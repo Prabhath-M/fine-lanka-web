@@ -28,8 +28,8 @@ export interface SiteInfo {
 export const SITE: SiteInfo = {
   brand: 'Fine Lanka Tours',
   tagline: 'Journey Beyond Expectations',
-  phone: '070 193 2526',
-  phones: ['070 193 2526', '077 745 1085'],
+  phone: '+94 70 193 2526',
+  phones: ['+94 70 193 2526', '+94 77 745 1085'],
   email: 'info@finelankatours.com',
   emails: ['info@finelankatours.com', 'travel@finelankatours.com'],
   address: 'No. 38/18, Muthulanda, Dagonna Road, Boragodawaththa, Minuwangoda, Sri Lanka',
