@@ -59,7 +59,7 @@ every `.ts`/`.tsx`/`.css` file in the project; **57 files (~112 MB) are not
 referenced anywhere** and are safe to delete. Worth doing as its own phase
 since it's the single biggest chunk of repo weight.
 
-- [ ] Delete the confirmed-unused images (full list — verify once more
+- [x] Delete the confirmed-unused images (full list — verify once more
   yourself before deleting, in case something loads a filename dynamically
   in a way my search missed):
   `ask1.png`, `ask2.png`, `caption-sigiri-liyawel-bg.png`, `carved-stone.png`,
@@ -93,9 +93,24 @@ since it's the single biggest chunk of repo weight.
   `lib/journal-data.ts`, `navbar_backdrop_5.png` vs `navbar_backdrop_2/3/4.png`
   which *are* used). Worth a quick manual glance before bulk-deleting in
   case one was meant to replace another and the swap never got finished.
-- [ ] After deleting, re-run a search for any filename you're unsure about
+- [x] After deleting, re-run a search for any filename you're unsure about
   before removing it — grep the whole `components/`, `lib/`, and
   `app/globals.css` for the filename first.
+
+  **Verification done:** re-grepped all 56 candidates individually against
+  `app/`, `components/`, `lib/`, `next.config.mjs`, `package.json` — none
+  referenced. Also specifically checked the two flagged near-duplicate
+  cases: the `journal/*-refined.png` files use different filenames than
+  what `lib/journal-data.ts` actually links to (e.g. `sunrise-over-the-
+  lion-rock.png`, not `sigiriya-pidurangala-refined.png`) — confirmed dead.
+  `navbar_backdrop_5.png` — only `_1`–`_4` are referenced in
+  `app/globals.css` — confirmed dead. Two *other* `journal/` files with a
+  similar `-refined.png` naming pattern (`portal-doors-refined.png`,
+  `portal-realm-refined.png`, not on the original candidate list) were
+  checked too and **are** actively used — correctly left alone.
+
+  Result: 56 files / 112 MB deleted. `public/images/` went from 443 MB to
+  331 MB.
 
 ---
 
