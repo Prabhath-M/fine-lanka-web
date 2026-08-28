@@ -1,6 +1,6 @@
 import { Analytics } from '@vercel/analytics/next'
-/* Ceylon Field Notes: retain elegant field typography with a high-contrast,
-   standalone compass-grain mark used consistently in browser chrome. */
+/* Ceylon Field Notes: retain elegant field typography and use the company
+   logo consistently in browser chrome. */
 import type { Metadata, Viewport } from 'next'
 import { Fraunces, Inter, Space_Mono } from 'next/font/google'
 import { EnquiryModal } from '@/components/enquiry-modal'
@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/images/milk-rice-compass-grain-mark.png',
+        url: '/images/logo-site.png',
         type: 'image/png',
       },
     ],
-    apple: '/images/milk-rice-compass-grain-mark.png',
+    apple: '/images/logo-site.png',
   },
   openGraph: {
     type: 'website',
