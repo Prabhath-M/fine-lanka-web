@@ -9855,17 +9855,16 @@ body:has(.features:target) .typed-opening { display: none; }
   .explore-heritage-rebuild .explore-map-card { min-height: 27rem; border-radius: 0.8rem 0.8rem 0.2rem 0.2rem; }
 }
 
-/* User-supplied Explore mural: preserve its portrait-oriented 1.25:1 artwork
-   by scaling it from the section height on wider screens. A soft continuation
-   layer carries its colours to variable-width edges without distorting the
-   primary artwork. */
+/* User-supplied Explore mural: cover the full section at every viewport
+   size. The artwork keeps its proportions while the section edge crops absorb
+   the aspect-ratio difference instead of leaving uncovered bands. */
 .explore-heritage-rebuild .explore-studio-bg {
   background:
     linear-gradient(90deg, rgba(243, 235, 211, 0.28) 0%, rgba(243, 235, 211, 0.08) 48%, rgba(239, 228, 199, 0.22) 100%),
     url('/images/fine-lanka-explore-supplied-heritage-mural.webp') center center / auto 100% no-repeat,
     #e9dcc0;
-  background-size: 100% 100%, 100% auto;
-  background-position: center center, center top;
+  background-size: 100% 100%, cover;
+  background-position: center center, center center;
   background-repeat: no-repeat, no-repeat;
   background-color: #e9dcc0;
 }
@@ -9878,7 +9877,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .explore-heritage-rebuild .explore-studio-bg {
     background:
       linear-gradient(180deg, rgba(243, 235, 211, 0.46) 0%, rgba(243, 235, 211, 0.12) 45%, rgba(239, 228, 199, 0.35) 100%),
-      url('/images/fine-lanka-explore-supplied-heritage-mural.webp') center top / 100% auto no-repeat,
+      url('/images/fine-lanka-explore-supplied-heritage-mural.webp') center center / cover no-repeat,
       #e9dcc0;
   }
 }
