@@ -220,21 +220,60 @@ This is the biggest real performance problem on the site.
 Every one of these is a real `href="#"` (or unset) link right now — they
 render as normal-looking buttons/links but go nowhere.
 
-- [ ] Footer → "Fine Lanka Tours" column: **Careers** and **Contact** both
+- [x] Footer → "Fine Lanka Tours" column: **Careers** and **Contact** both
   link to `#`.
-- [ ] Footer → "Legal" column: **Privacy Notice**, **Booking Terms**, and
+
+  **Done:** Careers removed entirely (not hiring — revisit in future).
+  "Our Designers" also removed per owner's call. Contact now links to a
+  new `/contact` page (`app/contact/page.tsx`,
+  `components/contact-page.tsx`) with a client-side form (same
+  no-backend-yet state as the booking form/enquiry modal — see Phase 9)
+  plus a sidebar showing phone numbers, emails, address, and social
+  links. Reuses the booking page's existing `.booking-layout`/
+  `.booking-form` CSS classes (unscoped, so no new CSS needed for the
+  layout itself).
+- [x] Footer → "Legal" column: **Privacy Notice**, **Booking Terms**, and
   **Cookie Policy** all link to `#`. These matter more than they might
   seem — a live site collecting names/emails/phone numbers through the
   booking and newsletter forms should have an actual privacy policy before
   launch, not just for legal reasons but because it's linked from data
   collection forms.
-- [ ] Footer socials: **Facebook**, **Instagram**, **LinkedIn** icons all
+
+  **Done:** three real pages added — `/privacy`, `/booking-terms`,
+  `/cookie-policy` (`app/privacy/`, `app/booking-terms/`,
+  `app/cookie-policy/`, sharing one layout shell in
+  `components/legal-page.tsx`). Content is a realistic first draft
+  covering the standard ground (data collected/used/shared, deposit and
+  cancellation terms, ETA visa responsibility, force majeure, an honest
+  "no analytics cookies currently in use" statement, etc.) using the
+  real business address/phone/email. **Not yet lawyer-reviewed** — flag
+  this for a legal read-through before launch, same as any other
+  pre-launch legal content.
+- [x] Footer socials: **Facebook**, **Instagram**, **LinkedIn** icons all
   link to `#`. Either wire up the real profile URLs or remove the icons —
   a social icon that goes nowhere looks broken/unfinished to a visitor.
   (`lib/site-data.ts`, `SOCIAL_LINKS`)
-- [ ] All of the above are in one place: `lib/site-data.ts` —
+
+  **Done:** moved to a new `lib/social-links.ts` (kept separate from
+  `site-data.ts` — the one obvious place to fill these in later). Added
+  a **TripAdvisor** entry alongside Facebook/Instagram/LinkedIn per
+  owner's request. No real profile URLs exist yet, so all four are
+  intentionally left with a blank `href` — the footer (and the new
+  contact page) render these as a muted, non-interactive icon instead
+  of a dead `#` link, and any entry becomes a live link automatically
+  the moment a real URL is added to that file. Added a small
+  `.footer-social-pending` CSS rule for the muted state.
+- [x] All of the above are in one place: `lib/site-data.ts` —
   `FOOTER_COLUMNS` and `SOCIAL_LINKS`. Quick fix once you have the real
   URLs.
+
+  **Done, restructured slightly:** `FOOTER_COLUMNS` stays in
+  `site-data.ts`; `SOCIAL_LINKS` moved to its own `lib/social-links.ts`
+  (see above). `SITE` in `site-data.ts` also updated with the real
+  contact details: both mobile numbers (`phone` = primary, `phones` =
+  full list), both emails (`email` = primary, `emails` = full list),
+  the Minuwangoda business address, and the new tagline "Journey Beyond
+  Expectations".
 
 ---
 

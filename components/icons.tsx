@@ -153,6 +153,19 @@ export const ICON_PATHS = {
       <path d="M15 22 V38 M15 22 V38 M24 38 V28 C24 24 30 24 30 28 V38 M24 38 V22" />
     </>
   ),
+  /** tripadvisor — two "owl-eye" circles astride a small central peak,
+   *  echoing the mark's general silhouette without reproducing its
+   *  actual wordmark/logo artwork. */
+  tripadvisor: (
+    <>
+      <path d="M2 15 C2 15 8 9 15 9 C20 9 24 12 24 12 C24 12 28 9 33 9 C40 9 46 15 46 15" />
+      <circle cx="15" cy="26" r="9" />
+      <circle cx="33" cy="26" r="9" />
+      <circle cx="15" cy="26" r="2.6" fill="currentColor" stroke="none" />
+      <circle cx="33" cy="26" r="2.6" fill="currentColor" stroke="none" />
+      <path d="M22 15 L24 11 L26 15" />
+    </>
+  ),
   lion: (
     <>
       <circle cx="24" cy="27" r="8" />

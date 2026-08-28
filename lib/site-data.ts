@@ -13,16 +13,26 @@
 export interface SiteInfo {
   brand: string
   tagline: string
+  /** Primary number — used anywhere only one phone fits (header, footer,
+   *  booking sidebar). Full list lives in `phones`. */
   phone: string
+  phones: string[]
+  /** Primary address — used anywhere only one email fits. Full list
+   *  lives in `emails`. */
   email: string
+  emails: string[]
+  address: string
   foundedYear: number
 }
 
 export const SITE: SiteInfo = {
   brand: 'Fine Lanka Tours',
-  tagline: 'Tailor-Made Journeys Across Sri Lanka',
-  phone: '+94 11 234 5678',
-  email: 'hello@finelankatours.com',
+  tagline: 'Journey Beyond Expectations',
+  phone: '070 193 2526',
+  phones: ['070 193 2526', '077 745 1085'],
+  email: 'info@finelankatours.com',
+  emails: ['info@finelankatours.com', 'travel@finelankatours.com'],
+  address: 'No. 38/18, Muthulanda, Dagonna Road, Boragodawaththa, Minuwangoda, Sri Lanka',
   foundedYear: 2011,
 }
 
@@ -173,34 +183,22 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
     links: [
       { label: 'About Us', href: '/about' },
       { label: 'Why Fine Lanka', href: '#why' },
-      { label: 'Our Designers', href: '/about#our-way' },
-      { label: 'Careers', href: '#' },
-      { label: 'Contact', href: '#' },
+      { label: 'Contact', href: '/contact' },
     ],
   },
   {
     heading: 'Legal',
     links: [
-      { label: 'Privacy Notice', href: '#' },
-      { label: 'Booking Terms', href: '#' },
-      { label: 'Cookie Policy', href: '#' },
+      { label: 'Privacy Notice', href: '/privacy' },
+      { label: 'Booking Terms', href: '/booking-terms' },
+      { label: 'Cookie Policy', href: '/cookie-policy' },
     ],
   },
 ]
 
-export interface SocialLink {
-  key: string
-  label: string
-  href: string
-}
-
-// Footer social icons (rendered via components/icons.tsx's <Icon key="…" />
-// once Phase 2 builds <SiteFooter />).
-export const SOCIAL_LINKS: SocialLink[] = [
-  { key: 'facebook', label: 'Facebook', href: '#' },
-  { key: 'instagram', label: 'Instagram', href: '#' },
-  { key: 'linkedin', label: 'LinkedIn', href: '#' },
-]
+// Social/review profile links now live in lib/social-links.ts — kept
+// separate from the rest of this file since it's the one obvious place
+// to go back and fill in real URLs later.
 
 export interface TravelNote {
   title: string

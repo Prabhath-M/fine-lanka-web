@@ -1,5 +1,6 @@
 import { Icon } from '@/components/icons'
-import { FOOTER_COLUMNS, SITE, SOCIAL_LINKS } from '@/lib/site-data'
+import { FOOTER_COLUMNS, SITE } from '@/lib/site-data'
+import { SOCIAL_LINKS } from '@/lib/social-links'
 
 export function SiteFooter() {
   return (
@@ -17,11 +18,32 @@ export function SiteFooter() {
             <span data-founded>{SITE.foundedYear}</span>.
           </p>
           <div className="footer-socials" id="footer-socials">
-            {SOCIAL_LINKS.map((social) => (
-              <a key={social.key} href={social.href} aria-label={social.label}>
-                <Icon name={social.key} />
-              </a>
-            ))}
+            {SOCIAL_LINKS.map((social) =>
+              social.href ? (
+                <a
+                  key={social.key}
+                  href={social.href}
+                  aria-label={social.label}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name={social.key} />
+                </a>
+              ) : (
+                // No confirmed profile yet — render a non-interactive,
+                // visibly muted icon instead of a dead `#` link. Add a
+                // real URL in lib/social-links.ts and this becomes a
+                // live link automatically.
+                <span
+                  key={social.key}
+                  className="footer-social-pending"
+                  aria-hidden="true"
+                  title={`${social.label} — coming soon`}
+                >
+                  <Icon name={social.key} />
+                </span>
+              ),
+            )}
           </div>
         </div>
         <div className="footer-columns" id="footer-columns" style={{ display: 'contents' }}>

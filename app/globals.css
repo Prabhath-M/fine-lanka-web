@@ -3723,6 +3723,9 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 .footer-socials a { color: var(--text-on-dark-muted); }
 .footer-socials .icon { width: 20px; height: 20px; }
 .footer-socials a:hover { color: var(--brass-light); }
+/* No confirmed profile URL yet (see lib/social-links.ts) — shown muted
+   and non-interactive rather than as a dead `#` link. */
+.footer-social-pending { color: var(--text-on-dark-muted); opacity: 0.35; cursor: default; }
 .footer-col h4 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-on-dark); margin-bottom: var(--space-2); }
 .footer-col li { margin-bottom: 0.6rem; font-size: 0.9rem; }
 .footer-col a:hover { color: var(--text-on-dark); }
@@ -16322,3 +16325,41 @@ body:has(.features:target) .typed-opening { display: none; }
   height: 1.3rem;
   color: #b18a3e;
 }
+
+/* ============ LEGAL PAGES (Privacy / Booking Terms / Cookie Policy) ===
+   Shared, simple prose styling — one place for all three so a future
+   consolidation pass has a single block to touch, not three. */
+.legal-page-body {
+  max-width: 72ch;
+  margin: 0 auto;
+  padding: var(--space-4) var(--space-3) 5rem;
+  color: var(--text-on-light);
+}
+.legal-page-body p.legal-updated {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: var(--text-on-light-muted);
+  margin-bottom: var(--space-4);
+}
+.legal-page-body h2 {
+  font-size: 1.3rem;
+  margin-top: var(--space-4);
+  margin-bottom: 0.7rem;
+  color: var(--ink);
+}
+.legal-page-body h2:first-of-type { margin-top: 0; }
+.legal-page-body p,
+.legal-page-body li {
+  font-size: 0.98rem;
+  line-height: 1.65;
+  color: var(--text-on-light-muted);
+}
+.legal-page-body p { margin: 0 0 1rem; }
+.legal-page-body ul {
+  margin: 0 0 1rem;
+  padding-left: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+}
+.legal-page-body a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
+.legal-page-body strong { color: var(--text-on-light); }
