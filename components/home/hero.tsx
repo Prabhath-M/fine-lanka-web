@@ -17,6 +17,16 @@ export function Hero() {
     const video = videoRef.current
     if (!video) return
 
+    // Home can be mounted again through client-side navigation. Reset any
+    // retained media state before the new opening sequence starts so a prior
+    // visit cannot leak playback into the arrival ritual.
+    video.pause()
+    try {
+      video.currentTime = 0
+    } catch {
+      // The media metadata may not be available yet; the poster remains safe.
+    }
+
     const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)')
     let hasStarted = false
     const beginHeroVideo = () => {
@@ -29,19 +39,12 @@ export function Hero() {
 
     const opening = document.querySelector<HTMLElement>('.typed-opening')
     const openingIsBypassed = !opening || getComputedStyle(opening).display === 'none'
-    const openingAlreadyFinished = document.documentElement.dataset.typedOpeningComplete === 'true'
 
-    if (openingIsBypassed || openingAlreadyFinished) {
+    if (openingIsBypassed) {
       beginHeroVideo()
     } else {
       window.addEventListener(HERO_OPENING_COMPLETE_EVENT, beginHeroVideo, { once: true })
     }
-
-    // The opening now starts its timers after hydration. Keep a generous
-    // fallback for a delayed event listener, but never use page-load time as
-    // the clock or the hero can begin over the still-running typewriter.
-    const fallbackDelay = openingIsBypassed || openingAlreadyFinished ? 0 : 7000
-    const fallbackTimer = window.setTimeout(beginHeroVideo, fallbackDelay)
 
     const stopForReducedMotion = () => {
       if (reducedMotionQuery.matches) video.pause()
@@ -49,7 +52,6 @@ export function Hero() {
     reducedMotionQuery.addEventListener('change', stopForReducedMotion)
 
     return () => {
-      window.clearTimeout(fallbackTimer)
       window.removeEventListener(HERO_OPENING_COMPLETE_EVENT, beginHeroVideo)
       reducedMotionQuery.removeEventListener('change', stopForReducedMotion)
     }

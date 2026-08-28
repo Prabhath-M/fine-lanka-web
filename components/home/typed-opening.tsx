@@ -70,7 +70,6 @@ export function TypedOpening() {
   const notifyCompletion = useCallback(() => {
     if (hasNotifiedCompletion.current) return
     hasNotifiedCompletion.current = true
-    document.documentElement.dataset.typedOpeningComplete = 'true'
     window.dispatchEvent(new Event(HERO_OPENING_COMPLETE_EVENT))
   }, [])
 
