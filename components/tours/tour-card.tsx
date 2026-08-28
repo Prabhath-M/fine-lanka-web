@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, CalendarDays, ChevronRight, MapPin, MessageSquareText, Sparkles } from 'lucide-react'
+import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight, MapPin, MessageSquareText, Sparkles } from 'lucide-react'
 import { Icon } from '@/components/icons'
 import { TOUR_CATEGORIES, type TourPackage } from '@/lib/tours-data'
 
@@ -19,9 +19,13 @@ import { TOUR_CATEGORIES, type TourPackage } from '@/lib/tours-data'
 export function TourCard({
   tour,
   onOpenItinerary,
+  onPrevious,
+  onNext,
 }: {
   tour: TourPackage
   onOpenItinerary: (tour: TourPackage) => void
+  onPrevious?: () => void
+  onNext?: () => void
 }) {
   const category = TOUR_CATEGORIES.find((c) => c.slug === tour.category)
   const stops = tour.itinerary.slice(0, 3).map((day) => day.title)
@@ -124,7 +128,28 @@ export function TourCard({
           {category && <Icon name={category.icon} className="tc-footer-icon" />}
           {category?.name ?? 'Fine Lanka Tours'}
         </span>
-        <ChevronRight className="h-4 w-4 text-[var(--tc-brass)]" strokeWidth={1.5} />
+        {onPrevious && onNext ? (
+          <div className="flex items-center gap-2" role="group" aria-label="Browse routes">
+            <button
+              type="button"
+              className="tc-focus inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--tc-line)] bg-transparent text-[var(--tc-monsoon)] transition-colors hover:border-[var(--tc-brass)] hover:bg-[rgba(180,138,70,0.12)]"
+              onClick={onPrevious}
+              aria-label="Show previous route"
+            >
+              <ChevronLeft aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
+            </button>
+            <button
+              type="button"
+              className="tc-focus inline-flex h-8 w-8 items-center justify-center rounded-full border border-[var(--tc-line)] bg-transparent text-[var(--tc-monsoon)] transition-colors hover:border-[var(--tc-brass)] hover:bg-[rgba(180,138,70,0.12)]"
+              onClick={onNext}
+              aria-label="Show next route"
+            >
+              <ChevronRight aria-hidden="true" className="h-4 w-4" strokeWidth={1.8} />
+            </button>
+          </div>
+        ) : (
+          <ChevronRight className="h-4 w-4 text-[var(--tc-brass)]" strokeWidth={1.5} />
+        )}
       </div>
     </article>
   )
