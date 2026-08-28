@@ -1,5 +1,50 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Phase 8 of the pre-launch audit: baseline security headers. The site
+  // is fully self-contained right now — no external scripts, fonts,
+  // analytics, or image hosts (next/font self-hosts Google Fonts, all
+  // images are served from /public) — so the CSP below is intentionally
+  // strict. If a third-party embed (payment widget, analytics, map, etc.)
+  // is added later, its origin needs to be added to the relevant
+  // directive here or it will be silently blocked.
+  async headers() {
+    return [
+      {
+        source: '/:path*',
+        headers: [
+          {
+            key: 'Strict-Transport-Security',
+            value: 'max-age=63072000; includeSubDomains; preload',
+          },
+          { key: 'X-Content-Type-Options', value: 'nosniff' },
+          { key: 'X-Frame-Options', value: 'DENY' },
+          { key: 'Referrer-Policy', value: 'strict-origin-when-cross-origin' },
+          {
+            key: 'Permissions-Policy',
+            value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              // Next.js needs 'unsafe-inline' for its own hydration/RSC
+              // bootstrap scripts in dev and some prod configurations;
+              // 'unsafe-eval' is dev-only (React Refresh) but harmless to
+              // leave since this header applies to both.
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "style-src 'self' 'unsafe-inline'",
+              "img-src 'self' data:",
+              "font-src 'self' data:",
+              "connect-src 'self'",
+              "frame-ancestors 'none'",
+              "base-uri 'self'",
+              "form-action 'self'",
+            ].join('; '),
+          },
+        ],
+      },
+    ]
+  },
   // Phase 8.2 of MIGRATION_PLAN.md: every page used to be a static file
   // at these *.html URLs (public/index.html, destinations.html,
   // tours-pricing.html, booking.html — all deleted in Phases 3-6 in
