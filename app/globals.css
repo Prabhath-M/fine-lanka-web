@@ -545,6 +545,10 @@
     #020506;
   color: #f8f0d8;
   animation: journal-threshold-clear 1ms linear 13040ms forwards;
+  animation-play-state: paused;
+}
+.journal-threshold-sequence.is-ready {
+  animation-play-state: running;
 }
 .journal-threshold-sequence::after {
   content: '';
@@ -560,6 +564,10 @@
   background: #fff4c9;
   box-shadow: 0 0 0.35rem #fff4c9, 0 0 1.6rem rgba(233, 188, 88, 0.92);
   animation: journal-threshold-crt-filament 640ms cubic-bezier(0.72, 0, 0.98, 0.24) 12400ms forwards;
+  animation-play-state: paused;
+}
+.journal-threshold-sequence.is-ready::after {
+  animation-play-state: running;
 }
 .journal-threshold-copy {
   display: flex;
@@ -569,6 +577,10 @@
   text-align: center;
   z-index: 1;
   animation: journal-threshold-crt-collapse 640ms cubic-bezier(0.72, 0, 0.98, 0.24) 12400ms forwards;
+  animation-play-state: paused;
+}
+.journal-threshold-sequence.is-ready .journal-threshold-copy {
+  animation-play-state: running;
 }
 .journal-threshold-kicker {
   min-height: 1.2em;
@@ -609,7 +621,10 @@
 .journal-threshold-character {
   display: inline-block;
   opacity: 0;
-  animation: journal-threshold-character-in 1ms linear var(--journal-character-delay) forwards;
+  transition: opacity 80ms linear;
+}
+.journal-threshold-character.is-revealed {
+  opacity: 1;
 }
 .journal-threshold-leading-box {
   position: absolute;
@@ -623,7 +638,10 @@
   background: rgba(239, 212, 129, 0.16);
   box-shadow: 0 0 0 1px rgba(239, 212, 129, 0.13), 0 0 0.7rem rgba(239, 212, 129, 0.18);
   opacity: 0;
-  animation: journal-threshold-leading-box-show 1ms linear var(--journal-box-delay) forwards, journal-threshold-leading-box-hide 1ms linear calc(var(--journal-box-delay) + var(--journal-box-hold)) forwards;
+  transition: opacity 80ms linear;
+}
+.journal-threshold-leading-box.is-active {
+  opacity: 1;
 }
 .journal-threshold-rule {
   width: min(12rem, 38vw);
@@ -1742,6 +1760,12 @@ body[data-page='journal'] .site-header {
 .nav-item.has-dropdown:hover .dropdown,
 .nav-item.has-dropdown:focus-within .dropdown { opacity: 1; visibility: visible;
   transform: translateY(0) scale(1);
+}
+.nav-item.has-dropdown[data-dropdown-suppressed='true'] .dropdown {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.98);
 }
 
 /* Small Sri Lanka tourism icon parade (tuk-tuk, surf, a Kandyan
@@ -5733,6 +5757,10 @@ main > #destinations,
   background: #020506;
   color: #f8f0d8;
   animation: typed-opening-clear 1ms linear 5320ms forwards;
+  animation-play-state: paused;
+}
+.typed-opening.is-ready {
+  animation-play-state: running;
 }
 .typed-opening::before {
   content: '';
@@ -5757,6 +5785,10 @@ main > #destinations,
   background: #fff4c9;
   box-shadow: 0 0 0.35rem #fff4c9, 0 0 1.6rem rgba(233, 188, 88, 0.92);
   animation: typed-opening-crt-filament 640ms cubic-bezier(0.72, 0, 0.98, 0.24) 4680ms forwards;
+  animation-play-state: paused;
+}
+.typed-opening.is-ready::after {
+  animation-play-state: running;
 }
 .typed-opening-stage {
   position: relative;
@@ -5768,6 +5800,10 @@ main > #destinations,
   text-align: center;
   z-index: 1;
   animation: typed-opening-crt-collapse 640ms cubic-bezier(0.72, 0, 0.98, 0.24) 4680ms forwards;
+  animation-play-state: paused;
+}
+.typed-opening.is-ready .typed-opening-stage {
+  animation-play-state: running;
 }
 .typed-opening-kicker {
   margin: 0 0 1.35rem;
@@ -5822,7 +5858,10 @@ main > #destinations,
      flip doesn't have to wait on a main-thread paint that a busy first load
      (hero video/fonts) can end up skipping. */
   will-change: opacity;
-  animation: typed-opening-character-in 1ms linear var(--typed-character-delay) forwards;
+  transition: opacity 80ms linear;
+}
+.typed-opening-character.is-revealed {
+  opacity: 1;
 }
 .typed-opening-leading-box {
   position: absolute;
@@ -5837,7 +5876,10 @@ main > #destinations,
   box-shadow: 0 0 0 1px rgba(239, 212, 129, 0.13), 0 0 0.7rem rgba(239, 212, 129, 0.18);
   opacity: 0;
   will-change: opacity;
-  animation: typed-opening-leading-box-show 1ms linear var(--typed-box-delay) forwards, typed-opening-leading-box-hide 1ms linear calc(var(--typed-box-delay) + var(--typed-box-hold)) forwards;
+  transition: opacity 80ms linear;
+}
+.typed-opening-leading-box.is-active {
+  opacity: 1;
 }
 .typed-opening-progress {
   display: block;
@@ -5846,6 +5888,10 @@ main > #destinations,
   margin: 2.5rem auto 0;
   background: linear-gradient(90deg, #e8c96f 0 0) left / 0% 100% no-repeat, rgba(255, 247, 223, 0.25);
   animation: typed-opening-progress 5.9s cubic-bezier(0.23, 1, 0.32, 1) 300ms forwards;
+  animation-play-state: paused;
+}
+.typed-opening.is-ready .typed-opening-progress {
+  animation-play-state: running;
 }
 @keyframes typed-opening-character-in { to { opacity: 1; } }
 @keyframes typed-opening-leading-box-show { to { opacity: 1; } }

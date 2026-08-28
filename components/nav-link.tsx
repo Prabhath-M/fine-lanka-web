@@ -16,10 +16,8 @@ type NavLinkProps = LinkProps &
  * no-op — no navigation happens, so the link just looks dead. That was
  * invisible before the Phase 6 `<a>` → `<Link>` migration, since every click
  * used to be a full browser reload no matter the destination. This restores
- * a visible response to that same click by scrolling back to the top of the
- * page, matching how most sites handle re-clicking the already-active nav
- * item — without giving up the fast client-side navigation Phase 6 added
- * for every other click.
+ * the original full-reload behavior for a same-location click, while every
+ * other click keeps the fast client-side navigation Phase 6 added.
  */
 export const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(function NavLink(
   { href, onClick, children, ...rest },
@@ -48,7 +46,7 @@ export const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(function NavL
 
     if (isSameLocation) {
       event.preventDefault()
-      window.scrollTo({ top: 0, behavior: 'smooth' })
+      window.location.reload()
     }
   }
 
