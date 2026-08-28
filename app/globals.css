@@ -6670,6 +6670,10 @@ body:has(.features:target) .typed-opening { display: none; }
 
   /* Give the current bearing more reading width without shrinking the
      coordinate facts into an unreadable column. */
+  .destinations-page .destinations-atlas-window .island-carousel-info-pane {
+    height: 12rem;
+    min-height: 12rem;
+  }
   .destinations-page .destinations-atlas-window .island-carousel-info-pane-body {
     grid-template-columns: minmax(0, 1.8fr) minmax(9rem, 0.5fr);
   }
