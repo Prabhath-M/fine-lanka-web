@@ -4,6 +4,7 @@ import Image from 'next/image'
 import { JOURNAL_ENTRIES, type JournalEntry } from '@/lib/journal-data'
 import { useBodyScrollLock } from '@/lib/use-body-scroll-lock'
 import { Icon } from '@/components/icons'
+import { useTypingProgress } from '@/lib/use-typing-progress'
 
 // Design reminder: the portal resolves into a measured archive reveal—heading
 // and brass rules first, then one journal card at a time. State owns the card
@@ -23,32 +24,29 @@ const DESCRIPTION_TO_DIVIDER_DELAY_MS = 1000
 const CARD_REVEAL_START_MS = DIVIDER_REVEAL_MS
 const CARD_REVEAL_STAGGER_MS = 330
 
-function JournalTypingLine({ text, startDelay, characterDelay, phrasePauses = [] }: { text: string; startDelay: number; characterDelay: number; phrasePauses?: { afterPhrase: string; delay: number }[] }) {
-  const boxLead = Math.max(16, Math.min(34, Math.round(characterDelay * 0.7)))
-  const characters = Array.from(text)
-  let elapsed = startDelay
-  const characterTimings = characters.map(() => {
-    const boxDelay = elapsed
-    elapsed += characterDelay
-    return {
-      boxDelay,
-      characterDelay: boxDelay + boxLead + 12,
-    }
-  })
-
-  phrasePauses.forEach(({ afterPhrase, delay }) => {
-    const phraseEnd = text.indexOf(afterPhrase) + afterPhrase.length
-    if (phraseEnd <= 0) return
-    characterTimings.slice(phraseEnd).forEach((timing) => {
-      timing.boxDelay += delay
-      timing.characterDelay += delay
-    })
-  })
-
-  // Keep every word intact on narrow screens while preserving a separately
-  // timed span for each character. Spaces remain between word wrappers so
-  // wrapping can only occur at natural word boundaries.
+function JournalTypingLine({
+  text,
+  startDelay,
+  characterDelay,
+  phrasePauses = [],
+}: {
+  text: string
+  startDelay: number
+  characterDelay: number
+  phrasePauses?: { afterPhrase: string; delay: number }[]
+}) {
+  const { activeIndex, characters, revealedCount } = useTypingProgress(
+    text,
+    startDelay,
+    characterDelay,
+    phrasePauses,
+    0.7,
+    16,
+    34,
+    12,
+  )
   const words: { chars: string[]; startIndex: number; isSpace: boolean }[] = []
+
   characters.forEach((character, index) => {
     const isSpace = character === ' '
     const current = words[words.length - 1]
@@ -65,19 +63,14 @@ function JournalTypingLine({ text, startDelay, characterDelay, phrasePauses = []
         <span key={wordIndex} className={word.isSpace ? undefined : 'journal-threshold-word'}>
           {word.chars.map((character, charOffset) => {
             const index = word.startIndex + charOffset
+            const isRevealed = index < revealedCount
+            const isActive = index === activeIndex
             return (
-              <span
-                key={`${character}-${index}`}
-                className="journal-threshold-character-slot"
-                style={{
-                  '--journal-box-delay': `${characterTimings[index].boxDelay}ms`,
-                  '--journal-box-hold': `${boxLead}ms`,
-                  '--journal-character-delay': `${characterTimings[index].characterDelay}ms`,
-                } as React.CSSProperties}
-                aria-hidden="true"
-              >
-                <span className="journal-threshold-leading-box" />
-                <span className="journal-threshold-character">{character === ' ' ? '\u00a0' : character}</span>
+              <span key={`${character}-${index}`} className="journal-threshold-character-slot" aria-hidden="true">
+                <span className={`journal-threshold-leading-box${isActive ? ' is-active' : ''}`} />
+                <span className={`journal-threshold-character${isRevealed ? ' is-revealed' : ''}`}>
+                  {character === ' ' ? '\u00a0' : character}
+                </span>
               </span>
             )
           })}
@@ -98,6 +91,7 @@ export function JournalPage() {
   const [revealedCardCount, setRevealedCardCount] = useState(0)
   const [doorwayGone, setDoorwayGone] = useState(false)
   const [thresholdComplete, setThresholdComplete] = useState(false)
+  const [thresholdReady, setThresholdReady] = useState(false)
   const [activeEntry, setActiveEntry] = useState<JournalEntry | null>(null)
 
   const chronicleRef = useRef<HTMLElement | null>(null)
@@ -153,6 +147,8 @@ export function JournalPage() {
     const clearTimers = () => {
       if (thresholdTimer.current) clearTimeout(thresholdTimer.current)
     }
+
+    setThresholdReady(true)
 
     if (prefersReducedMotion()) {
       setThresholdComplete(true)
@@ -274,7 +270,12 @@ export function JournalPage() {
   return (
     <main>
       {!thresholdComplete && (
-        <section className="journal-threshold-sequence" aria-label="Journal threshold introduction" aria-live="polite">
+                  <section
+            className={`journal-threshold-sequence${thresholdReady ? ' is-ready' : ''}`}
+            aria-label="Journal threshold introduction"
+            aria-live="polite"
+          >
+
           <div className="journal-threshold-copy">
             <p className="journal-threshold-kicker">
               <JournalTypingLine text="Field notes · The Threshold" startDelay={220} characterDelay={70} phrasePauses={[{ afterPhrase: 'Field notes ·', delay: 150 }]} />

@@ -48,10 +48,18 @@ export function SiteHeader() {
   const currentPage = pageKeyForPathname(pathname)
 
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [suppressedDropdown, setSuppressedDropdown] = useState<string | null>(null)
   const [scrolled, setScrolled] = useState(false)
   const headerRef = useRef<HTMLElement | null>(null)
   const mobileNavRef = useRef<HTMLElement | null>(null)
   const scrolledRef = useRef(false)
+
+  // Client-side navigation keeps the shared header mounted. Clear the
+  // one-click dropdown suppression whenever the route changes so a menu can
+  // be opened normally on the destination page.
+  useEffect(() => {
+    setSuppressedDropdown(null)
+  }, [pathname])
 
   // ---- Compact/scrolled header style (was initHeaderScroll()) ----
   useEffect(() => {
@@ -124,11 +132,15 @@ export function SiteHeader() {
                       key={item.label}
                       className="nav-item has-dropdown"
                       data-menu={item.page || ''}
+                      data-dropdown-suppressed={suppressedDropdown === item.label ? 'true' : undefined}
+                      onClick={() => setSuppressedDropdown(item.label)}
+                      onPointerEnter={() => setSuppressedDropdown(null)}
                     >
                       <NavLink
                         href={item.href}
                         className={isActive ? 'is-active' : undefined}
                         aria-haspopup="true"
+                        onFocus={() => setSuppressedDropdown(null)}
                       >
                         <span className="nav-label">{item.label}</span>
                       </NavLink>

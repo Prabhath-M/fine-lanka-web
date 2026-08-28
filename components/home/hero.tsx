@@ -37,9 +37,10 @@ export function Hero() {
       window.addEventListener(HERO_OPENING_COMPLETE_EVENT, beginHeroVideo, { once: true })
     }
 
-    // The CSS typewriter clears at 5.32s. This local timer is a deliberate
-    // backup for the rare case where hydration attaches after that CSS event.
-    const fallbackDelay = Math.max(0, 5360 - performance.now())
+    // The opening now starts its timers after hydration. Keep a generous
+    // fallback for a delayed event listener, but never use page-load time as
+    // the clock or the hero can begin over the still-running typewriter.
+    const fallbackDelay = openingIsBypassed || openingAlreadyFinished ? 0 : 7000
     const fallbackTimer = window.setTimeout(beginHeroVideo, fallbackDelay)
 
     const stopForReducedMotion = () => {
