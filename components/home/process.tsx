@@ -439,7 +439,7 @@ export function Process() {
         <div
           className="process-background absolute inset-0 opacity-90"
           style={{
-            backgroundImage: "url('/images/fine-lanka-process-route-background-tall.png')",
+            backgroundImage: "url('/images/fine-lanka-process-route-background-tall.jpg')",
           }}
         />
         <div className="absolute inset-0 bg-[#fffdf6]/30" />

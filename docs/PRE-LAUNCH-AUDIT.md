@@ -117,7 +117,7 @@ since it's the single biggest chunk of repo weight.
 ## Phase 3 — Image weight & optimization
 This is the biggest real performance problem on the site.
 
-- [ ] `next.config.mjs` currently has **`images: { unoptimized: true }`**,
+- [x] `next.config.mjs` currently has **`images: { unoptimized: true }`**,
   which switches off all of Next.js's automatic image optimization
   (resizing, WebP/AVIF conversion, responsive `srcset`). Combined with the
   raw image weight, this means visitors are downloading full-size,
@@ -125,14 +125,56 @@ This is the biggest real performance problem on the site.
   the manual compression below, or leave it on temporarily but prioritize
   the manual pass — `unoptimized` alone won't fix files that are 6–16 MB to
   start with.
-- [ ] Compress and resize the large background/hero images before upload —
+
+  **Done:** flag removed. `sharp` (needed for self-hosted Next.js image
+  optimization) is already present in `pnpm-lock.yaml` as a resolved
+  dependency, so no `package.json` change was needed.
+- [x] Compress and resize the large background/hero images before upload —
   several are 6–16 MB as PNG for what's ultimately a full-bleed background
   photo (`how-it-works-exploration-bg.jpg` is 16 MB; a dozen others are
   6–8 MB). Convert decorative background PNGs to JPEG or WebP at a
   sensible quality (80–85%) and cap dimensions at roughly what's actually
   displayed (most of these don't need to be wider than ~2560px).
-- [ ] Re-check `sizes` props on any `next/image` usage once optimization is
+
+  **Done:** `public/images/` goes from 331 MB → 97 MB. Broken down:
+  - **7 files** were named `.jpg` but actually contained raw PNG data (a
+    pre-existing bug) — re-encoded as real JPEGs in place, same filenames,
+    so no code changes needed. `how-it-works-exploration-bg.jpg` alone
+    went from 16.7 MB → 353 KB (it's a soft parchment-texture background,
+    not a detailed photo, so it compresses extremely well as JPEG).
+  - **2 files** were already genuine JPEGs but oversized (4272×2848,
+    3712×5568) — resized to a 2560px cap and recompressed to quality 82.
+  - **45 non-transparent PNGs** (backgrounds, journal photos, decorative
+    art) converted to real JPEGs, renamed `.png` → `.jpg`, resized to a
+    2560px cap on the long side (the four `blend-*.png` texture strips
+    kept their original 8100×360 dimensions — unusual aspect ratio,
+    didn't want to risk breaking a horizontal effect). Every reference to
+    each renamed file was found and updated (`app/globals.css`,
+    `.tsx` components, `lib/journal-data.ts`) — verified with a
+    site-wide grep afterward that no dangling `.png` references remained
+    and every path referenced in code resolves to a real file on disk.
+  - **25 PNGs with real transparency** (frame/border art, logos) were kept
+    as PNG (JPEG doesn't support alpha) but losslessly re-compressed;
+    modest gains (~5–15%) on about half of them, no change on the rest —
+    that's the safe ceiling without visible quality loss on this kind of
+    graphic art. Lossy PNG palette-reduction could shrink these further
+    but risks visible banding on gradients — flagging as a possible
+    follow-up, not done here.
+  - All conversions spot-checked visually (rendered thumbnails) before
+    committing; none were blank, corrupted, or visibly degraded.
+  - **Found in passing, not fixed (out of scope for this phase):**
+    `app/globals.css` references `/images/fine-lanka-booking-details-bg.png`
+    and `/images/fine-lanka-tours-collection-bg.png` — neither file has
+    ever existed in the repo (confirmed back to the initial commit), so
+    these were already dead CSS rules before this cleanup started. Worth
+    a look during Phase 6 (rendering & code-quality cleanup).
+- [x] Re-check `sizes` props on any `next/image` usage once optimization is
   back on, so the browser isn't served a desktop-width image on mobile.
+
+  **Done:** checked all 4 `<Image>` usages (`components/journal-page.tsx`,
+  `components/home/explore-section.tsx`). 3 already have appropriate
+  `sizes` props; the 4th is a 1×1 hidden preload image (`width={1}
+  height={1}`, `aria-hidden`) that doesn't need one. No changes required.
 
 ---
 
