@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import { Icon } from '@/components/icons'
 import { DESTINATIONS } from '@/lib/destinations-data'
 import { slugify } from '@/lib/utils'
@@ -176,10 +177,10 @@ export function ExploreSection() {
               </div>
               <div className="explore-map-support">
                 <p>{current.blurb}</p>
-                <a href="/destinations" className="explore-map-destinations-link">
+                <Link href="/destinations" className="explore-map-destinations-link">
                   <span>View all destinations</span>
                   <b aria-hidden="true">↗</b>
-                </a>
+                </Link>
               </div>
             </footer>
           </article>

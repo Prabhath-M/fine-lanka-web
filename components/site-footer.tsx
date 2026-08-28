@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Icon } from '@/components/icons'
 import { FOOTER_COLUMNS, SITE } from '@/lib/site-data'
 import { SOCIAL_LINKS } from '@/lib/social-links'
@@ -7,12 +8,12 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-top">
         <div className="footer-brand">
-          <a href="/" className="brand">
+          <Link href="/" className="brand">
             <span className="brand-logo">
               <span className="brand-logo-flare" aria-hidden="true" />
               <img src="/images/logo-site.png" alt="" className="brand-logo-img" />
             </span>
-          </a>
+          </Link>
           <p>
             Tailor-made journeys across Sri Lanka, considered one traveller at a time since{' '}
             <span data-founded>{SITE.foundedYear}</span>.
@@ -51,11 +52,17 @@ export function SiteFooter() {
             <div className="footer-col" key={col.heading}>
               <h4>{col.heading}</h4>
               <ul>
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <a href={link.href}>{link.label}</a>
-                  </li>
-                ))}
+                {col.links.map((link) =>
+                  link.href.startsWith('#') ? (
+                    <li key={link.label}>
+                      <a href={link.href}>{link.label}</a>
+                    </li>
+                  ) : (
+                    <li key={link.label}>
+                      <Link href={link.href}>{link.label}</Link>
+                    </li>
+                  ),
+                )}
               </ul>
             </div>
           ))}
