@@ -457,6 +457,32 @@ all do client-side validation only and show a fake "Thanks, we'll be in
 touch" message — **nothing is actually sent anywhere**. This is fine for a
 demo but is presumably not fine for launch.
 
+> **Decision made, not yet implemented.** Going with **Resend** (email via
+> transactional API) — chosen over a CRM, a database + admin view, or a
+> third-party form service (Formspree/Basin) since the site won't see
+> high volume and this gives the most control for the least ongoing cost.
+> Free tier (3,000 emails/month, 100/day) comfortably covers a tourism
+> site's realistic traffic.
+>
+> **Next steps (on the user's side, before I can build this):**
+> 1. Sign up at resend.com (free, no card required).
+> 2. Add + verify the real domain in the Resend dashboard (DNS records at
+>    the registrar) so mail sends from an address like
+>    `bookings@finelankatours.com` instead of a generic Resend address —
+>    skippable for early testing via `onboarding@resend.dev`, but needed
+>    before real launch so mail doesn't land in spam.
+> 3. Create an API key scoped to "Sending access" only.
+> 4. Hand over: the API key, which address should **receive** leads,
+>    which address emails should be sent **from**, and whether customers
+>    should get an auto-reply confirmation.
+>
+> **Once that's in hand, the work is:** three API routes (booking form,
+> enquiry modal, newsletter), server-side validation (not just the
+> existing client-side `checkValidity()`), the honeypot spam field noted
+> as blocked in Phase 8, an optional customer auto-reply, and the API key
+> added as an environment variable on the hosting platform — never
+> committed to the repo.
+
 - [ ] Decide where enquiries should land — email (e.g. via Resend/Postmark/
   SendGrid), a CRM, or a simple database + admin view — and wire the
   `onSubmit` handlers in `components/booking-page.tsx`,
