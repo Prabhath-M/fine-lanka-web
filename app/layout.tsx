@@ -26,11 +26,19 @@ const spaceMono = Space_Mono({
   variable: '--font-space-mono',
 })
 
+// Falls back to localhost during local dev; set NEXT_PUBLIC_SITE_URL in
+// the host's environment variables once the production domain is known,
+// so absolute OG/Twitter/canonical URLs resolve correctly.
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
+
 export const metadata: Metadata = {
-  title: "The Ship's Log — Fine Lanka Tours",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: 'Fine Lanka Tours — Considered Journeys Across Sri Lanka',
+    template: '%s',
+  },
   description:
-    'Cross the ancient doorway into the chronicles of Fine Lanka Tours — field notes from sunrise climbs, hill-country trains and whales before breakfast across Sri Lanka.',
-  generator: 'v0.app',
+    'Fine Lanka Tours designs considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage, planned with local knowledge and care in the details.',
   icons: {
     icon: [
       {
@@ -39,6 +47,28 @@ export const metadata: Metadata = {
       },
     ],
     apple: '/images/milk-rice-compass-grain-mark.png',
+  },
+  openGraph: {
+    type: 'website',
+    siteName: 'Fine Lanka Tours',
+    title: 'Fine Lanka Tours — Considered Journeys Across Sri Lanka',
+    description:
+      'Considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage.',
+    images: [
+      {
+        url: '/images/fine-lanka-about-heritage-hero.jpg',
+        width: 2560,
+        height: 1440,
+        alt: 'Sigiriya rock fortress seen from a heritage fresco border, Sri Lanka',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Fine Lanka Tours — Considered Journeys Across Sri Lanka',
+    description:
+      'Considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage.',
+    images: ['/images/fine-lanka-about-heritage-hero.jpg'],
   },
 }
 
