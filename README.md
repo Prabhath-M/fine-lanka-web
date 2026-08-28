@@ -37,9 +37,9 @@ pnpm start
 
 ## Status
 
-This project is pre-launch. See the project's pre-launch checklist for the
-current list of outstanding work (image optimization, SEO metadata, form
-backends, security headers, dependency updates, etc.).
+This project is pre-launch. See [`docs/PRE-LAUNCH-AUDIT.md`](docs/PRE-LAUNCH-AUDIT.md)
+for the live checklist of outstanding work (image optimization, SEO
+metadata, form backends, security headers, dependency updates, etc.).
 
 ## Historical notes
 
