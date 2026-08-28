@@ -46,6 +46,13 @@ export function ToursPricingPage() {
   const priceFloor = Math.min(...TOUR_PACKAGES.map((tour) => tour.priceFrom))
   const featuredTour = list.find((t) => t.slug === featuredSlug) ?? list[0]
 
+  const selectAdjacentTour = (direction: -1 | 1) => {
+    if (!featuredTour || list.length < 2) return
+    const currentIndex = list.findIndex((tour) => tour.slug === featuredTour.slug)
+    const nextIndex = (currentIndex + direction + list.length) % list.length
+    setFeaturedSlug(list[nextIndex].slug)
+  }
+
   return (
     <main className="tours-page">
       <section className="tours-hero">
@@ -148,7 +155,12 @@ export function ToursPricingPage() {
               </div>
             ) : list.length && featuredTour ? (
               <div className="tour-showcase">
-                <TourCard tour={featuredTour} onOpenItinerary={setActiveTour} />
+                <TourCard
+                  tour={featuredTour}
+                  onOpenItinerary={setActiveTour}
+                  onPrevious={list.length > 1 ? () => selectAdjacentTour(-1) : undefined}
+                  onNext={list.length > 1 ? () => selectAdjacentTour(1) : undefined}
+                />
                 {list.length > 1 && (
                   <TourPickerCarousel tours={list} activeSlug={featuredTour.slug} onSelect={setFeaturedSlug} />
                 )}
