@@ -278,7 +278,7 @@ render as normal-looking buttons/links but go nowhere.
 ---
 
 ## Phase 5 — SEO & metadata
-- [ ] **The homepage has no metadata of its own.** Every other page
+- [x] **The homepage has no metadata of its own.** Every other page
   (`/about`, `/destinations`, `/tours-pricing`, `/booking`) sets its own
   `<title>`/description, but `app/page.tsx` doesn't — so it falls back to
   the root layout's default, which is titled **"The Ship's Log — Fine Lanka
@@ -286,24 +286,31 @@ render as normal-looking buttons/links but go nowhere.
   the page most likely to show up in search results and get shared — is
   currently titled and described like a blog post. Add a proper `metadata`
   export to `app/page.tsx`.
-- [ ] No Open Graph or Twitter Card tags anywhere (`openGraph`/`twitter` in
+- [x] No Open Graph or Twitter Card tags anywhere (`openGraph`/`twitter` in
   the `Metadata` object) — right now a link to any page shared on
   WhatsApp/Facebook/X/iMessage will show no preview image and a generic
   title. Worth adding at least a site-wide default in `app/layout.tsx`,
   plus a per-page image for the homepage.
-- [ ] No `robots.txt` or `sitemap.xml`. Add `app/robots.ts` and
+- [x] No `robots.txt` or `sitemap.xml`. Add `app/robots.ts` and
   `app/sitemap.ts` (Next's App Router convention) so search engines know
   what to index.
-- [ ] No custom `not-found.tsx` — a mistyped URL currently shows Next's
+- [x] No custom `not-found.tsx` — a mistyped URL currently shows Next's
   bare default 404. A styled one matching the site is a small, cheap win.
-- [ ] `metadata.generator: 'v0.app'` in `app/layout.tsx` reveals the
+- [x] `metadata.generator: 'v0.app'` in `app/layout.tsx` reveals the
   scaffolding tool used to build the site — harmless, but worth removing
   for a polished public launch.
 
 ---
 
+> **Verified against code on 2026-08-29** and checked off — this file had
+> fallen behind PRs #6 and #7, which did the actual work without updating
+> these boxes. Confirmed: `app/page.tsx` has its own metadata,
+> `openGraph`/`twitter` are set in `app/layout.tsx`, `app/robots.ts`/
+> `app/sitemap.ts`/`app/not-found.tsx` all exist, and
+> `generator: 'v0.app'` is gone.
+
 ## Phase 6 — Rendering & code-quality cleanup
-- [ ] **Every internal link on the site is a plain `<a href="...">` instead
+- [x] **Every internal link on the site is a plain `<a href="...">` instead
   of Next.js's `<Link>` component** — I checked, there are zero uses of
   `next/link` anywhere in `components/` or `app/`. This means every click
   between pages (footer links, "Book Now", destination cards, etc.) does a
@@ -311,14 +318,14 @@ render as normal-looking buttons/links but go nowhere.
   you're not getting the performance Next.js is actually built to provide.
   Swap `<a href="/...">` → `<Link href="/...">` for every *internal* link
   (external links and the `#anchor` links can stay as `<a>`).
-- [ ] Fonts are being loaded **twice**: once properly via `next/font/google`
+- [x] Fonts are being loaded **twice**: once properly via `next/font/google`
   (self-hosted, optimized, no render-blocking request) in `app/layout.tsx`,
   and *again* via a classic `<link href="https://fonts.googleapis.com/...">`
   tag in the same file. Pick one — since `next/font` is already set up
   correctly, just delete the three `<link>` tags (`preconnect` ×2 +
   stylesheet) and confirm the CSS variables (`--font-display` etc. in
   `globals.css`) point at the `next/font` output instead.
-- [ ] `app/globals.css` is **16,300+ lines / 572 KB**, all loaded on every
+- [x] `app/globals.css` is **16,300+ lines / 572 KB**, all loaded on every
   single page. A lot of it is layered, superseding rewrites of the same
   selectors (e.g. `.booking-page .booking-layout` is redefined from scratch
   6+ separate times further down the file, each block overriding the last
@@ -328,7 +335,13 @@ render as normal-looking buttons/links but go nowhere.
   superseded versions. This won't change how the site looks (the cascade
   already ignores the dead rules) — it just cuts real weight and makes the
   file maintainable again.
-- [ ] `typescript: { ignoreBuildErrors: true }` in `next.config.mjs` means
+
+  **Verified:** down to 13,323 lines / 464 KB. `.booking-page
+  .booking-layout` now has exactly one top-level definition (was 6+). File
+  is still large — that's a large site with a lot of custom styling, not
+  something a consolidation pass alone eliminates — but the dead-weight
+  duplication specifically called out here is gone.
+- [x] `typescript: { ignoreBuildErrors: true }` in `next.config.mjs` means
   the production build will succeed even if there are real type errors —
   effectively flying blind. Turn this off, run a build, and fix whatever
   surfaces before launch.
