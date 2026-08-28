@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Destinations — Fine Lanka Tours</title>
+<meta name="description" content="Explore Sri Lanka by region with Fine Lanka Tours — the Cultural Triangle, Hill Country, South Coast, East Coast, wildlife parks, Colombo and the West Coast." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="destinations">
+
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="site-header">
+  <div class="container header-inner">
+    <a href="index.html" class="brand"><span class="brand-mark">✦</span> <span data-brand>Fine Lanka Tours</span></a>
+
+    <nav aria-label="Primary">
+      <ul class="primary-nav" id="primary-nav"><!-- filled by render.js --></ul>
+    </nav>
+
+    <div class="header-actions">
+      <span class="header-phone" data-phone>+44 20 7946 0958</span>
+      <button class="btn btn-uikit-primary" style="--btn-icon-left: url('../images/plan.png')" data-open-enquiry>Plan a Journey</button>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav-overlay" id="mobile-nav-overlay"></div>
+<aside class="mobile-nav" id="mobile-nav">
+  <ul id="mobile-nav-links"><!-- filled by render.js --></ul>
+</aside>
+
+<main>
+
+  <!-- ============ PAGE HERO ============ -->
+  <section class="page-hero">
+    <div class="container">
+      <p class="hero-eyebrow">Where to next</p>
+      <h1>Sri Lanka, region by region</h1>
+      <p>Thirteen places our designers keep returning to — filter by region to plan the shape of your route, or start from a blank page and tell us what you're after.</p>
+    </div>
+    <div class="mural-divider mural-divider--frieze" aria-hidden="true"><div class="mural-divider-inner"></div></div>
+  </section>
+
+  <!-- ============ DESTINATIONS ============ -->
+  <section class="destinations">
+    <div class="container">
+      <div class="filter-bar" id="region-filters"><!-- filled by main.js --></div>
+      <div class="destinations-grid" id="all-destinations-grid"><!-- filled by main.js --></div>
+      <div class="mural-divider mural-divider--frieze" aria-hidden="true"><div class="mural-divider-inner"></div></div>
+    </div>
+  </section>
+  
+  <!-- ============ CTA BAND ============ -->
+  <section class="cta-band">
+    <div class="mural-divider mural-divider--frieze" aria-hidden="true"><div class="mural-divider-inner"></div></div>
+    <h2>Not sure which region fits your trip?</h2>
+    <p>Tell us how much time you have and what you're after — we'll suggest a route across the regions that fit.</p>
+    <button class="btn btn-uikit-primary" style="--btn-icon-left: url('../images/plan.png')" data-open-enquiry>Plan Your Journey</button>
+  </section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="brand"><span class="brand-mark">✦</span> <span data-brand>Fine Lanka Tours</span></a>
+      <p>Tailor-made journeys across Sri Lanka, designed one traveller at a time since <span data-founded>2011</span>.</p>
+      <div class="footer-socials" id="footer-socials"><!-- filled by render.js --></div>
+    </div>
+    <div class="footer-columns" id="footer-columns" style="display:contents"><!-- filled by render.js --></div>
+  </div>
+  <div class="container footer-bottom">
+    <span>© <span id="current-year"></span> Fine Lanka Tours (Pvt) Ltd. All rights reserved.</span>
+    <span>Call <span data-phone>+44 20 7946 0958</span> to start planning</span>
+  </div>
+</footer>
+
+<!-- ============ ENQUIRY MODAL ============ -->
+<div class="enquiry-modal" id="enquiry-modal">
+  <div class="enquiry-modal-panel">
+    <button class="enquiry-modal-close" data-close-enquiry aria-label="Close">&times;</button>
+    <h3>Tell us about your trip</h3>
+    <p>Share a few details and a Sri Lanka-based travel designer will be in touch — usually within one business day.</p>
+    <form class="enquiry-modal-form" onsubmit="event.preventDefault(); this.closest('.enquiry-modal').classList.remove('is-open'); document.body.classList.remove('no-scroll');">
+      <input type="text" placeholder="Full name" required />
+      <input type="email" placeholder="Email address" required />
+      <input type="text" placeholder="Where in Sri Lanka are you dreaming of?" />
+      <textarea rows="3" placeholder="Anything else we should know?"></textarea>
+      <button type="submit" class="btn btn-uikit-primary" style="--btn-icon-left: url('../images/ask1.png')">Send Enquiry</button>
+    </form>
+  </div>
+</div>
+
+<script src="js/data.js"></script>
+<script src="js/icons.js"></script>
+<script src="js/render.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

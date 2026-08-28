@@ -1,0 +1,64 @@
+--- /home/claude/orig/components/home/typed-opening.tsx	2026-08-25 18:24:11.832915281 +0000
++++ /home/claude/changes-out/components/home/typed-opening.tsx	2026-08-25 18:24:11.829390340 +0000
+@@ -7,22 +7,48 @@
+  */
+ function OpeningTypingLine({ className, text, startDelay, characterDelay }: { className: string; text: string; startDelay: number; characterDelay: number }) {
+   const boxLead = Math.max(24, Math.min(38, Math.round(characterDelay * 0.62)))
++  const characters = Array.from(text)
++
++  // Group the per-character spans by word. Each character is its own
++  // inline-block (so the leading "cursor box" can sweep over it), and
++  // browsers treat adjacent inline-block boxes as valid line-break
++  // points even with no whitespace between them — so on narrow screens
++  // the line was wrapping mid-word (e.g. "TO Y" / "OU."). Wrapping each
++  // word's characters in a single no-wrap span keeps letters of a word
++  // together while still allowing the line to break between words.
++  const words: { chars: string[]; startIndex: number; isSpace: boolean }[] = []
++  characters.forEach((character, index) => {
++    const isSpace = character === ' '
++    const current = words[words.length - 1]
++    if (current && current.isSpace === isSpace) {
++      current.chars.push(character)
++    } else {
++      words.push({ chars: [character], startIndex: index, isSpace })
++    }
++  })
+ 
+   return (
+     <p className={className} aria-label={text}>
+-      {Array.from(text).map((character, index) => (
+-        <span
+-          key={`${character}-${index}`}
+-          className="typed-opening-character-slot"
+-          style={{
+-            '--typed-box-delay': `${startDelay + index * characterDelay}ms`,
+-            '--typed-box-hold': `${boxLead}ms`,
+-            '--typed-character-delay': `${startDelay + index * characterDelay + boxLead + 12}ms`,
+-          } as CSSProperties}
+-          aria-hidden="true"
+-        >
+-          <span className="typed-opening-leading-box" />
+-          <span className="typed-opening-character">{character === ' ' ? '\u00a0' : character}</span>
++      {words.map((word, wordIndex) => (
++        <span key={wordIndex} className={word.isSpace ? undefined : 'typed-opening-word'}>
++          {word.chars.map((character, charOffset) => {
++            const index = word.startIndex + charOffset
++            return (
++              <span
++                key={`${character}-${index}`}
++                className="typed-opening-character-slot"
++                style={{
++                  '--typed-box-delay': `${startDelay + index * characterDelay}ms`,
++                  '--typed-box-hold': `${boxLead}ms`,
++                  '--typed-character-delay': `${startDelay + index * characterDelay + boxLead + 12}ms`,
++                } as CSSProperties}
++                aria-hidden="true"
++              >
++                <span className="typed-opening-leading-box" />
++                <span className="typed-opening-character">{character === ' ' ? '\u00a0' : character}</span>
++              </span>
++            )
++          })}
+         </span>
+       ))}
+     </p>

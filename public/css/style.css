@@ -1,0 +1,1852 @@
+/* ==========================================================================
+   MERIDIAN — style.css
+   Structure:
+     1. Tokens (custom properties)
+     2. Reset & base
+     3. Layout utilities
+     4. Header & navigation
+     5. Hero
+     6. Features strip
+     7. About / intro
+     8. Destinations
+     9. Process
+     10. Testimonials
+     11. CTA band
+     12. Newsletter
+     13. Footer
+     14. Enquiry modal
+     15. Scroll-reveal & responsive
+   ========================================================================== */
+
+/* ---------- 1. Tokens ---------- */
+:root {
+  /* Color: ink (navy chart-paper) + brass (compass/instrument accent) +
+     parchment (aged map paper) + teal (secondary, coastal) */
+  --ink: #0f1b2b;
+  --ink-700: #16273d;
+  --ink-600: #1d3350;
+  --parchment: #e8dfc7;
+  --parchment-700: #ded2ab;
+  --paper: #faf7ef;
+  --brass: #b8924a;
+  --brass-light: #d8b978;
+  --teal: #2f5d57;
+  --teal-light: #4d7d74;
+  /* Added for the Sri Lanka UI-kit pass (buttons/dropdown/icon badges on
+     the homepage) — a warm terracotta accent alongside the existing
+     ink/brass/parchment palette. */
+  --terracotta: #b5502e;
+  --terracotta-light: #d97a52;
+  --radius-soft: 16px; /* the UI kit's pill/card shape — deliberately
+     softer than --radius (2px), used only by the new uikit-* components
+     below, not a site-wide change */
+  /* Exact swatches from the "Serendib" UI kit reference (buttons +
+     mural separators, this pass). A distinct forest-green family from
+     --ink (navy) — kept as its own set rather than merged into the
+     existing palette, since it's specific to these new components. */
+  --sl-green: #214236;
+  --sl-green-light: #6c8b6a;
+  --sl-cream: #e8e1d4;
+  --sl-gold: #d4af37;
+  --sl-terracotta: #c35a2b;
+  --sl-grey: #6b6b6b;
+  --text-on-dark: #f3efe1;
+  --text-on-dark-muted: #c9c2ab;
+  --text-on-light: #1a2331;
+  --text-on-light-muted: #5a5849;
+  --white: #ffffff;
+  --line-on-dark: rgba(243, 239, 225, 0.16);
+  --line-on-light: rgba(26, 35, 49, 0.12);
+
+  /* Type */
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Inter", -apple-system, sans-serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+
+  /* Spacing scale */
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+  --space-7: 9rem;
+
+  --max-width: 1240px;
+  --radius: 2px; /* deliberately near-square: charts/instruments, not soft UI */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ---------- 2. Reset & base ---------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--text-on-light);
+  background: var(--paper);
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+img, svg { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; margin: 0; padding: 0; }
+h1, h2, h3, h4 { font-family: var(--font-display); margin: 0; line-height: 1.15; font-weight: 600; }
+p { margin: 0; }
+button { font-family: inherit; cursor: pointer; }
+input { font-family: inherit; }
+body.no-scroll { overflow: hidden; }
+
+.icon { width: 32px; height: 32px; }
+
+/* ---------- 3. Layout utilities ---------- */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+/* Pins the header's container to these exact rules even if a same-
+   specificity ".container" from elsewhere (e.g. Tailwind's built-in
+   utility, generated on the Next.js /journal page purely because the
+   class name string appears there) loads after this stylesheet. */
+.site-header .container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+.section { padding-block: var(--space-6); }
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass);
+  display: inline-block;
+  margin-bottom: var(--space-2);
+}
+.section-heading {
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  max-width: 34ch;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+.section-intro {
+  max-width: 42ch;
+  color: var(--text-on-light-muted);
+  margin-top: var(--space-2);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.9rem 1.6rem;
+  border-radius: var(--radius);
+  border: 1px solid transparent;
+  transition: transform 0.3s var(--ease), background 0.3s var(--ease), color 0.3s var(--ease), border-color 0.3s var(--ease);
+  white-space: nowrap;
+}
+.btn-outline-dark { border-color: var(--line-on-dark); color: var(--text-on-dark); }
+.btn-outline-dark:hover { border-color: var(--brass); color: var(--brass-light); transform: translateY(-2px); }
+
+/* ---------- Serendib UI-kit buttons (sitewide) ----------
+   Left: a client-supplied painted icon, cropped and colour-keyed to
+   transparent. Default is per-class — the tureen (images/icon-tureen.png,
+   a traditional lamp/offering vessel — a "welcome" motif) on primary
+   booking CTAs, crossed swords (images/icon-crossed-swords.png, a
+   heritage/adventure motif) on secondary explore/discover links — via
+   the --btn-icon-left custom property with a class-level fallback, so
+   any specific button can override it with its own icon by setting
+   `style="--btn-icon-left: url('images/whatever.png')"` inline, without
+   touching the shared CSS rule. The homepage buttons each have their own
+   icon this way (see index.html) — every other page still uses the
+   class-level tureen/crossed-swords default. Right: the lotus artwork
+   (images/icon-lotus-motif.png) "imprinted" into BOTH as a faint,
+   masked watermark rather than a crisp icon — low opacity, fading in
+   from the centre, clipped to the button's own rounded shape.
+   Colour pass: primary moved from the dark forest green (--sl-green) to
+   the lighter sage (--sl-green-light); secondary moved from the green
+   outline to a light-orange one (--terracotta-light base, deepening to
+   --sl-terracotta on hover — the same family its hover glow already
+   used). Hover glows on both are toned down from the original pass —
+   smaller blur/spread and lower opacity — so they read as a soft lift
+   rather than a halo.
+   Now the site's only buttons — .btn-primary/.btn-outline-* have been
+   retired in favour of .btn-uikit-primary/.btn-uikit-secondary
+   everywhere. The gold variant (.btn-uikit-gold) has been removed; its
+   one use (homepage CTA band) now takes the primary green treatment
+   instead. */
+/* ---------- Carved-jade buttons (sitewide) ----------
+   Ported from the "Serendib Heritage" jade UI-kit button: a carved
+   nephrite-jade glass core set inside an engraved metallic-gold mural
+   frame, with a faded Sigiriya bithu-sithuwam fresco read through the
+   glass and a slow drifting light sheen.
+
+   Built on a single element with layered backgrounds + the gradient-border
+   trick: the jade core layers (top gloss, jade tint, fresco) are clipped
+   to `padding-box`, while the brushed gold frame gradient is clipped to
+   `border-box` and shows only through the 3px transparent border. The
+   painted left icon lives in ::before (a flex item, unchanged from before)
+   and the animated sheen streak lives in ::after (z-index:-1, so it drifts
+   above the jade background but below the label + icon). primary and
+   secondary share the jade treatment; only their glow/emphasis differ so
+   primary still reads as the main CTA. */
+.btn-uikit-primary,
+.btn-uikit-secondary {
+  position: relative;
+  z-index: 0;
+  overflow: hidden;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: normal;
+  text-transform: none;
+  border-radius: 14px;
+  gap: 0.7rem;
+  padding: 0.6rem 1.35rem 0.6rem 0.5rem;
+  border: 3px solid transparent;
+  color: #eafff0; /* jade-foreground — pale mint */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
+  background:
+    /* glassy top gloss band */
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 42%) padding-box,
+    /* nephrite jade tint over the fresco (lightened a touch so the
+       Sigiriya maidens read more clearly through the jade glass) */
+    linear-gradient(158deg, rgba(38, 132, 106, 0.66), rgba(20, 92, 72, 0.74)) padding-box,
+    /* Sigiriya fresco maidens seen through the jade glass */
+    url("../images/jade-fresco.png") center / cover no-repeat padding-box,
+    /* engraved brushed metallic-gold mural frame */
+    linear-gradient(150deg, #6f5216 0%, #d4af37 22%, #f6e7ad 50%, #d4af37 78%, #6f5216 100%) border-box;
+  background-repeat: no-repeat;
+  box-shadow:
+    0 12px 30px -14px rgba(212, 175, 55, 0.7),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+    inset 0 -10px 20px -8px rgba(0, 0, 0, 0.55);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s var(--ease), filter 0.3s var(--ease);
+}
+.btn-uikit-primary:hover,
+.btn-uikit-secondary:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.06);
+  box-shadow:
+    0 16px 34px -14px rgba(212, 175, 55, 0.85),
+    0 0 14px 2px rgba(212, 175, 55, 0.4),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5),
+    inset 0 -10px 20px -8px rgba(0, 0, 0, 0.55);
+}
+/* secondary: same jade core, softer emphasis (no gold halo) */
+.btn-uikit-secondary {
+  box-shadow:
+    0 10px 24px -16px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.4),
+    inset 0 -10px 20px -8px rgba(0, 0, 0, 0.55);
+}
+.btn-uikit-secondary:hover {
+  box-shadow:
+    0 14px 28px -16px rgba(0, 0, 0, 0.65),
+    0 0 12px 2px rgba(212, 175, 55, 0.28),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.45),
+    inset 0 -10px 20px -8px rgba(0, 0, 0, 0.55);
+}
+
+/* left: the painted icon, a real flex item so it sits before the label —
+   different artwork per button, same box/sizing rules for both. A soft
+   gold drop-shadow lifts it off the dark jade glass. */
+.btn-uikit-primary::before,
+.btn-uikit-secondary::before {
+  content: "";
+  width: 52px;
+  height: 40px;
+  flex: none;
+  opacity: 0.95;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.55));
+}
+.btn-uikit-primary::before { background-image: var(--btn-icon-left, url("../images/icon-tureen.png")); }
+.btn-uikit-secondary::before { background-image: var(--btn-icon-left, url("../images/icon-lotus-motif.png")); }
+
+/* drifting glassy light sheen across the jade core (z-index:-1 keeps it
+   above the button background but below the label + icon). */
+.btn-uikit-primary::after,
+.btn-uikit-secondary::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -50%;
+  left: 0;
+  width: 38%;
+  height: 200%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+  filter: blur(6px);
+  transform: translateX(-120%) rotate(8deg);
+  animation: jade-sheen 6s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes jade-sheen {
+  0%, 100% { transform: translateX(-120%) rotate(8deg); opacity: 0.35; }
+  50% { transform: translateX(360%) rotate(8deg); opacity: 0.6; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-uikit-primary::after,
+  .btn-uikit-secondary::after { animation: none; }
+}
+
+
+/* ---------- Mural-style section dividers (homepage only) ----------
+   Decorative horizontal strips between sections, inspired by the
+   "Section Separators" row in the Serendib UI kit reference (a plain
+   gold rule with a lotus, an ornate vine scrollwork band, a dancers'
+   frieze, and a coastal skyline frieze). The dancers' frieze specifically
+   was skipped — reproducing figures in specific dance poses by hand,
+   with no way to render a preview in this environment, was too likely
+   to come out looking wrong rather than characterful — the wildlife
+   procession below (reusing the site's own existing elephant icon
+   geometry) fills a similar "frieze" role at much lower risk.
+   Every variant sits on its own flat --paper band so the artwork reads
+   clearly regardless of what's directly above/below it in the page. */
+.mural-divider {
+  background: var(--paper);
+  overflow: hidden;
+}
+.mural-divider-inner {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-3);
+}
+
+/* Variant: thin gold rule with a centred lotus */
+.mural-divider--lotus { padding-block: 1.75rem; }
+.mural-divider--lotus .mural-divider-inner {
+  position: relative;
+  height: 1px;
+  background: var(--sl-gold);
+  opacity: 0.55;
+}
+.mural-divider--lotus .mural-divider-inner::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  background-color: var(--sl-gold);
+  opacity: 1;
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PGcgZmlsbD0iIzAwMCI+PHBhdGggZD0iTTI0IDQwIFExNi41OCAzMS4xMiA3LjA0IDI5LjQgUTEyLjc2IDM3LjIyIDI0IDQwIFoiLz48cGF0aCBkPSJNMjQgNDAgUTIwLjk0IDI1Ljg5IDExLjUgMTguMzUgUTEzLjMxIDMwLjI5IDI0IDQwIFoiLz48cGF0aCBkPSJNMjQgNDAgUTI5LjAgMjQuNiAyNC4wIDEyLjAgUTE5LjAgMjQuNiAyNCA0MCBaIi8+PHBhdGggZD0iTTI0IDQwIFEzNC42OSAzMC4yOSAzNi41IDE4LjM1IFEyNy4wNiAyNS44OSAyNCA0MCBaIi8+PHBhdGggZD0iTTI0IDQwIFEzNS4yNCAzNy4yMiA0MC45NiAyOS40IFEzMS40MiAzMS4xMiAyNCA0MCBaIi8+PGNpcmNsZSBjeD0iMjQiIGN5PSI0MSIgcj0iMi4yIi8+PC9nPjwvc3ZnPg==");
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0OCA0OCI+PGcgZmlsbD0iIzAwMCI+PHBhdGggZD0iTTI0IDQwIFExNi41OCAzMS4xMiA3LjA0IDI5LjQgUTEyLjc2IDM3LjIyIDI0IDQwIFoiLz48cGF0aCBkPSJNMjQgNDAgUTIwLjk0IDI1Ljg5IDExLjUgMTguMzUgUTEzLjMxIDMwLjI5IDI0IDQwIFoiLz48cGF0aCBkPSJNMjQgNDAgUTI5LjAgMjQuNiAyNC4wIDEyLjAgUTE5LjAgMjQuNiAyNCA0MCBaIi8+PHBhdGggZD0iTTI0IDQwIFEzNC42OSAzMC4yOSAzNi41IDE4LjM1IFEyNy4wNiAyNS44OSAyNCA0MCBaIi8+PHBhdGggZD0iTTI0IDQwIFEzNS4yNCAzNy4yMiA0MC45NiAyOS40IFEzMS40MiAzMS4xMiAyNCA0MCBaIi8+PGNpcmNsZSBjeD0iMjQiIGN5PSI0MSIgcj0iMi4yIi8+PC9nPjwvc3ZnPg==");
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
+/* Variant: repeating vine/paisley scrollwork band */
+.mural-divider--vine { padding-block: 1.4rem; }
+.mural-divider--vine .mural-divider-inner {
+  height: 26px;
+  background-color: var(--sl-green-light);
+  opacity: 0.75;
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDAgMzIiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTAgMTYgUTE3LjUgMiAzNSAxNiBUNzAgMTYgVDEwNSAxNiBUMTQwIDE2Ii8+PHBhdGggZD0iTTE3LjUgMiBDMTQgNyAxNCAxMSAxOS41IDEyLjUiLz48cGF0aCBkPSJNNTIuNSAzMCBDNTYgMjUgNTYgMjEgNTAuNSAxOS41Ii8+PHBhdGggZD0iTTg3LjUgMiBDODQgNyA4NCAxMSA4OS41IDEyLjUiLz48cGF0aCBkPSJNMTIyLjUgMzAgQzEyNiAyNSAxMjYgMjEgMTIwLjUgMTkuNSIvPjwvZz48ZyBmaWxsPSIjMDAwIj48Y2lyY2xlIGN4PSI5IiBjeT0iOSIgcj0iMiIvPjxjaXJjbGUgY3g9IjI2IiBjeT0iMjIiIHI9IjIiLz48Y2lyY2xlIGN4PSI0NCIgY3k9IjkiIHI9IjIiLz48Y2lyY2xlIGN4PSI2MSIgY3k9IjIyIiByPSIyIi8+PGNpcmNsZSBjeD0iNzkiIGN5PSI5IiByPSIyIi8+PGNpcmNsZSBjeD0iOTYiIGN5PSIyMiIgcj0iMiIvPjxjaXJjbGUgY3g9IjExNCIgY3k9IjkiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMzEiIGN5PSIyMiIgcj0iMiIvPjwvZz48L3N2Zz4=");
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNDAgMzIiPjxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIxLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTTAgMTYgUTE3LjUgMiAzNSAxNiBUNzAgMTYgVDEwNSAxNiBUMTQwIDE2Ii8+PHBhdGggZD0iTTE3LjUgMiBDMTQgNyAxNCAxMSAxOS41IDEyLjUiLz48cGF0aCBkPSJNNTIuNSAzMCBDNTYgMjUgNTYgMjEgNTAuNSAxOS41Ii8+PHBhdGggZD0iTTg3LjUgMiBDODQgNyA4NCAxMSA4OS41IDEyLjUiLz48cGF0aCBkPSJNMTIyLjUgMzAgQzEyNiAyNSAxMjYgMjEgMTIwLjUgMTkuNSIvPjwvZz48ZyBmaWxsPSIjMDAwIj48Y2lyY2xlIGN4PSI5IiBjeT0iOSIgcj0iMiIvPjxjaXJjbGUgY3g9IjI2IiBjeT0iMjIiIHI9IjIiLz48Y2lyY2xlIGN4PSI0NCIgY3k9IjkiIHI9IjIiLz48Y2lyY2xlIGN4PSI2MSIgY3k9IjIyIiByPSIyIi8+PGNpcmNsZSBjeD0iNzkiIGN5PSI5IiByPSIyIi8+PGNpcmNsZSBjeD0iOTYiIGN5PSIyMiIgcj0iMiIvPjxjaXJjbGUgY3g9IjExNCIgY3k9IjkiIHI9IjIiLz48Y2lyY2xlIGN4PSIxMzEiIGN5PSIyMiIgcj0iMiIvPjwvZz48L3N2Zz4=");
+  -webkit-mask-repeat: repeat-x;
+  mask-repeat: repeat-x;
+  -webkit-mask-size: 140px 26px;
+  mask-size: 140px 26px;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Variant: coastal-skyline frieze (hills, sun, a stupa, palm trees) —
+   a single wide illustration, not tiled, so nothing repeats or seams. */
+.mural-divider--landscape { padding-block: 0; }
+.mural-divider--landscape .mural-divider-inner {
+  height: 84px;
+  padding-inline: 0;
+  max-width: none;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMjAwIDE0MCI+PGNpcmNsZSBjeD0iMTUwIiBjeT0iNDYiIHI9IjE2IiBmaWxsPSIjRDRBRjM3Ii8+PGxpbmUgeDE9IjE3Mi4wIiB5MT0iNDYuMCIgeDI9IjE4MC4wIiB5Mj0iNDYuMCIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSIxNjUuNiIgeTE9IjYxLjYiIHgyPSIxNzEuMiIgeTI9IjY3LjIiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTUwLjAiIHkxPSI2OC4wIiB4Mj0iMTUwLjAiIHkyPSI3Ni4wIiBzdHJva2U9IiNENEFGMzciIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjEzNC40IiB5MT0iNjEuNiIgeDI9IjEyOC44IiB5Mj0iNjcuMiIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSIxMjguMCIgeTE9IjQ2LjAiIHgyPSIxMjAuMCIgeTI9IjQ2LjAiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48bGluZSB4MT0iMTM0LjQiIHkxPSIzMC40IiB4Mj0iMTI4LjgiIHkyPSIyNC44IiBzdHJva2U9IiNENEFGMzciIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PGxpbmUgeDE9IjE1MC4wIiB5MT0iMjQuMCIgeDI9IjE1MC4wIiB5Mj0iMTYuMCIgc3Ryb2tlPSIjRDRBRjM3IiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxsaW5lIHgxPSIxNjUuNiIgeTE9IjMwLjQiIHgyPSIxNzEuMiIgeTI9IjI0LjgiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNMCAxNDAgTDAgMTAwLjEgTDE1IDk2LjUgTDMwIDk0LjQgTDQ1IDk0LjEgTDYwIDk1LjYgTDc1IDk4LjcgTDkwIDEwMy4wIEwxMDUgMTA3LjkgTDEyMCAxMTIuOSBMMTM1IDExNy4yIEwxNTAgMTIwLjQgTDE2NSAxMjEuOSBMMTgwIDEyMS42IEwxOTUgMTE5LjYgTDIxMCAxMTYuMCBMMjI1IDExMS40IEwyNDAgMTA2LjQgTDI1NSAxMDEuNSBMMjcwIDk3LjYgTDI4NSA5NC45IEwzMDAgOTQuMCBMMzE1IDk0LjkgTDMzMCA5Ny41IEwzNDUgMTAxLjQgTDM2MCAxMDYuMyBMMzc1IDExMS4zIEwzOTAgMTE1LjkgTDQwNSAxMTkuNSBMNDIwIDEyMS42IEw0MzUgMTIxLjkgTDQ1MCAxMjAuNCBMNDY1IDExNy4zIEw0ODAgMTEzLjAgTDQ5NSAxMDguMSBMNTEwIDEwMy4xIEw1MjUgOTguOCBMNTQwIDk1LjYgTDU1NSA5NC4xIEw1NzAgOTQuNCBMNTg1IDk2LjQgTDYwMCAxMDAuMCBMNjE1IDEwNC42IEw2MzAgMTA5LjYgTDY0NSAxMTQuNSBMNjYwIDExOC40IEw2NzUgMTIxLjEgTDY5MCAxMjIuMCBMNzA1IDEyMS4xIEw3MjAgMTE4LjUgTDczNSAxMTQuNiBMNzUwIDEwOS43IEw3NjUgMTA0LjcgTDc4MCAxMDAuMSBMNzk1IDk2LjUgTDgxMCA5NC40IEw4MjUgOTQuMSBMODQwIDk1LjYgTDg1NSA5OC43IEw4NzAgMTAzLjAgTDg4NSAxMDcuOSBMOTAwIDExMi45IEw5MTUgMTE3LjIgTDkzMCAxMjAuNCBMOTQ1IDEyMS45IEw5NjAgMTIxLjYgTDk3NSAxMTkuNiBMOTkwIDExNi4wIEwxMDA1IDExMS40IEwxMDIwIDEwNi40IEwxMDM1IDEwMS41IEwxMDUwIDk3LjYgTDEwNjUgOTQuOSBMMTA4MCA5NC4wIEwxMDk1IDk0LjkgTDExMTAgOTcuNSBMMTEyNSAxMDEuNCBMMTE0MCAxMDYuMyBMMTE1NSAxMTEuMyBMMTE3MCAxMTUuOSBMMTE4NSAxMTkuNSBMMTIwMCAxMjEuNiBMMTIwMCAxNDAgWiIgZmlsbD0iIzZDOEI2QSIvPjxwYXRoIGQ9Ik0yOTcuNDUgMTMwIEMyOTQuOSAxMDQuNSwgMzAxLjcgODMuMjUsIDMwMy40IDcwLjUgTDMwNi44IDcwLjUgQzMwNC4yNSA4My4yNSwgMzAxLjcgMTA0LjUsIDMwMi41NSAxMzAgWiIgZmlsbD0iIzIxNDIzNiIvPjxwYXRoIGQ9Ik0zMDUuMSA3MC41IFEzMDUuOCA0NS4wIDMxNS4wIDM0LjggTTMwNS4xIDcwLjUgUTMxMy40IDQ3LjkgMzI4LjggNDUuNCBNMzA1LjEgNzAuNSBRMzE3LjcgNTMuNSAzMzMuOSA1OS41IE0zMDUuMSA3MC41IFEzMTguNiA2MC40IDMzMS4zIDc0LjIgTTMwNS4xIDcwLjUgUTMxNS44IDY2LjkgMzIxLjcgODUuNyBNMzA1LjEgNzAuNSBRMzExLjMgNzAuNyAzMTAuMSA5MC41IiBmaWxsPSJub25lIiBzdHJva2U9IiMyMTQyMzYiIHN0cm9rZS13aWR0aD0iMy40IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz48cGF0aCBkPSJNODc3Ljc1IDEzMiBDODc1LjUgMTA5LjUsIDg4MS41IDkwLjc1LCA4ODMuMCA3OS41IEw4ODYuMCA3OS41IEM4ODMuNzUgOTAuNzUsIDg4MS41IDEwOS41LCA4ODIuMjUgMTMyIFoiIGZpbGw9IiMyMTQyMzYiLz48cGF0aCBkPSJNODg0LjUgNzkuNSBRODg1LjEgNTcuMCA4OTMuMiA0OC4wIE04ODQuNSA3OS41IFE4OTEuOSA1OS41IDkwNS40IDU3LjQgTTg4NC41IDc5LjUgUTg5NS42IDY0LjUgOTA5LjkgNjkuOCBNODg0LjUgNzkuNSBRODk2LjQgNzAuNiA5MDcuNiA4Mi44IE04ODQuNSA3OS41IFE4OTQuMCA3Ni40IDg5OS4xIDkyLjkgTTg4NC41IDc5LjUgUTg5MC4wIDc5LjcgODg4LjkgOTcuMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjE0MjM2IiBzdHJva2Utd2lkdGg9IjMuMCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+PHBhdGggZD0iTTEwMzcuMTUgMTI4IEMxMDM0LjMgOTkuNSwgMTA0MS45IDc1Ljc1LCAxMDQzLjggNjEuNSBMMTA0Ny42IDYxLjUgQzEwNDQuNzUgNzUuNzUsIDEwNDEuOSA5OS41LCAxMDQyLjg1IDEyOCBaIiBmaWxsPSIjMjE0MjM2Ii8+PHBhdGggZD0iTTEwNDUuNyA2MS41IFExMDQ2LjQgMzMuMCAxMDU2LjcgMjEuNiBNMTA0NS43IDYxLjUgUTEwNTUuMCAzNi4yIDEwNzIuMiAzMy41IE0xMDQ1LjcgNjEuNSBRMTA1OS44IDQyLjUgMTA3Ny45IDQ5LjIgTTEwNDUuNyA2MS41IFExMDYwLjggNTAuMyAxMDc1LjAgNjUuNyBNMTA0NS43IDYxLjUgUTEwNTcuNyA1Ny41IDEwNjQuMiA3OC41IE0xMDQ1LjcgNjEuNSBRMTA1Mi42IDYxLjcgMTA1MS4zIDgzLjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzIxNDIzNiIgc3Ryb2tlLXdpZHRoPSIzLjgiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPjxwYXRoIGQ9Ik01ODUuMCAxMjggTDY1NS4wIDEyOCBMNjQzLjAgMTE4LjAgTDU5Ny4wIDExOC4wIFogTTU5Ny4wIDExOC4wIEw2NDMuMCAxMTguMCBMNjMyLjAgMTA4LjAgTDYwOC4wIDEwOC4wIFogTTYxMS42IDEwOC4wIEM2MDguMCA4Ni4wLCA2MzIuMCA4Ni4wLCA2MjguNCAxMDguMCBaIE02MTggODYuMCBMNjIyIDg2LjAgTDYyMSA2Ni4wIEw2MTkgNjYuMCBaIiBmaWxsPSIjQzM1QTJCIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiLz48cGF0aCBkPSJNMCAxNDAgTDAgMTEzLjQgTDE1IDExNy4wIEwzMCAxMjIuMSBMNDUgMTI3LjAgTDYwIDEzMC43IEw3NSAxMzIuMCBMOTAgMTMwLjYgTDEwNSAxMjcuMCBMMTIwIDEyMS45IEwxMzUgMTE3LjAgTDE1MCAxMTMuMyBMMTY1IDExMi4wIEwxODAgMTEzLjQgTDE5NSAxMTcuMCBMMjEwIDEyMi4xIEwyMjUgMTI3LjAgTDI0MCAxMzAuNyBMMjU1IDEzMi4wIEwyNzAgMTMwLjYgTDI4NSAxMjcuMCBMMzAwIDEyMS45IEwzMTUgMTE3LjAgTDMzMCAxMTMuMyBMMzQ1IDExMi4wIEwzNjAgMTEzLjQgTDM3NSAxMTcuMCBMMzkwIDEyMi4xIEw0MDUgMTI3LjAgTDQyMCAxMzAuNyBMNDM1IDEzMi4wIEw0NTAgMTMwLjYgTDQ2NSAxMjcuMCBMNDgwIDEyMS45IEw0OTUgMTE3LjAgTDUxMCAxMTMuMyBMNTI1IDExMi4wIEw1NDAgMTEzLjQgTDU1NSAxMTcuMCBMNTcwIDEyMi4xIEw1ODUgMTI3LjAgTDYwMCAxMzAuNyBMNjE1IDEzMi4wIEw2MzAgMTMwLjYgTDY0NSAxMjcuMCBMNjYwIDEyMS45IEw2NzUgMTE3LjAgTDY5MCAxMTMuMyBMNzA1IDExMi4wIEw3MjAgMTEzLjQgTDczNSAxMTcuMCBMNzUwIDEyMi4xIEw3NjUgMTI3LjAgTDc4MCAxMzAuNyBMNzk1IDEzMi4wIEw4MTAgMTMwLjYgTDgyNSAxMjcuMCBMODQwIDEyMS45IEw4NTUgMTE3LjAgTDg3MCAxMTMuMyBMODg1IDExMi4wIEw5MDAgMTEzLjQgTDkxNSAxMTcuMCBMOTMwIDEyMi4xIEw5NDUgMTI3LjAgTDk2MCAxMzAuNyBMOTc1IDEzMi4wIEw5OTAgMTMwLjYgTDEwMDUgMTI3LjAgTDEwMjAgMTIxLjkgTDEwMzUgMTE3LjAgTDEwNTAgMTEzLjMgTDEwNjUgMTEyLjAgTDEwODAgMTEzLjQgTDEwOTUgMTE3LjAgTDExMTAgMTIyLjEgTDExMjUgMTI3LjAgTDExNDAgMTMwLjcgTDExNTUgMTMyLjAgTDExNzAgMTMwLjYgTDExODUgMTI3LjAgTDEyMDAgMTIxLjkgTDEyMDAgMTQwIFoiIGZpbGw9IiMyMTQyMzYiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+/* Variant: wildlife procession — elephants + palm trees, reusing the
+   site's existing elephant icon geometry (icons.js) at trusted scale
+   rather than new figurative art. */
+.mural-divider--procession { padding-block: 1.3rem; }
+.mural-divider--procession .mural-divider-inner {
+  height: 44px;
+  background-color: var(--sl-terracotta);
+  opacity: 0.85;
+  -webkit-mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MjAgNjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLDYpIHNjYWxlKDEuMCkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik04IDM0IEM4IDI0IDE0IDE2IDI0IDE2IEMzMyAxNiAzOCAyMiAzOCAyOCBDMzggMzIgMzYgMzQgMzMgMzQgTDMzIDQwIi8+PHBhdGggZD0iTTE0IDM0IFY0MCBNMjAgMzQgVjQwIE0yNyAzNCBWNDAiLz48cGF0aCBkPSJNOCAzNCBDNSAzNCA0IDMwIDYgMjcgQzcuNSAyNSA5IDI1LjUgOSAyOCIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEuNCIgZmlsbD0iIzAwMCIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTE0IDIwIEMxMSAxOCAxMSAxNCAxNCAxMiIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNTAsNTApIHNjYWxlKDAuODUpIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMi4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik0tMiAwIEMtNSAtMTQgMSAtMjYgMyAtMzQiLz48cGF0aCBkPSJNMyAtMzQgUS04LjAgLTM3LjQgLTE3LjcgLTQxLjUgTTMgLTM0IFEtNi4zIC00My44IC05LjYgLTUyLjAgTTMgLTM0IFEtMi4yIC00Ny43IDEuMSAtNTUuOSBNMyAtMzQgUTQuNCAtNDguOSAxNC4wIC01My4xIE0zIC0zNCBRMTAuNCAtNDYuMiAyMi45IC00My4zIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI3MCw2KSBzY2FsZSgxLjApIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNOCAzNCBDOCAyNCAxNCAxNiAyNCAxNiBDMzMgMTYgMzggMjIgMzggMjggQzM4IDMyIDM2IDM0IDMzIDM0IEwzMyA0MCIvPjxwYXRoIGQ9Ik0xNCAzNCBWNDAgTTIwIDM0IFY0MCBNMjcgMzQgVjQwIi8+PHBhdGggZD0iTTggMzQgQzUgMzQgNCAzMCA2IDI3IEM3LjUgMjUgOSAyNS41IDkgMjgiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjIyIiByPSIxLjQiIGZpbGw9IiMwMDAiIHN0cm9rZT0ibm9uZSIvPjxwYXRoIGQ9Ik0xNCAyMCBDMTEgMTggMTEgMTQgMTQgMTIiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDAwLDUwKSBzY2FsZSgwLjg1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNLTIgMCBDLTUgLTE0IDEgLTI2IDMgLTM0Ii8+PHBhdGggZD0iTTMgLTM0IFEtOC4wIC0zNy40IC0xNy43IC00MS41IE0zIC0zNCBRLTYuMyAtNDMuOCAtOS42IC01Mi4wIE0zIC0zNCBRLTIuMiAtNDcuNyAxLjEgLTU1LjkgTTMgLTM0IFE0LjQgLTQ4LjkgMTQuMCAtNTMuMSBNMyAtMzQgUTEwLjQgLTQ2LjIgMjIuOSAtNDMuMyIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MjAsNikgc2NhbGUoMS4wKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTggMzQgQzggMjQgMTQgMTYgMjQgMTYgQzMzIDE2IDM4IDIyIDM4IDI4IEMzOCAzMiAzNiAzNCAzMyAzNCBMMzMgNDAiLz48cGF0aCBkPSJNMTQgMzQgVjQwIE0yMCAzNCBWNDAgTTI3IDM0IFY0MCIvPjxwYXRoIGQ9Ik04IDM0IEM1IDM0IDQgMzAgNiAyNyBDNy41IDI1IDkgMjUuNSA5IDI4Ii8+PGNpcmNsZSBjeD0iMzAiIGN5PSIyMiIgcj0iMS40IiBmaWxsPSIjMDAwIiBzdHJva2U9Im5vbmUiLz48cGF0aCBkPSJNMTQgMjAgQzExIDE4IDExIDE0IDE0IDEyIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY1MCw1MCkgc2NhbGUoMC44NSkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTS0yIDAgQy01IC0xNCAxIC0yNiAzIC0zNCIvPjxwYXRoIGQ9Ik0zIC0zNCBRLTguMCAtMzcuNCAtMTcuNyAtNDEuNSBNMyAtMzQgUS02LjMgLTQzLjggLTkuNiAtNTIuMCBNMyAtMzQgUS0yLjIgLTQ3LjcgMS4xIC01NS45IE0zIC0zNCBRNC40IC00OC45IDE0LjAgLTUzLjEgTTMgLTM0IFExMC40IC00Ni4yIDIyLjkgLTQzLjMiLz48L2c+PC9zdmc+");
+  mask-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA3MjAgNjAiPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDIwLDYpIHNjYWxlKDEuMCkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiPjxwYXRoIGQ9Ik04IDM0IEM4IDI0IDE0IDE2IDI0IDE2IEMzMyAxNiAzOCAyMiAzOCAyOCBDMzggMzIgMzYgMzQgMzMgMzQgTDMzIDQwIi8+PHBhdGggZD0iTTE0IDM0IFY0MCBNMjAgMzQgVjQwIE0yNyAzNCBWNDAiLz48cGF0aCBkPSJNOCAzNCBDNSAzNCA0IDMwIDYgMjcgQzcuNSAyNSA5IDI1LjUgOSAyOCIvPjxjaXJjbGUgY3g9IjMwIiBjeT0iMjIiIHI9IjEuNCIgZmlsbD0iIzAwMCIgc3Ryb2tlPSJub25lIi8+PHBhdGggZD0iTTE0IDIwIEMxMSAxOCAxMSAxNCAxNCAxMiIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSgxNTAsNTApIHNjYWxlKDAuODUpIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMi4zIiBzdHJva2UtbGluZWNhcD0icm91bmQiPjxwYXRoIGQ9Ik0tMiAwIEMtNSAtMTQgMSAtMjYgMyAtMzQiLz48cGF0aCBkPSJNMyAtMzQgUS04LjAgLTM3LjQgLTE3LjcgLTQxLjUgTTMgLTM0IFEtNi4zIC00My44IC05LjYgLTUyLjAgTTMgLTM0IFEtMi4yIC00Ny43IDEuMSAtNTUuOSBNMyAtMzQgUTQuNCAtNDguOSAxNC4wIC01My4xIE0zIC0zNCBRMTAuNCAtNDYuMiAyMi45IC00My4zIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDI3MCw2KSBzY2FsZSgxLjApIiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDAiIHN0cm9rZS13aWR0aD0iMiIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj48cGF0aCBkPSJNOCAzNCBDOCAyNCAxNCAxNiAyNCAxNiBDMzMgMTYgMzggMjIgMzggMjggQzM4IDMyIDM2IDM0IDMzIDM0IEwzMyA0MCIvPjxwYXRoIGQ9Ik0xNCAzNCBWNDAgTTIwIDM0IFY0MCBNMjcgMzQgVjQwIi8+PHBhdGggZD0iTTggMzQgQzUgMzQgNCAzMCA2IDI3IEM3LjUgMjUgOSAyNS41IDkgMjgiLz48Y2lyY2xlIGN4PSIzMCIgY3k9IjIyIiByPSIxLjQiIGZpbGw9IiMwMDAiIHN0cm9rZT0ibm9uZSIvPjxwYXRoIGQ9Ik0xNCAyMCBDMTEgMTggMTEgMTQgMTQgMTIiLz48L2c+PGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNDAwLDUwKSBzY2FsZSgwLjg1KSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIuMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj48cGF0aCBkPSJNLTIgMCBDLTUgLTE0IDEgLTI2IDMgLTM0Ii8+PHBhdGggZD0iTTMgLTM0IFEtOC4wIC0zNy40IC0xNy43IC00MS41IE0zIC0zNCBRLTYuMyAtNDMuOCAtOS42IC01Mi4wIE0zIC0zNCBRLTIuMiAtNDcuNyAxLjEgLTU1LjkgTTMgLTM0IFE0LjQgLTQ4LjkgMTQuMCAtNTMuMSBNMyAtMzQgUTEwLjQgLTQ2LjIgMjIuOSAtNDMuMyIvPjwvZz48ZyB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1MjAsNikgc2NhbGUoMS4wKSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTggMzQgQzggMjQgMTQgMTYgMjQgMTYgQzMzIDE2IDM4IDIyIDM4IDI4IEMzOCAzMiAzNiAzNCAzMyAzNCBMMzMgNDAiLz48cGF0aCBkPSJNMTQgMzQgVjQwIE0yMCAzNCBWNDAgTTI3IDM0IFY0MCIvPjxwYXRoIGQ9Ik04IDM0IEM1IDM0IDQgMzAgNiAyNyBDNy41IDI1IDkgMjUuNSA5IDI4Ii8+PGNpcmNsZSBjeD0iMzAiIGN5PSIyMiIgcj0iMS40IiBmaWxsPSIjMDAwIiBzdHJva2U9Im5vbmUiLz48cGF0aCBkPSJNMTQgMjAgQzExIDE4IDExIDE0IDE0IDEyIi8+PC9nPjxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKDY1MCw1MCkgc2NhbGUoMC44NSkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwMCIgc3Ryb2tlLXdpZHRoPSIyLjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCI+PHBhdGggZD0iTS0yIDAgQy01IC0xNCAxIC0yNiAzIC0zNCIvPjxwYXRoIGQ9Ik0zIC0zNCBRLTguMCAtMzcuNCAtMTcuNyAtNDEuNSBNMyAtMzQgUS02LjMgLTQzLjggLTkuNiAtNTIuMCBNMyAtMzQgUS0yLjIgLTQ3LjcgMS4xIC01NS45IE0zIC0zNCBRNC40IC00OC45IDE0LjAgLTUzLjEgTTMgLTM0IFExMC40IC00Ni4yIDIyLjkgLTQzLjMiLz48L2c+PC9zdmc+");
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+}
+
+/* Variant: real client-supplied line-art frieze — ocean scrollwork, a
+   lotus, a Kandyan dancer, palm trees and Sigiriya, hand-illustrated
+   (not hand-coded by us). images/frieze-divider.png is a pre-built tile:
+   the source artwork plus a horizontally-flipped copy of itself, placed
+   side by side. Because each half is the mirror of its neighbour, every
+   seam — within the tile and between repeats — lines up on matching
+   content, so `repeat-x` reads as one continuous, symmetric band rather
+   than a repeating strip with a visible join. See the README for exactly
+   how the tile was built (crop box, padding, quantization). */
+.mural-divider--frieze { padding-block: 0.4rem; background: transparent; }
+.mural-divider--frieze .mural-divider-inner {
+  height: 36px;
+  padding-inline: 0;
+  max-width: none;
+  background-image: url("../images/frieze-divider.png");
+  background-repeat: repeat-x;
+  background-position: center;
+  background-size: auto 100%;
+}
+@media (max-width: 720px) {
+  .mural-divider--frieze .mural-divider-inner { height: 36px; }
+}
+
+.coord-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  color: var(--brass);
+  margin: 0 0 0.4rem;
+}
+
+/* ---------- 4. Header & navigation ---------- */
+.site-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  padding-block: var(--space-3);
+  transition: padding 0.35s var(--ease), background 0.35s var(--ease), box-shadow 0.35s var(--ease);
+  background: linear-gradient(to bottom, rgba(15, 27, 43, 0.85), rgba(15, 27, 43, 0));
+}
+.site-header.is-scrolled {
+  padding-block: var(--space-1);
+  background: var(--ink);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+.brand {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  color: var(--text-on-dark);
+  letter-spacing: 0.02em;
+}
+.brand-mark { color: var(--brass); }
+
+.primary-nav { display: flex; gap: var(--space-4); }
+.nav-item { position: relative; }
+.nav-item > a {
+  color: var(--text-on-dark);
+  font-size: 0.92rem;
+  padding-block: 0.4rem;
+}
+.nav-item > a:hover { color: var(--brass-light); }
+.nav-item > a.is-active { color: var(--brass-light); }
+#mobile-nav-links a.is-active { color: var(--brass-light); }
+.nav-item.has-dropdown:hover .dropdown { opacity: 1; visibility: visible; transform: translateY(0); }
+/* ---------- Ancient Sri Lankan navigation dropdown (site-wide) ----------
+   An "ola-leaf shrine" panel: a dark, warmly-lit card carrying a faded
+   Sigiriya rock fresco (sigiri bithu sithuwam — the celestial maidens) as
+   its backdrop, capped top and bottom by a jaded Kandyan liyawela
+   (curling lotus-vine) frieze, with lotus-medallion icon badges on each
+   row. Applied to every page's dropdown — the homepage-only cream UI-kit
+   card it replaces has been retired. */
+.dropdown {
+  position: absolute;
+  top: calc(100% + 12px);
+  left: -1.4rem;
+  width: 300px;
+  padding: 54px 14px 52px;
+  border-radius: 14px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  background:
+    linear-gradient(158deg, rgba(24, 14, 6, 0.8) 0%, rgba(40, 24, 11, 0.83) 55%, rgba(24, 14, 6, 0.86) 100%),
+    url("../images/dropdown-sigiri-fresco.png");
+  background-size: cover;
+  background-position: center 18%;
+  box-shadow:
+    0 26px 55px rgba(12, 8, 3, 0.55),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.14);
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) scale(0.98);
+  transform-origin: top center;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0.3s;
+}
+.nav-item.has-dropdown:hover .dropdown {
+  transform: translateY(0) scale(1);
+}
+
+/* Jaded liyawela lotus-vine friezes pinned to the top and bottom edges.
+   The source ornament sits in the centre band of a square image, so a
+   slightly over-scaled, vertically-centred crop shows just that band.
+   The source art (dropdown-liyawel-divider.png) is gilded gold — hue-
+   rotate(120deg) shifts its highlight hue from ~42° to ~160°, landing
+   right in this site's existing jade range (--sl-jade is ~155°, --teal
+   is ~172°), so it reads jade instead of gold without needing a
+   separately-generated asset. */
+.dropdown::before,
+.dropdown::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 44px;
+  background-image: url("../images/dropdown-liyawel-divider.png");
+  background-size: 120% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  filter: hue-rotate(120deg);
+  pointer-events: none;
+}
+.dropdown::before { top: 0; }
+.dropdown::after { bottom: 0; transform: scaleY(-1); }
+
+.dropdown-heading {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin: -2px 0 8px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.28);
+}
+.dropdown-heading span {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sl-gold);
+}
+
+.dropdown li { position: relative; z-index: 1; }
+.dropdown li a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  color: #f1e4c6;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+  transition: background 0.22s var(--ease), color 0.22s var(--ease), box-shadow 0.22s var(--ease);
+}
+.dropdown li a:hover {
+  color: #fff8ea;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.22), rgba(197, 90, 43, 0.14));
+  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.4);
+}
+.dropdown-label { line-height: 1.25; }
+
+.dropdown-icon {
+  display: inline-flex;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #3c2614, #180d05);
+  border: 1px solid rgba(212, 175, 55, 0.7);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.1);
+  transition: box-shadow 0.22s var(--ease), border-color 0.22s var(--ease);
+}
+.dropdown-icon .icon { width: 16px; height: 16px; color: var(--sl-gold); stroke-width: 1.9; }
+.dropdown li a:hover .dropdown-icon {
+  border-color: var(--sl-gold);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
+}
+
+.header-actions { display: flex; align-items: center; gap: var(--space-2); }
+.header-phone {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-on-dark-muted);
+}
+
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  width: 32px;
+  height: 22px;
+  position: relative;
+}
+.nav-toggle span,
+.nav-toggle::before,
+.nav-toggle::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--text-on-dark);
+  transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+}
+.nav-toggle::before { top: 0; }
+.nav-toggle span { top: 50%; transform: translateY(-50%); }
+.nav-toggle::after { bottom: 0; }
+.nav-toggle[aria-expanded="true"]::before { transform: translateY(10px) rotate(45deg); }
+.nav-toggle[aria-expanded="true"]::after { transform: translateY(-10px) rotate(-45deg); }
+.nav-toggle[aria-expanded="true"] span { opacity: 0; }
+
+/* ---------- Sri Lanka UI-kit square icon button (homepage only) ----------
+   Matches buttons/button_icon_square_style1.png — a rounded terracotta
+   square housing a small icon (here, the hamburger lines already used
+   for this button's function). Scoped to body[data-page="index"] so the
+   plain version on other pages is untouched for now. */
+body[data-page="index"] .nav-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--terracotta) 0%, var(--terracotta-light) 100%);
+}
+body[data-page="index"] .nav-toggle span,
+body[data-page="index"] .nav-toggle::before,
+body[data-page="index"] .nav-toggle::after {
+  left: 9px;
+  right: 9px;
+  width: auto;
+  background: var(--paper);
+}
+body[data-page="index"] .nav-toggle::before { top: 13px; }
+body[data-page="index"] .nav-toggle::after { bottom: 13px; }
+
+.mobile-nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 27, 43, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease);
+  z-index: 90;
+}
+.mobile-nav-overlay.is-open { opacity: 1; visibility: visible; }
+
+.mobile-nav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(84vw, 360px);
+  background: var(--ink);
+  z-index: 95;
+  padding: var(--space-5) var(--space-3);
+  transform: translateX(100%);
+  transition: transform 0.35s var(--ease);
+  overflow-y: auto;
+}
+.mobile-nav.is-open { transform: translateX(0); }
+#mobile-nav-links > li { border-bottom: 1px solid var(--line-on-dark); }
+#mobile-nav-links > li > a,
+.mobile-nav-heading { display: block; padding: 0.9rem 0; color: var(--text-on-dark); font-size: 1rem; }
+.mobile-nav-group ul { padding-left: var(--space-2); padding-bottom: 0.6rem; }
+.mobile-nav-group ul a { display: block; padding: 0.5rem 0; color: var(--text-on-dark-muted); font-size: 0.9rem; }
+
+/* ---------- 5. Hero ---------- */
+.hero {
+  position: relative;
+  background: radial-gradient(ellipse at top right, var(--ink-600), var(--ink) 60%);
+  color: var(--text-on-dark);
+  padding-top: calc(var(--space-7) + var(--space-3));
+  padding-bottom: var(--space-6);
+  overflow: hidden;
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+.hero-video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: radial-gradient(ellipse at top right, rgba(29, 51, 80, 0.4), rgba(15, 27, 43, 0.4) 65%);
+}
+/* Respect reduced-motion preferences: fall back to the static gradient + poster look */
+@media (prefers-reduced-motion: reduce) {
+  .hero-video { display: none; }
+}
+.hero-route {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 2;
+}
+.hero-route path { fill: none; stroke: var(--brass); stroke-width: 1; stroke-dasharray: 4 6; }
+.hero-route circle { fill: var(--brass-light); }
+.hero-route .route-line {
+  stroke-dashoffset: 1000;
+  stroke-dasharray: 1000;
+  animation: draw-route 3.5s var(--ease) forwards 0.3s;
+}
+@keyframes draw-route { to { stroke-dashoffset: 0; } }
+
+.hero-inner { position: relative; z-index: 3; display: grid; gap: var(--space-4); }
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+  margin-bottom: var(--space-2);
+}
+.hero h1 {
+  font-size: clamp(2.6rem, 6vw, 4.6rem);
+  max-width: 16ch;
+  color: var(--text-on-dark);
+}
+.hero-sub {
+  max-width: 46ch;
+  color: var(--text-on-dark-muted);
+  font-size: 1.05rem;
+  margin-top: var(--space-3);
+}
+.hero-actions { display: flex; gap: var(--space-2); margin-top: var(--space-4); flex-wrap: wrap; }
+/* Sri Lanka UI-kit tab bar — matches tabs/tabs_bar_style3.png (a
+   pill-shaped segmented bar). Links, not stateful tabs (each goes to a
+   different page/filter), but the same rounded-segment treatment. */
+.hero-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  margin-top: var(--space-5);
+  padding: 6px;
+  background: rgba(243, 239, 225, 0.1);
+  border: 1px solid var(--line-on-dark);
+  border-radius: 999px;
+  width: fit-content;
+}
+.hero-quicklinks a {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: normal;
+  color: var(--text-on-dark-muted);
+  padding: 0.6rem 1.15rem;
+  border-radius: 999px;
+  border-bottom: none;
+}
+.hero-quicklinks a:hover {
+  color: var(--paper);
+  background: linear-gradient(135deg, var(--brass) 0%, var(--terracotta) 100%);
+  border-color: transparent;
+}
+
+/* ---------- 6. Features strip ---------- */
+.features {
+  background: var(--ink-700);
+  color: var(--text-on-dark);
+  padding-block: var(--space-5);
+}
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+.feature { border-top: 1px solid var(--line-on-dark); padding-top: var(--space-2); }
+/* Sri Lanka UI-kit circular icon badge — matches
+   icons/icon_circle_*.png (gold ring, cream fill, brown line icon). */
+.feature-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--paper);
+  border: 2px solid var(--brass);
+  box-shadow: 0 0 0 4px rgba(184, 146, 74, 0.15);
+  margin-bottom: var(--space-3);
+}
+.feature-icon .icon { width: 28px; height: 28px; color: var(--terracotta); stroke-width: 1.8; }
+.feature h3 { font-size: 1.05rem; margin-bottom: 0.5rem; color: var(--brass-light); }
+.feature p { color: var(--text-on-dark-muted); font-size: 0.92rem; }
+
+/* ---------- 7. About / intro ---------- */
+.intro { padding-block: var(--space-6); }
+.intro-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: var(--space-5);
+  align-items: start;
+}
+.intro h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); }
+.intro-body { color: var(--text-on-light-muted); font-size: 1.05rem; }
+.intro-body p + p { margin-top: var(--space-2); }
+.intro .btn { margin-top: var(--space-3); }
+
+/* ---------- 8. Destinations ---------- */
+.destinations { background: var(--parchment); padding-block: var(--space-6); }
+.destinations-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.dest-card {
+  background: transparent;
+  border: none;
+  perspective: 1400px;
+  height: 340px;
+  cursor: pointer;
+  outline: none;
+}
+.dest-card:focus-visible .dest-card-flip { outline: 2px solid var(--brass); outline-offset: 3px; }
+.dest-card-flip {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transform-style: preserve-3d;
+  box-shadow: 0 20px 40px rgba(15, 27, 43, 0.1);
+}
+.dest-card.is-flipped .dest-card-flip { transform: rotateY(180deg); }
+/* Desktop/pointer-fine devices also get a hover flip, no click required */
+@media (hover: hover) and (pointer: fine) {
+  .dest-card:hover .dest-card-flip { transform: rotateY(180deg); }
+}
+.dest-card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line-on-light);
+}
+.dest-card-front { align-items: stretch; }
+.dest-card-visual {
+  background: var(--ink);
+  color: var(--brass-light);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dest-icon { width: 56px; height: 56px; }
+.dest-card-front .coord-label,
+.dest-card-front h3,
+.dest-card-front .dest-region,
+.dest-card-front .dest-flip-hint { padding-inline: var(--space-3); }
+.dest-card-front h3 { font-size: 1.2rem; margin-top: 0.6rem; margin-bottom: 0.2rem; }
+.dest-region {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+.dest-flip-hint {
+  margin-top: auto;
+  padding-bottom: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.05em;
+  color: var(--text-on-light-muted);
+  opacity: 0.7;
+}
+.dest-card-back {
+  transform: rotateY(180deg);
+  padding: var(--space-3);
+  justify-content: space-between;
+  background: var(--ink);
+  color: var(--text-on-dark);
+}
+.dest-blurb { color: var(--text-on-dark-muted); font-size: 0.9rem; }
+.dest-highlights { display: grid; gap: 0.4rem; margin-top: var(--space-2); }
+.dest-highlights li {
+  font-size: 0.84rem;
+  color: var(--text-on-dark-muted);
+  padding-left: 1rem;
+  position: relative;
+}
+.dest-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  background: var(--brass-light);
+  border-radius: 50%;
+}
+.dest-back-cta {
+  margin-top: var(--space-2);
+  align-self: flex-start;
+  background: none;
+  border: 1px solid var(--brass-light);
+  color: var(--brass-light);
+  padding: 0.55rem 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  border-radius: var(--radius);
+}
+.dest-back-cta:hover { background: var(--brass-light); color: var(--ink); }
+
+/* ---------- 8b. Homepage "Explore the map" section ----------
+   The illustrated Sri Lanka map (images/sri-lanka-map-full.jpg) is the
+   section's own full-bleed background, not a boxed-in graphic beside the
+   content. On desktop, .explore-bg locks its aspect ratio to the image's
+   native 1536×1024 so the image shows whole, with zero crop — that's a
+   look choice, not a requirement: .explore-map's hotspot pins are
+   positioned in JS (positionMapPins() in main.js, from mapX/mapY in
+   data.js) using the same math object-fit: cover itself uses, so they
+   land correctly on the artwork's own hand-illustrated pins no matter
+   what shape .explore-bg's box ends up being. That's what lets mobile
+   drop the aspect-ratio lock for a taller crop instead (see the ~980px
+   media query) without the pins drifting. The heading and the video
+   window float on top — over the artwork's blank parchment side on
+   desktop, over a scrim on mobile. */
+.explore-map-section {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--parchment);
+}
+.explore-bg {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1536 / 1024;
+}
+.explore-bg-image {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center; /* overridden on mobile below, to keep the island (not the poster's blank left side) in the crop */
+}
+.explore-map-section .section-label { color: var(--brass); }
+.explore-map-section .section-heading { color: var(--ink); }
+
+/* The content column: label, heading, video window and CTA, stacked and
+   pinned to the artwork's blank left side. Sized in % of the section
+   (not the usual centred .container) so it stays inside that blank
+   parchment area at any width instead of drifting over the island. */
+.explore-map-content {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: var(--space-3);
+  width: min(58%, 820px);
+  padding-left: clamp(var(--space-3), 6%, var(--space-5));
+  padding-block: var(--space-4);
+  background: radial-gradient(ellipse 90% 70% at 30% 50%, rgba(232, 223, 199, 0.55) 0%, rgba(232, 223, 199, 0.15) 65%, transparent 85%);
+}
+.explore-map-content .section-label { margin-bottom: 0; }
+.explore-map-content .section-heading { font-size: clamp(1.3rem, 2.6vw, 2.2rem); }
+
+/* Invisible full-bleed layer the hotspot pins live in — same box as
+   .explore-bg-image (aspect-ratio inherited from the section), so a
+   pin's left/top % always matches the same spot on the image. */
+.explore-map {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+/* ---- Video window: "Container Window #1" card (client UI reference) —
+   a cream matted frame around a WIDE LANDSCAPE media area (centred play
+   control, prev/next arrows straddling its left/right edges, a "+"
+   detail toggle), a small brass corner flourish at each of the card's 4
+   corners, and a caption strip underneath (title + one-line blurb on
+   the left, pagination dots + a lion emblem grouped on the right).
+   Media ~9:4 above a caption strip, matched off the reference image.
+   Radius/border here are local to this card — the site's global
+   --radius stays a near-square 2px elsewhere. */
+.explore-window {
+  --panel-radius: 26px;
+  width: min(760px, 100%);
+  transition: opacity 0.4s var(--ease);
+}
+.explore-window.is-fading { opacity: 0; }
+/* ---------- Heritage jade/gold video window ----------
+   Ported from the uploaded HeritageVideoPlayer: the matted cream card is
+   replaced by an engraved brushed-metallic-gold mural frame (a 3px
+   gradient border) carrying a repeating Kandyan liyawela creeper-vine,
+   wrapped around a dark inner surface — video on top, a hairline gold
+   divider, then a carved-stone description strip. All the existing
+   rotation / play / prev-next / detail-drawer behaviour from main.js is
+   preserved; only the skin changes. */
+.dest-panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: 3px; /* the metallic frame's thickness */
+  border: none;
+  border-radius: var(--panel-radius);
+  background: linear-gradient(150deg, #6f5216 0%, #d4af37 22%, #f6e7ad 50%, #d4af37 78%, #6f5216 100%);
+  box-shadow:
+    0 24px 60px -22px rgba(212, 175, 55, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.5);
+  overflow: hidden;
+}
+/* engraved liyawela creeper-vine running along the gold frame — only
+   visible in the 3px padding ring, since the media + caption below sit
+   on their own opaque surfaces above it. */
+.dest-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border-radius: var(--panel-radius);
+  background: url("../images/liyawel-gold.png") repeat-x center / auto 100%;
+  opacity: 0.65;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* The old brass corner flourishes are superseded by the mural frame. */
+.dest-panel-corner { display: none; }
+
+/* "+" detail toggle — sits in the media's own top-right corner (clear
+   of the card's corner flourish, which lives further out on the outer
+   card edge). Opens the description drawer below. z-index kept above
+   .dest-panel-detail (4) so the toggle stays visible/clickable even
+   once the drawer is fully open — otherwise there'd be no way to press
+   "−" and close it again. */
+.dest-panel-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(15, 27, 43, 0.55);
+  color: var(--text-on-dark);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* -- Media frame --
+   .dest-panel-media stays overflow-visible so the prev/next arrows can
+   straddle its edges (half over the photo, half over the cream mat);
+   the actual footage is clipped inside .dest-panel-media-inner instead. */
+.dest-panel-media {
+  position: relative;
+  aspect-ratio: 9 / 4;
+  z-index: 1;
+}
+.dest-panel-media-inner {
+  position: absolute;
+  inset: 0;
+  /* rounded to meet the frame at the top; squared at the bottom where the
+     gold divider + carved-stone caption continue the inner surface. */
+  border-radius: calc(var(--panel-radius) - 3px) calc(var(--panel-radius) - 3px) 0 0;
+  overflow: hidden; /* clips the video AND the sliding .dest-panel-detail drawer below */
+  background: #000;
+}
+.dest-panel-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dest-panel-scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 27, 43, 0.35) 0%, rgba(15, 27, 43, 0) 24%, rgba(15, 27, 43, 0) 72%, rgba(15, 27, 43, 0.25) 100%);
+}
+
+
+
+/* Description drawer — slides up over the media when the "+" toggle is
+   open; "−" drops it back down to reveal the video again. Scrolls
+   internally if the highlights list runs taller than the (short,
+   landscape) media box.
+   Lives inside .dest-panel-media-inner now (a sibling of the video),
+   not directly inside .dest-panel-media — that inner box is the thing
+   with overflow: hidden + the rounded corners, so the drawer is clipped
+   to exactly the video's frame as it slides. That fixes two problems
+   at once: (1) while closed/mid-transition it can no longer spill out
+   and paint over the caption strip below (a plain, non-positioned
+   sibling that .dest-panel-media, being positioned+z-indexed for the
+   nav arrows, would otherwise always render above); (2) the "+"
+   toggle and prev/next arrows live outside this clipped box, with a
+   higher z-index than the drawer, so they stay visible and clickable
+   throughout the whole slide — not just before/after it — instead of
+   being buried under the drawer once it's open.
+   opacity/visibility are kept alongside the transform as a second line
+   of defence for the closed state, so it's genuinely invisible and
+   un-clickable rather than merely clipped. */
+.dest-panel-detail {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 0.5rem;
+  padding: 5% 6%;
+  background: rgba(15, 27, 43, 0.94);
+  border-radius: calc(var(--panel-radius) - 8px);
+  overflow-y: auto;
+  transform: translateY(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.35s var(--ease), visibility 0s linear 0.5s;
+}
+.dest-panel.is-open .dest-panel-detail {
+  transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1), opacity 0.35s var(--ease);
+}
+.dest-panel-detail .dest-blurb { font-size: 0.9rem; }
+.dest-panel-detail .dest-highlights { margin-top: 0.2rem; text-align: left; }
+.dest-panel-detail .dest-back-cta { align-self: center; }
+
+/* -- Heritage description strip --
+   The whole bottom bar is a Sigiriya fresco maiden (sigiri bithu sithuwam)
+   set into a gilded Kandyan liyawela vine artwork, embedded as the strip's
+   background. A left-to-right dark gradient sits over it so the title and
+   blurb on the left stay legible while the fresco reads through on the
+   right. Capped by a hairline gold divider (::before) reading as the
+   engraved seam between the footage and the caption. */
+.dest-panel-caption {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.05rem 1.15rem 1rem;
+  border-radius: 0 0 calc(var(--panel-radius) - 3px) calc(var(--panel-radius) - 3px);
+  background:
+    linear-gradient(90deg, rgba(24, 14, 6, 0.92) 0%, rgba(24, 14, 6, 0.7) 45%, rgba(24, 14, 6, 0.4) 100%),
+    url("../images/caption-sigiri-liyawel-bg.png") right center / cover;
+}
+.dest-panel-caption::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #d4af37, #f6e7ad, #d4af37, transparent);
+}
+.dest-panel-caption-text { flex: 1; min-width: 0; }
+.dest-panel-caption-text h3 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #f6ecd2;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+.dest-panel-caption-sub {
+  margin: 0.25rem 0 0;
+  font-size: 1rem;
+  color: #d8c7a1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+.dest-panel-caption-side {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  flex-shrink: 0;
+  padding-bottom: 0.3rem;
+}
+.dest-panel-dots { display: flex; align-items: center; gap: 6px; }
+.dest-panel-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: rgba(212, 175, 55, 0.35);
+  cursor: pointer;
+}
+.dest-panel-dot.is-active { background: #d4af37; width: 18px; border-radius: 4px; }
+
+/* Hotspot pins — invisible until active, positioned with left/top %
+   (mapX/mapY in data.js, measured off images/sri-lanka-map-full.jpg) so
+   each glow + pulsing ring sits exactly over that destination's own
+   hand-illustrated pin on the background artwork. The artwork itself is
+   never redrawn or altered, only highlighted. Sized as a % of the
+   section width so the hotspot scales at the same rate as the pin
+   artwork beneath it (both are proportional to the fixed-aspect image). */
+.map-pin {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2.9%;
+  aspect-ratio: 1 / 1;
+  transform: translate(-50%, -50%);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.map-pin-glow {
+  position: absolute;
+  inset: -55%;
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.map-pin.is-active .map-pin-glow {
+  opacity: 1;
+  background: radial-gradient(circle, rgba(255, 240, 200, 0.95) 0%, rgba(255, 210, 120, 0.65) 30%, rgba(216, 185, 120, 0.32) 55%, transparent 76%);
+  box-shadow:
+    0 0 18px 6px rgba(255, 210, 120, 0.85),
+    0 0 40px 16px rgba(216, 185, 120, 0.45);
+  animation: map-pin-breathe 2.1s ease-in-out infinite;
+}
+.map-pin-glow::before {
+  content: "";
+  position: absolute;
+  inset: 40%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fffaf0 0%, #ffdb8a 65%, transparent 100%);
+  box-shadow: 0 0 10px 4px rgba(255, 219, 138, 0.9);
+}
+@keyframes map-pin-breathe {
+  0%, 100% { transform: scale(0.92); opacity: 0.85; }
+  50% { transform: scale(1.12); opacity: 1; }
+}
+.map-pin-ping {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2.5px solid var(--brass-light);
+  opacity: 0;
+}
+.map-pin.is-active .map-pin-ping { animation: map-pin-pulse 1.6s ease-out infinite; }
+.map-pin.is-active .map-pin-ping::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 224, 153, 0.85);
+  animation: map-pin-pulse 1.6s ease-out infinite;
+  animation-delay: 0.55s;
+}
+@keyframes map-pin-pulse {
+  0% { transform: scale(0.6); opacity: 1; }
+  100% { transform: scale(2.8); opacity: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .map-pin.is-active .map-pin-ping,
+  .map-pin.is-active .map-pin-ping::after,
+  .map-pin.is-active .map-pin-glow { animation: none; }
+}
+
+/* ---------- 9. Process ---------- */
+.process { padding-block: var(--space-6); }
+.process-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-3);
+  position: relative;
+}
+.process-steps::before {
+  content: "";
+  position: absolute;
+  top: 1.1rem;
+  left: 4%;
+  right: 4%;
+  height: 1px;
+  background-image: linear-gradient(to right, var(--brass) 60%, transparent 0%);
+  background-size: 12px 1px;
+  background-repeat: repeat-x;
+}
+.process-step { position: relative; padding-top: var(--space-4); }
+.process-index {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--brass);
+  background: var(--paper);
+  padding-right: 0.6rem;
+}
+.process-step h3 { font-size: 1.1rem; margin-bottom: 0.4rem; }
+.process-step p { color: var(--text-on-light-muted); font-size: 0.92rem; }
+
+/* ---------- 10. Testimonials ---------- */
+.testimonials { background: var(--ink); color: var(--text-on-dark); padding-block: var(--space-6); }
+.testimonials-track {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-3);
+}
+.testimonial-card {
+  margin: 0;
+  border: 1px solid var(--line-on-dark);
+  padding: var(--space-3);
+  background: var(--ink-700);
+}
+.testimonial-quote { font-family: var(--font-display); font-size: 1.05rem; line-height: 1.5; }
+.testimonial-card footer { margin-top: var(--space-3); display: flex; flex-direction: column; gap: 0.15rem; }
+.testimonial-name { font-family: var(--font-mono); font-size: 0.8rem; color: var(--brass-light); }
+.testimonial-trip { font-size: 0.8rem; color: var(--text-on-dark-muted); }
+
+/* ---------- 11. CTA band ---------- */
+.cta-band {
+  background: linear-gradient(120deg, var(--teal), var(--ink));
+  color: var(--text-on-dark);
+  padding-block: var(--space-6);
+  text-align: center;
+}
+.cta-band h2 { font-size: clamp(1.8rem, 3.5vw, 2.6rem); max-width: 24ch; margin-inline: auto; }
+.cta-band p { color: var(--text-on-dark-muted); max-width: 46ch; margin: var(--space-2) auto var(--space-4); }
+
+/* ---------- 12. Newsletter ---------- */
+.newsletter { padding-block: var(--space-6); }
+.newsletter-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-4);
+  align-items: center;
+  border-top: 1px solid var(--line-on-light);
+  border-bottom: 1px solid var(--line-on-light);
+  padding-block: var(--space-4);
+}
+.newsletter h2 { font-size: 1.6rem; }
+.newsletter p { color: var(--text-on-light-muted); margin-top: 0.4rem; }
+.newsletter-form { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.newsletter-form input[type="email"] {
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line-on-light);
+  background: var(--paper);
+  min-width: 260px;
+  border-radius: var(--radius);
+}
+.newsletter-message { font-size: 0.82rem; margin-top: 0.6rem; color: var(--teal); }
+.newsletter-message.is-error { color: #a3423a; }
+
+/* ---------- 13. Footer ---------- */
+.site-footer { background: var(--ink); color: var(--text-on-dark-muted); padding-top: var(--space-6); }
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.3fr repeat(3, 1fr);
+  gap: var(--space-4);
+  padding-bottom: var(--space-5);
+  border-bottom: 1px solid var(--line-on-dark);
+}
+.footer-brand .brand { display: block; margin-bottom: var(--space-2); }
+.footer-brand p { max-width: 32ch; font-size: 0.92rem; }
+.footer-socials { display: flex; gap: var(--space-2); margin-top: var(--space-3); }
+.footer-socials a { color: var(--text-on-dark-muted); }
+.footer-socials .icon { width: 20px; height: 20px; }
+.footer-socials a:hover { color: var(--brass-light); }
+.footer-col h4 { font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-on-dark); margin-bottom: var(--space-2); }
+.footer-col li { margin-bottom: 0.6rem; font-size: 0.9rem; }
+.footer-col a:hover { color: var(--text-on-dark); }
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  font-size: 0.8rem;
+  flex-wrap: wrap;
+}
+
+/* ---------- 14. Enquiry modal ---------- */
+.enquiry-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+  background: rgba(15, 27, 43, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease);
+}
+.enquiry-modal.is-open { opacity: 1; visibility: visible; }
+/* See app/globals.css's copy of this rule for the full rationale. */
+.enquiry-modal-panel {
+  background:
+    linear-gradient(rgba(250, 247, 239, 0.9), rgba(250, 247, 239, 0.94)),
+    url("../images/modal-mural.png") center 18% / cover no-repeat;
+  max-width: 460px;
+  width: 100%;
+  padding: var(--space-4);
+  position: relative;
+  transform: translateY(12px);
+  transition: transform 0.3s var(--ease);
+  border: 1px solid var(--brass-light);
+  box-shadow: inset 0 0 0 5px rgba(250, 247, 239, 0.55), 0 30px 60px rgba(15, 27, 43, 0.35);
+}
+.enquiry-modal.is-open .enquiry-modal-panel { transform: translateY(0); }
+.enquiry-modal-close {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  background: rgba(250, 247, 239, 0.7);
+  border: none;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  line-height: 1;
+  color: var(--text-on-light-muted);
+}
+.enquiry-modal h3 { font-size: 1.4rem; margin-bottom: var(--space-2); }
+.enquiry-modal p { color: var(--text-on-light-muted); font-size: 0.92rem; margin-bottom: var(--space-3); }
+.enquiry-modal-form { display: grid; gap: 0.8rem; }
+.enquiry-modal-form input,
+.enquiry-modal-form select,
+.enquiry-modal-form textarea {
+  padding: 0.8rem;
+  border: 1px solid var(--line-on-light);
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.72);
+  font-size: 0.92rem;
+}
+.enquiry-modal-form input:focus,
+.enquiry-modal-form select:focus,
+.enquiry-modal-form textarea:focus {
+  background: rgba(255, 255, 255, 0.92);
+  outline: none;
+  border-color: var(--brass);
+}
+.enquiry-modal-form button { margin-top: 0.4rem; }
+
+/* ---------- 14a. Itinerary modal (tours-pricing.html) ---------- */
+.itinerary-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-3);
+  background: rgba(15, 27, 43, 0.7);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s var(--ease);
+}
+.itinerary-modal.is-open { opacity: 1; visibility: visible; }
+/* See app/globals.css's copy of this rule for the full rationale. */
+.itinerary-modal-panel {
+  background:
+    linear-gradient(rgba(250, 247, 239, 0.9), rgba(250, 247, 239, 0.94)),
+    url("../images/modal-mural.png") center 10% / cover no-repeat;
+  max-width: 640px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: var(--space-4);
+  position: relative;
+  transform: translateY(12px);
+  transition: transform 0.3s var(--ease);
+  border: 1px solid var(--brass-light);
+  box-shadow: inset 0 0 0 5px rgba(250, 247, 239, 0.55), 0 30px 60px rgba(15, 27, 43, 0.35);
+}
+.itinerary-modal.is-open .itinerary-modal-panel { transform: translateY(0); }
+.itinerary-modal-panel h3 { font-size: 1.5rem; padding-right: var(--space-4); }
+.itinerary-route {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--teal);
+  margin-top: var(--space-2);
+}
+.itinerary-meta { font-size: 0.88rem; color: var(--text-on-light-muted); margin-bottom: var(--space-3); }
+.itinerary-days { display: grid; gap: var(--space-2); margin-bottom: var(--space-3); }
+.itinerary-day {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: var(--space-2);
+  background: rgba(250, 247, 239, 0.78);
+  border: 1px solid rgba(184, 146, 74, 0.25);
+  border-radius: var(--radius);
+  padding: 0.7rem 0.8rem;
+}
+.itinerary-day-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--brass);
+  padding-top: 0.2rem;
+}
+.itinerary-day h4 { font-size: 0.98rem; margin-bottom: 0.15rem; }
+.itinerary-day p { font-size: 0.88rem; color: var(--text-on-light-muted); }
+
+/* ---------- 14b. Interior page hero (destinations / tours / booking) ---------- */
+.page-hero {
+  position: relative;
+  background: radial-gradient(ellipse at top right, var(--ink-600), var(--ink) 60%);
+  color: var(--text-on-dark);
+  padding-top: calc(var(--space-6) + var(--space-3));
+  padding-bottom: var(--space-5);
+}
+.page-hero h1 { font-size: clamp(2.1rem, 4.5vw, 3.2rem); max-width: 24ch; }
+/* When a mural divider closes out the hero, let it sit flush against the
+   section's bottom edge (cancelling the hero's own padding-bottom) with
+   a clean gap above it, rather than floating mid-padding. */
+.page-hero .mural-divider {
+  margin-top: var(--space-4);
+  margin-bottom: calc(var(--space-5) * -1);
+}
+.page-hero p { max-width: 52ch; color: var(--text-on-dark-muted); margin-top: var(--space-2); font-size: 1.02rem; }
+
+/* ---------- 14c. Filter bars (destinations & tours pages) ---------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: var(--space-4);
+}
+.filter-bar button {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.6rem 1rem;
+  border: 1px solid var(--line-on-light);
+  background: transparent;
+  color: var(--text-on-light-muted);
+  border-radius: var(--radius);
+  transition: all 0.25s var(--ease);
+}
+.filter-bar button:hover { border-color: var(--brass); color: var(--text-on-light); }
+.filter-bar button.is-active { background: var(--ink); border-color: var(--ink); color: var(--text-on-dark); }
+.dest-empty, .tour-empty { color: var(--text-on-light-muted); font-size: 0.95rem; grid-column: 1 / -1; }
+
+/* ---------- 14d. Tour package cards (tours-pricing.html) ---------- */
+.tour-packages-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+/* ---------- Tour package cards (carved-jade, sitewide look) ----------
+   Same visual language as the .btn-uikit jade buttons: a deep nephrite-jade
+   body wrapped in an engraved metallic-gold mural frame (the gradient-border
+   trick — a 3px transparent border showing a brushed-gold gradient clipped to
+   border-box, over the jade surface clipped to padding-box). The card top is
+   a photographic "window" whose image is topical to the card's category
+   (--tour-media, set inline per card in render.js), veiled with a jade scrim
+   so the gold title reads over it, and closed off with a gold hairline. The
+   body carries a faint Sigiriya bithu-sithuwam fresco watermark, echoing the
+   fresco read through the jade buttons. */
+.tour-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 3px solid transparent;
+  border-radius: 16px;
+  background:
+    linear-gradient(160deg, #123a2e 0%, #0d2c23 55%, #0a231c 100%) padding-box,
+    linear-gradient(150deg, #6f5216 0%, #d4af37 22%, #f6e7ad 50%, #d4af37 78%, #6f5216 100%) border-box;
+  box-shadow:
+    0 14px 34px -18px rgba(212, 175, 55, 0.6),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+  transition: transform 0.35s var(--ease), box-shadow 0.35s var(--ease);
+}
+.tour-card:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 22px 42px -18px rgba(212, 175, 55, 0.78),
+    0 0 16px 2px rgba(212, 175, 55, 0.28),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.22);
+}
+
+/* photographic window — topical per category, veiled in jade */
+.tour-card-media {
+  position: relative;
+  min-height: 172px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--space-2);
+  background:
+    linear-gradient(to top, rgba(9, 35, 28, 0.94) 4%, rgba(13, 44, 35, 0.5) 42%, rgba(20, 92, 72, 0.24) 100%),
+    var(--tour-media) center / cover no-repeat;
+}
+/* gold hairline closing the window off from the body */
+.tour-card-media::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #d4af37, #f6e7ad, #d4af37, transparent);
+}
+.tour-nights-badge {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #1a2a10;
+  background: linear-gradient(150deg, #f6e7ad, #d4af37);
+  padding: 0.28rem 0.6rem;
+  border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.tour-media-title { display: flex; align-items: center; gap: 0.7rem; }
+.tour-icon {
+  width: 34px;
+  height: 34px;
+  color: #f6e7ad;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+}
+.tour-media-title h3 {
+  font-size: 1.22rem;
+  color: #f4efe1;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.7);
+  text-wrap: balance;
+}
+
+/* jade body */
+.tour-card-body {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-3);
+}
+/* faint Sigiriya fresco watermark, fading in from the right edge */
+.tour-card-body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: url("../images/jade-fresco.png") right center / cover no-repeat;
+  opacity: 0.08;
+  -webkit-mask-image: linear-gradient(to left, #000, transparent 62%);
+  mask-image: linear-gradient(to left, #000, transparent 62%);
+  pointer-events: none;
+}
+.tour-card-body > * { position: relative; }
+.tour-route {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  line-height: 1.5;
+  color: #e7dfc6;
+  background: rgba(6, 26, 20, 0.55);
+  border-left: 2px solid var(--sl-gold);
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius);
+}
+.tour-meta { font-family: var(--font-mono); font-size: 0.85rem; color: #d7cfb6; }
+.tour-meta strong { color: #f6e7ad; }
+.tour-blurb { color: rgba(234, 255, 240, 0.74); font-size: 0.92rem; }
+.tour-card-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: auto; }
+.category-intro { color: var(--text-on-light-muted); font-size: 0.98rem; max-width: 60ch; margin-bottom: var(--space-3); }
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--brass);
+  text-decoration: underline;
+  font: inherit;
+  cursor: pointer;
+}
+.tour-highlights { display: grid; gap: 0.45rem; }
+.tour-highlights li {
+  font-size: 0.88rem;
+  color: var(--text-on-light-muted);
+  padding-left: 1.1rem;
+  position: relative;
+}
+.tour-highlights li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  background: var(--brass);
+  border-radius: 50%;
+}
+
+/* ---------- 14e. Travel notes strip (tours-pricing.html) ---------- */
+.travel-notes-section { background: var(--parchment-700); padding-block: var(--space-5); }
+.travel-notes-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-3); }
+.travel-note h4 {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 0.5rem;
+}
+.travel-note p { font-size: 0.9rem; color: var(--text-on-light-muted); }
+
+/* ---------- 14f. Booking page ---------- */
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: var(--space-5);
+  align-items: start;
+  padding-block: var(--space-6);
+}
+.booking-form-panel {
+  background: var(--paper);
+  border: 1px solid var(--line-on-light);
+  padding: var(--space-4);
+}
+.booking-form { display: grid; gap: var(--space-3); }
+.form-row { display: grid; gap: 0.4rem; }
+.form-row.two-col { grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+.form-row label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text-on-light-muted);
+}
+.booking-form input,
+.booking-form select,
+.booking-form textarea {
+  padding: 0.8rem;
+  border: 1px solid var(--line-on-light);
+  border-radius: var(--radius);
+  background: var(--white);
+  font-size: 0.95rem;
+  width: 100%;
+}
+.checkbox-grid { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.checkbox-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--line-on-light);
+  border-radius: 999px;
+  padding: 0.45rem 0.9rem;
+  font-size: 0.85rem;
+  color: var(--text-on-light-muted);
+  cursor: pointer;
+}
+.checkbox-pill input { width: auto; }
+.booking-message { font-size: 0.88rem; color: var(--teal); min-height: 1.2em; }
+.booking-message.is-error { color: #a3423a; }
+
+.booking-sidebar { display: grid; gap: var(--space-3); }
+.booking-sidebar-card {
+  background: var(--ink);
+  color: var(--text-on-dark);
+  padding: var(--space-3);
+}
+.booking-sidebar-card h3 { font-size: 1.1rem; margin-bottom: var(--space-2); color: var(--brass-light); }
+.booking-sidebar-card ol { list-style: decimal; padding-left: 1.1rem; display: grid; gap: 0.6rem; }
+.booking-sidebar-card li { font-size: 0.9rem; color: var(--text-on-dark-muted); }
+.booking-sidebar-contact { border: 1px solid var(--line-on-light); padding: var(--space-3); font-size: 0.92rem; color: var(--text-on-light-muted); }
+.booking-sidebar-contact strong { display: block; color: var(--text-on-light); font-family: var(--font-mono); margin-top: 0.3rem; }
+
+/* ---------- 15. Scroll-reveal & responsive ---------- */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); transition-delay: var(--delay, 0ms); }
+.reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 980px) {
+  .primary-nav, .header-phone { display: none; }
+  .nav-toggle { display: block; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .intro-grid { grid-template-columns: 1fr; }
+  .destinations-grid { grid-template-columns: repeat(2, 1fr); }
+  .process-steps { grid-template-columns: repeat(2, 1fr); row-gap: var(--space-4); }
+  .process-steps::before { display: none; }
+  .testimonials-track { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .tour-packages-grid { grid-template-columns: 1fr; }
+  .travel-notes-grid { grid-template-columns: repeat(2, 1fr); }
+  .booking-layout { grid-template-columns: 1fr; }
+  /* The map fills a taller, phone-appropriate box here instead of the
+     desktop's wide landscape strip (which, at a narrow viewport width,
+     was only a few hundred px tall). The heading/video/CTA column
+     drops into normal flow below it (see .explore-map-content further
+     down) rather than floating on top, so the map itself stays fully
+     visible instead of being covered by a scrim + text. object-fit:
+     cover on .explore-bg-image crops the sides to fill this taller box;
+     positionMapPins() (main.js) keeps the hotspots correctly placed
+     against that crop. */
+  .explore-bg { aspect-ratio: 3 / 4; }
+  .explore-bg-image {
+    /* Centered would crop to the poster's middle 50% — mostly its blank
+       left/title side, cutting off most destination pins (they cluster
+       between ~64%-92% along the image's width). Anchoring the crop to
+       the right instead keeps the whole island, and every pin, in view. */
+    object-position: 90% center;
+  }
+  .explore-map-content {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding: var(--space-4) var(--space-3);
+    background: none;
+  }
+  .explore-window { width: min(640px, 85vw); margin-inline: auto; }
+}
+
+@media (max-width: 600px) {
+  .destinations-grid { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .process-steps { grid-template-columns: 1fr; }
+  .newsletter-inner { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .travel-notes-grid { grid-template-columns: 1fr; }
+  .form-row.two-col { grid-template-columns: 1fr; }
+  .itinerary-day { grid-template-columns: 1fr; gap: 0.2rem; }
+  .explore-window { width: min(560px, 92vw); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .reveal, .hero-route .route-line { transition: none; animation: none; }
+}

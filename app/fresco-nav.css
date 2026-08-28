@@ -1,0 +1,479 @@
+/* ==========================================================================
+   The Living Fresco — animated navigation bar
+   A two-tier header: an ever-panning band of ancient Sri Lankan mural
+   art (the uploaded blend frescoes) sits above a translucent ink bar of
+   links. A gilded ink underline glides between items; dropdowns unfurl
+   like an ola-leaf shrine.
+   ========================================================================== */
+
+.fresco-nav {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  transition: transform 0.5s var(--sl-ease);
+}
+
+/* ---- The bar: a single row whose background IS the panning mural ----
+   NOTE: no overflow:hidden here — .fresco-dropdown is an absolutely-
+   positioned child of .fresco-item further down this bar, and clipping
+   the bar would clip the dropdown along with it. The panning mural
+   track below already clips itself (.fresco-frieze has its own
+   overflow:hidden), so nothing here needs to. */
+.fresco-bar {
+  position: relative;
+  background: var(--sl-ink-deep);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.16);
+  transition: box-shadow 0.4s var(--sl-ease);
+}
+
+/* the painted, panning frieze — an absolutely-positioned backdrop layer */
+.fresco-frieze {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  z-index: 0;
+  pointer-events: none;
+}
+.fresco-track {
+  display: flex;
+  height: 100%;
+  width: max-content;
+  transform-origin: center center;
+  animation: friezeDrift 52s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate;
+  will-change: transform;
+}
+.fresco-strip {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: cover;
+  filter: saturate(1.05) contrast(1.02) brightness(0.85);
+}
+/* Drifts left across the mural, easing through each waypoint rather than
+   sliding at one constant speed — then "infinite alternate" plays the
+   same sequence in reverse, so it drifts back right again just as
+   slowly, with a small zoom-in breath at each turn. Stays within 0% to
+   -42% so it never runs out of the doubled track (see FRIEZE below). */
+@keyframes friezeDrift {
+  0% {
+    transform: translateX(0%) scale(1);
+  }
+  25% {
+    transform: translateX(-14%) scale(1.035);
+  }
+  50% {
+    transform: translateX(-24%) scale(1);
+  }
+  75% {
+    transform: translateX(-34%) scale(1.035);
+  }
+  100% {
+    transform: translateX(-42%) scale(1);
+  }
+}
+/* dark wash so the links stay legible over the mural */
+.fresco-frieze-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    rgba(9, 15, 26, 0.82) 0%,
+    rgba(9, 15, 26, 0.6) 22%,
+    rgba(9, 15, 26, 0.48) 50%,
+    rgba(9, 15, 26, 0.6) 78%,
+    rgba(9, 15, 26, 0.82) 100%
+  );
+}
+/* a gilded rule along the bottom edge of the bar */
+.fresco-frieze-rule {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(212, 175, 55, 0.35) 12%,
+    var(--sl-gold) 50%,
+    rgba(212, 175, 55, 0.35) 88%,
+    transparent
+  );
+  box-shadow: 0 0 14px rgba(212, 175, 55, 0.5);
+}
+.fresco-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 0.85rem;
+}
+
+/* ---- Compact / scrolled: the bar tightens and the mural dims ---- */
+.fresco-nav.is-scrolled .fresco-track {
+  animation-duration: 38s;
+}
+.fresco-nav.is-scrolled .fresco-frieze-veil {
+  background: linear-gradient(
+    90deg,
+    rgba(9, 15, 26, 0.92) 0%,
+    rgba(9, 15, 26, 0.8) 50%,
+    rgba(9, 15, 26, 0.92) 100%
+  );
+}
+.fresco-nav.is-scrolled .fresco-bar {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.45);
+}
+.fresco-nav.is-scrolled .fresco-inner {
+  padding-block: 0.5rem;
+}
+
+/* ---- Brand ---- */
+.fresco-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  text-decoration: none;
+  color: var(--sl-text-on-dark);
+  flex: none;
+}
+.fresco-emblem {
+  width: 40px;
+  height: 40px;
+  flex: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--sl-brass-light);
+  border-radius: 50%;
+  color: var(--sl-brass-light);
+  font-size: 1.05rem;
+  box-shadow: 0 0 16px rgba(212, 175, 55, 0.3);
+  transition:
+    transform 0.5s var(--sl-ease),
+    box-shadow 0.4s var(--sl-ease);
+}
+.fresco-brand:hover .fresco-emblem {
+  transform: rotate(90deg);
+  box-shadow: 0 0 24px rgba(212, 175, 55, 0.55);
+}
+.fresco-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.05;
+}
+.fresco-brand-name {
+  font-family: var(--font-serif);
+  font-size: 1.15rem;
+  color: var(--sl-text-on-dark);
+}
+.fresco-brand-text small {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--sl-brass-light);
+  margin-top: 0.2rem;
+}
+
+/* ---- Primary links + sliding gilded indicator ---- */
+.fresco-nav-primary {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+}
+.fresco-links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.fresco-indicator {
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: calc(100% + 4px);
+  border-radius: 999px;
+  background: linear-gradient(120deg, rgba(212, 175, 55, 0.18), rgba(197, 90, 43, 0.14));
+  box-shadow:
+    inset 0 0 0 1px rgba(212, 175, 55, 0.4),
+    0 6px 18px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transform-origin: left center;
+  transition:
+    transform 0.45s var(--sl-ease),
+    width 0.45s var(--sl-ease),
+    opacity 0.3s var(--sl-ease);
+  pointer-events: none;
+  z-index: 0;
+}
+.fresco-indicator.is-visible {
+  opacity: 1;
+}
+.fresco-item {
+  position: relative;
+  z-index: 1;
+}
+.fresco-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.95rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.11em;
+  text-transform: uppercase;
+  color: var(--sl-text-on-dark-muted);
+  text-decoration: none;
+  border-radius: 999px;
+  transition: color 0.28s var(--sl-ease);
+}
+.fresco-item:hover .fresco-link,
+.fresco-item.is-active .fresco-link {
+  color: var(--sl-text-on-dark);
+}
+.fresco-item.is-active .fresco-link {
+  color: var(--sl-brass-light);
+}
+.fresco-caret {
+  font-size: 0.7rem;
+  transition: transform 0.3s var(--sl-ease);
+}
+.fresco-item.has-dropdown:hover .fresco-caret {
+  transform: rotate(180deg);
+}
+
+/* ---- Ola-leaf shrine dropdown that unfurls on hover ---- */
+.fresco-dropdown {
+  position: absolute;
+  top: calc(100% + 16px);
+  left: 50%;
+  translate: -50% 0;
+  width: 288px;
+  padding: 1rem 0.9rem 1.1rem;
+  border-radius: 16px;
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  background:
+    linear-gradient(
+      158deg,
+      rgba(24, 14, 6, 0.92) 0%,
+      rgba(40, 24, 11, 0.94) 55%,
+      rgba(24, 14, 6, 0.95) 100%
+    ),
+    url('/images/dropdown-sigiri-fresco.png');
+  background-size: cover;
+  background-position: center 18%;
+  box-shadow:
+    0 30px 60px rgba(6, 4, 2, 0.6),
+    inset 0 0 0 1px rgba(212, 175, 55, 0.12);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px) rotateX(-12deg) scale(0.97);
+  transform-origin: top center;
+  transition:
+    opacity 0.3s var(--sl-ease),
+    transform 0.35s var(--sl-ease),
+    visibility 0.35s;
+  z-index: 20;
+}
+.fresco-dropdown::before {
+  content: '';
+  position: absolute;
+  top: -7px;
+  left: 50%;
+  translate: -50% 0;
+  width: 14px;
+  height: 14px;
+  rotate: 45deg;
+  background: rgba(30, 18, 8, 0.95);
+  border-left: 1px solid rgba(212, 175, 55, 0.45);
+  border-top: 1px solid rgba(212, 175, 55, 0.45);
+}
+.fresco-item.has-dropdown:hover .fresco-dropdown,
+.fresco-item.has-dropdown:focus-within .fresco-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) rotateX(0) scale(1);
+}
+.fresco-dropdown-heading {
+  display: block;
+  text-align: center;
+  margin-bottom: 0.7rem;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.26);
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--sl-gold);
+}
+.fresco-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+.fresco-dropdown li {
+  opacity: 0;
+  transform: translateX(-8px);
+  transition:
+    opacity 0.3s var(--sl-ease),
+    transform 0.3s var(--sl-ease);
+}
+.fresco-item.has-dropdown:hover .fresco-dropdown li,
+.fresco-item.has-dropdown:focus-within .fresco-dropdown li {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: calc(0.06s * var(--i, 0) + 0.08s);
+}
+.fresco-dropdown li a {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.5rem 0.6rem;
+  border-radius: 10px;
+  color: #f1e4c6;
+  text-decoration: none;
+  font-size: 0.86rem;
+  transition:
+    background 0.22s var(--sl-ease),
+    box-shadow 0.22s var(--sl-ease),
+    color 0.22s var(--sl-ease);
+}
+.fresco-dropdown li a:hover {
+  color: #fff8ea;
+  background: linear-gradient(90deg, rgba(212, 175, 55, 0.22), rgba(197, 90, 43, 0.14));
+  box-shadow: inset 0 0 0 1px rgba(212, 175, 55, 0.4);
+}
+.fresco-dropdown-icon {
+  display: inline-flex;
+  flex: none;
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 28%, #3c2614, #180d05);
+  border: 1px solid rgba(212, 175, 55, 0.7);
+  transition:
+    box-shadow 0.22s var(--sl-ease),
+    border-color 0.22s var(--sl-ease);
+}
+.fresco-dropdown-icon svg {
+  width: 16px;
+  height: 16px;
+  color: var(--sl-gold);
+  stroke-width: 1.9;
+}
+.fresco-dropdown li a:hover .fresco-dropdown-icon {
+  border-color: var(--sl-gold);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.45);
+}
+
+/* ---- Actions ---- */
+.fresco-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: none;
+}
+.fresco-phone {
+  display: none;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--sl-text-on-dark-muted);
+}
+@media (min-width: 1120px) {
+  .fresco-phone {
+    display: inline;
+  }
+}
+.fresco-cta {
+  white-space: nowrap;
+}
+
+/* hamburger */
+.fresco-toggle {
+  display: none;
+  background: none;
+  border: none;
+  width: 32px;
+  height: 22px;
+  position: relative;
+  cursor: pointer;
+}
+.fresco-toggle span,
+.fresco-toggle::before,
+.fresco-toggle::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1.5px;
+  background: var(--sl-text-on-dark);
+  transition:
+    transform 0.25s var(--sl-ease),
+    opacity 0.25s var(--sl-ease);
+}
+.fresco-toggle::before {
+  top: 0;
+}
+.fresco-toggle span {
+  top: 50%;
+  transform: translateY(-50%);
+}
+.fresco-toggle::after {
+  bottom: 0;
+}
+.fresco-toggle[aria-expanded='true']::before {
+  transform: translateY(10px) rotate(45deg);
+}
+.fresco-toggle[aria-expanded='true']::after {
+  transform: translateY(-10px) rotate(-45deg);
+}
+.fresco-toggle[aria-expanded='true'] span {
+  opacity: 0;
+}
+
+/* ---- Responsive: collapse to hamburger ---- */
+@media (max-width: 940px) {
+  .fresco-nav-primary {
+    display: none;
+  }
+  .fresco-toggle {
+    display: block;
+  }
+}
+@media (max-width: 640px) {
+  .fresco-actions .fresco-cta {
+    display: none !important;
+  }
+  .fresco-brand-text small {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fresco-track {
+    animation: none;
+  }
+  .fresco-indicator,
+  .fresco-dropdown,
+  .fresco-dropdown li,
+  .fresco-emblem,
+  .fresco-caret {
+    transition: none;
+  }
+}

@@ -1,0 +1,86 @@
+- [x] Identify the current home-page image placeholders within the two target sections and the full About Us page structure.
+- [x] Source licensable authentic tourism images for Arugam Bay surfing, Kandy Esala Perahera, and Sri Lankan Kandyan/Wes dancers.
+- [x] Copy approved tourism images into `public/images` and record their source URLs for project documentation.
+- [x] Rework the two home sections so the generated Sigiriya-style artwork functions as a layered background treatment rather than foreground image panels.
+- [x] Replace target-section image placeholders with the selected authentic Sri Lankan tourism photos.
+- [x] Apply the matching Sigiriya Fresco Passage design system to the About Us page without changing unrelated routes.
+- [x] Verify the home and About Us pages in a local browser preview.
+- [x] Create, validate, and deliver the updated independent ZIP archive.
+- [x] Package only the fixed-background source changes, generated images, and update notes.
+- [x] Deliver the compact change-only archive.
+- [x] Restore the original Book Now and Tours & Pricing top hero sections.
+- [x] Repackage and deliver the corrected change-only files.
+- [x] Add a solid high-contrast stripe behind the Tours & Pricing collection heading.
+- [x] Repackage and deliver the heading-contrast update.
+- [x] Redesign the Tours & Pricing cards to match the Ceylon Field Notes design system.
+- [x] Visually verify the redesigned collection and deliver the updated compact archive.
+- [x] Redesign the Journal heading and card reveals after the portal transition.
+- [x] Verify the refined Journal sequence and deliver the updated compact archive.
+- [x] Restore the original Journal heading and card-reveal implementation.
+- [x] Restore the original header logo and icon metadata.
+- [x] Verify the rollback and deliver the revised compact archive.
+- [x] Compare and restore the original header logo asset from the uploaded site.
+- [x] Verify the restored original logo in the header and deliver the refreshed compact archive.
+- [x] Remove the Journal post-portal flash and duplicate visibility change.
+- [x] Add a half-second pause, gradual heading/description reveal, and slow card cascade.
+- [x] Verify the full Journal sequence and deliver the refreshed compact archive.
+- [x] Increase the header full-logo display size while preserving responsive navigation alignment.
+- [x] Verify the enlarged header logo and deliver the refreshed compact archive.
+- [x] Update the header source to use the requested full logo at the enlarged scale.
+- [x] Gate all Journal content until the portal has fully completed before beginning its delayed reveal.
+- [x] Verify the combined corrections and deliver the refreshed compact archive.
+- [x] Add a portal-toggle fallback that runs the Journal heading and card reveal even if the completion state is delayed.
+- [x] Verify the reliable post-portal animation trigger and deliver the refreshed compact archive.
+- [x] Restore the Journal heading divider-line visibility after portal opening.
+- [x] Replace the grouped content reveal with an explicitly staggered one-card-at-a-time sequence.
+- [x] Verify the corrected Journal reveal and deliver the updated compact archive.
+- [x] Restore the original visible Journal heading-divider lines in a durable cascade layer.
+- [x] Slow the individual Journal card reveal cadence without returning to a grouped animation.
+- [x] Verify the restored lines and slower card sequence, then deliver the refreshed compact archive.
+- [x] Restore the missing decorative Journal divider above the card collection.
+- [x] Verify the divider restoration while preserving the approved card timing and deliver the refreshed compact archive.
+- [x] Restore the Journal collection-divider wording above the cards.
+- [x] Verify the divider wording and deliver the refreshed compact archive.
+- [x] Restore the complete Journal heading block: upper rule, eyebrow, title, introductory description, and lower rule after portal completion.
+- [x] Verify the complete post-portal heading block, collection divider, and card sequence, then deliver the refreshed compact archive.
+- [x] Bind the complete Journal heading block to the same reliable live post-portal trigger as the collection divider.
+- [x] Verify the normal live Journal load path and deliver the refreshed compact archive.
+- [x] Identify the active live-state rule suppressing the Journal heading block above the visible divider.
+- [x] Replace the suppression with a durable full-heading visible state and verify it against the supplied screenshot.
+- [x] Sequence the Journal eyebrow, title, description, and Field Notes divider using the approved divider reveal treatment.
+- [x] Stabilise the Journal background image dimensions throughout its initial load and portal completion.
+- [x] Verify the ordered Journal reveal, steady background, and unchanged card cadence, then deliver the refreshed compact archive.
+- [x] Replace the live CSS-only heading animation with an explicit, slow, non-overlapping four-step state sequence.
+- [x] Move the Journal realm to a fixed-dimension background layer that cannot resize after image load.
+- [x] Remove any transform or scale animation affecting the Journal realm background layer during portal completion.
+- [x] Verify the live Journal sequence and background stability while preserving the approved card cadence, then deliver the refreshed compact archive.
+- [x] Restore the original opening portal animation without modification.
+- [x] Identify and remove only the post-portal Journal background appearance shift.
+- [x] Verify the original portal animation, stable post-portal background, and existing slow heading/card sequence, then deliver the refreshed compact archive.
+- [x] Gate the Journal heading sequence on portal completion and realm-background readiness.
+- [x] Animate the eyebrow, title, and description as independent non-overlapping stages before the divider and cards.
+- [x] Verify the complete independent post-portal Journal sequence and deliver the refreshed compact archive.
+- [x] Eliminate the first post-portal Journal heading paint before the independent stages begin.
+- [x] Verify the Journal background handoff remains text-free until the staged eyebrow, title, description, and divider releases.
+- [x] Adjust the independent Journal line stage offsets so each subsequent line begins before the preceding entrance completes.
+- [x] Verify the faster overlapping no-flash cascade and deliver the refreshed compact archive.
+- [x] Inspect the user-supplied wording-change archive and compare its files with the current workspace.
+- [x] Merge only the user’s wording changes without overwriting current Journal behavior or design changes.
+- [x] Verify the merged wording updates and deliver the refreshed compact archive.
+- [x] Restore the recovered latest workspace source state after the sandbox reset.
+- [x] Inspect and merge the supplied Home “Sri Lanka, held in story and place” alignment correction.
+- [x] Preserve the current desktop Journal portal and staged-content behavior while adding responsive mobile and resize-safe geometry.
+- [x] Verify the Home alignment plus Journal portal and realm scaling on desktop, mobile, and changed viewport dimensions.
+- [x] Deliver the refreshed compact archive containing the integrated corrections.
+- [x] Identify the specific Journal artwork layers causing severe mobile cropping.
+- [x] Apply a minimum readable artwork canvas or safer fit strategy without locking browser width or changing working animations.
+- [x] Verify mobile and resized-desktop artwork visibility, then deliver the refreshed compact archive.
+- [x] Reproduce the Journal card and realm behavior at the narrowest practical viewport.
+- [x] Apply a narrow-viewport safeguard without locking the whole browser width or changing working animations.
+- [x] Verify minimum-width and normal responsive behavior, then deliver the refreshed compact archive.
+- [x] Make the Journal realm background span the full scrollable card collection at narrow widths.
+- [x] Remove the visible inner gap between mobile Journal card artwork and its frame.
+- [x] Verify narrow-width scrolling and card framing, then deliver the refreshed compact archive.
+- [x] Increase Destinations card sizes while preserving balanced responsive spacing.
+- [x] Keep the mobile navigation rudder wheel anchored to its intended header/control position on load.
+- [x] Verify Destinations cards and mobile navigation, then deliver the refreshed compact archive.
