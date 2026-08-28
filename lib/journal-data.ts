@@ -18,7 +18,7 @@ export const JOURNAL_ENTRIES: JournalEntry[] = [
     location: 'Sigiriya',
     coords: '7.9570° N, 80.7603° E',
     tags: ['Cultural Triangle', 'Sunrise'],
-    image: '/images/journal/sunrise-over-the-lion-rock.png',
+    image: '/images/journal/sunrise-over-the-lion-rock.jpg',
     excerpt:
       'The climb everyone recommends is up Sigiriya itself. The one nobody tells you about is the rock across from it.',
     body: [
@@ -34,7 +34,7 @@ export const JOURNAL_ENTRIES: JournalEntry[] = [
     location: 'Nuwara Eliya to Ella',
     coords: '6.8667° N, 81.0466° E',
     tags: ['Hill Country', 'Train'],
-    image: '/images/journal/the-slow-train-to-ella.png',
+    image: '/images/journal/the-slow-train-to-ella.jpg',
     excerpt:
       "It's often called one of the world's most beautiful train journeys. It's also, reliably, three hours late.",
     body: [
@@ -50,7 +50,7 @@ export const JOURNAL_ENTRIES: JournalEntry[] = [
     location: 'Mirissa',
     coords: '5.9483° N, 80.4589° E',
     tags: ['South Coast', 'Wildlife'],
-    image: '/images/journal/whales-before-breakfast.png',
+    image: '/images/journal/whales-before-breakfast.jpg',
     excerpt:
       'Boats leave Mirissa harbour before six, chasing blue whales while the rest of the coast is still asleep.',
     body: [
@@ -66,7 +66,7 @@ export const JOURNAL_ENTRIES: JournalEntry[] = [
     location: 'Kandy',
     coords: '7.2906° N, 80.6337° E',
     tags: ['Hill Country', 'Culture'],
-    image: '/images/journal/a-night-at-the-temple-of-the-tooth.png',
+    image: '/images/journal/a-night-at-the-temple-of-the-tooth.jpg',
     excerpt:
       'Every evening, drummers and dancers perform outside the temple that holds Buddhism\u2019s most sacred relic in Sri Lanka.',
     body: [
@@ -82,7 +82,7 @@ export const JOURNAL_ENTRIES: JournalEntry[] = [
     location: 'Yala National Park',
     coords: '6.3724° N, 81.5165° E',
     tags: ['Wildlife', 'Safari'],
-    image: '/images/journal/tracking-leopards-in-yala.png',
+    image: '/images/journal/tracking-leopards-in-yala.jpg',
     excerpt:
       'Yala has one of the highest densities of leopards anywhere on earth. It still takes patience to see one.',
     body: [
@@ -98,7 +98,7 @@ export const JOURNAL_ENTRIES: JournalEntry[] = [
     location: 'Mannar',
     coords: '8.9810° N, 79.9042° E',
     tags: ['Ramayana Trail', 'North'],
-    image: '/images/journal/following-the-ramayana-trail-to-mannar.png',
+    image: '/images/journal/following-the-ramayana-trail-to-mannar.jpg',
     excerpt:
       'The chain of shoals between Sri Lanka and India is said, in the Ramayana, to be the bridge Rama\u2019s army built.',
     body: [

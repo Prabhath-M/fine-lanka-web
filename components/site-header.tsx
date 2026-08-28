@@ -16,10 +16,10 @@ import { useBodyScrollLock } from '@/lib/use-body-scroll-lock'
  * every route.
  */
 const MURAL_FRAMES = [
-  '/mural/blend-1.png',
-  '/mural/blend-2.png',
-  '/mural/blend-3.png',
-  '/mural/blend-4.png',
+  '/mural/blend-1.jpg',
+  '/mural/blend-2.jpg',
+  '/mural/blend-3.jpg',
+  '/mural/blend-4.jpg',
   '/mural/blend-5.png',
   '/mural/blend-6.png',
 ]

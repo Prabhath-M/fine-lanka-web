@@ -3,9 +3,6 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
-  },
   // Phase 8.2 of MIGRATION_PLAN.md: every page used to be a static file
   // at these *.html URLs (public/index.html, destinations.html,
   // tours-pricing.html, booking.html — all deleted in Phases 3-6 in
