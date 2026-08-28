@@ -339,7 +339,7 @@ render as normal-looking buttons/links but go nowhere.
 Ran `npm audit` — **8 vulnerabilities (7 high, 1 moderate)**, all stemming
 from an outdated Next.js:
 
-- [ ] Next.js is pinned to `16.2.6`; latest is `16.3.3`. The audit flags
+- [x] Next.js is pinned to `16.2.6`; latest is `16.3.3`. The audit flags
   **7 high-severity issues** fixed in the newer version, including a
   middleware/proxy bypass, a couple of SSRF issues (server actions and
   rewrites), a cache-confusion bug, a DoS in the image optimization API,
@@ -347,12 +347,45 @@ from an outdated Next.js:
   Update Next.js — this also pulls in a patched `postcss` (fixes an XSS +
   several path-traversal/source-map disclosure issues) as a transitive
   dependency.
-- [ ] `sharp` (used by Next's image pipeline) is also flagged for
+
+  **Done:** bumped `next` to `16.3.3` and `postcss` to `^8.5.12` (the
+  patched line). `pnpm install` + `pnpm audit` confirm both are resolved.
+- [x] `sharp` (used by Next's image pipeline) is also flagged for
   inherited `libvips` vulnerabilities — the Next.js update should resolve
   this too since it's a transitive dependency; just confirm with a fresh
   `npm audit` after.
-- [ ] Re-run `npm audit` after updating and confirm it comes back clean
+
+  **Done:** confirmed clean post-upgrade; no `sharp`/`libvips` entries in
+  `pnpm audit` anymore.
+- [x] Re-run `npm audit` after updating and confirm it comes back clean
   before launch.
+
+  **Done, with a scope correction:** the project standardized on pnpm in
+  Phase 1, so this was re-run as `pnpm audit` rather than `npm audit`
+  (no `package-lock.json` exists anymore for `npm audit` to read). Running
+  it surfaced **36 additional vulnerabilities** the original `npm audit`
+  never saw — all transitive dependencies of `shadcn` (the component-CLI
+  tool: `@modelcontextprotocol/sdk` → `hono`/`express`/`ajv`/etc.), plus a
+  `brace-expansion` DoS via `shadcn`'s `ts-morph`. None of these ship to
+  the production bundle (`shadcn` is a CLI you run locally, never
+  imported by app code — confirmed via grep), but they still sit in
+  `node_modules` and would show up in any future scan, so worth fixing
+  now rather than leaving a 36-item audit backlog for the next person.
+  Two things found along the way:
+  - `shadcn` was listed in `dependencies` instead of `devDependencies` —
+    moved it, since it's a build-time-only tool.
+  - There was already a `pnpm.overrides` block in `package.json` pinning
+    `hono`, but pnpm v10+ no longer reads overrides from that location
+    (confirmed via a `[WARN]` pnpm prints on install) — it was silently
+    doing nothing. Moved it to `overrides:` in `pnpm-workspace.yaml`
+    (the location pnpm v10+ actually reads) and extended it to cover the
+    other flagged transitive packages (`hono`, `@hono/node-server`,
+    `fast-uri`, `ip-address`, `brace-expansion`, `body-parser`,
+    `js-yaml`, `nanoid`) at their patched versions.
+
+  `pnpm audit` now reports **no known vulnerabilities**. Verified
+  `npx tsc --noEmit` and the existing `vitest` suite still pass clean
+  after the Next.js bump.
 
 ---
 
