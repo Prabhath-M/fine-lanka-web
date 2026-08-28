@@ -46,7 +46,11 @@ export const NavLink = forwardRef<HTMLAnchorElement, NavLinkProps>(function NavL
 
     if (isSameLocation) {
       event.preventDefault()
-      window.location.reload()
+      // Reload the requested URL itself rather than the current document URL.
+      // This matters when the current page has a hash (for example /#features)
+      // and the clicked home link is simply /. A plain reload would preserve
+      // that hash and the homepage would incorrectly bypass its opening.
+      window.location.assign(target.href)
     }
   }
 
