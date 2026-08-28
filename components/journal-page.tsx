@@ -12,6 +12,7 @@ import { useTypingProgress } from '@/lib/use-typing-progress'
 const THRESHOLD_TYPING_MS = 12400
 const THRESHOLD_POWER_DOWN_MS = 640
 const PORTAL_START_DELAY_MS = 500
+const PORTAL_ZOOM_DURATION_MS = 4800
 const POST_PORTAL_PAUSE_MS = 500
 const EYEBROW_REVEAL_MS = 1200
 const TITLE_REVEAL_MS = 1500
@@ -148,7 +149,7 @@ export function JournalPage() {
       contentRevealTimer.current = setTimeout(() => {
         setContentRevealed(true)
       }, POST_PORTAL_PAUSE_MS)
-    }, PORTAL_START_DELAY_MS + 3800)
+    }, PORTAL_START_DELAY_MS + PORTAL_ZOOM_DURATION_MS)
   }, [prefersReducedMotion])
 
   // ---- Clear screen → CSS types every character → open the doorway ----

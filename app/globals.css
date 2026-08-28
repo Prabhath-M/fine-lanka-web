@@ -260,19 +260,19 @@
 }
 
 /* --- Zoom stage: flying through the open doorway into the realm ----
-   Timeline (3.8s total, all from the same click):
-     0.0s–0.8s   ANTICIPATION — doors stay shut, .portal-frame does a
+   Timeline (4.8s total after the 0.5s pre-zoom pause):
+     0.0s–1.0s   ANTICIPATION — doors stay shut, .portal-frame does a
                  slow, subtle zoom-in on its own (see portalFrameZoom's
                  0%→21% stop) while the realm stays hidden behind it.
-     0.8s–3.8s   the doors swing open (.portal-door's transition-delay)
+     1.0s–4.8s   the doors swing open (.portal-door's transition-delay)
                  while the zoom picks up pace and the realm fades/
                  brightens/zooms/darkens through portalZoomThrough
-                 (animation-delay: 0.8s below, so its own 0%–100% maps
-                 to this 3s window) — one continuous push through the
+                 (animation-delay: 1s below, so its own 0%–100% maps
+                 to this 4s window) — one continuous push through the
                  threshold, not "door swings open, THEN camera zooms".
-   The dark overlay (::after) is timed to start fading in at 2.3s
-   (0.8s anticipation + the realm's own 50%/peak-brightness point) so
-   the screen goes fully dark right as the zoom ends at 3.8s.
+   The dark overlay (::after) is timed to start fading in at 2.8s
+   (1.0s anticipation + the realm's own late-stage brightness point) so
+   the screen goes fully dark right as the zoom ends at 4.8s.
    Both keyframe sets below use MANY closely-spaced stops with a
    *linear* timing-function, rather than a few widely-spaced stops each
    re-running the same ease-in-out curve — the latter decelerates to a
@@ -290,13 +290,13 @@
     linear-gradient(rgba(6, 12, 22, 0.92), rgba(9, 16, 28, 0.96));
   opacity: 0;
   pointer-events: none;
-  transition: opacity 1.5s var(--sl-ease) 2.3s;
+  transition: opacity 1.5s var(--sl-ease) 2.8s;
 }
 .portal-stage.is-zooming::after {
   opacity: 1;
 }
 .portal-stage.is-zooming .portal-realm {
-  animation: portalZoomThrough 3s linear 0.8s forwards;
+  animation: portalZoomThrough 4s linear 1s forwards;
 }
 @keyframes portalZoomThrough {
   12% {
@@ -321,7 +321,7 @@
   }
 }
 .portal-stage.is-zooming .portal-frame {
-  animation: portalFrameZoom 3.8s linear forwards;
+  animation: portalFrameZoom 4.8s linear forwards;
 }
 @keyframes portalFrameZoom {
 }
@@ -356,7 +356,7 @@
   will-change: transform, opacity;
 }
 .portal-stage[data-state='open'] .portal-burst {
-  animation: portalBurst 1.6s var(--sl-ease) 0.8s forwards;
+  animation: portalBurst 2s var(--sl-ease) 1s forwards;
 }
 @keyframes portalBurst {
   0% {
@@ -1079,20 +1079,20 @@ body:has(.journal-portal-toggle:checked) {
   overflow: hidden;
   height: 100%;
   overscroll-behavior: none;
-  animation: portalScrollRelease 0.01s linear 3.82s forwards;
+  animation: portalScrollRelease 0.01s linear 5.32s forwards;
 }
-.journal-portal-toggle:checked + .portal-stage .portal-realm {
+.journal-portal-toggle:checked + .portal-stage.is-zooming .portal-realm {
   opacity: 1;
   filter: brightness(1);
-  animation: portalZoomThrough 3s linear 0.8s forwards;
+  animation: portalZoomThrough 4s linear 1s forwards;
 }
-.journal-portal-toggle:checked + .portal-stage .portal-frame {
-  animation: portalFrameZoom 3.8s linear forwards;
+.journal-portal-toggle:checked + .portal-stage.is-zooming .portal-frame {
+  animation: portalFrameZoom 4.8s linear forwards;
 }
 .journal-portal-toggle:checked + .portal-stage .portal-door--left { transform: rotateY(108deg); }
 .journal-portal-toggle:checked + .portal-stage .portal-door--right { transform: rotateY(-108deg); }
 .journal-portal-toggle:checked + .portal-stage .portal-seam { opacity: 0; }
-.journal-portal-toggle:checked + .portal-stage .portal-burst { animation: portalBurst 1.6s var(--sl-ease) 0.8s forwards; }
+.journal-portal-toggle:checked + .portal-stage.is-zooming .portal-burst { animation: portalBurst 2s var(--sl-ease) 1s forwards; }
 .journal-portal-toggle:checked + .portal-stage .portal-intro,
 .journal-portal-toggle:checked + .portal-stage .portal-hint {
   opacity: 0;
@@ -1100,7 +1100,7 @@ body:has(.journal-portal-toggle:checked) {
 }
 .journal-portal-toggle:checked + .portal-stage::after { opacity: 1; }
 .journal-portal-toggle:checked + .portal-stage {
-  animation: portalStageRelease 0.01s linear 3.82s forwards;
+  animation: portalStageRelease 0.01s linear 5.32s forwards;
 }
 .journal-portal-toggle:checked ~ .chronicle-section {
   opacity: 1;
@@ -10381,9 +10381,8 @@ body:has(.features:target) .typed-opening { display: none; }
 
 
 /* JOURNAL — keep the temple chamber locked to the doorway zoom */
-.portal-stage.is-zooming::before,
-.journal-portal-toggle:checked + .portal-stage::before {
-  animation: portalWallZoom 3.8s linear forwards;
+.portal-stage.is-zooming::before {
+  animation: portalWallZoom 4.8s linear forwards;
 }
 @keyframes portalWallZoom {
 }
@@ -10401,13 +10400,13 @@ body:has(.features:target) .typed-opening { display: none; }
   background-size: 200% 100%;
   background-repeat: no-repeat;
   z-index: 4;
-  transition: transform 3s cubic-bezier(0.45, 0, 0.2, 1) 0.8s;
+  transition: transform 4s cubic-bezier(0.45, 0, 0.2, 1) 1s;
   will-change: transform;
   backface-visibility: hidden;
   cursor: pointer;
   transform: translateZ(0);
   background-color: transparent;
-  border: 0; /* 0.8s delay = the anticipation window (doors stay shut through it); 3s duration matches portalZoomThrough's main phase so the swing and the zoom-through still finish together at 3.8s total */
+  border: 0; /* 1s delay = the anticipation window (doors stay shut through it); 4s duration matches portalZoomThrough's main phase so the swing and the zoom-through still finish together at 4.8s total */
 }
 
 /* Keep the wall close from the first frame and follow the user-tuned
@@ -10500,7 +10499,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 /* Direct closed-door push: 0%→21% reaches 1.65 before the leaves open.
-   The 21% point is 0.8s of the 3.8s portal timeline. */
+   The 21% point is approximately 1s of the 4.8s portal timeline. */
 @keyframes portalFrameZoom {
 }
 @keyframes portalWallZoom {
@@ -10590,7 +10589,7 @@ body:has(.features:target) .typed-opening { display: none; }
 @keyframes portalFrameZoom {
   0% { transform: translate3d(0, calc(-1 * var(--portal-door-lift)), 0) scale(1); opacity: 1; }
   21% { transform: translate3d(0, calc(-1 * var(--portal-door-lift)), 0) scale(1.65); opacity: 1;
-    /* end of the anticipation window (0.8s of 3.8s) — only a slight
+    /* end of the anticipation window (1s of 4.8s) — only a slight
        zoom so far, doors still fully shut */ }
   40% { transform: translate3d(0, calc(-1 * var(--portal-door-lift)), 0) scale(2.25); opacity: 1; }
   60% { transform: translate3d(0, calc(-1 * var(--portal-door-lift)), 0) scale(2.95); opacity: 1; }
@@ -10708,7 +10707,7 @@ body:has(.features:target) .typed-opening { display: none; }
   overflow: visible;
 }
 .portal-stage.is-zooming .portal-architectural-frame {
-  animation: portalSeamTrimZoom 3.8s linear forwards;
+  animation: portalSeamTrimZoom 4.8s linear forwards;
 }
 @keyframes portalSeamTrimZoom {
   0% { transform: translate3d(-50%, calc(-50% - var(--portal-door-lift)), 0) scale(1); opacity: 1; }
@@ -11240,7 +11239,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 /* Native doorway fallback: the existing checkbox becomes checked at portal
    activation. If the React completion class is delayed, it runs the identical
-   reveal timeline from the portal’s 3.8s completion point. */
+   reveal timeline from the portal’s 4.8s completion point. */
 .journal-portal-toggle:checked ~ .chronicle-section:not(.is-content-revealed) .chronicle-head {
   opacity: 0;
   transform: translateY(1.2rem);
