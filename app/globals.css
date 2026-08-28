@@ -6662,6 +6662,46 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .destinations-atlas-rail .filter-bar button.is-active::before { color: #f0cd88; }
 }
 
+/* Consolidated destination filters sit beneath the atlas heading instead of
+   occupying side rails beside the view card. The row remains in normal flow,
+   so it cannot overlap the carousel stage. */
+.destinations-page .destinations-atlas-filters {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin-top: 0.15rem;
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(139, 99, 54, 0.24);
+}
+.destinations-page .destinations-atlas-filters .filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  width: 100%;
+  margin: 0;
+}
+.destinations-page .destinations-atlas-filters .filter-bar button {
+  flex: 0 1 auto;
+  min-width: 0;
+  white-space: nowrap;
+}
+@media (max-width: 1023px) {
+  .destinations-page .destinations-atlas-filters {
+    overflow: hidden;
+  }
+  .destinations-page .destinations-atlas-filters .filter-bar {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding: 0.1rem 0.1rem 0.45rem;
+    scrollbar-width: thin;
+  }
+  .destinations-page .destinations-atlas-filters .filter-bar button {
+    flex: 0 0 auto;
+  }
+}
+
 /* The static Home introduction becomes an editorial route note, while the
    map stays fully interactive: pins, rotation, drawer, and dot controls are
    untouched. */

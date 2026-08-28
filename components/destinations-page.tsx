@@ -148,21 +148,15 @@ export function DestinationsPage() {
                   <p className="destinations-atlas-heading-status">
                     <strong>{list.length.toString().padStart(2, '0')}</strong> of {DESTINATIONS.length.toString().padStart(2, '0')} plotted
                   </p>
-                </div>
-
-                <aside className="destinations-atlas-rail destinations-atlas-rail--left" aria-label="Northern and inland regions">
-                  <p className="destinations-atlas-rail-label">Temple &amp; hill country</p>
-                  <div className="filter-bar" aria-label="Filter destinations by inland region">
-                    {['All', 'Cultural Triangle', 'Hill Country', 'Wildlife & National Parks'].map(renderFilter)}
-                  </div>
-                  <p className="destinations-atlas-rail-foot">Inner bearings</p>
-                </aside>
-
-                <div className="destinations-atlas-window">
-                  <div className="destinations-toolbar">
+                  <div className="destinations-atlas-filters">
                     <div className="filter-bar" id="region-filters" aria-label="Filter destinations by region">
                       {['All', ...REGIONS].map(renderFilter)}
                     </div>
+                  </div>
+                </div>
+
+                <div className="destinations-atlas-window">
+                  <div className="destinations-toolbar">
                     <div className="destinations-toolbar-note">
                       <span className="destinations-toolbar-label">Viewing</span>
                       <strong>{list.length.toString().padStart(2, '0')}</strong>
@@ -174,13 +168,6 @@ export function DestinationsPage() {
                   <DestinationMarquee destinations={list} />
                 </div>
 
-                <aside className="destinations-atlas-rail destinations-atlas-rail--right" aria-label="Coastal regions">
-                  <p className="destinations-atlas-rail-label">Coastal passages</p>
-                  <div className="filter-bar" aria-label="Filter destinations by coastal region">
-                    {['South Coast', 'East Coast', 'Colombo & West Coast'].map(renderFilter)}
-                  </div>
-                  <p className="destinations-atlas-rail-foot">Sea routes</p>
-                </aside>
               </div>
             </div>
           </section>
