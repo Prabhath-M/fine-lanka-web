@@ -112,6 +112,35 @@ since it's the single biggest chunk of repo weight.
   Result: 56 files / 112 MB deleted. `public/images/` went from 443 MB to
   331 MB.
 
+  **Correction (post-launch-prep review):** 5 of the 56 were a false
+  positive — `tour-beach.png`, `tour-cultural-historical.png`,
+  `tour-nature.png`, `tour-ramayana-trails.png`, `tour-romantic.png`.
+  They're loaded via a dynamic template string
+  (`` `/images/tour-${tour.category}.png` `` in
+  `components/tours/tour-picker-card.tsx` and `tour-card.tsx`), so a
+  static filename grep can't see the reference — this is exactly the
+  case the "verify once more yourself" warning above was meant to catch,
+  and it slipped through. Restored from git history
+  (`2afc027~1` → commit `aa8f7f0`); confirmed live via dev server that
+  `/tours-pricing` serves all five correctly again.
+
+  Re-swept the whole codebase afterward for other dynamic asset-path
+  patterns (template literals, object/map lookups, `url(var(...))` in
+  CSS) that could hide a reference the same way — none found. The only
+  other dynamic path in the app is
+  `` `/videos/destinations/${slug}.mp4` ``, which is the destination
+  video files intentionally left for you to add (see note at the top of
+  this doc) — not a bug.
+
+  **Takeaway for future cleanup passes:** a plain grep for a literal
+  filename is not sufficient verification when assets can be referenced
+  by a computed/templated path. Grep for the *static prefix* too (e.g.
+  `tour-` or `/videos/destinations/`) and check anywhere it's combined
+  with a variable.
+
+  Remaining 51 deletions re-verified clean with exact-filename matching
+  (not substring) against `components/`, `app/`, `lib/`, and CSS.
+
 ---
 
 ## Phase 3 — Image weight & optimization
@@ -175,6 +204,15 @@ This is the biggest real performance problem on the site.
   `components/home/explore-section.tsx`). 3 already have appropriate
   `sizes` props; the 4th is a 1×1 hidden preload image (`width={1}
   height={1}`, `aria-hidden`) that doesn't need one. No changes required.
+
+  **Re-verified (post-launch-prep review):** `unoptimized` flag confirmed
+  absent from `next.config.mjs`; `sharp` present as a resolved dependency;
+  sampled renamed `.jpg` files confirmed genuine JPEGs within the 2560px
+  cap; all 4 blend texture strips still `8100×360`; all 4 `<Image>`
+  `sizes` props as documented. The 2 dangling CSS refs
+  (`fine-lanka-booking-details-bg.png`, `fine-lanka-tours-collection-bg.png`)
+  are still the only unresolved image paths in the codebase — pre-existing,
+  already deferred to Phase 6, not a new issue. No discrepancies found.
 
 ---
 
