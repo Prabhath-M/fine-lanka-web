@@ -6660,6 +6660,16 @@ body:has(.features:target) .typed-opening { display: none; }
     text-shadow: 0 1px 0 rgba(7, 46, 43, 0.52);
   }
   .destinations-page .destinations-atlas-rail .filter-bar button.is-active::before { color: #f0cd88; }
+
+  /* Give the current bearing more reading width without shrinking the
+     coordinate facts into an unreadable column. */
+  .destinations-page .destinations-atlas-window .island-carousel-info-pane-body {
+    grid-template-columns: minmax(0, 1.8fr) minmax(9rem, 0.5fr);
+  }
+  .destinations-page .destinations-atlas-window .island-carousel-info-copy p {
+    max-width: 56ch;
+    -webkit-line-clamp: 3;
+  }
 }
 
 /* Consolidated destination filters sit beneath the atlas heading instead of
