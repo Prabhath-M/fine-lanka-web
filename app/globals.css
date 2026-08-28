@@ -6661,6 +6661,13 @@ body:has(.features:target) .typed-opening { display: none; }
   }
   .destinations-page .destinations-atlas-rail .filter-bar button.is-active::before { color: #f0cd88; }
 
+  /* The side filter rails are no longer part of the view. Let the carousel
+     and its current-bearing pane use the full atlas width instead of staying
+     trapped in the former center column. */
+  .destinations-page .destinations-atlas-window {
+    grid-column: 1 / -1;
+  }
+
   /* Give the current bearing more reading width without shrinking the
      coordinate facts into an unreadable column. */
   .destinations-page .destinations-atlas-window .island-carousel-info-pane-body {
