@@ -1,33 +1,48 @@
-# Fine Lanka — Tours & Pricing redesign + jade button fix
+# Fine Lanka Tours
 
-Two files here. Drop them back into your project at the same paths,
-overwriting the originals:
+A Next.js marketing/booking site for Fine Lanka Tours — a Sri Lanka travel
+company. Pages: home, destinations, tours & pricing, booking, about, and
+journal.
 
-- `components/tours/tour-card.tsx` → `components/tours/tour-card.tsx`
-- `globals.css` → `app/globals.css`
+## Stack
 
-## This round's changes
+- Next.js 16 (App Router), React 19, TypeScript
+- Tailwind CSS 4
+- pnpm (this project's package manager — see below)
 
-**Sigiriya fresco shade on the tour cards** — `tour-card-body` now carries
-a very faint, low-opacity (16%) rendering of `jade-fresco.png` — the same
-maiden-and-lotus rock-art image already used inside your jade buttons — as
-a soft radial-vignette texture behind the card copy, instead of a flat
-paper colour. It's tuned low enough and masked into one soft patch (not a
-picture spanning the whole card) so it never fights with the route/blurb
-text sitting on top of it — it just reads as a quiet, intentional art
-motif tying the cards back to the same cultural imagery as the buttons.
+## Getting started
 
-**"Plan a Journey" (header) and "Plot a route" / "Plot my journey"
-(destinations page)** — all three were using the right `btn-uikit-primary`
-class already, but the header and the destinations page each had their own
-page-scoped override that flattened it to a plain solid-colour button
-(plain teal in the header, plain sea-glass on destinations), losing the
-jade-glass-and-gold-frame look the same button has in the hero, the tours
-CTA, and the itinerary modal. Added one final override that restores the
-real jade background/border/shadow/hover on all three, while leaving each
-page's own button sizing (the header's compact nav height, its narrow-
-screen icon-only mode) untouched.
+This project uses **pnpm**. Install Node.js 20+ and pnpm, then:
 
-Everything from the previous round (filter tabs, card layout/buttons) is
-unchanged — this just adds to that same "TOURS & PRICING — REDESIGN" /
-new final block at the end of the file.
+```bash
+pnpm install
+pnpm dev
+```
+
+Open [http://localhost:3000](http://localhost:3000).
+
+Production build:
+
+```bash
+pnpm build
+pnpm start
+```
+
+## Project structure
+
+- `app/` — routes (App Router)
+- `components/` — page and shared UI components
+- `lib/` — data and utilities
+- `public/` — static assets (images, mural art, videos)
+
+## Status
+
+This project is pre-launch. See the project's pre-launch checklist for the
+current list of outstanding work (image optimization, SEO metadata, form
+backends, security headers, dependency updates, etc.).
+
+## Historical notes
+
+`docs/archive/` holds older planning docs, patch notes, and README variants
+from earlier development rounds. They're kept for reference but don't
+describe the current state of the project — this file does.
