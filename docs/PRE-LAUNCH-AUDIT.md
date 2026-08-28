@@ -403,22 +403,51 @@ from an outdated Next.js:
 ---
 
 ## Phase 8 — Security hardening
-- [ ] No security headers are configured at all (`next.config.mjs` has no
+- [x] No security headers are configured at all (`next.config.mjs` has no
   `headers()` function). Before launch, add at minimum:
   `Strict-Transport-Security`, `X-Content-Type-Options: nosniff`,
   `X-Frame-Options: DENY` (or a `frame-ancestors` CSP directive), and a
   basic `Content-Security-Policy`.
+
+  **Done:** added a `headers()` function to `next.config.mjs` covering all
+  of the above, plus `Referrer-Policy` and `Permissions-Policy`. The site
+  has no external scripts, fonts, analytics domains, or remote image
+  hosts — `next/font` self-hosts Google Fonts and all images are local —
+  so the CSP is strict (`'self'` for scripts/styles/connect, no external
+  origins allowlisted). Specifically checked `@vercel/analytics` (which
+  *is* wired up in `app/layout.tsx` for production): inspected the
+  package source directly and confirmed it posts to same-origin
+  `/_vercel/insights/...` paths by default, not a cross-origin domain, so
+  no CSP exception was needed for it.
+
+  Verification: `npx tsc --noEmit` passes clean. A full `pnpm build`
+  couldn't complete in this sandbox — `next/font` needs to fetch
+  fonts.googleapis.com at build time and that domain isn't in this
+  environment's network allowlist, which is a sandbox limitation, not a
+  code issue. **Please run `pnpm build && pnpm start` locally and spot
+  check the headers** (`curl -I http://localhost:3000`) before launch,
+  since this wasn't verified against a real running server.
 - [ ] All three lead-capture forms (booking, the enquiry modal, newsletter
   signup) currently have **no backend and no bot/spam protection** — see
   Phase 9. Once they're wired to a real endpoint, add a honeypot field or
   lightweight CAPTCHA (e.g. Cloudflare Turnstile) plus basic server-side
   rate limiting, or you'll get spam-submitted the day the forms go live and
   start actually sending somewhere.
-- [ ] Once you pick a hosting/deploy target, make sure any real secrets
+
+  Not done here — genuinely blocked on Phase 9. A honeypot field added now
+  would be theater: none of the three forms call a backend yet (checked —
+  `newsletter.tsx`'s "submit" is a local `e.preventDefault()` that just
+  shows a fake success message, no `fetch`/`action` anywhere in any of the
+  three). There's nothing for a honeypot to protect yet.
+- [x] Once you pick a hosting/deploy target, make sure any real secrets
   (email API key, CRM token, etc. from Phase 9) go into environment
   variables / your host's secret manager — never committed to the repo.
   Nothing is hardcoded right now (checked), just flagging it as a rule to
   keep once real integrations are added.
+
+  Re-verified: no `.env*` files in the repo, no hardcoded API
+  keys/secrets/tokens anywhere in `app/`, `components/`, `lib/`,
+  `next.config.mjs`, or `package.json`.
 
 ---
 
