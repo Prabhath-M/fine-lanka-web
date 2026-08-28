@@ -5818,6 +5818,10 @@ main > #destinations,
 .typed-opening-character {
   display: inline-block;
   opacity: 0;
+  /* will-change promotes this to its own compositor layer up front, so the
+     flip doesn't have to wait on a main-thread paint that a busy first load
+     (hero video/fonts) can end up skipping. */
+  will-change: opacity;
   animation: typed-opening-character-in 1ms linear var(--typed-character-delay) forwards;
 }
 .typed-opening-leading-box {
@@ -5832,6 +5836,7 @@ main > #destinations,
   background: rgba(239, 212, 129, 0.16);
   box-shadow: 0 0 0 1px rgba(239, 212, 129, 0.13), 0 0 0.7rem rgba(239, 212, 129, 0.18);
   opacity: 0;
+  will-change: opacity;
   animation: typed-opening-leading-box-show 1ms linear var(--typed-box-delay) forwards, typed-opening-leading-box-hide 1ms linear calc(var(--typed-box-delay) + var(--typed-box-hold)) forwards;
 }
 .typed-opening-progress {
