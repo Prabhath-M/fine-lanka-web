@@ -88,18 +88,6 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${spaceMono.variable} bg-background`}
     >
       <body className="antialiased">
-        {/* app/globals.css (which now includes the former public/css/style.css,
-            folded in during Phase 7) defines its own --font-display/--font-body/
-            --font-mono names ("Fraunces"/"Inter"/"Space Mono") independent of
-            the next/font variables above, so the actual Google Fonts
-            stylesheet is still needed here too. */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap"
-          rel="stylesheet"
-        />
-
         <SiteHeader />
         {children}
         <SiteFooter />

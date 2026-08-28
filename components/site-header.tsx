@@ -2,6 +2,7 @@
 
 // Design reminder: the header is a restrained six-rem heritage threshold;
 // route additions should stay concise and preserve its ceremonial rhythm.
+import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useRef, useState } from 'react'
 import { Icon } from '@/components/icons'
@@ -105,13 +106,13 @@ export function SiteHeader() {
           <img src={MURAL_FRAMES[0]} alt="" className="site-header-mural-frame" />
         </div>
         <div className="container header-inner">
-          <a href="/" className="brand">
+          <Link href="/" className="brand">
             <span className="brand-logo">
               <span className="brand-logo-flare" aria-hidden="true" />
               <img src="/images/logo-site.png" alt="" className="brand-logo-img" />
             </span>
             <span data-brand>{SITE.brand}</span>
-          </a>
+          </Link>
 
           <nav aria-label="Primary">
             <ul className="primary-nav" id="primary-nav">
@@ -124,13 +125,13 @@ export function SiteHeader() {
                       className="nav-item has-dropdown"
                       data-menu={item.page || ''}
                     >
-                      <a
+                      <Link
                         href={item.href}
                         className={isActive ? 'is-active' : undefined}
                         aria-haspopup="true"
                       >
                         <span className="nav-label">{item.label}</span>
-                      </a>
+                      </Link>
                       <ul className="dropdown">
                         <li className="dropdown-frieze dropdown-frieze--top" aria-hidden="true">
                           <Icon name="tuktuk" />
@@ -143,12 +144,12 @@ export function SiteHeader() {
                         </li>
                         {item.children.map((child) => (
                           <li key={child.label}>
-                            <a href={child.href}>
+                            <Link href={child.href}>
                               <span className="dropdown-icon">
                                 <Icon name={child.icon} />
                               </span>
                               <span className="dropdown-label">{child.label}</span>
-                            </a>
+                            </Link>
                           </li>
                         ))}
                         <li className="dropdown-frieze dropdown-frieze--bottom" aria-hidden="true">
@@ -163,7 +164,7 @@ export function SiteHeader() {
                 }
                 return (
                   <li key={item.label} className={`nav-item${isActive ? ' is-active' : ''}`}>
-                    <a href={item.href}><span className="nav-label">{item.label}</span></a>
+                    <Link href={item.href}><span className="nav-label">{item.label}</span></Link>
                   </li>
                 )
               })}
@@ -216,9 +217,9 @@ export function SiteHeader() {
                   <ul>
                     {item.children.map((child) => (
                       <li key={child.label}>
-                        <a href={child.href} onClick={() => setMobileOpen(false)}>
+                        <Link href={child.href} onClick={() => setMobileOpen(false)}>
                           {child.label}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
@@ -227,13 +228,13 @@ export function SiteHeader() {
             }
             return (
               <li key={item.label}>
-                <a
+                <Link
                   href={item.href}
                   className={item.page === currentPage ? 'is-active' : undefined}
                   onClick={() => setMobileOpen(false)}
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             )
           })}

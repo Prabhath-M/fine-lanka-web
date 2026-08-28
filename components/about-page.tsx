@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 /**
  * Design reminder: About is a focused Sri Lankan travel-studio profile.
  * Keep a spare editorial rhythm—one meaningful image per story movement,
@@ -39,9 +41,9 @@ export function AboutPage() {
               to truly notice the island.
             </p>
             <div className="about-hero-actions">
-              <a className="btn btn-uikit-primary" href="/booking">
+              <Link className="btn btn-uikit-primary" href="/booking">
                 Plan a journey
-              </a>
+              </Link>
             </div>
           </div>
           <figure className="about-hero-photo">

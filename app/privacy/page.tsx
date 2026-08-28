@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 import { LegalPage } from '@/components/legal-page'
 import { SITE } from '@/lib/site-data'
 
@@ -78,7 +79,7 @@ export default function Page() {
       <h2>Cookies</h2>
       <p>
         This website uses a small number of cookies needed for it to function correctly. See
-        our <a href="/cookie-policy">Cookie Policy</a> for details.
+        our <Link href="/cookie-policy">Cookie Policy</Link> for details.
       </p>
 
       <h2>Security</h2>

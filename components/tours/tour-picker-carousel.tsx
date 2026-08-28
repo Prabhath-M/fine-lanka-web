@@ -149,7 +149,12 @@ export function TourPickerCarousel({
               aria-hidden={!visible}
               inert={distance !== 0 ? true : undefined}
             >
-              <TourPickerCard tour={tour} active={distance === 0} onSelect={() => onSelect(tour.slug)} />
+              <TourPickerCard
+                tour={tour}
+                index={index}
+                active={distance === 0}
+                onSelect={() => onSelect(tour.slug)}
+              />
             </div>
           )
         })}
