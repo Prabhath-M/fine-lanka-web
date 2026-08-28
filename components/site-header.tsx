@@ -54,12 +54,10 @@ export function SiteHeader() {
   const mobileNavRef = useRef<HTMLElement | null>(null)
   const scrolledRef = useRef(false)
 
-  // Client-side navigation keeps the shared header mounted. Clear the
-  // one-click dropdown suppression whenever the route changes so a menu can
-  // be opened normally on the destination page.
-  useEffect(() => {
-    setSuppressedDropdown(null)
-  }, [pathname])
+  // Client-side navigation keeps the shared header mounted. A dropdown that
+  // was dismissed by a click must stay suppressed until the pointer leaves
+  // the trigger; otherwise the still-hovered trigger reopens it immediately
+  // on the destination page.
 
   // ---- Compact/scrolled header style (was initHeaderScroll()) ----
   useEffect(() => {
