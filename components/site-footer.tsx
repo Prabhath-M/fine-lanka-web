@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import { Icon } from '@/components/icons'
+import { NavLink } from '@/components/nav-link'
 import { FOOTER_COLUMNS, SITE } from '@/lib/site-data'
 import { SOCIAL_LINKS } from '@/lib/social-links'
 
@@ -8,12 +8,12 @@ export function SiteFooter() {
     <footer className="site-footer">
       <div className="container footer-top">
         <div className="footer-brand">
-          <Link href="/" className="brand">
+          <NavLink href="/" className="brand">
             <span className="brand-logo">
               <span className="brand-logo-flare" aria-hidden="true" />
               <img src="/images/logo-site.png" alt="" className="brand-logo-img" />
             </span>
-          </Link>
+          </NavLink>
           <p>
             Tailor-made journeys across Sri Lanka, considered one traveller at a time since{' '}
             <span data-founded>{SITE.foundedYear}</span>.
@@ -59,7 +59,7 @@ export function SiteFooter() {
                     </li>
                   ) : (
                     <li key={link.label}>
-                      <Link href={link.href}>{link.label}</Link>
+                      <NavLink href={link.href}>{link.label}</NavLink>
                     </li>
                   ),
                 )}
