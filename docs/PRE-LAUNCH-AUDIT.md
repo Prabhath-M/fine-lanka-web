@@ -483,6 +483,22 @@ demo but is presumably not fine for launch.
 > added as an environment variable on the hosting platform — never
 > committed to the repo.
 
+**Configuration decided, implementation starting:**
+- **Receiving address:** `mprabhathm@gmail.com` — bookings and enquiries
+  land here.
+- **Sending address:** Resend's shared `onboarding@resend.dev` for now —
+  no domain purchased yet. This means Resend will only deliver to the
+  receiving address above until a real domain is verified, which is fine
+  since that's the only recipient right now anyway. Revisit once a domain
+  is bought — see the domain note further down this section.
+- **Customer auto-reply:** yes, wanted for all form types.
+- **API key:** provided in chat and used to configure the environment —
+  **never committed to this repo**, not even here. It needs to be set as
+  an environment variable (`RESEND_API_KEY`) on whatever platform this
+  gets deployed to (Vercel/Netlify/etc. project settings → Environment
+  Variables), and in a local `.env.local` for development (already
+  covered by `.gitignore`).
+
 - [ ] Decide where enquiries should land — email (e.g. via Resend/Postmark/
   SendGrid), a CRM, or a simple database + admin view — and wire the
   `onSubmit` handlers in `components/booking-page.tsx`,
