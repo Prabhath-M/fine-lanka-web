@@ -12151,7 +12151,14 @@ body:has(.features:target) .typed-opening { display: none; }
   --portal-wall-floor-offset: clamp(6rem, 19vh, 13rem);
   --portal-focus-y: calc(100% - var(--portal-wall-floor-offset) - var(--portal-door-lift) - var(--portal-door-half-height));
   --portal-door-lift: 1.75rem;
-  --portal-door-half-height: 253px;
+  /* Must track .portal-frame's actual width/aspect-ratio/max-height formula
+     (width: min(470px, 74vw), aspect-ratio 3/4, capped by max-height below),
+     the same way the mobile breakpoint already does — otherwise this drifts
+     out of sync with the frame's real rendered half-height whenever that
+     formula changes, and the wall's zoom pivot (--portal-focus-y) ends up
+     off-center, which reads as the wall sliding relative to the door/frame
+     during the zoom. */
+  --portal-door-half-height: min(calc(min(470px, 74vw) * 2 / 3), calc((100svh - var(--portal-wall-floor-offset) - 2rem) / 2));
   height: 100dvh;
   box-sizing: border-box;
 }
