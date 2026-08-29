@@ -4853,48 +4853,6 @@ main > #destinations,
   background-position: 77% 90%;
 }
 
-/* Mobile "How It Works": the overlay description cards are laid out at
-   fixed 25%-of-canvas-wide columns, matched to the 960x540 flight-path
-   SVG — fine on desktop, but at phone width that's a ~70-90px column and
-   the text packs into an unreadable few-characters-per-line block. Hide
-   those overlay cards below 640px and show a plain, always-visible,
-   fully readable stacked list instead. The animation, plane, and
-   waypoint markers themselves are untouched at every width — only the
-   description text's presentation changes. */
-.process-mobile-steps { display: none; }
-@media (max-width: 640px) {
-  .process-step-desc { display: none; }
-  .process-mobile-steps {
-    display: grid;
-    gap: 1.5rem;
-    margin-top: 1.75rem;
-  }
-  .process-mobile-step {
-    padding-top: 1rem;
-    border-top: 1px solid rgba(11, 18, 32, 0.12);
-  }
-  .process-mobile-step-kicker {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: rgba(11, 18, 32, 0.5);
-    margin-bottom: 0.4rem;
-  }
-  .process-mobile-step-title {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.05rem;
-    color: #0B1220;
-    margin-bottom: 0.35rem;
-  }
-  .process-mobile-step-text {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: rgba(11, 18, 32, 0.7);
-  }
-}
-
 /* Destinations keeps its cartographic identity, while using the same display
    cadence and body density as the refined homepage. */
 .destinations-page .dest-hero-copy h1,
@@ -10376,46 +10334,6 @@ body:has(.features:target) .typed-opening { display: none; }
   box-shadow: none;
   text-shadow: 0 1px 0 rgba(4, 32, 29, 0.45);
   gap: 0.55rem;
-}
-/* The unscoped max-width above (calc(100% - 8.5rem)) is desktop-tuned —
-   it assumes a wide caption bar where subtracting a flat amount for the
-   dots still leaves plenty of room. On a narrow phone the caption bar
-   itself is only ~58% of a already-narrow card, so subtracting a flat
-   136px left almost nothing for the text (this is what caused the
-   description to render as only a letter or two before the ellipsis).
-   Widen the bar and switch back to percentage-based sizing so it scales
-   with the card instead of fighting a fixed pixel budget. */
-@media (max-width: 640px) {
-  .explore-heritage-rebuild .dest-panel-caption {
-    left: 10%;
-    right: 10%;
-    top: 68%;
-    bottom: 10%;
-    gap: 0.4rem;
-  }
-  .explore-heritage-rebuild .dest-panel-caption-text {
-    max-width: 62%;
-  }
-  .explore-heritage-rebuild .dest-panel-caption-text h3 {
-    font-size: 0.85rem;
-  }
-  .explore-heritage-rebuild .dest-panel-caption-sub {
-    font-size: 0.72rem;
-    line-height: 1.32;
-    -webkit-line-clamp: 3;
-    max-height: 4.4em;
-  }
-  .explore-heritage-rebuild .dest-panel-caption-side {
-    right: 0.4rem;
-    bottom: 0.4rem;
-  }
-  .explore-heritage-rebuild .dest-panel-dots {
-    gap: 0.3rem;
-  }
-  .explore-heritage-rebuild .dest-panel-dot {
-    width: 0.42rem;
-    height: 0.42rem;
-  }
 }
 
 /* ===========================================================================

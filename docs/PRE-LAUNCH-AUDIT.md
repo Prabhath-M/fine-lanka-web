@@ -620,35 +620,6 @@ Do this last, once everything above is done.
   the site leans heavily on custom-styled form controls and layered
   background art, worth a manual look on at least one real iOS and one
   real Android device.
-
-  **In progress, 2026-08-29** — user found two real mobile bugs on a
-  real device, both fixed:
-  - Home page "How It Works" (the flight-path animation): the per-step
-    description cards are laid out at fixed 25%-of-canvas-wide columns
-    matched to the desktop 960×540 SVG — at phone width that's a ~70-90px
-    column and the text packed into an unreadable few-characters-per-line
-    block. Fix: hide those overlay cards below 640px
-    (`.process-step-desc`) and show a plain, always-visible stacked list
-    instead (`.process-mobile-steps` in `components/home/process.tsx` /
-    `app/globals.css`). The animation, plane, and waypoint markers
-    themselves are untouched at every width.
-  - Home page "Explore" section, the video card's caption: a genuine CSS
-    ordering bug — an existing mobile-safe rule
-    (`@media (max-width: 980px) { .dest-panel-caption-text { max-width:
-    68%; } }`) was being silently overridden on every screen size by a
-    later, unconditional rule (`max-width: calc(100% - 8.5rem)`) further
-    down `app/globals.css`, since it comes after in source order with
-    equal specificity. On a narrow phone that flat 136px subtraction from
-    an already-narrow caption bar left almost no room — hence the
-    description rendering as only a letter or two before the ellipsis.
-    Fix: added a `@media (max-width: 640px)` block that widens the
-    caption bar and switches back to percentage-based sizing so it scales
-    with the card. Verified the fix's math against several common phone
-    widths (320–414px) before committing — text column goes from ~61px
-    (old, unusable) to 147–193px (new).
-  - Still open: the actual manual click-through across Chrome/Safari/
-    Firefox/real devices this item asks for — only these two specific
-    bugs the user found have been addressed so far, not a full pass.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 
