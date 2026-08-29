@@ -576,19 +576,14 @@ export function Process() {
             )
           })}
 
-          {/* one description card per waypoint, revealed on arrival.
-              Hidden on mobile (see .process-step-desc in globals.css) —
-              at phone width these fixed 25%-of-canvas-wide overlay boxes
-              have nowhere near enough room and the text packs into an
-              unreadable few-characters-per-line column. A plain stacked
-              list (.process-mobile-steps below) replaces them there. */}
+          {/* one description card per waypoint, revealed on arrival */}
           {POINTS.map((p, i) => {
             const { style, origin } = descriptionPlacement(p, i)
             const show = revealed[i]
             return (
               <div
                 key={p.code}
-                className={`process-step-desc absolute max-w-none text-[#0B1220] ${origin} transition-all duration-500 ${
+                className={`absolute max-w-none text-[#0B1220] ${origin} transition-all duration-500 ${
                   show ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-90 pointer-events-none'
                 }`}
                 style={style}
@@ -613,20 +608,6 @@ export function Process() {
               </div>
             )
           })}
-        </div>
-
-        {/* Mobile-only replacement for the overlay description cards above
-            (hidden on mobile via .process-step-desc's media query) — a
-            plain, always-visible, fully readable stacked list. Desktop is
-            untouched; this is display:none there. */}
-        <div className="process-mobile-steps">
-          {POINTS.map((p) => (
-            <div key={p.code} className="process-mobile-step">
-              <div className="process-mobile-step-kicker">Step {p.code}</div>
-              <div className="process-mobile-step-title">{p.title}</div>
-              <div className="process-mobile-step-text">{p.text}</div>
-            </div>
-          ))}
         </div>
 
       </div>
