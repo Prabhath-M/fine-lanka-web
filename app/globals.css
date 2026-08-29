@@ -4853,6 +4853,28 @@ main > #destinations,
   background-position: 77% 90%;
 }
 
+/* Mobile "How It Works": same four description cards, same positions,
+   same reveal-on-arrival animation as desktop — only their width (via
+   the --process-desc-gap consumed in the inline width calc in
+   descriptionPlacement(), components/home/process.tsx) and font sizes
+   shrink, reclaiming real room within each card's existing quarter-of-
+   the-route slot instead of changing the layout or behavior. */
+.process-step-desc {
+  --process-desc-gap: 1rem;
+  --process-title-size: 16px;
+  --process-text-size: 13px;
+}
+@media (max-width: 640px) {
+  .process-step-desc {
+    --process-desc-gap: 0.35rem;
+    --process-title-size: 12px;
+    --process-text-size: 10.5px;
+  }
+  .process-step-desc .leading-snug {
+    line-height: 1.45;
+  }
+}
+
 /* Destinations keeps its cartographic identity, while using the same display
    cadence and body density as the refined homepage. */
 .destinations-page .dest-hero-copy h1,
@@ -10334,6 +10356,45 @@ body:has(.features:target) .typed-opening { display: none; }
   box-shadow: none;
   text-shadow: 0 1px 0 rgba(4, 32, 29, 0.45);
   gap: 0.55rem;
+}
+/* The unscoped max-width above (calc(100% - 8.5rem)) is desktop-tuned —
+   it assumes a wide caption bar where subtracting a flat amount for the
+   dots still leaves plenty of room. On a narrow phone the caption bar
+   itself is only ~58% of an already-narrow card, so subtracting a flat
+   136px left almost nothing for the text. Same overlay caption, same
+   position on the video frame, same behavior — just widened and given a
+   taller box so the existing text has room to actually read on mobile. */
+@media (max-width: 640px) {
+  .explore-heritage-rebuild .dest-panel-caption {
+    left: 10%;
+    right: 10%;
+    top: 68%;
+    bottom: 10%;
+    gap: 0.4rem;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-text {
+    max-width: 62%;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-text h3 {
+    font-size: 0.85rem;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-sub {
+    font-size: 0.72rem;
+    line-height: 1.32;
+    -webkit-line-clamp: 3;
+    max-height: 4.4em;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-side {
+    right: 0.4rem;
+    bottom: 0.4rem;
+  }
+  .explore-heritage-rebuild .dest-panel-dots {
+    gap: 0.3rem;
+  }
+  .explore-heritage-rebuild .dest-panel-dot {
+    width: 0.42rem;
+    height: 0.42rem;
+  }
 }
 
 /* ===========================================================================

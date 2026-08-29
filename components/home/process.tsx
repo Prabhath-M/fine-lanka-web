@@ -150,11 +150,15 @@ function findLengthAt(geo: SVGPathElement, total: number, target: Point, samples
 
 // Keep each description in its point's quarter of the route so it stays
 // close to the marker without spilling into the neighboring point's area.
+// The gap between quarters is a CSS var (--process-desc-gap) rather than
+// a hardcoded 1rem so a mobile media query can shrink it — reclaiming
+// real width for the text without changing the layout, positions, or
+// reveal behavior at all.
 function descriptionPlacement(p: Point, index: number) {
   const above = index % 2 === 0
   const style: React.CSSProperties = {}
   style.left = `${index * 25}%`
-  style.width = 'calc(25% - 1rem)'
+  style.width = 'calc(25% - var(--process-desc-gap, 1rem))'
   if (above) style.bottom = `calc(${100 - (p.y / VB_H) * 100}% + 24px)`
   else style.top = `calc(${(p.y / VB_H) * 100}% + 24px)`
   const origin = `origin-${above ? 'bottom' : 'top'}-${index < 2 ? 'left' : 'right'}`
@@ -576,14 +580,20 @@ export function Process() {
             )
           })}
 
-          {/* one description card per waypoint, revealed on arrival */}
+          {/* one description card per waypoint, revealed on arrival —
+              exact same layout, positions, and reveal animation at every
+              screen size. Only the width (via --process-desc-gap above)
+              and font sizes (via --process-title-size /
+              --process-text-size below) shrink on mobile, giving the
+              same cards more effective room instead of replacing them
+              with something else. */}
           {POINTS.map((p, i) => {
             const { style, origin } = descriptionPlacement(p, i)
             const show = revealed[i]
             return (
               <div
                 key={p.code}
-                className={`absolute max-w-none text-[#0B1220] ${origin} transition-all duration-500 ${
+                className={`process-step-desc absolute max-w-none text-[#0B1220] ${origin} transition-all duration-500 ${
                   show ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-90 pointer-events-none'
                 }`}
                 style={style}
@@ -593,9 +603,10 @@ export function Process() {
                 </div>
                 <div className="h-[1.2em] overflow-hidden leading-[1.2em] mb-2">
                   <div
-                    className="font-semibold text-[16px] transition-transform duration-[380ms]"
+                    className="font-semibold transition-transform duration-[380ms]"
                     style={{
                       fontFamily: "'Fraunces', serif",
+                      fontSize: 'var(--process-title-size, 16px)',
                       transform: show ? 'translateY(0)' : 'translateY(-100%)',
                       transitionDelay: show ? '70ms' : '0ms',
                       transitionTimingFunction: 'cubic-bezier(.2,.8,.3,1)',
@@ -604,7 +615,12 @@ export function Process() {
                     {p.title}
                   </div>
                 </div>
-                <div className="text-[13px] leading-snug text-[#0B1220]/70">{p.text}</div>
+                <div
+                  className="leading-snug text-[#0B1220]/70"
+                  style={{ fontSize: 'var(--process-text-size, 13px)' }}
+                >
+                  {p.text}
+                </div>
               </div>
             )
           })}

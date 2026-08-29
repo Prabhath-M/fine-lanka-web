@@ -620,6 +620,44 @@ Do this last, once everything above is done.
   the site leans heavily on custom-styled form controls and layered
   background art, worth a manual look on at least one real iOS and one
   real Android device.
+
+  **In progress, 2026-08-29** — user found two real mobile bugs on a
+  real device:
+  - Home page "How It Works" (flight-path animation): description cards
+    packed unreadably at phone width.
+  - Home page "Explore" section, video card caption: description
+    rendered as only a letter or two before the ellipsis.
+
+  First fix attempt (PR #32) replaced the "How It Works" cards with a
+  separate always-visible stacked list on mobile — **reverted (PR #33)**
+  after testing, since the actual ask was to keep existing mobile
+  behavior (same overlay cards, same reveal animation, same positions)
+  and just resize within it for more room, not change the behavior.
+
+  Corrected fix, in review — not yet merged:
+  - Explore caption: unchanged approach from the reverted PR (that part
+    was already behavior-preserving, CSS-only) — widened the caption bar
+    and switched to percentage-based sizing on mobile so it scales with
+    the card, instead of a flat-pixel subtraction that left almost no
+    room. Root cause was a real CSS ordering bug: an existing
+    `@media (max-width: 980px)` rule was being silently overridden by a
+    later unconditional rule further down `globals.css` with equal
+    specificity.
+  - How It Works: redone to keep the exact same 4 cards, positions, and
+    reveal-on-arrival animation at every screen size — only the gap
+    between the 4 quarter-width columns and the font size shrink on
+    mobile (via CSS custom properties consumed in the existing inline
+    styles), reclaiming real width without restructuring anything.
+  - **Known limitation, flagged rather than hidden:** even with this
+    fix, each description (~105 characters) still wraps to roughly 7
+    lines at the smaller mobile size, computed against a ~350px-wide
+    canvas — down from ~10 lines before the fix, but the resulting card
+    can still run tall relative to the ~197px-tall mobile canvas and may
+    visually crowd the flight-path animation or neighboring cards, since
+    nothing here clips or scrolls independently. This should fix the
+    specific complaint (illegible/cut-off text) but may not be the final
+    word on this section's mobile polish — please test on a real device
+    before merging, given the last attempt needed a revert.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 
