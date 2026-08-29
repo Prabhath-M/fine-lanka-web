@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { useState } from 'react'
 import { Icon } from '@/components/icons'
 import { DESTINATIONS } from '@/lib/destinations-data'
+import { HONEYPOT_FIELD } from '@/lib/form-guard'
 import { PROCESS_STEPS, SITE } from '@/lib/site-data'
 import { TOUR_CATEGORIES, TOUR_PACKAGES } from '@/lib/tours-data'
 
@@ -25,6 +26,7 @@ export function BookingPage() {
   const preselectDestination = searchParams.get('destination')
 
   const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   const categoriesWithPackages = TOUR_CATEGORIES.filter((c) =>
     TOUR_PACKAGES.some((t) => t.category === c.slug),
@@ -55,24 +57,75 @@ export function BookingPage() {
           <form
             className="booking-form"
             noValidate
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
               const form = e.currentTarget
               if (!form.checkValidity()) {
                 form.reportValidity()
                 return
               }
-              // NOTE: no backend wired up yet — placeholder for a future
-              // session to connect to a real enquiry/CRM endpoint, same
-              // pattern as the newsletter form.
-              const name = (form.elements.namedItem('name') as HTMLInputElement).value.trim()
-              setMessage({
-                text: `Thanks, ${name.split(' ')[0]} — a Sri Lanka-based travel designer will be in touch within one business day.`,
-                isError: false,
-              })
-              form.reset()
+
+              const formData = new FormData(form)
+              const name = String(formData.get('name') ?? '').trim()
+              const payload = {
+                name,
+                email: formData.get('email'),
+                phone: formData.get('phone'),
+                travellers: formData.get('travellers'),
+                dates: formData.get('dates'),
+                nights: formData.get('nights'),
+                tour: formData.get('tour'),
+                destinations: formData.getAll('destinations'),
+                budget: formData.get('budget'),
+                details: formData.get('details'),
+                [HONEYPOT_FIELD]: formData.get(HONEYPOT_FIELD),
+              }
+
+              setIsSubmitting(true)
+              setMessage(null)
+              try {
+                const res = await fetch('/api/booking', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify(payload),
+                })
+                if (!res.ok) {
+                  const data = await res.json().catch(() => null)
+                  throw new Error(data?.error || 'Something went wrong. Please try again.')
+                }
+                setMessage({
+                  text: `Thanks, ${name.split(' ')[0]} — a Sri Lanka-based travel designer will be in touch within one business day.`,
+                  isError: false,
+                })
+                form.reset()
+              } catch (err) {
+                setMessage({
+                  text:
+                    err instanceof Error
+                      ? err.message
+                      : 'Something went wrong. Please try again or call us directly.',
+                  isError: true,
+                })
+              } finally {
+                setIsSubmitting(false)
+              }
             }}
           >
+            {/* Honeypot: real visitors never see or fill this. Bots that
+                auto-fill every field they find in the DOM do. */}
+            <div
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}
+            >
+              <label htmlFor="booking-company-website">Company website</label>
+              <input
+                type="text"
+                id="booking-company-website"
+                name={HONEYPOT_FIELD}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             <div className="form-row two-col">
               <div>
                 <label htmlFor="booking-name">Full name</label>
@@ -180,9 +233,9 @@ export function BookingPage() {
               />
             </div>
 
-            <button type="submit" className="btn btn-uikit-primary">
+            <button type="submit" className="btn btn-uikit-primary" disabled={isSubmitting}>
               <Icon name="message" className="btn-icon" />
-              Send Enquiry
+              {isSubmitting ? 'Sending…' : 'Send Enquiry'}
             </button>
             <p className={`booking-message${message?.isError ? ' is-error' : ''}`}>
               {message?.text ?? ''}
