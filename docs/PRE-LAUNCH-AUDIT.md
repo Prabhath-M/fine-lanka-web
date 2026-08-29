@@ -427,18 +427,20 @@ from an outdated Next.js:
   code issue. **Please run `pnpm build && pnpm start` locally and spot
   check the headers** (`curl -I http://localhost:3000`) before launch,
   since this wasn't verified against a real running server.
-- [ ] All three lead-capture forms (booking, the enquiry modal, newsletter
+- [x] All three lead-capture forms (booking, the enquiry modal, newsletter
   signup) currently have **no backend and no bot/spam protection** — see
   Phase 9. Once they're wired to a real endpoint, add a honeypot field or
   lightweight CAPTCHA (e.g. Cloudflare Turnstile) plus basic server-side
   rate limiting, or you'll get spam-submitted the day the forms go live and
   start actually sending somewhere.
 
-  Not done here — genuinely blocked on Phase 9. A honeypot field added now
-  would be theater: none of the three forms call a backend yet (checked —
-  `newsletter.tsx`'s "submit" is a local `e.preventDefault()` that just
-  shows a fake success message, no `fetch`/`action` anywhere in any of the
-  three). There's nothing for a honeypot to protect yet.
+  **Done as part of Phase 9** (this was blocked here until the forms had
+  a real backend to protect — see the earlier note in this section,
+  superseded now). All three forms have a honeypot field
+  (`lib/form-guard.ts`) and their API routes rate-limit at 5
+  requests/10 minutes per IP. No CAPTCHA added — the honeypot + rate
+  limit is a reasonable starting point for a tourism site's realistic
+  traffic; revisit if real spam shows up in practice.
 - [x] Once you pick a hosting/deploy target, make sure any real secrets
   (email API key, CRM token, etc. from Phase 9) go into environment
   variables / your host's secret manager — never committed to the repo.
@@ -499,15 +501,74 @@ demo but is presumably not fine for launch.
   Variables), and in a local `.env.local` for development (already
   covered by `.gitignore`).
 
-- [ ] Decide where enquiries should land — email (e.g. via Resend/Postmark/
+- [x] Decide where enquiries should land — email (e.g. via Resend/Postmark/
   SendGrid), a CRM, or a simple database + admin view — and wire the
   `onSubmit` handlers in `components/booking-page.tsx`,
   `components/enquiry-modal.tsx`, and `components/home/newsletter.tsx` to
   a real API route.
-- [ ] Add server-side validation to match (don't rely on the client-side
+
+  **Done.** Three routes added: `app/api/booking/route.ts`,
+  `app/api/enquiry/route.ts`, `app/api/newsletter/route.ts`. Shared
+  sending logic lives in `lib/mail.ts` (Resend client, team-notification
+  email, customer auto-reply). All three forms now `fetch()` their route
+  on submit, show a loading state on the button, and display a real
+  success/error message instead of a fake one.
+
+  Each route also includes a honeypot check
+  (`lib/form-guard.ts::isHoneypotTripped`) and a best-effort in-memory
+  rate limiter (5 requests / 10 minutes per IP per form) — see the
+  limitations noted directly in `lib/form-guard.ts` about why the rate
+  limiter isn't reliable on serverless multi-instance hosting and what to
+  swap in if real abuse shows up (Upstash Redis).
+
+  **Verification:** couldn't run a full `pnpm build` for the same
+  font-fetch reason noted in Phase 8, and separately, `api.resend.com`
+  isn't in this sandbox's network allowlist either (confirmed via a
+  direct `curl` — `x-deny-reason: host_not_allowed`), so I couldn't
+  verify actual email delivery myself. What I *could* verify: wrote a
+  standalone script that called each route handler directly (bypassing
+  the parts of Next.js that need network access I don't have) and
+  confirmed — missing/invalid email correctly returns 400, a tripped
+  honeypot returns 200 without attempting to send, and the 6th request
+  from the same IP within the rate-limit window correctly returns 429.
+  The actual Resend send calls reached the network layer correctly (the
+  403 came from *my sandbox's* proxy, not from Resend rejecting the
+  request) but I couldn't confirm a real email lands in an inbox.
+  **Please test this yourself**: run `pnpm dev`, submit each of the
+  three forms with your own email, and confirm you receive both the team
+  notification and the auto-reply.
+- [x] Add server-side validation to match (don't rely on the client-side
   `checkValidity()` alone — anyone can bypass that).
-- [ ] Decide what confirmation the *customer* gets (auto-reply email?) in
+
+  **Done** — see `lib/form-guard.ts::cleanString` /`isValidEmail`. Every
+  route validates and length-caps input server-side regardless of what
+  the client sent; a request with a missing name/invalid email is
+  rejected with 400 even if it skips the browser entirely (verified with
+  the standalone script above, bypassing the browser form).
+- [x] Decide what confirmation the *customer* gets (auto-reply email?) in
   addition to your team being notified.
+
+  **Decided and implemented:** yes, an auto-reply for all three forms
+  (`lib/mail.ts::sendAutoReply`), sent as best-effort — its failure never
+  blocks the request or hides a successful team notification.
+
+  **Known limitation, current config:** since no domain is verified yet
+  (sending from `onboarding@resend.dev`), Resend restricts delivery to
+  the account owner's own address. Practically: the **team notification**
+  works for any submission right now (it goes to `mprabhathm@gmail.com`,
+  which is the account owner's address). The **customer auto-reply** will
+  only actually arrive if the customer's email happens to be
+  `mprabhathm@gmail.com` — for a real visitor's email, Resend will reject
+  the auto-reply send, which is caught and logged
+  (`console.error('... auto-reply failed', err)`) rather than surfaced to
+  the customer or team. **This resolves itself automatically once a
+  domain is bought and verified in Resend** — no code change needed, just
+  update `LEADS_FROM_EMAIL` to an address on the verified domain.
+- [ ] Not done: swap `LEADS_FROM_EMAIL` to a verified-domain address once
+  a domain is purchased, so customer auto-replies actually reach real
+  visitors (see the limitation above). Also not done: replacing the
+  in-memory rate limiter with a shared store if real abuse shows up on
+  serverless hosting (see `lib/form-guard.ts`).
 
 ---
 

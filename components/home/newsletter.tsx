@@ -2,13 +2,15 @@
 
 import { useState } from 'react'
 import { Icon } from '@/components/icons'
+import { HONEYPOT_FIELD } from '@/lib/form-guard'
 
-/** Newsletter signup form — client-side validation + placeholder
- *  "submit" only (was initNewsletterForm() in main.js). No backend
- *  wired up yet, same as the original. */
+/** Newsletter signup form — wired to POST /api/newsletter (see
+ *  app/api/newsletter/route.ts). Not a real mailing-list integration —
+ *  see the note in that route file. */
 export function Newsletter() {
   const [message, setMessage] = useState('')
   const [isError, setIsError] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
 
   return (
     <section className="newsletter">
@@ -25,7 +27,7 @@ export function Newsletter() {
             className="newsletter-form"
             id="newsletter-form"
             noValidate
-            onSubmit={(e) => {
+            onSubmit={async (e) => {
               e.preventDefault()
               const form = e.currentTarget
               const input = form.querySelector<HTMLInputElement>('input[type=email]')
@@ -37,15 +39,50 @@ export function Newsletter() {
                 return
               }
 
-              setMessage(`Thanks — we'll be in touch at ${input!.value}.`)
-              setIsError(false)
-              form.reset()
+              const email = input!.value
+              const honeypot = form.querySelector<HTMLInputElement>(`input[name=${HONEYPOT_FIELD}]`)
+
+              setIsSubmitting(true)
+              setMessage('')
+              try {
+                const res = await fetch('/api/newsletter', {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ email, [HONEYPOT_FIELD]: honeypot?.value }),
+                })
+                if (!res.ok) {
+                  const data = await res.json().catch(() => null)
+                  throw new Error(data?.error || 'Something went wrong. Please try again.')
+                }
+                setMessage(`Thanks — we'll be in touch at ${email}.`)
+                setIsError(false)
+                form.reset()
+              } catch (err) {
+                setMessage(err instanceof Error ? err.message : 'Something went wrong. Please try again.')
+                setIsError(true)
+              } finally {
+                setIsSubmitting(false)
+              }
             }}
           >
+            {/* Honeypot: real visitors never see or fill this. */}
+            <div
+              aria-hidden="true"
+              style={{ position: 'absolute', left: '-9999px', top: 'auto', width: 1, height: 1, overflow: 'hidden' }}
+            >
+              <label htmlFor="newsletter-company-website">Company website</label>
+              <input
+                type="text"
+                id="newsletter-company-website"
+                name={HONEYPOT_FIELD}
+                tabIndex={-1}
+                autoComplete="off"
+              />
+            </div>
             <input type="email" placeholder="you@example.com" required aria-label="Email address" />
-            <button type="submit" className="btn btn-uikit-primary">
+            <button type="submit" className="btn btn-uikit-primary" disabled={isSubmitting}>
               <Icon name="mail" className="btn-icon" />
-              Sign Up
+              {isSubmitting ? 'Signing up…' : 'Sign Up'}
             </button>
           </form>
           <p className={`newsletter-message${isError ? ' is-error' : ''}`} id="newsletter-message">
