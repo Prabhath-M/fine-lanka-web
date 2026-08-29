@@ -11,6 +11,10 @@ Not included per your note: destination video files (`public/videos/destinations
 
 > **Tracking:** this file is the live checklist for the pre-launch audit. Check items off in the PR that completes them. See git history / PRs for what changed and when.
 
+> **Live test deployment:** `https://fine-lanka-web-rgle.vercel.app/` —
+> deployed on Vercel's free tier for testing (not the final production
+> domain). Forms confirmed working end-to-end here as of 2026-08-29.
+
 ---
 
 ## Phase 1 — Remove legacy & dev files
@@ -300,6 +304,24 @@ render as normal-looking buttons/links but go nowhere.
   scaffolding tool used to build the site — harmless, but worth removing
   for a polished public launch.
 
+> **New finding, 2026-08-29** (from checking the live Vercel deployment):
+> `app/layout.tsx`, `app/robots.ts`, and `app/sitemap.ts` all fall back to
+> `http://localhost:3000` for `NEXT_PUBLIC_SITE_URL` when it isn't set —
+> which it wasn't, on the first Vercel deploy. Practical effect: the OG/
+> Twitter share image, `robots.txt`'s sitemap link, and every URL in
+> `sitemap.xml` were all pointing at localhost on the live site. The
+> fallback and the fix were already anticipated in code comments left
+> during the original Phase 5 work — just needed the env var actually
+> set.
+>
+> **Fixed and verified, 2026-08-29:** `NEXT_PUBLIC_SITE_URL` added in
+> Vercel project settings (scoped to Production), redeployed. Confirmed
+> via Vercel's own Open Graph inspector (Deployment → Open Graph tab) —
+> `og:image` and `twitter:image` both correctly resolve to
+> `https://fine-lanka-web-rgle.vercel.app/images/...`, no localhost
+> anywhere. Remember to update this variable again once a real domain
+> replaces the `.vercel.app` one.
+
 ---
 
 > **Verified against code on 2026-08-29** and checked off — this file had
@@ -521,22 +543,24 @@ demo but is presumably not fine for launch.
   limiter isn't reliable on serverless multi-instance hosting and what to
   swap in if real abuse shows up (Upstash Redis).
 
-  **Verification:** couldn't run a full `pnpm build` for the same
-  font-fetch reason noted in Phase 8, and separately, `api.resend.com`
-  isn't in this sandbox's network allowlist either (confirmed via a
-  direct `curl` — `x-deny-reason: host_not_allowed`), so I couldn't
-  verify actual email delivery myself. What I *could* verify: wrote a
-  standalone script that called each route handler directly (bypassing
-  the parts of Next.js that need network access I don't have) and
-  confirmed — missing/invalid email correctly returns 400, a tripped
-  honeypot returns 200 without attempting to send, and the 6th request
-  from the same IP within the rate-limit window correctly returns 429.
-  The actual Resend send calls reached the network layer correctly (the
-  403 came from *my sandbox's* proxy, not from Resend rejecting the
-  request) but I couldn't confirm a real email lands in an inbox.
-  **Please test this yourself**: run `pnpm dev`, submit each of the
-  three forms with your own email, and confirm you receive both the team
-  notification and the auto-reply.
+  **Verification (my sandbox):** couldn't run a full `pnpm build` for the
+  same font-fetch reason noted in Phase 8, and separately,
+  `api.resend.com` isn't in this sandbox's network allowlist either
+  (confirmed via a direct `curl` — `x-deny-reason: host_not_allowed`), so
+  I couldn't verify actual email delivery myself from here. What I
+  *could* verify: wrote a standalone script that called each route
+  handler directly (bypassing the parts of Next.js that need network
+  access I don't have) and confirmed — missing/invalid email correctly
+  returns 400, a tripped honeypot returns 200 without attempting to
+  send, and the 6th request from the same IP within the rate-limit
+  window correctly returns 429.
+
+  **Verified live by the user, 2026-08-29:** deployed to Vercel
+  (`fine-lanka-web-rgle.vercel.app`), env vars set in Vercel project
+  settings, all three forms tested on the live deployment and confirmed
+  working — team notifications arriving in `mprabhathm@gmail.com`. This
+  is the real end-to-end confirmation the sandbox verification above
+  couldn't provide. Genuinely done.
 - [x] Add server-side validation to match (don't rely on the client-side
   `checkValidity()` alone — anyone can bypass that).
 
@@ -584,11 +608,23 @@ Do this last, once everything above is done.
 - [ ] Run Lighthouse (or PageSpeed Insights) against the production build
   after Phases 3, 6, and 7 — should show a real jump in performance score
   once the image weight and CSS bloat are addressed.
-- [ ] Test the booking/enquiry/newsletter forms end-to-end after Phase 9 —
+- [x] Test the booking/enquiry/newsletter forms end-to-end after Phase 9 —
   confirm the email/CRM notification actually arrives.
+
+  **Done, 2026-08-29:** tested live on `fine-lanka-web-rgle.vercel.app`
+  after deploying to Vercel. All three forms confirmed working — team
+  notifications arriving at `mprabhathm@gmail.com`. (Along the way, fixed
+  a missing `.env.local` locally and a `NEXT_PUBLIC_SITE_URL` scoping
+  issue on Vercel — see the Phase 5 finding above.)
 - [ ] Cross-browser check (Chrome, Safari, Firefox) and mobile check —
   the site leans heavily on custom-styled form controls and layered
   background art, worth a manual look on at least one real iOS and one
   real Android device.
-- [ ] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
+- [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
+
+  **Partially done, 2026-08-29:** confirmed reachable and correct at the
+  real URL (see the Phase 5 finding above — this was the localhost bug,
+  now fixed and verified via Vercel's Open Graph inspector). **Still
+  open:** submitting the sitemap in Google Search Console — needs a
+  Google account and domain verification, not yet done.
