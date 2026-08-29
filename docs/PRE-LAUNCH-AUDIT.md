@@ -656,8 +656,26 @@ Do this last, once everything above is done.
     visually crowd the flight-path animation or neighboring cards, since
     nothing here clips or scrolls independently. This should fix the
     specific complaint (illegible/cut-off text) but may not be the final
-    word on this section's mobile polish — please test on a real device
-    before merging, given the last attempt needed a revert.
+    word on this section's mobile polish.
+
+  **User re-tested on device, found a second real bug in the Explore
+  video card caption** (screenshot): the description text was
+  overflowing past the visible teal caption box entirely — spilling
+  onto the decorative frame artwork below and covering the pagination
+  dots. Root cause: the caption box's height (derived from top/bottom %
+  insets) wasn't actually enforced — with no `overflow: hidden`, a flex
+  child taller than its container just overflows past it instead of
+  being contained. **Fixed:** added `height: 100%; overflow: hidden` on
+  the caption box as a hard containment guarantee (text can no longer
+  visually escape the box regardless of exact pixel calculations), plus
+  reduced the description to a more conservative 2-line clamp (down
+  from 3) so it's more likely to actually fit rather than relying on
+  the clip to kick in mid-sentence, and added a small reserved gap
+  between the text and the dots so they can't visually touch even at
+  the container's edge. The "How It Works" section was confirmed
+  working correctly by the user as-is — not touched in this round.
+  Still not merged — waiting on the user to confirm this on their
+  device before merging, per the same caution as before.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 

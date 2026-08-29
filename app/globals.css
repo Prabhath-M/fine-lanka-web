@@ -10371,18 +10371,35 @@ body:has(.features:target) .typed-opening { display: none; }
     top: 68%;
     bottom: 10%;
     gap: 0.4rem;
+    /* Hard containment: whatever the exact numbers below work out to on
+       a given phone, text can never again visually spill past this
+       box's edge onto the frame artwork or over the dots — it clips
+       instead. height:100% pins the flex row to exactly the box
+       implied by top/bottom above, so children can't force it taller. */
+    height: 100%;
+    overflow: hidden;
   }
   .explore-heritage-rebuild .dest-panel-caption-text {
     max-width: 62%;
+    /* Small reserved gap so clipped text never touches the dots, even
+       at the container's very edge. */
+    padding-bottom: 0.3rem;
+    box-sizing: border-box;
   }
   .explore-heritage-rebuild .dest-panel-caption-text h3 {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
+    line-height: 1.2;
   }
   .explore-heritage-rebuild .dest-panel-caption-sub {
-    font-size: 0.72rem;
-    line-height: 1.32;
-    -webkit-line-clamp: 3;
-    max-height: 4.4em;
+    font-size: 0.68rem;
+    line-height: 1.3;
+    /* Dropped from 3 lines to 2 — conservative on purpose. The box's
+       real available height varies by device/frame aspect and can't be
+       hand-tuned perfectly from here; 2 lines is far more likely to
+       genuinely fit without relying on the overflow:hidden clip above
+       ever actually kicking in mid-sentence. */
+    -webkit-line-clamp: 2;
+    max-height: 2.6em;
   }
   .explore-heritage-rebuild .dest-panel-caption-side {
     right: 0.4rem;
