@@ -10105,7 +10105,19 @@ body:has(.features:target) .typed-opening { display: none; }
    crop tightly framed, and preserve a distinct teal caption panel with clear
    touch targets. Do not alter crop math, pin placement, or destination state.
    =========================================================================== */
-@media (min-width: 981px) {
+/* This was unconditionally min-width:981px (no upper bound), meaning it
+   was ALSO active within the 981px-1180px "tweener" range below —
+   overlapping with that block's attempt to override it back to a
+   stacked/centered layout. Fighting that property-by-property in the
+   override turned out fragile (justify-self, grid-template-columns,
+   and other properties this block sets weren't all being cleanly
+   undone). The actual fix: this block's content (the 2-column grid,
+   justify-self:end for right-aligning the video card next to the map)
+   is clearly meant for the wide desktop tier only — narrowing its
+   range to 1181px, matching the boundary used consistently everywhere
+   else in this file for "true wide desktop," removes the overlap
+   entirely instead of continuing to patch around it. */
+@media (min-width: 1181px) {
   .explore-heritage-rebuild .explore-studio-workbench {
     grid-template-columns: minmax(25rem, 1.08fr) minmax(27rem, 0.92fr);
     gap: clamp(1rem, 1.9vw, 1.65rem);

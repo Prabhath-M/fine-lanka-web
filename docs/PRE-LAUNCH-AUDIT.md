@@ -806,6 +806,25 @@ Do this last, once everything above is done.
   this rule was declared (the base rule and the duplicate at
   `min-width: 1181px`).
 
+  **User confirmed the margin fix didn't resolve it either, and ruled
+  out a stale-build explanation** (confirmed a fresh pull + dev server
+  restart). This forced a proper re-investigation instead of another
+  guess: listed every single rule anywhere in the file touching
+  `.explore-video-card`/`.explore-studio-workbench` across all five
+  class variants applied to this section, in file order. Found a real
+  structural bug: an **unconditional `@media (min-width: 981px)`** rule
+  (no upper bound) set the 2-column grid layout and
+  `justify-self: end` on the video card — meaning it was *also* active
+  within the 981px–1180px "tweener" range, overlapping with that
+  range's own override block. The override was fighting it
+  property-by-property (which is what every fix in this range had
+  effectively been doing), rather than the two rules being properly
+  separated in the first place. **Fixed at the actual source:**
+  narrowed that block from `min-width: 981px` to `min-width: 1181px`,
+  matching the boundary used consistently everywhere else in this file
+  for "true wide desktop." This removes the overlap entirely instead of
+  continuing to patch around it.
+
   Still not merged — waiting on the user to confirm this on their
   device.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
