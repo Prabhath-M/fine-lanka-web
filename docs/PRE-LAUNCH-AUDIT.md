@@ -789,8 +789,25 @@ Do this last, once everything above is done.
   video card already had `align-self: center`, which should have been
   sufficient alone, but this closes any gap).
 
+  **User reported the section heading text itself ("A framed island
+  story" / "Watch, then trace · Kandy") was also left-aligned, not just
+  the video card** — this pointed to something more fundamental than
+  breakpoint-specific tweaks. Found it: `.explore-heritage-rebuild
+  .explore-studio-shell` — the outer wrapper around the *entire*
+  section, heading included, not just the video/map area — had a
+  `max-width: 82rem` cap but **no `margin: auto`** to actually center
+  it. Without that, a width-capped block just sits flush against the
+  left edge of its parent at *any* viewport wider than the cap
+  (82rem = 1312px) — a genuinely fundamental, viewport-independent bug,
+  not scoped to any particular breakpoint tier. This is very likely the
+  real root cause behind every left-alignment report across every round
+  so far, each one just surfacing it at whatever specific width was
+  being tested. **Fixed:** added `margin-inline: auto` to both places
+  this rule was declared (the base rule and the duplicate at
+  `min-width: 1181px`).
+
   Still not merged — waiting on the user to confirm this on their
-  device, hopefully for the last time on this particular bug.
+  device.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 

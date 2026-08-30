@@ -9726,7 +9726,15 @@ body:has(.features:target) .typed-opening { display: none; }
    part is a quieter companion in parchment, peacock teal, antique gold and
    botanical linework—never a generic card placed beside it.
    =========================================================================== */
-.explore-heritage-rebuild .explore-studio-shell { max-width: 82rem; }
+/* margin-inline:auto is the actual fix here — without it, a max-width
+   cap on a block-level element just makes it sit flush against the left
+   edge of its parent instead of centering, at any viewport wider than
+   the cap (82rem = 1312px). This wraps the ENTIRE section — heading
+   text included, not just the video/map area — so this single missing
+   property is very likely the real root cause behind every
+   left-alignment report on this section so far, at whatever specific
+   viewport width each one happened to be tested at. */
+.explore-heritage-rebuild .explore-studio-shell { max-width: 82rem; margin-inline: auto; }
 .explore-heritage-rebuild .explore-studio-intro .section-label { color: #9a6831; }
 .explore-heritage-rebuild .explore-studio-kicker { color: rgba(31, 77, 68, 0.76); }
 .explore-heritage-rebuild .explore-studio-copy h2 {
@@ -10133,7 +10141,7 @@ body:has(.features:target) .typed-opening { display: none; }
    =========================================================================== */
 @media (min-width: 1181px) {
   .explore-heritage-rebuild .explore-studio-shell,
-  .explore-heritage-rebuild .explore-studio-workbench { max-width: 82rem; }
+  .explore-heritage-rebuild .explore-studio-workbench { max-width: 82rem; margin-inline: auto; }
 }
 @media (min-width: 981px) and (max-width: 1180px) {
   .explore-heritage-rebuild .explore-studio-workbench {
