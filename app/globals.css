@@ -10399,30 +10399,27 @@ body:has(.features:target) .typed-opening { display: none; }
     max-width: 62%;
   }
   .explore-heritage-rebuild .dest-panel-caption-text h3 {
-    font-size: 0.78rem;
+    font-size: 0.95rem;
     line-height: 1.25;
+    /* h3 already uses white-space:nowrap + text-overflow:ellipsis from
+       the base rule (proven reliable — see the removed description
+       rule below for why that matters). Bumped up from the earlier
+       0.78rem now that the description is gone and the title has the
+       whole box's room to itself. */
   }
-  /* Multi-line clamping (-webkit-line-clamp) turned out unreliable here
-     — different destination names/description lengths and viewport
-     sizes produced everything from a correctly-truncated 2 lines to a
-     completely empty box, depending on exact pixel math that's brittle
-     to hand-tune. The title (h3) above uses plain single-line
-     white-space:nowrap + text-overflow:ellipsis and renders correctly
-     every time regardless of content length — switching the
-     description to the exact same technique on mobile trades showing
-     less text for a result that's actually guaranteed to render
-     correctly on every device and every destination. */
+  /* Only the destination name shows on mobile now — the description is
+     dropped entirely rather than fought over more pixel-tuning rounds.
+     Multi-line clamping (-webkit-line-clamp) was unreliable across
+     different content lengths and box sizes (produced anything from a
+     correctly-truncated line to a completely empty box depending on
+     exact pixel math), and even switching to the same reliable
+     single-line technique as the title still left very little real
+     room once a title + a second line had to share this box's actual
+     height. One line, guaranteed to fit, beats continuing to chase a
+     two-line layout that kept breaking in new ways on different
+     devices and destination names. */
   .explore-heritage-rebuild .dest-panel-caption-sub {
-    font-size: 0.7rem;
-    line-height: 1.25;
-    margin-top: 0.2rem;
-    display: block;
-    -webkit-box-orient: unset;
-    -webkit-line-clamp: unset;
-    white-space: nowrap;
-    max-height: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: none;
   }
   .explore-heritage-rebuild .dest-panel-caption-side {
     right: 0.4rem;

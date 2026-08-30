@@ -736,8 +736,18 @@ Do this last, once everything above is done.
   still provides the same containment guarantee, now against the
   correctly-sized box.
 
-  Still not merged — waiting on the user to confirm this on their
-  device before merging, per the same caution as the last two rounds.
+  **User reported the same observations still — decided to simplify
+  rather than continue pixel-tuning a two-line layout.** On mobile, the
+  video card caption now shows only the destination name (e.g. "Galle
+  Fort"), not the description — the description is `display: none`
+  below 640px. One short, single-line, already-reliably-truncating
+  element is far more robust than continuing to fit a title and a
+  description into a box whose real geometry (varies by destination
+  frame image and exact device) kept producing new edge cases across
+  four rounds of fixes. `overflow: hidden` on the box remains in place
+  as the containment guarantee regardless. The freed-up vertical room
+  went to a larger, more readable title (`0.78rem` → `0.95rem`). Still
+  not merged — waiting on the user to confirm this on their device.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 
