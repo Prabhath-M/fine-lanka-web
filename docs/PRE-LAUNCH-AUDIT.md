@@ -720,6 +720,22 @@ Do this last, once everything above is done.
     (missing cross-axis alignment) rather than fighting it with width
     overrides.
 
+  **User re-tested a third time, found the caption still broken**
+  (screenshots): text rendering outside the visible teal box, and the
+  pagination dots crowding against the text. This one was a mistake in
+  my own previous fix, not a new issue: I'd added `height: 100%`
+  alongside the existing `top`/`bottom` positioning, not realizing that
+  with `top`, `bottom`, AND `height` all specified on an absolutely
+  positioned element, CSS spec behavior is to silently *ignore*
+  `bottom` and size the box from `top` + `height` instead — so the box
+  ballooned to the panel's entire height starting at `top: 68%`,
+  massively overshooting where the artwork's teal region actually is.
+  **Fixed:** removed the erroneous `height: 100%` — `top` + `bottom`
+  alone already fully determine an absolutely positioned element's
+  height, no separate `height` property needed. `overflow: hidden`
+  still provides the same containment guarantee, now against the
+  correctly-sized box.
+
   Still not merged — waiting on the user to confirm this on their
   device before merging, per the same caution as the last two rounds.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
