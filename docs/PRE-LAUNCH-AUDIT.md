@@ -746,8 +746,34 @@ Do this last, once everything above is done.
   frame image and exact device) kept producing new edge cases across
   four rounds of fixes. `overflow: hidden` on the box remains in place
   as the containment guarantee regardless. The freed-up vertical room
-  went to a larger, more readable title (`0.78rem` → `0.95rem`). Still
-  not merged — waiting on the user to confirm this on their device.
+  went to a larger, more readable title (`0.78rem` → `0.95rem`).
+
+  **User confirmed the title text was still rendering above and left of
+  the box — the actual root cause across all five rounds so far.**
+  Rather than guess new position values again, measured the source
+  artwork directly (`fine-lanka-explore-video-frame-sigiri-sithuwam-
+  header.png`) pixel-by-pixel with a Python script to find exactly
+  where the teal panel sits, accounting for the image's
+  `background-size: 100% 107%; background-position: center bottom`
+  transform (the image is scaled larger than its container and
+  bottom-anchored, so a naive image-relative percentage doesn't map
+  1:1 to a container-relative one).
+
+  **The real finding:** the *desktop* rule (`top: 72%; right: 21%;
+  bottom: 18%; left: 21%`) was already correctly calibrated to the
+  artwork — it matches the measured position closely. Every mobile
+  override across all previous rounds was *replacing* those
+  already-correct values with guessed ones, which is what actually put
+  the box in the wrong place every single time — not the font size,
+  not the line-clamp technique, not the vertical alignment choice, all
+  of which were red herrings being fixed while the real problem
+  (wrong position, full stop) went unaddressed. **Fixed:** removed the
+  mobile override for `top`/`right`/`bottom`/`left` entirely — mobile
+  now inherits the same, verified-correct position as desktop. Only
+  `gap`, `overflow: hidden`, and `align-items` remain mobile-specific.
+
+  Still not merged — waiting on the user to confirm this on their
+  device, hopefully for the last time on this particular bug.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 

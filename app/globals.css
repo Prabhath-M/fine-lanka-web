@@ -10373,27 +10373,22 @@ body:has(.features:target) .typed-opening { display: none; }
    taller box so the existing text has room to actually read on mobile. */
 @media (max-width: 640px) {
   .explore-heritage-rebuild .dest-panel-caption {
-    left: 10%;
-    right: 10%;
-    top: 68%;
-    bottom: 10%;
+    /* Deliberately NOT overriding top/right/bottom/left here anymore.
+       The desktop rule above (top:72%; right:21%; bottom:18%; left:21%)
+       was already correctly calibrated to the actual artwork — verified
+       by measuring the source image
+       (fine-lanka-explore-video-frame-sigiri-sithuwam-header.png)
+       pixel-by-pixel and accounting for its
+       background-size:100% 107%; background-position:center bottom
+       transform. Every previous mobile-only round of this fix was
+       guessing new position values and *replacing* those already-
+       correct ones — which is what actually caused the box to render
+       in the wrong place across every attempt so far, not the font
+       size or line-clamp choices. Letting mobile inherit the same,
+       verified-correct position fixes that at the source. */
     gap: 0.4rem;
-    /* Containment: top+bottom alone already fully determine this box's
-       height on an absolutely positioned element — no separate height
-       needed. (An earlier version of this rule added height:100% here
-       too, which was a real bug: with top, bottom, AND height all set,
-       the CSS spec says bottom gets silently ignored and the box sizes
-       itself from top+height instead — so it ballooned to the entire
-       panel's height starting at top:68%, massively overshooting the
-       artwork's actual teal region. That's what caused text to render
-       outside the visible box and crowd the dots.) overflow:hidden
-       still guarantees text can never spill past this now-correctly-
-       sized box. flex-start (not center) means if content still
-       doesn't fit, it crops from the bottom only — the title stays
-       visible from the top down, instead of a centered crop
-       potentially hiding it entirely. */
     overflow: hidden;
-    align-items: flex-start;
+    align-items: center;
   }
   .explore-heritage-rebuild .dest-panel-caption-text {
     max-width: 62%;
