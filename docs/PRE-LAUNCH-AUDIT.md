@@ -674,8 +674,54 @@ Do this last, once everything above is done.
   between the text and the dots so they can't visually touch even at
   the container's edge. The "How It Works" section was confirmed
   working correctly by the user as-is — not touched in this round.
+
+  **User re-tested again, found two more issues** (two screenshots): on
+  the smallest screens, the caption box was completely empty — no
+  title, no description at all; on a slightly larger screen, the
+  description showed only a couple of characters + ellipsis, and the
+  pagination dots rendered inline overlapping the text instead of
+  staying in their own row. Separately, the whole video card frame was
+  sitting left-aligned instead of centered on the page once past the
+  very smallest screen width.
+
+  Root causes, found properly this time rather than more guessing:
+  - The multi-line `-webkit-line-clamp` technique for the description
+    is inherently less reliable across different content lengths and
+    exact box heights than the title's existing single-line
+    `white-space: nowrap` + `text-overflow: ellipsis` — proven by the
+    fact the title consistently rendered correctly (`Ya...`) while the
+    clamped description didn't. Combined with the previous round's
+    `align-items: center` on the box, when content still didn't fit,
+    the *centered* overflow got clipped symmetrically from both top and
+    bottom — capable of cropping out the title too, which is exactly
+    what produced the completely blank box on the smallest screens.
+  - The frame's left-alignment was a genuine, pre-existing layout bug
+    unrelated to any of this round's changes: `.explore-video-card` has
+    an explicit width narrower than its full-width flex column
+    container, and a flex item with a definite cross-axis size does not
+    auto-center under the default `align-items: stretch` — it sits at
+    `flex-start` (left) unless centering is requested explicitly, which
+    nothing was doing.
+
+  **Fixed:**
+  - Switched the description to the exact same reliable single-line
+    truncation technique as the title (`white-space: nowrap` +
+    `text-overflow: ellipsis`), trading showing less text for a result
+    that's guaranteed to render correctly regardless of content length
+    or exact device size — no more clamp-driven blank boxes or
+    half-rendered text.
+  - Changed the caption box's vertical alignment from `center` to
+    `flex-start`, so if anything still doesn't fit, it crops from the
+    bottom only — the title stays visible from the top down in every
+    case, instead of a centered crop risking hiding it entirely.
+  - Added `align-items: center` to `.explore-heritage-rebuild
+    .explore-studio-workbench`'s mobile flex-column rule — the actual,
+    minimal fix for the centering bug, addressing the real cause
+    (missing cross-axis alignment) rather than fighting it with width
+    overrides.
+
   Still not merged — waiting on the user to confirm this on their
-  device before merging, per the same caution as before.
+  device before merging, per the same caution as the last two rounds.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 
