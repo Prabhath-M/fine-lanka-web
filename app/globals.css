@@ -10140,6 +10140,12 @@ body:has(.features:target) .typed-opening { display: none; }
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
+    /* Same defensive align-items:center added to the ≤980px tier's
+       workbench rule, for consistency — .explore-video-card below
+       already has align-self:center, which should be sufficient on its
+       own, but this closes any gap in case something else in this band
+       ends up depending on the parent's default cross-axis alignment. */
+    align-items: center;
   }
   .explore-heritage-rebuild .explore-video-card {
     width: min(100%, 48rem);
@@ -10371,7 +10377,17 @@ body:has(.features:target) .typed-opening { display: none; }
    136px left almost nothing for the text. Same overlay caption, same
    position on the video frame, same behavior — just widened and given a
    taller box so the existing text has room to actually read on mobile. */
-@media (max-width: 640px) {
+/* This used to be scoped to max-width:640px only, which missed a whole
+   middle tier: the video/map layout actually stays stacked
+   (flex-direction:column) all the way up to 1180px — there's a
+   981-1180px "tablet" band that also switches to a column layout (see
+   the @media (min-width:981px) and (max-width:1180px) block further
+   down) even though it's past the usual 980px "mobile" cutoff. The old,
+   unfixed caption rules were still showing in that gap. Widened to
+   1180px so every stacked-layout viewport gets the same simplified,
+   correctly-positioned caption treatment — not just the narrowest
+   phones. */
+@media (max-width: 1180px) {
   .explore-heritage-rebuild .dest-panel-caption {
     /* Deliberately NOT overriding top/right/bottom/left here anymore.
        The desktop rule above (top:72%; right:21%; bottom:18%; left:21%)

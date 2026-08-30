@@ -772,6 +772,23 @@ Do this last, once everything above is done.
   now inherits the same, verified-correct position as desktop. Only
   `gap`, `overflow: hidden`, and `align-items` remain mobile-specific.
 
+  **User confirmed the smallest screens now work correctly**, but found
+  a middle viewport range — just below where the layout switches to the
+  full side-by-side desktop view — still showing the old broken caption
+  and a left-aligned card. Root cause: the fix was scoped to
+  `max-width: 640px`, but the video/map layout actually stays stacked
+  (video on top, map below) all the way up to **1180px** — there's a
+  separate `981px`–`1180px` "tablet" band that also uses a column
+  layout, past the more obvious `980px` mobile cutoff. That whole gap
+  was still showing the unfixed, pre-simplification caption. **Fixed:**
+  widened the caption fix from `max-width: 640px` to
+  `max-width: 1180px`, so every stacked-layout viewport width now gets
+  the identical simplified, correctly-positioned caption. Also added
+  the same defensive `align-items: center` to the 981–1180px band's
+  workbench rule for consistency with the ≤980px band (that tier's
+  video card already had `align-self: center`, which should have been
+  sufficient alone, but this closes any gap).
+
   Still not merged — waiting on the user to confirm this on their
   device, hopefully for the last time on this particular bug.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
