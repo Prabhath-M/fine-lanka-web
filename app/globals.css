@@ -10438,30 +10438,27 @@ body:has(.features:target) .typed-opening { display: none; }
     align-items: center;
   }
   .explore-heritage-rebuild .dest-panel-caption-text {
-    max-width: 62%;
+    max-width: calc(100% - 2.8rem);
   }
   .explore-heritage-rebuild .dest-panel-caption-text h3 {
-    font-size: 0.95rem;
-    line-height: 1.25;
-    /* h3 already uses white-space:nowrap + text-overflow:ellipsis from
-       the base rule (proven reliable — see the removed description
-       rule below for why that matters). Bumped up from the earlier
-       0.78rem now that the description is gone and the title has the
-       whole box's room to itself. */
+    font-size: clamp(0.68rem, 1.8vw, 0.9rem);
+    line-height: 1.15;
   }
-  /* Only the destination name shows on mobile now — the description is
-     dropped entirely rather than fought over more pixel-tuning rounds.
-     Multi-line clamping (-webkit-line-clamp) was unreliable across
-     different content lengths and box sizes (produced anything from a
-     correctly-truncated line to a completely empty box depending on
-     exact pixel math), and even switching to the same reliable
-     single-line technique as the title still left very little real
-     room once a title + a second line had to share this box's actual
-     height. One line, guaranteed to fit, beats continuing to chase a
-     two-line layout that kept breaking in new ways on different
-     devices and destination names. */
+  /* Keep the destination description visible in the framed caption. The
+     caption is only a fraction of the portrait frame, so the desktop 0.9rem
+     size consumes the available height quickly and causes the copy to end in
+     an ellipsis. A compact fluid size plus a controlled three-line box keeps
+     the full short blurbs readable across the mobile/tablet widths. */
   .explore-heritage-rebuild .dest-panel-caption-sub {
-    display: none;
+    display: -webkit-box;
+    margin-top: 0.1rem;
+    font-size: clamp(0.38rem, 1.25vw, 0.52rem);
+    line-height: 1.15;
+    max-height: 3.45em;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
   }
   .explore-heritage-rebuild .dest-panel-caption-side {
     right: 0.4rem;
@@ -10528,7 +10525,16 @@ body:has(.features:target) .typed-opening { display: none; }
     max-width: calc(100% - 2.8rem);
     flex: 1 1 auto;
   }
-  .explore-heritage-rebuild .dest-panel-caption-sub { display: none; }
+  .explore-heritage-rebuild .dest-panel-caption-sub {
+    display: -webkit-box;
+    font-size: clamp(0.38rem, 1.25vw, 0.52rem);
+    line-height: 1.15;
+    max-height: 3.45em;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    text-overflow: ellipsis;
+  }
 }
 
 /* ABOUT — coordinated folio background artwork
