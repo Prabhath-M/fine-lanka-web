@@ -620,6 +620,231 @@ Do this last, once everything above is done.
   the site leans heavily on custom-styled form controls and layered
   background art, worth a manual look on at least one real iOS and one
   real Android device.
+
+  **In progress, 2026-08-29** — user found two real mobile bugs on a
+  real device:
+  - Home page "How It Works" (flight-path animation): description cards
+    packed unreadably at phone width.
+  - Home page "Explore" section, video card caption: description
+    rendered as only a letter or two before the ellipsis.
+
+  First fix attempt (PR #32) replaced the "How It Works" cards with a
+  separate always-visible stacked list on mobile — **reverted (PR #33)**
+  after testing, since the actual ask was to keep existing mobile
+  behavior (same overlay cards, same reveal animation, same positions)
+  and just resize within it for more room, not change the behavior.
+
+  Corrected fix, in review — not yet merged:
+  - Explore caption: unchanged approach from the reverted PR (that part
+    was already behavior-preserving, CSS-only) — widened the caption bar
+    and switched to percentage-based sizing on mobile so it scales with
+    the card, instead of a flat-pixel subtraction that left almost no
+    room. Root cause was a real CSS ordering bug: an existing
+    `@media (max-width: 980px)` rule was being silently overridden by a
+    later unconditional rule further down `globals.css` with equal
+    specificity.
+  - How It Works: redone to keep the exact same 4 cards, positions, and
+    reveal-on-arrival animation at every screen size — only the gap
+    between the 4 quarter-width columns and the font size shrink on
+    mobile (via CSS custom properties consumed in the existing inline
+    styles), reclaiming real width without restructuring anything.
+  - **Known limitation, flagged rather than hidden:** even with this
+    fix, each description (~105 characters) still wraps to roughly 7
+    lines at the smaller mobile size, computed against a ~350px-wide
+    canvas — down from ~10 lines before the fix, but the resulting card
+    can still run tall relative to the ~197px-tall mobile canvas and may
+    visually crowd the flight-path animation or neighboring cards, since
+    nothing here clips or scrolls independently. This should fix the
+    specific complaint (illegible/cut-off text) but may not be the final
+    word on this section's mobile polish.
+
+  **User re-tested on device, found a second real bug in the Explore
+  video card caption** (screenshot): the description text was
+  overflowing past the visible teal caption box entirely — spilling
+  onto the decorative frame artwork below and covering the pagination
+  dots. Root cause: the caption box's height (derived from top/bottom %
+  insets) wasn't actually enforced — with no `overflow: hidden`, a flex
+  child taller than its container just overflows past it instead of
+  being contained. **Fixed:** added `height: 100%; overflow: hidden` on
+  the caption box as a hard containment guarantee (text can no longer
+  visually escape the box regardless of exact pixel calculations), plus
+  reduced the description to a more conservative 2-line clamp (down
+  from 3) so it's more likely to actually fit rather than relying on
+  the clip to kick in mid-sentence, and added a small reserved gap
+  between the text and the dots so they can't visually touch even at
+  the container's edge. The "How It Works" section was confirmed
+  working correctly by the user as-is — not touched in this round.
+
+  **User re-tested again, found two more issues** (two screenshots): on
+  the smallest screens, the caption box was completely empty — no
+  title, no description at all; on a slightly larger screen, the
+  description showed only a couple of characters + ellipsis, and the
+  pagination dots rendered inline overlapping the text instead of
+  staying in their own row. Separately, the whole video card frame was
+  sitting left-aligned instead of centered on the page once past the
+  very smallest screen width.
+
+  Root causes, found properly this time rather than more guessing:
+  - The multi-line `-webkit-line-clamp` technique for the description
+    is inherently less reliable across different content lengths and
+    exact box heights than the title's existing single-line
+    `white-space: nowrap` + `text-overflow: ellipsis` — proven by the
+    fact the title consistently rendered correctly (`Ya...`) while the
+    clamped description didn't. Combined with the previous round's
+    `align-items: center` on the box, when content still didn't fit,
+    the *centered* overflow got clipped symmetrically from both top and
+    bottom — capable of cropping out the title too, which is exactly
+    what produced the completely blank box on the smallest screens.
+  - The frame's left-alignment was a genuine, pre-existing layout bug
+    unrelated to any of this round's changes: `.explore-video-card` has
+    an explicit width narrower than its full-width flex column
+    container, and a flex item with a definite cross-axis size does not
+    auto-center under the default `align-items: stretch` — it sits at
+    `flex-start` (left) unless centering is requested explicitly, which
+    nothing was doing.
+
+  **Fixed:**
+  - Switched the description to the exact same reliable single-line
+    truncation technique as the title (`white-space: nowrap` +
+    `text-overflow: ellipsis`), trading showing less text for a result
+    that's guaranteed to render correctly regardless of content length
+    or exact device size — no more clamp-driven blank boxes or
+    half-rendered text.
+  - Changed the caption box's vertical alignment from `center` to
+    `flex-start`, so if anything still doesn't fit, it crops from the
+    bottom only — the title stays visible from the top down in every
+    case, instead of a centered crop risking hiding it entirely.
+  - Added `align-items: center` to `.explore-heritage-rebuild
+    .explore-studio-workbench`'s mobile flex-column rule — the actual,
+    minimal fix for the centering bug, addressing the real cause
+    (missing cross-axis alignment) rather than fighting it with width
+    overrides.
+
+  **User re-tested a third time, found the caption still broken**
+  (screenshots): text rendering outside the visible teal box, and the
+  pagination dots crowding against the text. This one was a mistake in
+  my own previous fix, not a new issue: I'd added `height: 100%`
+  alongside the existing `top`/`bottom` positioning, not realizing that
+  with `top`, `bottom`, AND `height` all specified on an absolutely
+  positioned element, CSS spec behavior is to silently *ignore*
+  `bottom` and size the box from `top` + `height` instead — so the box
+  ballooned to the panel's entire height starting at `top: 68%`,
+  massively overshooting where the artwork's teal region actually is.
+  **Fixed:** removed the erroneous `height: 100%` — `top` + `bottom`
+  alone already fully determine an absolutely positioned element's
+  height, no separate `height` property needed. `overflow: hidden`
+  still provides the same containment guarantee, now against the
+  correctly-sized box.
+
+  **User reported the same observations still — decided to simplify
+  rather than continue pixel-tuning a two-line layout.** On mobile, the
+  video card caption now shows only the destination name (e.g. "Galle
+  Fort"), not the description — the description is `display: none`
+  below 640px. One short, single-line, already-reliably-truncating
+  element is far more robust than continuing to fit a title and a
+  description into a box whose real geometry (varies by destination
+  frame image and exact device) kept producing new edge cases across
+  four rounds of fixes. `overflow: hidden` on the box remains in place
+  as the containment guarantee regardless. The freed-up vertical room
+  went to a larger, more readable title (`0.78rem` → `0.95rem`).
+
+  **User confirmed the title text was still rendering above and left of
+  the box — the actual root cause across all five rounds so far.**
+  Rather than guess new position values again, measured the source
+  artwork directly (`fine-lanka-explore-video-frame-sigiri-sithuwam-
+  header.png`) pixel-by-pixel with a Python script to find exactly
+  where the teal panel sits, accounting for the image's
+  `background-size: 100% 107%; background-position: center bottom`
+  transform (the image is scaled larger than its container and
+  bottom-anchored, so a naive image-relative percentage doesn't map
+  1:1 to a container-relative one).
+
+  **The real finding:** the *desktop* rule (`top: 72%; right: 21%;
+  bottom: 18%; left: 21%`) was already correctly calibrated to the
+  artwork — it matches the measured position closely. Every mobile
+  override across all previous rounds was *replacing* those
+  already-correct values with guessed ones, which is what actually put
+  the box in the wrong place every single time — not the font size,
+  not the line-clamp technique, not the vertical alignment choice, all
+  of which were red herrings being fixed while the real problem
+  (wrong position, full stop) went unaddressed. **Fixed:** removed the
+  mobile override for `top`/`right`/`bottom`/`left` entirely — mobile
+  now inherits the same, verified-correct position as desktop. Only
+  `gap`, `overflow: hidden`, and `align-items` remain mobile-specific.
+
+  **User confirmed the smallest screens now work correctly**, but found
+  a middle viewport range — just below where the layout switches to the
+  full side-by-side desktop view — still showing the old broken caption
+  and a left-aligned card. Root cause: the fix was scoped to
+  `max-width: 640px`, but the video/map layout actually stays stacked
+  (video on top, map below) all the way up to **1180px** — there's a
+  separate `981px`–`1180px` "tablet" band that also uses a column
+  layout, past the more obvious `980px` mobile cutoff. That whole gap
+  was still showing the unfixed, pre-simplification caption. **Fixed:**
+  widened the caption fix from `max-width: 640px` to
+  `max-width: 1180px`, so every stacked-layout viewport width now gets
+  the identical simplified, correctly-positioned caption. Also added
+  the same defensive `align-items: center` to the 981–1180px band's
+  workbench rule for consistency with the ≤980px band (that tier's
+  video card already had `align-self: center`, which should have been
+  sufficient alone, but this closes any gap).
+
+  **User reported the section heading text itself ("A framed island
+  story" / "Watch, then trace · Kandy") was also left-aligned, not just
+  the video card** — this pointed to something more fundamental than
+  breakpoint-specific tweaks. Found it: `.explore-heritage-rebuild
+  .explore-studio-shell` — the outer wrapper around the *entire*
+  section, heading included, not just the video/map area — had a
+  `max-width: 82rem` cap but **no `margin: auto`** to actually center
+  it. Without that, a width-capped block just sits flush against the
+  left edge of its parent at *any* viewport wider than the cap
+  (82rem = 1312px) — a genuinely fundamental, viewport-independent bug,
+  not scoped to any particular breakpoint tier. This is very likely the
+  real root cause behind every left-alignment report across every round
+  so far, each one just surfacing it at whatever specific width was
+  being tested. **Fixed:** added `margin-inline: auto` to both places
+  this rule was declared (the base rule and the duplicate at
+  `min-width: 1181px`).
+
+  **User confirmed the margin fix didn't resolve it either, and ruled
+  out a stale-build explanation** (confirmed a fresh pull + dev server
+  restart). This forced a proper re-investigation instead of another
+  guess: listed every single rule anywhere in the file touching
+  `.explore-video-card`/`.explore-studio-workbench` across all five
+  class variants applied to this section, in file order. Found a real
+  structural bug: an **unconditional `@media (min-width: 981px)`** rule
+  (no upper bound) set the 2-column grid layout and
+  `justify-self: end` on the video card — meaning it was *also* active
+  within the 981px–1180px "tweener" range, overlapping with that
+  range's own override block. The override was fighting it
+  property-by-property (which is what every fix in this range had
+  effectively been doing), rather than the two rules being properly
+  separated in the first place. **Fixed at the actual source:**
+  narrowed that block from `min-width: 981px` to `min-width: 1181px`,
+  matching the boundary used consistently everywhere else in this file
+  for "true wide desktop." This removes the overlap entirely instead of
+  continuing to patch around it.
+
+  **User provided exact pixel measurements pinpointing the remaining
+  bug precisely:** 635px wide → centered (working). 642px–980px →
+  left-aligned (broken). 991px → centered again (working). That precise
+  data made this one fast to find: a **second, separate**
+  `@media (max-width: 980px)` block further down the file was silently
+  overriding the `width: 100%` set by the main ≤980px fix block back
+  down to a narrow `21rem` (336px) — except at ≤640px specifically,
+  where an even-more-specific rule re-widened it again. That's exactly
+  why the narrowest screens worked, the 981px+ tier worked (different
+  rule entirely, already fixed), and only the 642–980px gap in between
+  stayed broken — it was the one range where the conflicting narrow
+  rule won uncontested. **Fixed:** removed the conflicting width
+  override so the whole ≤980px range consistently gets `width: 100%`.
+  Also swept every single rule touching `.explore-atlas-window` (not
+  just `.explore-video-card`) to check for a similar hidden duplicate
+  there — none found; it correctly falls back to its base rule's
+  `margin: 0.45rem auto 0` in this range.
+
+  Still not merged — waiting on the user to confirm this on their
+  device.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their
   real URLs after deploy, and submit the sitemap in Google Search Console.
 

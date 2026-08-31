@@ -4853,6 +4853,28 @@ main > #destinations,
   background-position: 77% 90%;
 }
 
+/* Mobile "How It Works": same four description cards, same positions,
+   same reveal-on-arrival animation as desktop — only their width (via
+   the --process-desc-gap consumed in the inline width calc in
+   descriptionPlacement(), components/home/process.tsx) and font sizes
+   shrink, reclaiming real room within each card's existing quarter-of-
+   the-route slot instead of changing the layout or behavior. */
+.process-step-desc {
+  --process-desc-gap: 1rem;
+  --process-title-size: 16px;
+  --process-text-size: 13px;
+}
+@media (max-width: 640px) {
+  .process-step-desc {
+    --process-desc-gap: 0.35rem;
+    --process-title-size: 12px;
+    --process-text-size: 10.5px;
+  }
+  .process-step-desc .leading-snug {
+    line-height: 1.45;
+  }
+}
+
 /* Destinations keeps its cartographic identity, while using the same display
    cadence and body density as the refined homepage. */
 .destinations-page .dest-hero-copy h1,
@@ -9704,7 +9726,15 @@ body:has(.features:target) .typed-opening { display: none; }
    part is a quieter companion in parchment, peacock teal, antique gold and
    botanical linework—never a generic card placed beside it.
    =========================================================================== */
-.explore-heritage-rebuild .explore-studio-shell { max-width: 82rem; }
+/* margin-inline:auto is the actual fix here — without it, a max-width
+   cap on a block-level element just makes it sit flush against the left
+   edge of its parent instead of centering, at any viewport wider than
+   the cap (82rem = 1312px). This wraps the ENTIRE section — heading
+   text included, not just the video/map area — so this single missing
+   property is very likely the real root cause behind every
+   left-alignment report on this section so far, at whatever specific
+   viewport width each one happened to be tested at. */
+.explore-heritage-rebuild .explore-studio-shell { max-width: 82rem; margin-inline: auto; }
 .explore-heritage-rebuild .explore-studio-intro .section-label { color: #9a6831; }
 .explore-heritage-rebuild .explore-studio-kicker { color: rgba(31, 77, 68, 0.76); }
 .explore-heritage-rebuild .explore-studio-copy h2 {
@@ -9774,7 +9804,14 @@ body:has(.features:target) .typed-opening { display: none; }
 .explore-heritage-rebuild .explore-journey-rail > i { background: repeating-linear-gradient(90deg, #b98544 0 3px, transparent 3px 7px); }
 @media (max-width: 980px) {
   .explore-heritage-rebuild .explore-studio-intro { grid-template-columns: 1fr; gap: 1rem; }
-  .explore-heritage-rebuild .explore-studio-workbench { display: flex; flex-direction: column; gap: 1.35rem; }
+  /* align-items:center is the actual fix for the frame sitting left
+     instead of centered: .explore-video-card gets an explicit width
+     later in this file (narrower than the full column), and a flex
+     item with a definite cross-axis size does NOT auto-center under
+     the default align-items:stretch — it sits at flex-start (left)
+     unless centering is requested explicitly, which nothing here was
+     doing before. */
+  .explore-heritage-rebuild .explore-studio-workbench { display: flex; flex-direction: column; gap: 1.35rem; align-items: center; }
   .explore-heritage-rebuild .explore-video-card,
   .explore-heritage-rebuild .explore-map-card { width: 100%; margin: 0; }
   .explore-heritage-rebuild .explore-map-card { order: 2; min-height: 35rem; }
@@ -9904,8 +9941,19 @@ body:has(.features:target) .typed-opening { display: none; }
   filter: drop-shadow(0 0.85rem 1.15rem rgba(50, 65, 45, 0.16));
   margin-top: 0.35rem;
 }
+/* This second, separate @media(max-width:980px) block was silently
+   overriding the width:100% set in the main ≤980px block further up
+   (same specificity, later in file wins) back down to a narrow 21rem —
+   except at ≤640px, where an even-more-specific rule re-widened it
+   again. That's exactly why 635px worked, 642-980px didn't, and
+   991px+ (a separate tier) worked: this conflicting rule only ever
+   affected the 642px-980px gap in between. Dropped the conflicting
+   width so the whole ≤980px range consistently gets width:100% from
+   the main block, same as ≤640px already did. order:1 is mostly
+   redundant (video-card already sorts before map-card's order:2 by
+   default), kept for explicitness. */
 @media (max-width: 980px) {
-  .explore-heritage-rebuild .explore-video-card { order: 1; width: min(100%, 21rem); }
+  .explore-heritage-rebuild .explore-video-card { order: 1; }
 }
 @media (max-width: 640px) {
   .explore-heritage-rebuild .explore-video-card { width: 100%; }
@@ -10068,7 +10116,19 @@ body:has(.features:target) .typed-opening { display: none; }
    crop tightly framed, and preserve a distinct teal caption panel with clear
    touch targets. Do not alter crop math, pin placement, or destination state.
    =========================================================================== */
-@media (min-width: 981px) {
+/* This was unconditionally min-width:981px (no upper bound), meaning it
+   was ALSO active within the 981px-1180px "tweener" range below —
+   overlapping with that block's attempt to override it back to a
+   stacked/centered layout. Fighting that property-by-property in the
+   override turned out fragile (justify-self, grid-template-columns,
+   and other properties this block sets weren't all being cleanly
+   undone). The actual fix: this block's content (the 2-column grid,
+   justify-self:end for right-aligning the video card next to the map)
+   is clearly meant for the wide desktop tier only — narrowing its
+   range to 1181px, matching the boundary used consistently everywhere
+   else in this file for "true wide desktop," removes the overlap
+   entirely instead of continuing to patch around it. */
+@media (min-width: 1181px) {
   .explore-heritage-rebuild .explore-studio-workbench {
     grid-template-columns: minmax(25rem, 1.08fr) minmax(27rem, 0.92fr);
     gap: clamp(1rem, 1.9vw, 1.65rem);
@@ -10104,13 +10164,19 @@ body:has(.features:target) .typed-opening { display: none; }
    =========================================================================== */
 @media (min-width: 1181px) {
   .explore-heritage-rebuild .explore-studio-shell,
-  .explore-heritage-rebuild .explore-studio-workbench { max-width: 82rem; }
+  .explore-heritage-rebuild .explore-studio-workbench { max-width: 82rem; margin-inline: auto; }
 }
 @media (min-width: 981px) and (max-width: 1180px) {
   .explore-heritage-rebuild .explore-studio-workbench {
     display: flex;
     flex-direction: column;
     gap: 1.4rem;
+    /* Same defensive align-items:center added to the ≤980px tier's
+       workbench rule, for consistency — .explore-video-card below
+       already has align-self:center, which should be sufficient on its
+       own, but this closes any gap in case something else in this band
+       ends up depending on the parent's default cross-axis alignment. */
+    align-items: center;
   }
   .explore-heritage-rebuild .explore-video-card {
     width: min(100%, 48rem);
@@ -10335,6 +10401,80 @@ body:has(.features:target) .typed-opening { display: none; }
   text-shadow: 0 1px 0 rgba(4, 32, 29, 0.45);
   gap: 0.55rem;
 }
+/* The unscoped max-width above (calc(100% - 8.5rem)) is desktop-tuned —
+   it assumes a wide caption bar where subtracting a flat amount for the
+   dots still leaves plenty of room. On a narrow phone the caption bar
+   itself is only ~58% of an already-narrow card, so subtracting a flat
+   136px left almost nothing for the text. Same overlay caption, same
+   position on the video frame, same behavior — just widened and given a
+   taller box so the existing text has room to actually read on mobile. */
+/* This used to be scoped to max-width:640px only, which missed a whole
+   middle tier: the video/map layout actually stays stacked
+   (flex-direction:column) all the way up to 1180px — there's a
+   981-1180px "tablet" band that also switches to a column layout (see
+   the @media (min-width:981px) and (max-width:1180px) block further
+   down) even though it's past the usual 980px "mobile" cutoff. The old,
+   unfixed caption rules were still showing in that gap. Widened to
+   1180px so every stacked-layout viewport gets the same simplified,
+   correctly-positioned caption treatment — not just the narrowest
+   phones. */
+@media (max-width: 1180px) {
+  .explore-heritage-rebuild .dest-panel-caption {
+    /* Deliberately NOT overriding top/right/bottom/left here anymore.
+       The desktop rule above (top:72%; right:21%; bottom:18%; left:21%)
+       was already correctly calibrated to the actual artwork — verified
+       by measuring the source image
+       (fine-lanka-explore-video-frame-sigiri-sithuwam-header.png)
+       pixel-by-pixel and accounting for its
+       background-size:100% 107%; background-position:center bottom
+       transform. Every previous mobile-only round of this fix was
+       guessing new position values and *replacing* those already-
+       correct ones — which is what actually caused the box to render
+       in the wrong place across every attempt so far, not the font
+       size or line-clamp choices. Letting mobile inherit the same,
+       verified-correct position fixes that at the source. */
+    gap: 0.4rem;
+    overflow: hidden;
+    align-items: center;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-text {
+    max-width: 62%;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-text h3 {
+    font-size: 0.95rem;
+    line-height: 1.25;
+    /* h3 already uses white-space:nowrap + text-overflow:ellipsis from
+       the base rule (proven reliable — see the removed description
+       rule below for why that matters). Bumped up from the earlier
+       0.78rem now that the description is gone and the title has the
+       whole box's room to itself. */
+  }
+  /* Only the destination name shows on mobile now — the description is
+     dropped entirely rather than fought over more pixel-tuning rounds.
+     Multi-line clamping (-webkit-line-clamp) was unreliable across
+     different content lengths and box sizes (produced anything from a
+     correctly-truncated line to a completely empty box depending on
+     exact pixel math), and even switching to the same reliable
+     single-line technique as the title still left very little real
+     room once a title + a second line had to share this box's actual
+     height. One line, guaranteed to fit, beats continuing to chase a
+     two-line layout that kept breaking in new ways on different
+     devices and destination names. */
+  .explore-heritage-rebuild .dest-panel-caption-sub {
+    display: none;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-side {
+    right: 0.4rem;
+    bottom: 0.4rem;
+  }
+  .explore-heritage-rebuild .dest-panel-dots {
+    gap: 0.3rem;
+  }
+  .explore-heritage-rebuild .dest-panel-dot {
+    width: 0.42rem;
+    height: 0.42rem;
+  }
+}
 
 /* ===========================================================================
    HOME — FULL ISLAND MAP RESTORATION
@@ -10353,6 +10493,43 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
+
+/* Final responsive contract for the heritage Explore module.
+   The video and map are a single-column composition until the wide-desktop
+   layout has enough room for two columns. Keeping this rule at the end of the
+   module prevents earlier generic Explore rules from winning by source order.
+   Both cards are explicitly centered so no intermediate viewport can fall back
+   to flex-start and pin the narrower video frame to the left edge. */
+@media (max-width: 1180px) {
+  .explore-heritage-rebuild .explore-studio-workbench {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 48rem;
+    margin-inline: auto;
+    gap: 1.4rem;
+  }
+  .explore-heritage-rebuild .explore-video-card,
+  .explore-heritage-rebuild .explore-map-card {
+    width: 100%;
+    max-width: 48rem;
+    margin-inline: auto;
+    align-self: center;
+  }
+  .explore-heritage-rebuild .explore-video-card { order: 1; }
+  .explore-heritage-rebuild .explore-map-card { order: 2; min-height: 0; }
+  .explore-heritage-rebuild .explore-atlas-window {
+    width: min(calc(100% - 1rem), 48rem);
+    margin-inline: auto;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-text {
+    min-width: 0;
+    max-width: calc(100% - 2.8rem);
+    flex: 1 1 auto;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-sub { display: none; }
+}
 
 /* ABOUT — coordinated folio background artwork
    These backgrounds extend the Home page's parchment, textile, botanical,
