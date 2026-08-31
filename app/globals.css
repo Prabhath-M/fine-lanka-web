@@ -10494,6 +10494,43 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 
+/* Final responsive contract for the heritage Explore module.
+   The video and map are a single-column composition until the wide-desktop
+   layout has enough room for two columns. Keeping this rule at the end of the
+   module prevents earlier generic Explore rules from winning by source order.
+   Both cards are explicitly centered so no intermediate viewport can fall back
+   to flex-start and pin the narrower video frame to the left edge. */
+@media (max-width: 1180px) {
+  .explore-heritage-rebuild .explore-studio-workbench {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 48rem;
+    margin-inline: auto;
+    gap: 1.4rem;
+  }
+  .explore-heritage-rebuild .explore-video-card,
+  .explore-heritage-rebuild .explore-map-card {
+    width: 100%;
+    max-width: 48rem;
+    margin-inline: auto;
+    align-self: center;
+  }
+  .explore-heritage-rebuild .explore-video-card { order: 1; }
+  .explore-heritage-rebuild .explore-map-card { order: 2; min-height: 0; }
+  .explore-heritage-rebuild .explore-atlas-window {
+    width: min(calc(100% - 1rem), 48rem);
+    margin-inline: auto;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-text {
+    min-width: 0;
+    max-width: calc(100% - 2.8rem);
+    flex: 1 1 auto;
+  }
+  .explore-heritage-rebuild .dest-panel-caption-sub { display: none; }
+}
+
 /* ABOUT — coordinated folio background artwork
    These backgrounds extend the Home page's parchment, textile, botanical,
    carved-stone, and brass visual language while preserving text-safe space. */
