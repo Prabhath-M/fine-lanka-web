@@ -462,7 +462,7 @@ export function Process() {
           Four clear stages, one team at your side — so every decision feels weighed and settled long before you depart.
         </p>
 
-        <div className="relative w-full aspect-video">
+        <div className="process-route-canvas relative w-full aspect-video">
           <svg viewBox={`0 0 ${VB_W} ${VB_H}`} className="absolute inset-0 w-full h-full overflow-visible">
             <defs>
               <mask id="process-reveal-mask" maskUnits="userSpaceOnUse">
@@ -593,7 +593,7 @@ export function Process() {
             return (
               <div
                 key={p.code}
-                className={`process-step-desc absolute max-w-none text-[#0B1220] ${origin} transition-all duration-500 ${
+                className={`process-step-desc process-step-desc-${i} absolute max-w-none text-[#0B1220] ${origin} transition-all duration-500 ${
                   show ? 'opacity-100 scale-100 pointer-events-auto' : 'opacity-0 scale-90 pointer-events-none'
                 }`}
                 style={style}

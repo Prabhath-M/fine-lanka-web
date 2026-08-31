@@ -13619,3 +13619,56 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .legal-page-body a { color: var(--ink); text-decoration: underline; text-underline-offset: 2px; }
 .legal-page-body strong { color: var(--text-on-light); }
+
+/* MOBILE LAYOUT — How It Works and Book Now overlap correction */
+@media (max-width: 640px) {
+  /* The four process cards are positioned against a 16:9 desktop canvas.
+     Give the route more vertical room on phones so the alternating cards,
+     heading, and descriptions have separate reading bands. */
+  .process-route-canvas {
+    height: 48rem;
+    min-height: 48rem;
+    aspect-ratio: auto;
+  }
+  .process-route-canvas .process-step-desc {
+    width: calc(25% - var(--process-desc-gap, 0.35rem));
+  }
+
+  /* Book Now: the final page-scoped grid must collapse after all desktop
+     refinement rules, including the later background-layer block. */
+  .booking-page .booking-layout {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.5rem;
+    padding: 4.25rem 1rem 4.5rem;
+  }
+  .booking-page .booking-form-panel,
+  .booking-page .booking-sidebar {
+    width: 100%;
+    min-width: 0;
+  }
+  .booking-page .booking-form {
+    gap: 1.15rem;
+  }
+  .booking-page .form-row.two-col {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.15rem;
+  }
+  .booking-page .booking-sidebar-card {
+    padding: 1.35rem 1.1rem;
+  }
+  .booking-page .booking-sidebar-card li {
+    padding-block: 1.1rem;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 640px) {
+  .booking-page .booking-layout > .booking-form-panel,
+  .booking-page .booking-layout > .booking-sidebar {
+    grid-column: 1 / -1;
+    grid-row: auto;
+  }
+  .booking-page .booking-sidebar {
+    position: static;
+  }
+}
