@@ -45,7 +45,7 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
   }
 
   const turnRudder = (direction: number) => {
-    setRudderTurn((current) => current + direction)
+    setRudderTurn((current) => wrappedIndex(current + direction, 8))
     go(direction)
   }
 
