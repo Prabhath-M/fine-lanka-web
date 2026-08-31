@@ -29,6 +29,7 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
   const [activeIndex, setActiveIndex] = useState(0)
   const [rudderTurn, setRudderTurn] = useState(0)
   const pointerStart = useRef<number | null>(null)
+  const rudderLock = useRef(false)
 
   useEffect(() => {
     setActiveIndex(0)
@@ -45,6 +46,11 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
   }
 
   const turnRudder = (direction: number) => {
+    if (rudderLock.current) return
+    rudderLock.current = true
+    window.setTimeout(() => {
+      rudderLock.current = false
+    }, 260)
     setRudderTurn((current) => wrappedIndex(current + direction, 8))
     go(direction)
   }
