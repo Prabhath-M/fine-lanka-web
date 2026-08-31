@@ -10420,19 +10420,15 @@ body:has(.features:target) .typed-opening { display: none; }
    phones. */
 @media (max-width: 1180px) {
   .explore-heritage-rebuild .dest-panel-caption {
-    /* Deliberately NOT overriding top/right/bottom/left here anymore.
-       The desktop rule above (top:72%; right:21%; bottom:18%; left:21%)
-       was already correctly calibrated to the actual artwork — verified
-       by measuring the source image
-       (fine-lanka-explore-video-frame-sigiri-sithuwam-header.png)
-       pixel-by-pixel and accounting for its
-       background-size:100% 107%; background-position:center bottom
-       transform. Every previous mobile-only round of this fix was
-       guessing new position values and *replacing* those already-
-       correct ones — which is what actually caused the box to render
-       in the wrong place across every attempt so far, not the font
-       size or line-clamp choices. Letting mobile inherit the same,
-       verified-correct position fixes that at the source. */
+    /* Keep the caption tied to the artwork rather than its content. The
+       previous auto-height combination (top + bottom with height:auto) let a
+       longer blurb increase the panel’s flow height and clip the painted
+       lower frame layer. */
+    top: 72%;
+    bottom: auto;
+    height: 10%;
+    max-height: 10%;
+    box-sizing: border-box;
     gap: 0.4rem;
     overflow: hidden;
     align-items: center;
