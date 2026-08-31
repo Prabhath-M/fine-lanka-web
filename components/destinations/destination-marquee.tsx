@@ -27,17 +27,13 @@ function relativePosition(index: number, activeIndex: number, length: number) {
 
 export function DestinationMarquee({ destinations }: { destinations: Destination[] }) {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [rudderDirection, setRudderDirection] = useState<'idle' | 'prev' | 'next'>('idle')
+  const [rudderTurn, setRudderTurn] = useState(0)
   const pointerStart = useRef<number | null>(null)
-  const rudderAnimationFrame = useRef<number | null>(null)
+  const rudderLock = useRef(false)
 
   useEffect(() => {
     setActiveIndex(0)
-    setRudderDirection('idle')
-    if (rudderAnimationFrame.current !== null) {
-      window.cancelAnimationFrame(rudderAnimationFrame.current)
-      rudderAnimationFrame.current = null
-    }
+    setRudderTurn(0)
   }, [destinations])
 
   if (!destinations.length) {
@@ -50,14 +46,12 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
   }
 
   const turnRudder = (direction: number) => {
-    if (rudderAnimationFrame.current !== null) {
-      window.cancelAnimationFrame(rudderAnimationFrame.current)
-    }
-    setRudderDirection('idle')
-    rudderAnimationFrame.current = window.requestAnimationFrame(() => {
-      setRudderDirection(direction < 0 ? 'prev' : 'next')
-      rudderAnimationFrame.current = null
-    })
+    if (rudderLock.current) return
+    rudderLock.current = true
+    window.setTimeout(() => {
+      rudderLock.current = false
+    }, 260)
+    setRudderTurn((current) => wrappedIndex(current + direction, 8))
     go(direction)
   }
 
@@ -177,7 +171,7 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
           alt=""
           aria-hidden="true"
           draggable={false}
-          className={`island-carousel-rudder-wheel is-${rudderDirection}`}
+          style={{ '--rudder-turn': `${rudderTurn * 45}deg` } as CSSProperties}
         />
         <button
           type="button"
