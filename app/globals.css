@@ -13672,3 +13672,31 @@ body:has(.features:target) .typed-opening { display: none; }
     position: static;
   }
 }
+
+/* MOBILE HOW IT WORKS — compact route above, one active description below */
+.process-mobile-description {
+  display: none;
+}
+@media (max-width: 640px) {
+  .process-route-canvas {
+    height: 34rem;
+    min-height: 34rem;
+    aspect-ratio: auto;
+  }
+  .process-route-canvas .process-step-desc {
+    display: none;
+  }
+  .process-route-canvas .process-mobile-description {
+    position: absolute;
+    right: 0.25rem;
+    bottom: 0;
+    left: 0.25rem;
+    display: block;
+    min-height: 8.25rem;
+    padding: 1rem 1.1rem 1.05rem;
+    border: 1px solid rgba(11, 18, 32, 0.14);
+    border-radius: 0.35rem;
+    background: rgba(255, 253, 246, 0.92);
+    box-shadow: 0 0.7rem 1.4rem rgba(11, 18, 32, 0.09);
+  }
+}
