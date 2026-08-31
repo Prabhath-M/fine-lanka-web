@@ -825,6 +825,24 @@ Do this last, once everything above is done.
   for "true wide desktop." This removes the overlap entirely instead of
   continuing to patch around it.
 
+  **User provided exact pixel measurements pinpointing the remaining
+  bug precisely:** 635px wide → centered (working). 642px–980px →
+  left-aligned (broken). 991px → centered again (working). That precise
+  data made this one fast to find: a **second, separate**
+  `@media (max-width: 980px)` block further down the file was silently
+  overriding the `width: 100%` set by the main ≤980px fix block back
+  down to a narrow `21rem` (336px) — except at ≤640px specifically,
+  where an even-more-specific rule re-widened it again. That's exactly
+  why the narrowest screens worked, the 981px+ tier worked (different
+  rule entirely, already fixed), and only the 642–980px gap in between
+  stayed broken — it was the one range where the conflicting narrow
+  rule won uncontested. **Fixed:** removed the conflicting width
+  override so the whole ≤980px range consistently gets `width: 100%`.
+  Also swept every single rule touching `.explore-atlas-window` (not
+  just `.explore-video-card`) to check for a similar hidden duplicate
+  there — none found; it correctly falls back to its base rule's
+  `margin: 0.45rem auto 0` in this range.
+
   Still not merged — waiting on the user to confirm this on their
   device.
 - [x] Confirm `robots.txt`/`sitemap.xml` (Phase 5) are reachable at their

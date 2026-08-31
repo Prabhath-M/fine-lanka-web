@@ -9941,8 +9941,19 @@ body:has(.features:target) .typed-opening { display: none; }
   filter: drop-shadow(0 0.85rem 1.15rem rgba(50, 65, 45, 0.16));
   margin-top: 0.35rem;
 }
+/* This second, separate @media(max-width:980px) block was silently
+   overriding the width:100% set in the main ≤980px block further up
+   (same specificity, later in file wins) back down to a narrow 21rem —
+   except at ≤640px, where an even-more-specific rule re-widened it
+   again. That's exactly why 635px worked, 642-980px didn't, and
+   991px+ (a separate tier) worked: this conflicting rule only ever
+   affected the 642px-980px gap in between. Dropped the conflicting
+   width so the whole ≤980px range consistently gets width:100% from
+   the main block, same as ≤640px already did. order:1 is mostly
+   redundant (video-card already sorts before map-card's order:2 by
+   default), kept for explicitness. */
 @media (max-width: 980px) {
-  .explore-heritage-rebuild .explore-video-card { order: 1; width: min(100%, 21rem); }
+  .explore-heritage-rebuild .explore-video-card { order: 1; }
 }
 @media (max-width: 640px) {
   .explore-heritage-rebuild .explore-video-card { width: 100%; }
