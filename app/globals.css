@@ -10439,6 +10439,12 @@ body:has(.features:target) .typed-opening { display: none; }
     max-width: calc(100% - 2.8rem);
   }
   .explore-heritage-rebuild .dest-panel-caption-text h3 {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
     font-size: clamp(0.68rem, 1.8vw, 0.9rem);
     line-height: 1.15;
   }
@@ -10525,6 +10531,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
   .explore-heritage-rebuild .explore-video-card .explore-card-heading strong {
     display: block;
+    width: 100%;
     min-width: 0;
     max-width: 100%;
     overflow: hidden;
