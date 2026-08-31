@@ -5741,7 +5741,13 @@ main > #destinations,
 }
 
 @media (max-width: 860px) {
-  .hero { min-height: 100svh; min-height: 100dvh; }
+  .hero {
+    /* The hero follows the site header in normal flow. Using a full viewport
+       minimum here made the combined header + hero taller than the first
+       mobile viewport, so the lower hero edge appeared only after scrolling. */
+    height: auto;
+    min-height: calc(100svh - 6.5rem);
+  }
   .features-shell, .intro-grid { grid-template-columns: 1fr; }
   .features-shell { gap: 3rem; }
   .features-intro { max-width: 42rem; }
@@ -5749,10 +5755,12 @@ main > #destinations,
 }
 @media (max-width: 640px) {
   .hero {
-    height: 100svh;
-    height: 100dvh;
-    min-height: 0;
-    align-items: end;
+    /* Let the mobile hero grow with its heading, copy, and CTA. A fixed
+       100dvh height clips the lower content when mobile browser chrome or
+       font metrics make the content taller than the live viewport. */
+    height: auto;
+    min-height: calc(100svh - 6.25rem);
+    align-items: stretch;
     padding-top: 7.5rem;
     padding-bottom: 4rem;
   }
