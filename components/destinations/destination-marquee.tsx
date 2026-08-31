@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, type CSSProperties } from 'react'
+import { memo, useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
 import { DestinationCard } from '@/components/destinations/destination-card'
 import type { Destination } from '@/lib/destinations-data'
 
@@ -25,37 +25,77 @@ function relativePosition(index: number, activeIndex: number, length: number) {
   return distance
 }
 
+const RUDDER_UNLOCK_DELAY = 420
+
+const DestinationRudder = memo(function DestinationRudder({ onTurn }: { onTurn: (direction: number) => void }) {
+  const [turnCount, setTurnCount] = useState(0)
+  const rudderLock = useRef(false)
+  const unlockTimer = useRef<number | null>(null)
+
+  useEffect(() => () => {
+    if (unlockTimer.current !== null) window.clearTimeout(unlockTimer.current)
+  }, [])
+
+  const turn = (direction: number) => {
+    if (rudderLock.current) return
+    rudderLock.current = true
+    unlockTimer.current = window.setTimeout(() => {
+      rudderLock.current = false
+      unlockTimer.current = null
+    }, RUDDER_UNLOCK_DELAY)
+    // This state belongs only to the wheel. The card deck receives the
+    // bounded destination direction through onTurn and never stores wheel
+    // rotation values in its own rendering state.
+    setTurnCount((current) => current + direction)
+    onTurn(direction)
+  }
+
+  return (
+    <div className="island-carousel-rudder" aria-label="Destination rudder controls">
+      <img
+        src="/images/serendib-brass-wheel.png"
+        alt=""
+        aria-hidden="true"
+        draggable={false}
+        style={{ '--rudder-turn': `${turnCount * 45}deg` } as CSSProperties}
+      />
+      <button
+        type="button"
+        className="island-carousel-rudder-hit is-prev"
+        onClick={() => turn(-1)}
+        aria-label="Turn the left rudder pole counterclockwise to show the previous destination"
+      >
+        <span className="sr-only">Previous destination</span>
+      </button>
+      <button
+        type="button"
+        className="island-carousel-rudder-hit is-next"
+        onClick={() => turn(1)}
+        aria-label="Turn the right rudder pole clockwise to show the next destination"
+      >
+        <span className="sr-only">Next destination</span>
+      </button>
+      <span className="island-carousel-rudder-caption" aria-hidden="true">Turn a pole</span>
+    </div>
+  )
+})
+
 export function DestinationMarquee({ destinations }: { destinations: Destination[] }) {
   const [activeIndex, setActiveIndex] = useState(0)
-  const [rudderTurn, setRudderTurn] = useState(0)
   const pointerStart = useRef<number | null>(null)
-  const rudderLock = useRef(false)
 
   useEffect(() => {
     setActiveIndex(0)
-    setRudderTurn(0)
   }, [destinations])
+
+  const go = useCallback((direction: number) => {
+    setActiveIndex((current) => wrappedIndex(current + direction, destinations.length))
+  }, [destinations.length])
 
   if (!destinations.length) {
     return <p className="dest-empty">No destinations match that filter yet — try another region.</p>
   }
-
   const activeDestination = destinations[wrappedIndex(activeIndex, destinations.length)]
-  const go = (direction: number) => {
-    setActiveIndex((current) => wrappedIndex(current + direction, destinations.length))
-  }
-
-  const turnRudder = (direction: number) => {
-    if (rudderLock.current) return
-    rudderLock.current = true
-    window.setTimeout(() => {
-      rudderLock.current = false
-    }, 260)
-    // Keep the wheel's turn count continuous. Wrapping at eight turns made
-    // 315deg jump back to 0deg, forcing a long reverse interpolation on mobile.
-    setRudderTurn((current) => current + direction)
-    go(direction)
-  }
 
   const onKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
     if (event.key === 'ArrowLeft') {
@@ -167,32 +207,10 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
         <div className="island-carousel-clouds" aria-hidden="true" />
       </div>
 
-      <div className="island-carousel-rudder" aria-label="Destination rudder controls">
-        <img
-          src="/images/serendib-brass-wheel.png"
-          alt=""
-          aria-hidden="true"
-          draggable={false}
-          style={{ '--rudder-turn': `${rudderTurn * 45}deg` } as CSSProperties}
-        />
-        <button
-          type="button"
-          className="island-carousel-rudder-hit is-prev"
-          onClick={() => turnRudder(-1)}
-          aria-label="Turn the left rudder pole counterclockwise to show the previous destination"
-        >
-          <span className="sr-only">Previous destination</span>
-        </button>
-        <button
-          type="button"
-          className="island-carousel-rudder-hit is-next"
-          onClick={() => turnRudder(1)}
-          aria-label="Turn the right rudder pole clockwise to show the next destination"
-        >
-          <span className="sr-only">Next destination</span>
-        </button>
-        <span className="island-carousel-rudder-caption" aria-hidden="true">Turn a pole</span>
-      </div>
+      <DestinationRudder
+        key={destinations.map((destination) => destination.name).join('|')}
+        onTurn={go}
+      />
 
       <div className="island-carousel-info-pane" aria-live="polite">
         <div className="island-carousel-info-pane-head">
