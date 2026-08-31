@@ -51,7 +51,9 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
     window.setTimeout(() => {
       rudderLock.current = false
     }, 260)
-    setRudderTurn((current) => wrappedIndex(current + direction, 8))
+    // Keep the wheel's turn count continuous. Wrapping at eight turns made
+    // 315deg jump back to 0deg, forcing a long reverse interpolation on mobile.
+    setRudderTurn((current) => current + direction)
     go(direction)
   }
 
