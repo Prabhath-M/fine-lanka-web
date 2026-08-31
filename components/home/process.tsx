@@ -177,7 +177,6 @@ export function Process() {
   const metricsRef = useRef<{ totalLen: number; cum: number[] } | null>(null)
 
   const [revealed, setRevealed] = useState([false, false, false, false])
-  const [activeStep, setActiveStep] = useState(0)
   const [flying, setFlying] = useState(false)
 
   const setPlaneTransform = useCallback((x: number, y: number, angle: number) => {
@@ -309,7 +308,6 @@ export function Process() {
           // rather than waiting for the animation promise to resolve.
           if (arrivalIndex !== undefined && !waypointRevealed && raw >= 0.94) {
             waypointRevealed = true
-            setActiveStep(arrivalIndex)
             setRevealed((previous) => previous.map((value, index) => index <= arrivalIndex || value))
           }
 
@@ -334,7 +332,6 @@ export function Process() {
     geo.style.strokeDasharray = String(metrics.totalLen)
     geo.style.strokeDashoffset = String(metrics.totalLen)
     setRevealed([true, false, false, false])
-    setActiveStep(0)
     setFlying(true)
     positionPlane(0)
     positionShadowPlane(0)
@@ -419,13 +416,11 @@ export function Process() {
         mountedRef.current = true
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
           setRevealed([true, true, true, true])
-          setActiveStep(3)
           geo.style.strokeDasharray = 'none'
           return
         }
         if (hasCompletedRef.current) {
           setRevealed([true, true, true, true])
-          setActiveStep(3)
           geo.style.strokeDashoffset = '0'
           return
         }
@@ -629,18 +624,22 @@ export function Process() {
               </div>
             )
           })}
+        </div>
 
-          <div className="process-mobile-description" aria-live="polite">
-            <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#0B1220]/50 border-b border-[#0B1220]/10 pb-2 mb-2">
-              Step {POINTS[activeStep].code}
-            </div>
-            <div className="font-semibold text-[#0B1220]" style={{ fontFamily: "'Fraunces', serif" }}>
-              {POINTS[activeStep].title}
-            </div>
-            <div className="mt-1 text-[12px] leading-[1.45] text-[#0B1220]/70">
-              {POINTS[activeStep].text}
-            </div>
-          </div>
+        <div className="process-mobile-descriptions">
+          {POINTS.map((p) => (
+            <article className="process-mobile-description" key={p.code}>
+              <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#0B1220]/50">
+                Step {p.code}
+              </div>
+              <div className="font-semibold text-[#0B1220]" style={{ fontFamily: "'Fraunces', serif" }}>
+                {p.title}
+              </div>
+              <div className="text-[12px] leading-[1.45] text-[#0B1220]/70">
+                {p.text}
+              </div>
+            </article>
+          ))}
         </div>
 
       </div>
