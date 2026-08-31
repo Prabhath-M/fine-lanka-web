@@ -426,13 +426,43 @@ export function Process() {
         }
         flySequence()
       },
-      { threshold: 0.35 },
+      { threshold: window.matchMedia('(max-width: 640px)').matches ? 0.1 : 0.35 },
     )
     observer.observe(section)
+    let mobileStarted = false
+    const mobileRevealTimers: number[] = []
+    const startMobileWhenVisible = () => {
+      if (
+        mobileStarted ||
+        !window.matchMedia('(max-width: 640px)').matches ||
+        section.getBoundingClientRect().top >= window.innerHeight * 0.9
+      ) {
+        return
+      }
+      mobileStarted = true
+      setRevealed([true, false, false, false])
+      ;[1700, 3300, 4900].forEach((delay, index) => {
+        mobileRevealTimers.push(
+          window.setTimeout(() => {
+            setRevealed((previous) => previous.map((value, step) => value || step <= index + 1))
+          }, delay),
+        )
+      })
+      flySequence()
+    }
+    const mobileKickoff = window.setTimeout(startMobileWhenVisible, 250)
+    const mobileVisibilityPoll = window.setInterval(startMobileWhenVisible, 250)
+    window.addEventListener('scroll', startMobileWhenVisible, { passive: true })
+    window.addEventListener('resize', startMobileWhenVisible)
 
     return () => {
       mountedRef.current = false
       if (rafRef.current) cancelAnimationFrame(rafRef.current)
+      window.clearTimeout(mobileKickoff)
+      window.clearInterval(mobileVisibilityPoll)
+      mobileRevealTimers.forEach((timer) => window.clearTimeout(timer))
+      window.removeEventListener('scroll', startMobileWhenVisible)
+      window.removeEventListener('resize', startMobileWhenVisible)
       observer.disconnect()
     }
   }, [flySequence, positionPlane, positionShadowPlane])
@@ -509,6 +539,17 @@ export function Process() {
               strokeDasharray="1 7"
             />
 
+            <path
+              className="process-route-trace-mobile"
+              d={PATH_D}
+              fill="none"
+              stroke="#E4C766"
+              strokeOpacity="0.42"
+              strokeWidth="2.6"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeDasharray="0.5 11"
+            />
             <path
               d={PATH_D}
               fill="none"
@@ -627,8 +668,12 @@ export function Process() {
         </div>
 
         <div className="process-mobile-descriptions">
-          {POINTS.map((p) => (
-            <article className="process-mobile-description" key={p.code}>
+          {POINTS.map((p, i) => (
+            <article
+              className={`process-mobile-description ${revealed[i] ? 'is-revealed' : ''}`}
+              key={p.code}
+              aria-hidden={!revealed[i]}
+            >
               <div className="font-mono text-[10px] tracking-[0.14em] uppercase text-[#0B1220]/50">
                 Step {p.code}
               </div>

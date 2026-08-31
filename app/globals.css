@@ -13728,3 +13728,28 @@ body:has(.features:target) .typed-opening { display: none; }
     background: rgba(255, 253, 246, 0.72);
   }
 }
+
+/* MOBILE HOW IT WORKS — reveal each ledger item as its waypoint is reached */
+@media (max-width: 640px) {
+  .process-mobile-descriptions .process-mobile-description {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(0.65rem);
+    transition: opacity 420ms var(--ease), transform 420ms var(--ease), visibility 0s linear 420ms;
+  }
+  .process-mobile-descriptions .process-mobile-description.is-revealed {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+}
+
+.process-route-trace-mobile {
+  display: none;
+}
+@media (max-width: 640px) {
+  .process-route-trace-mobile {
+    display: block;
+  }
+}
