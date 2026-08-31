@@ -10513,6 +10513,24 @@ body:has(.features:target) .typed-opening { display: none; }
     align-self: center;
   }
   .explore-heritage-rebuild .explore-video-card { order: 1; }
+  .explore-heritage-rebuild .explore-video-card .explore-card-heading {
+    /* The dynamic “Watch, then trace · destination” label was wrapping to a
+       different number of lines on real phones than in laptop emulation. That
+       changed the video-card height before the frame even began. */
+    height: 3.75rem;
+    min-height: 3.75rem;
+    box-sizing: border-box;
+    flex: 0 0 3.75rem;
+    overflow: hidden;
+  }
+  .explore-heritage-rebuild .explore-video-card .explore-card-heading strong {
+    display: block;
+    min-width: 0;
+    max-width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
   .explore-heritage-rebuild .explore-map-card { order: 2; min-height: 0; }
   .explore-heritage-rebuild .explore-atlas-window {
     width: min(calc(100% - 1rem), 48rem);
