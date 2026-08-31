@@ -10430,6 +10430,8 @@ body:has(.features:target) .typed-opening { display: none; }
     max-height: 10%;
     box-sizing: border-box;
     gap: 0.4rem;
+    padding-block: 0.45rem;
+    contain: layout paint;
     overflow: hidden;
     align-items: center;
   }
@@ -10514,7 +10516,18 @@ body:has(.features:target) .typed-opening { display: none; }
   .explore-heritage-rebuild .explore-map-card { order: 2; min-height: 0; }
   .explore-heritage-rebuild .explore-atlas-window {
     width: min(calc(100% - 1rem), 48rem);
+    height: auto;
+    flex: 0 0 auto;
     margin-inline: auto;
+  }
+  .explore-heritage-rebuild .dest-panel {
+    /* Keep the portrait frame geometry independent of caption content. This
+       is important on real phones, where text metrics can differ from desktop
+       device emulation and otherwise make the lower artwork appear cropped. */
+    height: auto;
+    min-height: 0;
+    aspect-ratio: 2 / 3;
+    contain: layout paint;
   }
   .explore-heritage-rebuild .dest-panel-caption-text {
     min-width: 0;
@@ -10527,6 +10540,7 @@ body:has(.features:target) .typed-opening { display: none; }
     line-height: 1.15;
     max-height: 3.45em;
     overflow: hidden;
+    box-sizing: border-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 3;
     text-overflow: ellipsis;
