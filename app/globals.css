@@ -10465,8 +10465,11 @@ body:has(.features:target) .typed-opening { display: none; }
     text-overflow: ellipsis;
   }
   .explore-heritage-rebuild .dest-panel-caption-side {
-    right: 0.4rem;
-    bottom: 0.4rem;
+    left: 0;
+    right: 0;
+    bottom: 0.35rem;
+    display: flex;
+    justify-content: center;
   }
   .explore-heritage-rebuild .dest-panel-dots {
     gap: 0.3rem;
@@ -10523,10 +10526,10 @@ body:has(.features:target) .typed-opening { display: none; }
     /* The dynamic “Watch, then trace · destination” label was wrapping to a
        different number of lines on real phones than in laptop emulation. That
        changed the video-card height before the frame even began. */
-    height: 3.75rem;
-    min-height: 3.75rem;
+    height: 4.5rem;
+    min-height: 4.5rem;
     box-sizing: border-box;
-    flex: 0 0 3.75rem;
+    flex: 0 0 4.5rem;
     overflow: hidden;
   }
   .explore-heritage-rebuild .explore-video-card .explore-card-heading strong {
@@ -10535,7 +10538,10 @@ body:has(.features:target) .typed-opening { display: none; }
     min-width: 0;
     max-width: 100%;
     overflow: hidden;
-    white-space: nowrap;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
     text-overflow: ellipsis;
   }
   .explore-heritage-rebuild .explore-map-card { order: 2; min-height: 0; }
@@ -10554,10 +10560,19 @@ body:has(.features:target) .typed-opening { display: none; }
     aspect-ratio: 2 / 3;
     contain: layout paint;
   }
+  .explore-heritage-rebuild .dest-panel-caption {
+    top: 70%;
+    height: 16%;
+    max-height: 16%;
+    bottom: auto;
+    box-sizing: border-box;
+    padding-bottom: 1.15rem;
+  }
   .explore-heritage-rebuild .dest-panel-caption-text {
     min-width: 0;
-    max-width: calc(100% - 2.8rem);
+    max-width: 100%;
     flex: 1 1 auto;
+    padding-bottom: 0.2rem;
   }
   .explore-heritage-rebuild .dest-panel-caption-sub {
     display: -webkit-box;
