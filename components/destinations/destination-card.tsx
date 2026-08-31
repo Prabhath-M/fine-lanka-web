@@ -23,6 +23,45 @@ import type { Destination } from '@/lib/destinations-data'
  *  The carousel mounts media only for its active card so hidden cards do not
  *  decode the same loop in parallel. `prefers-reduced-motion` retains the
  *  poster-frame fallback. */
+function DestinationVideo({ slug }: { slug: string }) {
+  const videoRef = useRef<HTMLVideoElement | null>(null)
+
+  useEffect(() => {
+    const video = videoRef.current
+    if (!video) return
+
+    video.play().catch(() => {
+      /* The supplied poster remains a graceful fallback if playback is blocked. */
+    })
+
+    return () => {
+      // Pause before removing the source so a card turn does not leave a
+      // decoder or buffered surface alive behind the next active card.
+      video.pause()
+      video.removeAttribute('src')
+      video.querySelectorAll('source').forEach((source) => source.removeAttribute('src'))
+      video.load()
+    }
+  }, [])
+
+  return (
+    <video
+      ref={videoRef}
+      className="dest-card-video"
+      muted
+      loop
+      playsInline
+      autoPlay
+      preload="metadata"
+      poster={`https://picsum.photos/seed/finelanka-dest-${slug}/700/933`}
+      aria-hidden="true"
+    >
+      <source src={`/videos/destinations/${slug}.mp4`} type="video/mp4" />
+      <source src="/videos/destinations/ambient-atlas-loop.mp4" type="video/mp4" />
+    </video>
+  )
+}
+
 export function DestinationCard({
   destination,
   index,
@@ -41,7 +80,6 @@ export function DestinationCard({
   mediaActive?: boolean
 }) {
   const [expanded, setExpanded] = useState(false)
-  const videoRef = useRef<HTMLVideoElement | null>(null)
   const [reducedMotion, setReducedMotion] = useState(false)
 
   useEffect(() => {
@@ -53,16 +91,6 @@ export function DestinationCard({
   }, [])
 
   const slug = slugify(destination.name)
-
-  useEffect(() => {
-    if (reducedMotion || !mediaActive) {
-      videoRef.current?.pause()
-      return
-    }
-    videoRef.current?.play().catch(() => {
-      /* The supplied poster remains a graceful fallback if a browser blocks playback. */
-    })
-  }, [mediaActive, reducedMotion])
 
   const setExpandedAndSyncVideo = (next: boolean) => setExpanded(next)
 
@@ -101,22 +129,7 @@ export function DestinationCard({
             aria-hidden="true"
           />
         )}
-        {shouldRenderDestinationVideo(mediaActive, reducedMotion) && (
-          <video
-            ref={videoRef}
-            className="dest-card-video"
-            muted
-            loop
-            playsInline
-            autoPlay
-            preload="metadata"
-            poster={`https://picsum.photos/seed/finelanka-dest-${slug}/700/933`}
-            aria-hidden="true"
-          >
-            <source src={`/videos/destinations/${slug}.mp4`} type="video/mp4" />
-            <source src="/videos/destinations/ambient-atlas-loop.mp4" type="video/mp4" />
-          </video>
-        )}
+        {shouldRenderDestinationVideo(mediaActive, reducedMotion) && <DestinationVideo slug={slug} />}
         <div className="dest-card-scrim" aria-hidden="true" />
         <span className="dest-card-mark" aria-hidden="true">
           <Icon name="lotus" />

@@ -4591,10 +4591,10 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   z-index: var(--island-z);
   pointer-events: none;
   transform: translate(-50%, -50%) translateX(var(--island-x)) translateY(var(--island-y)) scale(var(--island-scale)) rotate(var(--island-rotate));
-  /* Transform and opacity remain GPU-friendly. Per-card CSS filters on
-     moving layers were a recurring source of carousel frame drops. */
+  /* Promote cards only while they are actually animating. Keeping every
+     destination in a permanent compositor layer caused mobile GPUs to retain
+     too many transformed card surfaces after repeated turns. */
   transition: transform 420ms cubic-bezier(0.23, 1, 0.32, 1), opacity 260ms ease-out;
-  will-change: transform, opacity;
 }
 .destinations-page .island-carousel-card.is-visible { opacity: var(--island-opacity); }
 .destinations-page .island-carousel-card.is-active { pointer-events: auto; }
@@ -4607,13 +4607,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
    their intended interaction motion. */
 .destinations-page .island-carousel-card .dest-card-video {
   pointer-events: none;
-  transform: translateZ(0) !important;
   transition: none;
-  backface-visibility: hidden;
-}
-.destinations-page .island-carousel-card .dest-card-media {
-  transform: translateZ(0);
-  backface-visibility: hidden;
 }
 .destinations-page .island-carousel-rudder {
   position: absolute;
