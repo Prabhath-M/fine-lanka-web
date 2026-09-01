@@ -20,14 +20,22 @@ type Segment = {
   to: string
   via?: [number, number][]
   kind: 'main' | 'scenic'
+  roadClass?: string
+  distanceKm?: number
+  durationMin?: number
+  sourceKey?: string
 }
 
 type Itinerary = {
   id: string
   label: string
   route: string
+  waypoints: string[]
   markers: string[]
   segments: string[]
+  distanceKm: number
+  durationMin: number
+  airportToAirport: boolean
 }
 
 type AtlasData = {
@@ -35,6 +43,19 @@ type AtlasData = {
   width: number
   height: number
   calibration: string
+  source: {
+    map: string
+    routes: string
+    itineraryRule: string
+  }
+  networkStats: {
+    markerCount: number
+    edgeCount: number
+    primaryCount: number
+    hubCount: number
+    itineraryCount: number
+    connected: boolean
+  }
   markers: Marker[]
   segments: Segment[]
   itineraries: Itinerary[]
@@ -115,19 +136,19 @@ export function RouteMapPreview() {
   return (
     <main className={styles.page}>
       <header className={styles.hero}>
-        <div className={styles.eyebrow}><Compass size={15} /> Fine Lanka route atlas · sample overlay</div>
+        <div className={styles.eyebrow}><Compass size={15} /> Fine Lanka route atlas · connected route preview</div>
         <div className={styles.heroGrid}>
           <div>
             <h1>Follow the island <em>by feeling.</em></h1>
             <p className={styles.intro}>
-              A first interactable pass over the latest illustrated Sri Lankan map. The red circles are primary destinations;
-              the brown circles are route hubs and sub-points. Select a travel plan or click any marker to explore the network.
+              A connected overlay for the latest illustrated Sri Lankan map. Every named destination is attached to the shared road graph;
+              solid lines follow main corridors, while dashed lines mark scenic drives and local access spurs. Select a plan or click a marker to explore the network.
             </p>
           </div>
           <div className={styles.calibrationCard}>
-            <span className={styles.cardLabel}>Calibration note</span>
-            <strong>Latest all-hubs artwork</strong>
-            <span>Markers manually reconciled to the visible circles · {data.markers.length} interactable places</span>
+            <span className={styles.cardLabel}>Network check</span>
+            <strong>{data.networkStats.markerCount} places · {data.networkStats.edgeCount} connected edges</strong>
+            <span>{data.networkStats.itineraryCount} airport-to-airport journeys · {data.networkStats.primaryCount} destinations · {data.networkStats.hubCount} hubs</span>
           </div>
         </div>
       </header>
@@ -137,7 +158,7 @@ export function RouteMapPreview() {
           <div className={styles.sidebarIntro}>
             <span className={styles.kicker}>Choose a route</span>
             <h2>Trip lines, <em>made visible.</em></h2>
-            <p>Quiet corridors remain in the map artwork. The selected itinerary is drawn in a warm red line so its stops read as one journey.</p>
+            <p>The full island network stays quiet in the background. The selected itinerary is drawn in warm red so its stops read as one continuous airport-to-airport journey.</p>
           </div>
           <div className={styles.routeList} role="list" aria-label="Sample itineraries">
             {data.itineraries.map((itinerary) => {
@@ -164,15 +185,26 @@ export function RouteMapPreview() {
             <span className={styles.legendTitle}>Read the marks</span>
             <span><i className={`${styles.legendDot} ${styles.legendPrimary}`} /> Primary destination</span>
             <span><i className={`${styles.legendDot} ${styles.legendHub}`} /> Route hub / sub-point</span>
-            <span><i className={styles.legendLine} /> Selected corridor</span>
+            <span><i className={styles.legendLine} /> Main-road corridor</span>
             <span><i className={`${styles.legendLine} ${styles.legendDashed}`} /> Scenic / local connector</span>
           </div>
         </aside>
 
         <div className={styles.mapColumn}>
           <div className={styles.mapHeader}>
-            <div><span className={styles.kicker}>Now tracing</span><h2>{selectedItinerary?.label}</h2></div>
-            <span className={styles.mapHint}><MousePointer2 size={14} /> Click any circle</span>
+            <div className={styles.mapTitle}>
+              <span className={styles.kicker}>Now tracing</span>
+              <h2>{selectedItinerary?.label}</h2>
+              <p className={styles.routeTrail}>{selectedItinerary?.route}</p>
+            </div>
+            <div className={styles.mapHeaderRight}>
+              <div className={styles.routeFacts} aria-label="Selected route facts">
+                <span><strong>{selectedItinerary?.segments.length}</strong><small>legs</small></span>
+                <span><strong>{selectedItinerary?.distanceKm}</strong><small>km</small></span>
+                <span><strong>{Math.round((selectedItinerary?.durationMin ?? 0) / 60)}h</strong><small>road time</small></span>
+              </div>
+              <span className={styles.mapHint}><MousePointer2 size={14} /> Click any circle</span>
+            </div>
           </div>
           <div className={styles.mapFrame}>
             <img src={data.image} alt="Illustrated Sri Lankan route atlas with red primary destination circles and brown route-hub circles" className={styles.mapImage} />
@@ -216,11 +248,12 @@ export function RouteMapPreview() {
                 <h3>{selectedMarker.name}</h3>
                 <p>{selectedMarker.note ?? `${selectedMarker.name} is registered from the visible ${selectedMarker.type === 'primary' ? 'red primary' : 'brown hub'} circle on the latest atlas.`}</p>
                 <div className={styles.placeMeta}><MapPin size={14} /> Image coordinate {selectedMarker.x}, {selectedMarker.y}</div>
+                <div className={styles.placeMeta}><Route size={14} /> {selectedMarker.type === 'primary' ? 'Destination node' : 'Shared route hub'}</div>
                 {activeMarkerIds.has(selectedMarker.id) && <div className={styles.activeNotice}>Included in {selectedItinerary?.label}</div>}
               </aside>
             )}
           </div>
-          <p className={styles.caption}>Source artwork remains fixed. The interaction layer is calibrated to the latest all-hubs image and keeps marker coordinates in image space rather than projecting them from latitude/longitude.</p>
+          <p className={styles.caption}>The illustrated artwork remains fixed. Marker coordinates are registered in image space; route connectivity and leg distances come from the validated road database, so the artwork is a readable atlas rather than a live navigation map.</p>
         </div>
       </section>
     </main>

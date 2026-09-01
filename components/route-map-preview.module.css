@@ -246,8 +246,53 @@
   display: flex;
   align-items: end;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.25rem;
   padding: 0.4rem 0.7rem 1rem;
+}
+
+.mapTitle {
+  min-width: 0;
+}
+
+.routeTrail {
+  max-width: 62rem;
+  margin: 0.55rem 0 0;
+  color: #75644f;
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.66rem;
+  line-height: 1.55;
+}
+
+.mapHeaderRight {
+  display: grid;
+  justify-items: end;
+  gap: 0.7rem;
+}
+
+.routeFacts {
+  display: flex;
+  align-items: baseline;
+  gap: 0.85rem;
+  color: #8e4b2e;
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+.routeFacts span {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.25rem;
+}
+
+.routeFacts strong {
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.routeFacts small {
+  color: #8f7863;
+  font-size: 0.56rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .mapHeader h2 {
@@ -556,6 +601,14 @@
   .mapHeader {
     align-items: start;
     flex-direction: column;
+  }
+
+  .mapHeaderRight {
+    justify-items: start;
+  }
+
+  .routeTrail {
+    font-size: 0.58rem;
   }
 
   .mapHint {
