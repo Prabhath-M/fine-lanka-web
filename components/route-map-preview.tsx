@@ -176,14 +176,13 @@ export function RouteMapPreview() {
           <div>
             <h1>Follow the island <em>by feeling.</em></h1>
             <p className={styles.intro}>
-              A connected overlay for the latest illustrated Sri Lankan map. Every named destination is attached to the shared road graph;
-              solid lines follow main corridors, while dashed lines mark scenic drives and local access spurs. Select a plan or click a marker to explore the network.
+              A fresh visual index of the destinations shown on the latest illustrated Sri Lankan tour map. Select any marker to explore its place, image, and description.
             </p>
           </div>
           <div className={styles.calibrationCard}>
             <span className={styles.cardLabel}>Network check</span>
-            <strong>{data.networkStats.markerCount} places · {data.networkStats.edgeCount} connected edges</strong>
-            <span>{data.networkStats.itineraryCount} airport-to-airport journeys · {data.networkStats.primaryCount} destinations · {data.networkStats.hubCount} hubs</span>
+            <strong>{data.networkStats.markerCount} mapped places</strong>
+            <span>{data.networkStats.primaryCount} destinations · {data.networkStats.hubCount} supporting places · marker-only reference</span>
           </div>
         </div>
       </header>
@@ -191,70 +190,41 @@ export function RouteMapPreview() {
       <section className={styles.workspace} aria-label="Interactive route atlas">
         <aside className={styles.sidebar}>
           <div className={styles.sidebarIntro}>
-            <span className={styles.kicker}>Choose a route</span>
-            <h2>Trip lines, <em>made visible.</em></h2>
-            <p>The full island network stays quiet in the background. The selected itinerary is drawn in warm red so its stops read as one continuous airport-to-airport journey.</p>
+            <span className={styles.kicker}>Explore the island</span>
+            <h2>Places, <em>made visible.</em></h2>
+            <p>This refreshed map uses only the locations and placement from the newly supplied Sri Lanka tour map. Previous route paths and itinerary overlays have been removed.</p>
           </div>
-          <div className={styles.routeList} role="list" aria-label="Sample itineraries">
-            {data.itineraries.map((itinerary) => {
-              const isSelected = itinerary.id === selectedItinerary?.id
-              return (
-                <button
-                  key={itinerary.id}
-                  type="button"
-                  className={`${styles.routeOption} ${isSelected ? styles.routeOptionSelected : ''}`}
-                  onClick={() => {
-                    setSelectedItineraryId(itinerary.id)
-                    setSelectedMarkerId(null)
-                  }}
-                  aria-pressed={isSelected}
-                >
-                  <span className={styles.routeOptionTop}><span>{isSelected ? 'Active plan' : 'Sample plan'}</span><Route size={14} /></span>
-                  <strong>{itinerary.label}</strong>
-                  <span>{itinerary.route}</span>
-                </button>
-              )
-            })}
+          <div className={styles.routeList} role="list" aria-label="Map instructions">
+            <div className={styles.routeOption}>
+              <span className={styles.routeOptionTop}><span>Fresh map calibration</span><MapPin size={14} /></span>
+              <strong>{data.markers.length} location markers</strong>
+              <span>Click any white-and-red waypoint to open its travel photo and description.</span>
+            </div>
           </div>
           <div className={styles.legend} aria-label="Map legend">
             <span className={styles.legendTitle}>Read the marks</span>
             <span><i className={`${styles.legendDot} ${styles.legendPrimary}`} /> Primary destination</span>
             <span><i className={`${styles.legendDot} ${styles.legendHub}`} /> Route hub / sub-point</span>
-            <span><i className={styles.legendLine} /> Main-road corridor</span>
-            <span><i className={`${styles.legendLine} ${styles.legendDashed}`} /> Scenic / local connector</span>
           </div>
         </aside>
 
         <div className={styles.mapColumn}>
           <div className={styles.mapHeader}>
             <div className={styles.mapTitle}>
-              <span className={styles.kicker}>Now tracing</span>
-              <h2>{selectedItinerary?.label}</h2>
-              <p className={styles.routeTrail}>{selectedItinerary?.route}</p>
+              <span className={styles.kicker}>Fresh location index</span>
+              <h2>Sri Lanka, <em>up close.</em></h2>
+              <p className={styles.routeTrail}>A marker-only map rebuilt from the latest supplied destination reference.</p>
             </div>
             <div className={styles.mapHeaderRight}>
-              <div className={styles.routeFacts} aria-label="Selected route facts">
-                <span><strong>{selectedItinerary?.tracedSegments?.length ?? selectedItinerary?.segments.length}</strong><small>legs</small></span>
-                <span><strong>{selectedItinerary?.distanceKm}</strong><small>km</small></span>
-                <span><strong>{Math.round((selectedItinerary?.durationMin ?? 0) / 60)}h</strong><small>road time</small></span>
+              <div className={styles.routeFacts} aria-label="Map facts">
+                <span><strong>{data.markers.length}</strong><small>places</small></span>
+                <span><strong>0</strong><small>paths</small></span>
               </div>
-              <span className={styles.mapHint}><MousePointer2 size={14} /> Click any circle</span>
+              <span className={styles.mapHint}><MousePointer2 size={14} /> Click any marker</span>
             </div>
           </div>
           <div className={styles.mapFrame}>
             <img src={data.image} alt="Illustrated Sri Lankan route atlas with red primary destination circles and brown route-hub circles" className={styles.mapImage} />
-            <svg className={styles.routeOverlay} viewBox={`0 0 ${data.width} ${data.height}`} preserveAspectRatio="none" aria-hidden="true">
-              {data.segments.map((segment) => {
-                const isActive = activeSegmentIds.has(segment.id)
-                const path = pathForSegment(segment, markerById, data.width, data.height)
-                return (
-                  <g key={segment.id}>
-                    {isActive && <path d={path} className={styles.activeHalo} />}
-                    <path d={path} className={`${styles.routePath} ${isActive ? styles.routePathActive : ''} ${segment.kind === 'scenic' ? styles.routePathScenic : ''}`} />
-                  </g>
-                )
-              })}
-            </svg>
             <div className={styles.markerLayer}>
               {data.markers.map((marker) => {
                 const isActive = activeMarkerIds.has(marker.id)
@@ -291,7 +261,7 @@ export function RouteMapPreview() {
               </aside>
             )}
           </div>
-          <p className={styles.caption}>The illustrated artwork remains fixed. Every highlighted leg follows an audited orange corridor or an explicitly redrawn real-road connection kept inside the island silhouette; no route is allowed to shortcut across blank artwork.</p>
+          <p className={styles.caption}>The illustrated artwork is the geographic reference. Every waypoint is calibrated to the supplied map image; route paths are intentionally disabled in this marker-only version.</p>
         </div>
       </section>
     </main>
