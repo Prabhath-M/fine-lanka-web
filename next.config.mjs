@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Phase 10 / cPanel hosting: produces a self-contained server bundle
+  // (its own minimal node_modules + a server.js entry point) instead of
+  // relying on Vercel-specific build output. This is what a plain
+  // Node.js host (cPanel's "Setup Node.js App", a VPS, etc.) needs —
+  // Vercel deployments work fine with or without this setting, so it's
+  // safe to keep even though this project also deploys there for
+  // previews.
+  output: 'standalone',
   // Phase 8 of the pre-launch audit: baseline security headers. The site
   // is fully self-contained right now — no external scripts, fonts,
   // analytics, or image hosts (next/font self-hosts Google Fonts, all
