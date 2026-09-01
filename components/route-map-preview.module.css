@@ -1,0 +1,574 @@
+.page {
+  min-height: 100vh;
+  padding: 4.5rem clamp(1rem, 4vw, 4rem) 5rem;
+  color: #20252b;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(229, 198, 139, 0.24), transparent 32rem),
+    linear-gradient(135deg, #f1e5c6 0%, #e8d5ae 48%, #d7c096 100%);
+  font-family: var(--font-sans), Arial, sans-serif;
+}
+
+.hero,
+.workspace {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+}
+
+.hero {
+  margin-bottom: 2rem;
+}
+
+.eyebrow,
+.kicker,
+.cardLabel,
+.placeType,
+.routeOptionTop,
+.legendTitle {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+  font-size: 0.66rem;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #9b4c28;
+  margin-bottom: 0.8rem;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 23rem);
+  align-items: end;
+  gap: clamp(2rem, 7vw, 8rem);
+}
+
+.hero h1,
+.sidebar h2,
+.mapHeader h2,
+.placeCard h3 {
+  margin: 0;
+  font-family: var(--font-serif), Georgia, serif;
+  font-weight: 500;
+  letter-spacing: -0.04em;
+}
+
+.hero h1 {
+  max-width: 12ch;
+  color: #252d37;
+  font-size: clamp(3.2rem, 7vw, 6.8rem);
+  line-height: 0.92;
+}
+
+.hero h1 em,
+.sidebar h2 em {
+  color: #ae5935;
+  font-style: italic;
+}
+
+.intro {
+  max-width: 52rem;
+  margin: 1.4rem 0 0;
+  color: #51514b;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.calibrationCard {
+  display: grid;
+  gap: 0.48rem;
+  padding: 1.2rem 1.25rem;
+  border: 1px solid rgba(52, 44, 33, 0.32);
+  border-radius: 1rem;
+  background: rgba(255, 247, 226, 0.52);
+  box-shadow: 0 1rem 2.5rem rgba(67, 49, 24, 0.08);
+}
+
+.calibrationCard strong {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.calibrationCard span:last-child {
+  color: #686052;
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+
+.cardLabel,
+.kicker,
+.placeType {
+  color: #a65a35;
+}
+
+.workspace {
+  display: grid;
+  grid-template-columns: minmax(17rem, 21rem) minmax(0, 1fr);
+  gap: 1.25rem;
+  padding: 1.25rem;
+  border: 1px solid rgba(51, 42, 29, 0.28);
+  border-radius: 1.3rem;
+  background: rgba(255, 248, 230, 0.38);
+  box-shadow: 0 1.5rem 4rem rgba(63, 45, 22, 0.14);
+}
+
+.sidebar {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 1.15rem;
+  padding: 1rem;
+  border-radius: 0.9rem;
+  background: rgba(28, 42, 52, 0.96);
+  color: #f6edda;
+}
+
+.sidebar h2 {
+  margin-top: 0.5rem;
+  font-size: clamp(2rem, 3vw, 2.9rem);
+  line-height: 0.95;
+}
+
+.sidebarIntro p {
+  margin: 1rem 0 0;
+  color: #c8c0ac;
+  font-size: 0.83rem;
+  line-height: 1.6;
+}
+
+.routeList {
+  display: grid;
+  gap: 0.55rem;
+}
+
+.routeOption {
+  display: grid;
+  gap: 0.42rem;
+  width: 100%;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid rgba(238, 225, 196, 0.2);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: #eee4ce;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.routeOption:hover,
+.routeOption:focus-visible {
+  border-color: #e6a679;
+  background: rgba(178, 86, 49, 0.18);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.routeOptionSelected {
+  border-color: #e78a5d;
+  background: linear-gradient(135deg, rgba(173, 73, 39, 0.42), rgba(82, 47, 38, 0.55));
+}
+
+.routeOptionTop {
+  display: flex;
+  justify-content: space-between;
+  color: #e9ae82;
+  font-size: 0.57rem;
+}
+
+.routeOption strong {
+  font-family: var(--font-serif), Georgia, serif;
+  font-size: 1.08rem;
+  font-weight: 500;
+}
+
+.routeOption > span:last-child {
+  color: #c8c0ad;
+  font-size: 0.72rem;
+  line-height: 1.45;
+}
+
+.legend {
+  display: grid;
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(238, 225, 196, 0.16);
+  color: #d9d0bd;
+  font-size: 0.72rem;
+}
+
+.legendTitle {
+  color: #e9ae82;
+  margin-bottom: 0.15rem;
+  font-size: 0.57rem;
+}
+
+.legend span:not(.legendTitle) {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.legendDot {
+  display: inline-block;
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 3px solid #d2643a;
+  border-radius: 50%;
+  background: #fff2d8;
+}
+
+.legendHub {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-width: 2px;
+  border-color: #c68a27;
+}
+
+.legendLine {
+  display: inline-block;
+  width: 1.15rem;
+  border-top: 3px solid #d96c40;
+}
+
+.legendDashed {
+  border-top-style: dashed;
+}
+
+.mapColumn {
+  min-width: 0;
+}
+
+.mapHeader {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.4rem 0.7rem 1rem;
+}
+
+.mapHeader h2 {
+  margin-top: 0.28rem;
+  color: #30353a;
+  font-size: clamp(1.7rem, 3vw, 2.8rem);
+}
+
+.mapHint {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.42rem;
+  padding: 0.48rem 0.65rem;
+  border: 1px solid rgba(52, 44, 33, 0.23);
+  border-radius: 999px;
+  color: #775c46;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.mapFrame {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 1664 / 2080;
+  border: 0.5rem solid #21333b;
+  border-radius: 0.75rem;
+  background: #21333b;
+  box-shadow: 0 1.6rem 3rem rgba(29, 36, 37, 0.27);
+}
+
+.mapImage,
+.routeOverlay,
+.markerLayer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.mapImage {
+  display: block;
+  object-fit: fill;
+}
+
+.routeOverlay {
+  z-index: 2;
+  overflow: visible;
+  pointer-events: none;
+}
+
+.routePath {
+  fill: none;
+  stroke: rgba(93, 72, 51, 0.2);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+  transition: stroke 180ms ease, opacity 180ms ease;
+}
+
+.routePathScenic {
+  stroke-dasharray: 14 14;
+}
+
+.routePathActive {
+  stroke: #c64d31;
+  stroke-width: 13;
+  opacity: 0.95;
+}
+
+.activeHalo {
+  fill: none;
+  stroke: rgba(255, 237, 192, 0.94);
+  stroke-width: 25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+.markerLayer {
+  z-index: 3;
+  pointer-events: none;
+}
+
+.marker {
+  position: absolute;
+  display: grid;
+  place-items: center;
+  width: 1.9rem;
+  height: 1.9rem;
+  padding: 0;
+  border: 3px solid #c55a34;
+  border-radius: 50%;
+  background: #fff5dc;
+  color: #26343a;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: width 160ms ease, height 160ms ease, box-shadow 160ms ease, transform 160ms ease, background 160ms ease;
+}
+
+.marker:hover,
+.marker:focus-visible {
+  z-index: 5;
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 241, 197, 0.82), 0 0 1rem rgba(170, 67, 38, 0.55);
+  transform: translate(-50%, -50%) scale(1.16);
+}
+
+.markerHub {
+  width: 1.35rem;
+  height: 1.35rem;
+  border-width: 3px;
+  border-color: #c99121;
+  background: #fff8e6;
+}
+
+.markerArrival {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-color: #b85032;
+  background: #b85032;
+  color: #fff5dc;
+}
+
+.markerCore {
+  font-size: 0.82rem;
+  line-height: 1;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.65);
+}
+
+.markerArrival .markerCore {
+  font-size: 0.9rem;
+  text-shadow: none;
+}
+
+.markerLabel {
+  position: absolute;
+  top: calc(100% + 0.24rem);
+  left: 50%;
+  width: max-content;
+  max-width: 10rem;
+  padding: 0.17rem 0.3rem;
+  border-radius: 0.2rem;
+  background: rgba(28, 42, 52, 0.9);
+  color: #fff6e4;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: clamp(0.42rem, 0.68vw, 0.65rem);
+  letter-spacing: 0.02em;
+  line-height: 1.1;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-50%) translateY(-0.15rem);
+  transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.marker:hover .markerLabel,
+.marker:focus-visible .markerLabel,
+.markerSelected .markerLabel,
+.markerActive .markerLabel {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.markerActive {
+  box-shadow: 0 0 0 3px rgba(255, 242, 192, 0.9);
+}
+
+.markerSelected {
+  z-index: 6;
+  background: #c64d31;
+  border-color: #fff2d2;
+  color: #fff7e5;
+  transform: translate(-50%, -50%) scale(1.24);
+  box-shadow: 0 0 0 5px rgba(198, 77, 49, 0.25), 0 0 1rem rgba(198, 77, 49, 0.55);
+}
+
+.markerHub.markerSelected {
+  background: #c99121;
+}
+
+.placeCard {
+  position: absolute;
+  z-index: 8;
+  right: 1rem;
+  bottom: 1rem;
+  width: min(21rem, calc(100% - 2rem));
+  padding: 1.15rem 1.2rem 1.1rem;
+  border: 1px solid rgba(255, 245, 216, 0.4);
+  border-radius: 0.85rem;
+  background: rgba(28, 42, 52, 0.95);
+  color: #f8efd9;
+  box-shadow: 0 1rem 2.5rem rgba(19, 26, 28, 0.4);
+}
+
+.closeButton {
+  position: absolute;
+  top: 0.7rem;
+  right: 0.7rem;
+  display: grid;
+  place-items: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border: 1px solid rgba(255, 245, 216, 0.3);
+  border-radius: 50%;
+  background: transparent;
+  color: #f5e6c7;
+  cursor: pointer;
+}
+
+.closeButton:hover,
+.closeButton:focus-visible {
+  background: rgba(255, 255, 255, 0.12);
+  outline: none;
+}
+
+.placeCard h3 {
+  margin-top: 0.45rem;
+  padding-right: 1.4rem;
+  color: #fff1d4;
+  font-size: 2rem;
+}
+
+.placeCard p {
+  margin: 0.65rem 0 0;
+  color: #cec4ad;
+  font-size: 0.8rem;
+  line-height: 1.55;
+}
+
+.placeMeta,
+.activeNotice {
+  display: flex;
+  align-items: center;
+  gap: 0.38rem;
+  margin-top: 0.8rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.03em;
+}
+
+.placeMeta {
+  color: #d9a574;
+}
+
+.activeNotice {
+  padding-top: 0.7rem;
+  border-top: 1px solid rgba(255, 245, 216, 0.15);
+  color: #f0b48e;
+}
+
+.caption {
+  margin: 0.85rem 0.7rem 0;
+  color: #6c6252;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  line-height: 1.6;
+}
+
+.loading {
+  display: grid;
+  min-height: 60vh;
+  place-items: center;
+  color: #5b4f40;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 980px) {
+  .heroGrid,
+  .workspace {
+    grid-template-columns: 1fr;
+  }
+
+  .hero h1 {
+    max-width: 13ch;
+  }
+
+  .calibrationCard {
+    max-width: 28rem;
+  }
+
+  .sidebar {
+    order: 2;
+  }
+}
+
+@media (max-width: 620px) {
+  .page {
+    padding: 2rem 0.65rem 3rem;
+  }
+
+  .workspace {
+    padding: 0.55rem;
+    border-radius: 0.8rem;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.8rem, 15vw, 4.6rem);
+  }
+
+  .mapHeader {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .mapHint {
+    font-size: 0.55rem;
+  }
+
+  .mapFrame {
+    border-width: 0.3rem;
+  }
+
+  .placeCard {
+    right: 0.55rem;
+    bottom: 0.55rem;
+    width: calc(100% - 1.1rem);
+  }
+}
