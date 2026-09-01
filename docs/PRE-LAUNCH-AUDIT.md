@@ -599,6 +599,16 @@ demo but is presumably not fine for launch.
 ## Phase 10 — Final pre-launch QA
 Do this last, once everything above is done.
 
+> **Production hosting decided, 2026-08-31**: Namecheap Stellar plan,
+> cPanel, `finelankatours.com` — Vercel stays as the preview/testing
+> deployment. Full setup and every-deploy steps in
+> `docs/CPANEL-DEPLOY.md`. `next.config.mjs` now has
+> `output: 'standalone'` and there's a new `pnpm build:cpanel` script
+> (`scripts/prepare-cpanel-deploy.mjs`) that assembles a ready-to-upload
+> `deploy/` folder, handling the well-known gotcha where Next.js's
+> standalone output doesn't automatically include `public/` or
+> `.next/static`.
+
 - [ ] Add the destination video files per `public/videos/destinations/README.md`
   (your note — just listing it here so it's on the one master checklist).
   When you do, keep clips short (6–15s) and compressed — same size
