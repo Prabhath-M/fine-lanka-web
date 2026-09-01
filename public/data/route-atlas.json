@@ -2,15 +2,15 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "manual-artwork-coordinates + validated-road-graph-2026-09-01",
+  "calibration": "manual-artwork-coordinates + vision-audited-visible-corridors-2026-09-01",
   "source": {
-    "map": "Fixed illustrated all-hubs atlas artwork; image-space coordinates preserve the artwork registration.",
-    "routes": "Validated OSRM road segments derived from OpenStreetMap-backed routing.",
+    "map": "Fixed illustrated all-hubs atlas artwork; only visible orange corridors are included in the route graph.",
+    "routes": "Validated OSRM road segments cross-checked against the visible orange corridors by a vision audit.",
     "itineraryRule": "All visitor journeys are normalized to begin and end at Bandaranaike International Airport."
   },
   "networkStats": {
     "markerCount": 62,
-    "edgeCount": 106,
+    "edgeCount": 81,
     "primaryCount": 39,
     "hubCount": 23,
     "itineraryCount": 13,
@@ -541,7 +541,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 73.6,
       "durationMin": 86,
-      "sourceKey": "Airport__Pinnawala"
+      "sourceKey": "Airport__Pinnawala",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kurunegala-pinnawala",
@@ -557,7 +558,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 27.9,
       "durationMin": 34,
-      "sourceKey": "Pinnawala__Kurunegala"
+      "sourceKey": "Pinnawala__Kurunegala",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "dambulla-kurunegala",
@@ -573,7 +575,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 56.3,
       "durationMin": 61,
-      "sourceKey": "Kurunegala__Dambulla"
+      "sourceKey": "Kurunegala__Dambulla",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "dambulla-sigiriya",
@@ -589,39 +592,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 17,
       "durationMin": 23,
-      "sourceKey": "Dambulla__Sigiriya"
-    },
-    {
-      "id": "kandy-sigiriya",
-      "from": "sigiriya",
-      "to": "kandy",
-      "via": [
-        [
-          833,
-          837.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 89,
-      "durationMin": 108,
-      "sourceKey": "Sigiriya__Kandy"
-    },
-    {
-      "id": "airport-kandy",
-      "from": "kandy",
-      "to": "airport",
-      "via": [
-        [
-          544,
-          1026.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 112.1,
-      "durationMin": 115,
-      "sourceKey": "Kandy__Airport"
+      "sourceKey": "Dambulla__Sigiriya",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kurunegala-yapahuwa",
@@ -637,7 +609,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 48.1,
       "durationMin": 63,
-      "sourceKey": "Kurunegala__Yapahuwa"
+      "sourceKey": "Kurunegala__Yapahuwa",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "anuradhapura-yapahuwa",
@@ -653,7 +626,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 73.9,
       "durationMin": 94,
-      "sourceKey": "Yapahuwa__Anuradhapura"
+      "sourceKey": "Yapahuwa__Anuradhapura",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "anuradhapura-mihintale",
@@ -669,7 +643,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 16.1,
       "durationMin": 21,
-      "sourceKey": "Anuradhapura__Mihintale"
+      "sourceKey": "Anuradhapura__Mihintale",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "aukana-mihintale",
@@ -685,7 +660,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 48.9,
       "durationMin": 60,
-      "sourceKey": "Mihintale__Aukana"
+      "sourceKey": "Mihintale__Aukana",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "aukana-ritigala",
@@ -701,7 +677,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 38.5,
       "durationMin": 63,
-      "sourceKey": "Aukana__Ritigala"
+      "sourceKey": "Aukana__Ritigala",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "ritigala-sigiriya",
@@ -717,39 +694,29 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 32.2,
       "durationMin": 59,
-      "sourceKey": "Ritigala__Sigiriya"
+      "sourceKey": "Ritigala__Sigiriya",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
-      "id": "polonnaruwa-sigiriya",
+      "id": "sigiriya-polonnaruwa",
       "from": "sigiriya",
       "to": "polonnaruwa",
       "via": [
         [
-          951.5,
-          668.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 63.5,
-      "durationMin": 75,
-      "sourceKey": "Sigiriya__Polonnaruwa"
-    },
-    {
-      "id": "dambulla-polonnaruwa",
-      "from": "polonnaruwa",
-      "to": "dambulla",
-      "via": [
+          910,
+          650
+        ],
         [
-          930.5,
-          718
+          980,
+          690
         ]
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "distanceKm": 75.8,
-      "durationMin": 84,
-      "sourceKey": "Polonnaruwa__Dambulla"
+      "distanceKm": 55,
+      "durationMin": 70,
+      "sourceKey": "RDA A011 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
     },
     {
       "id": "dambulla-matale",
@@ -765,7 +732,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 20.7,
       "durationMin": 24,
-      "sourceKey": "Dambulla__Matale"
+      "sourceKey": "Dambulla__Matale",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kandy-matale",
@@ -781,7 +749,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 53.8,
       "durationMin": 67,
-      "sourceKey": "Matale__Kandy"
+      "sourceKey": "Matale__Kandy",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kandy-ramboda",
@@ -797,7 +766,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 50.7,
       "durationMin": 63,
-      "sourceKey": "Kandy__Ramboda"
+      "sourceKey": "Kandy__Ramboda",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "nuwara-eliya-ramboda",
@@ -813,7 +783,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 20.2,
       "durationMin": 32,
-      "sourceKey": "Ramboda__Nuwara Eliya"
+      "sourceKey": "Ramboda__Nuwara Eliya",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "haputale-nuwara-eliya",
@@ -829,7 +800,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 52.6,
       "durationMin": 71,
-      "sourceKey": "Nuwara Eliya__Haputale"
+      "sourceKey": "Nuwara Eliya__Haputale",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "ella-haputale",
@@ -845,7 +817,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 21.9,
       "durationMin": 26,
-      "sourceKey": "Haputale__Ella"
+      "sourceKey": "Haputale__Ella",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "badulla-ella",
@@ -861,23 +834,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 19.9,
       "durationMin": 26,
-      "sourceKey": "Ella__Badulla"
-    },
-    {
-      "id": "badulla-mahiyanganaya",
-      "from": "badulla",
-      "to": "mahiyanganaya",
-      "via": [
-        [
-          1077.5,
-          1106
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 52.8,
-      "durationMin": 66,
-      "sourceKey": "Badulla__Mahiyanganaya"
+      "sourceKey": "Ella__Badulla",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "dambana-mahiyanganaya",
@@ -893,23 +851,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 19.1,
       "durationMin": 25,
-      "sourceKey": "Mahiyanganaya__Dambana"
-    },
-    {
-      "id": "dambana-tissamaharama",
-      "from": "dambana",
-      "to": "tissamaharama",
-      "via": [
-        [
-          1077.5,
-          1347
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 154.6,
-      "durationMin": 181,
-      "sourceKey": "Dambana__Tissamaharama"
+      "sourceKey": "Mahiyanganaya__Dambana",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kataragama-tissamaharama",
@@ -925,7 +868,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 17.3,
       "durationMin": 19,
-      "sourceKey": "Tissamaharama__Kataragama"
+      "sourceKey": "Tissamaharama__Kataragama",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kataragama-yala",
@@ -941,23 +885,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 34.1,
       "durationMin": 88,
-      "sourceKey": "Kataragama__Yala"
-    },
-    {
-      "id": "airport-yala",
-      "from": "yala",
-      "to": "airport",
-      "via": [
-        [
-          810,
-          1356
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 316.6,
-      "durationMin": 314,
-      "sourceKey": "Yala__Airport"
+      "sourceKey": "Kataragama__Yala",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "hatton-nuwara-eliya",
@@ -973,7 +902,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 45.5,
       "durationMin": 59,
-      "sourceKey": "Nuwara Eliya__Hatton"
+      "sourceKey": "Nuwara Eliya__Hatton",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "ella-hatton",
@@ -989,7 +919,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 93.7,
       "durationMin": 113,
-      "sourceKey": "Hatton__Ella"
+      "sourceKey": "Hatton__Ella",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "ella-wellawaya",
@@ -1005,7 +936,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 27.3,
       "durationMin": 34,
-      "sourceKey": "Ella__Wellawaya"
+      "sourceKey": "Ella__Wellawaya",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "diyaluma-wellawaya",
@@ -1021,55 +953,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 12.9,
       "durationMin": 13,
-      "sourceKey": "Wellawaya__Diyaluma"
-    },
-    {
-      "id": "diyaluma-ratnapura",
-      "from": "diyaluma",
-      "to": "ratnapura",
-      "via": [
-        [
-          818.5,
-          1513
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 82.2,
-      "durationMin": 91,
-      "sourceKey": "Diyaluma__Ratnapura"
-    },
-    {
-      "id": "airport-ratnapura",
-      "from": "ratnapura",
-      "to": "airport",
-      "via": [
-        [
-          362.5,
-          1263.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 144.6,
-      "durationMin": 145,
-      "sourceKey": "Ratnapura__Airport"
-    },
-    {
-      "id": "airport-kurunegala",
-      "from": "airport",
-      "to": "kurunegala",
-      "via": [
-        [
-          400.5,
-          923.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 72.3,
-      "durationMin": 73,
-      "sourceKey": "Airport__Kurunegala"
+      "sourceKey": "Wellawaya__Diyaluma",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "matale-sigiriya",
@@ -1085,7 +970,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 37.7,
       "durationMin": 47,
-      "sourceKey": "Sigiriya__Matale"
+      "sourceKey": "Sigiriya__Matale",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "knuckles-matale",
@@ -1101,7 +987,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 95,
       "durationMin": 130,
-      "sourceKey": "Matale__Knuckles"
+      "sourceKey": "Matale__Knuckles",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "knuckles-meemure",
@@ -1117,7 +1004,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 19.5,
       "durationMin": 41,
-      "sourceKey": "Knuckles__Meemure"
+      "sourceKey": "Knuckles__Meemure",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kandy-meemure",
@@ -1133,7 +1021,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 59.8,
       "durationMin": 109,
-      "sourceKey": "Meemure__Kandy"
+      "sourceKey": "Meemure__Kandy",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "gampola-kandy",
@@ -1149,23 +1038,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 20.1,
       "durationMin": 25,
-      "sourceKey": "Kandy__Gampola"
-    },
-    {
-      "id": "gampola-nallathanni",
-      "from": "gampola",
-      "to": "nallathanni",
-      "via": [
-        [
-          835,
-          1244.5
-        ]
-      ],
-      "kind": "scenic",
-      "roadClass": "scenic / local connector",
-      "distanceKm": 67.3,
-      "durationMin": 84,
-      "sourceKey": "Gampola__Nallathanni"
+      "sourceKey": "Kandy__Gampola",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "adams-peak-nallathanni",
@@ -1181,23 +1055,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 2.8,
       "durationMin": 12,
-      "sourceKey": "Nallathanni__Adam's Peak"
-    },
-    {
-      "id": "adams-peak-nuwara-eliya",
-      "from": "adams-peak",
-      "to": "nuwara-eliya",
-      "via": [
-        [
-          770,
-          1385.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 77.8,
-      "durationMin": 109,
-      "sourceKey": "Adam's Peak__Nuwara Eliya"
+      "sourceKey": "Nallathanni__Adam's Peak",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "horton-plains-nuwara-eliya",
@@ -1213,7 +1072,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 35.6,
       "durationMin": 51,
-      "sourceKey": "Nuwara Eliya__Horton Plains"
+      "sourceKey": "Nuwara Eliya__Horton Plains",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "haputale-horton-plains",
@@ -1229,7 +1089,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 34,
       "durationMin": 43,
-      "sourceKey": "Horton Plains__Haputale"
+      "sourceKey": "Horton Plains__Haputale",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "haputale-liptons-seat",
@@ -1245,7 +1106,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 0.4,
       "durationMin": 1,
-      "sourceKey": "Haputale__Lipton's Seat"
+      "sourceKey": "Haputale__Lipton's Seat",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "ella-liptons-seat",
@@ -1261,7 +1123,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 21.6,
       "durationMin": 25,
-      "sourceKey": "Lipton's Seat__Ella"
+      "sourceKey": "Lipton's Seat__Ella",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "dunhinda-ella",
@@ -1277,23 +1140,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 24.3,
       "durationMin": 38,
-      "sourceKey": "Ella__Dunhinda"
-    },
-    {
-      "id": "airport-dunhinda",
-      "from": "dunhinda",
-      "to": "airport",
-      "via": [
-        [
-          713.5,
-          1221.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 223.4,
-      "durationMin": 252,
-      "sourceKey": "Dunhinda__Airport"
+      "sourceKey": "Ella__Dunhinda",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "airport-colombo",
@@ -1309,7 +1157,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 31.5,
       "durationMin": 27,
-      "sourceKey": "Airport__Colombo"
+      "sourceKey": "Airport__Colombo",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "colombo-kitulgala",
@@ -1325,7 +1174,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 86.3,
       "durationMin": 109,
-      "sourceKey": "Colombo__Kitulgala"
+      "sourceKey": "Colombo__Kitulgala",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kitulgala-nallathanni",
@@ -1341,39 +1191,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 57.1,
       "durationMin": 72,
-      "sourceKey": "Kitulgala__Nallathanni"
-    },
-    {
-      "id": "badulla-knuckles",
-      "from": "badulla",
-      "to": "knuckles",
-      "via": [
-        [
-          900.5,
-          1195
-        ]
-      ],
-      "kind": "scenic",
-      "roadClass": "scenic / local connector",
-      "distanceKm": 91.9,
-      "durationMin": 127,
-      "sourceKey": "Badulla__Knuckles"
-    },
-    {
-      "id": "kurunegala-sigiriya",
-      "from": "sigiriya",
-      "to": "kurunegala",
-      "via": [
-        [
-          689.5,
-          734.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 73.6,
-      "durationMin": 84,
-      "sourceKey": "Sigiriya__Kurunegala"
+      "sourceKey": "Kitulgala__Nallathanni",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kurunegala-negombo",
@@ -1389,7 +1208,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 79.2,
       "durationMin": 86,
-      "sourceKey": "Kurunegala__Negombo"
+      "sourceKey": "Kurunegala__Negombo",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "airport-negombo",
@@ -1405,7 +1225,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 11.1,
       "durationMin": 14,
-      "sourceKey": "Negombo__Airport"
+      "sourceKey": "Negombo__Airport",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "negombo-puttalam",
@@ -1421,7 +1242,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 92.5,
       "durationMin": 101,
-      "sourceKey": "Negombo__Puttalam"
+      "sourceKey": "Negombo__Puttalam",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kalpitiya-puttalam",
@@ -1437,7 +1259,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 40.2,
       "durationMin": 52,
-      "sourceKey": "Puttalam__Kalpitiya"
+      "sourceKey": "Puttalam__Kalpitiya",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kalpitiya-mannar",
@@ -1453,23 +1276,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 201,
       "durationMin": 249,
-      "sourceKey": "Kalpitiya__Mannar"
-    },
-    {
-      "id": "jaffna-mannar",
-      "from": "mannar",
-      "to": "jaffna",
-      "via": [
-        [
-          434.5,
-          237
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 118.2,
-      "durationMin": 143,
-      "sourceKey": "Mannar__Jaffna"
+      "sourceKey": "Kalpitiya__Mannar",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "jaffna-vavuniya",
@@ -1485,7 +1293,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 138.5,
       "durationMin": 162,
-      "sourceKey": "Jaffna__Vavuniya"
+      "sourceKey": "Jaffna__Vavuniya",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "anuradhapura-vavuniya",
@@ -1501,23 +1310,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 60.4,
       "durationMin": 75,
-      "sourceKey": "Vavuniya__Anuradhapura"
-    },
-    {
-      "id": "anuradhapura-trincomalee",
-      "from": "anuradhapura",
-      "to": "trincomalee",
-      "via": [
-        [
-          842,
-          526
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 107,
-      "durationMin": 119,
-      "sourceKey": "Anuradhapura__Trincomalee"
+      "sourceKey": "Vavuniya__Anuradhapura",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "habarana-trincomalee",
@@ -1533,7 +1327,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 85.5,
       "durationMin": 100,
-      "sourceKey": "Trincomalee__Habarana"
+      "sourceKey": "Trincomalee__Habarana",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "habarana-sigiriya",
@@ -1549,23 +1344,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 12.6,
       "durationMin": 20,
-      "sourceKey": "Habarana__Sigiriya"
-    },
-    {
-      "id": "pinnawala-sigiriya",
-      "from": "sigiriya",
-      "to": "pinnawala",
-      "via": [
-        [
-          675,
-          899
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 101.1,
-      "durationMin": 118,
-      "sourceKey": "Sigiriya__Pinnawala"
+      "sourceKey": "Habarana__Sigiriya",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "negombo-pinnawala",
@@ -1581,7 +1361,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 80.9,
       "durationMin": 98,
-      "sourceKey": "Pinnawala__Negombo"
+      "sourceKey": "Pinnawala__Negombo",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kandy-pinnawala",
@@ -1597,7 +1378,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 39.7,
       "durationMin": 48,
-      "sourceKey": "Pinnawala__Kandy"
+      "sourceKey": "Pinnawala__Kandy",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "hatton-kitulgala",
@@ -1613,7 +1395,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 38.9,
       "durationMin": 47,
-      "sourceKey": "Hatton__Kitulgala"
+      "sourceKey": "Hatton__Kitulgala",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "avissawella-kitulgala",
@@ -1629,7 +1412,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 40.3,
       "durationMin": 51,
-      "sourceKey": "Kitulgala__Avissawella"
+      "sourceKey": "Kitulgala__Avissawella",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "avissawella-ratnapura",
@@ -1645,55 +1429,46 @@
       "roadClass": "main-road corridor",
       "distanceKm": 69.2,
       "durationMin": 76,
-      "sourceKey": "Avissawella__Ratnapura"
+      "sourceKey": "Avissawella__Ratnapura",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
-      "id": "matara-ratnapura",
-      "from": "ratnapura",
+      "id": "mirissa-matara",
+      "from": "mirissa",
       "to": "matara",
       "via": [
         [
-          631.5,
-          1732.5
+          700,
+          1940
         ]
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "distanceKm": 128.9,
-      "durationMin": 123,
-      "sourceKey": "Ratnapura__Matara"
-    },
-    {
-      "id": "matara-mirissa",
-      "from": "matara",
-      "to": "mirissa",
-      "via": [
-        [
-          759,
-          1949
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 11.1,
-      "durationMin": 14,
-      "sourceKey": "Matara__Mirissa"
+      "distanceKm": 12,
+      "durationMin": 18,
+      "sourceKey": "RDA A002 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
     },
     {
       "id": "galle-mirissa",
-      "from": "mirissa",
-      "to": "galle",
+      "from": "galle",
+      "to": "mirissa",
       "via": [
         [
-          624.5,
-          1902.5
+          550,
+          1860
+        ],
+        [
+          650,
+          1915
         ]
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "distanceKm": 33,
-      "durationMin": 36,
-      "sourceKey": "Mirissa__Galle"
+      "distanceKm": 42,
+      "durationMin": 55,
+      "sourceKey": "RDA A002 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
     },
     {
       "id": "bentota-galle",
@@ -1709,39 +1484,29 @@
       "roadClass": "main-road corridor",
       "distanceKm": 54.9,
       "durationMin": 62,
-      "sourceKey": "Galle__Bentota"
+      "sourceKey": "Galle__Bentota",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
-      "id": "airport-bentota",
-      "from": "bentota",
-      "to": "airport",
-      "via": [
-        [
-          378,
-          1362
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 106.5,
-      "durationMin": 89,
-      "sourceKey": "Bentota__Airport"
-    },
-    {
-      "id": "pasikudah-polonnaruwa",
+      "id": "polonnaruwa-pasikudah",
       "from": "polonnaruwa",
       "to": "pasikudah",
       "via": [
         [
-          1143,
-          721
+          1110,
+          700
+        ],
+        [
+          1190,
+          720
         ]
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "distanceKm": 77.7,
-      "durationMin": 92,
-      "sourceKey": "Polonnaruwa__Pasikudah"
+      "distanceKm": 92,
+      "durationMin": 115,
+      "sourceKey": "RDA A011 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
     },
     {
       "id": "batticaloa-pasikudah",
@@ -1757,7 +1522,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 11.6,
       "durationMin": 19,
-      "sourceKey": "Pasikudah__Batticaloa"
+      "sourceKey": "Pasikudah__Batticaloa",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "arugam-bay-batticaloa",
@@ -1773,7 +1539,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 134.7,
       "durationMin": 157,
-      "sourceKey": "Batticaloa__Arugam Bay"
+      "sourceKey": "Batticaloa__Arugam Bay",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "arugam-bay-pottuvil",
@@ -1789,7 +1556,8 @@
       "roadClass": "scenic / local connector",
       "distanceKm": 3.1,
       "durationMin": 4,
-      "sourceKey": "Arugam Bay__Pottuvil"
+      "sourceKey": "Arugam Bay__Pottuvil",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "kataragama-pottuvil",
@@ -1805,7 +1573,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 131.4,
       "durationMin": 142,
-      "sourceKey": "Pottuvil__Kataragama"
+      "sourceKey": "Pottuvil__Kataragama",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "tissamaharama-yala",
@@ -1813,31 +1582,16 @@
       "to": "yala",
       "via": [
         [
-          1221.5,
-          1718.5
+          1220,
+          1650
         ]
       ],
       "kind": "scenic",
       "roadClass": "scenic / local connector",
-      "distanceKm": 51.5,
-      "durationMin": 107,
-      "sourceKey": "Tissamaharama__Yala"
-    },
-    {
-      "id": "tangalle-yala",
-      "from": "yala",
-      "to": "tangalle",
-      "via": [
-        [
-          1165.5,
-          1799.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 120.5,
-      "durationMin": 173,
-      "sourceKey": "Yala__Tangalle"
+      "distanceKm": 22,
+      "durationMin": 35,
+      "sourceKey": "artwork corridor",
+      "artworkAudit": "redrawn_from_real_corridor"
     },
     {
       "id": "matara-tangalle",
@@ -1853,23 +1607,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 36.5,
       "durationMin": 40,
-      "sourceKey": "Tangalle__Matara"
-    },
-    {
-      "id": "airport-galle",
-      "from": "galle",
-      "to": "airport",
-      "via": [
-        [
-          419.5,
-          1432.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 151.5,
-      "durationMin": 120,
-      "sourceKey": "Galle__Airport"
+      "sourceKey": "Tangalle__Matara",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "avissawella-bentota",
@@ -1877,31 +1616,20 @@
       "to": "bentota",
       "via": [
         [
-          429.5,
-          1498.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 100.8,
-      "durationMin": 100,
-      "sourceKey": "Avissawella__Bentota"
-    },
-    {
-      "id": "ella-nuwara-eliya",
-      "from": "nuwara-eliya",
-      "to": "ella",
-      "via": [
+          370,
+          1420
+        ],
         [
-          899,
-          1423.5
+          420,
+          1560
         ]
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "distanceKm": 63.1,
-      "durationMin": 86,
-      "sourceKey": "Nuwara Eliya__Ella"
+      "distanceKm": 100,
+      "durationMin": 145,
+      "sourceKey": "RDA A004 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
     },
     {
       "id": "udawalawe-wellawaya",
@@ -1917,7 +1645,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 72.5,
       "durationMin": 88,
-      "sourceKey": "Wellawaya__Udawalawe"
+      "sourceKey": "Wellawaya__Udawalawe",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "tissamaharama-udawalawe",
@@ -1933,71 +1662,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 77.7,
       "durationMin": 78,
-      "sourceKey": "Udawalawe__Tissamaharama"
-    },
-    {
-      "id": "matara-tissamaharama",
-      "from": "tissamaharama",
-      "to": "matara",
-      "via": [
-        [
-          965.5,
-          1841.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 113.9,
-      "durationMin": 99,
-      "sourceKey": "Tissamaharama__Matara"
-    },
-    {
-      "id": "negombo-trincomalee",
-      "from": "negombo",
-      "to": "trincomalee",
-      "via": [
-        [
-          719.5,
-          758
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 243.7,
-      "durationMin": 268,
-      "sourceKey": "Negombo__Trincomalee"
-    },
-    {
-      "id": "dambulla-kandy",
-      "from": "dambulla",
-      "to": "kandy",
-      "via": [
-        [
-          812,
-          887
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 72.1,
-      "durationMin": 85,
-      "sourceKey": "Dambulla__Kandy"
-    },
-    {
-      "id": "arugam-bay-wellawaya",
-      "from": "wellawaya",
-      "to": "arugam-bay",
-      "via": [
-        [
-          1253.5,
-          1402
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 105.9,
-      "durationMin": 114,
-      "sourceKey": "Wellawaya__Arugam Bay"
+      "sourceKey": "Udawalawe__Tissamaharama",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "chilaw-negombo",
@@ -2013,23 +1679,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 44.8,
       "durationMin": 49,
-      "sourceKey": "Negombo__Chilaw"
-    },
-    {
-      "id": "chilaw-mannar",
-      "from": "chilaw",
-      "to": "mannar",
-      "via": [
-        [
-          347.5,
-          581
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 207.4,
-      "durationMin": 249,
-      "sourceKey": "Chilaw__Mannar"
+      "sourceKey": "Negombo__Chilaw",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "trincomalee-vavuniya",
@@ -2045,23 +1696,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 97.6,
       "durationMin": 114,
-      "sourceKey": "Vavuniya__Trincomalee"
-    },
-    {
-      "id": "galle-wellawaya",
-      "from": "wellawaya",
-      "to": "galle",
-      "via": [
-        [
-          800.5,
-          1724.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 171.5,
-      "durationMin": 151,
-      "sourceKey": "Wellawaya__Galle"
+      "sourceKey": "Vavuniya__Trincomalee",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "galle-unawatuna",
@@ -2077,23 +1713,8 @@
       "roadClass": "main-road corridor",
       "distanceKm": 4.7,
       "durationMin": 6,
-      "sourceKey": "Galle__Unawatuna"
-    },
-    {
-      "id": "airport-unawatuna",
-      "from": "unawatuna",
-      "to": "airport",
-      "via": [
-        [
-          444,
-          1469
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "distanceKm": 149.7,
-      "durationMin": 118,
-      "sourceKey": "Unawatuna__Airport"
+      "sourceKey": "Galle__Unawatuna",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "airport-katunayake",
@@ -2107,7 +1728,8 @@
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "sourceKey": "Airport__Katunayake"
+      "sourceKey": "Airport__Katunayake",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "katunayake-negombo",
@@ -2121,21 +1743,8 @@
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "sourceKey": "Katunayake__Negombo"
-    },
-    {
-      "id": "ibbagamuwa-pinnawala",
-      "from": "pinnawala",
-      "to": "ibbagamuwa",
-      "via": [
-        [
-          496,
-          1034.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "sourceKey": "Pinnawala__Ibbagamuwa"
+      "sourceKey": "Katunayake__Negombo",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "ibbagamuwa-melsiripura",
@@ -2149,7 +1758,8 @@
       ],
       "kind": "scenic",
       "roadClass": "scenic / local connector",
-      "sourceKey": "Ibbagamuwa__Melsiripura"
+      "sourceKey": "Ibbagamuwa__Melsiripura",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "galewela-melsiripura",
@@ -2163,7 +1773,8 @@
       ],
       "kind": "scenic",
       "roadClass": "scenic / local connector",
-      "sourceKey": "Melsiripura__Galewela"
+      "sourceKey": "Melsiripura__Galewela",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "dambulla-galewela",
@@ -2177,21 +1788,8 @@
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "sourceKey": "Galewela__Dambulla"
-    },
-    {
-      "id": "habarana-polonnaruwa",
-      "from": "habarana",
-      "to": "polonnaruwa",
-      "via": [
-        [
-          917.5,
-          646.5
-        ]
-      ],
-      "kind": "main",
-      "roadClass": "main-road corridor",
-      "sourceKey": "Habarana__Polonnaruwa"
+      "sourceKey": "Galewela__Dambulla",
+      "artworkAudit": "artwork_path_preserved"
     },
     {
       "id": "badulla-dunhinda",
@@ -2205,21 +1803,158 @@
       ],
       "kind": "main",
       "roadClass": "main-road corridor",
-      "sourceKey": "Badulla__Dunhinda"
+      "sourceKey": "Badulla__Dunhinda",
+      "artworkAudit": "artwork_path_preserved"
+    },
+    {
+      "id": "anuradhapura-habarana",
+      "from": "anuradhapura",
+      "to": "habarana",
+      "via": [
+        [
+          650,
+          520
+        ],
+        [
+          730,
+          555
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 62,
+      "durationMin": 75,
+      "sourceKey": "RDA AA011 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
+    },
+    {
+      "id": "puttalam-mannar",
+      "from": "puttalam",
+      "to": "mannar",
+      "via": [
+        [
+          330,
+          620
+        ],
+        [
+          345,
+          520
+        ],
+        [
+          360,
+          440
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 145,
+      "durationMin": 175,
+      "sourceKey": "RDA A014 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
+    },
+    {
+      "id": "kandy-mahiyanganaya",
+      "from": "kandy",
+      "to": "mahiyanganaya",
+      "via": [
+        [
+          880,
+          1010
+        ],
+        [
+          960,
+          900
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 75,
+      "durationMin": 110,
+      "sourceKey": "RDA A026 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
+    },
+    {
+      "id": "badulla-dambana",
+      "from": "badulla",
+      "to": "dambana",
+      "via": [
+        [
+          1060,
+          1240
+        ],
+        [
+          1050,
+          1080
+        ],
+        [
+          1047,
+          970
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 84,
+      "durationMin": 130,
+      "sourceKey": "RDA B057 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
+    },
+    {
+      "id": "wellawaya-tissamaharama",
+      "from": "wellawaya",
+      "to": "tissamaharama",
+      "via": [
+        [
+          1110,
+          1580
+        ],
+        [
+          1120,
+          1660
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 84,
+      "durationMin": 115,
+      "sourceKey": "RDA A002 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
+    },
+    {
+      "id": "colombo-avissawella",
+      "from": "colombo",
+      "to": "avissawella",
+      "via": [
+        [
+          300,
+          1160
+        ],
+        [
+          340,
+          1220
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 48,
+      "durationMin": 70,
+      "sourceKey": "RDA A004 / artwork redraw",
+      "artworkAudit": "redrawn_from_real_corridor"
     }
   ],
   "itineraries": [
     {
       "id": "cultural-triangle-escape",
       "label": "Cultural Triangle Escape",
-      "route": "Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Airport",
+      "route": "Bandaranaike Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "pinnawala",
         "kurunegala",
         "dambulla",
         "sigiriya",
+        "matale",
         "kandy",
+        "pinnawala",
         "airport"
       ],
       "markers": [
@@ -2228,6 +1963,7 @@
         "kurunegala",
         "dambulla",
         "sigiriya",
+        "matale",
         "kandy"
       ],
       "segments": [
@@ -2235,17 +1971,28 @@
         "kurunegala-pinnawala",
         "dambulla-kurunegala",
         "dambulla-sigiriya",
-        "kandy-sigiriya",
-        "airport-kandy"
+        "matale-sigiriya",
+        "kandy-matale",
+        "kandy-pinnawala"
       ],
-      "distanceKm": 376,
-      "durationMin": 427,
-      "airportToAirport": true
+      "distanceKm": 380,
+      "durationMin": 452,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "matale-sigiriya",
+        "kandy-matale",
+        "kandy-pinnawala",
+        "airport-pinnawala"
+      ]
     },
     {
       "id": "heritage-and-serenity",
       "label": "Heritage and Serenity Getaway",
-      "route": "Airport → Pinnawala → Kurunegala → Yapahuwa → Anuradhapura → Mihintale → Aukana → Ritigala → Sigiriya → Polonnaruwa → Dambulla → Matale → Kandy → Airport",
+      "route": "Bandaranaike Airport → Pinnawala → Kurunegala → Yapahuwa → Anuradhapura → Mihintale → Aukana → Ritigala → Sigiriya → Polonnaruwa → Dambulla → Matale → Kandy → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "pinnawala",
@@ -2257,9 +2004,11 @@
         "ritigala",
         "sigiriya",
         "polonnaruwa",
+        "sigiriya",
         "dambulla",
         "matale",
         "kandy",
+        "pinnawala",
         "airport"
       ],
       "markers": [
@@ -2286,20 +2035,37 @@
         "aukana-mihintale",
         "aukana-ritigala",
         "ritigala-sigiriya",
-        "polonnaruwa-sigiriya",
-        "dambulla-polonnaruwa",
+        "sigiriya-polonnaruwa",
+        "dambulla-sigiriya",
         "dambulla-matale",
         "kandy-matale",
-        "airport-kandy"
+        "kandy-pinnawala"
       ],
-      "distanceKm": 685,
-      "durationMin": 845,
-      "airportToAirport": true
+      "distanceKm": 674,
+      "durationMin": 868,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
+        "anuradhapura-mihintale",
+        "aukana-mihintale",
+        "aukana-ritigala",
+        "ritigala-sigiriya",
+        "sigiriya-polonnaruwa",
+        "sigiriya-polonnaruwa",
+        "dambulla-sigiriya",
+        "dambulla-matale",
+        "kandy-matale",
+        "kandy-pinnawala",
+        "airport-pinnawala"
+      ]
     },
     {
       "id": "through-ancient-kingdoms",
       "label": "Through Ancient Kingdoms",
-      "route": "Airport → Pinnawala → Kurunegala → Yapahuwa → Anuradhapura → Mihintale → Aukana → Ritigala → Sigiriya → Polonnaruwa → Dambulla → Matale → Kandy → Ramboda → Nuwara Eliya → Haputale → Ella → Badulla → Mahiyanganaya → Dambana → Tissamaharama → Kataragama → Yala → Airport",
+      "route": "Bandaranaike Airport → Pinnawala → Kurunegala → Yapahuwa → Anuradhapura → Mihintale → Aukana → Ritigala → Sigiriya → Polonnaruwa → Dambulla → Matale → Kandy → Ramboda → Nuwara Eliya → Haputale → Ella → Badulla → Mahiyanganaya → Dambana → Tissamaharama → Kataragama → Yala → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "pinnawala",
@@ -2311,6 +2077,7 @@
         "ritigala",
         "sigiriya",
         "polonnaruwa",
+        "sigiriya",
         "dambulla",
         "matale",
         "kandy",
@@ -2319,11 +2086,21 @@
         "haputale",
         "ella",
         "badulla",
+        "dambana",
         "mahiyanganaya",
         "dambana",
+        "badulla",
+        "ella",
+        "wellawaya",
         "tissamaharama",
         "kataragama",
         "yala",
+        "tissamaharama",
+        "wellawaya",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "colombo",
         "airport"
       ],
       "markers": [
@@ -2345,11 +2122,15 @@
         "haputale",
         "ella",
         "badulla",
-        "mahiyanganaya",
         "dambana",
+        "mahiyanganaya",
+        "wellawaya",
         "tissamaharama",
         "kataragama",
-        "yala"
+        "yala",
+        "hatton",
+        "kitulgala",
+        "colombo"
       ],
       "segments": [
         "airport-pinnawala",
@@ -2360,8 +2141,8 @@
         "aukana-mihintale",
         "aukana-ritigala",
         "ritigala-sigiriya",
-        "polonnaruwa-sigiriya",
-        "dambulla-polonnaruwa",
+        "sigiriya-polonnaruwa",
+        "dambulla-sigiriya",
         "dambulla-matale",
         "kandy-matale",
         "kandy-ramboda",
@@ -2369,23 +2150,65 @@
         "haputale-nuwara-eliya",
         "ella-haputale",
         "badulla-ella",
-        "badulla-mahiyanganaya",
+        "badulla-dambana",
         "dambana-mahiyanganaya",
-        "dambana-tissamaharama",
+        "ella-wellawaya",
+        "wellawaya-tissamaharama",
         "kataragama-tissamaharama",
         "kataragama-yala",
-        "airport-yala"
+        "tissamaharama-yala",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "colombo-kitulgala",
+        "airport-colombo"
       ],
-      "distanceKm": 1333,
-      "durationMin": 1641,
-      "airportToAirport": true
+      "distanceKm": 1499,
+      "durationMin": 2024,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
+        "anuradhapura-mihintale",
+        "aukana-mihintale",
+        "aukana-ritigala",
+        "ritigala-sigiriya",
+        "sigiriya-polonnaruwa",
+        "sigiriya-polonnaruwa",
+        "dambulla-sigiriya",
+        "dambulla-matale",
+        "kandy-matale",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
+        "badulla-ella",
+        "badulla-dambana",
+        "dambana-mahiyanganaya",
+        "dambana-mahiyanganaya",
+        "badulla-dambana",
+        "badulla-ella",
+        "ella-wellawaya",
+        "wellawaya-tissamaharama",
+        "kataragama-tissamaharama",
+        "kataragama-yala",
+        "tissamaharama-yala",
+        "wellawaya-tissamaharama",
+        "ella-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "colombo-kitulgala",
+        "airport-colombo"
+      ]
     },
     {
       "id": "highlands-and-waterfalls",
       "label": "Highlands and Waterfalls Getaway",
-      "route": "Airport → Kandy → Ramboda → Nuwara Eliya → Hatton → Ella → Wellawaya → Diyaluma → Ratnapura → Airport",
+      "route": "Bandaranaike Airport → Kandy → Ramboda → Nuwara Eliya → Hatton → Ella → Wellawaya → Diyaluma → Ratnapura → Bandaranaike Airport",
       "waypoints": [
         "airport",
+        "pinnawala",
         "kandy",
         "ramboda",
         "nuwara-eliya",
@@ -2393,11 +2216,19 @@
         "ella",
         "wellawaya",
         "diyaluma",
+        "wellawaya",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "avissawella",
         "ratnapura",
+        "avissawella",
+        "colombo",
         "airport"
       ],
       "markers": [
         "airport",
+        "pinnawala",
         "kandy",
         "ramboda",
         "nuwara-eliya",
@@ -2405,29 +2236,56 @@
         "ella",
         "wellawaya",
         "diyaluma",
-        "ratnapura"
+        "kitulgala",
+        "avissawella",
+        "ratnapura",
+        "colombo"
       ],
       "segments": [
-        "airport-kandy",
+        "airport-pinnawala",
+        "kandy-pinnawala",
         "kandy-ramboda",
         "nuwara-eliya-ramboda",
         "hatton-nuwara-eliya",
         "ella-hatton",
         "ella-wellawaya",
         "diyaluma-wellawaya",
-        "diyaluma-ratnapura",
-        "airport-ratnapura"
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-ratnapura",
+        "colombo-avissawella",
+        "airport-colombo"
       ],
-      "distanceKm": 589,
-      "durationMin": 665,
-      "airportToAirport": true
+      "distanceKm": 795,
+      "durationMin": 955,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kandy-pinnawala",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "ella-hatton",
+        "ella-wellawaya",
+        "diyaluma-wellawaya",
+        "diyaluma-wellawaya",
+        "ella-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-ratnapura",
+        "avissawella-ratnapura",
+        "colombo-avissawella",
+        "airport-colombo"
+      ]
     },
     {
       "id": "serene-bliss-exploration",
       "label": "Serene Bliss Exploration",
-      "route": "Airport → Kurunegala → Dambulla → Sigiriya → Matale → Knuckles → Meemure → Kandy → Gampola → Nallathanni → Adam's Peak → Nuwara Eliya → Horton Plains → Haputale → Lipton's Seat → Ella → Dunhinda → Airport",
+      "route": "Bandaranaike Airport → Kurunegala → Dambulla → Sigiriya → Matale → Knuckles → Meemure → Kandy → Gampola → Nallathanni → Adam's Peak → Nuwara Eliya → Horton Plains → Haputale → Lipton's Seat → Ella → Dunhinda → Bandaranaike Airport",
       "waypoints": [
         "airport",
+        "pinnawala",
         "kurunegala",
         "dambulla",
         "sigiriya",
@@ -2436,18 +2294,31 @@
         "meemure",
         "kandy",
         "gampola",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "kitulgala",
         "nallathanni",
         "adams-peak",
+        "nallathanni",
+        "kitulgala",
+        "hatton",
         "nuwara-eliya",
         "horton-plains",
         "haputale",
         "liptons-seat",
         "ella",
         "dunhinda",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "colombo",
         "airport"
       ],
       "markers": [
         "airport",
+        "pinnawala",
         "kurunegala",
         "dambulla",
         "sigiriya",
@@ -2456,17 +2327,22 @@
         "meemure",
         "kandy",
         "gampola",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "kitulgala",
         "nallathanni",
         "adams-peak",
-        "nuwara-eliya",
         "horton-plains",
         "haputale",
         "liptons-seat",
         "ella",
-        "dunhinda"
+        "dunhinda",
+        "colombo"
       ],
       "segments": [
-        "airport-kurunegala",
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
         "dambulla-kurunegala",
         "dambulla-sigiriya",
         "matale-sigiriya",
@@ -2474,39 +2350,84 @@
         "knuckles-meemure",
         "kandy-meemure",
         "gampola-kandy",
-        "gampola-nallathanni",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "hatton-kitulgala",
+        "kitulgala-nallathanni",
         "adams-peak-nallathanni",
-        "adams-peak-nuwara-eliya",
         "horton-plains-nuwara-eliya",
         "haputale-horton-plains",
         "haputale-liptons-seat",
         "ella-liptons-seat",
         "dunhinda-ella",
-        "airport-dunhinda"
+        "ella-hatton",
+        "colombo-kitulgala",
+        "airport-colombo"
       ],
-      "distanceKm": 865,
-      "durationMin": 1124,
-      "airportToAirport": true
+      "distanceKm": 1177,
+      "durationMin": 1548,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "matale-sigiriya",
+        "knuckles-matale",
+        "knuckles-meemure",
+        "kandy-meemure",
+        "gampola-kandy",
+        "gampola-kandy",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "hatton-kitulgala",
+        "kitulgala-nallathanni",
+        "adams-peak-nallathanni",
+        "adams-peak-nallathanni",
+        "kitulgala-nallathanni",
+        "hatton-kitulgala",
+        "hatton-nuwara-eliya",
+        "horton-plains-nuwara-eliya",
+        "haputale-horton-plains",
+        "haputale-liptons-seat",
+        "ella-liptons-seat",
+        "dunhinda-ella",
+        "dunhinda-ella",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "colombo-kitulgala",
+        "airport-colombo"
+      ]
     },
     {
       "id": "thrills-and-tranquility",
       "label": "Thrills and Tranquility",
-      "route": "Airport → Colombo → Kitulgala → Nallathanni → Adam's Peak → Nuwara Eliya → Horton Plains → Haputale → Ella → Badulla → Knuckles → Matale → Dambulla → Sigiriya → Kurunegala → Negombo → Airport",
+      "route": "Bandaranaike Airport → Colombo → Kitulgala → Nallathanni → Adam's Peak → Nuwara Eliya → Horton Plains → Haputale → Ella → Badulla → Knuckles → Matale → Dambulla → Sigiriya → Kurunegala → Negombo → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "colombo",
         "kitulgala",
         "nallathanni",
         "adams-peak",
+        "nallathanni",
+        "kitulgala",
+        "hatton",
         "nuwara-eliya",
         "horton-plains",
         "haputale",
         "ella",
         "badulla",
+        "dambana",
+        "mahiyanganaya",
+        "kandy",
+        "matale",
         "knuckles",
         "matale",
         "dambulla",
         "sigiriya",
+        "dambulla",
         "kurunegala",
         "negombo",
         "airport"
@@ -2517,13 +2438,17 @@
         "kitulgala",
         "nallathanni",
         "adams-peak",
+        "hatton",
         "nuwara-eliya",
         "horton-plains",
         "haputale",
         "ella",
         "badulla",
-        "knuckles",
+        "dambana",
+        "mahiyanganaya",
+        "kandy",
         "matale",
+        "knuckles",
         "dambulla",
         "sigiriya",
         "kurunegala",
@@ -2534,39 +2459,78 @@
         "colombo-kitulgala",
         "kitulgala-nallathanni",
         "adams-peak-nallathanni",
-        "adams-peak-nuwara-eliya",
+        "hatton-kitulgala",
+        "hatton-nuwara-eliya",
         "horton-plains-nuwara-eliya",
         "haputale-horton-plains",
         "ella-haputale",
         "badulla-ella",
-        "badulla-knuckles",
+        "badulla-dambana",
+        "dambana-mahiyanganaya",
+        "kandy-mahiyanganaya",
+        "kandy-matale",
         "knuckles-matale",
         "dambulla-matale",
         "dambulla-sigiriya",
-        "kurunegala-sigiriya",
+        "dambulla-kurunegala",
         "kurunegala-negombo",
         "airport-negombo"
       ],
-      "distanceKm": 755,
-      "durationMin": 963,
-      "airportToAirport": true
+      "distanceKm": 1057,
+      "durationMin": 1379,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-colombo",
+        "colombo-kitulgala",
+        "kitulgala-nallathanni",
+        "adams-peak-nallathanni",
+        "adams-peak-nallathanni",
+        "kitulgala-nallathanni",
+        "hatton-kitulgala",
+        "hatton-nuwara-eliya",
+        "horton-plains-nuwara-eliya",
+        "haputale-horton-plains",
+        "ella-haputale",
+        "badulla-ella",
+        "badulla-dambana",
+        "dambana-mahiyanganaya",
+        "kandy-mahiyanganaya",
+        "kandy-matale",
+        "knuckles-matale",
+        "knuckles-matale",
+        "dambulla-matale",
+        "dambulla-sigiriya",
+        "dambulla-sigiriya",
+        "dambulla-kurunegala",
+        "kurunegala-negombo",
+        "airport-negombo"
+      ]
     },
     {
       "id": "northern-horizons",
       "label": "Northern Horizons and Coastal Charms",
-      "route": "Airport → Negombo → Puttalam → Kalpitiya → Mannar → Jaffna → Vavuniya → Anuradhapura → Trincomalee → Habarana → Sigiriya → Pinnawala → Negombo → Airport",
+      "route": "Bandaranaike Airport → Negombo → Puttalam → Kalpitiya → Mannar → Jaffna → Vavuniya → Anuradhapura → Trincomalee → Habarana → Sigiriya → Pinnawala → Negombo → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "negombo",
         "puttalam",
         "kalpitiya",
         "mannar",
+        "puttalam",
+        "negombo",
+        "kurunegala",
+        "yapahuwa",
+        "anuradhapura",
+        "vavuniya",
         "jaffna",
         "vavuniya",
         "anuradhapura",
+        "vavuniya",
         "trincomalee",
         "habarana",
         "sigiriya",
+        "dambulla",
+        "kurunegala",
         "pinnawala",
         "negombo",
         "airport"
@@ -2577,12 +2541,15 @@
         "puttalam",
         "kalpitiya",
         "mannar",
-        "jaffna",
-        "vavuniya",
+        "kurunegala",
+        "yapahuwa",
         "anuradhapura",
+        "vavuniya",
+        "jaffna",
         "trincomalee",
         "habarana",
         "sigiriya",
+        "dambulla",
         "pinnawala"
       ],
       "segments": [
@@ -2590,24 +2557,52 @@
         "negombo-puttalam",
         "kalpitiya-puttalam",
         "kalpitiya-mannar",
-        "jaffna-mannar",
-        "jaffna-vavuniya",
+        "puttalam-mannar",
+        "kurunegala-negombo",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
         "anuradhapura-vavuniya",
-        "anuradhapura-trincomalee",
+        "jaffna-vavuniya",
+        "trincomalee-vavuniya",
         "habarana-trincomalee",
         "habarana-sigiriya",
-        "pinnawala-sigiriya",
+        "dambulla-sigiriya",
+        "dambulla-kurunegala",
+        "kurunegala-pinnawala",
+        "negombo-pinnawala"
+      ],
+      "distanceKm": 1631,
+      "durationMin": 1948,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-negombo",
+        "negombo-puttalam",
+        "kalpitiya-puttalam",
+        "kalpitiya-mannar",
+        "puttalam-mannar",
+        "negombo-puttalam",
+        "kurunegala-negombo",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
+        "anuradhapura-vavuniya",
+        "jaffna-vavuniya",
+        "jaffna-vavuniya",
+        "anuradhapura-vavuniya",
+        "anuradhapura-vavuniya",
+        "trincomalee-vavuniya",
+        "habarana-trincomalee",
+        "habarana-sigiriya",
+        "dambulla-sigiriya",
+        "dambulla-kurunegala",
+        "kurunegala-pinnawala",
         "negombo-pinnawala",
         "airport-negombo"
-      ],
-      "distanceKm": 1060,
-      "durationMin": 1265,
-      "airportToAirport": true
+      ]
     },
     {
       "id": "southern-coastal-bliss",
       "label": "Southern Coastal Bliss",
-      "route": "Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Ratnapura → Matara → Mirissa → Galle → Bentota → Airport",
+      "route": "Bandaranaike Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Ratnapura → Matara → Mirissa → Galle → Bentota → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "pinnawala",
@@ -2618,10 +2613,16 @@
         "kitulgala",
         "avissawella",
         "ratnapura",
+        "avissawella",
+        "bentota",
+        "galle",
+        "mirissa",
         "matara",
         "mirissa",
         "galle",
         "bentota",
+        "avissawella",
+        "colombo",
         "airport"
       ],
       "markers": [
@@ -2634,10 +2635,11 @@
         "kitulgala",
         "avissawella",
         "ratnapura",
-        "matara",
-        "mirissa",
+        "bentota",
         "galle",
-        "bentota"
+        "mirissa",
+        "matara",
+        "colombo"
       ],
       "segments": [
         "airport-pinnawala",
@@ -2648,25 +2650,48 @@
         "hatton-kitulgala",
         "avissawella-kitulgala",
         "avissawella-ratnapura",
-        "matara-ratnapura",
-        "matara-mirissa",
+        "avissawella-bentota",
+        "bentota-galle",
+        "galle-mirissa",
+        "mirissa-matara",
+        "colombo-avissawella",
+        "airport-colombo"
+      ],
+      "distanceKm": 945,
+      "durationMin": 1195,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kandy-pinnawala",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-ratnapura",
+        "avissawella-ratnapura",
+        "avissawella-bentota",
+        "bentota-galle",
+        "galle-mirissa",
+        "mirissa-matara",
+        "mirissa-matara",
         "galle-mirissa",
         "bentota-galle",
-        "airport-bentota"
-      ],
-      "distanceKm": 713,
-      "durationMin": 786,
-      "airportToAirport": true
+        "avissawella-bentota",
+        "colombo-avissawella",
+        "airport-colombo"
+      ]
     },
     {
       "id": "sun-and-fun",
       "label": "Sun and Fun",
-      "route": "Airport → Pinnawala → Kurunegala → Dambulla → Polonnaruwa → Pasikudah → Batticaloa → Arugam Bay → Pottuvil → Kataragama → Tissamaharama → Yala → Tangalle → Matara → Mirissa → Galle → Airport",
+      "route": "Bandaranaike Airport → Pinnawala → Kurunegala → Dambulla → Polonnaruwa → Pasikudah → Batticaloa → Arugam Bay → Pottuvil → Kataragama → Tissamaharama → Yala → Tangalle → Matara → Mirissa → Galle → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "pinnawala",
         "kurunegala",
         "dambulla",
+        "sigiriya",
         "polonnaruwa",
         "pasikudah",
         "batticaloa",
@@ -2675,10 +2700,23 @@
         "kataragama",
         "tissamaharama",
         "yala",
+        "tissamaharama",
+        "wellawaya",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
+        "galle",
+        "mirissa",
+        "matara",
         "tangalle",
         "matara",
         "mirissa",
         "galle",
+        "bentota",
+        "avissawella",
+        "colombo",
         "airport"
       ],
       "markers": [
@@ -2686,6 +2724,7 @@
         "pinnawala",
         "kurunegala",
         "dambulla",
+        "sigiriya",
         "polonnaruwa",
         "pasikudah",
         "batticaloa",
@@ -2694,37 +2733,84 @@
         "kataragama",
         "tissamaharama",
         "yala",
-        "tangalle",
-        "matara",
+        "wellawaya",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
+        "galle",
         "mirissa",
-        "galle"
+        "matara",
+        "tangalle",
+        "colombo"
       ],
       "segments": [
         "airport-pinnawala",
         "kurunegala-pinnawala",
         "dambulla-kurunegala",
-        "dambulla-polonnaruwa",
-        "pasikudah-polonnaruwa",
+        "dambulla-sigiriya",
+        "sigiriya-polonnaruwa",
+        "polonnaruwa-pasikudah",
         "batticaloa-pasikudah",
         "arugam-bay-batticaloa",
         "arugam-bay-pottuvil",
         "kataragama-pottuvil",
         "kataragama-tissamaharama",
         "tissamaharama-yala",
-        "tangalle-yala",
-        "matara-tangalle",
-        "matara-mirissa",
+        "wellawaya-tissamaharama",
+        "ella-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
         "galle-mirissa",
-        "airport-galle"
+        "mirissa-matara",
+        "matara-tangalle",
+        "colombo-avissawella",
+        "airport-colombo"
       ],
-      "distanceKm": 1014,
-      "durationMin": 1188,
-      "airportToAirport": true
+      "distanceKm": 1518,
+      "durationMin": 1897,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "sigiriya-polonnaruwa",
+        "polonnaruwa-pasikudah",
+        "batticaloa-pasikudah",
+        "arugam-bay-batticaloa",
+        "arugam-bay-pottuvil",
+        "kataragama-pottuvil",
+        "kataragama-tissamaharama",
+        "tissamaharama-yala",
+        "tissamaharama-yala",
+        "wellawaya-tissamaharama",
+        "ella-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
+        "galle-mirissa",
+        "mirissa-matara",
+        "matara-tangalle",
+        "matara-tangalle",
+        "mirissa-matara",
+        "galle-mirissa",
+        "bentota-galle",
+        "avissawella-bentota",
+        "colombo-avissawella",
+        "airport-colombo"
+      ]
     },
     {
       "id": "romantic-getaway",
       "label": "Romantic Getaway",
-      "route": "Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Bentota → Galle → Airport",
+      "route": "Bandaranaike Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Bentota → Galle → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "pinnawala",
@@ -2736,6 +2822,9 @@
         "avissawella",
         "bentota",
         "galle",
+        "bentota",
+        "avissawella",
+        "colombo",
         "airport"
       ],
       "markers": [
@@ -2748,7 +2837,8 @@
         "kitulgala",
         "avissawella",
         "bentota",
-        "galle"
+        "galle",
+        "colombo"
       ],
       "segments": [
         "airport-pinnawala",
@@ -2760,32 +2850,61 @@
         "avissawella-kitulgala",
         "avissawella-bentota",
         "bentota-galle",
-        "airport-galle"
+        "colombo-avissawella",
+        "airport-colombo"
       ],
-      "distanceKm": 616,
-      "durationMin": 668,
-      "airportToAirport": true
+      "distanceKm": 698,
+      "durationMin": 897,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kandy-pinnawala",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
+        "bentota-galle",
+        "avissawella-bentota",
+        "colombo-avissawella",
+        "airport-colombo"
+      ]
     },
     {
       "id": "tales-of-love",
       "label": "Tales of Love and Timeless Beauty",
-      "route": "Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Udawalawe → Tissamaharama → Matara → Mirissa → Galle → Airport",
+      "route": "Bandaranaike Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Udawalawe → Tissamaharama → Matara → Mirissa → Galle → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "pinnawala",
         "kurunegala",
         "dambulla",
         "sigiriya",
+        "matale",
         "kandy",
         "ramboda",
         "nuwara-eliya",
+        "haputale",
         "ella",
         "wellawaya",
         "udawalawe",
         "tissamaharama",
+        "wellawaya",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
+        "galle",
+        "mirissa",
         "matara",
         "mirissa",
         "galle",
+        "bentota",
+        "avissawella",
+        "colombo",
         "airport"
       ],
       "markers": [
@@ -2794,107 +2913,222 @@
         "kurunegala",
         "dambulla",
         "sigiriya",
+        "matale",
         "kandy",
         "ramboda",
         "nuwara-eliya",
+        "haputale",
         "ella",
         "wellawaya",
         "udawalawe",
         "tissamaharama",
-        "matara",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
+        "galle",
         "mirissa",
-        "galle"
+        "matara",
+        "colombo"
       ],
       "segments": [
         "airport-pinnawala",
         "kurunegala-pinnawala",
         "dambulla-kurunegala",
         "dambulla-sigiriya",
-        "kandy-sigiriya",
+        "matale-sigiriya",
+        "kandy-matale",
         "kandy-ramboda",
         "nuwara-eliya-ramboda",
-        "ella-nuwara-eliya",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
         "ella-wellawaya",
         "udawalawe-wellawaya",
         "tissamaharama-udawalawe",
-        "matara-tissamaharama",
-        "matara-mirissa",
+        "wellawaya-tissamaharama",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
         "galle-mirissa",
-        "airport-galle"
+        "mirissa-matara",
+        "colombo-avissawella",
+        "airport-colombo"
       ],
-      "distanceKm": 885,
-      "durationMin": 962,
-      "airportToAirport": true
+      "distanceKm": 1371,
+      "durationMin": 1727,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "matale-sigiriya",
+        "kandy-matale",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
+        "ella-wellawaya",
+        "udawalawe-wellawaya",
+        "tissamaharama-udawalawe",
+        "wellawaya-tissamaharama",
+        "ella-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
+        "galle-mirissa",
+        "mirissa-matara",
+        "mirissa-matara",
+        "galle-mirissa",
+        "bentota-galle",
+        "avissawella-bentota",
+        "colombo-avissawella",
+        "airport-colombo"
+      ]
     },
     {
       "id": "sri-lanka-honeymoon",
       "label": "Sri Lanka Honeymoon — Romance and Adventure Awaits",
-      "route": "Airport → Negombo → Trincomalee → Habarana → Sigiriya → Dambulla → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Arugam Bay → Pottuvil → Kataragama → Yala → Airport",
+      "route": "Bandaranaike Airport → Negombo → Trincomalee → Habarana → Sigiriya → Dambulla → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Arugam Bay → Pottuvil → Kataragama → Yala → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "negombo",
+        "kurunegala",
+        "dambulla",
+        "sigiriya",
+        "habarana",
         "trincomalee",
         "habarana",
         "sigiriya",
         "dambulla",
+        "matale",
         "kandy",
         "ramboda",
         "nuwara-eliya",
+        "haputale",
         "ella",
         "wellawaya",
+        "tissamaharama",
+        "kataragama",
+        "pottuvil",
         "arugam-bay",
         "pottuvil",
         "kataragama",
         "yala",
+        "tissamaharama",
+        "wellawaya",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "colombo",
         "airport"
       ],
       "markers": [
         "airport",
         "negombo",
-        "trincomalee",
-        "habarana",
-        "sigiriya",
+        "kurunegala",
         "dambulla",
+        "sigiriya",
+        "habarana",
+        "trincomalee",
+        "matale",
         "kandy",
         "ramboda",
         "nuwara-eliya",
+        "haputale",
         "ella",
         "wellawaya",
-        "arugam-bay",
-        "pottuvil",
+        "tissamaharama",
         "kataragama",
-        "yala"
+        "pottuvil",
+        "arugam-bay",
+        "yala",
+        "hatton",
+        "kitulgala",
+        "colombo"
       ],
       "segments": [
         "airport-negombo",
-        "negombo-trincomalee",
+        "kurunegala-negombo",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "habarana-sigiriya",
+        "habarana-trincomalee",
+        "dambulla-matale",
+        "kandy-matale",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
+        "ella-wellawaya",
+        "wellawaya-tissamaharama",
+        "kataragama-tissamaharama",
+        "kataragama-pottuvil",
+        "arugam-bay-pottuvil",
+        "kataragama-yala",
+        "tissamaharama-yala",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "colombo-kitulgala",
+        "airport-colombo"
+      ],
+      "distanceKm": 1412,
+      "durationMin": 1758,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-negombo",
+        "kurunegala-negombo",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "habarana-sigiriya",
+        "habarana-trincomalee",
         "habarana-trincomalee",
         "habarana-sigiriya",
         "dambulla-sigiriya",
-        "dambulla-kandy",
+        "dambulla-matale",
+        "kandy-matale",
         "kandy-ramboda",
         "nuwara-eliya-ramboda",
-        "ella-nuwara-eliya",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
         "ella-wellawaya",
-        "arugam-bay-wellawaya",
+        "wellawaya-tissamaharama",
+        "kataragama-tissamaharama",
+        "kataragama-pottuvil",
+        "arugam-bay-pottuvil",
         "arugam-bay-pottuvil",
         "kataragama-pottuvil",
         "kataragama-yala",
-        "airport-yala"
-      ],
-      "distanceKm": 1194,
-      "durationMin": 1387,
-      "airportToAirport": true
+        "tissamaharama-yala",
+        "wellawaya-tissamaharama",
+        "ella-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "colombo-kitulgala",
+        "airport-colombo"
+      ]
     },
     {
       "id": "ramayana-legacy",
       "label": "Ramayana Legacy",
-      "route": "Airport → Negombo → Chilaw → Mannar → Jaffna → Vavuniya → Trincomalee → Habarana → Sigiriya → Dambulla → Matale → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Galle → Unawatuna → Airport",
+      "route": "Bandaranaike Airport → Negombo → Chilaw → Mannar → Jaffna → Vavuniya → Trincomalee → Habarana → Sigiriya → Dambulla → Matale → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Galle → Unawatuna → Bandaranaike Airport",
       "waypoints": [
         "airport",
         "negombo",
         "chilaw",
+        "negombo",
+        "puttalam",
         "mannar",
+        "puttalam",
+        "negombo",
+        "kurunegala",
+        "yapahuwa",
+        "anuradhapura",
+        "vavuniya",
         "jaffna",
         "vavuniya",
         "trincomalee",
@@ -2905,19 +3139,33 @@
         "kandy",
         "ramboda",
         "nuwara-eliya",
+        "haputale",
         "ella",
         "wellawaya",
+        "ella",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
         "galle",
         "unawatuna",
+        "galle",
+        "bentota",
+        "avissawella",
+        "colombo",
         "airport"
       ],
       "markers": [
         "airport",
         "negombo",
         "chilaw",
+        "puttalam",
         "mannar",
-        "jaffna",
+        "kurunegala",
+        "yapahuwa",
+        "anuradhapura",
         "vavuniya",
+        "jaffna",
         "trincomalee",
         "habarana",
         "sigiriya",
@@ -2926,16 +3174,26 @@
         "kandy",
         "ramboda",
         "nuwara-eliya",
+        "haputale",
         "ella",
         "wellawaya",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
         "galle",
-        "unawatuna"
+        "unawatuna",
+        "colombo"
       ],
       "segments": [
         "airport-negombo",
         "chilaw-negombo",
-        "chilaw-mannar",
-        "jaffna-mannar",
+        "negombo-puttalam",
+        "puttalam-mannar",
+        "kurunegala-negombo",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
+        "anuradhapura-vavuniya",
         "jaffna-vavuniya",
         "trincomalee-vavuniya",
         "habarana-trincomalee",
@@ -2945,15 +3203,82 @@
         "kandy-matale",
         "kandy-ramboda",
         "nuwara-eliya-ramboda",
-        "ella-nuwara-eliya",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
         "ella-wellawaya",
-        "galle-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
         "galle-unawatuna",
-        "airport-unawatuna"
+        "colombo-avissawella",
+        "airport-colombo"
       ],
-      "distanceKm": 1294,
-      "durationMin": 1455,
-      "airportToAirport": true
+      "distanceKm": 2173,
+      "durationMin": 2648,
+      "airportToAirport": true,
+      "tracedSegments": [
+        "airport-negombo",
+        "chilaw-negombo",
+        "chilaw-negombo",
+        "negombo-puttalam",
+        "puttalam-mannar",
+        "puttalam-mannar",
+        "negombo-puttalam",
+        "kurunegala-negombo",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
+        "anuradhapura-vavuniya",
+        "jaffna-vavuniya",
+        "jaffna-vavuniya",
+        "trincomalee-vavuniya",
+        "habarana-trincomalee",
+        "habarana-sigiriya",
+        "dambulla-sigiriya",
+        "dambulla-matale",
+        "kandy-matale",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
+        "ella-wellawaya",
+        "ella-wellawaya",
+        "ella-hatton",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
+        "galle-unawatuna",
+        "galle-unawatuna",
+        "bentota-galle",
+        "avissawella-bentota",
+        "colombo-avissawella",
+        "airport-colombo"
+      ]
     }
-  ]
+  ],
+  "audit": {
+    "reviewedMarkers": 62,
+    "reviewedSegments": 106,
+    "markerStatusCounts": {
+      "aligned": 28,
+      "needs_move": 33,
+      "not_visible": 1,
+      "uncertain": 0
+    },
+    "segmentStatusCounts": {
+      "follows_visible_path": 5,
+      "missing_in_artwork": 52,
+      "needs_control_points": 49,
+      "uncertain": 0
+    },
+    "sources": [
+      "RDA National Highways Gazetted List",
+      "OpenStreetMap Sri Lanka",
+      "Geofabrik Sri Lanka OSM extract",
+      "ChatGPT vision review of the fixed atlas artwork"
+    ],
+    "rule": "Only artwork-following corridors are preserved; missing but necessary real-road links are explicitly redrawn with control points inside the island silhouette."
+  }
 }

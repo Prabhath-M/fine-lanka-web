@@ -32,6 +32,7 @@ type Itinerary = {
   route: string
   waypoints: string[]
   markers: string[]
+  tracedSegments: string[]
   segments: string[]
   distanceKm: number
   durationMin: number
@@ -199,7 +200,7 @@ export function RouteMapPreview() {
             </div>
             <div className={styles.mapHeaderRight}>
               <div className={styles.routeFacts} aria-label="Selected route facts">
-                <span><strong>{selectedItinerary?.segments.length}</strong><small>legs</small></span>
+                <span><strong>{selectedItinerary?.tracedSegments?.length ?? selectedItinerary?.segments.length}</strong><small>legs</small></span>
                 <span><strong>{selectedItinerary?.distanceKm}</strong><small>km</small></span>
                 <span><strong>{Math.round((selectedItinerary?.durationMin ?? 0) / 60)}h</strong><small>road time</small></span>
               </div>
@@ -253,7 +254,7 @@ export function RouteMapPreview() {
               </aside>
             )}
           </div>
-          <p className={styles.caption}>The illustrated artwork remains fixed. Marker coordinates are registered in image space; route connectivity and leg distances come from the validated road database, so the artwork is a readable atlas rather than a live navigation map.</p>
+          <p className={styles.caption}>The illustrated artwork remains fixed. Every highlighted leg follows an audited orange corridor or an explicitly redrawn real-road connection kept inside the island silhouette; no route is allowed to shortcut across blank artwork.</p>
         </div>
       </section>
     </main>

@@ -3,7 +3,7 @@ import atlas from '../public/data/route-atlas.json'
 
 type Marker = { id: string }
 type Segment = { id: string; from: string; to: string }
-type Itinerary = { waypoints: string[]; segments: string[]; airportToAirport: boolean }
+type Itinerary = { waypoints: string[]; tracedSegments: string[]; segments: string[]; airportToAirport: boolean }
 
 const markers = atlas.markers as Marker[]
 const segments = atlas.segments as Segment[]
@@ -43,8 +43,8 @@ describe('route atlas data', () => {
       expect(itinerary.airportToAirport).toBe(true)
       expect(itinerary.waypoints[0]).toBe('airport')
       expect(itinerary.waypoints.at(-1)).toBe('airport')
-      expect(itinerary.segments).toHaveLength(itinerary.waypoints.length - 1)
-      itinerary.segments.forEach((segmentId, index) => {
+      expect(itinerary.tracedSegments).toHaveLength(itinerary.waypoints.length - 1)
+      itinerary.tracedSegments.forEach((segmentId, index) => {
         const segment = segmentById.get(segmentId)
         expect(segment, `${itinerary.waypoints[index]} → ${itinerary.waypoints[index + 1]}`).toBeDefined()
         expect(connects(segment as Segment, itinerary.waypoints[index], itinerary.waypoints[index + 1])).toBe(true)
