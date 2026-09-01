@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import { Compass, MapPin, MousePointer2, Route, X } from 'lucide-react'
 import styles from './route-map-preview.module.css'
+import { DESTINATIONS } from '@/lib/destinations-data'
 
 type Marker = {
   id: string
@@ -94,6 +95,35 @@ const symbolByKind: Record<string, string> = {
   'hub-city': '·',
 }
 
+const locationDetails: Record<string, { image: string; description: string }> = {
+  airport: {
+    image: '/images/sri-lanka-map-island-focus.jpg',
+    description: 'Your island welcome point at Bandaranaike International Airport, north of Colombo and the starting point for every Fine Lanka journey.',
+  },
+  pinnawala: {
+    image: '/images/tour-nature.png',
+    description: 'A gentle first stop beside the Maha Oya, known for the Pinnawala Elephant Orphanage and a slower introduction to Sri Lanka’s wildlife.',
+  },
+  dambulla: {
+    image: '/images/tour-cultural-historical.png',
+    description: 'A north-central heritage stop anchored by the Dambulla Cave Temple, with painted caves and Buddha images carved into the rock.',
+  },
+  sigiriya: {
+    image: '/images/fine-lanka-sigiriya-fresco-passage.jpg',
+    description: 'The fifth-century Sigiriya Rock Fortress, with frescoes, the Mirror Wall, garden ruins and wide views across the Cultural Triangle.',
+  },
+}
+
+function getLocationDetails(marker: Marker) {
+  const direct = locationDetails[marker.id]
+  if (direct) return direct
+  const destination = DESTINATIONS.find((item) => item.name.toLowerCase().includes(marker.name.toLowerCase()) || marker.name.toLowerCase().includes(item.name.toLowerCase()))
+  return {
+    image: destination?.region === 'Wildlife & National Parks' ? '/images/tour-nature.png' : destination?.region === 'Hill Country' ? '/images/tour-nature.png' : destination?.region === 'South Coast' || destination?.region === 'East Coast' ? '/images/tour-beach.png' : '/images/tour-cultural-historical.png',
+    description: destination?.blurb ?? marker.note ?? `${marker.name} is a featured stop on the Fine Lanka route atlas. Select this waypoint to explore its place in the journey.`,
+  }
+}
+
 function pathForSegment(segment: Segment, markers: Map<string, Marker>, width: number, height: number) {
   const start = markers.get(segment.from)
   const end = markers.get(segment.to)
@@ -124,6 +154,10 @@ export function RouteMapPreview() {
   const markerById = useMemo(() => new Map((data?.markers ?? []).map((marker) => [marker.id, marker])), [data])
   const activeMarkerIds = useMemo(() => new Set(selectedItinerary?.markers ?? []), [selectedItinerary])
   const activeSegmentIds = useMemo(() => new Set(selectedItinerary?.segments ?? []), [selectedItinerary])
+  const activeWaypointOrder = useMemo(() => {
+    const ordered = selectedItinerary?.waypoints ?? []
+    return ordered.filter((id, index) => id !== 'airport' || index === 0 || index === ordered.length - 1).filter((id, index, ids) => ids.indexOf(id) === index)
+  }, [selectedItinerary])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
 
   if (!data) {
@@ -225,18 +259,20 @@ export function RouteMapPreview() {
               {data.markers.map((marker) => {
                 const isActive = activeMarkerIds.has(marker.id)
                 const isSelected = selectedMarkerId === marker.id
+                const routeOrder = activeWaypointOrder.indexOf(marker.id)
+                const isOrderedWaypoint = routeOrder >= 0
                 return (
                   <button
                     key={marker.id}
                     type="button"
-                    className={`${styles.marker} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isSelected ? styles.markerSelected : ''}`}
+                    className={`${styles.marker} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isSelected ? styles.markerSelected : ''} ${isOrderedWaypoint ? styles.markerOrdered : ''}`}
                     style={{ left: `${(marker.x / data.width) * 100}%`, top: `${(marker.y / data.height) * 100}%` }}
                     onClick={() => setSelectedMarkerId(marker.id)}
                     aria-label={`Show details for ${marker.name}`}
                     aria-pressed={isSelected}
                     title={marker.name}
                   >
-                    <span className={styles.markerCore}>{symbolByKind[marker.kind] ?? '·'}</span>
+                    <span className={isOrderedWaypoint ? styles.markerOrder : styles.markerCore}>{isOrderedWaypoint ? routeOrder + 1 : symbolByKind[marker.kind] ?? '·'}</span>
                     <span className={styles.markerLabel}>{marker.name}</span>
                   </button>
                 )
@@ -245,9 +281,10 @@ export function RouteMapPreview() {
             {selectedMarker && (
               <aside className={styles.placeCard} aria-live="polite">
                 <button type="button" className={styles.closeButton} onClick={() => setSelectedMarkerId(null)} aria-label="Close place details"><X size={16} /></button>
+                <img className={styles.placeImage} src={getLocationDetails(selectedMarker).image} alt={`${selectedMarker.name} travel photograph`} />
                 <span className={styles.placeType}>{selectedMarker.type === 'primary' ? 'Primary destination' : kindLabel[selectedMarker.kind] ?? 'Route hub'}</span>
                 <h3>{selectedMarker.name}</h3>
-                <p>{selectedMarker.note ?? `${selectedMarker.name} is registered from the visible ${selectedMarker.type === 'primary' ? 'red primary' : 'brown hub'} circle on the latest atlas.`}</p>
+                <p>{getLocationDetails(selectedMarker).description}</p>
                 <div className={styles.placeMeta}><MapPin size={14} /> Image coordinate {selectedMarker.x}, {selectedMarker.y}</div>
                 <div className={styles.placeMeta}><Route size={14} /> {selectedMarker.type === 'primary' ? 'Destination node' : 'Shared route hub'}</div>
                 {activeMarkerIds.has(selectedMarker.id) && <div className={styles.activeNotice}>Included in {selectedItinerary?.label}</div>}
