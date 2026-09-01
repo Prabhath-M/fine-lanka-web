@@ -79,6 +79,25 @@ const kindLabel: Record<string, string> = {
   'hub-city': 'Route hub / city',
 }
 
+type ZoomRegion = {
+  id: string
+  label: string
+  note: string
+  x: number
+  y: number
+  width: number
+  height: number
+}
+
+const zoomRegions: ZoomRegion[] = [
+  { id: 'overview', label: 'Overview', note: 'Full island reference', x: 0, y: 0, width: 1664, height: 2080 },
+  { id: 'north', label: 'North', note: 'Jaffna to Anuradhapura', x: 120, y: 0, width: 1180, height: 1475 },
+  { id: 'cultural', label: 'Cultural Triangle', note: 'Anuradhapura to Polonnaruwa', x: 350, y: 500, width: 980, height: 1225 },
+  { id: 'highlands', label: 'Central Highlands', note: 'Kandy to Ella', x: 290, y: 1030, width: 1050, height: 1312 },
+  { id: 'south-east', label: 'South & East', note: 'Galle to Arugam Bay', x: 300, y: 760, width: 1210, height: 1512 },
+  { id: 'west', label: 'West Coast', note: 'Puttalam to Galle', x: 60, y: 640, width: 920, height: 1150 },
+]
+
 const symbolByKind: Record<string, string> = {
   arrival: '✈',
   heritage: '✦',
@@ -159,6 +178,15 @@ export function RouteMapPreview() {
     return ordered.filter((id, index) => id !== 'airport' || index === 0 || index === ordered.length - 1).filter((id, index, ids) => ids.indexOf(id) === index)
   }, [selectedItinerary])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
+  const [zoomRegionId, setZoomRegionId] = useState('overview')
+  const zoomRegion = zoomRegions.find((region) => region.id === zoomRegionId) ?? zoomRegions[0]
+  const zoomScale = data ? data.width / zoomRegion.width : 1
+  const zoomCanvasStyle = data ? {
+    width: `${zoomScale * 100}%`,
+    height: `${zoomScale * 100}%`,
+    left: `${-(zoomRegion.x * zoomScale / data.width) * 100}%`,
+    top: `${-(zoomRegion.y * zoomScale / data.height) * 100}%`,
+  } : undefined
 
   if (!data) {
     return (
@@ -220,12 +248,26 @@ export function RouteMapPreview() {
                 <span><strong>{data.markers.length}</strong><small>places</small></span>
                 <span><strong>0</strong><small>paths</small></span>
               </div>
-              <span className={styles.mapHint}><MousePointer2 size={14} /> Click any marker</span>
+              <div className={styles.zoomControls} aria-label="Map zoom regions">
+                {zoomRegions.map((region) => (
+                  <button
+                    key={region.id}
+                    type="button"
+                    className={`${styles.zoomButton} ${zoomRegion.id === region.id ? styles.zoomButtonSelected : ''}`}
+                    onClick={() => { setZoomRegionId(region.id); setSelectedMarkerId(null) }}
+                    aria-pressed={zoomRegion.id === region.id}
+                  >
+                    {region.label}
+                  </button>
+                ))}
+              </div>
+              <span className={styles.mapHint}><MousePointer2 size={14} /> Click any marker · {zoomRegion.note}</span>
             </div>
           </div>
           <div className={styles.mapFrame}>
-            <img src={data.image} alt="Illustrated Sri Lankan route atlas with red primary destination circles and brown route-hub circles" className={styles.mapImage} />
-            <div className={styles.markerLayer}>
+            <div className={styles.mapCanvas} style={zoomCanvasStyle}>
+              <img src={data.image} alt="Illustrated Sri Lankan tour map with detected waypoint circles" className={styles.mapImage} />
+              <div className={styles.markerLayer}>
               {data.markers.map((marker) => {
                 const isActive = activeMarkerIds.has(marker.id)
                 const isSelected = selectedMarkerId === marker.id
@@ -247,6 +289,7 @@ export function RouteMapPreview() {
                   </button>
                 )
               })}
+              </div>
             </div>
             {selectedMarker && (
               <aside className={styles.placeCard} aria-live="polite">

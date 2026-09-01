@@ -315,6 +315,41 @@
   text-transform: uppercase;
 }
 
+.zoomControls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.35rem;
+  max-width: 31rem;
+}
+
+.zoomButton {
+  padding: 0.4rem 0.58rem;
+  border: 1px solid rgba(52, 44, 33, 0.22);
+  border-radius: 999px;
+  background: rgba(255, 248, 230, 0.66);
+  color: #75553e;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.zoomButton:hover,
+.zoomButton:focus-visible {
+  border-color: #b65b37;
+  background: #fff4d7;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.zoomButtonSelected {
+  border-color: #b65b37;
+  background: #b65b37;
+  color: #fff5df;
+}
+
 .mapFrame {
   position: relative;
   overflow: hidden;
@@ -323,6 +358,14 @@
   border-radius: 0.75rem;
   background: #21333b;
   box-shadow: 0 1.6rem 3rem rgba(29, 36, 37, 0.27);
+}
+
+.mapCanvas {
+  position: absolute;
+  overflow: visible;
+  max-width: none;
+  max-height: none;
+  transition: left 260ms cubic-bezier(0.23, 1, 0.32, 1), top 260ms cubic-bezier(0.23, 1, 0.32, 1), width 260ms cubic-bezier(0.23, 1, 0.32, 1), height 260ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 
 .mapImage,
@@ -641,6 +684,11 @@
 
   .mapHeaderRight {
     justify-items: start;
+  }
+
+  .zoomControls {
+    justify-content: flex-start;
+    max-width: 100%;
   }
 
   .routeTrail {
