@@ -2,111 +2,2958 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "manual-label-review-2026-09-01",
+  "calibration": "manual-artwork-coordinates + validated-road-graph-2026-09-01",
+  "source": {
+    "map": "Fixed illustrated all-hubs atlas artwork; image-space coordinates preserve the artwork registration.",
+    "routes": "Validated OSRM road segments derived from OpenStreetMap-backed routing.",
+    "itineraryRule": "All visitor journeys are normalized to begin and end at Bandaranaike International Airport."
+  },
+  "networkStats": {
+    "markerCount": 62,
+    "edgeCount": 106,
+    "primaryCount": 39,
+    "hubCount": 23,
+    "itineraryCount": 13,
+    "connected": true
+  },
   "markers": [
-    {"id":"jaffna","name":"Jaffna","x":495,"y":88,"type":"primary","kind":"heritage","note":"Red-ring primary marker"},
-    {"id":"vavuniya","name":"Vavuniya","x":614,"y":263,"type":"hub","kind":"hub","note":"Brown-ring hub marker"},
-    {"id":"mihintale","name":"Mihintale","x":761,"y":370,"type":"primary","kind":"heritage"},
-    {"id":"mannar","name":"Mannar","x":374,"y":386,"type":"primary","kind":"heritage"},
-    {"id":"aukana","name":"Aukana","x":839,"y":458,"type":"hub","kind":"heritage"},
-    {"id":"anuradhapura","name":"Anuradhapura","x":530,"y":482,"type":"primary","kind":"heritage"},
-    {"id":"ritigala","name":"Ritigala","x":862,"y":505,"type":"hub","kind":"heritage"},
-    {"id":"trincomalee","name":"Trincomalee","x":1154,"y":570,"type":"primary","kind":"coast"},
-    {"id":"kalpitiya","name":"Kalpitiya","x":352,"y":577,"type":"primary","kind":"coast"},
-    {"id":"habanara","name":"Habarana","x":795,"y":588,"type":"hub","kind":"hub"},
-    {"id":"sigiriya","name":"Sigiriya","x":863,"y":632,"type":"primary","kind":"heritage"},
-    {"id":"puttalam","name":"Puttalam","x":332,"y":676,"type":"hub","kind":"hub"},
-    {"id":"dambulla","name":"Dambulla","x":821,"y":731,"type":"primary","kind":"heritage"},
-    {"id":"galewela","name":"Galewela","x":600,"y":738,"type":"hub","kind":"hub"},
-    {"id":"chilaw","name":"Chilaw","x":321,"y":776,"type":"hub","kind":"hub"},
-    {"id":"kurunegala","name":"Kurunegala","x":516,"y":837,"type":"primary","kind":"hub-city"},
-    {"id":"mahiyanganaya","name":"Mahiyanganaya","x":1018,"y":837,"type":"primary","kind":"heritage"},
-    {"id":"ibbagamuwa","name":"Ibbagamuwa","x":505,"y":903,"type":"hub","kind":"hub"},
-    {"id":"matale","name":"Matale","x":758,"y":911,"type":"primary","kind":"heritage"},
-    {"id":"batticaloa","name":"Batticaloa","x":1344,"y":935,"type":"primary","kind":"coast"},
-    {"id":"melsiripura","name":"Melsiripura","x":473,"y":946,"type":"hub","kind":"hub"},
-    {"id":"dambana","name":"Dambana","x":1047,"y":959,"type":"hub","kind":"culture"},
-    {"id":"pasikudah","name":"Pasikudah","x":1246,"y":737,"type":"primary","kind":"coast"},
-    {"id":"katunayake","name":"Katunayake","x":336,"y":1040,"type":"hub","kind":"hub"},
-    {"id":"kandy","name":"Kandy","x":803,"y":1043,"type":"primary","kind":"heritage"},
-    {"id":"meemure","name":"Meemure","x":618,"y":1084,"type":"hub","kind":"mountain"},
-    {"id":"gampola","name":"Gampola","x":930,"y":1084,"type":"hub","kind":"hub"},
-    {"id":"pinnawala","name":"Pinnawala","x":487,"y":1166,"type":"primary","kind":"wildlife"},
-    {"id":"colombo","name":"Colombo","x":309,"y":1185,"type":"primary","kind":"hub-city"},
-    {"id":"ramboda","name":"Ramboda","x":950,"y":1205,"type":"hub","kind":"mountain"},
-    {"id":"avissawella","name":"Avissawella","x":388,"y":1283,"type":"hub","kind":"hub"},
-    {"id":"nuwara-eliya","name":"Nuwara Eliya","x":800,"y":1324,"type":"primary","kind":"tea"},
-    {"id":"badulla","name":"Badulla","x":1137,"y":1375,"type":"primary","kind":"mountain"},
-    {"id":"kitulgala","name":"Kitulgala","x":379,"y":1381,"type":"primary","kind":"adventure"},
-    {"id":"hatton","name":"Hatton","x":746,"y":1386,"type":"hub","kind":"hub"},
-    {"id":"nallathanniya","name":"Nallathanniya","x":740,"y":1405,"type":"hub","kind":"mountain","note":"Approximate pale-ring center from the printed label corridor"},
-    {"id":"adams-peak","name":"Adam's Peak","x":740,"y":1447,"type":"primary","kind":"mountain"},
-    {"id":"ratnapura","name":"Ratnapura","x":440,"y":1517,"type":"primary","kind":"hub-city"},
-    {"id":"liptons-seat","name":"Lipton's Seat","x":916,"y":1467,"type":"hub","kind":"tea","note":"Approximate pale-ring center; non-city scenic waypoint"},
-    {"id":"horton-plains","name":"Horton Plains","x":744,"y":1553,"type":"primary","kind":"nature"},
-    {"id":"ella","name":"Ella","x":998,"y":1523,"type":"primary","kind":"rail"},
-    {"id":"diyaluma","name":"Diyaluma","x":1197,"y":1509,"type":"hub","kind":"waterfall"},
-    {"id":"wellawaya","name":"Wellawaya","x":1047,"y":1594,"type":"hub","kind":"hub"},
-    {"id":"bentota","name":"Bentota","x":471,"y":1714,"type":"primary","kind":"coast"},
-    {"id":"udawalawe","name":"Udawalawe","x":859,"y":1733,"type":"primary","kind":"wildlife"},
-    {"id":"tissamaharama","name":"Tissamaharama","x":1108,"y":1735,"type":"primary","kind":"heritage"},
-    {"id":"yala","name":"Yala","x":1335,"y":1702,"type":"primary","kind":"wildlife"},
-    {"id":"galle","name":"Galle","x":554,"y":1855,"type":"primary","kind":"heritage"},
-    {"id":"tangalle","name":"Tangalle","x":996,"y":1897,"type":"primary","kind":"coast"},
-    {"id":"unawatuna","name":"Unawatuna","x":603,"y":1928,"type":"hub","kind":"coast"},
-    {"id":"matara","name":"Matara","x":823,"y":1948,"type":"primary","kind":"coast","note":"Canonicalized from the duplicated printed Matara label pair"},
-    {"id":"mirissa","name":"Mirissa","x":695,"y":1950,"type":"primary","kind":"coast"},
-    {"id":"arugam-bay","name":"Arugam Bay","x":1460,"y":1210,"type":"primary","kind":"coast"},
-    {"id":"pottuvil","name":"Pottuvil","x":1398,"y":1396,"type":"hub","kind":"hub"},
-    {"id":"kataragama","name":"Kataragama","x":1100,"y":1825,"type":"hub","kind":"heritage"},
-    {"id":"airport","name":"Bandaranaike Airport","x":285,"y":1010,"type":"hub","kind":"arrival","note":"Airplane emblem rather than a circular marker"}
+    {
+      "id": "jaffna",
+      "name": "Jaffna",
+      "x": 495,
+      "y": 88,
+      "type": "primary",
+      "kind": "heritage",
+      "note": "Red-ring primary marker"
+    },
+    {
+      "id": "vavuniya",
+      "name": "Vavuniya",
+      "x": 614,
+      "y": 263,
+      "type": "hub",
+      "kind": "hub",
+      "note": "Brown-ring hub marker"
+    },
+    {
+      "id": "mihintale",
+      "name": "Mihintale",
+      "x": 761,
+      "y": 370,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "mannar",
+      "name": "Mannar",
+      "x": 374,
+      "y": 386,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "aukana",
+      "name": "Aukana",
+      "x": 839,
+      "y": 458,
+      "type": "hub",
+      "kind": "heritage"
+    },
+    {
+      "id": "anuradhapura",
+      "name": "Anuradhapura",
+      "x": 530,
+      "y": 482,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "ritigala",
+      "name": "Ritigala",
+      "x": 862,
+      "y": 505,
+      "type": "hub",
+      "kind": "heritage"
+    },
+    {
+      "id": "trincomalee",
+      "name": "Trincomalee",
+      "x": 1154,
+      "y": 570,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "kalpitiya",
+      "name": "Kalpitiya",
+      "x": 352,
+      "y": 577,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "habarana",
+      "name": "Habarana",
+      "x": 795,
+      "y": 588,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "sigiriya",
+      "name": "Sigiriya",
+      "x": 863,
+      "y": 632,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "puttalam",
+      "name": "Puttalam",
+      "x": 332,
+      "y": 676,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "dambulla",
+      "name": "Dambulla",
+      "x": 821,
+      "y": 731,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "galewela",
+      "name": "Galewela",
+      "x": 600,
+      "y": 738,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "chilaw",
+      "name": "Chilaw",
+      "x": 321,
+      "y": 776,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "kurunegala",
+      "name": "Kurunegala",
+      "x": 516,
+      "y": 837,
+      "type": "primary",
+      "kind": "hub-city"
+    },
+    {
+      "id": "mahiyanganaya",
+      "name": "Mahiyanganaya",
+      "x": 1018,
+      "y": 837,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "ibbagamuwa",
+      "name": "Ibbagamuwa",
+      "x": 505,
+      "y": 903,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "matale",
+      "name": "Matale",
+      "x": 758,
+      "y": 911,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "batticaloa",
+      "name": "Batticaloa",
+      "x": 1344,
+      "y": 935,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "melsiripura",
+      "name": "Melsiripura",
+      "x": 473,
+      "y": 946,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "dambana",
+      "name": "Dambana",
+      "x": 1047,
+      "y": 959,
+      "type": "hub",
+      "kind": "culture"
+    },
+    {
+      "id": "pasikudah",
+      "name": "Pasikudah",
+      "x": 1246,
+      "y": 737,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "katunayake",
+      "name": "Katunayake",
+      "x": 336,
+      "y": 1040,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "kandy",
+      "name": "Kandy",
+      "x": 803,
+      "y": 1043,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "meemure",
+      "name": "Meemure",
+      "x": 618,
+      "y": 1084,
+      "type": "hub",
+      "kind": "mountain"
+    },
+    {
+      "id": "gampola",
+      "name": "Gampola",
+      "x": 930,
+      "y": 1084,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "pinnawala",
+      "name": "Pinnawala",
+      "x": 487,
+      "y": 1166,
+      "type": "primary",
+      "kind": "wildlife"
+    },
+    {
+      "id": "colombo",
+      "name": "Colombo",
+      "x": 309,
+      "y": 1185,
+      "type": "primary",
+      "kind": "hub-city"
+    },
+    {
+      "id": "ramboda",
+      "name": "Ramboda",
+      "x": 950,
+      "y": 1205,
+      "type": "hub",
+      "kind": "mountain"
+    },
+    {
+      "id": "avissawella",
+      "name": "Avissawella",
+      "x": 388,
+      "y": 1283,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "nuwara-eliya",
+      "name": "Nuwara Eliya",
+      "x": 800,
+      "y": 1324,
+      "type": "primary",
+      "kind": "tea"
+    },
+    {
+      "id": "badulla",
+      "name": "Badulla",
+      "x": 1137,
+      "y": 1375,
+      "type": "primary",
+      "kind": "mountain"
+    },
+    {
+      "id": "kitulgala",
+      "name": "Kitulgala",
+      "x": 379,
+      "y": 1381,
+      "type": "primary",
+      "kind": "adventure"
+    },
+    {
+      "id": "hatton",
+      "name": "Hatton",
+      "x": 746,
+      "y": 1386,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "nallathanni",
+      "name": "Nallathanni",
+      "x": 740,
+      "y": 1405,
+      "type": "hub",
+      "kind": "mountain",
+      "note": "Approximate pale-ring center from the printed label corridor"
+    },
+    {
+      "id": "adams-peak",
+      "name": "Adam's Peak",
+      "x": 740,
+      "y": 1447,
+      "type": "primary",
+      "kind": "mountain"
+    },
+    {
+      "id": "ratnapura",
+      "name": "Ratnapura",
+      "x": 440,
+      "y": 1517,
+      "type": "primary",
+      "kind": "hub-city"
+    },
+    {
+      "id": "liptons-seat",
+      "name": "Lipton's Seat",
+      "x": 916,
+      "y": 1467,
+      "type": "hub",
+      "kind": "tea",
+      "note": "Approximate pale-ring center; non-city scenic waypoint"
+    },
+    {
+      "id": "horton-plains",
+      "name": "Horton Plains",
+      "x": 744,
+      "y": 1553,
+      "type": "primary",
+      "kind": "nature"
+    },
+    {
+      "id": "ella",
+      "name": "Ella",
+      "x": 998,
+      "y": 1523,
+      "type": "primary",
+      "kind": "rail"
+    },
+    {
+      "id": "diyaluma",
+      "name": "Diyaluma",
+      "x": 1197,
+      "y": 1509,
+      "type": "hub",
+      "kind": "waterfall"
+    },
+    {
+      "id": "wellawaya",
+      "name": "Wellawaya",
+      "x": 1047,
+      "y": 1594,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "bentota",
+      "name": "Bentota",
+      "x": 471,
+      "y": 1714,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "udawalawe",
+      "name": "Udawalawe",
+      "x": 859,
+      "y": 1733,
+      "type": "primary",
+      "kind": "wildlife"
+    },
+    {
+      "id": "tissamaharama",
+      "name": "Tissamaharama",
+      "x": 1108,
+      "y": 1735,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "yala",
+      "name": "Yala",
+      "x": 1335,
+      "y": 1702,
+      "type": "primary",
+      "kind": "wildlife"
+    },
+    {
+      "id": "galle",
+      "name": "Galle",
+      "x": 554,
+      "y": 1855,
+      "type": "primary",
+      "kind": "heritage"
+    },
+    {
+      "id": "tangalle",
+      "name": "Tangalle",
+      "x": 996,
+      "y": 1897,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "unawatuna",
+      "name": "Unawatuna",
+      "x": 603,
+      "y": 1928,
+      "type": "hub",
+      "kind": "coast"
+    },
+    {
+      "id": "matara",
+      "name": "Matara",
+      "x": 823,
+      "y": 1948,
+      "type": "primary",
+      "kind": "coast",
+      "note": "Canonicalized from the duplicated printed Matara label pair"
+    },
+    {
+      "id": "mirissa",
+      "name": "Mirissa",
+      "x": 695,
+      "y": 1950,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "arugam-bay",
+      "name": "Arugam Bay",
+      "x": 1460,
+      "y": 1210,
+      "type": "primary",
+      "kind": "coast"
+    },
+    {
+      "id": "pottuvil",
+      "name": "Pottuvil",
+      "x": 1398,
+      "y": 1396,
+      "type": "hub",
+      "kind": "hub"
+    },
+    {
+      "id": "kataragama",
+      "name": "Kataragama",
+      "x": 1100,
+      "y": 1825,
+      "type": "hub",
+      "kind": "heritage"
+    },
+    {
+      "id": "airport",
+      "name": "Bandaranaike Airport",
+      "x": 285,
+      "y": 1010,
+      "type": "primary",
+      "kind": "arrival",
+      "note": "Airplane emblem rather than a circular marker"
+    },
+    {
+      "id": "negombo",
+      "name": "Negombo",
+      "x": 285,
+      "y": 946,
+      "type": "primary",
+      "kind": "coast",
+      "note": "Airport-side coastal base on the A3 corridor."
+    },
+    {
+      "id": "yapahuwa",
+      "name": "Yapahuwa",
+      "x": 436,
+      "y": 526,
+      "type": "primary",
+      "kind": "heritage",
+      "note": "Heritage detour reached from the Kurunegala–Anuradhapura corridor."
+    },
+    {
+      "id": "polonnaruwa",
+      "name": "Polonnaruwa",
+      "x": 1040,
+      "y": 705,
+      "type": "primary",
+      "kind": "heritage",
+      "note": "Ancient capital reached on the eastbound Cultural Triangle corridor."
+    },
+    {
+      "id": "knuckles",
+      "name": "Knuckles",
+      "x": 664,
+      "y": 1015,
+      "type": "primary",
+      "kind": "mountain",
+      "note": "Mountain access area; local roads are shown as dashed connectors."
+    },
+    {
+      "id": "haputale",
+      "name": "Haputale",
+      "x": 650,
+      "y": 1608,
+      "type": "primary",
+      "kind": "mountain",
+      "note": "Hill-country stop on the A4 / scenic highlands corridor."
+    },
+    {
+      "id": "dunhinda",
+      "name": "Dunhinda",
+      "x": 1142,
+      "y": 1433,
+      "type": "primary",
+      "kind": "waterfall",
+      "note": "Local waterfall spur from Badulla."
+    }
   ],
   "segments": [
-    {"id":"north-loop","from":"airport","to":"kalpitiya","via":[[300,850],[350,700]],"kind":"main"},
-    {"id":"kalpitiya-mannar","from":"kalpitiya","to":"mannar","via":[[340,520]],"kind":"main"},
-    {"id":"mannar-jaffna","from":"mannar","to":"jaffna","via":[[430,260]],"kind":"scenic"},
-    {"id":"mannar-anuradhapura","from":"mannar","to":"anuradhapura","via":[[420,430]],"kind":"main"},
-    {"id":"anuradhapura-mihintale","from":"anuradhapura","to":"mihintale","via":[[650,430]],"kind":"scenic"},
-    {"id":"anuradhapura-dambulla","from":"anuradhapura","to":"dambulla","via":[[700,600]],"kind":"main"},
-    {"id":"dambulla-sigiriya","from":"dambulla","to":"sigiriya","via":[[820,670]],"kind":"scenic"},
-    {"id":"sigiriya-trincomalee","from":"sigiriya","to":"trincomalee","via":[[1000,600]],"kind":"main"},
-    {"id":"sigiriya-polonnaruwa","from":"sigiriya","to":"mahiyanganaya","via":[[950,760]],"kind":"scenic"},
-    {"id":"airport-pinnawala","from":"airport","to":"pinnawala","via":[[350,1080]],"kind":"main"},
-    {"id":"pinnawala-kandy","from":"pinnawala","to":"kandy","via":[[650,1050]],"kind":"main"},
-    {"id":"kurunegala-kandy","from":"kurunegala","to":"kandy","via":[[650,900]],"kind":"main"},
-    {"id":"kandy-matale","from":"kandy","to":"matale","via":[[790,970]],"kind":"main"},
-    {"id":"kandy-gampola","from":"kandy","to":"gampola","via":[[870,1050]],"kind":"main"},
-    {"id":"gampola-ramboda","from":"gampola","to":"ramboda","via":[[940,1140]],"kind":"main"},
-    {"id":"ramboda-nuwara-eliya","from":"ramboda","to":"nuwara-eliya","via":[[880,1270]],"kind":"main"},
-    {"id":"nuwara-eliya-hatton","from":"nuwara-eliya","to":"hatton","via":[[770,1350]],"kind":"main"},
-    {"id":"hatton-ella","from":"hatton","to":"ella","via":[[860,1450]],"kind":"main"},
-    {"id":"ella-haputale","from":"ella","to":"horton-plains","via":[[820,1550]],"kind":"scenic"},
-    {"id":"ella-badulla","from":"ella","to":"badulla","via":[[1060,1450]],"kind":"scenic"},
-    {"id":"badulla-diyaluma","from":"badulla","to":"diyaluma","via":[[1180,1460]],"kind":"scenic"},
-    {"id":"diyaluma-wellawaya","from":"diyaluma","to":"wellawaya","via":[[1120,1570]],"kind":"scenic"},
-    {"id":"airport-colombo","from":"airport","to":"colombo","via":[[300,1120]],"kind":"main"},
-    {"id":"colombo-galle","from":"colombo","to":"galle","via":[[420,1550]],"kind":"main"},
-    {"id":"galle-unawatuna","from":"galle","to":"unawatuna","via":[[580,1900]],"kind":"main"},
-    {"id":"unawatuna-mirissa","from":"unawatuna","to":"mirissa","via":[[680,1940]],"kind":"main"},
-    {"id":"mirissa-matara","from":"mirissa","to":"matara","via":[[760,1950]],"kind":"main"},
-    {"id":"matara-tangalle","from":"matara","to":"tangalle","via":[[900,1930]],"kind":"main"},
-    {"id":"tangalle-yala","from":"tangalle","to":"yala","via":[[1200,1850]],"kind":"main"},
-    {"id":"yala-tissamaharama","from":"yala","to":"tissamaharama","via":[[1230,1720]],"kind":"main"},
-    {"id":"tissamaharama-kataragama","from":"tissamaharama","to":"kataragama","via":[[1120,1790]],"kind":"main"},
-    {"id":"kataragama-pottuvil","from":"kataragama","to":"pottuvil","via":[[1260,1600]],"kind":"main"},
-    {"id":"pottuvil-arugam-bay","from":"pottuvil","to":"arugam-bay","via":[[1420,1300]],"kind":"main"},
-    {"id":"arugam-bay-batticaloa","from":"arugam-bay","to":"batticaloa","via":[[1380,1080]],"kind":"main"},
-    {"id":"batticaloa-pasikudah","from":"batticaloa","to":"pasikudah","via":[[1300,820]],"kind":"main"},
-    {"id":"pasikudah-trincomalee","from":"pasikudah","to":"trincomalee","via":[[1200,650]],"kind":"main"},
-    {"id":"kandy-meemure","from":"kandy","to":"meemure","via":[[700,1080]],"kind":"scenic"},
-    {"id":"meemure-mahiyanganaya","from":"meemure","to":"mahiyanganaya","via":[[840,950]],"kind":"scenic"},
-    {"id":"mahiyanganaya-dambana","from":"mahiyanganaya","to":"dambana","via":[[1030,900]],"kind":"scenic"}
+    {
+      "id": "airport-pinnawala",
+      "from": "airport",
+      "to": "pinnawala",
+      "via": [
+        [
+          350,
+          1080
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 73.6,
+      "durationMin": 86,
+      "sourceKey": "Airport__Pinnawala"
+    },
+    {
+      "id": "kurunegala-pinnawala",
+      "from": "pinnawala",
+      "to": "kurunegala",
+      "via": [
+        [
+          501.5,
+          1001.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 27.9,
+      "durationMin": 34,
+      "sourceKey": "Pinnawala__Kurunegala"
+    },
+    {
+      "id": "dambulla-kurunegala",
+      "from": "kurunegala",
+      "to": "dambulla",
+      "via": [
+        [
+          668.5,
+          784
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 56.3,
+      "durationMin": 61,
+      "sourceKey": "Kurunegala__Dambulla"
+    },
+    {
+      "id": "dambulla-sigiriya",
+      "from": "dambulla",
+      "to": "sigiriya",
+      "via": [
+        [
+          820,
+          670
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 17,
+      "durationMin": 23,
+      "sourceKey": "Dambulla__Sigiriya"
+    },
+    {
+      "id": "kandy-sigiriya",
+      "from": "sigiriya",
+      "to": "kandy",
+      "via": [
+        [
+          833,
+          837.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 89,
+      "durationMin": 108,
+      "sourceKey": "Sigiriya__Kandy"
+    },
+    {
+      "id": "airport-kandy",
+      "from": "kandy",
+      "to": "airport",
+      "via": [
+        [
+          544,
+          1026.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 112.1,
+      "durationMin": 115,
+      "sourceKey": "Kandy__Airport"
+    },
+    {
+      "id": "kurunegala-yapahuwa",
+      "from": "kurunegala",
+      "to": "yapahuwa",
+      "via": [
+        [
+          476,
+          681.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 48.1,
+      "durationMin": 63,
+      "sourceKey": "Kurunegala__Yapahuwa"
+    },
+    {
+      "id": "anuradhapura-yapahuwa",
+      "from": "yapahuwa",
+      "to": "anuradhapura",
+      "via": [
+        [
+          483,
+          504
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 73.9,
+      "durationMin": 94,
+      "sourceKey": "Yapahuwa__Anuradhapura"
+    },
+    {
+      "id": "anuradhapura-mihintale",
+      "from": "anuradhapura",
+      "to": "mihintale",
+      "via": [
+        [
+          650,
+          430
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 16.1,
+      "durationMin": 21,
+      "sourceKey": "Anuradhapura__Mihintale"
+    },
+    {
+      "id": "aukana-mihintale",
+      "from": "mihintale",
+      "to": "aukana",
+      "via": [
+        [
+          800,
+          414
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 48.9,
+      "durationMin": 60,
+      "sourceKey": "Mihintale__Aukana"
+    },
+    {
+      "id": "aukana-ritigala",
+      "from": "aukana",
+      "to": "ritigala",
+      "via": [
+        [
+          850.5,
+          481.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 38.5,
+      "durationMin": 63,
+      "sourceKey": "Aukana__Ritigala"
+    },
+    {
+      "id": "ritigala-sigiriya",
+      "from": "ritigala",
+      "to": "sigiriya",
+      "via": [
+        [
+          862.5,
+          568.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 32.2,
+      "durationMin": 59,
+      "sourceKey": "Ritigala__Sigiriya"
+    },
+    {
+      "id": "polonnaruwa-sigiriya",
+      "from": "sigiriya",
+      "to": "polonnaruwa",
+      "via": [
+        [
+          951.5,
+          668.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 63.5,
+      "durationMin": 75,
+      "sourceKey": "Sigiriya__Polonnaruwa"
+    },
+    {
+      "id": "dambulla-polonnaruwa",
+      "from": "polonnaruwa",
+      "to": "dambulla",
+      "via": [
+        [
+          930.5,
+          718
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 75.8,
+      "durationMin": 84,
+      "sourceKey": "Polonnaruwa__Dambulla"
+    },
+    {
+      "id": "dambulla-matale",
+      "from": "dambulla",
+      "to": "matale",
+      "via": [
+        [
+          789.5,
+          821
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 20.7,
+      "durationMin": 24,
+      "sourceKey": "Dambulla__Matale"
+    },
+    {
+      "id": "kandy-matale",
+      "from": "matale",
+      "to": "kandy",
+      "via": [
+        [
+          780.5,
+          977
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 53.8,
+      "durationMin": 67,
+      "sourceKey": "Matale__Kandy"
+    },
+    {
+      "id": "kandy-ramboda",
+      "from": "kandy",
+      "to": "ramboda",
+      "via": [
+        [
+          876.5,
+          1124
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 50.7,
+      "durationMin": 63,
+      "sourceKey": "Kandy__Ramboda"
+    },
+    {
+      "id": "nuwara-eliya-ramboda",
+      "from": "ramboda",
+      "to": "nuwara-eliya",
+      "via": [
+        [
+          875,
+          1264.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 20.2,
+      "durationMin": 32,
+      "sourceKey": "Ramboda__Nuwara Eliya"
+    },
+    {
+      "id": "haputale-nuwara-eliya",
+      "from": "nuwara-eliya",
+      "to": "haputale",
+      "via": [
+        [
+          725,
+          1466
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 52.6,
+      "durationMin": 71,
+      "sourceKey": "Nuwara Eliya__Haputale"
+    },
+    {
+      "id": "ella-haputale",
+      "from": "haputale",
+      "to": "ella",
+      "via": [
+        [
+          824,
+          1565.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 21.9,
+      "durationMin": 26,
+      "sourceKey": "Haputale__Ella"
+    },
+    {
+      "id": "badulla-ella",
+      "from": "ella",
+      "to": "badulla",
+      "via": [
+        [
+          1067.5,
+          1449
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 19.9,
+      "durationMin": 26,
+      "sourceKey": "Ella__Badulla"
+    },
+    {
+      "id": "badulla-mahiyanganaya",
+      "from": "badulla",
+      "to": "mahiyanganaya",
+      "via": [
+        [
+          1077.5,
+          1106
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 52.8,
+      "durationMin": 66,
+      "sourceKey": "Badulla__Mahiyanganaya"
+    },
+    {
+      "id": "dambana-mahiyanganaya",
+      "from": "mahiyanganaya",
+      "to": "dambana",
+      "via": [
+        [
+          1032.5,
+          898
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 19.1,
+      "durationMin": 25,
+      "sourceKey": "Mahiyanganaya__Dambana"
+    },
+    {
+      "id": "dambana-tissamaharama",
+      "from": "dambana",
+      "to": "tissamaharama",
+      "via": [
+        [
+          1077.5,
+          1347
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 154.6,
+      "durationMin": 181,
+      "sourceKey": "Dambana__Tissamaharama"
+    },
+    {
+      "id": "kataragama-tissamaharama",
+      "from": "tissamaharama",
+      "to": "kataragama",
+      "via": [
+        [
+          1104,
+          1780
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 17.3,
+      "durationMin": 19,
+      "sourceKey": "Tissamaharama__Kataragama"
+    },
+    {
+      "id": "kataragama-yala",
+      "from": "kataragama",
+      "to": "yala",
+      "via": [
+        [
+          1217.5,
+          1763.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 34.1,
+      "durationMin": 88,
+      "sourceKey": "Kataragama__Yala"
+    },
+    {
+      "id": "airport-yala",
+      "from": "yala",
+      "to": "airport",
+      "via": [
+        [
+          810,
+          1356
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 316.6,
+      "durationMin": 314,
+      "sourceKey": "Yala__Airport"
+    },
+    {
+      "id": "hatton-nuwara-eliya",
+      "from": "nuwara-eliya",
+      "to": "hatton",
+      "via": [
+        [
+          773,
+          1355
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 45.5,
+      "durationMin": 59,
+      "sourceKey": "Nuwara Eliya__Hatton"
+    },
+    {
+      "id": "ella-hatton",
+      "from": "hatton",
+      "to": "ella",
+      "via": [
+        [
+          872,
+          1454.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 93.7,
+      "durationMin": 113,
+      "sourceKey": "Hatton__Ella"
+    },
+    {
+      "id": "ella-wellawaya",
+      "from": "ella",
+      "to": "wellawaya",
+      "via": [
+        [
+          1022.5,
+          1558.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 27.3,
+      "durationMin": 34,
+      "sourceKey": "Ella__Wellawaya"
+    },
+    {
+      "id": "diyaluma-wellawaya",
+      "from": "wellawaya",
+      "to": "diyaluma",
+      "via": [
+        [
+          1122,
+          1551.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 12.9,
+      "durationMin": 13,
+      "sourceKey": "Wellawaya__Diyaluma"
+    },
+    {
+      "id": "diyaluma-ratnapura",
+      "from": "diyaluma",
+      "to": "ratnapura",
+      "via": [
+        [
+          818.5,
+          1513
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 82.2,
+      "durationMin": 91,
+      "sourceKey": "Diyaluma__Ratnapura"
+    },
+    {
+      "id": "airport-ratnapura",
+      "from": "ratnapura",
+      "to": "airport",
+      "via": [
+        [
+          362.5,
+          1263.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 144.6,
+      "durationMin": 145,
+      "sourceKey": "Ratnapura__Airport"
+    },
+    {
+      "id": "airport-kurunegala",
+      "from": "airport",
+      "to": "kurunegala",
+      "via": [
+        [
+          400.5,
+          923.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 72.3,
+      "durationMin": 73,
+      "sourceKey": "Airport__Kurunegala"
+    },
+    {
+      "id": "matale-sigiriya",
+      "from": "sigiriya",
+      "to": "matale",
+      "via": [
+        [
+          810.5,
+          771.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 37.7,
+      "durationMin": 47,
+      "sourceKey": "Sigiriya__Matale"
+    },
+    {
+      "id": "knuckles-matale",
+      "from": "matale",
+      "to": "knuckles",
+      "via": [
+        [
+          711,
+          963
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 95,
+      "durationMin": 130,
+      "sourceKey": "Matale__Knuckles"
+    },
+    {
+      "id": "knuckles-meemure",
+      "from": "knuckles",
+      "to": "meemure",
+      "via": [
+        [
+          641,
+          1049.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 19.5,
+      "durationMin": 41,
+      "sourceKey": "Knuckles__Meemure"
+    },
+    {
+      "id": "kandy-meemure",
+      "from": "meemure",
+      "to": "kandy",
+      "via": [
+        [
+          710.5,
+          1063.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 59.8,
+      "durationMin": 109,
+      "sourceKey": "Meemure__Kandy"
+    },
+    {
+      "id": "gampola-kandy",
+      "from": "kandy",
+      "to": "gampola",
+      "via": [
+        [
+          866.5,
+          1063.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 20.1,
+      "durationMin": 25,
+      "sourceKey": "Kandy__Gampola"
+    },
+    {
+      "id": "gampola-nallathanni",
+      "from": "gampola",
+      "to": "nallathanni",
+      "via": [
+        [
+          835,
+          1244.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 67.3,
+      "durationMin": 84,
+      "sourceKey": "Gampola__Nallathanni"
+    },
+    {
+      "id": "adams-peak-nallathanni",
+      "from": "nallathanni",
+      "to": "adams-peak",
+      "via": [
+        [
+          740,
+          1426
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 2.8,
+      "durationMin": 12,
+      "sourceKey": "Nallathanni__Adam's Peak"
+    },
+    {
+      "id": "adams-peak-nuwara-eliya",
+      "from": "adams-peak",
+      "to": "nuwara-eliya",
+      "via": [
+        [
+          770,
+          1385.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 77.8,
+      "durationMin": 109,
+      "sourceKey": "Adam's Peak__Nuwara Eliya"
+    },
+    {
+      "id": "horton-plains-nuwara-eliya",
+      "from": "nuwara-eliya",
+      "to": "horton-plains",
+      "via": [
+        [
+          772,
+          1438.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 35.6,
+      "durationMin": 51,
+      "sourceKey": "Nuwara Eliya__Horton Plains"
+    },
+    {
+      "id": "haputale-horton-plains",
+      "from": "horton-plains",
+      "to": "haputale",
+      "via": [
+        [
+          697,
+          1580.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 34,
+      "durationMin": 43,
+      "sourceKey": "Horton Plains__Haputale"
+    },
+    {
+      "id": "haputale-liptons-seat",
+      "from": "haputale",
+      "to": "liptons-seat",
+      "via": [
+        [
+          783,
+          1537.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 0.4,
+      "durationMin": 1,
+      "sourceKey": "Haputale__Lipton's Seat"
+    },
+    {
+      "id": "ella-liptons-seat",
+      "from": "liptons-seat",
+      "to": "ella",
+      "via": [
+        [
+          957,
+          1495
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 21.6,
+      "durationMin": 25,
+      "sourceKey": "Lipton's Seat__Ella"
+    },
+    {
+      "id": "dunhinda-ella",
+      "from": "ella",
+      "to": "dunhinda",
+      "via": [
+        [
+          1070,
+          1478
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 24.3,
+      "durationMin": 38,
+      "sourceKey": "Ella__Dunhinda"
+    },
+    {
+      "id": "airport-dunhinda",
+      "from": "dunhinda",
+      "to": "airport",
+      "via": [
+        [
+          713.5,
+          1221.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 223.4,
+      "durationMin": 252,
+      "sourceKey": "Dunhinda__Airport"
+    },
+    {
+      "id": "airport-colombo",
+      "from": "airport",
+      "to": "colombo",
+      "via": [
+        [
+          300,
+          1120
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 31.5,
+      "durationMin": 27,
+      "sourceKey": "Airport__Colombo"
+    },
+    {
+      "id": "colombo-kitulgala",
+      "from": "colombo",
+      "to": "kitulgala",
+      "via": [
+        [
+          344,
+          1283
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 86.3,
+      "durationMin": 109,
+      "sourceKey": "Colombo__Kitulgala"
+    },
+    {
+      "id": "kitulgala-nallathanni",
+      "from": "kitulgala",
+      "to": "nallathanni",
+      "via": [
+        [
+          559.5,
+          1393
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 57.1,
+      "durationMin": 72,
+      "sourceKey": "Kitulgala__Nallathanni"
+    },
+    {
+      "id": "badulla-knuckles",
+      "from": "badulla",
+      "to": "knuckles",
+      "via": [
+        [
+          900.5,
+          1195
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 91.9,
+      "durationMin": 127,
+      "sourceKey": "Badulla__Knuckles"
+    },
+    {
+      "id": "kurunegala-sigiriya",
+      "from": "sigiriya",
+      "to": "kurunegala",
+      "via": [
+        [
+          689.5,
+          734.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 73.6,
+      "durationMin": 84,
+      "sourceKey": "Sigiriya__Kurunegala"
+    },
+    {
+      "id": "kurunegala-negombo",
+      "from": "kurunegala",
+      "to": "negombo",
+      "via": [
+        [
+          400.5,
+          891.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 79.2,
+      "durationMin": 86,
+      "sourceKey": "Kurunegala__Negombo"
+    },
+    {
+      "id": "airport-negombo",
+      "from": "negombo",
+      "to": "airport",
+      "via": [
+        [
+          285,
+          978
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 11.1,
+      "durationMin": 14,
+      "sourceKey": "Negombo__Airport"
+    },
+    {
+      "id": "negombo-puttalam",
+      "from": "negombo",
+      "to": "puttalam",
+      "via": [
+        [
+          308.5,
+          811
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 92.5,
+      "durationMin": 101,
+      "sourceKey": "Negombo__Puttalam"
+    },
+    {
+      "id": "kalpitiya-puttalam",
+      "from": "puttalam",
+      "to": "kalpitiya",
+      "via": [
+        [
+          342,
+          626.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 40.2,
+      "durationMin": 52,
+      "sourceKey": "Puttalam__Kalpitiya"
+    },
+    {
+      "id": "kalpitiya-mannar",
+      "from": "kalpitiya",
+      "to": "mannar",
+      "via": [
+        [
+          340,
+          520
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 201,
+      "durationMin": 249,
+      "sourceKey": "Kalpitiya__Mannar"
+    },
+    {
+      "id": "jaffna-mannar",
+      "from": "mannar",
+      "to": "jaffna",
+      "via": [
+        [
+          434.5,
+          237
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 118.2,
+      "durationMin": 143,
+      "sourceKey": "Mannar__Jaffna"
+    },
+    {
+      "id": "jaffna-vavuniya",
+      "from": "jaffna",
+      "to": "vavuniya",
+      "via": [
+        [
+          554.5,
+          175.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 138.5,
+      "durationMin": 162,
+      "sourceKey": "Jaffna__Vavuniya"
+    },
+    {
+      "id": "anuradhapura-vavuniya",
+      "from": "vavuniya",
+      "to": "anuradhapura",
+      "via": [
+        [
+          572,
+          372.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 60.4,
+      "durationMin": 75,
+      "sourceKey": "Vavuniya__Anuradhapura"
+    },
+    {
+      "id": "anuradhapura-trincomalee",
+      "from": "anuradhapura",
+      "to": "trincomalee",
+      "via": [
+        [
+          842,
+          526
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 107,
+      "durationMin": 119,
+      "sourceKey": "Anuradhapura__Trincomalee"
+    },
+    {
+      "id": "habarana-trincomalee",
+      "from": "trincomalee",
+      "to": "habarana",
+      "via": [
+        [
+          974.5,
+          579
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 85.5,
+      "durationMin": 100,
+      "sourceKey": "Trincomalee__Habarana"
+    },
+    {
+      "id": "habarana-sigiriya",
+      "from": "habarana",
+      "to": "sigiriya",
+      "via": [
+        [
+          829,
+          610
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 12.6,
+      "durationMin": 20,
+      "sourceKey": "Habarana__Sigiriya"
+    },
+    {
+      "id": "pinnawala-sigiriya",
+      "from": "sigiriya",
+      "to": "pinnawala",
+      "via": [
+        [
+          675,
+          899
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 101.1,
+      "durationMin": 118,
+      "sourceKey": "Sigiriya__Pinnawala"
+    },
+    {
+      "id": "negombo-pinnawala",
+      "from": "pinnawala",
+      "to": "negombo",
+      "via": [
+        [
+          386,
+          1056
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 80.9,
+      "durationMin": 98,
+      "sourceKey": "Pinnawala__Negombo"
+    },
+    {
+      "id": "kandy-pinnawala",
+      "from": "pinnawala",
+      "to": "kandy",
+      "via": [
+        [
+          645,
+          1104.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 39.7,
+      "durationMin": 48,
+      "sourceKey": "Pinnawala__Kandy"
+    },
+    {
+      "id": "hatton-kitulgala",
+      "from": "hatton",
+      "to": "kitulgala",
+      "via": [
+        [
+          562.5,
+          1383.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 38.9,
+      "durationMin": 47,
+      "sourceKey": "Hatton__Kitulgala"
+    },
+    {
+      "id": "avissawella-kitulgala",
+      "from": "kitulgala",
+      "to": "avissawella",
+      "via": [
+        [
+          383.5,
+          1332
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 40.3,
+      "durationMin": 51,
+      "sourceKey": "Kitulgala__Avissawella"
+    },
+    {
+      "id": "avissawella-ratnapura",
+      "from": "avissawella",
+      "to": "ratnapura",
+      "via": [
+        [
+          414,
+          1400
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 69.2,
+      "durationMin": 76,
+      "sourceKey": "Avissawella__Ratnapura"
+    },
+    {
+      "id": "matara-ratnapura",
+      "from": "ratnapura",
+      "to": "matara",
+      "via": [
+        [
+          631.5,
+          1732.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 128.9,
+      "durationMin": 123,
+      "sourceKey": "Ratnapura__Matara"
+    },
+    {
+      "id": "matara-mirissa",
+      "from": "matara",
+      "to": "mirissa",
+      "via": [
+        [
+          759,
+          1949
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 11.1,
+      "durationMin": 14,
+      "sourceKey": "Matara__Mirissa"
+    },
+    {
+      "id": "galle-mirissa",
+      "from": "mirissa",
+      "to": "galle",
+      "via": [
+        [
+          624.5,
+          1902.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 33,
+      "durationMin": 36,
+      "sourceKey": "Mirissa__Galle"
+    },
+    {
+      "id": "bentota-galle",
+      "from": "galle",
+      "to": "bentota",
+      "via": [
+        [
+          512.5,
+          1784.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 54.9,
+      "durationMin": 62,
+      "sourceKey": "Galle__Bentota"
+    },
+    {
+      "id": "airport-bentota",
+      "from": "bentota",
+      "to": "airport",
+      "via": [
+        [
+          378,
+          1362
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 106.5,
+      "durationMin": 89,
+      "sourceKey": "Bentota__Airport"
+    },
+    {
+      "id": "pasikudah-polonnaruwa",
+      "from": "polonnaruwa",
+      "to": "pasikudah",
+      "via": [
+        [
+          1143,
+          721
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 77.7,
+      "durationMin": 92,
+      "sourceKey": "Polonnaruwa__Pasikudah"
+    },
+    {
+      "id": "batticaloa-pasikudah",
+      "from": "pasikudah",
+      "to": "batticaloa",
+      "via": [
+        [
+          1295,
+          836
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 11.6,
+      "durationMin": 19,
+      "sourceKey": "Pasikudah__Batticaloa"
+    },
+    {
+      "id": "arugam-bay-batticaloa",
+      "from": "batticaloa",
+      "to": "arugam-bay",
+      "via": [
+        [
+          1402,
+          1072.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 134.7,
+      "durationMin": 157,
+      "sourceKey": "Batticaloa__Arugam Bay"
+    },
+    {
+      "id": "arugam-bay-pottuvil",
+      "from": "arugam-bay",
+      "to": "pottuvil",
+      "via": [
+        [
+          1429,
+          1303
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 3.1,
+      "durationMin": 4,
+      "sourceKey": "Arugam Bay__Pottuvil"
+    },
+    {
+      "id": "kataragama-pottuvil",
+      "from": "pottuvil",
+      "to": "kataragama",
+      "via": [
+        [
+          1249,
+          1610.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 131.4,
+      "durationMin": 142,
+      "sourceKey": "Pottuvil__Kataragama"
+    },
+    {
+      "id": "tissamaharama-yala",
+      "from": "tissamaharama",
+      "to": "yala",
+      "via": [
+        [
+          1221.5,
+          1718.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "distanceKm": 51.5,
+      "durationMin": 107,
+      "sourceKey": "Tissamaharama__Yala"
+    },
+    {
+      "id": "tangalle-yala",
+      "from": "yala",
+      "to": "tangalle",
+      "via": [
+        [
+          1165.5,
+          1799.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 120.5,
+      "durationMin": 173,
+      "sourceKey": "Yala__Tangalle"
+    },
+    {
+      "id": "matara-tangalle",
+      "from": "tangalle",
+      "to": "matara",
+      "via": [
+        [
+          909.5,
+          1922.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 36.5,
+      "durationMin": 40,
+      "sourceKey": "Tangalle__Matara"
+    },
+    {
+      "id": "airport-galle",
+      "from": "galle",
+      "to": "airport",
+      "via": [
+        [
+          419.5,
+          1432.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 151.5,
+      "durationMin": 120,
+      "sourceKey": "Galle__Airport"
+    },
+    {
+      "id": "avissawella-bentota",
+      "from": "avissawella",
+      "to": "bentota",
+      "via": [
+        [
+          429.5,
+          1498.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 100.8,
+      "durationMin": 100,
+      "sourceKey": "Avissawella__Bentota"
+    },
+    {
+      "id": "ella-nuwara-eliya",
+      "from": "nuwara-eliya",
+      "to": "ella",
+      "via": [
+        [
+          899,
+          1423.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 63.1,
+      "durationMin": 86,
+      "sourceKey": "Nuwara Eliya__Ella"
+    },
+    {
+      "id": "udawalawe-wellawaya",
+      "from": "wellawaya",
+      "to": "udawalawe",
+      "via": [
+        [
+          953,
+          1663.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 72.5,
+      "durationMin": 88,
+      "sourceKey": "Wellawaya__Udawalawe"
+    },
+    {
+      "id": "tissamaharama-udawalawe",
+      "from": "udawalawe",
+      "to": "tissamaharama",
+      "via": [
+        [
+          983.5,
+          1734
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 77.7,
+      "durationMin": 78,
+      "sourceKey": "Udawalawe__Tissamaharama"
+    },
+    {
+      "id": "matara-tissamaharama",
+      "from": "tissamaharama",
+      "to": "matara",
+      "via": [
+        [
+          965.5,
+          1841.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 113.9,
+      "durationMin": 99,
+      "sourceKey": "Tissamaharama__Matara"
+    },
+    {
+      "id": "negombo-trincomalee",
+      "from": "negombo",
+      "to": "trincomalee",
+      "via": [
+        [
+          719.5,
+          758
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 243.7,
+      "durationMin": 268,
+      "sourceKey": "Negombo__Trincomalee"
+    },
+    {
+      "id": "dambulla-kandy",
+      "from": "dambulla",
+      "to": "kandy",
+      "via": [
+        [
+          812,
+          887
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 72.1,
+      "durationMin": 85,
+      "sourceKey": "Dambulla__Kandy"
+    },
+    {
+      "id": "arugam-bay-wellawaya",
+      "from": "wellawaya",
+      "to": "arugam-bay",
+      "via": [
+        [
+          1253.5,
+          1402
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 105.9,
+      "durationMin": 114,
+      "sourceKey": "Wellawaya__Arugam Bay"
+    },
+    {
+      "id": "chilaw-negombo",
+      "from": "negombo",
+      "to": "chilaw",
+      "via": [
+        [
+          303,
+          861
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 44.8,
+      "durationMin": 49,
+      "sourceKey": "Negombo__Chilaw"
+    },
+    {
+      "id": "chilaw-mannar",
+      "from": "chilaw",
+      "to": "mannar",
+      "via": [
+        [
+          347.5,
+          581
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 207.4,
+      "durationMin": 249,
+      "sourceKey": "Chilaw__Mannar"
+    },
+    {
+      "id": "trincomalee-vavuniya",
+      "from": "vavuniya",
+      "to": "trincomalee",
+      "via": [
+        [
+          884,
+          416.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 97.6,
+      "durationMin": 114,
+      "sourceKey": "Vavuniya__Trincomalee"
+    },
+    {
+      "id": "galle-wellawaya",
+      "from": "wellawaya",
+      "to": "galle",
+      "via": [
+        [
+          800.5,
+          1724.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 171.5,
+      "durationMin": 151,
+      "sourceKey": "Wellawaya__Galle"
+    },
+    {
+      "id": "galle-unawatuna",
+      "from": "galle",
+      "to": "unawatuna",
+      "via": [
+        [
+          580,
+          1900
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 4.7,
+      "durationMin": 6,
+      "sourceKey": "Galle__Unawatuna"
+    },
+    {
+      "id": "airport-unawatuna",
+      "from": "unawatuna",
+      "to": "airport",
+      "via": [
+        [
+          444,
+          1469
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "distanceKm": 149.7,
+      "durationMin": 118,
+      "sourceKey": "Unawatuna__Airport"
+    },
+    {
+      "id": "airport-katunayake",
+      "from": "airport",
+      "to": "katunayake",
+      "via": [
+        [
+          310.5,
+          1025
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "sourceKey": "Airport__Katunayake"
+    },
+    {
+      "id": "katunayake-negombo",
+      "from": "katunayake",
+      "to": "negombo",
+      "via": [
+        [
+          310.5,
+          993
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "sourceKey": "Katunayake__Negombo"
+    },
+    {
+      "id": "ibbagamuwa-pinnawala",
+      "from": "pinnawala",
+      "to": "ibbagamuwa",
+      "via": [
+        [
+          496,
+          1034.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "sourceKey": "Pinnawala__Ibbagamuwa"
+    },
+    {
+      "id": "ibbagamuwa-melsiripura",
+      "from": "ibbagamuwa",
+      "to": "melsiripura",
+      "via": [
+        [
+          489,
+          924.5
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "sourceKey": "Ibbagamuwa__Melsiripura"
+    },
+    {
+      "id": "galewela-melsiripura",
+      "from": "melsiripura",
+      "to": "galewela",
+      "via": [
+        [
+          536.5,
+          842
+        ]
+      ],
+      "kind": "scenic",
+      "roadClass": "scenic / local connector",
+      "sourceKey": "Melsiripura__Galewela"
+    },
+    {
+      "id": "dambulla-galewela",
+      "from": "galewela",
+      "to": "dambulla",
+      "via": [
+        [
+          710.5,
+          734.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "sourceKey": "Galewela__Dambulla"
+    },
+    {
+      "id": "habarana-polonnaruwa",
+      "from": "habarana",
+      "to": "polonnaruwa",
+      "via": [
+        [
+          917.5,
+          646.5
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "sourceKey": "Habarana__Polonnaruwa"
+    },
+    {
+      "id": "badulla-dunhinda",
+      "from": "badulla",
+      "to": "dunhinda",
+      "via": [
+        [
+          1139.5,
+          1404
+        ]
+      ],
+      "kind": "main",
+      "roadClass": "main-road corridor",
+      "sourceKey": "Badulla__Dunhinda"
+    }
   ],
   "itineraries": [
-    {"id":"cultural-triangle-escape","label":"Cultural Triangle Escape","route":"Airport → Pinnawala → Dambulla → Sigiriya → Kandy → Airport","markers":["airport","pinnawala","dambulla","sigiriya","kandy"],"segments":["airport-pinnawala","pinnawala-kandy","kandy-matale","anuradhapura-dambulla","dambulla-sigiriya"]},
-    {"id":"northern-horizons","label":"Northern Horizons","route":"Airport → Kalpitiya → Mannar → Jaffna → Trincomalee → Airport","markers":["airport","kalpitiya","mannar","jaffna","trincomalee"],"segments":["north-loop","kalpitiya-mannar","mannar-jaffna","pasikudah-trincomalee"]},
-    {"id":"highlands-and-waterfalls","label":"Highlands & Waterfalls","route":"Airport → Kandy → Nuwara Eliya → Ella → Diyaluma → Airport","markers":["airport","kandy","nuwara-eliya","ella","diyaluma","wellawaya"],"segments":["airport-pinnawala","pinnawala-kandy","kandy-gampola","gampola-ramboda","ramboda-nuwara-eliya","nuwara-eliya-hatton","hatton-ella","ella-badulla","badulla-diyaluma","diyaluma-wellawaya"]},
-    {"id":"southern-coastal-bliss","label":"Southern Coastal Bliss","route":"Airport → Colombo → Galle → Mirissa → Matara → Tangalle","markers":["airport","colombo","galle","mirissa","matara","tangalle"],"segments":["airport-colombo","colombo-galle","galle-unawatuna","unawatuna-mirissa","mirissa-matara","matara-tangalle"]},
-    {"id":"east-coast-loop","label":"East Coast Loop","route":"Trincomalee → Pasikudah → Batticaloa → Arugam Bay → Yala","markers":["trincomalee","pasikudah","batticaloa","arugam-bay","yala"],"segments":["pasikudah-trincomalee","batticaloa-pasikudah","arugam-bay-batticaloa","pottuvil-arugam-bay","tangalle-yala"]}
+    {
+      "id": "cultural-triangle-escape",
+      "label": "Cultural Triangle Escape",
+      "route": "Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Airport",
+      "waypoints": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "dambulla",
+        "sigiriya",
+        "kandy",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "dambulla",
+        "sigiriya",
+        "kandy"
+      ],
+      "segments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "kandy-sigiriya",
+        "airport-kandy"
+      ],
+      "distanceKm": 376,
+      "durationMin": 427,
+      "airportToAirport": true
+    },
+    {
+      "id": "heritage-and-serenity",
+      "label": "Heritage and Serenity Getaway",
+      "route": "Airport → Pinnawala → Kurunegala → Yapahuwa → Anuradhapura → Mihintale → Aukana → Ritigala → Sigiriya → Polonnaruwa → Dambulla → Matale → Kandy → Airport",
+      "waypoints": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "yapahuwa",
+        "anuradhapura",
+        "mihintale",
+        "aukana",
+        "ritigala",
+        "sigiriya",
+        "polonnaruwa",
+        "dambulla",
+        "matale",
+        "kandy",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "yapahuwa",
+        "anuradhapura",
+        "mihintale",
+        "aukana",
+        "ritigala",
+        "sigiriya",
+        "polonnaruwa",
+        "dambulla",
+        "matale",
+        "kandy"
+      ],
+      "segments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
+        "anuradhapura-mihintale",
+        "aukana-mihintale",
+        "aukana-ritigala",
+        "ritigala-sigiriya",
+        "polonnaruwa-sigiriya",
+        "dambulla-polonnaruwa",
+        "dambulla-matale",
+        "kandy-matale",
+        "airport-kandy"
+      ],
+      "distanceKm": 685,
+      "durationMin": 845,
+      "airportToAirport": true
+    },
+    {
+      "id": "through-ancient-kingdoms",
+      "label": "Through Ancient Kingdoms",
+      "route": "Airport → Pinnawala → Kurunegala → Yapahuwa → Anuradhapura → Mihintale → Aukana → Ritigala → Sigiriya → Polonnaruwa → Dambulla → Matale → Kandy → Ramboda → Nuwara Eliya → Haputale → Ella → Badulla → Mahiyanganaya → Dambana → Tissamaharama → Kataragama → Yala → Airport",
+      "waypoints": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "yapahuwa",
+        "anuradhapura",
+        "mihintale",
+        "aukana",
+        "ritigala",
+        "sigiriya",
+        "polonnaruwa",
+        "dambulla",
+        "matale",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "haputale",
+        "ella",
+        "badulla",
+        "mahiyanganaya",
+        "dambana",
+        "tissamaharama",
+        "kataragama",
+        "yala",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "yapahuwa",
+        "anuradhapura",
+        "mihintale",
+        "aukana",
+        "ritigala",
+        "sigiriya",
+        "polonnaruwa",
+        "dambulla",
+        "matale",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "haputale",
+        "ella",
+        "badulla",
+        "mahiyanganaya",
+        "dambana",
+        "tissamaharama",
+        "kataragama",
+        "yala"
+      ],
+      "segments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "kurunegala-yapahuwa",
+        "anuradhapura-yapahuwa",
+        "anuradhapura-mihintale",
+        "aukana-mihintale",
+        "aukana-ritigala",
+        "ritigala-sigiriya",
+        "polonnaruwa-sigiriya",
+        "dambulla-polonnaruwa",
+        "dambulla-matale",
+        "kandy-matale",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "haputale-nuwara-eliya",
+        "ella-haputale",
+        "badulla-ella",
+        "badulla-mahiyanganaya",
+        "dambana-mahiyanganaya",
+        "dambana-tissamaharama",
+        "kataragama-tissamaharama",
+        "kataragama-yala",
+        "airport-yala"
+      ],
+      "distanceKm": 1333,
+      "durationMin": 1641,
+      "airportToAirport": true
+    },
+    {
+      "id": "highlands-and-waterfalls",
+      "label": "Highlands and Waterfalls Getaway",
+      "route": "Airport → Kandy → Ramboda → Nuwara Eliya → Hatton → Ella → Wellawaya → Diyaluma → Ratnapura → Airport",
+      "waypoints": [
+        "airport",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "ella",
+        "wellawaya",
+        "diyaluma",
+        "ratnapura",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "ella",
+        "wellawaya",
+        "diyaluma",
+        "ratnapura"
+      ],
+      "segments": [
+        "airport-kandy",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "ella-hatton",
+        "ella-wellawaya",
+        "diyaluma-wellawaya",
+        "diyaluma-ratnapura",
+        "airport-ratnapura"
+      ],
+      "distanceKm": 589,
+      "durationMin": 665,
+      "airportToAirport": true
+    },
+    {
+      "id": "serene-bliss-exploration",
+      "label": "Serene Bliss Exploration",
+      "route": "Airport → Kurunegala → Dambulla → Sigiriya → Matale → Knuckles → Meemure → Kandy → Gampola → Nallathanni → Adam's Peak → Nuwara Eliya → Horton Plains → Haputale → Lipton's Seat → Ella → Dunhinda → Airport",
+      "waypoints": [
+        "airport",
+        "kurunegala",
+        "dambulla",
+        "sigiriya",
+        "matale",
+        "knuckles",
+        "meemure",
+        "kandy",
+        "gampola",
+        "nallathanni",
+        "adams-peak",
+        "nuwara-eliya",
+        "horton-plains",
+        "haputale",
+        "liptons-seat",
+        "ella",
+        "dunhinda",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "kurunegala",
+        "dambulla",
+        "sigiriya",
+        "matale",
+        "knuckles",
+        "meemure",
+        "kandy",
+        "gampola",
+        "nallathanni",
+        "adams-peak",
+        "nuwara-eliya",
+        "horton-plains",
+        "haputale",
+        "liptons-seat",
+        "ella",
+        "dunhinda"
+      ],
+      "segments": [
+        "airport-kurunegala",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "matale-sigiriya",
+        "knuckles-matale",
+        "knuckles-meemure",
+        "kandy-meemure",
+        "gampola-kandy",
+        "gampola-nallathanni",
+        "adams-peak-nallathanni",
+        "adams-peak-nuwara-eliya",
+        "horton-plains-nuwara-eliya",
+        "haputale-horton-plains",
+        "haputale-liptons-seat",
+        "ella-liptons-seat",
+        "dunhinda-ella",
+        "airport-dunhinda"
+      ],
+      "distanceKm": 865,
+      "durationMin": 1124,
+      "airportToAirport": true
+    },
+    {
+      "id": "thrills-and-tranquility",
+      "label": "Thrills and Tranquility",
+      "route": "Airport → Colombo → Kitulgala → Nallathanni → Adam's Peak → Nuwara Eliya → Horton Plains → Haputale → Ella → Badulla → Knuckles → Matale → Dambulla → Sigiriya → Kurunegala → Negombo → Airport",
+      "waypoints": [
+        "airport",
+        "colombo",
+        "kitulgala",
+        "nallathanni",
+        "adams-peak",
+        "nuwara-eliya",
+        "horton-plains",
+        "haputale",
+        "ella",
+        "badulla",
+        "knuckles",
+        "matale",
+        "dambulla",
+        "sigiriya",
+        "kurunegala",
+        "negombo",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "colombo",
+        "kitulgala",
+        "nallathanni",
+        "adams-peak",
+        "nuwara-eliya",
+        "horton-plains",
+        "haputale",
+        "ella",
+        "badulla",
+        "knuckles",
+        "matale",
+        "dambulla",
+        "sigiriya",
+        "kurunegala",
+        "negombo"
+      ],
+      "segments": [
+        "airport-colombo",
+        "colombo-kitulgala",
+        "kitulgala-nallathanni",
+        "adams-peak-nallathanni",
+        "adams-peak-nuwara-eliya",
+        "horton-plains-nuwara-eliya",
+        "haputale-horton-plains",
+        "ella-haputale",
+        "badulla-ella",
+        "badulla-knuckles",
+        "knuckles-matale",
+        "dambulla-matale",
+        "dambulla-sigiriya",
+        "kurunegala-sigiriya",
+        "kurunegala-negombo",
+        "airport-negombo"
+      ],
+      "distanceKm": 755,
+      "durationMin": 963,
+      "airportToAirport": true
+    },
+    {
+      "id": "northern-horizons",
+      "label": "Northern Horizons and Coastal Charms",
+      "route": "Airport → Negombo → Puttalam → Kalpitiya → Mannar → Jaffna → Vavuniya → Anuradhapura → Trincomalee → Habarana → Sigiriya → Pinnawala → Negombo → Airport",
+      "waypoints": [
+        "airport",
+        "negombo",
+        "puttalam",
+        "kalpitiya",
+        "mannar",
+        "jaffna",
+        "vavuniya",
+        "anuradhapura",
+        "trincomalee",
+        "habarana",
+        "sigiriya",
+        "pinnawala",
+        "negombo",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "negombo",
+        "puttalam",
+        "kalpitiya",
+        "mannar",
+        "jaffna",
+        "vavuniya",
+        "anuradhapura",
+        "trincomalee",
+        "habarana",
+        "sigiriya",
+        "pinnawala"
+      ],
+      "segments": [
+        "airport-negombo",
+        "negombo-puttalam",
+        "kalpitiya-puttalam",
+        "kalpitiya-mannar",
+        "jaffna-mannar",
+        "jaffna-vavuniya",
+        "anuradhapura-vavuniya",
+        "anuradhapura-trincomalee",
+        "habarana-trincomalee",
+        "habarana-sigiriya",
+        "pinnawala-sigiriya",
+        "negombo-pinnawala",
+        "airport-negombo"
+      ],
+      "distanceKm": 1060,
+      "durationMin": 1265,
+      "airportToAirport": true
+    },
+    {
+      "id": "southern-coastal-bliss",
+      "label": "Southern Coastal Bliss",
+      "route": "Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Ratnapura → Matara → Mirissa → Galle → Bentota → Airport",
+      "waypoints": [
+        "airport",
+        "pinnawala",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "ratnapura",
+        "matara",
+        "mirissa",
+        "galle",
+        "bentota",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "pinnawala",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "ratnapura",
+        "matara",
+        "mirissa",
+        "galle",
+        "bentota"
+      ],
+      "segments": [
+        "airport-pinnawala",
+        "kandy-pinnawala",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-ratnapura",
+        "matara-ratnapura",
+        "matara-mirissa",
+        "galle-mirissa",
+        "bentota-galle",
+        "airport-bentota"
+      ],
+      "distanceKm": 713,
+      "durationMin": 786,
+      "airportToAirport": true
+    },
+    {
+      "id": "sun-and-fun",
+      "label": "Sun and Fun",
+      "route": "Airport → Pinnawala → Kurunegala → Dambulla → Polonnaruwa → Pasikudah → Batticaloa → Arugam Bay → Pottuvil → Kataragama → Tissamaharama → Yala → Tangalle → Matara → Mirissa → Galle → Airport",
+      "waypoints": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "dambulla",
+        "polonnaruwa",
+        "pasikudah",
+        "batticaloa",
+        "arugam-bay",
+        "pottuvil",
+        "kataragama",
+        "tissamaharama",
+        "yala",
+        "tangalle",
+        "matara",
+        "mirissa",
+        "galle",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "dambulla",
+        "polonnaruwa",
+        "pasikudah",
+        "batticaloa",
+        "arugam-bay",
+        "pottuvil",
+        "kataragama",
+        "tissamaharama",
+        "yala",
+        "tangalle",
+        "matara",
+        "mirissa",
+        "galle"
+      ],
+      "segments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "dambulla-kurunegala",
+        "dambulla-polonnaruwa",
+        "pasikudah-polonnaruwa",
+        "batticaloa-pasikudah",
+        "arugam-bay-batticaloa",
+        "arugam-bay-pottuvil",
+        "kataragama-pottuvil",
+        "kataragama-tissamaharama",
+        "tissamaharama-yala",
+        "tangalle-yala",
+        "matara-tangalle",
+        "matara-mirissa",
+        "galle-mirissa",
+        "airport-galle"
+      ],
+      "distanceKm": 1014,
+      "durationMin": 1188,
+      "airportToAirport": true
+    },
+    {
+      "id": "romantic-getaway",
+      "label": "Romantic Getaway",
+      "route": "Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Bentota → Galle → Airport",
+      "waypoints": [
+        "airport",
+        "pinnawala",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
+        "galle",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "pinnawala",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "hatton",
+        "kitulgala",
+        "avissawella",
+        "bentota",
+        "galle"
+      ],
+      "segments": [
+        "airport-pinnawala",
+        "kandy-pinnawala",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "hatton-nuwara-eliya",
+        "hatton-kitulgala",
+        "avissawella-kitulgala",
+        "avissawella-bentota",
+        "bentota-galle",
+        "airport-galle"
+      ],
+      "distanceKm": 616,
+      "durationMin": 668,
+      "airportToAirport": true
+    },
+    {
+      "id": "tales-of-love",
+      "label": "Tales of Love and Timeless Beauty",
+      "route": "Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Udawalawe → Tissamaharama → Matara → Mirissa → Galle → Airport",
+      "waypoints": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "dambulla",
+        "sigiriya",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "ella",
+        "wellawaya",
+        "udawalawe",
+        "tissamaharama",
+        "matara",
+        "mirissa",
+        "galle",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "pinnawala",
+        "kurunegala",
+        "dambulla",
+        "sigiriya",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "ella",
+        "wellawaya",
+        "udawalawe",
+        "tissamaharama",
+        "matara",
+        "mirissa",
+        "galle"
+      ],
+      "segments": [
+        "airport-pinnawala",
+        "kurunegala-pinnawala",
+        "dambulla-kurunegala",
+        "dambulla-sigiriya",
+        "kandy-sigiriya",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "ella-nuwara-eliya",
+        "ella-wellawaya",
+        "udawalawe-wellawaya",
+        "tissamaharama-udawalawe",
+        "matara-tissamaharama",
+        "matara-mirissa",
+        "galle-mirissa",
+        "airport-galle"
+      ],
+      "distanceKm": 885,
+      "durationMin": 962,
+      "airportToAirport": true
+    },
+    {
+      "id": "sri-lanka-honeymoon",
+      "label": "Sri Lanka Honeymoon — Romance and Adventure Awaits",
+      "route": "Airport → Negombo → Trincomalee → Habarana → Sigiriya → Dambulla → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Arugam Bay → Pottuvil → Kataragama → Yala → Airport",
+      "waypoints": [
+        "airport",
+        "negombo",
+        "trincomalee",
+        "habarana",
+        "sigiriya",
+        "dambulla",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "ella",
+        "wellawaya",
+        "arugam-bay",
+        "pottuvil",
+        "kataragama",
+        "yala",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "negombo",
+        "trincomalee",
+        "habarana",
+        "sigiriya",
+        "dambulla",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "ella",
+        "wellawaya",
+        "arugam-bay",
+        "pottuvil",
+        "kataragama",
+        "yala"
+      ],
+      "segments": [
+        "airport-negombo",
+        "negombo-trincomalee",
+        "habarana-trincomalee",
+        "habarana-sigiriya",
+        "dambulla-sigiriya",
+        "dambulla-kandy",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "ella-nuwara-eliya",
+        "ella-wellawaya",
+        "arugam-bay-wellawaya",
+        "arugam-bay-pottuvil",
+        "kataragama-pottuvil",
+        "kataragama-yala",
+        "airport-yala"
+      ],
+      "distanceKm": 1194,
+      "durationMin": 1387,
+      "airportToAirport": true
+    },
+    {
+      "id": "ramayana-legacy",
+      "label": "Ramayana Legacy",
+      "route": "Airport → Negombo → Chilaw → Mannar → Jaffna → Vavuniya → Trincomalee → Habarana → Sigiriya → Dambulla → Matale → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Galle → Unawatuna → Airport",
+      "waypoints": [
+        "airport",
+        "negombo",
+        "chilaw",
+        "mannar",
+        "jaffna",
+        "vavuniya",
+        "trincomalee",
+        "habarana",
+        "sigiriya",
+        "dambulla",
+        "matale",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "ella",
+        "wellawaya",
+        "galle",
+        "unawatuna",
+        "airport"
+      ],
+      "markers": [
+        "airport",
+        "negombo",
+        "chilaw",
+        "mannar",
+        "jaffna",
+        "vavuniya",
+        "trincomalee",
+        "habarana",
+        "sigiriya",
+        "dambulla",
+        "matale",
+        "kandy",
+        "ramboda",
+        "nuwara-eliya",
+        "ella",
+        "wellawaya",
+        "galle",
+        "unawatuna"
+      ],
+      "segments": [
+        "airport-negombo",
+        "chilaw-negombo",
+        "chilaw-mannar",
+        "jaffna-mannar",
+        "jaffna-vavuniya",
+        "trincomalee-vavuniya",
+        "habarana-trincomalee",
+        "habarana-sigiriya",
+        "dambulla-sigiriya",
+        "dambulla-matale",
+        "kandy-matale",
+        "kandy-ramboda",
+        "nuwara-eliya-ramboda",
+        "ella-nuwara-eliya",
+        "ella-wellawaya",
+        "galle-wellawaya",
+        "galle-unawatuna",
+        "airport-unawatuna"
+      ],
+      "distanceKm": 1294,
+      "durationMin": 1455,
+      "airportToAirport": true
+    }
   ]
 }
