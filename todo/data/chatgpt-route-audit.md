@@ -1,0 +1,112 @@
+Scope and method
+- I checked each itinerary at corridor level (major highways and obvious connectors) using general OSM/OSRM knowledge. I did not generate exact turn-by-turns.
+- Where I’m less than certain (remote mountain spurs; seasonally variable roads), I say so explicitly.
+
+Key to notes
+- Plausible: sits on or very near the shortest clear driving corridor.
+- Detour but valid: off the shortest line because it’s a destination/spur; still a normal way to connect.
+- Local access spur: dead‑end or narrow mountain/park road; expect out‑and‑back or slow going.
+- Redundant: two waypoints that are essentially the same stop for road travel.
+- Scenic train: commonly used rail segment that differs from the road corridor.
+
+Tour audits
+
+1) cultural-triangle-escape
+- Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Airport: Plausible. Kurunegala lies on the practical Pinnawala→Dambulla corridor. Sigiriya→Kandy typically returns via Dambulla/Matale corridor.
+- No unnecessary waypoints.
+- Train/local-spur notes: none.
+
+2) heritage-and-serenity
+- Airport → Pinnawala → Kurunegala → Yapahuwa → Anuradhapura → Mihintale → Aukana → Ritigala → Sigiriya → Polonnaruwa → Dambulla → Matale → Kandy → Airport: Plausible. Yapahuwa is a short detour off the Kurunegala–Anuradhapura corridor; Aukana and Ritigala are also short spurs off the main A12/A11 corridors; Matale is on the Dambulla–Kandy corridor.
+- No unnecessary waypoints.
+- Local access spurs: Aukana, Ritigala (short rural roads).
+
+3) through-ancient-kingdoms
+- Up to Kandy as above: Plausible.
+- Kandy → Ramboda → Nuwara Eliya: Plausible on the mountain A5 corridor.
+- Nuwara Eliya → Haputale → Ella → Badulla: Plausible by road (multiple mountain options). Many travelers use the scenic train here (see note).
+- Badulla → Mahiyanganaya → Dambana: Plausible (A5 then local spur to Dambana).
+- Dambana → Tissamaharama → Kataragama → Yala: Plausible via Monaragala/Buttala region. Order is fine; bases for Yala are usually Tissamaharama and/or Kataragama.
+- Airport return from Yala: Long but standard via south coast expressway connection.
+- Local access spurs: Dambana; Yala park approach is a spur.
+- Scenic train: Kandy↔Nanu Oya/Haputale/Ella/Badulla segment is often by rail; if taken, the pass-through road towns don’t reflect the rail path.
+
+4) highlands-and-waterfalls
+- Airport → Kandy → Ramboda → Nuwara Eliya → Hatton → Ella → Wellawaya → Diyaluma → Ratnapura → Airport: Mostly plausible.
+- Hatton → Ella: Plausible but not direct; road routing typically backtracks via Nuwara Eliya/Bandarawela or uses slower mountain B-roads. Detour but valid if Hatton is a destination.
+- Wellawaya → Diyaluma → Ratnapura: Plausible (A4 mountain corridor).
+- Local access spurs: Diyaluma is a short spur off the A4.
+- Scenic train: Kandy/Hatton/Nanu Oya ↔ Ella is commonly done by train (different corridor than by road).
+
+5) serene-bliss-exploration
+- Airport → Kurunegala → Dambulla → Sigiriya → Matale → Kandy: Plausible; Matale lies on the Dambulla–Kandy line.
+- Matale → Knuckles → Meemure → Kandy: Plausible but these are narrow, steep mountain roads; Meemure is an out‑and‑back spur via Hunnasgiriya/Loolwatte (expect slow travel).
+- Kandy → Gampola → Nallathanni → Adam’s Peak → Nuwara Eliya: Plausible; Nallathanniya is the Adam’s Peak trailhead. Listing both “Nallathanni” and “Adam’s Peak” is redundant for road travel.
+- Nuwara Eliya → Horton Plains → Haputale → Lipton’s Seat → Ella → Dunhinda → Airport: Plausible. Horton Plains and Lipton’s Seat are local access spurs; Dunhinda is a short spur near Badulla (the sequence adds backtrack east before the long westbound return).
+- Flags/corrections:
+  - Redundant: Nallathanni and Adam’s Peak represent the same approach; keep one (e.g., Nallathanniya/Adam’s Peak).
+- Local access spurs: Meemure, Horton Plains, Lipton’s Seat, Dunhinda.
+- Scenic train: Kandy/Nanu Oya/Haputale/Ella commonly by rail.
+
+6) thrills-and-tranquility
+- Airport → Colombo → Kitulgala → Nallathanni → Adam’s Peak → Nuwara Eliya → Horton Plains → Haputale → Ella → Badulla: Plausible mountain corridor. Redundancy as above for Adam’s Peak.
+- Badulla → Knuckles → Matale → Dambulla → Sigiriya → Kurunegala → Negombo → Airport: Plausible but long. Badulla→Knuckles typically via Mahiyanganaya/Digana; expect mountain driving; Matale lies on the onward corridor to Dambulla/Kandy.
+- Flags/corrections:
+  - Redundant: Nallathanni and Adam’s Peak; keep one.
+- Local access spurs: Horton Plains; Knuckles approaches involve narrow roads.
+- Scenic train: Adam’s Peak/Nanu Oya/Haputale/Ella/Badulla region often traveled by rail.
+
+7) northern-horizons
+- Airport → Negombo → Puttalam → Kalpitiya: Plausible; Kalpitiya is an out‑and‑back spur from Puttalam.
+- Kalpitiya → Mannar → Jaffna: Plausible via the coastal A32 corridor (shortest). Alternative via Medawachchiya/A9 is longer.
+- Jaffna → Vavuniya → Anuradhapura → Trincomalee → Habarana → Sigiriya: Plausible.
+- Sigiriya → Pinnawala → Negombo → Airport: Plausible; Pinnawala is a detour off the most direct Sigiriya→Negombo line but valid if it’s a destination.
+- Local access spurs: Kalpitiya.
+- Scenic train: none assumed.
+
+8) southern-coastal-bliss
+- Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Ratnapura → Matara → Mirissa → Galle → Bentota → Airport: Plausible. The interior arc uses the A7/A8/A17 corridors; coast leg is A2/E01.
+- No unnecessary waypoints.
+- Local access spurs: none unusual.
+- Scenic train: Nuwara Eliya/Hatton section sometimes by rail, but the itinerary follows the road corridor.
+
+9) sun-and-fun
+- Airport → Pinnawala → Kurunegala → Dambulla → Polonnaruwa → Pasikudah → Batticaloa → Arugam Bay → Pottuvil → Kataragama → Tissamaharama → Yala → Tangalle → Matara → Mirissa → Galle → Airport: Mostly plausible east–south coastal sweep.
+- Flags/corrections:
+  - Redundant: Arugam Bay and Pottuvil are adjacent; list one (Arugam Bay suffices).
+  - Order Kataragama/Tissamaharama/Yala is fine (both towns serve Yala); including both is not wrong but is functionally redundant if used only as pass‑throughs.
+- Local access spurs: Yala park approach is a spur.
+- Scenic train: none assumed.
+
+10) romantic-getaway
+- Airport → Pinnawala → Kandy → Ramboda → Nuwara Eliya → Hatton → Kitulgala → Avissawella → Bentota → Galle → Airport: Plausible. Avissawella→Bentota can go via local B-roads (Ingiriya/Horana) or via Ratnapura–Panadura–E01; both are standard.
+- No unnecessary waypoints.
+- Scenic train: Nuwara Eliya/Hatton sometimes by rail; road corridor is fine.
+
+11) tales-of-love
+- Airport → Pinnawala → Kurunegala → Dambulla → Sigiriya → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Udawalawe → Tissamaharama → Matara → Mirissa → Galle → Airport: Plausible. Wellawaya→Udawalawe via Thanamalwila corridor is standard; coastal return is straightforward.
+- No unnecessary waypoints.
+- Local access spurs: Udawalawe park approach is a spur.
+- Scenic train: Kandy/Nanu Oya→Ella is often by rail (if chosen, road pass‑throughs differ).
+
+12) sri-lanka-honeymoon
+- Airport → Negombo → Trincomalee → Habarana → Sigiriya → Dambulla → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Arugam Bay → Pottuvil → Kataragama → Yala → Airport: Plausible long loop.
+- Flags/corrections:
+  - Redundant: Arugam Bay and Pottuvil; keep one.
+- Local access spurs: Yala approach is a spur.
+- Scenic train: Kandy/Nanu Oya→Ella commonly by rail.
+
+13) ramayana-legacy
+- Airport → Negombo → Chilaw → Mannar → Jaffna → Vavuniya → Trincomalee → Habarana → Sigiriya → Dambulla → Matale → Kandy → Ramboda → Nuwara Eliya → Ella → Wellawaya → Galle → Unawatuna → Airport: Plausible. Chilaw→Mannar typically passes Puttalam (not listed, but on corridor). Wellawaya→Galle runs the A2 coastal corridor (will naturally pass Hambantota/Matara, which needn’t be listed).
+- No unnecessary waypoints.
+- Local access spurs: none unusual.
+- Scenic train: Central highlands segment often by rail (if chosen).
+
+General corrections and cautions across tours
+- Redundant pairs to fix:
+  - Nallathanni and Adam’s Peak: for road travel they are effectively the same stop (Nallathanniya is the trailhead). Keep one.
+  - Arugam Bay and Pottuvil: adjacent; keep one (typically Arugam Bay).
+- Local access spurs (expect out‑and‑back and slower roads): Meemure, Knuckles access tracks, Horton Plains (from Nuwara Eliya/Ohiya), Lipton’s Seat, Dunhinda, Diyaluma, Kalpitiya, Yala/Udawalawe/Kataragama park approaches.
+- Scenic train option (not assumed but common): Kandy/Peradeniya ↔ Hatton/Nanu Oya ↔ Haputale/Ella ↔ Badulla. If taking the train, expect different pass‑throughs and to rejoin the road network at your chosen station.
+- Uncertainty notes:
+  - Some mountain links (e.g., Meemure–Kandy via Hunnasgiriya; Horton Plains–Haputale via Ohiya; Hatton–Ella via minor B-roads) are slow, narrow, and weather‑sensitive. OSRM typically prefers the larger A‑class corridors even if longer; the listed sequences remain plausible but may not be time‑optimal.

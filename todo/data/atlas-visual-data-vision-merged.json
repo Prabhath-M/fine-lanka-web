@@ -1,0 +1,2723 @@
+{
+  "schemaVersion": "2.0-vision-registered",
+  "image": "/images/fine-lanka-route-atlas-all-hubs.png",
+  "imageWidth": 1664,
+  "imageHeight": 2080,
+  "waypoints": [
+    {
+      "uid": "atlas-marker-001",
+      "name": "Waypoint 01",
+      "x": 433,
+      "y": 87,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 433,
+        "y": 87
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-004",
+      "name": "Waypoint 02",
+      "x": 263,
+      "y": 389,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 263,
+        "y": 389
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-005",
+      "name": "Waypoint 03",
+      "x": 560,
+      "y": 481,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 560,
+        "y": 481
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-007",
+      "name": "Waypoint 04",
+      "x": 187,
+      "y": 492,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 187,
+        "y": 492
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-010",
+      "name": "Waypoint 05",
+      "x": 163,
+      "y": 584,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 163,
+        "y": 584
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-002",
+      "name": "Waypoint 06",
+      "x": 677,
+      "y": 270,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 677,
+        "y": 270
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-003",
+      "name": "Waypoint 07",
+      "x": 822,
+      "y": 362,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 822,
+        "y": 362
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-008",
+      "name": "Waypoint 08",
+      "x": 910,
+      "y": 526,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 910,
+        "y": 526
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-009",
+      "name": "Waypoint 09",
+      "x": 1027,
+      "y": 549,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 1027,
+        "y": 549
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-011",
+      "name": "Waypoint 10",
+      "x": 887,
+      "y": 676,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 887,
+        "y": 676
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-012",
+      "name": "Waypoint 11",
+      "x": 1050,
+      "y": 676,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1050,
+        "y": 676
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-013",
+      "name": "Waypoint 12",
+      "x": 1085,
+      "y": 687,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1085,
+        "y": 687
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-015",
+      "name": "Waypoint 13",
+      "x": 654,
+      "y": 698,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 654,
+        "y": 698
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-006",
+      "name": "Waypoint 14",
+      "x": 1284,
+      "y": 481,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1284,
+        "y": 481
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-017",
+      "name": "Waypoint 15",
+      "x": 1400,
+      "y": 710,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1400,
+        "y": 710
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-019",
+      "name": "Waypoint 16",
+      "x": 140,
+      "y": 730,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 140,
+        "y": 730
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-018",
+      "name": "Waypoint 17",
+      "x": 610,
+      "y": 720,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 610,
+        "y": 720
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-014",
+      "name": "Waypoint 18",
+      "x": 850,
+      "y": 690,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 850,
+        "y": 690
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-021",
+      "name": "Waypoint 19",
+      "x": 830,
+      "y": 760,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 830,
+        "y": 760
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-027",
+      "name": "Waypoint 20",
+      "x": 860,
+      "y": 940,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 860,
+        "y": 940
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-029",
+      "name": "Waypoint 21",
+      "x": 420,
+      "y": 980,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 420,
+        "y": 980
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-031",
+      "name": "Waypoint 22",
+      "x": 280,
+      "y": 1080,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 280,
+        "y": 1080
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-040",
+      "name": "Waypoint 23",
+      "x": 230,
+      "y": 1380,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 230,
+        "y": 1380
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-016",
+      "name": "Waypoint 24",
+      "x": 1520,
+      "y": 700,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1520,
+        "y": 700
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-025",
+      "name": "Waypoint 25",
+      "x": 1500,
+      "y": 840,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1500,
+        "y": 840
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-032",
+      "name": "Waypoint 26",
+      "x": 1540,
+      "y": 1120,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1540,
+        "y": 1120
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-039",
+      "name": "Waypoint 27",
+      "x": 1000,
+      "y": 1360,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1000,
+        "y": 1360
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-033",
+      "name": "Waypoint 28",
+      "x": 900,
+      "y": 1160,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 900,
+        "y": 1160
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-020",
+      "name": "Waypoint 29",
+      "x": 1130,
+      "y": 740,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1130,
+        "y": 740
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-022",
+      "name": "Waypoint 30",
+      "x": 590,
+      "y": 790,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 590,
+        "y": 790
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-024",
+      "name": "Waypoint 31",
+      "x": 560,
+      "y": 830,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 560,
+        "y": 830
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-028",
+      "name": "Waypoint 32",
+      "x": 1000,
+      "y": 960,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 1000,
+        "y": 960
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-030",
+      "name": "Waypoint 33",
+      "x": 1060,
+      "y": 1030,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 1060,
+        "y": 1030
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-035",
+      "name": "Waypoint 34",
+      "x": 870,
+      "y": 1240,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 870,
+        "y": 1240
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-037",
+      "name": "Waypoint 35",
+      "x": 780,
+      "y": 1300,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 780,
+        "y": 1300
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-026",
+      "name": "Waypoint 36",
+      "x": 690,
+      "y": 940,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 690,
+        "y": 940
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-023",
+      "name": "Waypoint 37",
+      "x": 1200,
+      "y": 810,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 1200,
+        "y": 810
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-036",
+      "name": "Waypoint 38",
+      "x": 1520,
+      "y": 1280,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 1520,
+        "y": 1280
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-034",
+      "name": "Waypoint 39",
+      "x": 360,
+      "y": 1180,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 360,
+        "y": 1180
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-038",
+      "name": "Waypoint 40",
+      "x": 930,
+      "y": 1320,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 930,
+        "y": 1320
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-041",
+      "name": "Waypoint 41",
+      "x": 250,
+      "y": 1440,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 250,
+        "y": 1440
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-045",
+      "name": "Waypoint 42",
+      "x": 360,
+      "y": 1590,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 360,
+        "y": 1590
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-046",
+      "name": "Waypoint 43",
+      "x": 430,
+      "y": 1620,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 430,
+        "y": 1620
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-049",
+      "name": "Waypoint 44",
+      "x": 720,
+      "y": 1710,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 720,
+        "y": 1710
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-050",
+      "name": "Waypoint 45",
+      "x": 860,
+      "y": 1715,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 860,
+        "y": 1715
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-048",
+      "name": "Waypoint 46",
+      "x": 1110,
+      "y": 1695,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1110,
+        "y": 1695
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-047",
+      "name": "Waypoint 47",
+      "x": 1180,
+      "y": 1640,
+      "role": "support-hub",
+      "atlasPosition": {
+        "x": 1180,
+        "y": 1640
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "support"
+    },
+    {
+      "uid": "atlas-marker-044",
+      "name": "Waypoint 48",
+      "x": 1020,
+      "y": 1530,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1020,
+        "y": 1530
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-042",
+      "name": "Waypoint 49",
+      "x": 800,
+      "y": 1480,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 800,
+        "y": 1480
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    },
+    {
+      "uid": "atlas-marker-043",
+      "name": "Waypoint 50",
+      "x": 1430,
+      "y": 1510,
+      "role": "primary-tourism",
+      "atlasPosition": {
+        "x": 1430,
+        "y": 1510
+      },
+      "lat": null,
+      "lon": null,
+      "markerType": "primary"
+    }
+  ],
+  "routes": [
+    {
+      "uid": "rt-jaffna-to-mannar",
+      "start": "Jaffna",
+      "end": "Mannar",
+      "lineType": "dashed",
+      "trace": [
+        [
+          706,
+          145
+        ],
+        [
+          700,
+          220
+        ],
+        [
+          690,
+          300
+        ],
+        [
+          650,
+          380
+        ],
+        [
+          610,
+          430
+        ],
+        [
+          560,
+          450
+        ],
+        [
+          507,
+          450
+        ]
+      ],
+      "startWaypointUid": "wp-jaffna",
+      "endWaypointUid": "wp-mannar"
+    },
+    {
+      "uid": "rt-mannar-to-anuradhapura",
+      "start": "Mannar",
+      "end": "Anuradhapura",
+      "lineType": "solid",
+      "trace": [
+        [
+          507,
+          450
+        ],
+        [
+          570,
+          540
+        ],
+        [
+          600,
+          600
+        ],
+        [
+          634,
+          648
+        ]
+      ],
+      "startWaypointUid": "wp-mannar",
+      "endWaypointUid": "wp-anuradhapura"
+    },
+    {
+      "uid": "rt-anuradhapura-to-pinnawala",
+      "start": "Anuradhapura",
+      "end": "Pinnawala",
+      "lineType": "solid",
+      "trace": [
+        [
+          634,
+          648
+        ],
+        [
+          600,
+          680
+        ],
+        [
+          560,
+          720
+        ],
+        [
+          510,
+          740
+        ]
+      ],
+      "startWaypointUid": "wp-anuradhapura",
+      "endWaypointUid": "wp-pinnawala"
+    },
+    {
+      "uid": "rt-pinnawala-to-bandaranaike-airport",
+      "start": "Pinnawala",
+      "end": "Bandaranaike Airport",
+      "lineType": "solid",
+      "trace": [
+        [
+          510,
+          740
+        ],
+        [
+          470,
+          680
+        ],
+        [
+          440,
+          620
+        ],
+        [
+          436,
+          614
+        ]
+      ],
+      "startWaypointUid": "wp-pinnawala",
+      "endWaypointUid": "wp-bandaranaike-airport"
+    },
+    {
+      "uid": "rt-bandaranaike-airport-to-colombo",
+      "start": "Bandaranaike Airport",
+      "end": "Colombo",
+      "lineType": "solid",
+      "trace": [
+        [
+          436,
+          614
+        ],
+        [
+          430,
+          680
+        ],
+        [
+          426,
+          840
+        ]
+      ],
+      "startWaypointUid": "wp-bandaranaike-airport",
+      "endWaypointUid": "wp-colombo"
+    },
+    {
+      "uid": "rt-colombo-to-galle",
+      "start": "Colombo",
+      "end": "Galle",
+      "lineType": "solid",
+      "trace": [
+        [
+          426,
+          840
+        ],
+        [
+          430,
+          940
+        ],
+        [
+          441,
+          1200
+        ],
+        [
+          450,
+          1400
+        ],
+        [
+          460,
+          1600
+        ],
+        [
+          462,
+          1833
+        ]
+      ],
+      "startWaypointUid": "wp-colombo",
+      "endWaypointUid": "wp-galle"
+    },
+    {
+      "uid": "rt-galle-to-unawatuna",
+      "start": "Galle",
+      "end": "Unawatuna",
+      "lineType": "solid",
+      "trace": [
+        [
+          462,
+          1833
+        ],
+        [
+          490,
+          1870
+        ],
+        [
+          520,
+          1902
+        ]
+      ],
+      "startWaypointUid": "wp-galle",
+      "endWaypointUid": "wp-unawatuna"
+    },
+    {
+      "uid": "rt-unawatuna-to-mirissa",
+      "start": "Unawatuna",
+      "end": "Mirissa",
+      "lineType": "solid",
+      "trace": [
+        [
+          542,
+          1902
+        ],
+        [
+          580,
+          1920
+        ],
+        [
+          620,
+          1930
+        ],
+        [
+          662,
+          1933
+        ]
+      ],
+      "startWaypointUid": "wp-unawatuna",
+      "endWaypointUid": "wp-mirissa"
+    },
+    {
+      "uid": "rt-mirissa-to-matara",
+      "start": "Mirissa",
+      "end": "Matara",
+      "lineType": "solid",
+      "trace": [
+        [
+          662,
+          1933
+        ],
+        [
+          700,
+          1900
+        ],
+        [
+          740,
+          1880
+        ],
+        [
+          779,
+          1877
+        ]
+      ],
+      "startWaypointUid": "wp-mirissa",
+      "endWaypointUid": "wp-matara"
+    },
+    {
+      "uid": "rt-matara-to-tangalle",
+      "start": "Matara",
+      "end": "Tangalle",
+      "lineType": "solid",
+      "trace": [
+        [
+          779,
+          1877
+        ],
+        [
+          820,
+          1875
+        ],
+        [
+          860,
+          1877
+        ],
+        [
+          888,
+          1875
+        ]
+      ],
+      "startWaypointUid": "wp-matara",
+      "endWaypointUid": "wp-tangalle"
+    },
+    {
+      "uid": "rt-tangalle-to-yala",
+      "start": "Tangalle",
+      "end": "Yala",
+      "lineType": "solid",
+      "trace": [
+        [
+          888,
+          1875
+        ],
+        [
+          910,
+          1740
+        ],
+        [
+          929,
+          1579
+        ]
+      ],
+      "startWaypointUid": "wp-tangalle",
+      "endWaypointUid": "wp-yala"
+    },
+    {
+      "uid": "rt-yala-to-tissamaharama",
+      "start": "Yala",
+      "end": "Tissamaharama",
+      "lineType": "solid",
+      "trace": [
+        [
+          929,
+          1579
+        ],
+        [
+          955,
+          1660
+        ],
+        [
+          1000,
+          1700
+        ],
+        [
+          1050,
+          1700
+        ]
+      ],
+      "startWaypointUid": "wp-yala",
+      "endWaypointUid": "wp-tissamaharama"
+    },
+    {
+      "uid": "rt-tissamaharama-to-kataragama",
+      "start": "Tissamaharama",
+      "end": "Kataragama",
+      "lineType": "solid",
+      "trace": [
+        [
+          1050,
+          1700
+        ],
+        [
+          1080,
+          1740
+        ],
+        [
+          1100,
+          1825
+        ]
+      ],
+      "startWaypointUid": "wp-tissamaharama",
+      "endWaypointUid": "wp-kataragama"
+    },
+    {
+      "uid": "rt-kataragama-to-pottuvil",
+      "start": "Kataragama",
+      "end": "Pottuvil",
+      "lineType": "solid",
+      "trace": [
+        [
+          1100,
+          1825
+        ],
+        [
+          1120,
+          1700
+        ],
+        [
+          1144,
+          1590
+        ]
+      ],
+      "startWaypointUid": "wp-kataragama",
+      "endWaypointUid": "wp-pottuvil"
+    },
+    {
+      "uid": "rt-pottuvil-to-arugam-bay",
+      "start": "Pottuvil",
+      "end": "Arugam Bay",
+      "lineType": "solid",
+      "trace": [
+        [
+          1144,
+          1590
+        ],
+        [
+          1150,
+          1500
+        ],
+        [
+          1180,
+          1450
+        ],
+        [
+          1203,
+          1424
+        ]
+      ],
+      "startWaypointUid": "wp-pottuvil",
+      "endWaypointUid": "wp-arugam-bay"
+    },
+    {
+      "uid": "rt-arugam-bay-to-batticaloa",
+      "start": "Arugam Bay",
+      "end": "Batticaloa",
+      "lineType": "solid",
+      "trace": [
+        [
+          1203,
+          1424
+        ],
+        [
+          1180,
+          1350
+        ],
+        [
+          1150,
+          1280
+        ],
+        [
+          1120,
+          1218
+        ]
+      ],
+      "startWaypointUid": "wp-arugam-bay",
+      "endWaypointUid": "wp-batticaloa"
+    },
+    {
+      "uid": "rt-batticaloa-to-pasikudah",
+      "start": "Batticaloa",
+      "end": "Pasikudah",
+      "lineType": "solid",
+      "trace": [
+        [
+          1120,
+          1218
+        ],
+        [
+          1140,
+          1100
+        ],
+        [
+          1160,
+          1050
+        ],
+        [
+          1170,
+          976
+        ]
+      ],
+      "startWaypointUid": "wp-batticaloa",
+      "endWaypointUid": "wp-pasikudah"
+    },
+    {
+      "uid": "rt-pasikudah-to-trincomalee",
+      "start": "Pasikudah",
+      "end": "Trincomalee",
+      "lineType": "solid",
+      "trace": [
+        [
+          1170,
+          976
+        ],
+        [
+          1145,
+          825
+        ],
+        [
+          1100,
+          700
+        ],
+        [
+          1088,
+          565
+        ]
+      ],
+      "startWaypointUid": "wp-pasikudah",
+      "endWaypointUid": "wp-trincomalee"
+    },
+    {
+      "uid": "rt-anuradhapura-to-dambulla",
+      "start": "Anuradhapura",
+      "end": "Dambulla",
+      "lineType": "solid",
+      "trace": [
+        [
+          634,
+          648
+        ],
+        [
+          660,
+          700
+        ],
+        [
+          680,
+          760
+        ],
+        [
+          690,
+          864
+        ]
+      ],
+      "startWaypointUid": "wp-anuradhapura",
+      "endWaypointUid": "wp-dambulla"
+    },
+    {
+      "uid": "rt-dambulla-to-sigiriya",
+      "start": "Dambulla",
+      "end": "Sigiriya",
+      "lineType": "dashed",
+      "trace": [
+        [
+          690,
+          864
+        ],
+        [
+          730,
+          810
+        ],
+        [
+          782,
+          695
+        ]
+      ],
+      "startWaypointUid": "wp-dambulla",
+      "endWaypointUid": "wp-sigiriya"
+    },
+    {
+      "uid": "rt-sigiriya-to-mihintale",
+      "start": "Sigiriya",
+      "end": "Mihintale",
+      "lineType": "dashed",
+      "trace": [
+        [
+          782,
+          695
+        ],
+        [
+          815,
+          640
+        ],
+        [
+          844,
+          580
+        ]
+      ],
+      "startWaypointUid": "wp-sigiriya",
+      "endWaypointUid": "wp-mihintale"
+    },
+    {
+      "uid": "rt-sigiriya-to-polonnaruwa",
+      "start": "Sigiriya",
+      "end": "Polonnaruwa",
+      "lineType": "dashed",
+      "trace": [
+        [
+          782,
+          695
+        ],
+        [
+          875,
+          740
+        ],
+        [
+          940,
+          770
+        ],
+        [
+          974,
+          828
+        ]
+      ],
+      "startWaypointUid": "wp-sigiriya",
+      "endWaypointUid": "wp-polonnaruwa"
+    },
+    {
+      "uid": "rt-anuradhapura-to-vavuniya",
+      "start": "Anuradhapura",
+      "end": "Vavuniya",
+      "lineType": "dashed",
+      "trace": [
+        [
+          634,
+          648
+        ],
+        [
+          670,
+          580
+        ],
+        [
+          700,
+          530
+        ],
+        [
+          750,
+          511
+        ]
+      ],
+      "startWaypointUid": "wp-anuradhapura",
+      "endWaypointUid": "wp-vavuniya"
+    },
+    {
+      "uid": "rt-anuradhapura-to-kurunegala",
+      "start": "Anuradhapura",
+      "end": "Kurunegala",
+      "lineType": "solid",
+      "trace": [
+        [
+          634,
+          648
+        ],
+        [
+          600,
+          700
+        ],
+        [
+          550,
+          730
+        ],
+        [
+          524,
+          765
+        ]
+      ],
+      "startWaypointUid": "wp-anuradhapura",
+      "endWaypointUid": "wp-kurunegala"
+    },
+    {
+      "uid": "rt-kurunegala-to-chilaw",
+      "start": "Kurunegala",
+      "end": "Chilaw",
+      "lineType": "solid",
+      "trace": [
+        [
+          524,
+          765
+        ],
+        [
+          480,
+          670
+        ],
+        [
+          455,
+          600
+        ],
+        [
+          434,
+          510
+        ]
+      ],
+      "startWaypointUid": "wp-kurunegala",
+      "endWaypointUid": "wp-chilaw"
+    },
+    {
+      "uid": "rt-puttalam-to-kalpitiya",
+      "start": "Puttalam",
+      "end": "Kalpitiya",
+      "lineType": "solid",
+      "trace": [
+        [
+          462,
+          430
+        ],
+        [
+          460,
+          400
+        ],
+        [
+          457,
+          380
+        ]
+      ],
+      "startWaypointUid": "wp-puttalam",
+      "endWaypointUid": "wp-kalpitiya"
+    },
+    {
+      "uid": "rt-puttalam-to-mannar",
+      "start": "Puttalam",
+      "end": "Mannar",
+      "lineType": "solid",
+      "trace": [
+        [
+          462,
+          430
+        ],
+        [
+          480,
+          440
+        ],
+        [
+          507,
+          450
+        ]
+      ],
+      "startWaypointUid": "wp-puttalam",
+      "endWaypointUid": "wp-mannar"
+    },
+    {
+      "uid": "rt-kandy-to-matale",
+      "start": "Kandy",
+      "end": "Matale",
+      "lineType": "solid",
+      "trace": [
+        [
+          622,
+          1085
+        ],
+        [
+          660,
+          1040
+        ],
+        [
+          700,
+          1000
+        ]
+      ],
+      "startWaypointUid": "wp-kandy",
+      "endWaypointUid": "wp-matale"
+    },
+    {
+      "uid": "rt-kandy-to-gampola",
+      "start": "Kandy",
+      "end": "Gampola",
+      "lineType": "solid",
+      "trace": [
+        [
+          622,
+          1085
+        ],
+        [
+          620,
+          1100
+        ],
+        [
+          627,
+          1085
+        ]
+      ],
+      "startWaypointUid": "wp-kandy",
+      "endWaypointUid": "wp-gampola"
+    },
+    {
+      "uid": "rt-gampola-to-ramboda",
+      "start": "Gampola",
+      "end": "Ramboda",
+      "lineType": "solid",
+      "trace": [
+        [
+          627,
+          1085
+        ],
+        [
+          620,
+          1050
+        ],
+        [
+          608,
+          1006
+        ]
+      ],
+      "startWaypointUid": "wp-gampola",
+      "endWaypointUid": "wp-ramboda"
+    },
+    {
+      "uid": "rt-ramboda-to-nallathanni",
+      "start": "Ramboda",
+      "end": "Nallathanni",
+      "lineType": "solid",
+      "trace": [
+        [
+          608,
+          1006
+        ],
+        [
+          612,
+          976
+        ],
+        [
+          600,
+          936
+        ]
+      ],
+      "startWaypointUid": "wp-ramboda",
+      "endWaypointUid": "wp-nallathanni"
+    },
+    {
+      "uid": "rt-nallathanni-to-avissawella",
+      "start": "Nallathanni",
+      "end": "Avissawella",
+      "lineType": "solid",
+      "trace": [
+        [
+          600,
+          936
+        ],
+        [
+          580,
+          900
+        ],
+        [
+          548,
+          865
+        ]
+      ],
+      "startWaypointUid": "wp-nallathanni",
+      "endWaypointUid": "wp-avissawella"
+    },
+    {
+      "uid": "rt-ella-to-haputale",
+      "start": "Ella",
+      "end": "Haputale",
+      "lineType": "dashed",
+      "trace": [
+        [
+          692,
+          1451
+        ],
+        [
+          690,
+          1400
+        ],
+        [
+          686,
+          1342
+        ]
+      ],
+      "startWaypointUid": "wp-ella",
+      "endWaypointUid": "wp-haputale"
+    },
+    {
+      "uid": "rt-haputale-to-wellawaya",
+      "start": "Haputale",
+      "end": "Wellawaya",
+      "lineType": "dashed",
+      "trace": [
+        [
+          686,
+          1342
+        ],
+        [
+          730,
+          1350
+        ],
+        [
+          815,
+          1360
+        ],
+        [
+          873,
+          1363
+        ]
+      ],
+      "startWaypointUid": "wp-haputale",
+      "endWaypointUid": "wp-wellawaya"
+    },
+    {
+      "uid": "rt-nuwara-eliya-to-hatton",
+      "start": "Nuwara Eliya",
+      "end": "Hatton",
+      "lineType": "solid",
+      "trace": [
+        [
+          674,
+          1168
+        ],
+        [
+          665,
+          1220
+        ],
+        [
+          662,
+          1245
+        ]
+      ],
+      "startWaypointUid": "wp-nuwara-eliya",
+      "endWaypointUid": "wp-hatton"
+    },
+    {
+      "uid": "rt-hatton-to-ella",
+      "start": "Hatton",
+      "end": "Ella",
+      "lineType": "solid",
+      "trace": [
+        [
+          662,
+          1245
+        ],
+        [
+          670,
+          1340
+        ],
+        [
+          690,
+          1451
+        ]
+      ],
+      "startWaypointUid": "wp-hatton",
+      "endWaypointUid": "wp-ella"
+    },
+    {
+      "uid": "rt-batticaloa-to-polonnaruwa",
+      "start": "Batticaloa",
+      "end": "Polonnaruwa",
+      "lineType": "solid",
+      "trace": [
+        [
+          1120,
+          1218
+        ],
+        [
+          1050,
+          1100
+        ],
+        [
+          990,
+          950
+        ],
+        [
+          974,
+          828
+        ]
+      ],
+      "startWaypointUid": "wp-batticaloa",
+      "endWaypointUid": "wp-polonnaruwa"
+    },
+    {
+      "uid": "rt-polonnaruwa-to-mahiyanganaya",
+      "start": "Polonnaruwa",
+      "end": "Mahiyanganaya",
+      "lineType": "solid",
+      "trace": [
+        [
+          974,
+          828
+        ],
+        [
+          940,
+          900
+        ],
+        [
+          890,
+          1000
+        ]
+      ],
+      "startWaypointUid": "wp-polonnaruwa",
+      "endWaypointUid": "wp-mahiyanganaya"
+    },
+    {
+      "uid": "rt-mahiyanganaya-to-dambana",
+      "start": "Mahiyanganaya",
+      "end": "Dambana",
+      "lineType": "solid",
+      "trace": [
+        [
+          890,
+          1000
+        ],
+        [
+          860,
+          1060
+        ]
+      ],
+      "startWaypointUid": "wp-mahiyanganaya",
+      "endWaypointUid": "wp-dambana"
+    }
+  ],
+  "tours": {
+    "cultural-triangle-escape": {
+      "waypoints": [
+        "Airport",
+        "Pinnawala",
+        "Kurunegala",
+        "Dambulla",
+        "Sigiriya",
+        "Kandy",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Pinnawala",
+        "Pinnawala__Kurunegala",
+        "Kurunegala__Dambulla",
+        "Dambulla__Sigiriya",
+        "Sigiriya__Kandy",
+        "Kandy__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-anuradhapura-to-pinnawala",
+        "rt-anuradhapura-to-kurunegala",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya"
+      ]
+    },
+    "heritage-and-serenity": {
+      "waypoints": [
+        "Airport",
+        "Pinnawala",
+        "Kurunegala",
+        "Yapahuwa",
+        "Anuradhapura",
+        "Mihintale",
+        "Aukana",
+        "Ritigala",
+        "Sigiriya",
+        "Polonnaruwa",
+        "Dambulla",
+        "Matale",
+        "Kandy",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Pinnawala",
+        "Pinnawala__Kurunegala",
+        "Kurunegala__Yapahuwa",
+        "Yapahuwa__Anuradhapura",
+        "Anuradhapura__Mihintale",
+        "Mihintale__Aukana",
+        "Aukana__Ritigala",
+        "Ritigala__Sigiriya",
+        "Sigiriya__Polonnaruwa",
+        "Polonnaruwa__Dambulla",
+        "Dambulla__Matale",
+        "Matale__Kandy",
+        "Kandy__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-anuradhapura-to-pinnawala",
+        "rt-anuradhapura-to-kurunegala",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya",
+        "rt-sigiriya-to-mihintale",
+        "rt-sigiriya-to-polonnaruwa",
+        "rt-kandy-to-matale"
+      ]
+    },
+    "through-ancient-kingdoms": {
+      "waypoints": [
+        "Airport",
+        "Pinnawala",
+        "Kurunegala",
+        "Yapahuwa",
+        "Anuradhapura",
+        "Mihintale",
+        "Aukana",
+        "Ritigala",
+        "Sigiriya",
+        "Polonnaruwa",
+        "Dambulla",
+        "Matale",
+        "Kandy",
+        "Ramboda",
+        "Nuwara Eliya",
+        "Haputale",
+        "Ella",
+        "Badulla",
+        "Mahiyanganaya",
+        "Dambana",
+        "Tissamaharama",
+        "Kataragama",
+        "Yala",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Pinnawala",
+        "Pinnawala__Kurunegala",
+        "Kurunegala__Yapahuwa",
+        "Yapahuwa__Anuradhapura",
+        "Anuradhapura__Mihintale",
+        "Mihintale__Aukana",
+        "Aukana__Ritigala",
+        "Ritigala__Sigiriya",
+        "Sigiriya__Polonnaruwa",
+        "Polonnaruwa__Dambulla",
+        "Dambulla__Matale",
+        "Matale__Kandy",
+        "Kandy__Ramboda",
+        "Ramboda__Nuwara Eliya",
+        "Nuwara Eliya__Haputale",
+        "Haputale__Ella",
+        "Ella__Badulla",
+        "Badulla__Mahiyanganaya",
+        "Mahiyanganaya__Dambana",
+        "Dambana__Tissamaharama",
+        "Tissamaharama__Kataragama",
+        "Kataragama__Yala",
+        "Yala__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-anuradhapura-to-pinnawala",
+        "rt-anuradhapura-to-kurunegala",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya",
+        "rt-sigiriya-to-mihintale",
+        "rt-sigiriya-to-polonnaruwa",
+        "rt-kandy-to-matale",
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-nuwara-eliya-to-hatton",
+        "rt-hatton-to-ella",
+        "rt-ella-to-haputale",
+        "rt-mahiyanganaya-to-dambana",
+        "rt-polonnaruwa-to-mahiyanganaya",
+        "rt-batticaloa-to-polonnaruwa",
+        "rt-arugam-bay-to-batticaloa",
+        "rt-pottuvil-to-arugam-bay",
+        "rt-kataragama-to-pottuvil",
+        "rt-tissamaharama-to-kataragama",
+        "rt-yala-to-tissamaharama",
+        "rt-tangalle-to-yala",
+        "rt-matara-to-tangalle",
+        "rt-mirissa-to-matara",
+        "rt-unawatuna-to-mirissa",
+        "rt-galle-to-unawatuna",
+        "rt-colombo-to-galle",
+        "rt-bandaranaike-airport-to-colombo"
+      ]
+    },
+    "highlands-and-waterfalls": {
+      "waypoints": [
+        "Airport",
+        "Kandy",
+        "Ramboda",
+        "Nuwara Eliya",
+        "Hatton",
+        "Ella",
+        "Wellawaya",
+        "Diyaluma",
+        "Ratnapura",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Kandy",
+        "Kandy__Ramboda",
+        "Ramboda__Nuwara Eliya",
+        "Nuwara Eliya__Hatton",
+        "Hatton__Ella",
+        "Ella__Wellawaya",
+        "Wellawaya__Diyaluma",
+        "Diyaluma__Ratnapura",
+        "Ratnapura__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-nuwara-eliya-to-hatton",
+        "rt-hatton-to-ella",
+        "rt-ella-to-haputale",
+        "rt-haputale-to-wellawaya"
+      ]
+    },
+    "serene-bliss-exploration": {
+      "waypoints": [
+        "Airport",
+        "Kurunegala",
+        "Dambulla",
+        "Sigiriya",
+        "Matale",
+        "Knuckles",
+        "Meemure",
+        "Kandy",
+        "Gampola",
+        "Nallathanni",
+        "Adam's Peak",
+        "Nuwara Eliya",
+        "Horton Plains",
+        "Haputale",
+        "Lipton's Seat",
+        "Ella",
+        "Dunhinda",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Kurunegala",
+        "Kurunegala__Dambulla",
+        "Dambulla__Sigiriya",
+        "Sigiriya__Matale",
+        "Matale__Knuckles",
+        "Knuckles__Meemure",
+        "Meemure__Kandy",
+        "Kandy__Gampola",
+        "Gampola__Nallathanni",
+        "Nallathanni__Adam's Peak",
+        "Adam's Peak__Nuwara Eliya",
+        "Nuwara Eliya__Horton Plains",
+        "Horton Plains__Haputale",
+        "Haputale__Lipton's Seat",
+        "Lipton's Seat__Ella",
+        "Ella__Dunhinda",
+        "Dunhinda__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-anuradhapura-to-pinnawala",
+        "rt-anuradhapura-to-kurunegala",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya",
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-ramboda-to-nallathanni"
+      ]
+    },
+    "thrills-and-tranquility": {
+      "waypoints": [
+        "Airport",
+        "Colombo",
+        "Kitulgala",
+        "Nallathanni",
+        "Adam's Peak",
+        "Nuwara Eliya",
+        "Horton Plains",
+        "Haputale",
+        "Ella",
+        "Badulla",
+        "Knuckles",
+        "Matale",
+        "Dambulla",
+        "Sigiriya",
+        "Kurunegala",
+        "Negombo",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Colombo",
+        "Colombo__Kitulgala",
+        "Kitulgala__Nallathanni",
+        "Nallathanni__Adam's Peak",
+        "Adam's Peak__Nuwara Eliya",
+        "Nuwara Eliya__Horton Plains",
+        "Horton Plains__Haputale",
+        "Haputale__Ella",
+        "Ella__Badulla",
+        "Badulla__Knuckles",
+        "Knuckles__Matale",
+        "Matale__Dambulla",
+        "Dambulla__Sigiriya",
+        "Sigiriya__Kurunegala",
+        "Kurunegala__Negombo",
+        "Negombo__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-bandaranaike-airport-to-colombo",
+        "rt-ella-to-haputale",
+        "rt-dambulla-to-sigiriya",
+        "rt-anuradhapura-to-dambulla",
+        "rt-anuradhapura-to-kurunegala"
+      ]
+    },
+    "northern-horizons": {
+      "waypoints": [
+        "Airport",
+        "Negombo",
+        "Puttalam",
+        "Kalpitiya",
+        "Mannar",
+        "Jaffna",
+        "Vavuniya",
+        "Anuradhapura",
+        "Trincomalee",
+        "Habarana",
+        "Sigiriya",
+        "Pinnawala",
+        "Negombo",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Negombo",
+        "Negombo__Puttalam",
+        "Puttalam__Kalpitiya",
+        "Kalpitiya__Mannar",
+        "Mannar__Jaffna",
+        "Jaffna__Vavuniya",
+        "Vavuniya__Anuradhapura",
+        "Anuradhapura__Trincomalee",
+        "Trincomalee__Habarana",
+        "Habarana__Sigiriya",
+        "Sigiriya__Pinnawala",
+        "Pinnawala__Negombo",
+        "Negombo__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-puttalam-to-kalpitiya",
+        "rt-puttalam-to-mannar",
+        "rt-jaffna-to-mannar",
+        "rt-mannar-to-anuradhapura",
+        "rt-anuradhapura-to-vavuniya",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya",
+        "rt-sigiriya-to-polonnaruwa",
+        "rt-batticaloa-to-polonnaruwa",
+        "rt-batticaloa-to-pasikudah",
+        "rt-pasikudah-to-trincomalee",
+        "rt-anuradhapura-to-pinnawala"
+      ]
+    },
+    "southern-coastal-bliss": {
+      "waypoints": [
+        "Airport",
+        "Pinnawala",
+        "Kandy",
+        "Ramboda",
+        "Nuwara Eliya",
+        "Hatton",
+        "Kitulgala",
+        "Avissawella",
+        "Ratnapura",
+        "Matara",
+        "Mirissa",
+        "Galle",
+        "Bentota",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Pinnawala",
+        "Pinnawala__Kandy",
+        "Kandy__Ramboda",
+        "Ramboda__Nuwara Eliya",
+        "Nuwara Eliya__Hatton",
+        "Hatton__Kitulgala",
+        "Kitulgala__Avissawella",
+        "Avissawella__Ratnapura",
+        "Ratnapura__Matara",
+        "Matara__Mirissa",
+        "Mirissa__Galle",
+        "Galle__Bentota",
+        "Bentota__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-nuwara-eliya-to-hatton",
+        "rt-mirissa-to-matara",
+        "rt-unawatuna-to-mirissa",
+        "rt-galle-to-unawatuna"
+      ]
+    },
+    "sun-and-fun": {
+      "waypoints": [
+        "Airport",
+        "Pinnawala",
+        "Kurunegala",
+        "Dambulla",
+        "Polonnaruwa",
+        "Pasikudah",
+        "Batticaloa",
+        "Arugam Bay",
+        "Pottuvil",
+        "Kataragama",
+        "Tissamaharama",
+        "Yala",
+        "Tangalle",
+        "Matara",
+        "Mirissa",
+        "Galle",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Pinnawala",
+        "Pinnawala__Kurunegala",
+        "Kurunegala__Dambulla",
+        "Dambulla__Polonnaruwa",
+        "Polonnaruwa__Pasikudah",
+        "Pasikudah__Batticaloa",
+        "Batticaloa__Arugam Bay",
+        "Arugam Bay__Pottuvil",
+        "Pottuvil__Kataragama",
+        "Kataragama__Tissamaharama",
+        "Tissamaharama__Yala",
+        "Yala__Tangalle",
+        "Tangalle__Matara",
+        "Matara__Mirissa",
+        "Mirissa__Galle",
+        "Galle__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-anuradhapura-to-pinnawala",
+        "rt-anuradhapura-to-kurunegala",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya",
+        "rt-sigiriya-to-polonnaruwa",
+        "rt-batticaloa-to-polonnaruwa",
+        "rt-batticaloa-to-pasikudah",
+        "rt-arugam-bay-to-batticaloa",
+        "rt-pottuvil-to-arugam-bay",
+        "rt-kataragama-to-pottuvil",
+        "rt-tissamaharama-to-kataragama",
+        "rt-yala-to-tissamaharama",
+        "rt-tangalle-to-yala",
+        "rt-matara-to-tangalle",
+        "rt-mirissa-to-matara",
+        "rt-unawatuna-to-mirissa",
+        "rt-galle-to-unawatuna",
+        "rt-colombo-to-galle",
+        "rt-bandaranaike-airport-to-colombo"
+      ]
+    },
+    "romantic-getaway": {
+      "waypoints": [
+        "Airport",
+        "Pinnawala",
+        "Kandy",
+        "Ramboda",
+        "Nuwara Eliya",
+        "Hatton",
+        "Kitulgala",
+        "Avissawella",
+        "Bentota",
+        "Galle",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Pinnawala",
+        "Pinnawala__Kandy",
+        "Kandy__Ramboda",
+        "Ramboda__Nuwara Eliya",
+        "Nuwara Eliya__Hatton",
+        "Hatton__Kitulgala",
+        "Kitulgala__Avissawella",
+        "Avissawella__Bentota",
+        "Bentota__Galle",
+        "Galle__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-nuwara-eliya-to-hatton",
+        "rt-colombo-to-galle",
+        "rt-bandaranaike-airport-to-colombo"
+      ]
+    },
+    "tales-of-love": {
+      "waypoints": [
+        "Airport",
+        "Pinnawala",
+        "Kurunegala",
+        "Dambulla",
+        "Sigiriya",
+        "Kandy",
+        "Ramboda",
+        "Nuwara Eliya",
+        "Ella",
+        "Wellawaya",
+        "Udawalawe",
+        "Tissamaharama",
+        "Matara",
+        "Mirissa",
+        "Galle",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Pinnawala",
+        "Pinnawala__Kurunegala",
+        "Kurunegala__Dambulla",
+        "Dambulla__Sigiriya",
+        "Sigiriya__Kandy",
+        "Kandy__Ramboda",
+        "Ramboda__Nuwara Eliya",
+        "Nuwara Eliya__Ella",
+        "Ella__Wellawaya",
+        "Wellawaya__Udawalawe",
+        "Udawalawe__Tissamaharama",
+        "Tissamaharama__Matara",
+        "Matara__Mirissa",
+        "Mirissa__Galle",
+        "Galle__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-pinnawala-to-bandaranaike-airport",
+        "rt-anuradhapura-to-pinnawala",
+        "rt-anuradhapura-to-kurunegala",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya",
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-nuwara-eliya-to-hatton",
+        "rt-hatton-to-ella",
+        "rt-ella-to-haputale",
+        "rt-haputale-to-wellawaya",
+        "rt-yala-to-tissamaharama",
+        "rt-tangalle-to-yala",
+        "rt-matara-to-tangalle",
+        "rt-mirissa-to-matara",
+        "rt-unawatuna-to-mirissa",
+        "rt-galle-to-unawatuna",
+        "rt-colombo-to-galle",
+        "rt-bandaranaike-airport-to-colombo"
+      ]
+    },
+    "sri-lanka-honeymoon": {
+      "waypoints": [
+        "Airport",
+        "Negombo",
+        "Trincomalee",
+        "Habarana",
+        "Sigiriya",
+        "Dambulla",
+        "Kandy",
+        "Ramboda",
+        "Nuwara Eliya",
+        "Ella",
+        "Wellawaya",
+        "Arugam Bay",
+        "Pottuvil",
+        "Kataragama",
+        "Yala",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Negombo",
+        "Negombo__Trincomalee",
+        "Trincomalee__Habarana",
+        "Habarana__Sigiriya",
+        "Sigiriya__Dambulla",
+        "Dambulla__Kandy",
+        "Kandy__Ramboda",
+        "Ramboda__Nuwara Eliya",
+        "Nuwara Eliya__Ella",
+        "Ella__Wellawaya",
+        "Wellawaya__Arugam Bay",
+        "Arugam Bay__Pottuvil",
+        "Pottuvil__Kataragama",
+        "Kataragama__Yala",
+        "Yala__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-dambulla-to-sigiriya",
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-nuwara-eliya-to-hatton",
+        "rt-hatton-to-ella",
+        "rt-ella-to-haputale",
+        "rt-haputale-to-wellawaya",
+        "rt-pottuvil-to-arugam-bay",
+        "rt-kataragama-to-pottuvil",
+        "rt-tissamaharama-to-kataragama",
+        "rt-yala-to-tissamaharama",
+        "rt-tangalle-to-yala",
+        "rt-matara-to-tangalle",
+        "rt-mirissa-to-matara",
+        "rt-unawatuna-to-mirissa",
+        "rt-galle-to-unawatuna",
+        "rt-colombo-to-galle",
+        "rt-bandaranaike-airport-to-colombo"
+      ]
+    },
+    "ramayana-legacy": {
+      "waypoints": [
+        "Airport",
+        "Negombo",
+        "Chilaw",
+        "Mannar",
+        "Jaffna",
+        "Vavuniya",
+        "Trincomalee",
+        "Habarana",
+        "Sigiriya",
+        "Dambulla",
+        "Matale",
+        "Kandy",
+        "Ramboda",
+        "Nuwara Eliya",
+        "Ella",
+        "Wellawaya",
+        "Galle",
+        "Unawatuna",
+        "Airport"
+      ],
+      "segments": [
+        "Airport__Negombo",
+        "Negombo__Chilaw",
+        "Chilaw__Mannar",
+        "Mannar__Jaffna",
+        "Jaffna__Vavuniya",
+        "Vavuniya__Trincomalee",
+        "Trincomalee__Habarana",
+        "Habarana__Sigiriya",
+        "Sigiriya__Dambulla",
+        "Dambulla__Matale",
+        "Matale__Kandy",
+        "Kandy__Ramboda",
+        "Ramboda__Nuwara Eliya",
+        "Nuwara Eliya__Ella",
+        "Ella__Wellawaya",
+        "Wellawaya__Galle",
+        "Galle__Unawatuna",
+        "Unawatuna__Airport"
+      ],
+      "visualRouteUids": [
+        "rt-kurunegala-to-chilaw",
+        "rt-anuradhapura-to-kurunegala",
+        "rt-mannar-to-anuradhapura",
+        "rt-jaffna-to-mannar",
+        "rt-anuradhapura-to-vavuniya",
+        "rt-anuradhapura-to-dambulla",
+        "rt-dambulla-to-sigiriya",
+        "rt-sigiriya-to-polonnaruwa",
+        "rt-batticaloa-to-polonnaruwa",
+        "rt-batticaloa-to-pasikudah",
+        "rt-pasikudah-to-trincomalee",
+        "rt-kandy-to-matale",
+        "rt-kandy-to-gampola",
+        "rt-gampola-to-ramboda",
+        "rt-nuwara-eliya-to-hatton",
+        "rt-hatton-to-ella",
+        "rt-ella-to-haputale",
+        "rt-haputale-to-wellawaya",
+        "rt-galle-to-unawatuna",
+        "rt-colombo-to-galle",
+        "rt-bandaranaike-airport-to-colombo"
+      ]
+    }
+  },
+  "places": {
+    "Airport": {
+      "name": "Airport",
+      "query": "Bandaranaike International Airport, Sri Lanka",
+      "lat": 7.1789262,
+      "lon": 79.8857275,
+      "display": "Bandaranaike International Airport, Katunayake-Veyangoda Road, Awariwatte, Katunayake, Gampaha District, Western Province, 11450, Sri Lanka"
+    },
+    "Pinnawala": {
+      "name": "Pinnawala",
+      "query": "Pinnawala, Sri Lanka",
+      "lat": 7.3004342,
+      "lon": 80.3862978,
+      "display": "Pinnawala, Kegalle District, Sabaragamuwa Province, 71100, Sri Lanka"
+    },
+    "Kurunegala": {
+      "name": "Kurunegala",
+      "query": "Kurunegala, Sri Lanka",
+      "lat": 7.4870464,
+      "lon": 80.364908,
+      "display": "Kurunegala, Kurunǣgala, North Western Province, 60000, Sri Lanka"
+    },
+    "Dambulla": {
+      "name": "Dambulla",
+      "query": "Dambulla, Sri Lanka",
+      "lat": 7.8742031,
+      "lon": 80.6510917,
+      "display": "Dambulla, Matale District, Central Province, 21000, Sri Lanka"
+    },
+    "Sigiriya": {
+      "name": "Sigiriya",
+      "query": "Sigiriya, Sri Lanka",
+      "lat": 7.9566634,
+      "lon": 80.7599301,
+      "display": "Sigiriya, Ehalagala, Matale District, Central Province, 21121, Sri Lanka"
+    },
+    "Kandy": {
+      "name": "Kandy",
+      "query": "Kandy, Sri Lanka",
+      "lat": 7.2931208,
+      "lon": 80.6350358,
+      "display": "Kandy, Kandy District, Central Province, 20000, Sri Lanka"
+    },
+    "Yapahuwa": {
+      "name": "Yapahuwa",
+      "query": "Yapahuwa, Sri Lanka",
+      "lat": 7.8185613,
+      "lon": 80.3131565,
+      "display": "Yapahuwa, Kurunǣgala, North Western Province, 60600, Sri Lanka"
+    },
+    "Anuradhapura": {
+      "name": "Anuradhapura",
+      "query": "Anuradhapura, Sri Lanka",
+      "lat": 8.334985,
+      "lon": 80.4106096,
+      "display": "Anuradhapura, Anuradhapura District, North Central Province, 50000, Sri Lanka"
+    },
+    "Mihintale": {
+      "name": "Mihintale",
+      "query": "Mihintale, Sri Lanka",
+      "lat": 8.347538,
+      "lon": 80.5126963,
+      "display": "Eth Vehara, Mihintale, Anuradhapura District, North Central Province, 40150, Sri Lanka"
+    },
+    "Aukana": {
+      "name": "Aukana",
+      "query": "Aukana Buddha Statue, Sri Lanka",
+      "lat": 8.0108914,
+      "lon": 80.5128161,
+      "display": "Aukana Buddha Statue, Kalawewa-Avukana Road, Walawegama, Anuradhapura District, North Central Province, 50170, Sri Lanka"
+    },
+    "Ritigala": {
+      "name": "Ritigala",
+      "query": "Ritigala, Sri Lanka",
+      "lat": 8.1090191,
+      "lon": 80.6568395,
+      "display": "Ritigala, Anuradhapura District, North Central Province, Sri Lanka"
+    },
+    "Polonnaruwa": {
+      "name": "Polonnaruwa",
+      "query": "Polonnaruwa, Sri Lanka",
+      "lat": 7.9962335,
+      "lon": 81.0491723,
+      "display": "Polonnaruwa District, North Central Province, Sri Lanka"
+    },
+    "Matale": {
+      "name": "Matale",
+      "query": "Matale, Sri Lanka",
+      "lat": 7.698211,
+      "lon": 80.660908,
+      "display": "Matale District, Central Province, Sri Lanka"
+    },
+    "Ramboda": {
+      "name": "Ramboda",
+      "query": "Ramboda, Sri Lanka",
+      "lat": 7.0555441,
+      "lon": 80.7004729,
+      "display": "Ramboda, Nuwara Eliya District, Central Province, 20838, Sri Lanka"
+    },
+    "Nuwara Eliya": {
+      "name": "Nuwara Eliya",
+      "query": "Nuwara Eliya, Sri Lanka",
+      "lat": 7.012402,
+      "lon": 80.7571612,
+      "display": "Nuwara Eliya District, Central Province, Sri Lanka"
+    },
+    "Haputale": {
+      "name": "Haputale",
+      "query": "Haputale, Sri Lanka",
+      "lat": 6.7681528,
+      "lon": 80.9602296,
+      "display": "Haputale, Badulla District, Uva Province, 90160, Sri Lanka"
+    },
+    "Ella": {
+      "name": "Ella",
+      "query": "Ella, Sri Lanka",
+      "lat": 6.8736058,
+      "lon": 81.0489927,
+      "display": "Ella, Badulla District, Uva Province, 90090, Sri Lanka"
+    },
+    "Badulla": {
+      "name": "Badulla",
+      "query": "Badulla, Sri Lanka",
+      "lat": 6.9900353,
+      "lon": 81.0570315,
+      "display": "Badulla, Badulla District, Uva Province, 90000, Sri Lanka"
+    },
+    "Mahiyanganaya": {
+      "name": "Mahiyanganaya",
+      "query": "Mahiyanganaya, Sri Lanka",
+      "lat": 7.3401663,
+      "lon": 80.993126,
+      "display": "Mahiyanganaya, Badulla District, Uva Province, 90700, Sri Lanka"
+    },
+    "Dambana": {
+      "name": "Dambana",
+      "query": "Dambana, Sri Lanka",
+      "lat": 7.4131421,
+      "lon": 81.117328,
+      "display": "Dambana, Badulla District, Uva Province, Sri Lanka"
+    },
+    "Tissamaharama": {
+      "name": "Tissamaharama",
+      "query": "Tissamaharama, Sri Lanka",
+      "lat": 6.2770724,
+      "lon": 81.2892814,
+      "display": "Tissamaharama, Hambantota District, Southern Province, 82600, Sri Lanka"
+    },
+    "Kataragama": {
+      "name": "Kataragama",
+      "query": "Kataragama, Sri Lanka",
+      "lat": 6.4135586,
+      "lon": 81.3324423,
+      "display": "Kataragama, Monaragala District, Uva Province, 91400, Sri Lanka"
+    },
+    "Yala": {
+      "name": "Yala",
+      "query": "Yala National Park, Sri Lanka",
+      "lat": 6.5709721,
+      "lon": 81.5072819,
+      "display": "Yala National Park, Uva Province, Sri Lanka"
+    },
+    "Hatton": {
+      "name": "Hatton",
+      "query": "Hatton, Sri Lanka",
+      "lat": 6.8916333,
+      "lon": 80.5984591,
+      "display": "Hatton, Nuwara Eliya District, Central Province, 22080, Sri Lanka"
+    },
+    "Wellawaya": {
+      "name": "Wellawaya",
+      "query": "Wellawaya, Sri Lanka",
+      "lat": 6.7317804,
+      "lon": 81.1018359,
+      "display": "Wellawaya, Monaragala District, Uva Province, 91200, Sri Lanka"
+    },
+    "Diyaluma": {
+      "name": "Diyaluma",
+      "query": "Diyaluma Falls, Sri Lanka",
+      "lat": 6.733071,
+      "lon": 81.031448,
+      "display": "Diyaluma Falls, Diyaluma, Badulla District, Uva Province, 90190, Sri Lanka"
+    },
+    "Ratnapura": {
+      "name": "Ratnapura",
+      "query": "Ratnapura, Sri Lanka",
+      "lat": 6.5795685,
+      "lon": 80.588223,
+      "display": "Ratnapura District, Sabaragamuwa Province, Sri Lanka"
+    },
+    "Knuckles": {
+      "name": "Knuckles",
+      "query": "Knuckles Range, Sri Lanka",
+      "lat": 7.3592267,
+      "lon": 80.8492714,
+      "display": "Trekking sky camp - knuckles range, Hunnasgiriya - Meemure Road, Loolwatta, Meenagola, Kandy District, Central Province, 20926, Sri Lanka"
+    },
+    "Meemure": {
+      "name": "Meemure",
+      "query": "Meemure, Sri Lanka",
+      "lat": 7.4415244,
+      "lon": 80.8442148,
+      "display": "Meemure, Kandy District, Central Province, Sri Lanka"
+    },
+    "Gampola": {
+      "name": "Gampola",
+      "query": "Gampola, Sri Lanka",
+      "lat": 7.1636487,
+      "lon": 80.5702744,
+      "display": "Gampola, Kandy District, Central Province, 20500, Sri Lanka"
+    },
+    "Nallathanni": {
+      "name": "Nallathanni",
+      "query": "Nallathanniya, Sri Lanka",
+      "lat": 6.8255129,
+      "lon": 80.5225964,
+      "display": "Nallathanniya, Nuwara Eliya District, Central Province, 22070, Sri Lanka"
+    },
+    "Adam's Peak": {
+      "name": "Adam's Peak",
+      "query": "Sri Pada, Sri Lanka",
+      "lat": 6.8094211,
+      "lon": 80.4993876,
+      "display": "Sri Paadaya Peak, Ratnapura, Ratnapura District, Sabaragamuwa Province, Sri Lanka"
+    },
+    "Horton Plains": {
+      "name": "Horton Plains",
+      "query": "Horton Plains National Park, Sri Lanka",
+      "lat": 6.8067144,
+      "lon": 80.8021297,
+      "display": "Horton Plains National Park, Nuwara Eliya, Nuwara Eliya District, Central Province, Sri Lanka"
+    },
+    "Lipton's Seat": {
+      "name": "Lipton's Seat",
+      "query": "Lipton Seat, Haputale, Sri Lanka",
+      "lat": 6.7689032,
+      "lon": 80.9605657,
+      "display": "Small Bus to Lipton Seat (Rs 180), Haputale-Dambetenne Road, Thotulagala, Haputale, Badulla District, Uva Province, 90160, Sri Lanka"
+    },
+    "Dunhinda": {
+      "name": "Dunhinda",
+      "query": "Dunhinda Falls, Sri Lanka",
+      "lat": 7.0169435,
+      "lon": 81.063492,
+      "display": "Dunhinda Falls, Badulla, Badulla District, Uva Province, 90000, Sri Lanka"
+    },
+    "Colombo": {
+      "name": "Colombo",
+      "query": "Colombo, Sri Lanka",
+      "lat": 6.9388614,
+      "lon": 79.8542005,
+      "display": "Colombo, Colombo District, Western Province, Sri Lanka"
+    },
+    "Kitulgala": {
+      "name": "Kitulgala",
+      "query": "Kitulgala, Sri Lanka",
+      "lat": 7.017974,
+      "lon": 80.416575,
+      "display": "Moksha@Kitulgala, Malwatte Road, Kithulgala, Kegalle District, Sabaragamuwa Province, 71720, Sri Lanka"
+    },
+    "Negombo": {
+      "name": "Negombo",
+      "query": "Negombo, Sri Lanka",
+      "lat": 7.2094282,
+      "lon": 79.833117,
+      "display": "Negombo, Gampaha District, Western Province, 11500, Sri Lanka"
+    },
+    "Puttalam": {
+      "name": "Puttalam",
+      "query": "Puttalam, Sri Lanka",
+      "lat": 7.9818403,
+      "lon": 79.8293371,
+      "display": "Puttalam District, North Western Province, Sri Lanka"
+    },
+    "Kalpitiya": {
+      "name": "Kalpitiya",
+      "query": "Kalpitiya, Sri Lanka",
+      "lat": 8.2368062,
+      "lon": 79.7661508,
+      "display": "Kalpitiya, Puttalam District, North Western Province, 61360, Sri Lanka"
+    },
+    "Mannar": {
+      "name": "Mannar",
+      "query": "Mannar, Sri Lanka",
+      "lat": 8.9812896,
+      "lon": 79.9043942,
+      "display": "Mannar, Mannar District, Northern Province, Sri Lanka"
+    },
+    "Jaffna": {
+      "name": "Jaffna",
+      "query": "Jaffna, Sri Lanka",
+      "lat": 9.665093,
+      "lon": 80.0093029,
+      "display": "Jaffna, Jaffna District, Northern Province, 40000, Sri Lanka"
+    },
+    "Vavuniya": {
+      "name": "Vavuniya",
+      "query": "Vavuniya, Sri Lanka",
+      "lat": 8.7593517,
+      "lon": 80.5000778,
+      "display": "Vavuniya, Vavuniya District, Northern Province, 43000, Sri Lanka"
+    },
+    "Trincomalee": {
+      "name": "Trincomalee",
+      "query": "Trincomalee, Sri Lanka",
+      "lat": 8.576425,
+      "lon": 81.2344952,
+      "display": "Trincomalee, Trincomalee District, Eastern Province, 32100, Sri Lanka"
+    },
+    "Habarana": {
+      "name": "Habarana",
+      "query": "Habarana, Sri Lanka",
+      "lat": 8.0423226,
+      "lon": 80.7564622,
+      "display": "Habarana, Anuradhapura District, North Central Province, 50150, Sri Lanka"
+    },
+    "Avissawella": {
+      "name": "Avissawella",
+      "query": "Avissawella, Sri Lanka",
+      "lat": 6.9521206,
+      "lon": 80.2128586,
+      "display": "Avissawella, Colombo District, Western Province, 10700, Sri Lanka"
+    },
+    "Matara": {
+      "name": "Matara",
+      "query": "Matara, Sri Lanka",
+      "lat": 5.947822,
+      "lon": 80.5482919,
+      "display": "Matara, Matara District, Southern Province, 81000, Sri Lanka"
+    },
+    "Mirissa": {
+      "name": "Mirissa",
+      "query": "Mirissa, Sri Lanka",
+      "lat": 5.9493634,
+      "lon": 80.4558128,
+      "display": "Mirissa, Matara District, Southern Province, 81740, Sri Lanka"
+    },
+    "Galle": {
+      "name": "Galle",
+      "query": "Galle, Sri Lanka",
+      "lat": 6.0328139,
+      "lon": 80.214955,
+      "display": "Galle, Galle District, Southern Province, Sri Lanka"
+    },
+    "Bentota": {
+      "name": "Bentota",
+      "query": "Bentota, Sri Lanka",
+      "lat": 6.4215276,
+      "lon": 79.9978544,
+      "display": "Bentota, Galle District, Southern Province, 12080, Sri Lanka"
+    },
+    "Pasikudah": {
+      "name": "Pasikudah",
+      "query": "Pasikudah, Sri Lanka",
+      "lat": 7.9224499,
+      "lon": 81.5650752,
+      "display": "Pasikudah, Batticaloa District, Eastern Province, 30414, Sri Lanka"
+    },
+    "Batticaloa": {
+      "name": "Batticaloa",
+      "query": "Batticaloa, Sri Lanka",
+      "lat": 7.8381021,
+      "lon": 81.5567533,
+      "display": "Batticaloa District, Eastern Province, Sri Lanka"
+    },
+    "Arugam Bay": {
+      "name": "Arugam Bay",
+      "query": "Arugam Bay, Sri Lanka",
+      "lat": 6.8468506,
+      "lon": 81.8306961,
+      "display": "Arugam Bay, Ampara District, Eastern Province, 32506, Sri Lanka"
+    },
+    "Pottuvil": {
+      "name": "Pottuvil",
+      "query": "Pottuvil, Sri Lanka",
+      "lat": 6.8732418,
+      "lon": 81.8300476,
+      "display": "Pottuvil, Ampara District, Eastern Province, 32506, Sri Lanka"
+    },
+    "Tangalle": {
+      "name": "Tangalle",
+      "query": "Tangalle, Sri Lanka",
+      "lat": 6.0250847,
+      "lon": 80.7949279,
+      "display": "Tangalle, Hambantota District, Southern Province, 82200, Sri Lanka"
+    },
+    "Udawalawe": {
+      "name": "Udawalawe",
+      "query": "Udawalawe, Sri Lanka",
+      "lat": 6.4241386,
+      "lon": 80.8172144,
+      "display": "Udawalawe, Ratnapura District, Sabaragamuwa Province, 70190, Sri Lanka"
+    },
+    "Chilaw": {
+      "name": "Chilaw",
+      "query": "Chilaw, Sri Lanka",
+      "lat": 7.5762564,
+      "lon": 79.7953575,
+      "display": "Chilaw, Puttalam District, North Western Province, 61238, Sri Lanka"
+    },
+    "Unawatuna": {
+      "name": "Unawatuna",
+      "query": "Unawatuna, Sri Lanka",
+      "lat": 6.0201774,
+      "lon": 80.2474836,
+      "display": "Unawatuna, Rumassala, Galle District, Southern Province, 80600, Sri Lanka"
+    }
+  },
+  "source": "ChatGPT vision audit of fixed atlas image"
+}

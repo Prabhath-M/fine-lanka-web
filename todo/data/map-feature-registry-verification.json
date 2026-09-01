@@ -1,0 +1,74 @@
+{
+  "waypointCount": 58,
+  "routeCount": 106,
+  "tripCount": 13,
+  "brokenRoutes": [],
+  "allTripsHaveRoutes": true,
+  "trips": [
+    {
+      "uid": "trip-cultural-triangle-escape",
+      "waypoints": 7,
+      "routes": 6
+    },
+    {
+      "uid": "trip-heritage-and-serenity",
+      "waypoints": 14,
+      "routes": 13
+    },
+    {
+      "uid": "trip-through-ancient-kingdoms",
+      "waypoints": 24,
+      "routes": 23
+    },
+    {
+      "uid": "trip-highlands-and-waterfalls",
+      "waypoints": 10,
+      "routes": 9
+    },
+    {
+      "uid": "trip-serene-bliss-exploration",
+      "waypoints": 18,
+      "routes": 17
+    },
+    {
+      "uid": "trip-thrills-and-tranquility",
+      "waypoints": 17,
+      "routes": 16
+    },
+    {
+      "uid": "trip-northern-horizons",
+      "waypoints": 14,
+      "routes": 13
+    },
+    {
+      "uid": "trip-southern-coastal-bliss",
+      "waypoints": 14,
+      "routes": 13
+    },
+    {
+      "uid": "trip-sun-and-fun",
+      "waypoints": 17,
+      "routes": 16
+    },
+    {
+      "uid": "trip-romantic-getaway",
+      "waypoints": 11,
+      "routes": 10
+    },
+    {
+      "uid": "trip-tales-of-love",
+      "waypoints": 16,
+      "routes": 15
+    },
+    {
+      "uid": "trip-sri-lanka-honeymoon",
+      "waypoints": 16,
+      "routes": 15
+    },
+    {
+      "uid": "trip-ramayana-legacy",
+      "waypoints": 19,
+      "routes": 18
+    }
+  ]
+}

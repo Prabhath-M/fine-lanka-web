@@ -1,0 +1,18 @@
+distance_km 128.5 duration_min 131.6
+{'road': '(unnamed)', 'ref': '', 'type': 'depart', 'modifier': None, 'lon': 79.888453, 'lat': 7.176351}
+{'road': 'Katunayake-Veyangoda Road', 'ref': 'B208', 'type': 'turn', 'modifier': 'left', 'lon': 79.889401, 'lat': 7.175038}
+{'road': 'Katunayake-Veyangoda Road', 'ref': 'B208', 'type': 'continue', 'modifier': 'straight', 'lon': 79.895335, 'lat': 7.187044}
+{'road': 'Ekala-Kotadeniyawa Road', 'ref': 'B111', 'type': 'new name', 'modifier': 'straight', 'lon': 79.948019, 'lat': 7.16912}
+{'road': 'Negombo-Mirigama Road', 'ref': 'B324', 'type': 'roundabout', 'modifier': 'left', 'lon': 80.019232, 'lat': 7.224525}
+{'road': 'Negombo-Mirigama Road', 'ref': 'B324', 'type': 'exit roundabout', 'modifier': 'left', 'lon': 80.019362, 'lat': 7.224577}
+{'road': 'Pasyala-Giriulla Road', 'ref': 'AB29', 'type': 'end of road', 'modifier': 'left', 'lon': 80.129455, 'lat': 7.247458}
+{'road': 'Pasyala-Giriulla Road', 'ref': 'AB29', 'type': 'continue', 'modifier': 'left', 'lon': 80.133001, 'lat': 7.253513}
+{'road': '(unnamed)', 'ref': '', 'type': 'on ramp', 'modifier': 'left', 'lon': 80.136378, 'lat': 7.259416}
+{'road': '(unnamed)', 'ref': '', 'type': 'fork', 'modifier': 'slight right', 'lon': 80.135591, 'lat': 7.259781}
+{'road': 'Central Expressway', 'ref': 'E04', 'type': 'new name', 'modifier': 'straight', 'lon': 80.133075, 'lat': 7.263616}
+{'road': '(unnamed)', 'ref': '', 'type': 'off ramp', 'modifier': 'slight left', 'lon': 80.382022, 'lat': 7.486548}
+{'road': 'Kurunegala-Dambulla Road', 'ref': 'A6', 'type': 'turn', 'modifier': 'right', 'lon': 80.383285, 'lat': 7.497533}
+{'road': 'Kandy-Jaffna Road', 'ref': 'A9', 'type': 'roundabout', 'modifier': 'straight', 'lon': 80.651004, 'lat': 7.874265}
+{'road': 'Kandy-Jaffna Road', 'ref': 'A9', 'type': 'exit roundabout', 'modifier': 'straight', 'lon': 80.651252, 'lat': 7.874181}
+{'road': '(unnamed)', 'ref': '', 'type': 'turn', 'modifier': 'left', 'lon': 80.651156, 'lat': 7.872933}
+{'road': '(unnamed)', 'ref': '', 'type': 'arrive', 'modifier': 'left', 'lon': 80.651734, 'lat': 7.872805}
