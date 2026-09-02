@@ -2,7 +2,7 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "fresh supplied-map audit: Kalpitiya added above Chilaw; Colombo moved to the farther-right red-ring location; 2026-09-02; role-audited primary destinations vs supporting hubs, 2026-09-02; Colombo snapped back onto the printed red circle and retained as primary, 2026-09-02",
+  "calibration": "fresh supplied-map audit: Kalpitiya added above Chilaw; Colombo moved to the farther-right red-ring location; 2026-09-02; role-audited primary destinations vs supporting hubs, 2026-09-02; Colombo snapped back onto the printed red circle and retained as primary, 2026-09-02; Colombo nudged right/up onto the visible printed red circle, 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
@@ -428,8 +428,8 @@
     {
       "id": "colombo",
       "name": "Colombo",
-      "x": 342.0,
-      "y": 1374.0,
+      "x": 354.0,
+      "y": 1360.0,
       "type": "primary",
       "kind": "landmark",
       "gridCell": {
@@ -644,7 +644,8 @@
       "C39 position used for Aukana.",
       "Kalpitiya added at the red circle above Chilaw.",
       "Colombo moved slightly right to the indicated red circle.",
-      "Colombo snapped to the printed red circle and classified as a primary destination."
+      "Colombo snapped to the printed red circle and classified as a primary destination.",
+      "Colombo nudged slightly right and upward to fully cover the printed red circle."
     ],
     "review2Implemented": [
       "Kilinochchi",
