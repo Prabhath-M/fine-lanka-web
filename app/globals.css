@@ -13765,24 +13765,3 @@ body:has(.features:target) .typed-opening { display: none; }
     width: min(100% - 1rem, 1440px);
   }
 }
-
-/* JOURNAL — delay the mobile transparent arch reveal
-   Keep the transparent architectural layer hidden during the initial part of
-   the zoom so the pre-door aperture cannot flash the realm above the frame. */
-@keyframes portalMobileArchitecturalFrameReveal {
-  from {
-    opacity: 0;
-    visibility: hidden;
-  }
-  to {
-    opacity: 1;
-    visibility: visible;
-  }
-}
-@media (max-width: 640px) {
-  .portal-stage.is-zooming .portal-frame > .portal-architectural-frame {
-    animation: portalMobileArchitecturalFrameReveal 1ms linear 0.6s forwards;
-    opacity: 0;
-    visibility: hidden;
-  }
-}
