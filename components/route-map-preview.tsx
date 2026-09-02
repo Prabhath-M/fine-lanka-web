@@ -238,7 +238,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
           <div className={styles.sidebarIntro}>
             <span className={styles.kicker}>Explore the island</span>
             <h2>Places, <em>made visible.</em></h2>
-            <p>Every marker sits exactly where you'll find it in real life — pick a trip below to see its main stays highlighted, or explore freely at your own pace.</p>
+            <p>Each marker is thoughtfully placed to reflect where a destination sits on the island — pick a trip below to see its main stays highlighted, or explore freely at your own pace.</p>
           </div>
           <div className={styles.routeList} role="list" aria-label="Select a trip">
             <div className={styles.routeOption}>
@@ -344,6 +344,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
             )}
           </div>
           <p className={styles.caption}>This hand-illustrated map is your visual companion to the island — tap any marker for a closer look at what makes each place worth the trip.</p>
+          <p className={styles.accuracyNote}>Marker positions are artistically composed for a beautiful, easy-to-read map and are approximate — not intended for precise geographic navigation.</p>
         </div>
       </section>
     </Root>

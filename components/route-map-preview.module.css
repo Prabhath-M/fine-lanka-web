@@ -825,6 +825,16 @@
   line-height: 1.6;
 }
 
+.accuracyNote {
+  margin: 0.35rem 0.7rem 0;
+  color: #8a7f6c;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.62rem;
+  font-style: italic;
+  line-height: 1.6;
+  opacity: 0.85;
+}
+
 .loading {
   display: grid;
   min-height: 60vh;
