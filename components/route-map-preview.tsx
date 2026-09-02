@@ -301,16 +301,18 @@ export function RouteMapPreview() {
                   <button
                     key={marker.id}
                     type="button"
-                    className={`${styles.marker} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}
+                    className={styles.marker}
                     style={{ left: `${(marker.x / data.width) * 100}%`, top: `${(marker.y / data.height) * 100}%` }}
                     onClick={() => setSelectedMarkerId(marker.id)}
                     aria-label={`Show details for ${marker.name}`}
                     aria-pressed={isSelected}
                     title={marker.name}
                   >
-                    <span className={(isMainWaypoint || isSecondaryWaypoint) ? styles.markerOrder : styles.markerCore}>{isMainWaypoint ? mainOrder + 1 : isSecondaryWaypoint ? secondaryOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
-                    {isMainWaypoint && <span className={styles.markerStay}>{waypoint?.nights ?? 0}N</span>}
-                    <span className={styles.markerLabel}>{marker.name}</span>
+                    <span className={`${styles.markerHead} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}>
+                      <span className={(isMainWaypoint || isSecondaryWaypoint) ? styles.markerOrder : styles.markerCore}>{isMainWaypoint ? mainOrder + 1 : isSecondaryWaypoint ? secondaryOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
+                      {isMainWaypoint && <span className={styles.markerStay}>{waypoint?.nights ?? 0}N</span>}
+                      <span className={styles.markerLabel}>{marker.name}</span>
+                    </span>
                   </button>
                 )
               })}
