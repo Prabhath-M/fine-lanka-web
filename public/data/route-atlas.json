@@ -2,16 +2,16 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "fresh supplied-map audit review 2 implemented: accepted corrected cyan locations plus manual Colombo adjustment; no paths; 2026-09-02",
+  "calibration": "fresh supplied-map audit: Kalpitiya added above Chilaw; Colombo moved to the farther-right red-ring location; 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
     "routes": "Removed by request; no path or itinerary records are retained."
   },
   "networkStats": {
-    "markerCount": 46,
+    "markerCount": 47,
     "edgeCount": 0,
-    "primaryCount": 38,
+    "primaryCount": 39,
     "hubCount": 8,
     "itineraryCount": 0,
     "connected": false
@@ -428,7 +428,7 @@
     {
       "id": "colombo",
       "name": "Colombo",
-      "x": 330.0,
+      "x": 360.0,
       "y": 1374.0,
       "type": "primary",
       "kind": "landmark",
@@ -568,6 +568,18 @@
         "column": 7,
         "row": 9
       }
+    },
+    {
+      "id": "kalpitiya",
+      "name": "Kalpitiya",
+      "x": 354.0,
+      "y": 840.0,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 2,
+        "row": 5
+      }
     }
   ],
   "segments": [],
@@ -629,7 +641,9 @@
       "Airport moved to the same vertical line immediately below Negombo.",
       "G24 removed as the old airport placement; Colombo added at the nearby unmarked point.",
       "G11 relabeled as Mihintale.",
-      "C39 position used for Aukana."
+      "C39 position used for Aukana.",
+      "Kalpitiya added at the red circle above Chilaw.",
+      "Colombo moved slightly right to the indicated red circle."
     ],
     "review2Implemented": [
       "Kilinochchi",
