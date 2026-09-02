@@ -31,6 +31,7 @@ type Waypoint = {
   markerId: string
   role: 'airport' | 'main' | 'secondary'
   nights?: number
+  mainOrder?: number
 }
 
 type Itinerary = {
@@ -182,7 +183,6 @@ export function RouteMapPreview() {
   const activeSegmentIds = useMemo(() => new Set(selectedItinerary?.segments ?? []), [selectedItinerary])
   const waypointByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint) => [waypoint.markerId, waypoint])), [activeWaypoints])
   const mainWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'main'), [activeWaypoints])
-  const secondaryWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'secondary'), [activeWaypoints])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
   const [zoomRegionId, setZoomRegionId] = useState('overview')
   const zoomRegion = zoomRegions.find((region) => region.id === zoomRegionId) ?? zoomRegions[0]
@@ -293,7 +293,7 @@ export function RouteMapPreview() {
                 const isSelected = selectedMarkerId === marker.id
                 const waypoint = waypointByMarkerId.get(marker.id)
                 const mainOrder = waypoint?.role === 'main' ? mainWaypointOrder.findIndex((item) => item.markerId === marker.id) : -1
-                const secondaryOrder = waypoint?.role === 'secondary' ? secondaryWaypointOrder.findIndex((item) => item.markerId === marker.id) : -1
+                const secondaryOrder = waypoint?.role === 'secondary' ? (waypoint.mainOrder ?? 1) - 1 : -1
                 const isMainWaypoint = mainOrder >= 0
                 const isSecondaryWaypoint = secondaryOrder >= 0
                 const isAirportWaypoint = waypoint?.role === 'airport'
