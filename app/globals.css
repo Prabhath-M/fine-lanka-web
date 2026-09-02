@@ -13765,3 +13765,24 @@ body:has(.features:target) .typed-opening { display: none; }
     width: min(100% - 1rem, 1440px);
   }
 }
+
+/* JOURNAL — close the mobile arch-aperture leak
+   The mobile frame artwork has a transparent centre and is intentionally lifted
+   above the door container. During the short pre-door phase that left a narrow
+   top gap where the realm could show above the closed leaves. This cap lives in
+   the frame's own stacking context, above the realm but below the doors and
+   carved trim, so it blocks only the exposed crown and travels with the frame. */
+@media (max-width: 640px) {
+  .portal-frame::before {
+    content: '';
+    position: absolute;
+    z-index: 3;
+    top: -2%;
+    left: 18%;
+    width: 64%;
+    height: 31%;
+    border-radius: 50% 50% 0 0;
+    background: rgba(12, 24, 40, 0.98);
+    pointer-events: none;
+  }
+}
