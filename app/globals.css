@@ -13747,3 +13747,21 @@ body:has(.features:target) .typed-opening { display: none; }
     display: block;
   }
 }
+
+/* Tours & pricing: embedded route atlas */
+.tours-route-map-section {
+  scroll-margin-top: 1.5rem;
+  padding: clamp(3rem, 7vw, 6rem) 0;
+  background: #efe3c4;
+}
+
+.tours-route-map-section > div {
+  width: min(1440px, calc(100% - 2rem));
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .tours-route-map-section > div {
+    width: min(100% - 1rem, 1440px);
+  }
+}

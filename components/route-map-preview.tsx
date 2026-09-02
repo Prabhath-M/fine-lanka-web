@@ -160,9 +160,21 @@ function pathForSegment(segment: Segment, markers: Map<string, Marker>, width: n
     .join(' ')
 }
 
-export function RouteMapPreview() {
+type RouteMapPreviewProps = {
+  embedded?: boolean
+  selectedItineraryId?: string | null
+  onSelectedItineraryChange?: (itineraryId: string | null) => void
+}
+
+export function RouteMapPreview({ embedded = false, selectedItineraryId: controlledItineraryId, onSelectedItineraryChange }: RouteMapPreviewProps) {
   const [data, setData] = useState<AtlasData | null>(null)
-  const [selectedItineraryId, setSelectedItineraryId] = useState('cultural-triangle-escape')
+  const [internalSelectedItineraryId, setInternalSelectedItineraryId] = useState<string | null>('cultural-triangle-escape')
+  const selectedItineraryId = controlledItineraryId === undefined ? internalSelectedItineraryId : controlledItineraryId
+  const Root = embedded ? 'div' : 'main'
+  const setSelectedItineraryId = (itineraryId: string | null) => {
+    if (controlledItineraryId === undefined) setInternalSelectedItineraryId(itineraryId)
+    onSelectedItineraryChange?.(itineraryId)
+  }
   const [selectedMarkerId, setSelectedMarkerId] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -176,7 +188,7 @@ export function RouteMapPreview() {
       .catch((loadError: Error) => setError(loadError.message))
   }, [])
 
-  const selectedItinerary = data?.itineraries.find((item) => item.id === selectedItineraryId) ?? data?.itineraries[0]
+  const selectedItinerary = selectedItineraryId ? data?.itineraries.find((item) => item.id === selectedItineraryId) : undefined
   const markerById = useMemo(() => new Map((data?.markers ?? []).map((marker) => [marker.id, marker])), [data])
   const activeWaypoints = useMemo(() => selectedItinerary?.waypoints ?? [], [selectedItinerary])
   const activeMarkerIds = useMemo(() => new Set(activeWaypoints.map((waypoint) => waypoint.markerId)), [activeWaypoints])
@@ -196,14 +208,14 @@ export function RouteMapPreview() {
 
   if (!data) {
     return (
-      <main className={styles.page}>
+      <Root className={`${styles.page} ${embedded ? styles.embeddedPage : ''}`}>
         <div className={styles.loading}>{error ?? 'Loading the calibrated route atlas…'}</div>
-      </main>
+      </Root>
     )
   }
 
   return (
-    <main className={styles.page}>
+    <Root className={`${styles.page} ${embedded ? styles.embeddedPage : ''}`}>
       <header className={styles.hero}>
         <div className={styles.eyebrow}><Compass size={15} /> Fine Lanka route atlas · connected route preview</div>
         <div className={styles.heroGrid}>
@@ -240,7 +252,7 @@ export function RouteMapPreview() {
                 type="button"
                 role="listitem"
                 className={`${styles.routeOptionButton} ${selectedItinerary?.id === itinerary.id ? styles.routeOptionButtonSelected : ''}`}
-                onClick={() => { setSelectedItineraryId(itinerary.id); setSelectedMarkerId(null) }}
+                onClick={() => { setSelectedItineraryId(selectedItinerary?.id === itinerary.id ? null : itinerary.id); setSelectedMarkerId(null) }}
                 aria-pressed={selectedItinerary?.id === itinerary.id}
               >
                 <span className={styles.routeOptionTop}><span>{itinerary.label}</span><span>{itinerary.waypoints.filter((waypoint) => waypoint.role === 'main').length} stays</span></span>
@@ -334,6 +346,6 @@ export function RouteMapPreview() {
           <p className={styles.caption}>The illustrated artwork is the geographic reference. Every waypoint is calibrated to the supplied map image; route paths are intentionally disabled in this marker-only version.</p>
         </div>
       </section>
-    </main>
+    </Root>
   )
 }

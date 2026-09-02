@@ -8,6 +8,12 @@
   font-family: var(--font-sans), Arial, sans-serif;
 }
 
+.embeddedPage {
+  min-height: auto;
+  padding: 0;
+  background: transparent;
+}
+
 .hero,
 .workspace {
   width: min(1440px, 100%);

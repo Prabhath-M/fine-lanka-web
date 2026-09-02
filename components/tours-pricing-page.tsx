@@ -8,6 +8,7 @@ import { Icon } from '@/components/icons'
 import { ItineraryModal } from '@/components/tours/itinerary-modal'
 import { TourCard } from '@/components/tours/tour-card'
 import { TourPickerCarousel } from '@/components/tours/tour-picker-carousel'
+import { RouteMapPreview } from '@/components/route-map-preview'
 import { TRAVEL_NOTES } from '@/lib/site-data'
 import { TOUR_CATEGORIES, TOUR_PACKAGES, type TourPackage } from '@/lib/tours-data'
 
@@ -26,6 +27,7 @@ export function ToursPricingPage() {
   // category filter (which changes `list` below) falls straight back to
   // the first result in the new list whenever the previous pick isn't in it.
   const [featuredSlug, setFeaturedSlug] = useState<string | null>(null)
+  const [selectedMapItineraryId, setSelectedMapItineraryId] = useState<string | null>(null)
 
   const categoryParam = searchParams.get('category')
   const activeSlug = categoryParam && TOUR_CATEGORIES.some((c) => c.slug === categoryParam) ? categoryParam : 'All'
@@ -51,6 +53,19 @@ export function ToursPricingPage() {
     const currentIndex = list.findIndex((tour) => tour.slug === featuredTour.slug)
     const nextIndex = (currentIndex + direction + list.length) % list.length
     setFeaturedSlug(list[nextIndex].slug)
+  }
+
+  const showTourOnMap = (tour: TourPackage) => {
+    setSelectedMapItineraryId(tour.slug)
+    window.requestAnimationFrame(() => {
+      const mapSection = document.getElementById('tour-map')
+      if (!mapSection) return
+      const headerOffset = 24
+      window.scrollTo({
+        top: mapSection.getBoundingClientRect().top + window.scrollY - headerOffset,
+        behavior: 'smooth',
+      })
+    })
   }
 
   return (
@@ -158,6 +173,7 @@ export function ToursPricingPage() {
                 <TourCard
                   tour={featuredTour}
                   onOpenItinerary={setActiveTour}
+                  onViewOnMap={showTourOnMap}
                   onPrevious={list.length > 1 ? () => selectAdjacentTour(-1) : undefined}
                   onNext={list.length > 1 ? () => selectAdjacentTour(1) : undefined}
                 />
@@ -170,6 +186,14 @@ export function ToursPricingPage() {
             )}
           </div>
         </div>
+      </section>
+
+      <section className="tours-route-map-section" id="tour-map" aria-label="Interactive route map">
+        <RouteMapPreview
+          embedded
+          selectedItineraryId={selectedMapItineraryId}
+          onSelectedItineraryChange={setSelectedMapItineraryId}
+        />
       </section>
 
       <section className="travel-notes-section tours-notes-section">

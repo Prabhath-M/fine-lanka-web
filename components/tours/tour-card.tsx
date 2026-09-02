@@ -1,6 +1,6 @@
 'use client'
 
-import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight, MapPin, MessageSquareText, Sparkles } from 'lucide-react'
+import { ArrowRight, CalendarDays, ChevronLeft, ChevronRight, Map, MapPin, MessageSquareText, Sparkles } from 'lucide-react'
 import { Icon } from '@/components/icons'
 import { TOUR_CATEGORIES, type TourPackage } from '@/lib/tours-data'
 
@@ -19,11 +19,13 @@ import { TOUR_CATEGORIES, type TourPackage } from '@/lib/tours-data'
 export function TourCard({
   tour,
   onOpenItinerary,
+  onViewOnMap,
   onPrevious,
   onNext,
 }: {
   tour: TourPackage
   onOpenItinerary: (tour: TourPackage) => void
+  onViewOnMap: (tour: TourPackage) => void
   onPrevious?: () => void
   onNext?: () => void
 }) {
@@ -108,6 +110,14 @@ export function TourCard({
                 >
                   View itinerary
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-[var(--tc-ease-out)] group-hover/button:translate-x-1" strokeWidth={1.8} />
+                </button>
+                <button
+                  className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[rgba(14,81,69,0.3)] bg-transparent px-5 text-sm font-extrabold text-[var(--tc-monsoon)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:border-[var(--tc-monsoon)] hover:bg-[rgba(14,81,69,0.06)] active:scale-[0.97]"
+                  onClick={() => onViewOnMap(tour)}
+                  type="button"
+                >
+                  View on map
+                  <Map className="h-4 w-4 transition-transform duration-200 ease-[var(--tc-ease-out)] group-hover/button:-translate-y-0.5" strokeWidth={1.7} />
                 </button>
                 <button
                   className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--tc-monsoon)] px-5 text-sm font-extrabold text-[var(--tc-ivory)] shadow-[0_10px_20px_rgba(14,81,69,0.16)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:bg-[var(--tc-monsoon-deep)] hover:shadow-[0_14px_24px_rgba(14,81,69,0.22)] active:scale-[0.97]"
