@@ -916,92 +916,138 @@
    buttons retain their coordinate and hit area; only the visual heads shrink. */
 @media (max-width: 620px) {
   .markerHead {
-    width: 1.38rem;
-    height: 1.38rem;
-    border-width: 2px;
+    width: 1.18rem;
+    height: 1.18rem;
+    border-width: 1.5px;
   }
 
   .markerHub {
-    width: 1rem;
-    height: 1rem;
-    border-width: 2px;
+    width: 0.86rem;
+    height: 0.86rem;
+    border-width: 1.5px;
   }
 
   .markerArrival {
-    width: 1.14rem;
-    height: 1.14rem;
+    width: 0.98rem;
+    height: 0.98rem;
   }
 
   .markerItineraryMain,
   .markerItinerarySecondary,
   .markerItineraryAirport {
-    transform: translate(-50%, calc(-100% - 0.48rem));
+    transform: translate(-50%, calc(-100% - 0.4rem));
   }
 
   .markerItineraryMain {
-    width: 1.72rem;
-    height: 1.72rem;
+    width: 1.48rem;
+    height: 1.48rem;
   }
 
   .markerItinerarySecondary {
-    width: 1.1rem;
-    height: 1.1rem;
+    width: 0.94rem;
+    height: 0.94rem;
   }
 
   .markerItineraryAirport {
-    width: 1.4rem;
-    height: 1.4rem;
+    width: 1.18rem;
+    height: 1.18rem;
   }
 
   .markerItineraryMain::after,
   .markerItinerarySecondary::after,
   .markerItineraryAirport::after {
-    bottom: -0.2rem;
-    width: 0.42rem;
-    height: 0.42rem;
+    bottom: -0.16rem;
+    width: 0.34rem;
+    height: 0.34rem;
   }
 
   .markerItineraryMain:hover,
   .markerItineraryMain:focus-visible {
-    transform: translate(-50%, calc(-100% - 0.48rem)) scale(1.06);
+    transform: translate(-50%, calc(-100% - 0.4rem)) scale(1.06);
   }
 
   .markerItinerarySecondary:hover,
   .markerItinerarySecondary:focus-visible,
   .markerItineraryAirport:hover,
   .markerItineraryAirport:focus-visible {
-    transform: translate(-50%, calc(-100% - 0.48rem)) scale(1.08);
+    transform: translate(-50%, calc(-100% - 0.4rem)) scale(1.08);
   }
 
   .markerItineraryMain.markerSelected {
-    transform: translate(-50%, calc(-100% - 0.48rem)) scale(1.08);
+    transform: translate(-50%, calc(-100% - 0.4rem)) scale(1.08);
   }
 
   .markerItinerarySecondary.markerSelected,
   .markerItineraryAirport.markerSelected {
-    transform: translate(-50%, calc(-100% - 0.48rem)) scale(1.08);
+    transform: translate(-50%, calc(-100% - 0.4rem)) scale(1.08);
   }
 
   .markerCore {
-    font-size: 0.68rem;
+    font-size: 0.58rem;
   }
 
   .markerArrival .markerCore {
-    font-size: 0.74rem;
+    font-size: 0.64rem;
   }
 
   .markerOrder {
-    font-size: 0.62rem;
+    font-size: 0.54rem;
   }
 
   .markerStay {
-    bottom: 0.14rem;
-    font-size: 0.43rem;
+    bottom: 0.11rem;
+    font-size: 0.37rem;
   }
 
   .markerLabel {
-    max-width: 8rem;
-    padding: 0.12rem 0.24rem;
-    font-size: 0.42rem;
+    max-width: 7rem;
+    padding: 0.1rem 0.2rem;
+    font-size: 0.36rem;
+  }
+
+  .placeCard {
+    right: 0.4rem;
+    bottom: 0.4rem;
+    width: calc(100% - 0.8rem);
+    padding: 0.72rem 0.78rem 0.7rem;
+    border-radius: 0.62rem;
+  }
+
+  .closeButton {
+    top: 0.45rem;
+    right: 0.45rem;
+    width: 1.35rem;
+    height: 1.35rem;
+  }
+
+  .placeImage {
+    height: 5.2rem;
+    margin: -0.12rem 0 0.62rem;
+    border-radius: 0.42rem;
+  }
+
+  .placeCard h3 {
+    margin-top: 0.3rem;
+    padding-right: 1rem;
+    font-size: 1.28rem;
+    line-height: 1.1;
+  }
+
+  .placeCard p {
+    margin-top: 0.42rem;
+    font-size: 0.68rem;
+    line-height: 1.4;
+  }
+
+  .placeMeta,
+  .activeNotice {
+    gap: 0.28rem;
+    margin-top: 0.54rem;
+    font-size: 0.52rem;
+    line-height: 1.25;
+  }
+
+  .activeNotice {
+    padding-top: 0.5rem;
   }
 }
