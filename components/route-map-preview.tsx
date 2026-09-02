@@ -101,11 +101,11 @@ const zoomRegions: ZoomRegion[] = [
 const symbolByKind: Record<string, string> = {
   arrival: '✈',
   heritage: '✦',
-  coast: '◒',
+  coast: '≈',
   mountain: '⌃',
   tea: '❧',
   wildlife: '♢',
-  waterfall: '≋',
+  waterfall: '║',
   adventure: '≈',
   nature: '♧',
   culture: '◈',
@@ -285,7 +285,7 @@ export function RouteMapPreview() {
                     aria-pressed={isSelected}
                     title={marker.name}
                   >
-                    <span className={isOrderedWaypoint ? styles.markerOrder : styles.markerCore}>{isOrderedWaypoint ? routeOrder + 1 : marker.type === 'hub' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
+                    <span className={isOrderedWaypoint ? styles.markerOrder : styles.markerCore}>{isOrderedWaypoint ? routeOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
                     <span className={styles.markerLabel}>{marker.name}</span>
                   </button>
                 )
