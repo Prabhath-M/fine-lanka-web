@@ -2,17 +2,17 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "fresh map-image waypoint positions manually corrected from user audit: airport directly below Negombo; Colombo added; Mihintale and Aukana relabeled; 2026-09-02",
+  "calibration": "fresh supplied-map audit review 2 implemented: accepted corrected cyan locations plus manual Colombo adjustment; no paths; 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
     "routes": "Removed by request; no path or itinerary records are retained."
   },
   "networkStats": {
-    "markerCount": 35,
+    "markerCount": 46,
     "edgeCount": 0,
-    "primaryCount": 28,
-    "hubCount": 7,
+    "primaryCount": 38,
+    "hubCount": 8,
     "itineraryCount": 0,
     "connected": false
   },
@@ -320,13 +320,13 @@
     {
       "id": "nuwara-eliya",
       "name": "Nuwara Eliya",
-      "x": 943.74,
-      "y": 1527.0,
+      "x": 874.0,
+      "y": 1414.0,
       "type": "primary",
       "kind": "tea",
       "gridCell": {
         "column": 5,
-        "row": 8
+        "row": 7
       }
     },
     {
@@ -428,13 +428,145 @@
     {
       "id": "colombo",
       "name": "Colombo",
-      "x": 315.0,
+      "x": 330.0,
       "y": 1374.0,
       "type": "primary",
       "kind": "landmark",
       "gridCell": {
         "column": 2,
         "row": 7
+      }
+    },
+    {
+      "id": "kilinochchi",
+      "name": "Kilinochchi",
+      "x": 656.0,
+      "y": 314.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 4,
+        "row": 2
+      }
+    },
+    {
+      "id": "vavuniya",
+      "name": "Vavuniya",
+      "x": 710.0,
+      "y": 500.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 4,
+        "row": 3
+      }
+    },
+    {
+      "id": "anuradhapura",
+      "name": "Anuradhapura Ancient City",
+      "x": 598.0,
+      "y": 754.0,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 3,
+        "row": 4
+      }
+    },
+    {
+      "id": "polonnaruwa",
+      "name": "Polonnaruwa",
+      "x": 1052.0,
+      "y": 890.0,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 6,
+        "row": 5
+      }
+    },
+    {
+      "id": "matale",
+      "name": "Matale",
+      "x": 842.0,
+      "y": 1072.0,
+      "type": "hub",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 5,
+        "row": 6
+      }
+    },
+    {
+      "id": "mahiyanganaya",
+      "name": "Mahiyanganaya",
+      "x": 1206.0,
+      "y": 1082.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 6,
+        "row": 6
+      }
+    },
+    {
+      "id": "nallathanni",
+      "name": "Nallathanni",
+      "x": 1058.0,
+      "y": 1222.0,
+      "type": "primary",
+      "kind": "mountain",
+      "gridCell": {
+        "column": 6,
+        "row": 6
+      }
+    },
+    {
+      "id": "meemure",
+      "name": "Meemure Village",
+      "x": 936.0,
+      "y": 1300.0,
+      "type": "primary",
+      "kind": "nature",
+      "gridCell": {
+        "column": 5,
+        "row": 7
+      }
+    },
+    {
+      "id": "haputale",
+      "name": "Haputale",
+      "x": 940.0,
+      "y": 1532.0,
+      "type": "primary",
+      "kind": "tea",
+      "gridCell": {
+        "column": 5,
+        "row": 8
+      }
+    },
+    {
+      "id": "ella",
+      "name": "Ella",
+      "x": 1018.0,
+      "y": 1604.0,
+      "type": "primary",
+      "kind": "mountain",
+      "gridCell": {
+        "column": 5,
+        "row": 8
+      }
+    },
+    {
+      "id": "tissamaharama",
+      "name": "Tissamaharama",
+      "x": 1248.0,
+      "y": 1726.0,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 7,
+        "row": 9
       }
     }
   ],
@@ -498,6 +630,25 @@
       "G24 removed as the old airport placement; Colombo added at the nearby unmarked point.",
       "G11 relabeled as Mihintale.",
       "C39 position used for Aukana."
-    ]
+    ],
+    "review2Implemented": [
+      "Kilinochchi",
+      "Vavuniya",
+      "Anuradhapura Ancient City",
+      "Polonnaruwa",
+      "Matale",
+      "Mahiyanganaya",
+      "Nallathanni",
+      "Meemure Village",
+      "Nuwara Eliya",
+      "Haputale",
+      "Ella",
+      "Tissamaharama"
+    ],
+    "colomboAdjustment": {
+      "x": 330.0,
+      "y": 1374.0,
+      "note": "moved slightly right per user review"
+    }
   }
 }
