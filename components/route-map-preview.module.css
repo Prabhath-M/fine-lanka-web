@@ -517,8 +517,10 @@
 }
 
 .markerItineraryMain,
-.markerItinerarySecondary {
+.markerItinerarySecondary,
+.markerItineraryAirport {
   position: relative;
+  transform: translate(-50%, calc(-100% - 0.32rem));
 }
 
 .markerItineraryMain {
@@ -534,7 +536,7 @@
   content: '';
   position: absolute;
   left: 50%;
-  bottom: -0.38rem;
+  bottom: -0.36rem;
   width: 0.72rem;
   height: 0.72rem;
   background: #b8472d;
@@ -558,6 +560,18 @@
   border-color: #d9f0e9;
   background: #2b7c88;
   color: #f5fff8;
+}
+
+.markerItineraryMain:hover,
+.markerItineraryMain:focus-visible {
+  transform: translate(-50%, calc(-100% - 0.32rem)) scale(1.08);
+}
+
+.markerItinerarySecondary:hover,
+.markerItinerarySecondary:focus-visible,
+.markerItineraryAirport:hover,
+.markerItineraryAirport:focus-visible {
+  transform: translate(-50%, calc(-100% - 0.32rem)) scale(1.12);
 }
 
 .markerItineraryMain .markerOrder {
@@ -665,6 +679,15 @@
   color: #fff7e5;
   transform: translate(-50%, -50%) scale(1.24);
   box-shadow: 0 0 0 5px rgba(198, 77, 49, 0.25), 0 0 1rem rgba(198, 77, 49, 0.55);
+}
+
+.markerItineraryMain.markerSelected {
+  transform: translate(-50%, calc(-100% - 0.32rem)) scale(1.1);
+}
+
+.markerItinerarySecondary.markerSelected,
+.markerItineraryAirport.markerSelected {
+  transform: translate(-50%, calc(-100% - 0.32rem)) scale(1.12);
 }
 
 .markerHub.markerSelected {

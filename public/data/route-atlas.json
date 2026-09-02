@@ -2,17 +2,17 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "fresh supplied-map audit: Kalpitiya added above Chilaw; Colombo moved to the farther-right red-ring location; 2026-09-02; role-audited primary destinations vs supporting hubs, 2026-09-02; Colombo snapped back onto the printed red circle and retained as primary, 2026-09-02; Colombo nudged right/up onto the visible printed red circle, 2026-09-02; itinerary-driven pins with airport, secondary stops, numbered main stays, and nights; 2026-09-02; itinerary-required destination markers added for Kitulgala, Knuckles, Udawalawe, and Yala; 2026-09-02; itinerary-driven pins with airport, secondary stops, numbered main stays, and nights; 2026-09-02",
+  "calibration": "original verified 47-marker map coordinates restored; itinerary pins anchor their bottom tip to fixed marker centers; no map coordinates changed; itinerary-driven pins with airport, secondary stops, numbered main stays, and nights; 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
     "routes": "Removed by request; no path or itinerary records are retained."
   },
   "networkStats": {
-    "markerCount": 51,
+    "markerCount": 47,
     "edgeCount": 0,
-    "primaryCount": 38,
-    "hubCount": 13,
+    "primaryCount": 39,
+    "hubCount": 8,
     "itineraryCount": 13,
     "connected": false
   },
@@ -202,7 +202,7 @@
       "name": "Kurunegala",
       "x": 539.12,
       "y": 1013.22,
-      "type": "hub",
+      "type": "primary",
       "kind": "landmark",
       "gridCell": {
         "column": 3,
@@ -298,7 +298,7 @@
       "name": "Katunayake / Bandaranaike International Airport",
       "x": 342.0,
       "y": 1210.0,
-      "type": "hub",
+      "type": "primary",
       "kind": "arrival",
       "gridCell": {
         "column": 2,
@@ -428,8 +428,8 @@
     {
       "id": "colombo",
       "name": "Colombo",
-      "x": 354.0,
-      "y": 1360.0,
+      "x": 360.0,
+      "y": 1374.0,
       "type": "primary",
       "kind": "landmark",
       "gridCell": {
@@ -442,7 +442,7 @@
       "name": "Kilinochchi",
       "x": 656.0,
       "y": 314.0,
-      "type": "hub",
+      "type": "primary",
       "kind": "landmark",
       "gridCell": {
         "column": 4,
@@ -454,7 +454,7 @@
       "name": "Vavuniya",
       "x": 710.0,
       "y": 500.0,
-      "type": "hub",
+      "type": "primary",
       "kind": "landmark",
       "gridCell": {
         "column": 4,
@@ -502,7 +502,7 @@
       "name": "Mahiyanganaya",
       "x": 1206.0,
       "y": 1082.0,
-      "type": "hub",
+      "type": "primary",
       "kind": "landmark",
       "gridCell": {
         "column": 6,
@@ -579,54 +579,6 @@
       "gridCell": {
         "column": 2,
         "row": 5
-      }
-    },
-    {
-      "id": "kitulgala",
-      "name": "Kitulgala",
-      "x": 575.0,
-      "y": 1415.0,
-      "type": "primary",
-      "kind": "adventure",
-      "gridCell": {
-        "column": 3,
-        "row": 7
-      }
-    },
-    {
-      "id": "knuckles",
-      "name": "Knuckles Mountain Range",
-      "x": 942.0,
-      "y": 1272.0,
-      "type": "primary",
-      "kind": "mountain",
-      "gridCell": {
-        "column": 5,
-        "row": 7
-      }
-    },
-    {
-      "id": "udawalawe",
-      "name": "Udawalawe National Park",
-      "x": 844.0,
-      "y": 1716.0,
-      "type": "primary",
-      "kind": "wildlife",
-      "gridCell": {
-        "column": 5,
-        "row": 9
-      }
-    },
-    {
-      "id": "yala",
-      "name": "Yala National Park",
-      "x": 1178.0,
-      "y": 1718.0,
-      "type": "primary",
-      "kind": "wildlife",
-      "gridCell": {
-        "column": 6,
-        "row": 9
       }
     }
   ],
@@ -892,10 +844,6 @@
           "nights": 2
         },
         {
-          "markerId": "knuckles",
-          "role": "secondary"
-        },
-        {
           "markerId": "kandy",
           "role": "main",
           "nights": 1
@@ -926,7 +874,6 @@
         "sigiriya",
         "matale",
         "meemure",
-        "knuckles",
         "kandy",
         "nallathanni",
         "nuwara-eliya",
@@ -949,11 +896,6 @@
           "role": "airport"
         },
         {
-          "markerId": "kitulgala",
-          "role": "main",
-          "nights": 1
-        },
-        {
           "markerId": "nuwara-eliya",
           "role": "main",
           "nights": 1
@@ -969,11 +911,6 @@
           "nights": 2
         },
         {
-          "markerId": "knuckles",
-          "role": "main",
-          "nights": 1
-        },
-        {
           "markerId": "sigiriya",
           "role": "main",
           "nights": 1
@@ -986,11 +923,9 @@
       ],
       "markers": [
         "bandaranaike-airport",
-        "kitulgala",
         "nuwara-eliya",
         "haputale",
         "ella",
-        "knuckles",
         "sigiriya",
         "negombo"
       ],
@@ -1279,11 +1214,6 @@
           "nights": 2
         },
         {
-          "markerId": "udawalawe",
-          "role": "main",
-          "nights": 1
-        },
-        {
           "markerId": "mirissa",
           "role": "main",
           "nights": 2
@@ -1301,7 +1231,6 @@
         "kandy",
         "nuwara-eliya",
         "ella",
-        "udawalawe",
         "mirissa",
         "galle"
       ],
@@ -1366,10 +1295,6 @@
         {
           "markerId": "kataragama",
           "role": "secondary"
-        },
-        {
-          "markerId": "yala",
-          "role": "secondary"
         }
       ],
       "markers": [
@@ -1383,8 +1308,7 @@
         "ella",
         "arugam-bay",
         "tissamaharama",
-        "kataragama",
-        "yala"
+        "kataragama"
       ],
       "segments": [],
       "tracedSegments": [],
@@ -1528,9 +1452,7 @@
       "G11 relabeled as Mihintale.",
       "C39 position used for Aukana.",
       "Kalpitiya added at the red circle above Chilaw.",
-      "Colombo moved slightly right to the indicated red circle.",
-      "Colombo snapped to the printed red circle and classified as a primary destination.",
-      "Colombo nudged slightly right and upward to fully cover the printed red circle."
+      "Colombo moved slightly right to the indicated red circle."
     ],
     "review2Implemented": [
       "Kilinochchi",
@@ -1550,66 +1472,6 @@
       "x": 330.0,
       "y": 1374.0,
       "note": "moved slightly right per user review"
-    },
-    "roleAudit": {
-      "primaryDestinations": [
-        "alu-vihara",
-        "anuradhapura",
-        "arugam-bay",
-        "aukana",
-        "batticaloa",
-        "bentota",
-        "dambulla",
-        "ella",
-        "galle",
-        "haputale",
-        "jaffna",
-        "kalpitiya",
-        "kandy",
-        "kataragama",
-        "madhu-road-national-park",
-        "mannar",
-        "meemure",
-        "mihintale",
-        "mirissa",
-        "mullaittivu",
-        "nallathanni",
-        "negombo",
-        "nuwara-eliya",
-        "pasikudah",
-        "pigeon-island",
-        "pinnawala",
-        "point-pedro",
-        "polonnaruwa",
-        "sigiriya",
-        "tangalle",
-        "tissamaharama",
-        "trincomalee",
-        "unawatuna"
-      ],
-      "supportingHubs": [
-        "avissawella",
-        "badulla",
-        "bandaranaike-airport",
-        "chilaw",
-        "colombo",
-        "elephant-pass",
-        "habanara",
-        "kilinochchi",
-        "kurunegala",
-        "mahiyanganaya",
-        "matale",
-        "pulmoddai",
-        "ratnapura",
-        "vavuniya"
-      ],
-      "rule": "Primary means an intentional visitor destination, attraction, park, beach, heritage site, or tourism base. Hub means an arrival point, transfer town, or supporting network node."
-    },
-    "itineraryRequiredMarkers": [
-      "kitulgala",
-      "knuckles",
-      "udawalawe",
-      "yala"
-    ]
+    }
   }
 }
