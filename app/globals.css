@@ -13765,3 +13765,13 @@ body:has(.features:target) .typed-opening { display: none; }
     width: min(100% - 1rem, 1440px);
   }
 }
+
+/* JOURNAL — lower the mobile transparent arch mask
+   The transparent aperture is slightly too high above the closed stone leaves
+   on narrow screens. Lower the overlay without changing its size, timing, or
+   desktop placement so the visible crown sits behind the actual doorframe. */
+@media (max-width: 640px) {
+  .portal-frame > .portal-architectural-frame {
+    top: -14.78%;
+  }
+}
