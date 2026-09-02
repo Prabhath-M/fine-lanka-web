@@ -484,6 +484,10 @@
   z-index: 3;
 }
 
+.markerAnchorAirport {
+  z-index: 7;
+}
+
 .markerHead {
   position: absolute;
   left: 0;

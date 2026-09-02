@@ -301,7 +301,7 @@ export function RouteMapPreview() {
                   <button
                     key={marker.id}
                     type="button"
-                    className={styles.marker}
+                    className={`${styles.marker} ${isAirportWaypoint ? styles.markerAnchorAirport : ''}`}
                     style={{ left: `${(marker.x / data.width) * 100}%`, top: `${(marker.y / data.height) * 100}%` }}
                     onClick={() => setSelectedMarkerId(marker.id)}
                     aria-label={`Show details for ${marker.name}`}

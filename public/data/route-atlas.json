@@ -2,7 +2,7 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "original verified 47-marker map coordinates restored; itinerary pins anchor their bottom tip to fixed marker centers; no map coordinates changed; itinerary-driven pins with airport, secondary stops, numbered main stays, and nights; 2026-09-02; secondary pins inherit parent main-destination ordinals; 2026-09-02",
+  "calibration": "original verified 47-marker map coordinates restored; itinerary pins anchor their bottom tip to fixed marker centers; no map coordinates changed; itinerary-driven pins with airport, secondary stops, numbered main stays, and nights; 2026-09-02; secondary pins inherit parent main-destination ordinals; 2026-09-02; airport anchor nudged below Negombo; 2026-09-02; airport anchor nudged below Negombo; 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
@@ -297,13 +297,14 @@
       "id": "bandaranaike-airport",
       "name": "Katunayake / Bandaranaike International Airport",
       "x": 342.0,
-      "y": 1210.0,
+      "y": 1317.0,
       "type": "primary",
       "kind": "arrival",
       "gridCell": {
         "column": 2,
         "row": 6
-      }
+      },
+      "anchorNote": "Below Negombo with clearance for both pin heads; fixed source-image anchor."
     },
     {
       "id": "badulla",
