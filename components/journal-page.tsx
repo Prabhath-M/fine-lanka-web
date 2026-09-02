@@ -11,8 +11,6 @@ import { useTypingProgress } from '@/lib/use-typing-progress'
 // cascade so it cannot collapse into a grouped CSS animation.
 const THRESHOLD_TYPING_MS = 12400
 const THRESHOLD_POWER_DOWN_MS = 640
-const PORTAL_START_DELAY_MS = 500
-const PORTAL_ZOOM_DURATION_MS = 4800
 const POST_PORTAL_PAUSE_MS = 500
 const EYEBROW_REVEAL_MS = 1200
 const TITLE_REVEAL_MS = 1500
@@ -103,7 +101,6 @@ export function JournalPage() {
   const cardRevealTimers = useRef<ReturnType<typeof setTimeout>[]>([])
   const headingStageTimers = useRef<ReturnType<typeof setTimeout>[]>([])
   const thresholdTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const portalStartTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
   const openingRef = useRef(false)
 
   const prefersReducedMotion = useCallback(
@@ -124,24 +121,17 @@ export function JournalPage() {
     if (portalToggleRef.current) portalToggleRef.current.checked = true
 
     setIsOpen(true)
+    setIsZooming(true)
 
     if (prefersReducedMotion()) {
-      setIsZooming(true)
       setRevealed(true)
       setContentRevealed(true)
       setDoorwayGone(true)
       return
     }
 
-    // Hold the opened doorway on screen briefly before starting the zoom. This
-    // gives the threshold handoff a distinct beat instead of blending directly
-    // into the portal motion.
-    portalStartTimer.current = setTimeout(() => {
-      setIsZooming(true)
-    }, PORTAL_START_DELAY_MS)
-
-    // Keep the page locked throughout the 0.5s pause, 0.8s anticipation, and
-    // 3s door/realm transition; the reveal state releases it only after the
+    // Keep the page locked throughout the 0.8s anticipation and 3s
+    // door/realm transition; the reveal state releases it only after the
     // doorway has been removed from the document.
     revealTimer.current = setTimeout(() => {
       setRevealed(true)
@@ -149,7 +139,7 @@ export function JournalPage() {
       contentRevealTimer.current = setTimeout(() => {
         setContentRevealed(true)
       }, POST_PORTAL_PAUSE_MS)
-    }, PORTAL_START_DELAY_MS + PORTAL_ZOOM_DURATION_MS)
+    }, 3800)
   }, [prefersReducedMotion])
 
   // ---- Clear screen → CSS types every character → open the doorway ----
@@ -176,7 +166,6 @@ export function JournalPage() {
 
   useEffect(() => {
     return () => {
-      if (portalStartTimer.current) clearTimeout(portalStartTimer.current)
       if (revealTimer.current) clearTimeout(revealTimer.current)
       if (contentRevealTimer.current) clearTimeout(contentRevealTimer.current)
       cardRevealTimers.current.forEach(clearTimeout)
