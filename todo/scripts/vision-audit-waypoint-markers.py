@@ -1,8 +1,0 @@
-import base64,json,os,requests
-from pathlib import Path
-img=Path('/home/ubuntu/fine-lanka-web/public/images/fine-lanka-route-atlas-all-hubs.png')
-data=base64.b64encode(img.read_bytes()).decode()
-prompt='''Inspect this fixed Sri Lanka tourism atlas image. Identify ONLY actual map waypoint symbols that are circular markers with a white center: (1) red ring/circle primary destination markers and (2) brown, tan, or cream ring/circle support hub markers. Exclude the legend symbols, decorative objects, coins, food/artwork, and any circles that are not map waypoint markers. For every actual map marker return only visibleLabel if readable, markerType (primary or support), x and y pixel center. Do not return confidence, explanations, or any other fields. Use the full image dimensions 1664 x 2080. Return JSON only with key markers. This is a visual registration task: use the pixel positions of the symbols in the image, not geographic estimation.'''
-body={'model':'gemini-3-flash-preview','messages':[{'role':'user','content':[{'type':'text','text':prompt},{'type':'image_url','image_url':{'url':'data:image/png;base64,'+data,'detail':'high'}}]}],'max_tokens':16000,'response_format':{'type':'json_object'}}
-url=os.environ['OPENAI_API_BASE'].rstrip('/')+'/chat/completions'; headers={'Authorization':'Bearer '+os.environ['OPENAI_API_KEY'],'Content-Type':'application/json'}
-r=requests.post(url,headers=headers,json=body,timeout=180); r.raise_for_status(); text=r.json()['choices'][0]['message']['content']; Path('/home/ubuntu/fine-lanka-web/docs/atlas-marker-vision.json').write_text(text); print(text)
