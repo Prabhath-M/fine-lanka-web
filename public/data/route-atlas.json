@@ -2,7 +2,7 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "fresh computer-vision waypoint-circle detection + OCR label matching from supplied map, 2026-09-02",
+  "calibration": "fresh computer-vision waypoint-circle detection + OCR label matching from supplied map, manually audited against regional review, 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
@@ -415,5 +415,59 @@
     }
   ],
   "segments": [],
-  "itineraries": []
+  "itineraries": [],
+  "audit": {
+    "method": "Hough circle detection constrained to small red-ring/white-center markers, followed by OCR and manual visual review",
+    "excludedFalsePositiveCircles": [
+      {
+        "x": 900,
+        "y": 398,
+        "reason": "circle left of Mullaittivu label"
+      },
+      {
+        "x": 1118,
+        "y": 668,
+        "reason": "circle left of Trincomalee label"
+      },
+      {
+        "x": 1198,
+        "y": 756,
+        "reason": "circle below Nilaveli label"
+      },
+      {
+        "x": 736,
+        "y": 868,
+        "reason": "circle just below Habarana label"
+      },
+      {
+        "x": 494,
+        "y": 1756,
+        "reason": "circle between Bentota and Galle"
+      },
+      {
+        "x": 608,
+        "y": 1602,
+        "reason": "circle below Ratnapura"
+      },
+      {
+        "x": 366,
+        "y": 1382,
+        "reason": "circle below Colombo"
+      }
+    ],
+    "addedOrRefreshedMarkers": [
+      {
+        "id": "avissawella",
+        "x": 602.89,
+        "y": 1308.28,
+        "label": "Avissawella"
+      },
+      {
+        "id": "badulla",
+        "x": 1097.84,
+        "y": 1494.16,
+        "label": "Badulla"
+      }
+    ]
+  }
 }
