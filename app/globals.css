@@ -13772,6 +13772,6 @@ body:has(.features:target) .typed-opening { display: none; }
    desktop placement so the visible crown sits behind the actual doorframe. */
 @media (max-width: 640px) {
   .portal-frame > .portal-architectural-frame {
-    top: -4.78%;
+    top: 5.22%;
   }
 }
