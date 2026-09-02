@@ -209,7 +209,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   if (!data) {
     return (
       <Root className={`${styles.page} ${embedded ? styles.embeddedPage : ''}`}>
-        <div className={styles.loading}>{error ?? 'Loading the calibrated route atlas…'}</div>
+        <div className={styles.loading}>{error ?? 'Loading the map…'}</div>
       </Root>
     )
   }
@@ -217,18 +217,18 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   return (
     <Root className={`${styles.page} ${embedded ? styles.embeddedPage : ''}`}>
       <header className={styles.hero}>
-        <div className={styles.eyebrow}><Compass size={15} /> Fine Lanka route atlas · connected route preview</div>
+        <div className={styles.eyebrow}><Compass size={15} /> Fine Lanka route atlas · explore Sri Lanka by map</div>
         <div className={styles.heroGrid}>
           <div>
             <h1>Follow the island <em>by feeling.</em></h1>
             <p className={styles.intro}>
-              A fresh visual index of the destinations shown on the latest illustrated Sri Lankan tour map. Select any marker to explore its place, image, and description.
+              A hand-illustrated guide to the places we love most across Sri Lanka. Tap any marker to see photos, a short story, and where it fits into your journey.
             </p>
           </div>
           <div className={styles.calibrationCard}>
-            <span className={styles.cardLabel}>Network check</span>
-            <strong>{data.networkStats.markerCount} mapped places</strong>
-            <span>{data.networkStats.primaryCount} destinations · {data.networkStats.hubCount} supporting places · marker-only reference</span>
+            <span className={styles.cardLabel}>At a glance</span>
+            <strong>{data.networkStats.markerCount} places to discover</strong>
+            <span>{data.networkStats.primaryCount} signature destinations · {data.networkStats.hubCount} gateway towns along the way</span>
           </div>
         </div>
       </header>
@@ -238,7 +238,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
           <div className={styles.sidebarIntro}>
             <span className={styles.kicker}>Explore the island</span>
             <h2>Places, <em>made visible.</em></h2>
-            <p>This refreshed map uses only the locations and placement from the newly supplied Sri Lanka tour map. Previous route paths and itinerary overlays have been removed.</p>
+            <p>Every marker sits exactly where you'll find it in real life — pick a trip below to see its main stays highlighted, or explore freely at your own pace.</p>
           </div>
           <div className={styles.routeList} role="list" aria-label="Select a trip">
             <div className={styles.routeOption}>
@@ -271,14 +271,14 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
         <div className={styles.mapColumn}>
           <div className={styles.mapHeader}>
             <div className={styles.mapTitle}>
-              <span className={styles.kicker}>Fresh location index</span>
+              <span className={styles.kicker}>Explore by map</span>
               <h2>Sri Lanka, <em>up close.</em></h2>
-              <p className={styles.routeTrail}>A marker-only map rebuilt from the latest supplied destination reference.</p>
+              <p className={styles.routeTrail}>Every marker is a real place worth visiting — zoom into a region or tap a stop to start exploring.</p>
             </div>
             <div className={styles.mapHeaderRight}>
               <div className={styles.routeFacts} aria-label="Map facts">
                 <span><strong>{data.markers.length}</strong><small>places</small></span>
-                <span><strong>0</strong><small>paths</small></span>
+                <span><strong>{data.itineraries.length}</strong><small>sample trips</small></span>
               </div>
               <div className={styles.zoomControls} aria-label="Map zoom regions">
                 {zoomRegions.map((region) => (
@@ -293,7 +293,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                   </button>
                 ))}
               </div>
-              <span className={styles.mapHint}><MousePointer2 size={14} /> Click any marker · {zoomRegion.note}</span>
+              <span className={styles.mapHint}><MousePointer2 size={14} /> Tap a marker to explore · {zoomRegion.note}</span>
             </div>
           </div>
           <div className={styles.mapFrame}>
@@ -343,7 +343,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
               </aside>
             )}
           </div>
-          <p className={styles.caption}>The illustrated artwork is the geographic reference. Every waypoint is calibrated to the supplied map image; route paths are intentionally disabled in this marker-only version.</p>
+          <p className={styles.caption}>This hand-illustrated map is your visual companion to the island — tap any marker for a closer look at what makes each place worth the trip.</p>
         </div>
       </section>
     </Root>
