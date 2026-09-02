@@ -192,7 +192,10 @@ export function ToursPricingPage() {
         <RouteMapPreview
           embedded
           selectedItineraryId={selectedMapItineraryId}
-          onSelectedItineraryChange={setSelectedMapItineraryId}
+          onSelectedItineraryChange={(itineraryId) => {
+            setSelectedMapItineraryId(itineraryId)
+            if (itineraryId) setFeaturedSlug(itineraryId)
+          }}
         />
       </section>
 
