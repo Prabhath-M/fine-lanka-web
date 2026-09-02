@@ -2,7 +2,7 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "fresh supplied-map audit: Kalpitiya added above Chilaw; Colombo moved to the farther-right red-ring location; 2026-09-02",
+  "calibration": "fresh supplied-map audit: Kalpitiya added above Chilaw; Colombo moved to the farther-right red-ring location; 2026-09-02; role-audited primary destinations vs supporting hubs, 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
@@ -11,8 +11,8 @@
   "networkStats": {
     "markerCount": 47,
     "edgeCount": 0,
-    "primaryCount": 39,
-    "hubCount": 8,
+    "primaryCount": 33,
+    "hubCount": 14,
     "itineraryCount": 0,
     "connected": false
   },
@@ -202,7 +202,7 @@
       "name": "Kurunegala",
       "x": 539.12,
       "y": 1013.22,
-      "type": "primary",
+      "type": "hub",
       "kind": "landmark",
       "gridCell": {
         "column": 3,
@@ -298,7 +298,7 @@
       "name": "Katunayake / Bandaranaike International Airport",
       "x": 342.0,
       "y": 1210.0,
-      "type": "primary",
+      "type": "hub",
       "kind": "arrival",
       "gridCell": {
         "column": 2,
@@ -430,7 +430,7 @@
       "name": "Colombo",
       "x": 360.0,
       "y": 1374.0,
-      "type": "primary",
+      "type": "hub",
       "kind": "landmark",
       "gridCell": {
         "column": 2,
@@ -442,7 +442,7 @@
       "name": "Kilinochchi",
       "x": 656.0,
       "y": 314.0,
-      "type": "primary",
+      "type": "hub",
       "kind": "landmark",
       "gridCell": {
         "column": 4,
@@ -454,7 +454,7 @@
       "name": "Vavuniya",
       "x": 710.0,
       "y": 500.0,
-      "type": "primary",
+      "type": "hub",
       "kind": "landmark",
       "gridCell": {
         "column": 4,
@@ -502,7 +502,7 @@
       "name": "Mahiyanganaya",
       "x": 1206.0,
       "y": 1082.0,
-      "type": "primary",
+      "type": "hub",
       "kind": "landmark",
       "gridCell": {
         "column": 6,
@@ -663,6 +663,60 @@
       "x": 330.0,
       "y": 1374.0,
       "note": "moved slightly right per user review"
+    },
+    "roleAudit": {
+      "primaryDestinations": [
+        "alu-vihara",
+        "anuradhapura",
+        "arugam-bay",
+        "aukana",
+        "batticaloa",
+        "bentota",
+        "dambulla",
+        "ella",
+        "galle",
+        "haputale",
+        "jaffna",
+        "kalpitiya",
+        "kandy",
+        "kataragama",
+        "madhu-road-national-park",
+        "mannar",
+        "meemure",
+        "mihintale",
+        "mirissa",
+        "mullaittivu",
+        "nallathanni",
+        "negombo",
+        "nuwara-eliya",
+        "pasikudah",
+        "pigeon-island",
+        "pinnawala",
+        "point-pedro",
+        "polonnaruwa",
+        "sigiriya",
+        "tangalle",
+        "tissamaharama",
+        "trincomalee",
+        "unawatuna"
+      ],
+      "supportingHubs": [
+        "avissawella",
+        "badulla",
+        "bandaranaike-airport",
+        "chilaw",
+        "colombo",
+        "elephant-pass",
+        "habanara",
+        "kilinochchi",
+        "kurunegala",
+        "mahiyanganaya",
+        "matale",
+        "pulmoddai",
+        "ratnapura",
+        "vavuniya"
+      ],
+      "rule": "Primary means an intentional visitor destination, attraction, park, beach, heritage site, or tourism base. Hub means an arrival point, transfer town, or supporting network node."
     }
   }
 }

@@ -232,7 +232,8 @@ export function RouteMapPreview() {
           <div className={styles.legend} aria-label="Map legend">
             <span className={styles.legendTitle}>Read the marks</span>
             <span><i className={`${styles.legendDot} ${styles.legendPrimary}`} /> Primary destination</span>
-            <span><i className={`${styles.legendDot} ${styles.legendHub}`} /> Route hub / sub-point</span>
+            <span><i className={`${styles.legendDot} ${styles.legendHub}`} /> Supporting hub / transfer point</span>
+            <span><i className={`${styles.legendDot} ${styles.legendAirport}`} /> Airport / arrival point</span>
           </div>
         </aside>
 
@@ -284,7 +285,7 @@ export function RouteMapPreview() {
                     aria-pressed={isSelected}
                     title={marker.name}
                   >
-                    <span className={isOrderedWaypoint ? styles.markerOrder : styles.markerCore}>{isOrderedWaypoint ? routeOrder + 1 : symbolByKind[marker.kind] ?? '·'}</span>
+                    <span className={isOrderedWaypoint ? styles.markerOrder : styles.markerCore}>{isOrderedWaypoint ? routeOrder + 1 : marker.type === 'hub' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
                     <span className={styles.markerLabel}>{marker.name}</span>
                   </button>
                 )

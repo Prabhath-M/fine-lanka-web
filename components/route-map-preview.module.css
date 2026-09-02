@@ -228,6 +228,14 @@
   border-color: #c68a27;
 }
 
+.legendAirport {
+  width: 0.9rem;
+  height: 0.9rem;
+  border-width: 2px;
+  border-color: #2b7c88;
+  background: #d9f0e9;
+}
+
 .legendLine {
   display: inline-block;
   width: 1.15rem;
@@ -456,11 +464,11 @@
 }
 
 .markerArrival {
-  width: 2.25rem;
-  height: 2.25rem;
-  border-color: #b85032;
-  background: #b85032;
-  color: #fff5dc;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-color: #2b7c88;
+  background: #d9f0e9;
+  color: #164d59;
 }
 
 .markerCore {
@@ -543,6 +551,11 @@
 
 .markerHub.markerSelected {
   background: #c99121;
+}
+
+.markerArrival.markerSelected {
+  background: #2b7c88;
+  color: #f3fbf5;
 }
 
 .placeCard {
