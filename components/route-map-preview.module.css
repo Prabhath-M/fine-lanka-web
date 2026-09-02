@@ -158,6 +158,46 @@
   transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
 }
 
+.routeOptionButton {
+  display: grid;
+  gap: 0.42rem;
+  width: 100%;
+  padding: 0.85rem 0.9rem;
+  border: 1px solid rgba(238, 225, 196, 0.2);
+  border-radius: 0.65rem;
+  background: rgba(255, 255, 255, 0.03);
+  color: #eee4ce;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.routeOptionButton:hover,
+.routeOptionButton:focus-visible {
+  border-color: #e6a679;
+  background: rgba(178, 86, 49, 0.18);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+.routeOptionButtonSelected {
+  border-color: #e78a5d;
+  background: linear-gradient(135deg, rgba(173, 73, 39, 0.42), rgba(82, 47, 38, 0.55));
+}
+
+.routeOptionButton .routeOptionTop {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+}
+
+.routeOptionButton strong {
+  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
+  color: #c8c0ad;
+  font-size: 0.63rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+
 .routeOption:hover,
 .routeOption:focus-visible {
   border-color: #e6a679;
@@ -476,6 +516,66 @@
   line-height: 1;
 }
 
+.markerItineraryMain,
+.markerItinerarySecondary {
+  position: relative;
+}
+
+.markerItineraryMain {
+  width: 2.35rem;
+  height: 2.35rem;
+  border-color: #fff4d7;
+  background: #b8472d;
+  color: #fff8e8;
+  box-shadow: 0 0 0 3px rgba(255, 242, 192, 0.86), 0 0.35rem 0.8rem rgba(92, 40, 23, 0.3);
+}
+
+.markerItineraryMain::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -0.38rem;
+  width: 0.72rem;
+  height: 0.72rem;
+  background: #b8472d;
+  transform: translateX(-50%) rotate(45deg);
+  z-index: -1;
+}
+
+.markerItinerarySecondary {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-width: 2px;
+  border-color: #fff8dc;
+  background: #d19a2f;
+  color: #3c2b1e;
+}
+
+.markerItineraryAirport {
+  width: 1.85rem;
+  height: 1.85rem;
+  border-width: 3px;
+  border-color: #d9f0e9;
+  background: #2b7c88;
+  color: #f5fff8;
+}
+
+.markerItineraryMain .markerOrder {
+  position: relative;
+  z-index: 1;
+  margin-top: -0.28rem;
+}
+
+.markerStay {
+  position: absolute;
+  bottom: 0.2rem;
+  z-index: 1;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.54rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
 .markerOrdered {
   width: 2.05rem;
   height: 2.05rem;
@@ -494,6 +594,24 @@
   font-size: 0.75rem;
   font-weight: 700;
   line-height: 1;
+}
+
+.markerItineraryMain:hover,
+.markerItineraryMain:focus-visible,
+.markerItineraryMain.markerSelected {
+  background: #9f3d29;
+}
+
+.markerItinerarySecondary:hover,
+.markerItinerarySecondary:focus-visible,
+.markerItinerarySecondary.markerSelected {
+  background: #a97920;
+}
+
+.markerItineraryAirport:hover,
+.markerItineraryAirport:focus-visible,
+.markerItineraryAirport.markerSelected {
+  background: #205f6a;
 }
 
 .markerOrdered:hover,

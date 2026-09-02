@@ -27,11 +27,17 @@ type Segment = {
   sourceKey?: string
 }
 
+type Waypoint = {
+  markerId: string
+  role: 'airport' | 'main' | 'secondary'
+  nights?: number
+}
+
 type Itinerary = {
   id: string
   label: string
   route: string
-  waypoints: string[]
+  waypoints: Waypoint[]
   markers: string[]
   tracedSegments: string[]
   segments: string[]
@@ -171,12 +177,12 @@ export function RouteMapPreview() {
 
   const selectedItinerary = data?.itineraries.find((item) => item.id === selectedItineraryId) ?? data?.itineraries[0]
   const markerById = useMemo(() => new Map((data?.markers ?? []).map((marker) => [marker.id, marker])), [data])
-  const activeMarkerIds = useMemo(() => new Set(selectedItinerary?.markers ?? []), [selectedItinerary])
+  const activeWaypoints = useMemo(() => selectedItinerary?.waypoints ?? [], [selectedItinerary])
+  const activeMarkerIds = useMemo(() => new Set(activeWaypoints.map((waypoint) => waypoint.markerId)), [activeWaypoints])
   const activeSegmentIds = useMemo(() => new Set(selectedItinerary?.segments ?? []), [selectedItinerary])
-  const activeWaypointOrder = useMemo(() => {
-    const ordered = selectedItinerary?.waypoints ?? []
-    return ordered.filter((id, index) => id !== 'airport' || index === 0 || index === ordered.length - 1).filter((id, index, ids) => ids.indexOf(id) === index)
-  }, [selectedItinerary])
+  const waypointByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint) => [waypoint.markerId, waypoint])), [activeWaypoints])
+  const mainWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'main'), [activeWaypoints])
+  const secondaryWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'secondary'), [activeWaypoints])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
   const [zoomRegionId, setZoomRegionId] = useState('overview')
   const zoomRegion = zoomRegions.find((region) => region.id === zoomRegionId) ?? zoomRegions[0]
@@ -222,12 +228,25 @@ export function RouteMapPreview() {
             <h2>Places, <em>made visible.</em></h2>
             <p>This refreshed map uses only the locations and placement from the newly supplied Sri Lanka tour map. Previous route paths and itinerary overlays have been removed.</p>
           </div>
-          <div className={styles.routeList} role="list" aria-label="Map instructions">
+          <div className={styles.routeList} role="list" aria-label="Select a trip">
             <div className={styles.routeOption}>
-              <span className={styles.routeOptionTop}><span>Fresh map calibration</span><MapPin size={14} /></span>
-              <strong>{data.markers.length} location markers</strong>
-              <span>Click any white-and-red waypoint to open its travel photo and description.</span>
+              <span className={styles.routeOptionTop}><span>Choose a trip</span><MapPin size={14} /></span>
+              <strong>{data.itineraries.length} itineraries</strong>
+              <span>Select a trip to highlight its main stays and supporting stops.</span>
             </div>
+            {data.itineraries.map((itinerary) => (
+              <button
+                key={itinerary.id}
+                type="button"
+                role="listitem"
+                className={`${styles.routeOptionButton} ${selectedItinerary?.id === itinerary.id ? styles.routeOptionButtonSelected : ''}`}
+                onClick={() => { setSelectedItineraryId(itinerary.id); setSelectedMarkerId(null) }}
+                aria-pressed={selectedItinerary?.id === itinerary.id}
+              >
+                <span className={styles.routeOptionTop}><span>{itinerary.label}</span><span>{itinerary.waypoints.filter((waypoint) => waypoint.role === 'main').length} stays</span></span>
+                <strong>{itinerary.route}</strong>
+              </button>
+            ))}
           </div>
           <div className={styles.legend} aria-label="Map legend">
             <span className={styles.legendTitle}>Read the marks</span>
@@ -272,20 +291,25 @@ export function RouteMapPreview() {
               {data.markers.map((marker) => {
                 const isActive = activeMarkerIds.has(marker.id)
                 const isSelected = selectedMarkerId === marker.id
-                const routeOrder = activeWaypointOrder.indexOf(marker.id)
-                const isOrderedWaypoint = routeOrder >= 0
+                const waypoint = waypointByMarkerId.get(marker.id)
+                const mainOrder = waypoint?.role === 'main' ? mainWaypointOrder.findIndex((item) => item.markerId === marker.id) : -1
+                const secondaryOrder = waypoint?.role === 'secondary' ? secondaryWaypointOrder.findIndex((item) => item.markerId === marker.id) : -1
+                const isMainWaypoint = mainOrder >= 0
+                const isSecondaryWaypoint = secondaryOrder >= 0
+                const isAirportWaypoint = waypoint?.role === 'airport'
                 return (
                   <button
                     key={marker.id}
                     type="button"
-                    className={`${styles.marker} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isSelected ? styles.markerSelected : ''} ${isOrderedWaypoint ? styles.markerOrdered : ''}`}
+                    className={`${styles.marker} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}
                     style={{ left: `${(marker.x / data.width) * 100}%`, top: `${(marker.y / data.height) * 100}%` }}
                     onClick={() => setSelectedMarkerId(marker.id)}
                     aria-label={`Show details for ${marker.name}`}
                     aria-pressed={isSelected}
                     title={marker.name}
                   >
-                    <span className={isOrderedWaypoint ? styles.markerOrder : styles.markerCore}>{isOrderedWaypoint ? routeOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
+                    <span className={(isMainWaypoint || isSecondaryWaypoint) ? styles.markerOrder : styles.markerCore}>{isMainWaypoint ? mainOrder + 1 : isSecondaryWaypoint ? secondaryOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
+                    {isMainWaypoint && <span className={styles.markerStay}>{waypoint?.nights ?? 0}N</span>}
                     <span className={styles.markerLabel}>{marker.name}</span>
                   </button>
                 )
