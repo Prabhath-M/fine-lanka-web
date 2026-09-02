@@ -2,16 +2,16 @@
   "image": "/images/fine-lanka-route-atlas-all-hubs.png",
   "width": 1664,
   "height": 2080,
-  "calibration": "fresh computer-vision waypoint-circle detection + OCR label matching from supplied map, manually audited against regional review, 2026-09-02",
+  "calibration": "fresh map-image waypoint positions manually corrected from user audit: airport directly below Negombo; Colombo added; Mihintale and Aukana relabeled; 2026-09-02",
   "source": {
     "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
     "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
     "routes": "Removed by request; no path or itinerary records are retained."
   },
   "networkStats": {
-    "markerCount": 33,
+    "markerCount": 35,
     "edgeCount": 0,
-    "primaryCount": 26,
+    "primaryCount": 28,
     "hubCount": 7,
     "itineraryCount": 0,
     "connected": false
@@ -102,8 +102,8 @@
       }
     },
     {
-      "id": "mihintale",
-      "name": "Mihintale",
+      "id": "aukana",
+      "name": "Aukana",
       "x": 967.76,
       "y": 675.96,
       "type": "primary",
@@ -138,8 +138,8 @@
       }
     },
     {
-      "id": "anuradhapura",
-      "name": "Anuradhapura Ancient City",
+      "id": "mihintale",
+      "name": "Mihintale",
       "x": 745.3,
       "y": 690.48,
       "type": "primary",
@@ -295,14 +295,14 @@
     },
     {
       "id": "bandaranaike-airport",
-      "name": "Bandaranaike International Airport",
-      "x": 315.65,
-      "y": 1374.69,
+      "name": "Katunayake / Bandaranaike International Airport",
+      "x": 342.0,
+      "y": 1210.0,
       "type": "primary",
       "kind": "arrival",
       "gridCell": {
         "column": 2,
-        "row": 7
+        "row": 6
       }
     },
     {
@@ -412,6 +412,30 @@
         "column": 4,
         "row": 10
       }
+    },
+    {
+      "id": "negombo",
+      "name": "Negombo",
+      "x": 342.0,
+      "y": 1180.0,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 2,
+        "row": 6
+      }
+    },
+    {
+      "id": "colombo",
+      "name": "Colombo",
+      "x": 315.0,
+      "y": 1374.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 2,
+        "row": 7
+      }
     }
   ],
   "segments": [],
@@ -468,6 +492,12 @@
         "y": 1494.16,
         "label": "Badulla"
       }
+    ],
+    "latestUserCorrections": [
+      "Airport moved to the same vertical line immediately below Negombo.",
+      "G24 removed as the old airport placement; Colombo added at the nearby unmarked point.",
+      "G11 relabeled as Mihintale.",
+      "C39 position used for Aukana."
     ]
   }
 }
