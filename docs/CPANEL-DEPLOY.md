@@ -12,7 +12,10 @@ production site only.
    bought together through Namecheap.
 2. **Create the Node.js app**: cPanel → Software → Setup Node.js App →
    Create Application.
-   - Node version: latest available
+   - Node version: latest available (**don't leave this on whatever
+     cPanel defaults to** — it may default to something ancient like
+     Node 10, which is EOL and incompatible with this project; pick
+     the newest option, e.g. 22.x)
    - Application mode: **Production**
    - Application root: a folder of your choice (not `public_html`
      directly — cPanel handles routing the domain to the app)
@@ -25,26 +28,51 @@ production site only.
    | `LEADS_TO_EMAIL` | `mprabhathm@gmail.com` |
    | `LEADS_FROM_EMAIL` | `onboarding@resend.dev` until the domain is verified in Resend (see below), then switch to an address on `finelankatours.com` |
    | `NEXT_PUBLIC_SITE_URL` | `https://finelankatours.com` |
+4. **Connect Git Version Control to the `deploy/production` branch**
+   (not `main`) — cPanel → Software → Git™ Version Control → Create →
+   Clone URL `https://github.com/Prabhath-M/fine-lanka-web.git`,
+   pick the `deploy/production` branch specifically. This is the
+   branch GitHub Actions keeps updated with ready-to-copy build
+   output (see below) — deploying from it never triggers a build on
+   the server itself.
 
 ## Every time you deploy an update
 
-1. Locally: `pnpm build:cpanel`
-   This runs `next build` (produces `.next/standalone` because
-   `next.config.mjs` has `output: 'standalone'`) and then
-   `scripts/prepare-cpanel-deploy.mjs`, which assembles everything into
-   a `deploy/` folder — handling a well-known Next.js gotcha where
-   `public/` and `.next/static` aren't included in the standalone
-   output automatically (a silent way to ship a site with no images,
-   fonts, or styling if skipped).
-2. Upload the **contents** of `deploy/` (not the folder itself) into the
-   cPanel Node.js app's root folder — via File Manager or your
-   FTP/SFTP client.
-3. In cPanel → Setup Node.js App → your app → **Run NPM Install**.
-   This matters specifically for `sharp` (used for image optimization)
-   — it's a native binary, and the one bundled from your local build
-   may not match the server's exact architecture. Re-running install
-   on the server itself gets the correct one.
-4. Click **Restart** to pick up the new build.
+Deployment is git-based and automatic — you don't manually build or
+upload anything anymore. Here's the flow:
+
+1. Push (or merge a PR) to `main`.
+2. GitHub Actions (`.github/workflows/deploy.yml`) builds the site —
+   `pnpm install`, `pnpm run build:cpanel` — on GitHub's own runners,
+   **not** on the cPanel server. This matters: this hosting account
+   hits a hard memory ceiling (a CloudLinux LVE limit, invisible to
+   `ulimit`, not tunable with Node flags) partway through
+   `pnpm install`/`next build`. Building here sidesteps that entirely.
+3. The Action force-pushes the finished build output — `server.js`,
+   `node_modules/`, `package.json`, `.next/`, `public/` — plus a small
+   auto-generated `.cpanel.yml`, to the `deploy/production` branch.
+   That branch has no relation to `main`'s history; it's regenerated
+   fresh every run and only ever contains the latest built output.
+4. In cPanel → Git™ Version Control, the repository tracking
+   `deploy/production` (separate from the one tracking `main`, if you
+   keep one for reference) → Manage → Pull or Deploy → **Update from
+   Remote**, then **Deploy HEAD Commit**.
+   This step doesn't build anything — it only copies the
+   already-built files into the live app folder and touches
+   `tmp/restart.txt` to reload the app via Passenger. Nothing here can
+   hit a memory limit, since no `install`/`build` runs on the server.
+5. Check `https://finelankatours.com` to confirm.
+
+Step 4 is currently a manual click in cPanel's UI — cPanel's Git
+Version Control doesn't support triggering a deploy from a webhook out
+of the box on this plan, so pushing to `main` builds automatically but
+still needs that one manual "Deploy HEAD Commit" click to go live.
+
+`node_modules` is built by GitHub's `ubuntu-latest` runners
+(linux-x64/glibc), which matches this cPanel host's architecture — so
+native deps like `sharp` work correctly without the cross-architecture
+mismatch that building on a different machine (e.g. a local Windows/Mac
+dev machine) would risk.
 
 ## SSL
 
