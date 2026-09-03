@@ -6,8 +6,10 @@
 # from the repository's clone directory on the server.
 #
 # What this does:
-#   1. Installs dependencies using the exact lockfile (npm ci), inside
-#      the Node.js version cPanel set up for this app.
+#   1. Installs pnpm (this project's package manager - see
+#      pnpm-workspace.yaml / pnpm-lock.yaml) into the Node.js
+#      environment cPanel set up for this app, then installs
+#      dependencies from the committed lockfile.
 #   2. Runs the same build:cpanel script used for manual deploys
 #      (next build + scripts/prepare-cpanel-deploy.mjs), producing a
 #      ready deploy/ folder.
@@ -41,8 +43,9 @@ deployment:
     - export DEPLOYPATH=/home/finelbts/finelankatours-app
     - export NODEENV=/home/finelbts/nodevenv/finelankatours-app/10/bin/activate
     - echo "NEXT_PUBLIC_SITE_URL=https://finelankatours.com" > .env.production.local
-    - source $NODEENV && npm ci
-    - source $NODEENV && npm run build:cpanel
+    - source $NODEENV && npm install -g pnpm
+    - source $NODEENV && pnpm install --frozen-lockfile
+    - source $NODEENV && pnpm run build:cpanel
     - /bin/cp -R ./deploy/. $DEPLOYPATH/
     - /bin/mkdir -p $DEPLOYPATH/tmp
     - /bin/touch $DEPLOYPATH/tmp/restart.txt
