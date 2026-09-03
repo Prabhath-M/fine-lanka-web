@@ -41,7 +41,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/finelbts/finelankatours-app
-    - export NODEENV=/home/finelbts/nodevenv/finelankatours-app/10/bin/activate
+    - export NODEENV=/home/finelbts/nodevenv/finelankatours-app/22/bin/activate
     - echo "NEXT_PUBLIC_SITE_URL=https://finelankatours.com" > .env.production.local
     - source $NODEENV && npm install -g pnpm
     - source $NODEENV && pnpm install --frozen-lockfile
