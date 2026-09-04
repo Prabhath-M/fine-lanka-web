@@ -109,11 +109,16 @@ confirmed-dead leftover image variants across the batches below.
       restricted, can't reach fonts.googleapis.com for next/font —
       this is a sandbox limitation, not a real problem). **Verify for
       real via GitHub Actions once pushed.**
-- [ ] **NEXT UP:** commit this final batch on `fix/optimize-media`
-      (first batch — videos + portal + navbar + mural — already
-      committed and pushed to that branch), push, verify GitHub
-      Actions build succeeds
-- [ ] Merge to `main`, confirm `deploy/production` updated
+- [x] Committed final batch on `fix/optimize-media`, pushed, GitHub
+      Actions build **succeeded** (run confirms the real `next build`
+      — with full network access, unlike the sandbox this work was
+      done in — went through cleanly with all reference updates)
+- [x] Merged to `main` (commit `11705a6`)
+- [x] Confirmed `deploy/production` updated to match (`0c6eb95`,
+      "Deploy build of 11705a6...")
+- [ ] **NEXT UP (needs a human with cPanel access — not automatable
+      from here):** manual cPanel step — Git Version Control → Update
+      from Remote → Deploy HEAD Commit (see `docs/CPANEL-DEPLOY.md`)
 - [ ] Manual cPanel step: Git Version Control → Update from Remote →
       Deploy HEAD Commit (see `docs/CPANEL-DEPLOY.md`)
 - [ ] Verify on `https://finelankatours.com` — homepage hero, journal
