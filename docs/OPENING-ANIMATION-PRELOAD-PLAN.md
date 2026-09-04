@@ -197,7 +197,7 @@ work, not just adding a preload hook:
 
 ## Status
 
-**Current phase: IN PROGRESS — Sections 1–2 done.**
+**Current phase: IN PROGRESS — Sections 1–3 done.**
 
 - [x] Section 1 — Home preload. Added `lib/use-preload-images.ts`
       (shared hook, fires on mount, ignores reduced-motion since
@@ -222,9 +222,15 @@ work, not just adding a preload hook:
       3-column desktop grid (`app/globals.css` `.chronicle-grid`) so
       exactly what's visible on open is covered, not the whole
       archive. `tsc`/`vitest` clean.
-- [ ] Section 3 — Destinations preload (atlas/panel/frame images only
-      — wheel already covered by Section 1, see "Decisions made
-      mid-plan" above)
+- [x] Section 3 — Destinations preload. Added `usePreloadImages` to
+      `destinations-page.tsx` for the atlas/panel/frame CSS
+      background-images that render immediately once the ritual's
+      doors open: `destinations-atlas-bg-1600w` (+ mobile variant),
+      `dest-panel-frame-960w`/`-1600w`, `frieze-divider-1600w`,
+      `destinations-cloud-frame`, `destinations-atlas-mist`. The
+      rudder wheel is deliberately excluded — already covered from
+      Home (Section 1). Verified all 7 files exist under
+      `public/images/` before wiring them in. `tsc`/`vitest` clean.
 - [ ] Section 4 — Tours & Pricing opening animation + preload
 - [ ] Full `tsc`/`vitest` pass on `develop`
 - [ ] Merge `develop` → `main`

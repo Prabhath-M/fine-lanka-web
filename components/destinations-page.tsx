@@ -6,8 +6,26 @@ import { Icon } from '@/components/icons'
 import { DestinationMarquee } from '@/components/destinations/destination-marquee'
 import { ChartIntro } from '@/components/destinations/chart-intro'
 import { DESTINATIONS, type DestinationRegion } from '@/lib/destinations-data'
+import { usePreloadImages } from '@/lib/use-preload-images'
 
 const REGIONS = Array.from(new Set(DESTINATIONS.map((d) => d.region))) as DestinationRegion[]
+
+// Everything below-the-fold-of-the-ritual that's a CSS background-image
+// rather than an <img>/next/image — so none of the lazy-loading work
+// from docs/MEDIA-OPTIMIZATION.md touches it. The brass rudder wheel
+// itself is deliberately NOT in this list: it's already warmed from the
+// Home page (see docs/OPENING-ANIMATION-PRELOAD-PLAN.md, Section 1 +
+// "Decisions made mid-plan") since that gives it a longer head start
+// than starting here ever could.
+const DESTINATIONS_PRELOAD_IMAGES = [
+  '/images/destinations-atlas-bg-1600w.webp',
+  '/images/destinations-atlas-bg-mobile-1600w.webp',
+  '/images/dest-panel-frame-960w.webp',
+  '/images/dest-panel-frame-1600w.webp',
+  '/images/frieze-divider-1600w.webp',
+  '/images/destinations-cloud-frame.webp',
+  '/images/destinations-atlas-mist.webp',
+]
 
 /**
  * Destinations page — Archival Cartography direction.
@@ -20,6 +38,13 @@ const REGIONS = Array.from(new Set(DESTINATIONS.map((d) => d.region))) as Destin
 export function DestinationsPage() {
   const router = useRouter()
   const searchParams = useSearchParams()
+
+  // Starts the moment the page mounts, i.e. during the chart-intro
+  // ritual (~3.6s wheel-turn minimum, see ChartIntro) — dead time from
+  // a network point of view that the ritual is already spending on the
+  // wheel image; this covers the atlas/panel/frame imagery the ritual
+  // doesn't gate on but that renders immediately once the doors open.
+  usePreloadImages(DESTINATIONS_PRELOAD_IMAGES)
 
   const regionParam = searchParams.get('region')
   const activeRegion: DestinationRegion | 'All' =
