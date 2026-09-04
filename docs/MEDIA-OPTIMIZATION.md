@@ -179,10 +179,19 @@ the map.
 - [x] Added the `deviceSizes` cap in `next.config.mjs`
 - [x] Verified `node --check next.config.mjs` and `npx tsc --noEmit`
       pass clean
-- [ ] Commit, push, PR, verify GitHub Actions build succeeds
-- [ ] Merge to `main`
-- [ ] Manual cPanel step: Git Version Control → Update from Remote →
-      Deploy HEAD Commit
+- [x] Committed, pushed, opened PR #82. GitHub Actions doesn't build on
+      PRs to feature branches (only on push to `main` — see
+      `.github/workflows/deploy.yml`), so manually triggered it via
+      `workflow_dispatch` on the feature branch first, before merging —
+      **succeeded**
+      (https://github.com/Prabhath-M/fine-lanka-web/actions/runs/33857885283)
+- [x] Merged to `main` (squash commit `1b3eb51`)
+- [x] `main`'s own automatic deploy-workflow run also succeeded
+      (confirms `deploy/production` branch is now up to date with this
+      fix)
+- [ ] **Manual cPanel step (needs a human with cPanel access — not
+      automatable from here):** Git Version Control → Update from
+      Remote → Deploy HEAD Commit
 - [ ] Re-verify on `https://finelankatours.com` — re-fetch the homepage
       HTML and confirm the map's `/_next/image` URL no longer requests
       `w=3840` (should cap at `w=1600` now)
