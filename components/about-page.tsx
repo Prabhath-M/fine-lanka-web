@@ -48,7 +48,7 @@ export function AboutPage() {
           </div>
           <figure className="about-hero-photo">
             <img
-              src="/images/fine-lanka-esala-perahera.jpg"
+              src="/images/fine-lanka-esala-perahera.webp"
               alt="Illuminated elephant procession at the Kandy Esala Perahera"
               width={1707}
               height={2560}
@@ -81,7 +81,7 @@ export function AboutPage() {
           </div>
           <figure className="about-origin-photo">
             <img
-              src="/images/fine-lanka-kandyan-dancers.jpg"
+              src="/images/fine-lanka-kandyan-dancers.webp"
               alt="A Kandyan dancer wearing traditional Sri Lankan ceremonial costume"
               width={2560}
               height={1707}

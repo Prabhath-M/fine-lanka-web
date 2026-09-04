@@ -12,7 +12,7 @@ export function SiteFooter() {
             <span className="brand-logo">
               <span className="brand-logo-flare" aria-hidden="true" />
               <img
-                src="/images/logo-site.png"
+                src="/images/logo-site.webp"
                 alt=""
                 className="brand-logo-img"
                 width={1024}

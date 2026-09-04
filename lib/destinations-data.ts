@@ -26,7 +26,7 @@ export interface Destination {
   featured?: boolean
   /** Percentage position (0–100, left/top of the full image) on the
    *  homepage's illustrated "Explore the map" section, measured off
-   *  images/sri-lanka-map-full.jpg. Only destinations pinned on that
+   *  images/sri-lanka-map-full.webp. Only destinations pinned on that
    *  illustration have mapX/mapY (12 of the 13 below — the
    *  illustration doesn't include Ella). */
   mapX?: number
@@ -63,7 +63,7 @@ export const DESTINATIONS: Destination[] = [
       'Scenic hill-country train ride',
     ],
     featured: true,
-    // No mapX/mapY: not pinned on images/sri-lanka-map-full.jpg, so it's
+    // No mapX/mapY: not pinned on images/sri-lanka-map-full.webp, so it's
     // excluded from the homepage map showcase. Still appears anywhere
     // else DESTINATIONS is used.
   },

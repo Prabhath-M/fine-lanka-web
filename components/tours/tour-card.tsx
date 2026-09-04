@@ -36,7 +36,7 @@ export function TourCard({
     <article className="tour-card-v2 group relative overflow-hidden rounded-[28px] bg-[var(--tc-ivory)] text-[var(--tc-monsoon-deep)] ring-1 ring-[rgba(14,81,69,0.13)] transition-transform duration-300 ease-[var(--tc-ease-out)] hover:-translate-y-1">
       <div className="relative isolate min-h-[300px] overflow-hidden sm:min-h-[380px]">
         <img
-          src={`/images/tour-${tour.category}.png`}
+          src={`/images/tour-${tour.category}.webp`}
           alt={`${tour.name} — Sri Lanka`}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[var(--tc-ease-out)] group-hover:scale-[1.015]"
           width={1024}

@@ -180,7 +180,7 @@ export function JournalPage() {
     const realm = new window.Image()
     const markReady = () => setRealmReady(true)
     realm.addEventListener('load', markReady, { once: true })
-    realm.src = '/images/journal/portal-realm-refined.jpg'
+    realm.src = '/images/journal/portal-realm-refined.webp'
     if (realm.complete) markReady()
     return () => realm.removeEventListener('load', markReady)
   }, [])
@@ -383,7 +383,7 @@ export function JournalPage() {
       >
         <Image
           className="chronicle-realm-preload"
-          src="/images/journal/portal-realm-refined.jpg"
+          src="/images/journal/portal-realm-refined.webp"
           alt=""
           width={1}
           height={1}

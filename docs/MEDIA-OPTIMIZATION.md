@@ -60,34 +60,80 @@ site already avoids building on cPanel:
 
 ## Status
 
-**Current phase:** Not started — inventory taken, plan agreed, about
-to begin with the assets the user specifically flagged (hero video +
-journal portal set + navbar/mural backgrounds).
+**Current phase: COMPLETE.** All planned conversions done, verified,
+and ready to commit/deploy. `public/` folder: **271MB → 48MB (82%
+reduction)**.
 
-**Nothing has been converted yet as of this writing.**
+Final breakdown: `public/videos` 135MB→24MB, `public/images` 113MB→23MB,
+`public/mural` 19MB→1.1MB. Also removed `public/flight-canvas-texture.png`
+(5.4MB, confirmed dead — no code reference anywhere) and ~26MB of other
+confirmed-dead leftover image variants across the batches below.
 
-### Checklist — do in this order
+### Checklist — all done
 
-- [ ] Sample conversion + visual sanity check (2–3 files, before
-      doing all ~90) — confirm quality is acceptable before bulk work
-- [ ] Hero video (`public/videos/hero-loop.mp4`)
-- [ ] Destination videos (`anuradhapura.mp4`, `sigiriya.mp4`)
-- [ ] Journal portal image set (5 files, CSS backgrounds)
-- [ ] Navbar backdrop set (`navbar_backdrop_1..4.png`)
-- [ ] Mural frame/blend set (`public/mural/*.png`, ~14 files)
-- [ ] Remaining `public/images/*` over 300 KB (~65 files — see full
-      list below)
-- [ ] Update every code/CSS reference to point at new filenames
-      (if extensions change, e.g. `.png` → `.webp`)
-- [ ] Re-run `npx tsc --noEmit` and `vitest`
-- [ ] Commit on a new branch (e.g. `fix/optimize-media`), verify
-      GitHub Actions build succeeds
+- [x] Sample conversion + visual sanity check — confirmed quality
+      acceptable, settings below
+- [x] Hero video — 58.2MB → 7.9MB
+- [x] Destination videos — anuradhapura 38.0MB→4.7MB, sigiriya
+      36.9MB→10.6MB. `public/videos` total: 135MB → 24MB
+- [x] Journal portal image set — 34.7MB → 4.95MB (6 in-use files);
+      7 unused leftover variants deleted
+- [x] Navbar backdrop set — 5.19MB → 0.57MB
+- [x] Mural flipbook set — 9.19MB → 1.02MB; 6 dead `frame-*.png`
+      files deleted
+- [x] Tour category images (`tour-*.png`, referenced via
+      `` `/images/tour-${tour.category}.png` `` in **two** places —
+      `tour-picker-card.tsx` AND `tour-card.tsx` — plus **three**
+      direct/non-template references in `route-map-preview.tsx` that
+      an earlier pass missed and had to be fixed separately) —
+      9.11MB → 0.64MB
+- [x] Remaining ~45 `public/images/*` files over 250KB — batch
+      converted, references updated, originals removed:
+      45.66MB → 16.14MB
+- [x] 14MB of confirmed-dead files removed along the way (`blend-1..4.jpg`
+      in `public/images/` — distinct from the live `public/mural/blend-*`
+      set — plus several unused `fine-lanka-about-bg-*`,
+      `explore-*-background`, and `milk-rice-*` leftovers). Confirmed
+      dead by grepping the full codebase (`.tsx`/`.ts`/`.css`/`.json`/
+      `.mjs`/`.js`, node_modules and .next excluded) for the exact
+      filename before deleting — nothing deleted without a zero-match
+      grep first.
+- [x] `flight-canvas-texture.png` (5.4MB, at `public/` root, not
+      `public/images/` — easy to miss) — confirmed dead, deleted
+- [x] Re-ran `npx tsc --noEmit` (clean) and `npx vitest run` (8/8
+      passing) after every batch, plus a final full-repo scan for any
+      leftover `.png`/`.jpg` reference to a file that no longer
+      exists — clean (the only matches were in this guide's own
+      historical inventory table, not real code)
+- [x] Full `next build` still not run in this sandbox (network-
+      restricted, can't reach fonts.googleapis.com for next/font —
+      this is a sandbox limitation, not a real problem). **Verify for
+      real via GitHub Actions once pushed.**
+- [ ] **NEXT UP:** commit this final batch on `fix/optimize-media`
+      (first batch — videos + portal + navbar + mural — already
+      committed and pushed to that branch), push, verify GitHub
+      Actions build succeeds
 - [ ] Merge to `main`, confirm `deploy/production` updated
 - [ ] Manual cPanel step: Git Version Control → Update from Remote →
       Deploy HEAD Commit (see `docs/CPANEL-DEPLOY.md`)
 - [ ] Verify on `https://finelankatours.com` — homepage hero, journal
       page portal animation, general page-weight via browser devtools
-      Network tab
+      Network tab. Specifically re-check the tour cards/pricing page
+      (categories: nature, beach, cultural-historical, romantic,
+      ramayana-trails) and the route-map-preview place-card thumbnail,
+      since those had the trickiest (template-literal / multi-file)
+      references.
+
+**Confirmed settings (reused across all batches):**
+- **Images → WebP:** `quality=82, method=6` (Pillow
+  `im.save(path, 'WEBP', quality=82, method=6)`). Gave a **2.8x–14x**
+  size reduction depending on the source file, with no visible
+  quality loss on any of the manually-spot-checked samples (fine
+  detail like carving/gold inlay held up).
+- **Video → H.264 re-encode:** `ffmpeg -c:v libx264 -preset slow -crf 26
+  -maxrate 3500k -bufsize 7000k -c:a aac -b:a 96k -movflags +faststart`.
+  Gave **3.6x–7.7x** reduction, frame-by-frame comparison showed no
+  visible difference.
 
 ---
 

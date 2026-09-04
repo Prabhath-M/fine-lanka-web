@@ -1237,7 +1237,7 @@ body:has(.journal-portal-toggle:checked) {
        Sigiriya maidens read more clearly through the jade glass) */
     linear-gradient(158deg, rgba(38, 132, 106, 0.46), rgba(20, 92, 72, 0.74)) padding-box,
     /* Sigiriya fresco maidens seen through the jade glass */
-    url("/images/jade-fresco.jpg") center / cover no-repeat padding-box,
+    url("/images/jade-fresco.webp") center / cover no-repeat padding-box,
     /* engraved brushed metallic-gold mural frame */
     linear-gradient(150deg, #6f5216 0%, #d4af37 22%, #f6e7ad 50%, #d4af37 78%, #6f5216 100%) border-box;
   background-repeat: no-repeat;
@@ -1408,7 +1408,7 @@ body:has(.journal-portal-toggle:checked) {
 
 /* Variant: real client-supplied line-art frieze — ocean scrollwork, a
    lotus, a Kandyan dancer, palm trees and Sigiriya, hand-illustrated
-   (not hand-coded by us). images/frieze-divider.jpg is a pre-built tile:
+   (not hand-coded by us). images/frieze-divider.webp is a pre-built tile:
    the source artwork plus a horizontally-flipped copy of itself, placed
    side by side. Because each half is the mirror of its neighbour, every
    seam — within the tile and between repeats — lines up on matching
@@ -1844,7 +1844,7 @@ body[data-page='journal'] .site-header {
   border: 1px solid rgba(212, 175, 55, 0.5);
   background:
     linear-gradient(158deg, rgba(24, 14, 6, 0.8) 0%, rgba(40, 24, 11, 0.83) 55%, rgba(24, 14, 6, 0.86) 100%),
-    url("/images/dropdown-sigiri-fresco.jpg");
+    url("/images/dropdown-sigiri-fresco.webp");
   background-size: cover;
   background-position: center 18%;
   box-shadow:
@@ -2117,7 +2117,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 
 /* ---------- 8a. Map-scene backdrop (hero + board) ----------
    The destinations page hero and card board share a single backdrop
-   image — images/serendib-ancient-map.jpg, the hand-painted antique
+   image — images/serendib-ancient-map.webp, the hand-painted antique
    chart from the reference "Serendib" prototype — fixed behind both
    sections (background-attachment: fixed means its cover-sizing is
    computed against the viewport, not this very tall combined section,
@@ -2139,7 +2139,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 .dest-map-bg-image {
   position: absolute;
   inset: 0;
-  background-image: url('/images/serendib-ancient-map.jpg');
+  background-image: url('/images/serendib-ancient-map.webp');
   background-size: cover;
   background-position: center 40%;
   background-attachment: fixed;
@@ -2403,7 +2403,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 /* ---------- Destination video cards ----------
    Each card is an ornate hand-painted frame (peacocks, elephants,
    dancers, lotus medallions) laid over the video as a picture-frame
-   overlay: dest-card-frame.png sits above everything at full card
+   overlay: dest-card-frame.webp sits above everything at full card
    size, and dest-card-media (video + scrim + text) is inset to the
    frame artwork's own transparent window so nothing plays under the
    painted border. The source PNG is exactly 3:4 (1632x2176), the same
@@ -2632,7 +2632,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 .dest-back-cta:hover { background: var(--brass-light); color: var(--ink); }
 
 /* ---------- 8b. Homepage "Explore the map" section ----------
-   The illustrated Sri Lanka map (images/sri-lanka-map-full.jpg) is the
+   The illustrated Sri Lanka map (images/sri-lanka-map-full.webp) is the
    section's own full-bleed background, not a boxed-in graphic beside the
    content. On desktop, .explore-bg locks its aspect ratio to the image's
    native 1536×1024 so the image shows whole, with zero crop — that's a
@@ -2687,7 +2687,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
    --radius stays a near-square 2px elsewhere. */
 .explore-window.is-fading { opacity: 0; }
 /* ---------- Carved mural video window ----------
-   Reskinned around a single hand-painted asset (images/dest-panel-frame.png):
+   Reskinned around a single hand-painted asset (images/dest-panel-frame.webp):
    a gilded Sri Lankan mural frame — sun medallions, peacocks, a lotus
    crest — wrapped around a wide transparent window in its top ~60%, and
    a carved elephants/dancers/temple mural (opaque, painted-in) filling
@@ -2701,7 +2701,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
    toggle / detail-drawer behaviour from main.js is unchanged; only the
    skin + the % geometry are new. */
 .dest-panel {
-  /* measured off public/images/dest-panel-frame.png (2304×1536): the
+  /* measured off public/images/dest-panel-frame.webp (2304×1536): the
      transparent "hole" sits at x 7.77%–92.19%, y 11.07%–59.70%; the
      painted mural band fills the remaining 59.70%–98.24% below it. */
   --hole-left: 7.77%;
@@ -2721,7 +2721,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 /* the mural frame itself, on top of everything else in the card so its
    gilded border + painted bottom band read exactly as painted, with the
    video/caption showing only through the hole it leaves transparent.
-   (dest-panel-frame.png has been cleaned of the hard black cutout rim
+   (dest-panel-frame.webp has been cleaned of the hard black cutout rim
    the original export left around the window — its alpha edge is now
    properly feathered so nothing but gold meets the video.) */
 .dest-panel::before {
@@ -2729,7 +2729,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: url("/images/dest-panel-frame.png") no-repeat center / 100% 100%;
+  background: url("/images/dest-panel-frame.webp") no-repeat center / 100% 100%;
   pointer-events: none;
 }
 /* Metallic shine: a bright diagonal band that sweeps slowly across the
@@ -2745,11 +2745,11 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  -webkit-mask-image: url("/images/dest-panel-frame.png");
+  -webkit-mask-image: url("/images/dest-panel-frame.webp");
   -webkit-mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  mask-image: url("/images/dest-panel-frame.png");
+  mask-image: url("/images/dest-panel-frame.webp");
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -3030,7 +3030,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 }
 
 /* Hotspot pins — invisible until active, positioned with left/top %
-   (mapX/mapY in data.js, measured off images/sri-lanka-map-full.jpg) so
+   (mapX/mapY in data.js, measured off images/sri-lanka-map-full.webp) so
    each glow + pulsing ring sits exactly over that destination's own
    hand-illustrated pin on the background artwork. The artwork itself is
    never redrawn or altered, only highlighted. Sized as a % of the
@@ -3234,7 +3234,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   transition: opacity 0.3s var(--ease);
 }
 .enquiry-modal.is-open { opacity: 1; visibility: visible; }
-/* The mural (public/images/modal-mural.jpg, shared with the itinerary
+/* The mural (public/images/modal-mural.webp, shared with the itinerary
    modal below) sits under a mostly-opaque paper-coloured gradient — a
    watermark rather than a full-strength backdrop, so the artwork reads
    as texture behind the text without ever competing with it for
@@ -3246,7 +3246,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 .enquiry-modal-panel {
   background:
     linear-gradient(rgba(250, 247, 239, 0.7), rgba(250, 247, 239, 0.8)),
-    url('/images/modal-mural.jpg') center 18% / cover no-repeat;
+    url('/images/modal-mural.webp') center 18% / cover no-repeat;
   max-width: 460px;
   width: 100%;
   padding: var(--space-4);
@@ -3320,7 +3320,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 .itinerary-modal-panel {
   background:
     linear-gradient(rgba(250, 247, 239, 0.7), rgba(250, 247, 239, 0.8)),
-    url('/images/modal-mural.jpg') center 10% / cover no-repeat;
+    url('/images/modal-mural.webp') center 10% / cover no-repeat;
   max-width: 640px;
   width: 100%;
   max-height: 85vh;
@@ -3521,7 +3521,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   content: "";
   position: absolute;
   inset: 0;
-  background: url("/images/jade-fresco.jpg") right center / cover no-repeat;
+  background: url("/images/jade-fresco.webp") right center / cover no-repeat;
   opacity: 0.08;
   -webkit-mask-image: linear-gradient(to left, #000, transparent 62%);
   mask-image: linear-gradient(to left, #000, transparent 62%);
@@ -3768,7 +3768,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
    ========================================================================== */
 
 .destinations-page .dest-map-bg-image {
-  background-image: url('/images/destinations-atlas-bg.jpg');
+  background-image: url('/images/destinations-atlas-bg.webp');
   background-size: cover;
   background-position: 54% 42%;
   /* Fixed filtered backgrounds repaint while scrolling on several browsers.
@@ -4115,7 +4115,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 
 @media (max-width: 640px) {
   .destinations-page .dest-map-bg-image {
-    background-image: url('/images/destinations-atlas-bg-mobile.jpg');
+    background-image: url('/images/destinations-atlas-bg-mobile.webp');
     background-position: 50% 34%;
     background-attachment: scroll;
   }
@@ -4533,7 +4533,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   position: absolute;
   inset: 0;
   z-index: 5;
-  background-image: url('/images/destinations-cloud-frame.png');
+  background-image: url('/images/destinations-cloud-frame.webp');
   background-size: 100% 100%;
   background-position: center;
   background-repeat: no-repeat;
@@ -4841,7 +4841,7 @@ main > #destinations,
   line-height: 1.65;
 }
 .process-background {
-  background-image: url('/images/how-it-works-exploration-bg.jpg');
+  background-image: url('/images/how-it-works-exploration-bg.webp');
   background-repeat: no-repeat;
   background-size: auto 135%;
   background-position: 77% 90%;
@@ -5148,10 +5148,10 @@ main > #destinations,
 
   --max-width: 1240px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --navbar-backdrop-1: url('/images/navbar_backdrop_1.png');
-  --navbar-backdrop-2: url('/images/navbar_backdrop_2.png');
-  --navbar-backdrop-3: url('/images/navbar_backdrop_3.png');
-  --navbar-backdrop-4: url('/images/navbar_backdrop_4.png');
+  --navbar-backdrop-1: url('/images/navbar_backdrop_1.webp');
+  --navbar-backdrop-2: url('/images/navbar_backdrop_2.webp');
+  --navbar-backdrop-3: url('/images/navbar_backdrop_3.webp');
+  --navbar-backdrop-4: url('/images/navbar_backdrop_4.webp');
   --navbar-backdrop-active: var(--navbar-backdrop-1);
 
   /* Sri Lankan tourism palette: ink navy, brass/gold, parchment, teal */
@@ -5412,7 +5412,7 @@ main > #destinations,
   border: 1px solid rgba(46, 73, 65, 0.3);
   background:
     linear-gradient(115deg, rgba(255, 252, 239, 0.94), rgba(239, 231, 205, 0.88)),
-    url('/images/serendib-ancient-map.jpg') center / cover;
+    url('/images/serendib-ancient-map.webp') center / cover;
   box-shadow: 0 10px 22px rgba(26, 35, 49, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.7);
   overflow: hidden;
 }
@@ -5521,7 +5521,7 @@ main > #destinations,
   color: #f7f1df;
   background:
     linear-gradient(105deg, rgba(7, 26, 34, 0.98) 0%, rgba(11, 46, 47, 0.93) 52%, rgba(15, 56, 58, 0.82) 100%),
-    url('/images/serendib-ancient-map.jpg') center 42% / cover;
+    url('/images/serendib-ancient-map.webp') center 42% / cover;
 }
 .tours-hero::before,
 .tours-hero::after {
@@ -5697,7 +5697,7 @@ main > #destinations,
   position: absolute;
   inset: 0;
   opacity: 0.14;
-  background-image: url('/images/how-it-works-exploration-bg.jpg');
+  background-image: url('/images/how-it-works-exploration-bg.webp');
   background-size: cover;
   background-position: center;
   mix-blend-mode: screen;
@@ -6171,7 +6171,7 @@ body:has(.features:target) .typed-opening { display: none; }
     z-index: 1;
     inset: auto 0 0;
     pointer-events: none;
-    background-image: url('/images/destinations-atlas-mist.png');
+    background-image: url('/images/destinations-atlas-mist.webp');
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -6255,7 +6255,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .destinations--map {
     background:
       linear-gradient(180deg, rgba(250, 240, 214, 0.1), rgba(220, 235, 219, 0.08) 42%, rgba(247, 234, 204, 0.18)),
-      url('/images/destinations-light-sigiriya-sithuwam-tourism-background.jpg') center / cover no-repeat;
+      url('/images/destinations-light-sigiriya-sithuwam-tourism-background.webp') center / cover no-repeat;
     padding-block: clamp(2.65rem, 4.75vw, 4.6rem);
     scroll-margin-top: 6rem;
     isolation: isolate;
@@ -6276,8 +6276,8 @@ body:has(.features:target) .typed-opening { display: none; }
     opacity: 0.22;
     background:
       linear-gradient(90deg, rgba(9, 19, 28, 0.95), transparent 18% 82%, rgba(9, 19, 28, 0.95)),
-      url('/images/liyawel-gold.jpg') left -5rem top 15% / 17rem auto no-repeat,
-      url('/images/liyawel-gold.jpg') right -5rem top 15% / 17rem auto no-repeat;
+      url('/images/liyawel-gold.webp') left -5rem top 15% / 17rem auto no-repeat,
+      url('/images/liyawel-gold.webp') right -5rem top 15% / 17rem auto no-repeat;
     mix-blend-mode: screen;
     -webkit-mask-image: linear-gradient(90deg, #000, transparent 36% 64%, #000), linear-gradient(#000, transparent);
     -webkit-mask-composite: source-in;
@@ -6384,7 +6384,7 @@ body:has(.features:target) .typed-opening { display: none; }
     width: 10rem;
     pointer-events: none;
     opacity: 0.075;
-    background: url('/images/liyawel-gold.jpg') right -4rem center / 13rem auto no-repeat;
+    background: url('/images/liyawel-gold.webp') right -4rem center / 13rem auto no-repeat;
     -webkit-mask-image: linear-gradient(90deg, transparent, #000 40%);
     mask-image: linear-gradient(90deg, transparent, #000 40%);
     mix-blend-mode: multiply;
@@ -6423,7 +6423,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .destinations--map {
     background:
       linear-gradient(180deg, rgba(248, 239, 214, 0.12), rgba(225, 237, 216, 0.16)),
-      url('/images/destinations-light-sigiriya-sithuwam-tourism-background.jpg') center / cover no-repeat;
+      url('/images/destinations-light-sigiriya-sithuwam-tourism-background.webp') center / cover no-repeat;
   }
   .destinations-page .filter-bar button {
     border-color: rgba(140, 99, 57, 0.5);
@@ -6664,7 +6664,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .destinations-atlas-rail .filter-bar button:focus-visible {
     background:
       linear-gradient(90deg, rgba(227, 238, 217, 0.98), rgba(198, 224, 207, 0.98)),
-      url('/images/liyawel-gold.jpg') left -1.8rem center / 5.4rem auto no-repeat;
+      url('/images/liyawel-gold.webp') left -1.8rem center / 5.4rem auto no-repeat;
     border-color: #216c61;
     color: #173e3d;
     outline: 2px solid rgba(238, 192, 124, 0.36);
@@ -6674,7 +6674,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .destinations-atlas-rail .filter-bar button.is-active {
     background:
       linear-gradient(90deg, #2f8174, #27685f),
-      url('/images/liyawel-gold.jpg') left -1.7rem center / 5.2rem auto no-repeat;
+      url('/images/liyawel-gold.webp') left -1.7rem center / 5.2rem auto no-repeat;
     border-color: #1e685e;
     color: #fff7e5;
     box-shadow:
@@ -6850,7 +6850,7 @@ body:has(.features:target) .typed-opening { display: none; }
     border: 1px solid rgba(46, 111, 101, 0.56);
     background:
       linear-gradient(90deg, rgba(242, 237, 214, 0.93), rgba(212, 230, 210, 0.9)),
-      url('/images/liyawel-gold.jpg') left -1.8rem center / 5.4rem auto no-repeat;
+      url('/images/liyawel-gold.webp') left -1.8rem center / 5.4rem auto no-repeat;
     color: #214b49;
     font-size: 0.57rem;
     letter-spacing: 0.1em;
@@ -7248,7 +7248,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .tours-page .tours-hero {
   background:
     linear-gradient(90deg, rgba(8, 46, 45, 0.62), rgba(11, 59, 54, 0.26) 56%, rgba(8, 42, 42, 0.5)),
-    url('/images/tours-temple-path-cover.jpg') center / cover no-repeat;
+    url('/images/tours-temple-path-cover.webp') center / cover no-repeat;
 }
 .tours-page .tours-hero::before {
   inset: 1.75rem max(1.2rem, calc((100vw - var(--max-width)) / 2)) 7rem;
@@ -7297,7 +7297,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .tours-page .tours-notes-section {
   background:
     linear-gradient(112deg, rgba(8, 37, 45, 0.42), rgba(13, 55, 57, 0.24)),
-    url('/images/tours-kandyan-night-register.jpg') center / cover no-repeat;
+    url('/images/tours-kandyan-night-register.webp') center / cover no-repeat;
 }
 .tours-page .tours-notes-section::before {
   opacity: 0.42;
@@ -7377,7 +7377,7 @@ body:has(.features:target) .typed-opening { display: none; }
   width: 3rem;
   height: 3rem;
   opacity: 0.45;
-  background: url('/images/liyawel-gold.jpg') center / contain no-repeat;
+  background: url('/images/liyawel-gold.webp') center / contain no-repeat;
 }
 .tours-page .tour-filter-label,
 .tours-page .filter-bar,
@@ -7419,7 +7419,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 64% center;
     background-image:
       linear-gradient(180deg, rgba(249, 246, 232, 0.93) 0%, rgba(249, 246, 232, 0.86) 54%, rgba(241, 238, 218, 0.65) 100%),
-      url('/images/fine-lanka-home-route-folio-background.jpg');
+      url('/images/fine-lanka-home-route-folio-background.webp');
   }
   .intro::after { inset: 0.9rem 1rem; }
   .intro-grid > div:first-child { background: rgba(255, 252, 239, 0.5); }
@@ -7623,7 +7623,7 @@ body:has(.features:target) .typed-opening { display: none; }
   height: clamp(3.8rem, 8vw, 7rem);
   opacity: 0.22;
   pointer-events: none;
-  background: url('/images/fine-lanka-liyawel-border.jpg') center bottom / max(69rem, 115%) auto no-repeat;
+  background: url('/images/fine-lanka-liyawel-border.webp') center bottom / max(69rem, 115%) auto no-repeat;
   inset: auto 0 0;
   mix-blend-mode: multiply;
 }
@@ -7775,7 +7775,7 @@ body:has(.features:target) .typed-opening { display: none; }
   background:
     linear-gradient(90deg, rgba(248, 241, 223, 0.97) 0%, rgba(248, 241, 223, 0.92) 28%, rgba(248, 241, 223, 0.62) 62%, rgba(248, 241, 223, 0.48) 100%),
     linear-gradient(180deg, rgba(33, 75, 69, 0.05), rgba(200, 100, 54, 0.04)),
-    url('/images/fine-lanka-sigiriya-fresco-passage.jpg') right center / cover no-repeat;
+    url('/images/fine-lanka-sigiriya-fresco-passage.webp') right center / cover no-repeat;
   mix-blend-mode: normal;
 }
 .features-heritage-wash::after {
@@ -7784,7 +7784,7 @@ body:has(.features:target) .typed-opening { display: none; }
   inset: auto 0 0;
   height: clamp(3.8rem, 7.5vw, 6.7rem);
   opacity: 0.72;
-  background: url('/images/fine-lanka-liyawel-border.jpg') center bottom / max(71rem, 115%) auto no-repeat;
+  background: url('/images/fine-lanka-liyawel-border.webp') center bottom / max(71rem, 115%) auto no-repeat;
   mix-blend-mode: multiply;
 }
 .features-ledger {
@@ -7861,7 +7861,7 @@ body:has(.features:target) .typed-opening { display: none; }
   background:
     linear-gradient(90deg, rgba(247, 239, 219, 0.98) 0%, rgba(247, 239, 219, 0.94) 39%, rgba(247, 239, 219, 0.77) 64%, rgba(247, 239, 219, 0.58) 100%),
     linear-gradient(180deg, rgba(40, 81, 73, 0.04), rgba(198, 117, 66, 0.08)),
-    url('/images/fine-lanka-cultural-route-panel.jpg') right center / cover no-repeat;
+    url('/images/fine-lanka-cultural-route-panel.webp') right center / cover no-repeat;
   overflow: hidden;
   isolation: isolate;
 }
@@ -7889,7 +7889,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 62% center;
     background-image:
       linear-gradient(180deg, rgba(248, 241, 223, 0.97) 0%, rgba(248, 241, 223, 0.88) 68%, rgba(248, 241, 223, 0.76) 100%),
-      url('/images/fine-lanka-sigiriya-fresco-passage.jpg');
+      url('/images/fine-lanka-sigiriya-fresco-passage.webp');
   }
   .features-photo-rail { grid-template-columns: 1.16fr 0.84fr; gap: 0.55rem; }
   .feature-photo { min-height: 9rem; }
@@ -7900,7 +7900,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 67% center;
     background-image:
       linear-gradient(180deg, rgba(247, 239, 219, 0.96) 0%, rgba(247, 239, 219, 0.91) 55%, rgba(247, 239, 219, 0.78) 100%),
-      url('/images/fine-lanka-cultural-route-panel.jpg');
+      url('/images/fine-lanka-cultural-route-panel.webp');
   }
 }
 
@@ -7919,7 +7919,7 @@ body:has(.features:target) .typed-opening { display: none; }
   padding: clamp(8.6rem, 14vw, 11.5rem) 0 clamp(4.5rem, 7vw, 6.5rem);
   background:
     linear-gradient(90deg, rgba(247, 241, 223, 0.98) 0%, rgba(247, 241, 223, 0.93) 36%, rgba(247, 241, 223, 0.55) 66%, rgba(247, 241, 223, 0.18) 100%),
-    url('/images/fine-lanka-about-heritage-hero.jpg') center / cover no-repeat,
+    url('/images/fine-lanka-about-heritage-hero.webp') center / cover no-repeat,
     #e9e0c8;
   isolation: isolate;
 }
@@ -8000,7 +8000,7 @@ body:has(.features:target) .typed-opening { display: none; }
   padding: clamp(5.8rem, 10vw, 9rem) 0;
   background:
     linear-gradient(110deg, rgba(244, 239, 223, 0.97) 0%, rgba(244, 239, 223, 0.9) 55%, rgba(244, 239, 223, 0.78) 100%),
-    url('/images/fine-lanka-cultural-route-panel.jpg') right center / cover no-repeat;
+    url('/images/fine-lanka-cultural-route-panel.webp') right center / cover no-repeat;
 }
 .about-origin-photo-rail {
   display: grid;
@@ -8047,7 +8047,7 @@ body:has(.features:target) .typed-opening { display: none; }
   padding: clamp(5.5rem, 10vw, 9rem) 0;
   background:
     linear-gradient(100deg, rgba(29, 72, 67, 0.97) 0%, rgba(29, 72, 67, 0.93) 48%, rgba(29, 72, 67, 0.82) 100%),
-    url('/images/fine-lanka-sigiriya-fresco-passage.jpg') right center / cover no-repeat;
+    url('/images/fine-lanka-sigiriya-fresco-passage.webp') right center / cover no-repeat;
 }
 .about-principles::before {
   content: '';
@@ -8056,7 +8056,7 @@ body:has(.features:target) .typed-opening { display: none; }
   pointer-events: none;
   background:
     radial-gradient(circle at 90% 5%, rgba(206, 158, 87, 0.15), transparent 17rem),
-    url('/images/fine-lanka-liyawel-border.jpg') center bottom / max(78rem, 125%) auto no-repeat;
+    url('/images/fine-lanka-liyawel-border.webp') center bottom / max(78rem, 125%) auto no-repeat;
   opacity: 0.36;
 }
 @media (max-width: 980px) {
@@ -8069,7 +8069,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 61% center;
     background-image:
       linear-gradient(180deg, rgba(247, 241, 223, 0.96) 0%, rgba(247, 241, 223, 0.88) 55%, rgba(247, 241, 223, 0.7) 100%),
-      url('/images/fine-lanka-about-heritage-hero.jpg');
+      url('/images/fine-lanka-about-heritage-hero.webp');
   }
   .about-hero-side { grid-template-columns: 1fr; }
   .about-hero-photo, .about-hero-photo img { min-height: 15rem; }
@@ -8098,7 +8098,7 @@ body:has(.features:target) .typed-opening { display: none; }
   opacity: 1;
   background:
     linear-gradient(90deg, rgba(244, 237, 219, 0.98) 0%, rgba(244, 237, 219, 0.94) 42%, rgba(244, 237, 219, 0.72) 72%, rgba(244, 237, 219, 0.48) 100%),
-    url('/images/fine-lanka-why-craft-background.jpg') right center / cover no-repeat;
+    url('/images/fine-lanka-why-craft-background.webp') right center / cover no-repeat;
 }
 .why-professional::before {
   content: '';
@@ -8354,7 +8354,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .why-professional-backdrop {
     background:
       linear-gradient(180deg, rgba(244, 237, 219, 0.97) 0%, rgba(244, 237, 219, 0.9) 56%, rgba(244, 237, 219, 0.74) 100%),
-      url('/images/fine-lanka-why-craft-background.jpg') 65% center / cover no-repeat;
+      url('/images/fine-lanka-why-craft-background.webp') 65% center / cover no-repeat;
   }
   .why-professional::before { inset: 0.7rem; }
   .why-professional-intro h2 { font-size: clamp(2.65rem, 12vw, 4rem); }
@@ -8382,7 +8382,7 @@ body:has(.features:target) .typed-opening { display: none; }
   color: #f6efd8;
   background:
     linear-gradient(112deg, rgba(24, 67, 61, 0.985) 0%, rgba(24, 67, 61, 0.95) 50%, rgba(24, 67, 61, 0.86) 100%),
-    url('/images/fine-lanka-cultural-route-panel.jpg') right center / cover no-repeat,
+    url('/images/fine-lanka-cultural-route-panel.webp') right center / cover no-repeat,
     #18433d;
 }
 .intro-professional::before {
@@ -8393,7 +8393,7 @@ body:has(.features:target) .typed-opening { display: none; }
   width: min(37rem, 51vw);
   height: min(37rem, 51vw);
   opacity: 0.14;
-  background: url('/images/fine-lanka-liyawel-border.jpg') center / contain no-repeat;
+  background: url('/images/fine-lanka-liyawel-border.webp') center / contain no-repeat;
   mix-blend-mode: screen;
 }
 .intro-professional::after {
@@ -9091,7 +9091,7 @@ body:has(.features:target) .typed-opening { display: none; }
   inset: 0;
   background:
     linear-gradient(90deg, rgba(244, 238, 219, 0.97) 0%, rgba(244, 238, 219, 0.91) 27%, rgba(244, 238, 219, 0.75) 58%, rgba(244, 238, 219, 0.76) 100%),
-    url('/images/fine-lanka-explore-atlas-background.jpg') center / cover no-repeat;
+    url('/images/fine-lanka-explore-atlas-background.webp') center / cover no-repeat;
 }
 .explore-studio-bg::after {
   content: '';
@@ -9285,7 +9285,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .explore-studio-bg {
     background:
       linear-gradient(180deg, rgba(244, 238, 219, 0.97) 0%, rgba(244, 238, 219, 0.9) 52%, rgba(244, 238, 219, 0.84) 100%),
-      url('/images/fine-lanka-explore-atlas-background.jpg') center / cover no-repeat;
+      url('/images/fine-lanka-explore-atlas-background.webp') center / cover no-repeat;
   }
   .explore-studio-intro { gap: 0.85rem; margin-bottom: 1.8rem; }
   .explore-studio-copy h2 { font-size: clamp(2.1rem, 11vw, 3.15rem); }
@@ -9542,7 +9542,7 @@ body:has(.features:target) .typed-opening { display: none; }
   z-index: 5;
   inset: 0;
   border: none;
-  background: url('/images/fine-lanka-explore-video-frame-motif.png') no-repeat center / 100% 100%;
+  background: url('/images/fine-lanka-explore-video-frame-motif.webp') no-repeat center / 100% 100%;
   pointer-events: none;
 }
 .explore-island-focus .dest-panel-media {
@@ -9654,7 +9654,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .explore-portrait-frame .dest-panel::before {
   z-index: 8;
   inset: 0;
-  background: url('/images/fine-lanka-explore-video-frame-portrait.png') no-repeat center / 100% 100%;
+  background: url('/images/fine-lanka-explore-video-frame-portrait.webp') no-repeat center / 100% 100%;
 }
 .explore-portrait-frame .dest-panel-media {
   left: var(--hole-left);
@@ -9965,7 +9965,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .intro-blue-lily {
   background:
     linear-gradient(90deg, rgba(18, 61, 54, 0.08) 0%, rgba(18, 61, 54, 0.18) 35%, rgba(18, 61, 54, 0.82) 58%, rgba(18, 61, 54, 0.95) 100%),
-    url('/images/fine-lanka-journey-blue-lily-background.jpg') left center / cover no-repeat,
+    url('/images/fine-lanka-journey-blue-lily-background.webp') left center / cover no-repeat,
     #133f39;
 }
 .intro-blue-lily::before {
@@ -10002,7 +10002,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .intro-blue-lily {
     background:
       linear-gradient(180deg, rgba(18, 61, 54, 0.56) 0%, rgba(18, 61, 54, 0.9) 58%, rgba(18, 61, 54, 0.97) 100%),
-      url('/images/fine-lanka-journey-blue-lily-background.jpg') 22% center / cover no-repeat,
+      url('/images/fine-lanka-journey-blue-lily-background.webp') 22% center / cover no-repeat,
       #133f39;
   }
   .intro-blue-lily .intro-compact-shell { grid-template-columns: 1fr; grid-template-rows: auto; }
@@ -10384,8 +10384,8 @@ body:has(.features:target) .typed-opening { display: none; }
   background: transparent;
 }
 .explore-heritage-rebuild .dest-panel::before {
-  background-image: url('/images/fine-lanka-explore-video-frame-heritage.png');
-  background: url('/images/fine-lanka-explore-video-frame-sigiri-sithuwam-header.png') no-repeat center / 100% 100%;
+  background-image: url('/images/fine-lanka-explore-video-frame-heritage.webp');
+  background: url('/images/fine-lanka-explore-video-frame-sigiri-sithuwam-header.webp') no-repeat center / 100% 100%;
   background-size: 100% 107%;
   background-position: center bottom;
 }
@@ -10597,7 +10597,7 @@ body:has(.features:target) .typed-opening { display: none; }
   padding-block: clamp(8.6rem, 12vw, 10.5rem) clamp(4.8rem, 7vw, 6.8rem);
   background:
     linear-gradient(90deg, rgba(233, 224, 200, 0.9) 0%, rgba(233, 224, 200, 0.7) 48%, rgba(233, 224, 200, 0.16) 100%),
-    url('/images/fine-lanka-about-bg-hero.jpg') center / cover no-repeat,
+    url('/images/fine-lanka-about-bg-hero.webp') center / cover no-repeat,
     #e9e0c8;
 }
 @media (max-width: 640px) {
@@ -10605,7 +10605,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 68% center;
     background-image:
       linear-gradient(180deg, rgba(233, 224, 200, 0.96) 0%, rgba(233, 224, 200, 0.86) 58%, rgba(233, 224, 200, 0.48) 100%),
-      url('/images/fine-lanka-about-bg-hero.jpg');
+      url('/images/fine-lanka-about-bg-hero.webp');
   }
 }
 
@@ -10614,7 +10614,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .about-refined .about-origin { padding-block: clamp(5rem, 8vw, 7.5rem);
   background:
     linear-gradient(90deg, rgba(244, 239, 223, 0.58) 0%, rgba(244, 239, 223, 0.86) 48%, rgba(244, 239, 223, 0.96) 100%),
-    url('/images/fine-lanka-about-bg-origin-left.jpg') center / cover no-repeat,
+    url('/images/fine-lanka-about-bg-origin-left.webp') center / cover no-repeat,
     #f4efdf;
 }
 @media (max-width: 640px) {
@@ -10622,7 +10622,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 22% center;
     background-image:
       linear-gradient(180deg, rgba(244, 239, 223, 0.72) 0%, rgba(244, 239, 223, 0.9) 58%, rgba(244, 239, 223, 0.98) 100%),
-      url('/images/fine-lanka-about-bg-origin-left.jpg');
+      url('/images/fine-lanka-about-bg-origin-left.webp');
   }
 }
 
@@ -10635,7 +10635,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .about-refined .about-principles { padding-block: clamp(4.8rem, 8vw, 7.3rem);
   background:
     linear-gradient(90deg, rgba(33, 75, 70, 0.9), rgba(33, 75, 70, 0.78) 48%, rgba(33, 75, 70, 0.86) 100%),
-    url('/images/fine-lanka-about-bg-invitation.jpg') center / cover no-repeat,
+    url('/images/fine-lanka-about-bg-invitation.webp') center / cover no-repeat,
     #214b46;
 }
 @media (max-width: 640px) {
@@ -10643,7 +10643,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 70% center;
     background-image:
       linear-gradient(180deg, rgba(33, 75, 70, 0.86) 0%, rgba(33, 75, 70, 0.9) 58%, rgba(33, 75, 70, 0.95) 100%),
-      url('/images/fine-lanka-about-bg-invitation.jpg');
+      url('/images/fine-lanka-about-bg-invitation.webp');
   }
 }
 
@@ -10652,7 +10652,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .about-refined .about-invitation { padding-block: clamp(4.8rem, 8vw, 7rem);
   background:
     linear-gradient(90deg, rgba(244, 237, 215, 0.66) 0%, rgba(244, 237, 215, 0.76) 48%, rgba(234, 224, 195, 0.52) 100%),
-    url('/images/fine-lanka-about-bg-principles-left.jpg') left center / cover no-repeat,
+    url('/images/fine-lanka-about-bg-principles-left.webp') left center / cover no-repeat,
     #eadfc3;
 }
 .about-refined .about-invitation-inner { max-width: 46rem;
@@ -10665,7 +10665,7 @@ body:has(.features:target) .typed-opening { display: none; }
     background-position: 12% center;
     background-image:
       linear-gradient(180deg, rgba(244, 237, 215, 0.68) 0%, rgba(244, 237, 215, 0.8) 62%, rgba(234, 224, 195, 0.66) 100%),
-      url('/images/fine-lanka-about-bg-principles-left.jpg');
+      url('/images/fine-lanka-about-bg-principles-left.webp');
   }
 }
 
@@ -10692,7 +10692,7 @@ body:has(.features:target) .typed-opening { display: none; }
   top: 0;
   bottom: 0;
   width: 50%;
-  background-image: url('/images/journal-portal-doors-coordinated-final.png');
+  background-image: url('/images/journal-portal-doors-coordinated-final.webp');
   background-size: 200% 100%;
   background-repeat: no-repeat;
   z-index: 4;
@@ -10914,7 +10914,7 @@ body:has(.features:target) .typed-opening { display: none; }
   inset: 0;
   background:
     linear-gradient(180deg, rgba(7, 15, 26, 0.18), rgba(7, 15, 26, 0.34)),
-    url('/images/journal-portal-stone-wall-background.jpg') center / cover no-repeat,
+    url('/images/journal-portal-stone-wall-background.webp') center / cover no-repeat,
     radial-gradient(ellipse at center, rgba(207, 166, 83, 0.08), transparent 48%),
     linear-gradient(90deg, rgba(3, 9, 17, 0.18), transparent 24%, transparent 76%, rgba(3, 9, 17, 0.18));
   pointer-events: none;
@@ -10991,11 +10991,11 @@ body:has(.features:target) .typed-opening { display: none; }
   aspect-ratio: 3 / 4;
   max-height: calc(100svh - var(--portal-wall-floor-offset) - 2rem);
   pointer-events: none;
-  background: url('/images/journal-portal-frame-coordinated-final.jpg') center / 100% 100% no-repeat;
+  background: url('/images/journal-portal-frame-coordinated-final.webp') center / 100% 100% no-repeat;
   transform: translate3d(-50%, calc(-50% - var(--portal-door-lift)), 0) scale(1);
   transform-origin: 50% 50%;
   will-change: transform, opacity;
-  background-image: url('/images/journal-portal-door-seam-trim-final-v2.png');
+  background-image: url('/images/journal-portal-door-seam-trim-final-v2.webp');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -11149,7 +11149,7 @@ body:has(.features:target) .typed-opening { display: none; }
   max-height: none;
   aspect-ratio: auto;
   pointer-events: none;
-  background-image: url('/images/journal-portal-arch-frame-gapless-v2.png');
+  background-image: url('/images/journal-portal-arch-frame-gapless-v2.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -11214,7 +11214,7 @@ body:has(.features:target) .typed-opening { display: none; }
   pointer-events: none;
   background-image:
     linear-gradient(rgba(6, 12, 22, 0.48), rgba(9, 16, 28, 0.64)),
-    url('/images/journal/portal-realm-refined.jpg');
+    url('/images/journal/portal-realm-refined.webp');
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
@@ -11491,11 +11491,11 @@ body:has(.features:target) .typed-opening { display: none; }
   background-position: -60% -60%;
   opacity: 0;
   pointer-events: none;
-  mask-image: url('/images/logo-site.png');
+  mask-image: url('/images/logo-site.webp');
   mask-position: center;
   mask-size: contain;
   mask-repeat: no-repeat;
-  -webkit-mask-image: url('/images/logo-site.png');
+  -webkit-mask-image: url('/images/logo-site.webp');
   -webkit-mask-position: center;
   -webkit-mask-size: contain;
   -webkit-mask-repeat: no-repeat;
@@ -11969,7 +11969,7 @@ body:has(.features:target) .typed-opening { display: none; }
   padding-bottom: 0;
   background:
     linear-gradient(105deg, rgba(7, 28, 36, 0.9) 0%, rgba(10, 52, 54, 0.78) 55%, rgba(15, 67, 62, 0.62) 100%),
-    url('/images/fine-lanka-booking-bg.jpg') center center / cover no-repeat;
+    url('/images/fine-lanka-booking-bg.webp') center center / cover no-repeat;
   display: flex;
   flex-direction: column;
 }
@@ -12170,11 +12170,11 @@ body:has(.features:target) .typed-opening { display: none; }
    canvas. Content remains in normal scrolling flow above a steady background.
    ========================================================================== */
 .section-fixed-canvas--booking {
-  background-image: url('/images/milk-rice-booking-field-notes.jpg');
+  background-image: url('/images/milk-rice-booking-field-notes.webp');
   background-position: 67% center;
 }
 .section-fixed-canvas--tours {
-  background-image: url('/images/milk-rice-tours-field-notes.jpg');
+  background-image: url('/images/milk-rice-tours-field-notes.webp');
   background-position: 67% center;
 }
 
@@ -12263,7 +12263,7 @@ body:has(.features:target) .typed-opening { display: none; }
   width: auto;
   transform: none;
   pointer-events: none;
-  background-image: url('/images/milk-rice-booking-field-notes.jpg');
+  background-image: url('/images/milk-rice-booking-field-notes.webp');
   background-repeat: no-repeat;
   background-position: 67% center;
   background-size: cover;
@@ -12312,7 +12312,7 @@ body:has(.features:target) .typed-opening { display: none; }
   background-color: #eadcbd;
   background-image:
     linear-gradient(90deg, rgba(247, 239, 218, 0.86) 0%, rgba(247, 239, 218, 0.72) 48%, rgba(242, 232, 207, 0.50) 100%),
-    url('/images/milk-rice-tours-field-notes.jpg');
+    url('/images/milk-rice-tours-field-notes.webp');
   background-repeat: no-repeat;
   background-position: 67% center;
   background-size: cover;
@@ -12355,7 +12355,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .tours-page .tour-collection { background-position: center top;
     background-image:
       linear-gradient(180deg, rgba(247, 239, 218, 0.84) 0%, rgba(247, 239, 218, 0.70) 60%, rgba(242, 232, 207, 0.58) 100%),
-      url('/images/milk-rice-tours-field-notes.jpg');
+      url('/images/milk-rice-tours-field-notes.webp');
   }
 }
 
@@ -12511,7 +12511,7 @@ body:has(.features:target) .typed-opening { display: none; }
   pointer-events: none;
   background:
     linear-gradient(rgba(6, 12, 22, 0.36), rgba(9, 16, 28, 0.5)),
-    url('/images/journal/portal-realm-refined.jpg');
+    url('/images/journal/portal-realm-refined.webp');
   background-size: cover;
   background-position: center top;
   background-attachment: scroll;
@@ -12975,7 +12975,7 @@ body:has(.features:target) .typed-opening { display: none; }
   right: 0;
   left: auto;
   width: 58%;
-  background: url('/images/jade-fresco.jpg') right center / cover no-repeat;
+  background: url('/images/jade-fresco.webp') right center / cover no-repeat;
   -webkit-mask-image: radial-gradient(120% 100% at 78% 28%, black 42%, transparent 92%);
   mask-image: radial-gradient(120% 100% at 78% 28%, black 42%, transparent 92%);
   content: "";
@@ -13160,7 +13160,7 @@ body:has(.features:target) .typed-opening { display: none; }
   background:
     linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 42%) padding-box,
     linear-gradient(158deg, rgba(38, 132, 106, 0.46), rgba(20, 92, 72, 0.74)) padding-box,
-    url("/images/jade-fresco.jpg") center / cover no-repeat padding-box,
+    url("/images/jade-fresco.webp") center / cover no-repeat padding-box,
     linear-gradient(150deg, #6f5216 0%, #d4af37 22%, #f6e7ad 50%, #d4af37 78%, #6f5216 100%) border-box;
   background-repeat: no-repeat;
   box-shadow:
@@ -13177,7 +13177,7 @@ body:has(.features:target) .typed-opening { display: none; }
   background:
     linear-gradient(to bottom, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0) 42%) padding-box,
     linear-gradient(158deg, rgba(38, 132, 106, 0.46), rgba(20, 92, 72, 0.74)) padding-box,
-    url("/images/jade-fresco.jpg") center / cover no-repeat padding-box,
+    url("/images/jade-fresco.webp") center / cover no-repeat padding-box,
     linear-gradient(150deg, #6f5216 0%, #d4af37 22%, #f6e7ad 50%, #d4af37 78%, #6f5216 100%) border-box;
   box-shadow:
     0 16px 34px -14px rgba(212, 175, 55, 0.85),

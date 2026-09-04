@@ -71,7 +71,7 @@ export function ChartIntro({ children, onReveal }: { children: React.ReactNode; 
             <div className="chart-ritual-orbit orbit-b" />
             <div className="chart-ritual-wheel">
               <img
-                src="/images/serendib-brass-wheel.png"
+                src="/images/serendib-brass-wheel.webp"
                 alt=""
                 draggable={false}
                 width={800}
