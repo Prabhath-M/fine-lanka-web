@@ -7,28 +7,42 @@
 // images, fonts, and CSS if skipped. This script copies both in so
 // the resulting deploy/ folder is complete and upload-ready.
 //
-// One more gotcha this script guards against, found the hard way
-// during the first live cPanel deploy: this project uses pnpm, whose
-// node_modules is built almost entirely out of symlinks into a
-// .pnpm store with strict, non-hoisted isolation (deliberately
-// blocking access to "phantom" transitive dependencies that aren't
-// declared in package.json - which is exactly why @swc/helpers,
-// needed internally by Next/SWC but never declared directly, doesn't
-// exist at a normal top-level path at all). Next's own standalone
-// output file tracer inherits both problems: it preserves pnpm's
-// symlinks as-is (fine on the build machine, dangling once moved
-// anywhere else) and misses @swc/helpers entirely (a known upstream
-// issue - SWC injects it into compiled code implicitly, not via a
-// static import the tracer can follow).
+// Two more gotchas this script guards against, both found the hard
+// way during the first live cPanel deploy:
 //
-// Rather than patching around pnpm's structure package-by-package
-// (fragile - there could be other similarly "phantom" transitive
-// deps we haven't hit yet), this script throws away the traced
-// node_modules and does a plain `npm install` inside deploy/ instead,
-// using the package.json Next already generates there. npm's
-// resolver has none of pnpm's phantom-dependency isolation, so it
-// naturally pulls in and correctly hoists everything actually
-// needed - including @swc/helpers - as real files, no symlinks.
+// 1. This project uses pnpm, whose node_modules is built almost
+//    entirely out of symlinks into a .pnpm store. Next's file tracer
+//    preserves those as symlinks rather than copying real content -
+//    fine on the machine that built it, but broken (dangling
+//    symlinks) the moment deploy/ is moved anywhere else, including
+//    to the production server. Every copy below uses
+//    `dereference: true` so the result is real, portable files.
+//    (A "replace it all with a flat npm install instead" approach
+//    was tried and reverted - npm's own dependency resolver
+//    (@npmcli/arborist) hit an unrelated internal crash,
+//    "Cannot read properties of null (reading 'edgesOut')", on this
+//    project's peer-dependency graph. Targeted fixes below are more
+//    reliable than that blanket replacement turned out to be.)
+//
+// 2. Next's file tracer misses `@swc/helpers` entirely from the
+//    standalone output - a known upstream issue, since SWC injects
+//    it into compiled code implicitly rather than through a normal
+//    static import the tracer can follow. It's only a transitive
+//    dependency (needed internally by Next/SWC, never declared in
+//    this project's own package.json), so pnpm's strict,
+//    non-hoisting layout never creates a top-level
+//    node_modules/@swc/helpers for it either - it only exists inside
+//    the .pnpm store (confirmed: node_modules/.pnpm/@swc+helpers@*).
+//    Without this, the app crashes at startup with "Cannot find
+//    module '@swc/helpers/_/_interop_require_default'". This script
+//    locates it inside the store directly and copies it to the top
+//    level of deploy/node_modules, where Node's normal module
+//    resolution can find it like any other flat-installed package.
+//
+// If a *different* "Cannot find module 'X'" error shows up after
+// this - i.e. another package in the same boat as @swc/helpers -
+// the fix is the same pattern: find it under node_modules/.pnpm/,
+// copy it into deploy/node_modules/ at the top level.
 //
 // Run via: pnpm build:cpanel  (runs `next build` first, then this)
 //
@@ -37,11 +51,10 @@
 //   deploy/server.js       <- startup file path in cPanel
 //   deploy/public/
 //   deploy/.next/
-//   deploy/node_modules/   <- fresh flat npm install, no pnpm quirks
+//   deploy/node_modules/   <- fully self-contained, real files only
 
-import { cpSync, existsSync, rmSync } from 'node:fs'
+import { cpSync, existsSync, readdirSync, rmSync } from 'node:fs'
 import path from 'node:path'
-import { execSync } from 'node:child_process'
 
 const root = process.cwd()
 const standaloneDir = path.join(root, '.next', 'standalone')
@@ -74,15 +87,38 @@ cpSync(
   { recursive: true, dereference: true },
 )
 
-console.log(
-  '\nReplacing traced node_modules with a fresh flat `npm install` in deploy/ ' +
-    '(avoids pnpm phantom-dependency gaps like the missing @swc/helpers) ...\n',
-)
-rmSync(path.join(deployDir, 'node_modules'), { recursive: true, force: true })
-execSync('npm install --omit=dev --no-audit --no-fund', {
-  cwd: deployDir,
-  stdio: 'inherit',
-})
+function copyPhantomPnpmDep(pkgPathParts) {
+  // pkgPathParts e.g. ['@swc', 'helpers'] for the @swc/helpers package.
+  const storeName = pkgPathParts.join('+') // pnpm store dirs use + instead of /
+  const pnpmStoreDir = path.join(root, 'node_modules', '.pnpm')
+  const dest = path.join(deployDir, 'node_modules', ...pkgPathParts)
+
+  let src = null
+  if (existsSync(pnpmStoreDir)) {
+    const match = readdirSync(pnpmStoreDir).find((name) => name.startsWith(`${storeName}@`))
+    if (match) {
+      src = path.join(pnpmStoreDir, match, 'node_modules', ...pkgPathParts)
+    }
+  }
+  // Fallback for non-pnpm installs (e.g. a plain `npm install`), where
+  // it may already be hoisted to the normal top-level location.
+  if (!src || !existsSync(src)) {
+    const flatPath = path.join(root, 'node_modules', ...pkgPathParts)
+    if (existsSync(flatPath)) src = flatPath
+  }
+
+  const pkgLabel = pkgPathParts.join('/')
+  if (src && existsSync(src)) {
+    console.log(`Copying ${pkgLabel} (from ${path.relative(root, src)}) -> deploy/node_modules/${pkgLabel}/ ...`)
+    cpSync(src, dest, { recursive: true, dereference: true })
+  } else {
+    console.warn(
+      `\nWARNING: could not locate ${pkgLabel} anywhere under node_modules (checked the pnpm store and the flat top-level path). If the deployed app crashes with "Cannot find module ${pkgLabel}/...", this is why.\n`,
+    )
+  }
+}
+
+copyPhantomPnpmDep(['@swc', 'helpers'])
 
 console.log(
   `\nDone. Upload the contents of ${path.relative(root, deployDir)}/ to your cPanel Node.js app's root folder.\n` +
