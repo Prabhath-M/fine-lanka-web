@@ -206,6 +206,68 @@ change at Namecheap.
 
 ---
 
+## Phase 4 — Cache-Control headers + confirming Phase 3 was never deployed (2026-09-04)
+
+**Discovered:** re-checked the live site directly (`web_fetch` on
+`finelankatours.com`) at the start of this session and found the map
+image request was still `.../​_next/image?url=...&w=3840&q=75` — Phase
+3's fix (merged to `main` as `1b3eb51`, confirmed built into
+`deploy/production` as of `6f470cb`) had never actually been pulled
+and deployed on cPanel. Code was correct and waiting; the manual
+"Deploy HEAD Commit" click just hadn't happened yet. **This means the
+"little to no impact from later fixes" the user reported is at least
+partly explained by Phase 3 literally not being live** — worth
+re-testing once it is.
+
+**Also implemented this session:** the Cache-Control gap flagged
+above. Added `next.config.mjs` `headers()` rules:
+- `/images/*`, `/videos/*`, `/mural/*`, and top-level static icons →
+  `public, max-age=31536000, immutable` (1 year) — safe given this
+  project's convention of swapping files under new/distinct names
+  rather than overwriting content in place; revisit if that
+  convention ever changes.
+- `/data/route-atlas.json` → shorter `max-age=3600, must-revalidate`,
+  since it's structured data that could be updated without a
+  filename change, unlike the media files above.
+- `/_next/static/*` and `/_next/image` output already get long-lived
+  immutable caching automatically from Next.js itself — nothing
+  needed there.
+
+- [x] Diagnosed via live-site `web_fetch` — confirmed Phase 3 was
+      never deployed, not just under-effective
+- [x] Added Cache-Control headers to `next.config.mjs`
+- [x] Verified `node --check`, `npx tsc --noEmit` (clean), `npx
+      vitest run` (8/8 passing)
+- [x] Committed, pushed, PR #84, GitHub Actions build succeeded,
+      merged to `main`
+- [x] `main`'s automatic deploy-workflow run succeeded — confirms
+      `deploy/production` has both this fix AND the still-pending
+      Phase 3 fix together now
+- [ ] **Manual cPanel step (needs a human with cPanel access — not
+      automatable from here):** Git Version Control → Update from
+      Remote → Deploy HEAD Commit. This one deploy click ships BOTH
+      Phase 3 (map image cap) and Phase 4 (cache headers) at once,
+      since neither has reached cPanel yet.
+- [ ] Re-verify on `https://finelankatours.com`:
+  - Map image URL should show `w=1600` (or less), not `w=3840`
+  - Browser DevTools → Network tab → click an image under
+    `/images/` or `/videos/` → Response Headers should show
+    `Cache-Control: public, max-age=31536000, immutable`
+  - Reload the same page a second time (not hard refresh) — repeat
+    page loads should now feel noticeably snappier for image-heavy
+    pages, since previously-loaded assets serve straight from the
+    browser's cache instead of re-validating with the server
+
+**Still open, unchanged from before — a decision, not a fix:**
+whether to put a CDN (e.g. Cloudflare) in front of the origin. Would
+help both first-load (edge-cached delivery closer to visitors,
+especially outside Sri Lanka) and repeat-load (works alongside the
+Cache-Control headers just added, not instead of them) performance
+at once, but needs a DNS change at Namecheap — a bigger, separate
+decision from the code-only fixes above.
+
+---
+
 ## Phase 2 — Responsive sizing (started 2026-09-04, post-launch)
 
 **The problem (diagnosed post-launch, live-site QA):** Phase 1 above
