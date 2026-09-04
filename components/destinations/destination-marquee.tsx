@@ -59,7 +59,11 @@ const DestinationRudder = memo(function DestinationRudder({ onTurn }: { onTurn: 
         draggable={false}
         width={800}
         height={800}
-        loading="lazy"
+        // This is the wheel the chart-intro ritual's doors open onto — it's
+        // above-the-fold from the first frame, not deferred content, so
+        // "lazy" only delayed when the browser even started fetching it
+        // and let the ritual's doors finish opening before it arrived.
+        loading="eager"
         style={{ '--rudder-turn': `${turnCount * 45}deg` } as CSSProperties}
       />
       <button

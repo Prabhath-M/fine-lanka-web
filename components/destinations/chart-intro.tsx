@@ -1,6 +1,7 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import { DESTINATION_VIDEO_READY_EVENT } from '@/components/destinations/destination-card'
 
 /**
  * Destinations opening ritual — Archival Cartography direction.
@@ -12,12 +13,42 @@ import { useEffect, useState } from 'react'
 
 const WHEEL_MS = 2650
 const DOOR_MS = 820
+// Hard cap on how much longer than WHEEL_MS we'll wait for the wheel image
+// and first destination video to actually arrive before opening the doors
+// anyway — a slow connection or an errored asset should never leave someone
+// staring at the ritual indefinitely.
+const MAX_EXTRA_WAIT_MS = 4000
 
 export function ChartIntro({ children, onReveal }: { children: React.ReactNode; onReveal?: () => void }) {
   const [ready, setReady] = useState(false)
   const [showRitual, setShowRitual] = useState(true)
   const [doorsOpening, setDoorsOpening] = useState(false)
   const [replayKey, setReplayKey] = useState(0)
+
+  // On the very first run, the doors must not open before the brass wheel
+  // image and the first destination video are actually ready — otherwise
+  // (most visibly on a cold cache) the ritual finishes and the doors open
+  // onto a wheel/card that hasn't loaded yet. Once that's happened once,
+  // the assets are known-loaded, so the replay button can go straight back
+  // to the original fixed timing without re-waiting on anything.
+  const hasOpenedOnceRef = useRef(false)
+  const wheelLoadedRef = useRef(false)
+  const videoReadyRef = useRef(false)
+  const minTimeElapsedRef = useRef(false)
+  const openedRef = useRef(false)
+  const openDoorsRef = useRef<() => void>(() => {})
+
+  const maybeOpenDoors = useCallback(() => {
+    if (openedRef.current) return
+    if (minTimeElapsedRef.current && wheelLoadedRef.current && videoReadyRef.current) {
+      openDoorsRef.current()
+    }
+  }, [])
+
+  const onWheelImageSettled = useCallback(() => {
+    wheelLoadedRef.current = true
+    maybeOpenDoors()
+  }, [maybeOpenDoors])
 
   useEffect(() => {
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
@@ -29,13 +60,44 @@ export function ChartIntro({ children, onReveal }: { children: React.ReactNode; 
     setShowRitual(true)
     setDoorsOpening(false)
     setReady(false)
-    const doorsTimer = window.setTimeout(() => setDoorsOpening(true), WHEEL_MS)
-    const readyTimer = window.setTimeout(() => setReady(true), WHEEL_MS + DOOR_MS)
-    return () => {
-      window.clearTimeout(doorsTimer)
-      window.clearTimeout(readyTimer)
+    openedRef.current = false
+
+    openDoorsRef.current = () => {
+      if (openedRef.current) return
+      openedRef.current = true
+      hasOpenedOnceRef.current = true
+      setDoorsOpening(true)
+      window.setTimeout(() => setReady(true), DOOR_MS)
     }
-  }, [replayKey])
+
+    if (hasOpenedOnceRef.current) {
+      // Replay: assets are already loaded and playing — no need to gate.
+      const doorsTimer = window.setTimeout(() => openDoorsRef.current(), WHEEL_MS)
+      return () => window.clearTimeout(doorsTimer)
+    }
+
+    wheelLoadedRef.current = false
+    videoReadyRef.current = false
+    minTimeElapsedRef.current = false
+
+    const minTimer = window.setTimeout(() => {
+      minTimeElapsedRef.current = true
+      maybeOpenDoors()
+    }, WHEEL_MS)
+    const maxWaitTimer = window.setTimeout(() => openDoorsRef.current(), WHEEL_MS + MAX_EXTRA_WAIT_MS)
+
+    const onVideoReady = () => {
+      videoReadyRef.current = true
+      maybeOpenDoors()
+    }
+    window.addEventListener(DESTINATION_VIDEO_READY_EVENT, onVideoReady)
+
+    return () => {
+      window.clearTimeout(minTimer)
+      window.clearTimeout(maxWaitTimer)
+      window.removeEventListener(DESTINATION_VIDEO_READY_EVENT, onVideoReady)
+    }
+  }, [replayKey, maybeOpenDoors])
 
   useEffect(() => {
     if (!ready || !onReveal) return
@@ -77,6 +139,8 @@ export function ChartIntro({ children, onReveal }: { children: React.ReactNode; 
                 width={800}
                 height={800}
                 loading="eager"
+                onLoad={onWheelImageSettled}
+                onError={onWheelImageSettled}
               />
             </div>
             <p className="chart-ritual-kicker">Turn the wheel</p>

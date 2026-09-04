@@ -9,6 +9,14 @@ import { HERO_OPENING_COMPLETE_EVENT } from '@/components/home/typed-opening'
  * Homepage hero — the video is deliberately held on its poster frame until
  * the TypedOpening reports that the complete typing-and-dissolve sequence has
  * ended. This keeps the first visual arrival calm and intentional.
+ *
+ * preload="auto" (not "metadata") is deliberate: the typed opening runs for
+ * several seconds before beginHeroVideo() is ever called, which is a real
+ * buffering head start. With "metadata" the browser fetches nothing beyond
+ * duration/dimensions ahead of play(), so playback raced the download and
+ * reliably stalled ~2s in once the small initial buffer was consumed —
+ * exactly during the window a slower/first-load connection hasn't caught
+ * up yet. "auto" lets that idle time actually be spent buffering.
  */
 export function Hero() {
   const videoRef = useRef<HTMLVideoElement | null>(null)
@@ -65,7 +73,7 @@ export function Hero() {
         muted
         loop
         playsInline
-        preload="metadata"
+        preload="auto"
         poster="https://picsum.photos/seed/finelanka-hero/1600/900"
       >
         <source src="/videos/hero-loop.mp4" type="video/mp4" />
