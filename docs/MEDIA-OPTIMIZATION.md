@@ -142,6 +142,95 @@ confirmed-dead leftover image variants across the batches below.
 
 ---
 
+---
+
+## Phase 2 — Responsive sizing (started 2026-09-04, post-launch)
+
+**The problem (diagnosed post-launch, live-site QA):** Phase 1 above
+compressed format + quality (PNG/JPG → WebP, quality 82) but did
+**not resize pixel dimensions**. Every image is still served at its
+original resolution regardless of how small it's actually rendered.
+Confirmed on live QA: home page cards, the explore section's map/video
+card, About Us, Book Now, and Tours & Pricing all still load
+noticeably slowly.
+
+Evidence: cards render at ~280–340px wide (per CSS), but e.g.
+`about-page.tsx`'s hero photo ships at 1707×2560px, `dest-panel-frame.webp`
+at 2304×1536, `tours-kandyan-night-register.webp` at 2560×1440 — 6–9x
+more pixels than the card ever displays. Only two places in the
+codebase (`explore-section.tsx`, `journal-page.tsx`) use `next/image`
+with a `sizes` prop, which does generate right-sized variants on
+request (Node/Passenger server + matching-arch `sharp`, per
+`docs/CPANEL-DEPLOY.md` — this actually works at runtime here). Every
+other image is a plain `<img>` or CSS `background-image`, which gets
+zero responsive treatment — full file, every device, every time.
+
+**The fix (chosen approach — build-time, no live server-side
+resizing):** same philosophy as Phase 1 — do the work offline, keep
+runtime free of extra sharp/memory load given the cPanel host's known
+memory ceiling. Pre-generate multiple WebP width variants (480w /
+960w / 1600w, quality 82, never upscaling past the original) for
+every image over ~150KB, then:
+- `<img>` card/hero photos → add `srcset` + `sizes` pointing at the
+  generated variants.
+- CSS decorative card frames (dest-card-frame, dest-panel-frame,
+  navbar backdrop, mural set, journal portal frames) → swap the
+  `url()` reference to a single appropriately-sized variant (these
+  render at a consistent small/medium size everywhere, so one variant
+  covers it — no need for full responsive complexity).
+- CSS full-bleed section backgrounds (milk-rice booking/tours field
+  notes, destinations atlas, how-it-works, serendib map, ves-dance
+  heritage) → add a mobile breakpoint media query serving the smaller
+  variant below ~760px, since these are genuinely full-viewport-width
+  on desktop but massive overkill on a 390px phone screen.
+
+### Checklist
+
+- [x] Diagnose actual cause (dimensions, not format/quality) —
+      confirmed via `PIL`/CSS width comparison
+- [x] Write/run the width-variant generation script (480w/960w/1600w,
+      quality 82, never upscaling) — ran for every file over 150KB in
+      `public/images/` + `public/mural/` (59 source files → 163
+      variant files, `public/` 48MB → 67MB; more files but far less
+      transferred per page view)
+- [x] Convert `<img>` usages to `srcset`/`sizes`:
+  - `about-page.tsx` — hero photo + origin photo
+  - `destination-card.tsx` — `dest-card-frame` overlay
+  - `site-header.tsx` — header mural frame (was hardcoded to the full
+    1900×360 original, eager-loaded on **every page**; also removed
+    the now-dead `MURAL_FRAMES[1..6]` array, only frame `[0]` was ever
+    rendered)
+- [x] Swap the two highest-traffic card-frame CSS refs to sized
+      variants: `dest-panel-frame` (the Explore section's video-window
+      frame the QA report specifically flagged — background + both
+      mask-image layers, 960w by default with a 1400px+ media-query
+      bump to 1600w for large screens)
+- [x] Add mobile-first sizing for the Book Now / Tours & Pricing
+      full-bleed canvases: `.section-fixed-canvas--booking` /
+      `--tours` (`milk-rice-*-field-notes`) now serve the 960w variant
+      by default, full-res only above 1400px; also switched the
+      booking page's `sri-lanka-ves-dance-heritage-background` layer
+      to 960w
+- [x] Re-ran `npx tsc --noEmit` (clean once `pnpm install` picked up
+      the `resend` dependency added upstream since this branch's last
+      install) and `npx vitest run` (8/8 passing)
+- [ ] **Deferred, lower priority** (not flagged as slow in this QA
+      round, revisit if reported): tour category cards
+      (`tour-card.tsx`/`tour-picker-card.tsx`, already a modest 1024px
+      native so less urgent), `destinations-cloud-frame` (already
+      under 100KB, skipped), journal portal frame set (unchanged since
+      Phase 1 — journal wasn't reported slow this round), remaining
+      mural `blend-2..6`/`frame-*` files (only `blend-1` is actually
+      rendered — see `site-header.tsx`, `MURAL_FRAMES` array removed)
+- [ ] Commit, push, PR, verify GitHub Actions build succeeds
+- [ ] Merge to `main` (**confirm with human first — site is live now**)
+- [ ] Manual cPanel step: Git Version Control → Update from Remote →
+      Deploy HEAD Commit
+- [ ] Re-verify on `https://finelankatours.com` — home, about, booking,
+      tours-pricing, explore section, Network tab page-weight check
+
+---
+
 ## How to resume (if a session runs out)
 
 1. Re-clone or `cd` into the repo, `git status` to see what's
