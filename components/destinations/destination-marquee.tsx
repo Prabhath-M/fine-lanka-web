@@ -57,6 +57,9 @@ const DestinationRudder = memo(function DestinationRudder({ onTurn }: { onTurn: 
         alt=""
         aria-hidden="true"
         draggable={false}
+        width={800}
+        height={800}
+        loading="lazy"
         style={{ '--rudder-turn': `${turnCount * 45}deg` } as CSSProperties}
       />
       <button

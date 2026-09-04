@@ -70,7 +70,14 @@ export function ChartIntro({ children, onReveal }: { children: React.ReactNode; 
             <div className="chart-ritual-orbit orbit-a" />
             <div className="chart-ritual-orbit orbit-b" />
             <div className="chart-ritual-wheel">
-              <img src="/images/serendib-brass-wheel.png" alt="" draggable={false} />
+              <img
+                src="/images/serendib-brass-wheel.png"
+                alt=""
+                draggable={false}
+                width={800}
+                height={800}
+                loading="eager"
+              />
             </div>
             <p className="chart-ritual-kicker">Turn the wheel</p>
             <h1 className="chart-ritual-title">

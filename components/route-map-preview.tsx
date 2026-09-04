@@ -298,7 +298,14 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
           </div>
           <div className={styles.mapFrame}>
             <div className={styles.mapCanvas} style={zoomCanvasStyle}>
-              <img src={data.image} alt="Illustrated Sri Lankan tour map with detected waypoint circles" className={styles.mapImage} />
+              <img
+                src={data.image}
+                alt="Illustrated Sri Lankan tour map with detected waypoint circles"
+                className={styles.mapImage}
+                width={data.width}
+                height={data.height}
+                loading="lazy"
+              />
               <div className={styles.markerLayer}>
               {data.markers.map((marker) => {
                 const isActive = activeMarkerIds.has(marker.id)
@@ -333,7 +340,12 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
             {selectedMarker && (
               <aside className={styles.placeCard} aria-live="polite">
                 <button type="button" className={styles.closeButton} onClick={() => setSelectedMarkerId(null)} aria-label="Close place details"><X size={16} /></button>
-                <img className={styles.placeImage} src={getLocationDetails(selectedMarker).image} alt={`${selectedMarker.name} travel photograph`} />
+                <img
+                  className={styles.placeImage}
+                  src={getLocationDetails(selectedMarker).image}
+                  alt={`${selectedMarker.name} travel photograph`}
+                  loading="lazy"
+                />
                 <span className={styles.placeType}>{selectedMarker.type === 'primary' ? 'Primary destination' : kindLabel[selectedMarker.kind] ?? 'Route hub'}</span>
                 <h3>{selectedMarker.name}</h3>
                 <p>{getLocationDetails(selectedMarker).description}</p>

@@ -17,10 +17,10 @@ import { useBodyScrollLock } from '@/lib/use-body-scroll-lock'
  * every route.
  */
 const MURAL_FRAMES = [
-  '/mural/blend-1.jpg',
-  '/mural/blend-2.jpg',
-  '/mural/blend-3.jpg',
-  '/mural/blend-4.jpg',
+  '/mural/blend-1.png',
+  '/mural/blend-2.png',
+  '/mural/blend-3.png',
+  '/mural/blend-4.png',
   '/mural/blend-5.png',
   '/mural/blend-6.png',
 ]
@@ -109,13 +109,27 @@ export function SiteHeader() {
         id="site-header"
       >
         <div className="site-header-mural" aria-hidden="true">
-          <img src={MURAL_FRAMES[0]} alt="" className="site-header-mural-frame" />
+          <img
+            src={MURAL_FRAMES[0]}
+            alt=""
+            className="site-header-mural-frame"
+            width={1900}
+            height={360}
+            loading="eager"
+          />
         </div>
         <div className="container header-inner">
           <NavLink href="/" className="brand">
             <span className="brand-logo">
               <span className="brand-logo-flare" aria-hidden="true" />
-              <img src="/images/logo-site.png" alt="" className="brand-logo-img" />
+              <img
+                src="/images/logo-site.png"
+                alt=""
+                className="brand-logo-img"
+                width={1024}
+                height={1024}
+                loading="eager"
+              />
             </span>
             <span data-brand>{SITE.brand}</span>
           </NavLink>
