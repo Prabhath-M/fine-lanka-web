@@ -5,6 +5,18 @@ import { JOURNAL_ENTRIES, type JournalEntry } from '@/lib/journal-data'
 import { useBodyScrollLock } from '@/lib/use-body-scroll-lock'
 import { Icon } from '@/components/icons'
 import { useTypingProgress } from '@/lib/use-typing-progress'
+import { usePreloadImages } from '@/lib/use-preload-images'
+
+// The chronicle grid is 3 columns on desktop (app/globals.css
+// .chronicle-grid) — preloading the first row's worth covers what's
+// actually visible the instant the portal opens and the cascade
+// begins, without preloading the entire archive. There's plenty of
+// time for this: THRESHOLD_TYPING_MS below is 12.4s of dead time
+// before the portal even starts opening.
+const JOURNAL_FIRST_ROW_PRELOAD_COUNT = 3
+const JOURNAL_PRELOAD_IMAGES = JOURNAL_ENTRIES.slice(0, JOURNAL_FIRST_ROW_PRELOAD_COUNT)
+  .map((entry) => entry.image)
+  .filter((src): src is string => Boolean(src))
 
 // Design reminder: the portal resolves into a measured archive reveal—heading
 // and brass rules first, then one journal card at a time. State owns the card
@@ -82,6 +94,8 @@ function JournalTypingLine({
 }
 
 export function JournalPage() {
+  usePreloadImages(JOURNAL_PRELOAD_IMAGES)
+
   const [isOpen, setIsOpen] = useState(false)
   const [isZooming, setIsZooming] = useState(false)
   const [revealed, setRevealed] = useState(false)

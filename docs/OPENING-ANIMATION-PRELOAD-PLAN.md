@@ -197,7 +197,7 @@ work, not just adding a preload hook:
 
 ## Status
 
-**Current phase: IN PROGRESS — Section 1 done.**
+**Current phase: IN PROGRESS — Sections 1–2 done.**
 
 - [x] Section 1 — Home preload. Added `lib/use-preload-images.ts`
       (shared hook, fires on mount, ignores reduced-motion since
@@ -210,7 +210,18 @@ work, not just adding a preload hook:
       (2.65s → 3.6s) and its matching `WHEEL_MS` gate (2650 → 3600) so
       the ritual's own dead time is longer too. `tsc --noEmit` and
       `vitest run` both clean (8/8 passing).
-- [ ] Section 2 — Journal preload
+- [x] Section 2 — Journal preload. Turned out the portal-realm image
+      itself was already being preloaded (journal-page.tsx already
+      had its own `new window.Image()` effect gating `realmReady`) —
+      the real gap was the chronicle card grid: `entry.image` renders
+      via `next/image` with `loading="lazy"`, correct for cards
+      further down the archive but not for the first row, which is
+      visible the instant the portal opens (after 12.4s of typing —
+      plenty of dead time). Added `usePreloadImages` for the first 3
+      entries' images (`JOURNAL_ENTRIES.slice(0, 3)`), matching the
+      3-column desktop grid (`app/globals.css` `.chronicle-grid`) so
+      exactly what's visible on open is covered, not the whole
+      archive. `tsc`/`vitest` clean.
 - [ ] Section 3 — Destinations preload (atlas/panel/frame images only
       — wheel already covered by Section 1, see "Decisions made
       mid-plan" above)
