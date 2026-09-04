@@ -7,42 +7,50 @@
 // images, fonts, and CSS if skipped. This script copies both in so
 // the resulting deploy/ folder is complete and upload-ready.
 //
-// Two more gotchas this script guards against, both found the hard
-// way during the first live cPanel deploy:
+// One more gotcha this script guards against, found the hard way
+// during the first live cPanel deploy - and it took several rounds
+// to get right, so this explanation is worth reading in full before
+// changing anything below:
 //
-// 1. This project uses pnpm, whose node_modules is built almost
-//    entirely out of symlinks into a .pnpm store. Next's file tracer
-//    preserves those as symlinks rather than copying real content -
-//    fine on the machine that built it, but broken (dangling
-//    symlinks) the moment deploy/ is moved anywhere else, including
-//    to the production server. Every copy below uses
-//    `dereference: true` so the result is real, portable files.
-//    (A "replace it all with a flat npm install instead" approach
-//    was tried and reverted - npm's own dependency resolver
-//    (@npmcli/arborist) hit an unrelated internal crash,
-//    "Cannot read properties of null (reading 'edgesOut')", on this
-//    project's peer-dependency graph. Targeted fixes below are more
-//    reliable than that blanket replacement turned out to be.)
+// This project uses pnpm, whose node_modules is deliberately NOT
+// flat: only this project's own declared dependencies get a
+// top-level entry (as a symlink into a .pnpm store). Anything that's
+// only a *transitive* dependency - needed internally by some package
+// this project depends on, but never declared in this project's own
+// package.json - has no top-level entry at all. That's pnpm
+// correctly preventing "phantom dependency" bugs during normal
+// dev/build - but it's exactly the wrong property for a standalone,
+// portable deploy/ folder, where everything needs to be resolvable
+// via plain top-level requires with nothing left implicit.
 //
-// 2. Next's file tracer misses `@swc/helpers` entirely from the
-//    standalone output - a known upstream issue, since SWC injects
-//    it into compiled code implicitly rather than through a normal
-//    static import the tracer can follow. It's only a transitive
-//    dependency (needed internally by Next/SWC, never declared in
-//    this project's own package.json), so pnpm's strict,
-//    non-hoisting layout never creates a top-level
-//    node_modules/@swc/helpers for it either - it only exists inside
-//    the .pnpm store (confirmed: node_modules/.pnpm/@swc+helpers@*).
-//    Without this, the app crashes at startup with "Cannot find
-//    module '@swc/helpers/_/_interop_require_default'". This script
-//    locates it inside the store directly and copies it to the top
-//    level of deploy/node_modules, where Node's normal module
-//    resolution can find it like any other flat-installed package.
+// Next's own file tracer (which builds the standalone output) makes
+// this worse: it doesn't reliably catch every transitive dependency
+// either - some are injected into compiled code implicitly (e.g. by
+// SWC) rather than through a normal static import the tracer can
+// follow. In practice this surfaced as a chain of crashes, each only
+// visible once the previous one was fixed and the app got further
+// into starting up: first "Cannot find module 'next'" (turned out to
+// be a *symlink*, not a missing file - see dereference: true below),
+// then '@swc/helpers', then '@next/env', with 'tslib' and
+// 'client-only' waiting one level deeper still (needed by
+// @swc/helpers and styled-jsx respectively).
 //
-// If a *different* "Cannot find module 'X'" error shows up after
-// this - i.e. another package in the same boat as @swc/helpers -
-// the fix is the same pattern: find it under node_modules/.pnpm/,
-// copy it into deploy/node_modules/ at the top level.
+// Patching each one by name as it was discovered clearly wasn't
+// going to end - so instead, resolvePhantomDepsRecursively() below
+// walks the FULL dependency tree of every package this project
+// directly depends on (from deploy/package.json's own
+// "dependencies"), checks each one against pnpm's .pnpm store, and
+// copies in anything missing from deploy/node_modules - recursing
+// into newly-copied packages' own dependencies too, however deep
+// that goes. This should need no further hand-patching even if a
+// dependency upgrade shuffles which packages happen to be phantom.
+//
+// (A "throw it all away and do a flat npm install instead" approach
+// was tried and reverted - npm's own dependency resolver
+// (@npmcli/arborist) hit an unrelated internal crash, "Cannot read
+// properties of null (reading 'edgesOut')", on this project's
+// peer-dependency graph. The targeted, recursive approach here is
+// more reliable than that blanket replacement turned out to be.)
 //
 // Run via: pnpm build:cpanel  (runs `next build` first, then this)
 //
@@ -53,7 +61,7 @@
 //   deploy/.next/
 //   deploy/node_modules/   <- fully self-contained, real files only
 
-import { cpSync, existsSync, readdirSync, rmSync } from 'node:fs'
+import { cpSync, existsSync, readdirSync, readFileSync, rmSync } from 'node:fs'
 import path from 'node:path'
 
 const root = process.cwd()
@@ -87,8 +95,15 @@ cpSync(
   { recursive: true, dereference: true },
 )
 
+function depNameToParts(depName) {
+  return depName.startsWith('@') ? depName.split('/') : [depName]
+}
+
+// Finds a package inside pnpm's .pnpm store and copies it to the top
+// level of deploy/node_modules, dereferenced (real files, not
+// symlinks). Falls back to a flat top-level node_modules/<pkg> path
+// for non-pnpm installs (e.g. a plain `npm install`).
 function copyPhantomPnpmDep(pkgPathParts) {
-  // pkgPathParts e.g. ['@swc', 'helpers'] for the @swc/helpers package.
   const storeName = pkgPathParts.join('+') // pnpm store dirs use + instead of /
   const pnpmStoreDir = path.join(root, 'node_modules', '.pnpm')
   const dest = path.join(deployDir, 'node_modules', ...pkgPathParts)
@@ -100,8 +115,6 @@ function copyPhantomPnpmDep(pkgPathParts) {
       src = path.join(pnpmStoreDir, match, 'node_modules', ...pkgPathParts)
     }
   }
-  // Fallback for non-pnpm installs (e.g. a plain `npm install`), where
-  // it may already be hoisted to the normal top-level location.
   if (!src || !existsSync(src)) {
     const flatPath = path.join(root, 'node_modules', ...pkgPathParts)
     if (existsSync(flatPath)) src = flatPath
@@ -109,16 +122,65 @@ function copyPhantomPnpmDep(pkgPathParts) {
 
   const pkgLabel = pkgPathParts.join('/')
   if (src && existsSync(src)) {
-    console.log(`Copying ${pkgLabel} (from ${path.relative(root, src)}) -> deploy/node_modules/${pkgLabel}/ ...`)
     cpSync(src, dest, { recursive: true, dereference: true })
-  } else {
-    console.warn(
-      `\nWARNING: could not locate ${pkgLabel} anywhere under node_modules (checked the pnpm store and the flat top-level path). If the deployed app crashes with "Cannot find module ${pkgLabel}/...", this is why.\n`,
-    )
+    return true
   }
+  console.warn(
+    `\nWARNING: could not locate ${pkgLabel} anywhere under node_modules (checked the pnpm store and the flat top-level path). If the deployed app crashes with "Cannot find module ${pkgLabel}/...", this is why.\n`,
+  )
+  return false
 }
 
-copyPhantomPnpmDep(['@swc', 'helpers'])
+// Walks the full dependency tree starting from the given package
+// names, copying in anything missing from deploy/node_modules and
+// recursing into each newly-copied package's own dependencies.
+function resolvePhantomDepsRecursively(startingDeps) {
+  const visited = new Set()
+  const queue = [...startingDeps]
+  let copiedCount = 0
+
+  while (queue.length > 0) {
+    const depName = queue.shift()
+    if (visited.has(depName)) continue
+    visited.add(depName)
+
+    const depParts = depNameToParts(depName)
+    const destPath = path.join(deployDir, 'node_modules', ...depParts)
+
+    if (!existsSync(destPath)) {
+      const copied = copyPhantomPnpmDep(depParts)
+      if (!copied) continue
+      console.log(`  copied phantom dependency: ${depName}`)
+      copiedCount++
+    }
+
+    const pkgJsonPath = path.join(destPath, 'package.json')
+    if (existsSync(pkgJsonPath)) {
+      try {
+        const pkgJson = JSON.parse(readFileSync(pkgJsonPath, 'utf8'))
+        for (const subDep of Object.keys(pkgJson.dependencies ?? {})) {
+          if (!visited.has(subDep)) queue.push(subDep)
+        }
+      } catch {
+        // Malformed or unreadable package.json - nothing more to walk
+        // from here, but the package itself is already in place.
+      }
+    }
+  }
+
+  return copiedCount
+}
+
+console.log('Resolving phantom pnpm-only dependencies (recursive) ...')
+const deployPkgJsonPath = path.join(deployDir, 'package.json')
+if (existsSync(deployPkgJsonPath)) {
+  const deployPkgJson = JSON.parse(readFileSync(deployPkgJsonPath, 'utf8'))
+  const directDeps = Object.keys(deployPkgJson.dependencies ?? {})
+  const copiedCount = resolvePhantomDepsRecursively(directDeps)
+  console.log(`Done - copied ${copiedCount} phantom dependencies into deploy/node_modules/.`)
+} else {
+  console.warn('\nWARNING: deploy/package.json not found - skipped resolving phantom dependencies.\n')
+}
 
 console.log(
   `\nDone. Upload the contents of ${path.relative(root, deployDir)}/ to your cPanel Node.js app's root folder.\n` +
