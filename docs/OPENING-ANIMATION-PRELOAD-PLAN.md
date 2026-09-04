@@ -167,21 +167,53 @@ work, not just adding a preload hook:
   new copy, new timing) — flagging this now rather than discovering
   scope creep mid-branch. Happy to proceed with a copy consistent with
   the Home page's tone unless there's specific wording wanted.
-- Destinations' ritual is wheel-based, not typewriter text. Treating
-  "typewriter animations on... destinations" as "keep its existing
-  ritual, fix the preload gap" rather than replacing the wheel with
-  typed text — flag if the intent was actually to add typed copy to
-  Destinations too.
+- Destinations' ritual is wheel-based, not typewriter text. **Confirmed:**
+  keep the existing wheel ritual as-is (not replaced with typed text) —
+  just fix the preload gap and slow the wheel turn, as done in Section 1.
+
+## Decisions made mid-plan (superseding original Section 3 sketch)
+
+- Rather than the nav-hover/`<link rel="prefetch">` idea originally
+  sketched for Destinations, the brass rudder wheel
+  (`/images/serendib-brass-wheel.webp`) is preloaded from the **Home
+  page** instead, via the new shared `usePreloadImages` hook
+  (`lib/use-preload-images.ts`) — Home is where most visitors land
+  first, so this gives the wheel the longest possible head start
+  regardless of whether/how someone navigates to Destinations
+  afterward. Section 3 (when it happens) should not duplicate this;
+  it only needs the other Destinations assets (atlas/panel/frame
+  images), since the wheel is already covered.
+- The wheel-turn animation itself was slowed from 2.65s to 3.6s
+  (`chartWheelTurnSmooth` in `app/globals.css`) specifically to give
+  page loading more time before the ritual's minimum-time gate is
+  satisfied. `WHEEL_MS` in `components/destinations/chart-intro.tsx`
+  was updated to match (2650 → 3600) — these two values must always
+  move together. The dead base-rule `chartWheelTurn` (2.4s, not
+  actually active since `[data-chart-ritual]` always overrides it)
+  was bumped to 3.6s too, for consistency/no confusion if it's ever
+  reused without that wrapper.
 
 ---
 
 ## Status
 
-**Current phase: PLANNING — not started.**
+**Current phase: IN PROGRESS — Section 1 done.**
 
-- [ ] Section 1 — Home preload
+- [x] Section 1 — Home preload. Added `lib/use-preload-images.ts`
+      (shared hook, fires on mount, ignores reduced-motion since
+      that's about skipping animation, not skipping network warmup).
+      `home-page.tsx` now preloads the Destinations rudder wheel plus
+      Home's own `sri-lanka-map-island-focus`,
+      `fine-lanka-esala-perahera`, and
+      `fine-lanka-process-route-background-tall` images the moment
+      the page mounts. Also slowed the rudder wheel's turn animation
+      (2.65s → 3.6s) and its matching `WHEEL_MS` gate (2650 → 3600) so
+      the ritual's own dead time is longer too. `tsc --noEmit` and
+      `vitest run` both clean (8/8 passing).
 - [ ] Section 2 — Journal preload
-- [ ] Section 3 — Destinations preload + wheel prefetch
+- [ ] Section 3 — Destinations preload (atlas/panel/frame images only
+      — wheel already covered by Section 1, see "Decisions made
+      mid-plan" above)
 - [ ] Section 4 — Tours & Pricing opening animation + preload
 - [ ] Full `tsc`/`vitest` pass on `develop`
 - [ ] Merge `develop` → `main`

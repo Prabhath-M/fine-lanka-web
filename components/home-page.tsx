@@ -12,8 +12,29 @@ import { Newsletter } from '@/components/home/newsletter'
 import { Process } from '@/components/home/process'
 import { Testimonials } from '@/components/home/testimonials'
 import { TypedOpening } from '@/components/home/typed-opening'
+import { usePreloadImages } from '@/lib/use-preload-images'
+
+// Warmed the moment the Home page mounts — i.e. during the several
+// seconds the typed opening (WELCOME TO SRI LANKA...) is playing,
+// which is dead time from a network point of view. Two purposes:
+// 1) Home's own below-the-fold imagery is ready by the time visitors
+//    scroll to it. 2) the Destinations page's brass rudder wheel is
+//    included here on purpose: Home is where most visitors land
+//    first, so warming that image now — rather than waiting for
+//    someone to actually navigate to /destinations — gives it the
+//    longest possible head start against the "wheel hasn't finished
+//    loading before the ritual's minimum time is up" symptom
+//    described in docs/OPENING-ANIMATION-PRELOAD-PLAN.md.
+const HOME_PRELOAD_IMAGES = [
+  '/images/serendib-brass-wheel.webp',
+  '/images/sri-lanka-map-island-focus.webp',
+  '/images/fine-lanka-esala-perahera.webp',
+  '/images/fine-lanka-process-route-background-tall.webp',
+]
 
 export function HomePage() {
+  usePreloadImages(HOME_PRELOAD_IMAGES)
+
   // ---- Fades/slides elements with the .reveal class in as they enter
   // view (was initScrollReveal() in main.js — global in the original
   // too). Covers Features and Process. The explore-window is

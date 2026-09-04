@@ -11,7 +11,12 @@ import { DESTINATION_VIDEO_READY_EVENT } from '@/components/destinations/destina
  * beneath it is responsible for the atlas composition and staged card field.
  */
 
-const WHEEL_MS = 2650
+// Kept in step with the .chart-ritual-wheel img `chartWheelTurnSmooth`
+// animation duration in app/globals.css (slowed from 2650ms to give the
+// wheel image, and the assets warmed early from the Home page per
+// docs/OPENING-ANIMATION-PRELOAD-PLAN.md, more time to actually load
+// before the minimum-time gate is satisfied) — change both together.
+const WHEEL_MS = 3600
 const DOOR_MS = 820
 // Hard cap on how much longer than WHEEL_MS we'll wait for the wheel image
 // and first destination video to actually arrive before opening the doors

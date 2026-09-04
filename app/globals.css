@@ -2299,7 +2299,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   height: 100%;
   object-fit: contain;
   transform-origin: 50% 50%;
-  animation: chartWheelTurn 2.4s cubic-bezier(0.77, 0, 0.175, 1) both;
+  animation: chartWheelTurn 3.6s cubic-bezier(0.77, 0, 0.175, 1) both;
 }
 .chart-ritual-orbit {
   position: absolute;
@@ -4091,7 +4091,12 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   transform-origin: center;
   backface-visibility: hidden;
   will-change: transform;
-  animation: chartWheelTurnSmooth 2.65s cubic-bezier(0.72, 0, 0.98, 1) both;
+  /* Slowed from 2.65s (docs/OPENING-ANIMATION-PRELOAD-PLAN.md): gives
+     the brass wheel image — and, now that it's also warmed from the
+     Home page, other destination-page assets — more of the ritual's
+     dead time to actually finish loading before the doors gate opens.
+     WHEEL_MS in chart-intro.tsx must stay in step with this value. */
+  animation: chartWheelTurnSmooth 3.6s cubic-bezier(0.72, 0, 0.98, 1) both;
 }
 [data-chart-ritual] .chart-ritual-kicker { margin-top: 1.5rem; }
 [data-chart-ritual] .chart-ritual-title { font-size: clamp(2.9rem, 6.5vw, 5.1rem); }
