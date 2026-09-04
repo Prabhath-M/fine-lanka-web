@@ -6,6 +6,11 @@ import { shouldRenderDestinationVideo } from '@/lib/destination-media'
 import { slugify } from '@/lib/utils'
 import type { Destination } from '@/lib/destinations-data'
 
+/** Fired once this card's video has enough data for a first frame to show.
+ *  The chart-intro ritual on the destinations page listens for this so its
+ *  doors don't open onto a video that hasn't arrived yet. */
+export const DESTINATION_VIDEO_READY_EVENT = 'fl:destination-video-ready'
+
 /** A single destination card: a muted looping inline video plays behind the
  *  name/coords/region/description on the front, over a dark band so the
  *  text stays legible against whatever's playing behind it. Clicking or
@@ -34,7 +39,13 @@ function DestinationVideo({ slug }: { slug: string }) {
       /* The supplied poster remains a graceful fallback if playback is blocked. */
     })
 
+    const notifyReady = () => {
+      window.dispatchEvent(new Event(DESTINATION_VIDEO_READY_EVENT))
+    }
+    video.addEventListener('loadeddata', notifyReady)
+
     return () => {
+      video.removeEventListener('loadeddata', notifyReady)
       // Pause before removing the source so a card turn does not leave a
       // decoder or buffered surface alive behind the next active card.
       video.pause()
