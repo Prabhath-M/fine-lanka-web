@@ -229,6 +229,57 @@ every image over ~150KB, then:
 - [ ] Re-verify on `https://finelankatours.com` — home, about, booking,
       tours-pricing, explore section, Network tab page-weight check
 
+### Phase 2b — correction (same day, post-deploy report)
+
+Human tested on a 2K laptop screen after deploying Phase 2 and
+reported backgrounds *still* somewhat slow. Investigation found two
+real problems with the Phase 2 work above:
+
+1. **Introduced bug:** the `.section-fixed-canvas--booking`/`--tours`
+   large-screen (`≥1400px`) override pointed at the **full original**
+   file instead of the `1600w` variant — so on exactly the kind of
+   screen (2K/1440p+) that triggers that breakpoint, this made things
+   *worse* than before Phase 2 for that element.
+2. **Fixed the wrong selector:** `.section-fixed-canvas--booking`/
+   `--tours` turned out to be dead CSS — never applied to any element
+   in the actual JSX. The real, live Tours & Pricing background is
+   `.tours-page .tour-collection` (confirmed via
+   `grep` against `tours-pricing-page.tsx`), which Phase 2 never
+   touched — it was still shipping the full 302KB/2560px original,
+   unconditionally, on every screen size including mobile.
+3. **Much wider gap:** ~35 other background-image references across
+   About Us, Home, and other pages already had `480w`/`960w`/`1600w`
+   variants generated (from the Phase 2 batch script) but the CSS
+   still pointed at the full-size originals — Phase 2 only wired up
+   2–3 of them.
+
+**Fix applied:** a repo-wide script-driven pass over `globals.css` —
+every `url('/images/X.webp')` background reference is now capped at
+its `1600w` variant (falling back to `960w` for images whose original
+was already under 1600px wide, so no `1600w` file exists). No
+background image on the site now ever serves anything larger than
+1600px wide, regardless of screen size — 78 references updated across
+the file. `.tours-page .tour-collection` additionally got the same
+tiered treatment as the other full-bleed canvases (960w default /
+1600w on ≥1400px / 480w on ≤720px mobile).
+
+Net result: the 52 unique background images actually referenced in
+`globals.css` now total ~9.9MB combined (down from the un-capped
+originals), and — critically — nothing is ever served above 1600px
+wide anymore, closing the "still slow on a big screen" gap.
+
+**Known remaining dead code, not touched:** `.section-fixed-canvas--
+booking`/`--tours` and `.booking-page .booking-layout::before` (the
+latter sets `background-image` then immediately resets it with
+`background: none` in the same rule, so it was never fetched even
+before Phase 2). Harmless to leave, but worth removing in a cleanup
+pass since they're confusing to read.
+
+- [ ] Deploy this correction, re-verify Tours & Pricing / Book Now on
+      a large/2K screen specifically this time
+- [ ] Consider a follow-up cleanup PR to delete the dead
+      `.section-fixed-canvas--*` rules
+
 ---
 
 ## How to resume (if a session runs out)
