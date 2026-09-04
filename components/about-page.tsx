@@ -50,6 +50,9 @@ export function AboutPage() {
             <img
               src="/images/fine-lanka-esala-perahera.jpg"
               alt="Illuminated elephant procession at the Kandy Esala Perahera"
+              width={1707}
+              height={2560}
+              loading="eager"
             />
             <figcaption>
               <span>Kandy, after dark</span>
@@ -80,6 +83,9 @@ export function AboutPage() {
             <img
               src="/images/fine-lanka-kandyan-dancers.jpg"
               alt="A Kandyan dancer wearing traditional Sri Lankan ceremonial costume"
+              width={2560}
+              height={1707}
+              loading="lazy"
             />
             <figcaption>Living tradition · Kandy</figcaption>
           </figure>

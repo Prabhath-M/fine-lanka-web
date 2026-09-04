@@ -110,6 +110,9 @@ export function DestinationsPage() {
                       alt=""
                       aria-hidden="true"
                       draggable={false}
+                      width={640}
+                      height={640}
+                      loading="eager"
                     />
                   </div>
                   <div className="dest-hero-aside-copy">
@@ -175,7 +178,14 @@ export function DestinationsPage() {
 
         <section className="cta-band destinations-cta">
           <div className="destinations-cta-mark" aria-hidden="true">
-            <img src="/images/destinations-route-line.png" alt="" draggable={false} />
+            <img
+              src="/images/destinations-route-line.png"
+              alt=""
+              draggable={false}
+              width={2304}
+              height={1536}
+              loading="lazy"
+            />
           </div>
           <p className="dest-section-kicker">A route can start anywhere</p>
           <h2>Not sure which region fits your trip?</h2>

@@ -12,12 +12,16 @@ const SUPPORTING_MOMENTS = [
     alt: 'Aerial view of the Arugam Bay shoreline and surf craft',
     place: 'Arugam Bay',
     theme: 'East coast ease',
+    width: 2048,
+    height: 1282,
   },
   {
     image: '/images/fine-lanka-kandyan-dancers.jpg',
     alt: 'A Sri Lankan Kandyan dancer in traditional costume',
     place: 'Kandy',
     theme: 'Culture in motion',
+    width: 2560,
+    height: 1707,
   },
 ]
 
@@ -49,6 +53,9 @@ export function Features() {
             <img
               src="/images/fine-lanka-esala-perahera.jpg"
               alt="Illuminated elephant procession at Kandy Esala Perahera"
+              width={1707}
+              height={2560}
+              loading="lazy"
             />
             <figcaption>
               <span>For the moments you cannot plan from afar</span>
@@ -84,7 +91,13 @@ export function Features() {
           <div className="why-professional-moments" aria-label="Sri Lankan travel moments">
             {SUPPORTING_MOMENTS.map((moment) => (
               <figure key={moment.place}>
-                <img src={moment.image} alt={moment.alt} />
+                <img
+                  src={moment.image}
+                  alt={moment.alt}
+                  width={moment.width}
+                  height={moment.height}
+                  loading="lazy"
+                />
                 <figcaption>
                   <span>{moment.place}</span>
                   <small>{moment.theme}</small>

@@ -121,6 +121,9 @@ export function DestinationCard({
         aria-hidden="true"
         className="dest-card-frame"
         draggable={false}
+        width={1632}
+        height={2176}
+        loading="lazy"
       />
       <div className="dest-card-media">
         {!shouldRenderDestinationVideo(mediaActive, reducedMotion) && (

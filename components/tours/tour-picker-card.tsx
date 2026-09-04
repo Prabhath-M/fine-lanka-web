@@ -46,6 +46,9 @@ export const TourPickerCard = forwardRef<
         alt=""
         aria-hidden="true"
         className="h-40 w-full object-cover transition-transform duration-500 ease-[var(--tc-ease-out)] group-hover:scale-[1.04] sm:h-44"
+        width={1024}
+        height={1024}
+        loading="lazy"
       />
       <span className="absolute inset-0 bg-[linear-gradient(180deg,transparent_30%,rgba(5,39,33,0.8)_100%)]" />
       <span className="absolute inset-x-4 bottom-3 flex items-end justify-between gap-3 text-white">

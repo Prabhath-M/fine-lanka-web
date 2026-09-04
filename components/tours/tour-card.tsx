@@ -39,6 +39,9 @@ export function TourCard({
           src={`/images/tour-${tour.category}.png`}
           alt={`${tour.name} — Sri Lanka`}
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-[var(--tc-ease-out)] group-hover:scale-[1.015]"
+          width={1024}
+          height={1024}
+          loading="lazy"
         />
         <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(5,39,33,0.5)_0%,rgba(5,39,33,0.05)_42%,rgba(5,39,33,0.84)_100%)]" />
 

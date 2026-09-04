@@ -11,7 +11,14 @@ export function SiteFooter() {
           <NavLink href="/" className="brand">
             <span className="brand-logo">
               <span className="brand-logo-flare" aria-hidden="true" />
-              <img src="/images/logo-site.png" alt="" className="brand-logo-img" />
+              <img
+                src="/images/logo-site.png"
+                alt=""
+                className="brand-logo-img"
+                width={1024}
+                height={1024}
+                loading="lazy"
+              />
             </span>
           </NavLink>
           <p>
