@@ -7,6 +7,25 @@ const nextConfig = {
   // enabled there can remove the `.nft.json` manifest expected by Vercel's
   // post-build hook.
   ...(isVercelBuild ? {} : { output: 'standalone' }),
+  // docs/MEDIA-OPTIMIZATION.md's Phase 2b established a site-wide policy:
+  // nothing is ever served above 1600px wide, regardless of screen size —
+  // applied by hand to every CSS background-image and plain <img> on the
+  // site. The two next/image usages (this map, journal-page.tsx) were
+  // missed, since next/image generates its own responsive variants
+  // on-demand rather than reading from that manually-capped set. Left at
+  // Next's default deviceSizes, that array goes up to 3840px — so a wide,
+  // high-DPI screen could trigger an on-demand 3840px resize through
+  // next/image's live sharp-based optimizer, exactly the kind of
+  // expensive per-request server-side work this project has otherwise
+  // gone out of its way to avoid on this memory-constrained cPanel host
+  // (see the "why this wasn't caught by next/image" note near the top of
+  // MEDIA-OPTIMIZATION.md). Capping deviceSizes here brings next/image
+  // in line with the same 1600px ceiling already enforced everywhere
+  // else, and should be revisited if a genuinely full-bleed next/image
+  // usage is ever added that needs to exceed it.
+  images: {
+    deviceSizes: [640, 750, 828, 1080, 1200, 1600],
+  },
   // Phase 8 of the pre-launch audit: baseline security headers. The site
   // is fully self-contained right now — no external scripts, fonts,
   // analytics, or image hosts (next/font self-hosts Google Fonts, all
