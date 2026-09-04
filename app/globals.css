@@ -5148,10 +5148,10 @@ main > #destinations,
 
   --max-width: 1240px;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
-  --navbar-backdrop-1: url('/images/navbar_backdrop_1.png');
-  --navbar-backdrop-2: url('/images/navbar_backdrop_2.png');
-  --navbar-backdrop-3: url('/images/navbar_backdrop_3.png');
-  --navbar-backdrop-4: url('/images/navbar_backdrop_4.png');
+  --navbar-backdrop-1: url('/images/navbar_backdrop_1.webp');
+  --navbar-backdrop-2: url('/images/navbar_backdrop_2.webp');
+  --navbar-backdrop-3: url('/images/navbar_backdrop_3.webp');
+  --navbar-backdrop-4: url('/images/navbar_backdrop_4.webp');
   --navbar-backdrop-active: var(--navbar-backdrop-1);
 
   /* Sri Lankan tourism palette: ink navy, brass/gold, parchment, teal */
@@ -10692,7 +10692,7 @@ body:has(.features:target) .typed-opening { display: none; }
   top: 0;
   bottom: 0;
   width: 50%;
-  background-image: url('/images/journal-portal-doors-coordinated-final.png');
+  background-image: url('/images/journal-portal-doors-coordinated-final.webp');
   background-size: 200% 100%;
   background-repeat: no-repeat;
   z-index: 4;
@@ -10914,7 +10914,7 @@ body:has(.features:target) .typed-opening { display: none; }
   inset: 0;
   background:
     linear-gradient(180deg, rgba(7, 15, 26, 0.18), rgba(7, 15, 26, 0.34)),
-    url('/images/journal-portal-stone-wall-background.jpg') center / cover no-repeat,
+    url('/images/journal-portal-stone-wall-background.webp') center / cover no-repeat,
     radial-gradient(ellipse at center, rgba(207, 166, 83, 0.08), transparent 48%),
     linear-gradient(90deg, rgba(3, 9, 17, 0.18), transparent 24%, transparent 76%, rgba(3, 9, 17, 0.18));
   pointer-events: none;
@@ -10991,11 +10991,11 @@ body:has(.features:target) .typed-opening { display: none; }
   aspect-ratio: 3 / 4;
   max-height: calc(100svh - var(--portal-wall-floor-offset) - 2rem);
   pointer-events: none;
-  background: url('/images/journal-portal-frame-coordinated-final.jpg') center / 100% 100% no-repeat;
+  background: url('/images/journal-portal-frame-coordinated-final.webp') center / 100% 100% no-repeat;
   transform: translate3d(-50%, calc(-50% - var(--portal-door-lift)), 0) scale(1);
   transform-origin: 50% 50%;
   will-change: transform, opacity;
-  background-image: url('/images/journal-portal-door-seam-trim-final-v2.png');
+  background-image: url('/images/journal-portal-door-seam-trim-final-v2.webp');
   background-repeat: no-repeat;
   background-position: center;
   background-size: 100% 100%;
@@ -11149,7 +11149,7 @@ body:has(.features:target) .typed-opening { display: none; }
   max-height: none;
   aspect-ratio: auto;
   pointer-events: none;
-  background-image: url('/images/journal-portal-arch-frame-gapless-v2.png');
+  background-image: url('/images/journal-portal-arch-frame-gapless-v2.webp');
   background-position: center;
   background-repeat: no-repeat;
   background-size: 100% 100%;
@@ -11214,7 +11214,7 @@ body:has(.features:target) .typed-opening { display: none; }
   pointer-events: none;
   background-image:
     linear-gradient(rgba(6, 12, 22, 0.48), rgba(9, 16, 28, 0.64)),
-    url('/images/journal/portal-realm-refined.jpg');
+    url('/images/journal/portal-realm-refined.webp');
   background-size: 100% 100%;
   background-position: center center;
   background-repeat: no-repeat;
@@ -12511,7 +12511,7 @@ body:has(.features:target) .typed-opening { display: none; }
   pointer-events: none;
   background:
     linear-gradient(rgba(6, 12, 22, 0.36), rgba(9, 16, 28, 0.5)),
-    url('/images/journal/portal-realm-refined.jpg');
+    url('/images/journal/portal-realm-refined.webp');
   background-size: cover;
   background-position: center top;
   background-attachment: scroll;

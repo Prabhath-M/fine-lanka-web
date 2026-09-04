@@ -60,34 +60,71 @@ site already avoids building on cPanel:
 
 ## Status
 
-**Current phase:** Not started — inventory taken, plan agreed, about
-to begin with the assets the user specifically flagged (hero video +
-journal portal set + navbar/mural backgrounds).
+**Current phase:** Sample conversions done and visually verified —
+proceeding to full batch conversion.
 
-**Nothing has been converted yet as of this writing.**
+**Confirmed settings (visually checked, safe to reuse for the rest):**
+- **Images → WebP:** `quality=82, method=6` (Pillow `im.save(path, 'WEBP', quality=82, method=6)`).
+  On the 3 samples tested (journal portal doors, navbar backdrop,
+  mural frame) this gave **~9–14x size reduction with no visible
+  quality loss** even on fine detail (carving, gold inlay).
+- **Video → H.264 re-encode:** `ffmpeg -c:v libx264 -preset slow -crf 26
+  -maxrate 3500k -bufsize 7000k -c:a aac -b:a 96k -movflags +faststart`.
+  On `hero-loop.mp4`: **58.2 MB → 7.9 MB (7.7x smaller)**, frame-by-frame
+  comparison showed no visible difference.
+
+Nothing has been swapped into `public/` yet as of this writing — only
+tested in `/tmp`. Next step is running this across the full asset
+list and swapping files in.
 
 ### Checklist — do in this order
 
-- [ ] Sample conversion + visual sanity check (2–3 files, before
-      doing all ~90) — confirm quality is acceptable before bulk work
-- [ ] Hero video (`public/videos/hero-loop.mp4`)
-- [ ] Destination videos (`anuradhapura.mp4`, `sigiriya.mp4`)
-- [ ] Journal portal image set (5 files, CSS backgrounds)
-- [ ] Navbar backdrop set (`navbar_backdrop_1..4.png`)
-- [ ] Mural frame/blend set (`public/mural/*.png`, ~14 files)
-- [ ] Remaining `public/images/*` over 300 KB (~65 files — see full
-      list below)
-- [ ] Update every code/CSS reference to point at new filenames
-      (if extensions change, e.g. `.png` → `.webp`)
-- [ ] Re-run `npx tsc --noEmit` and `vitest`
-- [ ] Commit on a new branch (e.g. `fix/optimize-media`), verify
-      GitHub Actions build succeeds
+- [x] Sample conversion + visual sanity check (2–3 files, before
+      doing all ~90) — confirmed quality is acceptable, settings above
+- [x] Hero video (`public/videos/hero-loop.mp4`) — 58.2MB → 7.9MB
+- [x] Destination videos — `anuradhapura.mp4` 38.0MB→4.7MB,
+      `sigiriya.mp4` 36.9MB→10.6MB. `ambient-atlas-loop.mp4` (1.5MB)
+      left as-is, already small. **`public/videos` total: 135MB → 24MB**
+- [x] Journal portal image set — 6 files actually referenced in code
+      converted to WebP (34.7MB → 4.95MB combined); 7 more files in
+      that family were unused leftover variants (arch-frame-final,
+      -fit-final, -gapless, -fitted, -inner-edge-aligned,
+      -door-height, journal/portal-doors-refined.jpg) — confirmed via
+      grep no code/CSS references them, deleted outright rather than
+      converted. `portal-doors.jpg` (221KB, unused) and
+      `portal-realm.jpg` (167KB, used, already small) left alone.
+- [x] Navbar backdrop set — only `navbar_backdrop_4.png` was the
+      outlier (4.78MB); 1–3 were already small (~130-150KB each).
+      All 4 converted to WebP for consistency. **5.19MB → 0.57MB**
+- [x] Mural set — `blend-1..6.png` (the active flipbook frames,
+      referenced in `site-header.tsx`) converted to WebP: 9.19MB →
+      1.02MB. `frame-1..6.png` (~10MB) were dead files — confirmed no
+      code reference (grepped for any `mural` usage beyond
+      `blend-N`), deleted outright.
+- [x] Re-ran `npx tsc --noEmit` (clean) and `npx vitest run` (8/8
+      passing) after the above changes — done as a checkpoint before
+      continuing to the remaining images.
+- [ ] **NEXT UP:** remaining `public/images/*` over 300 KB (~65 files
+      not yet touched — see full list below, minus the journal
+      portal/navbar/mural files already done above)
+- [ ] Full `next build` verification (couldn't run in this sandbox —
+      network-restricted, can't reach fonts.googleapis.com for
+      next/font; not a real issue, just this container. Verify for
+      real once pushed and GitHub Actions runs the build.)
+- [ ] Commit remaining work on `fix/optimize-media` branch (already
+      created; hero/destination videos + journal portal + navbar +
+      mural batch is the first commit on it, not yet pushed as of
+      this checkpoint), verify GitHub Actions build succeeds
 - [ ] Merge to `main`, confirm `deploy/production` updated
 - [ ] Manual cPanel step: Git Version Control → Update from Remote →
       Deploy HEAD Commit (see `docs/CPANEL-DEPLOY.md`)
 - [ ] Verify on `https://finelankatours.com` — homepage hero, journal
       page portal animation, general page-weight via browser devtools
       Network tab
+
+**Running total so far:** `public/` 271MB → 106MB
+(videos 135MB→24MB, mural 19MB→1.1MB, images 113MB→76MB — images
+still has the bulk of the remaining ~65 files to do).
 
 ---
 
