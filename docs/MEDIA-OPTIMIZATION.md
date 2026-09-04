@@ -142,6 +142,59 @@ confirmed-dead leftover image variants across the batches below.
 
 ---
 
+## Phase 3 — next/image device-size cap (2026-09-04, post-deploy report)
+
+**The problem:** user reported the live site still felt considerably
+slow despite Phases 1 and 2 both being deployed and verified. Fetched
+`finelankatours.com`'s actual rendered HTML directly and found a smoking
+gun: `.../​_next/image?url=%2Fimages%2Fsri-lanka-map-island-focus.webp&w=3840&q=75`
+— the interactive island map (`components/home/explore-section.tsx`,
+`fill` + `sizes="(max-width: 900px) 100vw, 38vw"`) was triggering
+Next.js's **live, on-demand, server-side** image optimizer at a 3840px
+width — exactly the kind of expensive per-request `sharp` work this
+whole optimization effort was built to avoid on this memory-constrained
+cPanel host (see the "why this wasn't caught by next/image" note near
+the top of this doc). Worse: the source file is only **794px wide** —
+Next clamps rather than upscales, so no literal 3840px image was
+produced, but the request still round-tripped through the live
+optimizer unnecessarily.
+
+Root cause: the two `next/image` usages on the site
+(`explore-section.tsx`, `journal-page.tsx`) were never brought in line
+with the site-wide "never serve above 1600px" policy established in
+Phase 2b — that policy was applied by hand to every CSS
+`background-image` and plain `<img>`, but next/image generates its own
+responsive variants from Next's *default* `deviceSizes` array
+(`[640, 750, 828, 1080, 1200, 1920, 2048, 3840]`), which nothing had
+capped.
+
+**Fix:** added an `images.deviceSizes` cap to `next.config.mjs`
+(`[640, 750, 828, 1080, 1200, 1600]`), bringing next/image's own
+responsive generation in line with the same ceiling already enforced
+everywhere else. Benefits both existing `next/image` usages, not just
+the map.
+
+- [x] Diagnosed via the live site's actual rendered HTML (`web_fetch`),
+      not guessed
+- [x] Added the `deviceSizes` cap in `next.config.mjs`
+- [x] Verified `node --check next.config.mjs` and `npx tsc --noEmit`
+      pass clean
+- [ ] Commit, push, PR, verify GitHub Actions build succeeds
+- [ ] Merge to `main`
+- [ ] Manual cPanel step: Git Version Control → Update from Remote →
+      Deploy HEAD Commit
+- [ ] Re-verify on `https://finelankatours.com` — re-fetch the homepage
+      HTML and confirm the map's `/_next/image` URL no longer requests
+      `w=3840` (should cap at `w=1600` now)
+
+**Not done, needs a decision — see the remaining options laid out in
+chat:** static-asset `Cache-Control` headers (no `.htaccess` and no
+caching policy currently exist at all — every image likely re-validates
+on every visit, affecting repeat page loads specifically, not first
+paint), and whether to put a CDN (e.g. Cloudflare) in front of the
+origin, which would help both of the above at once but needs a DNS
+change at Namecheap.
+
 ---
 
 ## Phase 2 — Responsive sizing (started 2026-09-04, post-launch)
