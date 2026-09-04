@@ -12527,7 +12527,16 @@ body:has(.features:target) .typed-opening { display: none; }
   --portal-wall-floor-offset: clamp(6rem, 19vh, 13rem);
   --portal-focus-y: calc(100% - var(--portal-wall-floor-offset) - var(--portal-door-lift) - var(--portal-door-half-height));
   --portal-door-lift: 1.75rem;
-  --portal-door-half-height: 253px;
+  /* Must always equal half of .portal-frame's actual rendered height
+     (width * (4/3) / 2, from its 3/4 aspect-ratio below), or the wall's
+     transform-origin (--portal-focus-y above) stops lining up with the
+     door's true visual center and the two visibly drift apart from each
+     other as both scale up during the zoom. This was hardcoded to 253px
+     — correct for a since-changed 380px frame width (380 * 2/3 = 253),
+     stale after .portal-frame's width later moved to min(470px, 74vw)
+     without updating this alongside it. Deriving it from the same
+     min(470px, 74vw) formula keeps the two coupled going forward. */
+  --portal-door-half-height: calc(min(470px, 74vw) * 2 / 3);
   height: 100dvh;
   box-sizing: border-box;
 }
