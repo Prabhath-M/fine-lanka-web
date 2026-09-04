@@ -69,6 +69,52 @@ const nextConfig = {
           },
         ],
       },
+      // docs/MEDIA-OPTIMIZATION.md flagged this as the remaining gap after
+      // Phases 1-3 (format/quality, dimensions, next/image deviceSizes):
+      // no Cache-Control policy existed at all for static assets under
+      // public/, so every image/video re-validates with the server on
+      // every single page view - even repeat visits to a page whose
+      // media hasn't changed. next/image's own on-demand-optimized output
+      // (/_next/image) and Next's own build output (/_next/static/*) both
+      // already get long-lived immutable caching automatically from
+      // Next.js itself; this only needed adding for the plain files
+      // served as-is from public/.
+      //
+      // `immutable, max-age=31536000` (1 year) is safe here specifically
+      // because of how this project's media-optimization work is done:
+      // every conversion/resize swaps in a file under its existing name
+      // rather than editing bytes in place (see MEDIA-OPTIMIZATION.md's
+      // "How to resume" - variants get their own distinct filenames,
+      // e.g. `-960w`/`-1600w` suffixes). If that convention ever changes
+      // (a file's content updated while keeping the exact same name),
+      // visitors with a cached copy won't see the update for up to a
+      // year - rename the file (or add a cache-busting query/version)
+      // instead of overwriting in place.
+      {
+        source: '/images/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/videos/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/mural/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      {
+        source: '/:path(icon-light-32x32\\.png|icon\\.svg|placeholder\\.svg)',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
+      },
+      // The route-atlas map data is structured content, not a media
+      // file - it could plausibly be updated (a destination added/
+      // edited) without the filename changing, unlike the media files
+      // above. A much shorter cache with revalidation avoids visitors
+      // getting stuck with stale map data for a year after an update.
+      {
+        source: '/data/:path*',
+        headers: [{ key: 'Cache-Control', value: 'public, max-age=3600, must-revalidate' }],
+      },
     ]
   },
   // Phase 8.2 of MIGRATION_PLAN.md: every page used to be a static file
