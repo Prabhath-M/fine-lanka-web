@@ -11,21 +11,6 @@ import { useFocusTrap } from '@/lib/use-focus-trap'
 import { useBodyScrollLock } from '@/lib/use-body-scroll-lock'
 
 /**
- * Hand-painted mural behind the tall, unscrolled header. The prior flipbook
- * cross-faded six large raster layers continuously; one composed frame keeps
- * the same visual language without imposing background decode/paint work on
- * every route.
- */
-const MURAL_FRAMES = [
-  '/mural/blend-1.webp',
-  '/mural/blend-2.webp',
-  '/mural/blend-3.webp',
-  '/mural/blend-4.webp',
-  '/mural/blend-5.webp',
-  '/mural/blend-6.webp',
-]
-
-/**
  * Maps a Next.js pathname to the `page` key used by NAV_LINKS for
  * active-item highlighting — the React equivalent of the old
  * `document.body.dataset.page` convention every static page set by
@@ -110,7 +95,9 @@ export function SiteHeader() {
       >
         <div className="site-header-mural" aria-hidden="true">
           <img
-            src={MURAL_FRAMES[0]}
+            src="/mural/blend-1-960w.webp"
+            srcSet="/mural/blend-1-480w.webp 480w, /mural/blend-1-960w.webp 960w, /mural/blend-1-1600w.webp 1600w, /mural/blend-1.webp 1900w"
+            sizes="100vw"
             alt=""
             className="site-header-mural-frame"
             width={1900}

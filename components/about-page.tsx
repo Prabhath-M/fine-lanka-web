@@ -48,7 +48,9 @@ export function AboutPage() {
           </div>
           <figure className="about-hero-photo">
             <img
-              src="/images/fine-lanka-esala-perahera.webp"
+              src="/images/fine-lanka-esala-perahera-960w.webp"
+              srcSet="/images/fine-lanka-esala-perahera-480w.webp 480w, /images/fine-lanka-esala-perahera-960w.webp 960w, /images/fine-lanka-esala-perahera-1600w.webp 1600w, /images/fine-lanka-esala-perahera.webp 1707w"
+              sizes="(max-width: 900px) 100vw, 480px"
               alt="Illuminated elephant procession at the Kandy Esala Perahera"
               width={1707}
               height={2560}
@@ -81,7 +83,9 @@ export function AboutPage() {
           </div>
           <figure className="about-origin-photo">
             <img
-              src="/images/fine-lanka-kandyan-dancers.webp"
+              src="/images/fine-lanka-kandyan-dancers-960w.webp"
+              srcSet="/images/fine-lanka-kandyan-dancers-480w.webp 480w, /images/fine-lanka-kandyan-dancers-960w.webp 960w, /images/fine-lanka-kandyan-dancers-1600w.webp 1600w, /images/fine-lanka-kandyan-dancers.webp 2560w"
+              sizes="(max-width: 900px) 100vw, 640px"
               alt="A Kandyan dancer wearing traditional Sri Lankan ceremonial costume"
               width={2560}
               height={1707}

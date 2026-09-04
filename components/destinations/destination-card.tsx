@@ -127,7 +127,9 @@ export function DestinationCard({
       }}
     >
       <img
-        src="/images/dest-card-frame.webp"
+        src="/images/dest-card-frame-480w.webp"
+        srcSet="/images/dest-card-frame-480w.webp 480w, /images/dest-card-frame-960w.webp 960w, /images/dest-card-frame-1600w.webp 1600w"
+        sizes="360px"
         alt=""
         aria-hidden="true"
         className="dest-card-frame"

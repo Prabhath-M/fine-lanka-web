@@ -2729,8 +2729,20 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   position: absolute;
   inset: 0;
   z-index: 2;
-  background: url("/images/dest-panel-frame.webp") no-repeat center / 100% 100%;
+  /* Rendered well under 960px in every layout this card appears in;
+     swap to the full-resolution source only on large/high-DPI screens
+     where the extra detail is actually visible. */
+  background: url("/images/dest-panel-frame-960w.webp") no-repeat center / 100% 100%;
   pointer-events: none;
+}
+@media (min-width: 1400px) {
+  .dest-panel::before {
+    background-image: url("/images/dest-panel-frame-1600w.webp");
+  }
+  .dest-panel::after {
+    -webkit-mask-image: url("/images/dest-panel-frame-1600w.webp");
+    mask-image: url("/images/dest-panel-frame-1600w.webp");
+  }
 }
 /* Metallic shine: a bright diagonal band that sweeps slowly across the
    frame, masked to the frame PNG's own alpha so it only ever plays over
@@ -2745,11 +2757,11 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   inset: 0;
   z-index: 2;
   pointer-events: none;
-  -webkit-mask-image: url("/images/dest-panel-frame.webp");
+  -webkit-mask-image: url("/images/dest-panel-frame-960w.webp");
   -webkit-mask-size: 100% 100%;
   -webkit-mask-repeat: no-repeat;
   -webkit-mask-position: center;
-  mask-image: url("/images/dest-panel-frame.webp");
+  mask-image: url("/images/dest-panel-frame-960w.webp");
   mask-size: 100% 100%;
   mask-repeat: no-repeat;
   mask-position: center;
@@ -12170,12 +12182,23 @@ body:has(.features:target) .typed-opening { display: none; }
    canvas. Content remains in normal scrolling flow above a steady background.
    ========================================================================== */
 .section-fixed-canvas--booking {
-  background-image: url('/images/milk-rice-booking-field-notes.webp');
+  /* Full-bleed viewport-width canvas — serve a moderate size by default
+     and step up only for large/high-DPI screens, since the original is
+     2560px wide (massive overkill on a ~390px phone viewport). */
+  background-image: url('/images/milk-rice-booking-field-notes-960w.webp');
   background-position: 67% center;
 }
 .section-fixed-canvas--tours {
-  background-image: url('/images/milk-rice-tours-field-notes.webp');
+  background-image: url('/images/milk-rice-tours-field-notes-960w.webp');
   background-position: 67% center;
+}
+@media (min-width: 1400px) {
+  .section-fixed-canvas--booking {
+    background-image: url('/images/milk-rice-booking-field-notes.webp');
+  }
+  .section-fixed-canvas--tours {
+    background-image: url('/images/milk-rice-tours-field-notes.webp');
+  }
 }
 
 /* Book Now: retain its index label, but remove the former stretched image
@@ -12284,7 +12307,7 @@ body:has(.features:target) .typed-opening { display: none; }
   pointer-events: none;
   background-image:
     linear-gradient(180deg, rgba(246, 238, 218, 0.18), rgba(244, 233, 207, 0.3)),
-    url('/images/sri-lanka-ves-dance-heritage-background.webp');
+    url('/images/sri-lanka-ves-dance-heritage-background-960w.webp');
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
