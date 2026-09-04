@@ -11,7 +11,17 @@ function getResendClient() {
 }
 
 const FROM_EMAIL = process.env.LEADS_FROM_EMAIL || 'onboarding@resend.dev'
+// Supports one or more recipients: set LEADS_TO_EMAIL to a single address
+// (e.g. "travel@finelankatours.com") or a comma-separated list (e.g.
+// "travel@finelankatours.com,you@gmail.com") to send an identical copy of
+// every team notification to each address. Resend's `to` field accepts
+// either a single string or an array — an array is used here so a
+// multi-address value is sent as genuinely separate recipients (not a
+// single malformed address string).
 const TO_EMAIL = process.env.LEADS_TO_EMAIL
+  ?.split(',')
+  .map((email) => email.trim())
+  .filter((email) => email.length > 0)
 
 export type LeadKind = 'booking' | 'enquiry' | 'newsletter'
 
@@ -49,7 +59,7 @@ interface SendTeamNotificationArgs {
  *  error response, since this is the email that actually matters (the
  *  auto-reply to the customer is a nice-to-have by comparison). */
 export async function sendTeamNotification({ kind, subject, fields }: SendTeamNotificationArgs) {
-  if (!TO_EMAIL) {
+  if (!TO_EMAIL || TO_EMAIL.length === 0) {
     throw new Error('LEADS_TO_EMAIL is not set. Add it to your environment variables.')
   }
   const resend = getResendClient()
