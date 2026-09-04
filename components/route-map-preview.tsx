@@ -123,19 +123,19 @@ const symbolByKind: Record<string, string> = {
 
 const locationDetails: Record<string, { image: string; description: string }> = {
   airport: {
-    image: '/images/sri-lanka-map-island-focus.jpg',
+    image: '/images/sri-lanka-map-island-focus.webp',
     description: 'Your island welcome point at Bandaranaike International Airport, north of Colombo and the starting point for every Fine Lanka journey.',
   },
   pinnawala: {
-    image: '/images/tour-nature.png',
+    image: '/images/tour-nature.webp',
     description: 'A gentle first stop beside the Maha Oya, known for the Pinnawala Elephant Orphanage and a slower introduction to Sri Lanka’s wildlife.',
   },
   dambulla: {
-    image: '/images/tour-cultural-historical.png',
+    image: '/images/tour-cultural-historical.webp',
     description: 'A north-central heritage stop anchored by the Dambulla Cave Temple, with painted caves and Buddha images carved into the rock.',
   },
   sigiriya: {
-    image: '/images/fine-lanka-sigiriya-fresco-passage.jpg',
+    image: '/images/fine-lanka-sigiriya-fresco-passage.webp',
     description: 'The fifth-century Sigiriya Rock Fortress, with frescoes, the Mirror Wall, garden ruins and wide views across the Cultural Triangle.',
   },
 }
@@ -145,7 +145,7 @@ function getLocationDetails(marker: Marker) {
   if (direct) return direct
   const destination = DESTINATIONS.find((item) => item.name.toLowerCase().includes(marker.name.toLowerCase()) || marker.name.toLowerCase().includes(item.name.toLowerCase()))
   return {
-    image: destination?.region === 'Wildlife & National Parks' ? '/images/tour-nature.png' : destination?.region === 'Hill Country' ? '/images/tour-nature.png' : destination?.region === 'South Coast' || destination?.region === 'East Coast' ? '/images/tour-beach.png' : '/images/tour-cultural-historical.png',
+    image: destination?.region === 'Wildlife & National Parks' ? '/images/tour-nature.webp' : destination?.region === 'Hill Country' ? '/images/tour-nature.webp' : destination?.region === 'South Coast' || destination?.region === 'East Coast' ? '/images/tour-beach.webp' : '/images/tour-cultural-historical.webp',
     description: destination?.blurb ?? marker.note ?? `${marker.name} is a featured stop on the Fine Lanka route atlas. Select this waypoint to explore its place in the journey.`,
   }
 }

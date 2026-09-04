@@ -8,7 +8,7 @@ import { FEATURES } from '@/lib/site-data'
  */
 const SUPPORTING_MOMENTS = [
   {
-    image: '/images/fine-lanka-arugam-bay-surf.jpg',
+    image: '/images/fine-lanka-arugam-bay-surf.webp',
     alt: 'Aerial view of the Arugam Bay shoreline and surf craft',
     place: 'Arugam Bay',
     theme: 'East coast ease',
@@ -16,7 +16,7 @@ const SUPPORTING_MOMENTS = [
     height: 1282,
   },
   {
-    image: '/images/fine-lanka-kandyan-dancers.jpg',
+    image: '/images/fine-lanka-kandyan-dancers.webp',
     alt: 'A Sri Lankan Kandyan dancer in traditional costume',
     place: 'Kandy',
     theme: 'Culture in motion',
@@ -51,7 +51,7 @@ export function Features() {
         <div className="why-professional-main">
           <figure className="why-professional-hero">
             <img
-              src="/images/fine-lanka-esala-perahera.jpg"
+              src="/images/fine-lanka-esala-perahera.webp"
               alt="Illuminated elephant procession at Kandy Esala Perahera"
               width={1707}
               height={2560}

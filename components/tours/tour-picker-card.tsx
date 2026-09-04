@@ -42,7 +42,7 @@ export const TourPickerCard = forwardRef<
     >
       <span className="tour-picker-spine" aria-hidden="true" />
       <img
-        src={`/images/tour-${tour.category}.png`}
+        src={`/images/tour-${tour.category}.webp`}
         alt=""
         aria-hidden="true"
         className="h-40 w-full object-cover transition-transform duration-500 ease-[var(--tc-ease-out)] group-hover:scale-[1.04] sm:h-44"

@@ -141,7 +141,7 @@ export function ExploreSection() {
               <Image
                 ref={imgRef}
                 className="explore-map-image"
-                src="/images/sri-lanka-map-island-focus.jpg"
+                src="/images/sri-lanka-map-island-focus.webp"
                 alt="Island-focused illustrated interactive map of Sri Lanka marking Fine Lanka Tours destinations"
                 fill
                 sizes="(max-width: 900px) 100vw, 38vw"

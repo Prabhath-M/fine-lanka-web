@@ -179,7 +179,7 @@ export function DestinationsPage() {
         <section className="cta-band destinations-cta">
           <div className="destinations-cta-mark" aria-hidden="true">
             <img
-              src="/images/destinations-route-line.png"
+              src="/images/destinations-route-line.webp"
               alt=""
               draggable={false}
               width={2304}

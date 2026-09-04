@@ -53,7 +53,7 @@ const DestinationRudder = memo(function DestinationRudder({ onTurn }: { onTurn: 
   return (
     <div className="island-carousel-rudder" aria-label="Destination rudder controls">
       <img
-        src="/images/serendib-brass-wheel.png"
+        src="/images/serendib-brass-wheel.webp"
         alt=""
         aria-hidden="true"
         draggable={false}

@@ -42,11 +42,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/images/logo-site.png',
+        url: '/images/logo-site.webp',
         type: 'image/png',
       },
     ],
-    apple: '/images/logo-site.png',
+    apple: '/images/logo-site.webp',
   },
   openGraph: {
     type: 'website',
@@ -56,7 +56,7 @@ export const metadata: Metadata = {
       'Considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage.',
     images: [
       {
-        url: '/images/fine-lanka-about-heritage-hero.jpg',
+        url: '/images/fine-lanka-about-heritage-hero.webp',
         width: 2560,
         height: 1440,
         alt: 'Sigiriya rock fortress seen from a heritage fresco border, Sri Lanka',
@@ -68,7 +68,7 @@ export const metadata: Metadata = {
     title: 'Fine Lanka Tours — Considered Journeys Across Sri Lanka',
     description:
       'Considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage.',
-    images: ['/images/fine-lanka-about-heritage-hero.jpg'],
+    images: ['/images/fine-lanka-about-heritage-hero.webp'],
   },
 }
 

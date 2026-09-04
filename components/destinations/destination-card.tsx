@@ -116,7 +116,7 @@ export function DestinationCard({
       }}
     >
       <img
-        src="/images/dest-card-frame.png"
+        src="/images/dest-card-frame.webp"
         alt=""
         aria-hidden="true"
         className="dest-card-frame"
