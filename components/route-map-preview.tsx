@@ -238,7 +238,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
     if (!data || !selectedItinerary || activeMarkerIds.size === 0) return []
     return data.markers.filter((marker) => activeMarkerIds.has(marker.id))
   }, [data, selectedItinerary, activeMarkerIds])
-  const spotlightRadiusPx = 300
+  const spotlightRadiusPx = 340
   const spotlightMaskId = useId()
   const waypointByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint) => [waypoint.markerId, waypoint])), [activeWaypoints])
   const mainWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'main'), [activeWaypoints])
@@ -378,23 +378,55 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
               {spotlightMarkers.length > 0 && (
                 <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
                   <defs>
-                    <radialGradient id={`${spotlightMaskId}-feather`}>
-                      <stop offset="0%" stopColor="#fff" stopOpacity="1" />
-                      <stop offset="72%" stopColor="#fff" stopOpacity="1" />
-                      <stop offset="100%" stopColor="#fff" stopOpacity="0" />
-                    </radialGradient>
                     <mask id={spotlightMaskId} maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
                       <rect x="0" y="0" width="1" height="1" fill="black" />
-                      {spotlightMarkers.map((marker) => (
-                        <ellipse
-                          key={marker.id}
-                          cx={marker.x / data.width}
-                          cy={marker.y / data.height}
-                          rx={spotlightRadiusPx / data.width}
-                          ry={spotlightRadiusPx / data.height}
-                          fill={`url("#${spotlightMaskId}-feather")`}
-                        />
-                      ))}
+                      {/* A nested, viewBox-scoped <svg> gives this content real
+                          pixel coordinates (matching marker.x/marker.y and the
+                          blur's stdDeviation directly, no fraction math) while
+                          the outer mask still scales proportionally with
+                          whatever size the masked <img> actually renders at. */}
+                      <svg x="0" y="0" width="1" height="1" viewBox={`0 0 ${data.width} ${data.height}`}>
+                        <defs>
+                          <radialGradient id={`${spotlightMaskId}-feather`}>
+                            <stop offset="0%" stopColor="#fff" stopOpacity="1" />
+                            <stop offset="35%" stopColor="#fff" stopOpacity="1" />
+                            <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+                          </radialGradient>
+                          {/* Blurring the combined shapes alone still leaves a
+                              faint darker notch right where two circles meet —
+                              a plain blur softens each edge but doesn't fully
+                              fuse two separate soft-edged blobs into one evenly
+                              -lit shape. Fix (the classic "gooey filter" trick):
+                              blur, then push the alpha channel through a steep
+                              threshold so any partially-lit pixel snaps to
+                              fully on/off — this is what actually merges two
+                              overlapping blobs into one seamless union, since
+                              there's no partial-alpha pinch left to read as a
+                              notch. A final light blur softens that now-crisp
+                              edge back into a gentle glow. */}
+                          <filter id={`${spotlightMaskId}-blur`} x="-80%" y="-80%" width="260%" height="260%">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="34" result="soft" />
+                            <feColorMatrix
+                              in="soft"
+                              type="matrix"
+                              values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 20 -9"
+                              result="fused"
+                            />
+                            <feGaussianBlur in="fused" stdDeviation="10" />
+                          </filter>
+                        </defs>
+                        <g filter={`url("#${spotlightMaskId}-blur")`}>
+                          {spotlightMarkers.map((marker) => (
+                            <circle
+                              key={marker.id}
+                              cx={marker.x}
+                              cy={marker.y}
+                              r={spotlightRadiusPx}
+                              fill={`url("#${spotlightMaskId}-feather")`}
+                            />
+                          ))}
+                        </g>
+                      </svg>
                     </mask>
                   </defs>
                 </svg>
