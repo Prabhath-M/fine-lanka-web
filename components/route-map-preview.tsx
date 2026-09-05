@@ -392,13 +392,27 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                             <stop offset="35%" stopColor="#fff" stopOpacity="1" />
                             <stop offset="100%" stopColor="#fff" stopOpacity="0" />
                           </radialGradient>
-                          {/* Blurring the combined shapes (rather than relying
-                              on each circle's own feather alone) is what turns
-                              an uneven union of overlapping discs into one
-                              smooth, continuous glow with no visible seams
-                              where two circles meet. */}
-                          <filter id={`${spotlightMaskId}-blur`} x="-60%" y="-60%" width="220%" height="220%">
-                            <feGaussianBlur stdDeviation="42" />
+                          {/* Blurring the combined shapes alone still leaves a
+                              faint darker notch right where two circles meet —
+                              a plain blur softens each edge but doesn't fully
+                              fuse two separate soft-edged blobs into one evenly
+                              -lit shape. Fix (the classic "gooey filter" trick):
+                              blur, then push the alpha channel through a steep
+                              threshold so any partially-lit pixel snaps to
+                              fully on/off — this is what actually merges two
+                              overlapping blobs into one seamless union, since
+                              there's no partial-alpha pinch left to read as a
+                              notch. A final light blur softens that now-crisp
+                              edge back into a gentle glow. */}
+                          <filter id={`${spotlightMaskId}-blur`} x="-80%" y="-80%" width="260%" height="260%">
+                            <feGaussianBlur in="SourceGraphic" stdDeviation="34" result="soft" />
+                            <feColorMatrix
+                              in="soft"
+                              type="matrix"
+                              values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 20 -9"
+                              result="fused"
+                            />
+                            <feGaussianBlur in="fused" stdDeviation="10" />
                           </filter>
                         </defs>
                         <g filter={`url("#${spotlightMaskId}-blur")`}>
