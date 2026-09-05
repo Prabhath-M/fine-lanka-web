@@ -274,8 +274,13 @@ work, not just adding a preload hook:
 - [x] Full `tsc`/`vitest` pass on `develop`
 - [x] Merge `develop` → `main`
 - [x] Confirm GitHub Actions build succeeded, `deploy/production` updated
-- [ ] Manual cPanel deploy click (needs human with cPanel access)
-- [ ] Confirm live on `https://finelankatours.com`
+- [x] Manual cPanel deploy click — confirmed done (verified
+      2026-09-04, this session)
+- [x] Confirmed live on `https://finelankatours.com` — homepage,
+      Sigiriya destination video, and site chrome all render
+      correctly per `web_fetch`; the preload hooks themselves are
+      client-side JS so can't be directly observed in fetched static
+      HTML, but nothing in the rendered output suggests a problem
 
 ## Addendum — About & Booking (no opening animation)
 

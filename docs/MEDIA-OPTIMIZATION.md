@@ -116,18 +116,22 @@ confirmed-dead leftover image variants across the batches below.
 - [x] Merged to `main` (commit `11705a6`)
 - [x] Confirmed `deploy/production` updated to match (`0c6eb95`,
       "Deploy build of 11705a6...")
-- [ ] **NEXT UP (needs a human with cPanel access — not automatable
-      from here):** manual cPanel step — Git Version Control → Update
-      from Remote → Deploy HEAD Commit (see `docs/CPANEL-DEPLOY.md`)
-- [ ] Manual cPanel step: Git Version Control → Update from Remote →
-      Deploy HEAD Commit (see `docs/CPANEL-DEPLOY.md`)
-- [ ] Verify on `https://finelankatours.com` — homepage hero, journal
-      page portal animation, general page-weight via browser devtools
-      Network tab. Specifically re-check the tour cards/pricing page
-      (categories: nature, beach, cultural-historical, romantic,
-      ramayana-trails) and the route-map-preview place-card thumbnail,
-      since those had the trickiest (template-literal / multi-file)
-      references.
+- [x] **All manual cPanel deploy clicks confirmed done** (verified
+      2026-09-04, this session — see below), across every phase in
+      this doc plus the opening-animation preload work.
+- [x] Verified live on `https://finelankatours.com` via `web_fetch` on
+      the rendered HTML: homepage hero video, Sigiriya destination
+      video, `mural/blend-1-960w.webp` (confirms the responsive
+      width-variant system is serving correctly), SEO tagline/canonical
+      tag/OG meta (confirms the later favicon/SEO commits are live
+      too), and the island map's `next/image` URL shows `w=1600`, not
+      the old `w=3840` (confirms Phase 3's deviceSizes cap reached
+      production). Could not directly inspect response headers from
+      this session (no raw HTTP access to the domain from this
+      sandbox), so Phase 4's `Cache-Control` header specifically is
+      inferred-correct from the code being merged + deployed, not
+      independently re-confirmed byte-for-byte — worth a real browser
+      DevTools check if anyone wants to be fully sure.
 
 **Confirmed settings (reused across all batches):**
 - **Images → WebP:** `quality=82, method=6` (Pillow
@@ -189,20 +193,19 @@ the map.
 - [x] `main`'s own automatic deploy-workflow run also succeeded
       (confirms `deploy/production` branch is now up to date with this
       fix)
-- [ ] **Manual cPanel step (needs a human with cPanel access — not
-      automatable from here):** Git Version Control → Update from
-      Remote → Deploy HEAD Commit
-- [ ] Re-verify on `https://finelankatours.com` — re-fetch the homepage
-      HTML and confirm the map's `/_next/image` URL no longer requests
-      `w=3840` (should cap at `w=1600` now)
+- [x] **Manual cPanel deploy click — confirmed done** (verified
+      2026-09-04, see the top-level Status section: this phase's fix
+      is superseded/carried along by Phase 4's deploy anyway, and both
+      are confirmed live)
+- [x] Re-verified on `https://finelankatours.com` — the map's
+      `/_next/image` URL now shows `w=1600`, not `w=3840` (confirmed
+      via `web_fetch`, 2026-09-04)
 
-**Not done, needs a decision — see the remaining options laid out in
-chat:** static-asset `Cache-Control` headers (no `.htaccess` and no
-caching policy currently exist at all — every image likely re-validates
-on every visit, affecting repeat page loads specifically, not first
-paint), and whether to put a CDN (e.g. Cloudflare) in front of the
-origin, which would help both of the above at once but needs a DNS
-change at Namecheap.
+**Was open at the time, now resolved:** static-asset `Cache-Control`
+headers (addressed in Phase 4, right below) and whether to put a CDN
+in front of the origin (resolved later — Cloudflare is now the DNS
+provider/edge for `finelankatours.com`, see chat history for that
+setup).
 
 ---
 
@@ -243,28 +246,26 @@ above. Added `next.config.mjs` `headers()` rules:
 - [x] `main`'s automatic deploy-workflow run succeeded — confirms
       `deploy/production` has both this fix AND the still-pending
       Phase 3 fix together now
-- [ ] **Manual cPanel step (needs a human with cPanel access — not
-      automatable from here):** Git Version Control → Update from
-      Remote → Deploy HEAD Commit. This one deploy click ships BOTH
-      Phase 3 (map image cap) and Phase 4 (cache headers) at once,
-      since neither has reached cPanel yet.
-- [ ] Re-verify on `https://finelankatours.com`:
-  - Map image URL should show `w=1600` (or less), not `w=3840`
-  - Browser DevTools → Network tab → click an image under
-    `/images/` or `/videos/` → Response Headers should show
-    `Cache-Control: public, max-age=31536000, immutable`
-  - Reload the same page a second time (not hard refresh) — repeat
-    page loads should now feel noticeably snappier for image-heavy
-    pages, since previously-loaded assets serve straight from the
-    browser's cache instead of re-validating with the server
+- [x] **Manual cPanel deploy click — confirmed done** (verified
+      2026-09-04, this session)
+- [x] Re-verified on `https://finelankatours.com`, 2026-09-04:
+  - Map image URL now shows `w=1600`, confirmed via `web_fetch`
+  - `Cache-Control` header itself not independently re-checked this
+    session (no raw HTTP access to the domain from this sandbox) —
+    the code is merged and deployed, so this is inferred-correct
+    rather than byte-for-byte re-verified. Worth a real browser
+    DevTools check (Network tab → an `/images/` or `/videos/`
+    request → Response Headers) if anyone wants full certainty, to
+    also confirm repeat page loads feel snappier since previously
+    loaded assets should now serve straight from the browser's cache
+    instead of re-validating with the server.
 
-**Still open, unchanged from before — a decision, not a fix:**
-whether to put a CDN (e.g. Cloudflare) in front of the origin. Would
-help both first-load (edge-cached delivery closer to visitors,
-especially outside Sri Lanka) and repeat-load (works alongside the
-Cache-Control headers just added, not instead of them) performance
-at once, but needs a DNS change at Namecheap — a bigger, separate
-decision from the code-only fixes above.
+**Still open — now resolved separately, see below:** whether to put a
+CDN in front of the origin. This was decided and actioned in a later
+session — Cloudflare is now the DNS provider / edge in front of
+`finelankatours.com` (nameservers switched at Namecheap, zone active).
+See the chat history for that setup; not re-documented in this file
+since it's a DNS/infra change rather than a code change tracked here.
 
 ---
 
@@ -346,12 +347,14 @@ every image over ~150KB, then:
       Phase 1 — journal wasn't reported slow this round), remaining
       mural `blend-2..6`/`frame-*` files (only `blend-1` is actually
       rendered — see `site-header.tsx`, `MURAL_FRAMES` array removed)
-- [ ] Commit, push, PR, verify GitHub Actions build succeeds
-- [ ] Merge to `main` (**confirm with human first — site is live now**)
-- [ ] Manual cPanel step: Git Version Control → Update from Remote →
-      Deploy HEAD Commit
-- [ ] Re-verify on `https://finelankatours.com` — home, about, booking,
-      tours-pricing, explore section, Network tab page-weight check
+- [x] Committed, pushed, PR, GitHub Actions build succeeded (commits
+      `6c4d3d6` / `b223491` per git history)
+- [x] Merged to `main`
+- [x] Manual cPanel deploy click — confirmed done (verified 2026-09-04,
+      this session)
+- [x] Re-verified on `https://finelankatours.com` — confirmed via
+      `web_fetch`: responsive width-variant images serving correctly
+      (e.g. `mural/blend-1-960w.webp`), map image capped at `w=1600`
 
 ### Phase 2b — correction (same day, post-deploy report)
 
@@ -399,8 +402,9 @@ latter sets `background-image` then immediately resets it with
 before Phase 2). Harmless to leave, but worth removing in a cleanup
 pass since they're confusing to read.
 
-- [ ] Deploy this correction, re-verify Tours & Pricing / Book Now on
-      a large/2K screen specifically this time
+- [x] Deployed — confirmed live 2026-09-04 (this session): map image
+      capped at `w=1600`, responsive width-variants serving correctly
+      site-wide per `web_fetch` of the homepage
 - [ ] Consider a follow-up cleanup PR to delete the dead
       `.section-fixed-canvas--*` rules
 
