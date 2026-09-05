@@ -135,8 +135,40 @@ const locationDetails: Record<string, { image: string; description: string }> = 
     description: 'A north-central heritage stop anchored by the Dambulla Cave Temple, with painted caves and Buddha images carved into the rock.',
   },
   sigiriya: {
-    image: '/images/fine-lanka-sigiriya-fresco-passage.webp',
+    image: '/images/tours-and-pricing/sigiriya.webp',
     description: 'The fifth-century Sigiriya Rock Fortress, with frescoes, the Mirror Wall, garden ruins and wide views across the Cultural Triangle.',
+  },
+  anuradhapura: {
+    image: '/images/tours-and-pricing/anuradhapura.webp',
+    description: 'One of the ancient island’s ceremonial capitals, its floodlit dagobas and sacred sites still drawing pilgrims after over two thousand years.',
+  },
+  kandy: {
+    image: '/images/tours-and-pricing/kandy.webp',
+    description: 'The hill capital and spiritual heart of the island, home to the Temple of the Sacred Tooth Relic and the Esala Perahera procession.',
+  },
+  ella: {
+    image: '/images/tours-and-pricing/ella.webp',
+    description: 'A hill-country favourite threaded by the Nine Arch Bridge and the scenic railway, with tea slopes and viewpoints in every direction.',
+  },
+  'nuwara-eliya': {
+    image: '/images/tours-and-pricing/nuwara-eliya.webp',
+    description: 'Sri Lanka’s tea country at its most classic — rolling estates wrapped in cool highland mist, with colonial-era charm woven through the town.',
+  },
+  galle: {
+    image: '/images/tours-and-pricing/galle.webp',
+    description: 'A fortified coastal town where a Dutch-colonial fort, ramparts and a working lighthouse meet the Indian Ocean.',
+  },
+  mirissa: {
+    image: '/images/tours-and-pricing/mirissa.webp',
+    description: 'A palm-lined south-coast beach known for whale watching, quiet coves and one of the island’s best-loved sunset viewpoints.',
+  },
+  'arugam-bay': {
+    image: '/images/tours-and-pricing/arugam-bay.webp',
+    description: 'The island’s east-coast surf capital, a laid-back stretch of coastline where fishing boats and world-class breaks share the same shore.',
+  },
+  colombo: {
+    image: '/images/tours-and-pricing/colombo.webp',
+    description: 'The island’s commercial capital, where colonial-era landmarks and the Lotus Tower skyline meet a fast-moving modern city.',
   },
 }
 
