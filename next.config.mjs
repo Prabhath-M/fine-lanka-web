@@ -103,7 +103,8 @@ const nextConfig = {
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
       {
-        source: '/:path(icon-light-32x32\\.png|icon\\.svg|placeholder\\.svg)',
+        source:
+          '/:path(icon-light-32x32\\.png|icon\\.svg|placeholder\\.svg|favicon\\.ico|favicon-16x16\\.png|favicon-48x48\\.png|apple-touch-icon\\.png|icon-192x192\\.png|icon-512x512\\.png)',
         headers: [{ key: 'Cache-Control', value: 'public, max-age=31536000, immutable' }],
       },
       // The route-atlas map data is structured content, not a media

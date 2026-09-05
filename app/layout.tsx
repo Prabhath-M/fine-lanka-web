@@ -46,19 +46,37 @@ export const metadata: Metadata = {
     // Google's own favicon documentation, updated 2026-08-28). The
     // previous value here (logo-site.webp) was also declaring
     // `type: 'image/png'` on a .webp file, a mismatch on top of the
-    // unsupported format. Switched to the real PNG already sitting in
-    // public/ but unused. apple-touch-icon isn't subject to the same
-    // Google Search restriction, so it's left as the higher-resolution
-    // WebP logo for now.
+    // unsupported format.
+    //
+    // icon-light-32x32.png/icon.svg used to be Vercel's default
+    // v0-scaffold placeholder image (leftover from project setup,
+    // never actually removed) — switching the code to reference them
+    // without also fixing their pixel content would have kept Google
+    // showing that placeholder, just in a supported format instead of
+    // an unsupported one. Both files now contain a proper crop of the
+    // real logo's circular emblem (elephants/palms/sunset, no wordmark
+    // text, since that's illegible at real favicon sizes), and a full
+    // size set (16/32/48/192/512 + a multi-res favicon.ico) was
+    // generated from the same crop for broader browser support beyond
+    // just Google Search's specific favicon requirements.
+    //
+    // apple-touch-icon also switched from the full-resolution WebP
+    // logo to a properly cropped/sized PNG: WebP support for
+    // apple-touch-icon specifically is inconsistent across Safari/iOS
+    // versions (separately from Google's favicon restriction above,
+    // which doesn't apply to apple-touch-icon at all), and the full
+    // logo's wordmark text is illegible at typical apple-touch-icon
+    // display sizes regardless of format.
     icon: [
-      {
-        url: '/icon-light-32x32.png',
-        type: 'image/png',
-        sizes: '32x32',
-      },
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/icon-light-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+      { url: '/icon-192x192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512x512.png', type: 'image/png', sizes: '512x512' },
     ],
     shortcut: '/icon-light-32x32.png',
-    apple: '/images/logo-site.webp',
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
   },
   openGraph: {
     type: 'website',
