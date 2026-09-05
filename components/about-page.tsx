@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import { usePreloadImages } from '@/lib/use-preload-images'
 
 /**
  * Design reminder: About is a focused Sri Lankan travel-studio profile.
@@ -23,7 +26,27 @@ const PRINCIPLES = [
   },
 ]
 
+// No opening animation on this page, so nothing to time this against —
+// these just start fetching as soon as the page mounts, same as any
+// other page load (docs/OPENING-ANIMATION-PRELOAD-PLAN.md's approach,
+// applied here without the animation half of it). Verified against the
+// actual cascade winners in app/globals.css: `.about-refined` (also on
+// this page's <main>) overrides the plain `.about-hero`/`.about-origin`/
+// `.about-principles` background rules, so these are the images that
+// really render, not the ones the base rules alone would suggest.
+// `.about-hero-photo`'s <img> is already `loading="eager"`, so it's left
+// out here — nothing to gain preloading what's already prioritized.
+const ABOUT_PRELOAD_IMAGES = [
+  '/images/fine-lanka-about-bg-hero-1600w.webp',
+  '/images/fine-lanka-about-bg-origin-left-1600w.webp',
+  '/images/fine-lanka-kandyan-dancers-960w.webp',
+  '/images/fine-lanka-about-bg-invitation-1600w.webp',
+  '/images/fine-lanka-about-bg-principles-left-1600w.webp',
+]
+
 export function AboutPage() {
+  usePreloadImages(ABOUT_PRELOAD_IMAGES)
+
   return (
     <main className="about-page about-refined">
       <section className="about-hero">

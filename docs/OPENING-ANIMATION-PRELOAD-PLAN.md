@@ -271,8 +271,45 @@ work, not just adding a preload hook:
 
 **All four sections done.** Next: full `develop` review, then merge to
 `main` and deploy (see "Execution workflow" above).
-- [ ] Full `tsc`/`vitest` pass on `develop`
-- [ ] Merge `develop` → `main`
-- [ ] Confirm GitHub Actions build succeeded, `deploy/production` updated
+- [x] Full `tsc`/`vitest` pass on `develop`
+- [x] Merge `develop` → `main`
+- [x] Confirm GitHub Actions build succeeded, `deploy/production` updated
 - [ ] Manual cPanel deploy click (needs human with cPanel access)
 - [ ] Confirm live on `https://finelankatours.com`
+
+## Addendum — About & Booking (no opening animation)
+
+Follow-up request, out of the original scope above: preload the
+heavy images on the About and Booking pages too, but **without**
+adding an opening animation to either — these preloads just start the
+moment the page mounts, same mechanism (`usePreloadImages`), no
+animation to time it against.
+
+- **About** (`components/about-page.tsx`) — had no `'use client'`
+  before this; added one, since `usePreloadImages` needs an effect.
+  Safe to do: `app/about/page.tsx` holds the route's `metadata` export
+  separately, so this component becoming a Client Component doesn't
+  affect it. Preload list was checked against the actual cascade
+  winner in `app/globals.css` — `.about-refined` (also present on this
+  page's `<main>`) overrides the plain `.about-hero`/`.about-origin`/
+  `.about-principles` background rules via higher-specificity
+  descendant selectors, so the images that actually render are
+  `fine-lanka-about-bg-hero-1600w`, `fine-lanka-about-bg-origin-left-1600w`,
+  `fine-lanka-about-bg-invitation-1600w`, and
+  `fine-lanka-about-bg-principles-left-1600w` — not the ones the base
+  rules alone would suggest. Also added the Origin section's `<img>`
+  (`fine-lanka-kandyan-dancers-960w`, currently `loading="lazy"`). The
+  Hero section's own `<img>` (`fine-lanka-esala-perahera-960w`) was
+  left out — it's already `loading="eager"`, so there's nothing to
+  gain preloading it again.
+- **Booking** (`components/booking-page.tsx`) — already a Client
+  Component. Has zero `<img>` tags; every image is a CSS
+  background — `fine-lanka-booking-bg-1600w` (hero),
+  `frieze-divider-1600w` (shared divider motif, already preloaded
+  elsewhere for Destinations — harmless to preload again here, browser
+  just serves it from cache), `milk-rice-booking-field-notes-1600w`,
+  and `sri-lanka-ves-dance-heritage-background-960w`.
+
+`tsc --noEmit` and `vitest run` both clean (8/8). `next build` again
+couldn't complete in this sandbox for the same Google Fonts network
+reason as before — unrelated to these changes.

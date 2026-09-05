@@ -9,6 +9,21 @@ import { DESTINATIONS } from '@/lib/destinations-data'
 import { HONEYPOT_FIELD } from '@/lib/form-guard'
 import { PROCESS_STEPS, SITE } from '@/lib/site-data'
 import { TOUR_CATEGORIES, TOUR_PACKAGES } from '@/lib/tours-data'
+import { usePreloadImages } from '@/lib/use-preload-images'
+
+// No opening animation on this page — these just start fetching as
+// soon as the page mounts (docs/OPENING-ANIMATION-PRELOAD-PLAN.md's
+// approach, without the animation half). Booking has no <img> tags at
+// all; everything is a CSS background-image, verified against the
+// actual .booking-page-scoped rules in app/globals.css: the hero,
+// the frieze divider under it, and the two ::before/::after panel
+// textures behind the form layout.
+const BOOKING_PRELOAD_IMAGES = [
+  '/images/fine-lanka-booking-bg-1600w.webp',
+  '/images/frieze-divider-1600w.webp',
+  '/images/milk-rice-booking-field-notes-1600w.webp',
+  '/images/sri-lanka-ves-dance-heritage-background-960w.webp',
+]
 
 /** Booking page: page hero, booking form + "what happens next" sidebar.
  *  Replaces public/booking.html + initBookingForm()/renderBookingProcess()
@@ -21,6 +36,8 @@ import { TOUR_CATEGORIES, TOUR_PACKAGES } from '@/lib/tours-data'
  *  param back to the URL, so this stays a plain (uncontrolled) form,
  *  matching the original's mostly-native-HTML-form approach. */
 export function BookingPage() {
+  usePreloadImages(BOOKING_PRELOAD_IMAGES)
+
   const searchParams = useSearchParams()
   const preselectTour = searchParams.get('tour')
   const preselectDestination = searchParams.get('destination')
