@@ -43,21 +43,20 @@ export const metadata: Metadata = {
   icons: {
     // Google Search only shows favicons in a specific set of formats
     // (BMP, GIF, ICO, PNG, JPEG, PPM, TIFF — no WebP, no SVG, per
-    // Google's own favicon documentation, updated 2026-08-28). The
-    // previous value here (logo-site.webp) was also declaring
-    // `type: 'image/png'` on a .webp file, a mismatch on top of the
-    // unsupported format. Switched to the real PNG already sitting in
-    // public/ but unused. apple-touch-icon isn't subject to the same
-    // Google Search restriction, so it's left as the higher-resolution
-    // WebP logo for now.
+    // Google's own favicon documentation, updated 2026-08-28).
+    // logo-site-favicon-32x32.png is a 32x32 PNG resized from the real
+    // site logo (logo-site.webp), replacing an unrelated placeholder
+    // mark that had been sitting here. apple-touch-icon isn't subject
+    // to the same Google Search restriction, so it's left as the
+    // higher-resolution WebP logo.
     icon: [
       {
-        url: '/icon-light-32x32.png',
+        url: '/images/logo-site-favicon-32x32.png',
         type: 'image/png',
         sizes: '32x32',
       },
     ],
-    shortcut: '/icon-light-32x32.png',
+    shortcut: '/images/logo-site-favicon-32x32.png',
     apple: '/images/logo-site.webp',
   },
   openGraph: {
