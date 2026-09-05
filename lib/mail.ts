@@ -108,7 +108,7 @@ export async function sendAutoReply({ toEmail, toName, subject, bodyHtml }: Send
       <p>Hi ${escapeHtml(toName || 'there')},</p>
       ${bodyHtml}
       <p style="margin-top:24px;color:#6b6255;font-size:13px;">
-        Fine Lanka Tours — Considered Journeys Across Sri Lanka
+        Fine Lanka Tours — Journey Beyond Expectations
       </p>
     </div>
   `

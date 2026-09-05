@@ -6,6 +6,7 @@ import { Fraunces, Inter, Space_Mono } from 'next/font/google'
 import { EnquiryModal } from '@/components/enquiry-modal'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
+import { SITE } from '@/lib/site-data'
 import './globals.css'
 
 const fraunces = Fraunces({
@@ -34,7 +35,7 @@ const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'http://localhost:3000'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Fine Lanka Tours — Considered Journeys Across Sri Lanka',
+    default: 'Fine Lanka Tours — Journey Beyond Expectations',
     template: '%s',
   },
   description:
@@ -51,7 +52,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'Fine Lanka Tours',
-    title: 'Fine Lanka Tours — Considered Journeys Across Sri Lanka',
+    title: 'Fine Lanka Tours — Journey Beyond Expectations',
     description:
       'Considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage.',
     images: [
@@ -65,7 +66,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Fine Lanka Tours — Considered Journeys Across Sri Lanka',
+    title: 'Fine Lanka Tours — Journey Beyond Expectations',
     description:
       'Considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage.',
     images: ['/images/fine-lanka-about-heritage-hero.webp'],
@@ -88,6 +89,38 @@ export default function RootLayout({
       className={`${fraunces.variable} ${inter.variable} ${spaceMono.variable} bg-background`}
     >
       <body className="antialiased">
+        {/* TravelAgency structured data (JSON-LD) — helps Google associate
+           this exact business name/phone/address with the site for brand
+           searches, and is a prerequisite for things like a sitelinks
+           search box or knowledge-panel-style results. No `sameAs` yet
+           since there are no linked social profiles in the codebase —
+           add each verified profile URL here once those exist. */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'TravelAgency',
+              name: SITE.brand,
+              description:
+                'Fine Lanka Tours designs considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage.',
+              url: SITE_URL,
+              logo: `${SITE_URL}/images/logo-site.webp`,
+              telephone: SITE.phone,
+              email: SITE.email,
+              foundingDate: String(SITE.foundedYear),
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: SITE.address,
+                addressCountry: 'LK',
+              },
+              areaServed: {
+                '@type': 'Country',
+                name: 'Sri Lanka',
+              },
+            }),
+          }}
+        />
         <SiteHeader />
         {children}
         <SiteFooter />
