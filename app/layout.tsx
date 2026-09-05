@@ -41,12 +41,14 @@ export const metadata: Metadata = {
     'Fine Lanka Tours designs considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage, planned with local knowledge and care in the details.',
   icons: {
     icon: [
-      {
-        url: '/images/logo-site.webp',
-        type: 'image/png',
-      },
+      { url: '/favicon.ico', sizes: '48x48' },
+      { url: '/favicon-16x16.png', type: 'image/png', sizes: '16x16' },
+      { url: '/icon-light-32x32.png', type: 'image/png', sizes: '32x32' },
+      { url: '/favicon-48x48.png', type: 'image/png', sizes: '48x48' },
+      { url: '/icon-192x192.png', type: 'image/png', sizes: '192x192' },
+      { url: '/icon-512x512.png', type: 'image/png', sizes: '512x512' },
     ],
-    apple: '/images/logo-site.webp',
+    apple: { url: '/apple-touch-icon.png', sizes: '180x180' },
   },
   openGraph: {
     type: 'website',
