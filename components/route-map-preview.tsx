@@ -225,6 +225,31 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   const activeWaypoints = useMemo(() => selectedItinerary?.waypoints ?? [], [selectedItinerary])
   const activeMarkerIds = useMemo(() => new Set(activeWaypoints.map((waypoint) => waypoint.markerId)), [activeWaypoints])
   const activeSegmentIds = useMemo(() => new Set(selectedItinerary?.segments ?? []), [selectedItinerary])
+  // Soft "spotlight" mask for the map image itself: a grayscale, dimmed copy
+  // of the map sits on top of the full-colour one, masked so it's fully
+  // transparent (revealing the colour map beneath) over the selected trip's
+  // area and opaque (showing the dim copy) everywhere else. The base image
+  // is never touched — this is purely an overlay.
+  const spotlightMask = useMemo(() => {
+    if (!data || !selectedItinerary || activeMarkerIds.size === 0) return null
+    const activeMarkers = data.markers.filter((marker) => activeMarkerIds.has(marker.id))
+    if (activeMarkers.length === 0) return null
+    const xs = activeMarkers.map((marker) => marker.x)
+    const ys = activeMarkers.map((marker) => marker.y)
+    const minX = Math.min(...xs)
+    const maxX = Math.max(...xs)
+    const minY = Math.min(...ys)
+    const maxY = Math.max(...ys)
+    const padding = 260
+    const minRadius = 420
+    const rx = Math.max((maxX - minX) / 2 + padding, minRadius)
+    const ry = Math.max((maxY - minY) / 2 + padding, minRadius)
+    const cxPct = ((minX + maxX) / 2 / data.width) * 100
+    const cyPct = ((minY + maxY) / 2 / data.height) * 100
+    const rxPct = (rx / data.width) * 100
+    const ryPct = (ry / data.height) * 100
+    return `radial-gradient(ellipse ${rxPct}% ${ryPct}% at ${cxPct}% ${cyPct}%, transparent 0%, transparent 58%, #000 100%)`
+  }, [data, selectedItinerary, activeMarkerIds])
   const waypointByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint) => [waypoint.markerId, waypoint])), [activeWaypoints])
   const mainWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'main'), [activeWaypoints])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
@@ -338,6 +363,16 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                 height={data.height}
                 loading="lazy"
               />
+              <img
+                src={data.image}
+                alt=""
+                aria-hidden="true"
+                className={styles.mapImageMuted}
+                style={spotlightMask ? { opacity: 1, maskImage: spotlightMask, WebkitMaskImage: spotlightMask } : undefined}
+                width={data.width}
+                height={data.height}
+                loading="lazy"
+              />
               <div className={styles.markerLayer}>
               {data.markers.map((marker) => {
                 const isActive = activeMarkerIds.has(marker.id)
@@ -348,6 +383,10 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                 const isMainWaypoint = mainOrder >= 0
                 const isSecondaryWaypoint = secondaryOrder >= 0
                 const isAirportWaypoint = waypoint?.role === 'airport'
+                // Only meaningful once a trip is selected: markers that
+                // aren't part of that trip shrink and desaturate so the
+                // chosen route's pins read clearly against the rest.
+                const isDimmed = Boolean(selectedItinerary) && !isActive
                 return (
                   <button
                     key={marker.id}
@@ -359,7 +398,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                     aria-pressed={isSelected}
                     title={marker.name}
                   >
-                    <span className={`${styles.markerHead} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}>
+                    <span className={`${styles.markerHead} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isDimmed ? styles.markerDimmed : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}>
                       <span className={(isMainWaypoint || isSecondaryWaypoint) ? styles.markerOrder : styles.markerCore}>{isMainWaypoint ? mainOrder + 1 : isSecondaryWaypoint ? secondaryOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
                       {isMainWaypoint && <span className={styles.markerStay}>{waypoint?.nights ?? 0}N</span>}
                       <span className={styles.markerLabel}>{marker.name}</span>
