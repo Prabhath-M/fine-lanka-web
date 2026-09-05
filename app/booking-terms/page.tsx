@@ -5,6 +5,7 @@ import { SITE } from '@/lib/site-data'
 export const metadata: Metadata = {
   title: 'Booking Terms — Fine Lanka Tours',
   description: 'Terms and conditions that apply when you book a trip with Fine Lanka Tours.',
+  alternates: { canonical: '/booking-terms' },
 }
 
 export default function Page() {

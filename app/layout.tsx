@@ -41,12 +41,23 @@ export const metadata: Metadata = {
   description:
     'Fine Lanka Tours designs considered, small-group journeys across Sri Lanka — hill-country trains, ancient rock fortresses, whale watching and cultural heritage, planned with local knowledge and care in the details.',
   icons: {
+    // Google Search only shows favicons in a specific set of formats
+    // (BMP, GIF, ICO, PNG, JPEG, PPM, TIFF — no WebP, no SVG, per
+    // Google's own favicon documentation, updated 2026-08-28). The
+    // previous value here (logo-site.webp) was also declaring
+    // `type: 'image/png'` on a .webp file, a mismatch on top of the
+    // unsupported format. Switched to the real PNG already sitting in
+    // public/ but unused. apple-touch-icon isn't subject to the same
+    // Google Search restriction, so it's left as the higher-resolution
+    // WebP logo for now.
     icon: [
       {
-        url: '/images/logo-site.webp',
+        url: '/icon-light-32x32.png',
         type: 'image/png',
+        sizes: '32x32',
       },
     ],
+    shortcut: '/icon-light-32x32.png',
     apple: '/images/logo-site.webp',
   },
   openGraph: {

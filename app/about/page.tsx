@@ -7,6 +7,7 @@ export const metadata: Metadata = {
   title: 'About Us — Fine Lanka Tours',
   description:
     'Meet Fine Lanka Tours, a Sri Lanka-based travel studio shaping considered journeys around cultural depth, local knowledge, and care in the details.',
+  alternates: { canonical: '/about' },
 }
 
 export default function Page() {

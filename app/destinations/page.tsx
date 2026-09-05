@@ -6,6 +6,7 @@ export const metadata: Metadata = {
   title: 'Destinations — Fine Lanka Tours',
   description:
     "Explore Sri Lanka by region with Fine Lanka Tours — the Cultural Triangle, Hill Country, South Coast, East Coast, wildlife parks, Colombo and the West Coast.",
+  alternates: { canonical: '/destinations' },
 }
 
 export default function Page() {

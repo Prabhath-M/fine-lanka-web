@@ -5,6 +5,7 @@ import { SITE } from '@/lib/site-data'
 export const metadata: Metadata = {
   title: 'Cookie Policy — Fine Lanka Tours',
   description: 'How Fine Lanka Tours uses cookies on this website.',
+  alternates: { canonical: '/cookie-policy' },
 }
 
 export default function Page() {

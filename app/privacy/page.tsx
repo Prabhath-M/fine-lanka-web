@@ -6,6 +6,7 @@ import { SITE } from '@/lib/site-data'
 export const metadata: Metadata = {
   title: 'Privacy Notice — Fine Lanka Tours',
   description: 'How Fine Lanka Tours collects, uses, and protects your personal data.',
+  alternates: { canonical: '/privacy' },
 }
 
 export default function Page() {
