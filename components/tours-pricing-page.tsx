@@ -11,6 +11,28 @@ import { TourPickerCarousel } from '@/components/tours/tour-picker-carousel'
 import { RouteMapPreview } from '@/components/route-map-preview'
 import { TRAVEL_NOTES } from '@/lib/site-data'
 import { TOUR_CATEGORIES, TOUR_PACKAGES, type TourPackage } from '@/lib/tours-data'
+import { ToursTypedOpening } from '@/components/tours/typed-opening'
+import { usePreloadImages } from '@/lib/use-preload-images'
+
+// Verified against app/globals.css's .tours-page-scoped selectors before
+// listing here (docs/OPENING-ANIMATION-PRELOAD-PLAN.md, Section 4) —
+// an earlier draft of the plan guessed fine-lanka-liyawel-border-1600w
+// for this page, but that file is actually Home-only; corrected to the
+// images .tours-hero/.tour-collection/.tours-notes-section actually use,
+// plus the category art rendered in the initial tour grid
+// (tour-card.tsx / tour-picker-card.tsx, `/images/tour-${category}.webp`
+// — only the 5 categories with real packages have this file; the two
+// comingSoon categories render an enquiry prompt instead, no image).
+const TOURS_PRELOAD_IMAGES = [
+  '/images/tours-temple-path-cover-1600w.webp',
+  '/images/milk-rice-tours-field-notes-960w.webp',
+  '/images/tours-kandyan-night-register-1600w.webp',
+  '/images/tour-beach.webp',
+  '/images/tour-cultural-historical.webp',
+  '/images/tour-nature.webp',
+  '/images/tour-ramayana-trails.webp',
+  '/images/tour-romantic.webp',
+]
 
 /** Tours & pricing page: page hero, category filter bar + intro copy +
  *  package grid, travel notes, CTA band, itinerary modal. Replaces
@@ -19,6 +41,10 @@ import { TOUR_CATEGORIES, TOUR_PACKAGES, type TourPackage } from '@/lib/tours-da
  *  the `?category=` query param the same way the destinations page's
  *  region filter does (see components/destinations-page.tsx). */
 export function ToursPricingPage() {
+  // Starts the moment the page mounts, during the typed-opening
+  // overlay's ~5.36s dead time — see docs/OPENING-ANIMATION-PRELOAD-PLAN.md.
+  usePreloadImages(TOURS_PRELOAD_IMAGES)
+
   const router = useRouter()
   const searchParams = useSearchParams()
   const [activeTour, setActiveTour] = useState<TourPackage | null>(null)
@@ -70,6 +96,7 @@ export function ToursPricingPage() {
 
   return (
     <main className="tours-page">
+      <ToursTypedOpening />
       <section className="tours-hero">
         <div className="container tours-hero-grid">
           <div className="tours-hero-copy">

@@ -197,7 +197,7 @@ work, not just adding a preload hook:
 
 ## Status
 
-**Current phase: IN PROGRESS — Sections 1–3 done.**
+**Current phase: Sections 1–4 complete — ready for review/merge.**
 
 - [x] Section 1 — Home preload. Added `lib/use-preload-images.ts`
       (shared hook, fires on mount, ignores reduced-motion since
@@ -231,7 +231,46 @@ work, not just adding a preload hook:
       rudder wheel is deliberately excluded — already covered from
       Home (Section 1). Verified all 7 files exist under
       `public/images/` before wiring them in. `tsc`/`vitest` clean.
-- [ ] Section 4 — Tours & Pricing opening animation + preload
+- [x] Section 4 — Tours & Pricing opening animation + preload. Built
+      the page's first-ever opening animation rather than inventing a
+      new visual style: extracted Home's `TypedOpening` into a generic,
+      prop-driven `components/typed-opening.tsx` (kicker/lines/event
+      name/timing all now parameters), with Home's own
+      `components/home/typed-opening.tsx` reduced to a thin wrapper
+      passing its existing copy/timing byte-for-byte unchanged —
+      `HERO_OPENING_COMPLETE_EVENT` and hero.tsx's import of it are
+      untouched. New `components/tours/typed-opening.tsx` uses the
+      generic component with Tours & Pricing–specific copy ("EVERY
+      ROUTE, CONSIDERED" / "PRICED IN THE OPEN") and its own
+      `TOURS_OPENING_COMPLETE_EVENT`, deliberately keeping the default
+      5360ms/580ms clear-delay timing so the existing CSS (written for
+      that exact duration) needed zero changes. Rendered as the first
+      child of the page — the overlay's own `position: fixed` covers
+      the page, so no separate content-gating logic was needed (unlike
+      Hero, which specifically gates video playback timing).
+
+      Preload list was corrected against actual CSS during this
+      section: an earlier draft of this doc (see "Scope" above)
+      guessed `fine-lanka-liyawel-border-1600w.webp` for this page —
+      checked against `app/globals.css` and that file is actually
+      Home-only (`.intro::before`). Corrected list, verified against
+      the real `.tours-hero`/`.tour-collection`/`.tours-notes-section`
+      selectors: `tours-temple-path-cover-1600w`,
+      `milk-rice-tours-field-notes-960w`,
+      `tours-kandyan-night-register-1600w`, plus the 5 tour-category
+      card images that actually have art (`tour-beach`,
+      `tour-cultural-historical`, `tour-nature`, `tour-ramayana-trails`,
+      `tour-romantic` — the 2 `comingSoon` categories render an
+      enquiry prompt instead, no image to preload).
+
+      `tsc --noEmit` and `vitest run` both clean (8/8). A full
+      `next build` couldn't run in this sandbox — blocked on fetching
+      Google Fonts over a network domain not in this environment's
+      allowlist, unrelated to these changes — so that's still worth
+      watching on the GitHub Actions build once this reaches `main`.
+
+**All four sections done.** Next: full `develop` review, then merge to
+`main` and deploy (see "Execution workflow" above).
 - [ ] Full `tsc`/`vitest` pass on `develop`
 - [ ] Merge `develop` → `main`
 - [ ] Confirm GitHub Actions build succeeded, `deploy/production` updated
