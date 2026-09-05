@@ -20,7 +20,7 @@ export function ToursTypedOpening() {
       eventName={TOURS_OPENING_COMPLETE_EVENT}
       kicker="Fine Lanka Tours · Journeys & Fares"
       sectionAriaLabel="Fine Lanka Tours, tours and pricing introduction"
-      copyAriaLabel="Every route, considered. Priced in the open."
+      copyAriaLabel="Every route, considered. Designed around you."
       lines={[
         {
           text: 'EVERY ROUTE, CONSIDERED',
@@ -29,7 +29,7 @@ export function ToursTypedOpening() {
           phrasePauses: [{ afterPhrase: 'EVERY ROUTE,', delay: 170 }],
         },
         {
-          text: 'PRICED IN THE OPEN',
+          text: 'DESIGNED AROUND YOU',
           startDelay: 2600,
           characterDelay: 82,
         },

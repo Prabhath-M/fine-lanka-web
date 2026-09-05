@@ -241,7 +241,7 @@ work, not just adding a preload hook:
       `HERO_OPENING_COMPLETE_EVENT` and hero.tsx's import of it are
       untouched. New `components/tours/typed-opening.tsx` uses the
       generic component with Tours & Pricing–specific copy ("EVERY
-      ROUTE, CONSIDERED" / "PRICED IN THE OPEN") and its own
+      ROUTE, CONSIDERED" / "DESIGNED AROUND YOU") and its own
       `TOURS_OPENING_COMPLETE_EVENT`, deliberately keeping the default
       5360ms/580ms clear-delay timing so the existing CSS (written for
       that exact duration) needed zero changes. Rendered as the first
