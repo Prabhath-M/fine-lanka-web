@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useState } from 'react'
 import { Compass, MapPin, MousePointer2, Route, X } from 'lucide-react'
 import styles from './route-map-preview.module.css'
 import { DESTINATIONS } from '@/lib/destinations-data'
@@ -225,31 +225,21 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   const activeWaypoints = useMemo(() => selectedItinerary?.waypoints ?? [], [selectedItinerary])
   const activeMarkerIds = useMemo(() => new Set(activeWaypoints.map((waypoint) => waypoint.markerId)), [activeWaypoints])
   const activeSegmentIds = useMemo(() => new Set(selectedItinerary?.segments ?? []), [selectedItinerary])
-  // Soft "spotlight" mask for the map image itself: a grayscale, dimmed copy
-  // of the map sits on top of the full-colour one, masked so it's fully
-  // transparent (revealing the colour map beneath) over the selected trip's
-  // area and opaque (showing the dim copy) everywhere else. The base image
-  // is never touched — this is purely an overlay.
-  const spotlightMask = useMemo(() => {
-    if (!data || !selectedItinerary || activeMarkerIds.size === 0) return null
-    const activeMarkers = data.markers.filter((marker) => activeMarkerIds.has(marker.id))
-    if (activeMarkers.length === 0) return null
-    const xs = activeMarkers.map((marker) => marker.x)
-    const ys = activeMarkers.map((marker) => marker.y)
-    const minX = Math.min(...xs)
-    const maxX = Math.max(...xs)
-    const minY = Math.min(...ys)
-    const maxY = Math.max(...ys)
-    const padding = 260
-    const minRadius = 420
-    const rx = Math.max((maxX - minX) / 2 + padding, minRadius)
-    const ry = Math.max((maxY - minY) / 2 + padding, minRadius)
-    const cxPct = ((minX + maxX) / 2 / data.width) * 100
-    const cyPct = ((minY + maxY) / 2 / data.height) * 100
-    const rxPct = (rx / data.width) * 100
-    const ryPct = (ry / data.height) * 100
-    return `radial-gradient(ellipse ${rxPct}% ${ryPct}% at ${cxPct}% ${cyPct}%, transparent 0%, transparent 58%, #000 100%)`
+  // Per-pin "spotlight": rather than one shape covering the whole trip, each
+  // active marker gets its own soft-edged circle of full colour, and the
+  // rest of the map stays under the grayscale/dimmed copy. An SVG <mask>
+  // (referenced by id) is used rather than stacking CSS gradient masks,
+  // because a real union of several circular "reveal" holes needs either
+  // mask-composite keywords that differ between standard and -webkit- CSS
+  // (fragile across browsers) or, more simply and predictably, an SVG mask —
+  // where painting several white/feathered circles on a black backdrop
+  // unions their visible regions automatically, no compositing mode needed.
+  const spotlightMarkers = useMemo(() => {
+    if (!data || !selectedItinerary || activeMarkerIds.size === 0) return []
+    return data.markers.filter((marker) => activeMarkerIds.has(marker.id))
   }, [data, selectedItinerary, activeMarkerIds])
+  const spotlightRadiusPx = 300
+  const spotlightMaskId = useId()
   const waypointByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint) => [waypoint.markerId, waypoint])), [activeWaypoints])
   const mainWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'main'), [activeWaypoints])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
@@ -368,11 +358,47 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                 alt=""
                 aria-hidden="true"
                 className={styles.mapImageMuted}
-                style={spotlightMask ? { opacity: 1, maskImage: spotlightMask, WebkitMaskImage: spotlightMask } : undefined}
+                style={{ opacity: selectedItinerary ? 1 : 0 }}
                 width={data.width}
                 height={data.height}
                 loading="lazy"
               />
+              {spotlightMarkers.length > 0 && (
+                <img
+                  src={data.image}
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.mapImageSpotlight}
+                  style={{ mask: `url("#${spotlightMaskId}")`, WebkitMaskImage: `url("#${spotlightMaskId}")` }}
+                  width={data.width}
+                  height={data.height}
+                  loading="lazy"
+                />
+              )}
+              {spotlightMarkers.length > 0 && (
+                <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
+                  <defs>
+                    <radialGradient id={`${spotlightMaskId}-feather`}>
+                      <stop offset="0%" stopColor="#fff" stopOpacity="1" />
+                      <stop offset="72%" stopColor="#fff" stopOpacity="1" />
+                      <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+                    </radialGradient>
+                    <mask id={spotlightMaskId} maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+                      <rect x="0" y="0" width="1" height="1" fill="black" />
+                      {spotlightMarkers.map((marker) => (
+                        <ellipse
+                          key={marker.id}
+                          cx={marker.x / data.width}
+                          cy={marker.y / data.height}
+                          rx={spotlightRadiusPx / data.width}
+                          ry={spotlightRadiusPx / data.height}
+                          fill={`url("#${spotlightMaskId}-feather")`}
+                        />
+                      ))}
+                    </mask>
+                  </defs>
+                </svg>
+              )}
               <div className={styles.markerLayer}>
               {data.markers.map((marker) => {
                 const isActive = activeMarkerIds.has(marker.id)
