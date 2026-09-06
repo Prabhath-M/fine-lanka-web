@@ -63,7 +63,7 @@ function DestinationVideo({ slug }: { slug: string }) {
       loop
       playsInline
       autoPlay
-      preload="metadata"
+      preload="auto"
       poster={`https://picsum.photos/seed/finelanka-dest-${slug}/700/933`}
       aria-hidden="true"
     >
