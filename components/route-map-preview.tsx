@@ -182,6 +182,39 @@ function getLocationDetails(marker: Marker) {
   }
 }
 
+// The place-card thumbnail this feeds (.placeImage) only ever renders at
+// ~336x136px, but most of these source photos are full 1700-2560px
+// originals -- some over 1MB -- since this "tours-and-pricing" image
+// subdirectory sat outside the glob the site-wide image-optimization pass
+// scanned (it only covered public/images/*.webp directly, not
+// subdirectories). Pre-generated 480/960/1600w variants for all of them;
+// this maps a known source to the widths that actually exist on disk so we
+// never point a srcset at a file that was never generated.
+const POPUP_IMAGE_WIDTHS: Record<string, number[]> = {
+  '/images/tour-beach.webp': [480, 960],
+  '/images/tour-nature.webp': [480, 960],
+  '/images/sri-lanka-map-island-focus.webp': [480],
+}
+for (const name of ['sigiriya', 'anuradhapura', 'kandy', 'ella', 'nuwara-eliya', 'nuwara-eliya-gardens', 'galle', 'mirissa', 'arugam-bay', 'colombo', 'hiriketiya', 'minneriya', 'weligama', 'yala']) {
+  POPUP_IMAGE_WIDTHS[`/images/tours-and-pricing/${name}.webp`] = [480, 960, 1600]
+}
+
+function popupImageSrcSet(src: string): string | undefined {
+  const widths = POPUP_IMAGE_WIDTHS[src]
+  if (!widths) return undefined
+  const base = src.slice(0, -'.webp'.length)
+  return widths.map((w) => `${base}-${w}w.webp ${w}w`).join(', ')
+}
+
+function popupImageSrc(src: string): string {
+  const widths = POPUP_IMAGE_WIDTHS[src]
+  if (!widths) return src
+  const base = src.slice(0, -'.webp'.length)
+  // Use the smallest generated tier as the fallback `src` (for browsers
+  // that ignore srcset); it's already well above the card's display size.
+  return `${base}-${widths[0]}w.webp`
+}
+
 function pathForSegment(segment: Segment, markers: Map<string, Marker>, width: number, height: number) {
   const start = markers.get(segment.from)
   const end = markers.get(segment.to)
@@ -503,7 +536,9 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
               <button type="button" className={styles.closeButton} onClick={() => setSelectedMarkerId(null)} aria-label="Close place details"><X size={16} /></button>
               <img
                 className={styles.placeImage}
-                src={getLocationDetails(selectedMarker).image}
+                src={popupImageSrc(getLocationDetails(selectedMarker).image)}
+                srcSet={popupImageSrcSet(getLocationDetails(selectedMarker).image)}
+                sizes="(max-width: 480px) 100vw, 336px"
                 alt={`${selectedMarker.name} travel photograph`}
                 loading="lazy"
               />
