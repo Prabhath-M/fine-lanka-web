@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo, useRef, useState } from 'react'
 import { Compass, MapPin, MousePointer2, Route, X } from 'lucide-react'
 import styles from './route-map-preview.module.css'
 import { DESTINATIONS } from '@/lib/destinations-data'
@@ -208,6 +208,16 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
     onSelectedItineraryChange?.(itineraryId)
   }
   const [selectedMarkerId, setSelectedMarkerId] = useState<string | null>(null)
+  // On wide viewports the place card anchors next to whichever marker was
+  // clicked instead of sitting fixed in a map corner; this holds the spot
+  // to anchor it to, measured live off the actual button/frame-wrap so it
+  // stays correct through the map's zoom levels. The card renders inside a
+  // thin wrapper around (not inside) the map frame, since the frame itself
+  // has overflow: hidden for image cropping and would clip the card near
+  // any edge marker. Left untouched (null) on the narrower/mobile layout,
+  // which keeps its own fixed bottom-of-map card.
+  const mapFrameWrapRef = useRef<HTMLDivElement>(null)
+  const [markerCardAnchor, setMarkerCardAnchor] = useState<{ left: number; top: number; above: boolean } | null>(null)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -343,146 +353,168 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
               <span className={styles.mapHint}><MousePointer2 size={14} /> Tap a marker to explore · {zoomRegion.note}</span>
             </div>
           </div>
-          <div className={styles.mapFrame}>
-            <div className={styles.mapCanvas} style={zoomCanvasStyle}>
-              <img
-                src={data.image}
-                alt="Illustrated Sri Lankan tour map with detected waypoint circles"
-                className={styles.mapImage}
-                width={data.width}
-                height={data.height}
-                loading="lazy"
-              />
-              <img
-                src={data.image}
-                alt=""
-                aria-hidden="true"
-                className={styles.mapImageMuted}
-                style={{ opacity: selectedItinerary ? 1 : 0 }}
-                width={data.width}
-                height={data.height}
-                loading="lazy"
-              />
-              {spotlightMarkers.length > 0 && (
+          <div className={styles.mapFrameWrap} ref={mapFrameWrapRef}>
+            <div className={styles.mapFrame}>
+              <div className={styles.mapCanvas} style={zoomCanvasStyle}>
                 <img
                   src={data.image}
-                  alt=""
-                  aria-hidden="true"
-                  className={styles.mapImageSpotlight}
-                  style={{ mask: `url("#${spotlightMaskId}")`, WebkitMaskImage: `url("#${spotlightMaskId}")` }}
+                  alt="Illustrated Sri Lankan tour map with detected waypoint circles"
+                  className={styles.mapImage}
                   width={data.width}
                   height={data.height}
                   loading="lazy"
                 />
-              )}
-              {spotlightMarkers.length > 0 && (
-                <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
-                  <defs>
-                    <mask id={spotlightMaskId} maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-                      <rect x="0" y="0" width="1" height="1" fill="black" />
-                      {/* A nested, viewBox-scoped <svg> gives this content real
-                          pixel coordinates (matching marker.x/marker.y and the
-                          blur's stdDeviation directly, no fraction math) while
-                          the outer mask still scales proportionally with
-                          whatever size the masked <img> actually renders at. */}
-                      <svg x="0" y="0" width="1" height="1" viewBox={`0 0 ${data.width} ${data.height}`}>
-                        <defs>
-                          <radialGradient id={`${spotlightMaskId}-feather`}>
-                            <stop offset="0%" stopColor="#fff" stopOpacity="1" />
-                            <stop offset="35%" stopColor="#fff" stopOpacity="1" />
-                            <stop offset="100%" stopColor="#fff" stopOpacity="0" />
-                          </radialGradient>
-                          {/* Blurring the combined shapes alone still leaves a
-                              faint darker notch right where two circles meet —
-                              a plain blur softens each edge but doesn't fully
-                              fuse two separate soft-edged blobs into one evenly
-                              -lit shape. Fix (the classic "gooey filter" trick):
-                              blur, then push the alpha channel through a steep
-                              threshold so any partially-lit pixel snaps to
-                              fully on/off — this is what actually merges two
-                              overlapping blobs into one seamless union, since
-                              there's no partial-alpha pinch left to read as a
-                              notch. A final light blur softens that now-crisp
-                              edge back into a gentle glow. */}
-                          <filter id={`${spotlightMaskId}-blur`} x="-80%" y="-80%" width="260%" height="260%">
-                            <feGaussianBlur in="SourceGraphic" stdDeviation="34" result="soft" />
-                            <feColorMatrix
-                              in="soft"
-                              type="matrix"
-                              values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 20 -9"
-                              result="fused"
-                            />
-                            <feGaussianBlur in="fused" stdDeviation="10" />
-                          </filter>
-                        </defs>
-                        <g filter={`url("#${spotlightMaskId}-blur")`}>
-                          {spotlightMarkers.map((marker) => (
-                            <circle
-                              key={marker.id}
-                              cx={marker.x}
-                              cy={marker.y}
-                              r={spotlightRadiusPx}
-                              fill={`url("#${spotlightMaskId}-feather")`}
-                            />
-                          ))}
-                        </g>
-                      </svg>
-                    </mask>
-                  </defs>
-                </svg>
-              )}
-              <div className={styles.markerLayer}>
-              {data.markers.map((marker) => {
-                const isActive = activeMarkerIds.has(marker.id)
-                const isSelected = selectedMarkerId === marker.id
-                const waypoint = waypointByMarkerId.get(marker.id)
-                const mainOrder = waypoint?.role === 'main' ? mainWaypointOrder.findIndex((item) => item.markerId === marker.id) : -1
-                const secondaryOrder = waypoint?.role === 'secondary' ? (waypoint.mainOrder ?? 1) - 1 : -1
-                const isMainWaypoint = mainOrder >= 0
-                const isSecondaryWaypoint = secondaryOrder >= 0
-                const isAirportWaypoint = waypoint?.role === 'airport'
-                // Only meaningful once a trip is selected: markers that
-                // aren't part of that trip shrink and desaturate so the
-                // chosen route's pins read clearly against the rest.
-                const isDimmed = Boolean(selectedItinerary) && !isActive
-                return (
-                  <button
-                    key={marker.id}
-                    type="button"
-                    className={`${styles.marker} ${isAirportWaypoint ? styles.markerAnchorAirport : ''}`}
-                    style={{ left: `${(marker.x / data.width) * 100}%`, top: `${(marker.y / data.height) * 100}%` }}
-                    onClick={() => setSelectedMarkerId(marker.id)}
-                    aria-label={`Show details for ${marker.name}`}
-                    aria-pressed={isSelected}
-                    title={marker.name}
-                  >
-                    <span className={`${styles.markerHead} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isDimmed ? styles.markerDimmed : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}>
-                      <span className={(isMainWaypoint || isSecondaryWaypoint) ? styles.markerOrder : styles.markerCore}>{isMainWaypoint ? mainOrder + 1 : isSecondaryWaypoint ? secondaryOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
-                      {isMainWaypoint && <span className={styles.markerStay}>{waypoint?.nights ?? 0}N</span>}
-                      <span className={styles.markerLabel}>{marker.name}</span>
-                    </span>
-                  </button>
-                )
-              })}
-              </div>
-            </div>
-            {selectedMarker && (
-              <aside className={styles.placeCard} aria-live="polite">
-                <button type="button" className={styles.closeButton} onClick={() => setSelectedMarkerId(null)} aria-label="Close place details"><X size={16} /></button>
                 <img
-                  className={styles.placeImage}
-                  src={getLocationDetails(selectedMarker).image}
-                  alt={`${selectedMarker.name} travel photograph`}
+                  src={data.image}
+                  alt=""
+                  aria-hidden="true"
+                  className={styles.mapImageMuted}
+                  style={{ opacity: selectedItinerary ? 1 : 0 }}
+                  width={data.width}
+                  height={data.height}
                   loading="lazy"
                 />
-                <span className={styles.placeType}>{selectedMarker.type === 'primary' ? 'Primary destination' : kindLabel[selectedMarker.kind] ?? 'Route hub'}</span>
-                <h3>{selectedMarker.name}</h3>
-                <p>{getLocationDetails(selectedMarker).description}</p>
-                <div className={styles.placeMeta}><MapPin size={14} /> Image coordinate {selectedMarker.x}, {selectedMarker.y}</div>
-                <div className={styles.placeMeta}><Route size={14} /> {selectedMarker.type === 'primary' ? 'Destination node' : 'Shared route hub'}</div>
-                {activeMarkerIds.has(selectedMarker.id) && <div className={styles.activeNotice}>Included in {selectedItinerary?.label}</div>}
-              </aside>
-            )}
+                {spotlightMarkers.length > 0 && (
+                  <img
+                    src={data.image}
+                    alt=""
+                    aria-hidden="true"
+                    className={styles.mapImageSpotlight}
+                    style={{ mask: `url("#${spotlightMaskId}")`, WebkitMaskImage: `url("#${spotlightMaskId}")` }}
+                    width={data.width}
+                    height={data.height}
+                    loading="lazy"
+                  />
+                )}
+                {spotlightMarkers.length > 0 && (
+                  <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
+                    <defs>
+                      <mask id={spotlightMaskId} maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
+                        <rect x="0" y="0" width="1" height="1" fill="black" />
+                        {/* A nested, viewBox-scoped <svg> gives this content real
+                            pixel coordinates (matching marker.x/marker.y and the
+                            blur's stdDeviation directly, no fraction math) while
+                            the outer mask still scales proportionally with
+                            whatever size the masked <img> actually renders at. */}
+                        <svg x="0" y="0" width="1" height="1" viewBox={`0 0 ${data.width} ${data.height}`}>
+                          <defs>
+                            <radialGradient id={`${spotlightMaskId}-feather`}>
+                              <stop offset="0%" stopColor="#fff" stopOpacity="1" />
+                              <stop offset="35%" stopColor="#fff" stopOpacity="1" />
+                              <stop offset="100%" stopColor="#fff" stopOpacity="0" />
+                            </radialGradient>
+                            {/* Blurring the combined shapes alone still leaves a
+                                faint darker notch right where two circles meet —
+                                a plain blur softens each edge but doesn't fully
+                                fuse two separate soft-edged blobs into one evenly
+                                -lit shape. Fix (the classic "gooey filter" trick):
+                                blur, then push the alpha channel through a steep
+                                threshold so any partially-lit pixel snaps to
+                                fully on/off — this is what actually merges two
+                                overlapping blobs into one seamless union, since
+                                there's no partial-alpha pinch left to read as a
+                                notch. A final light blur softens that now-crisp
+                                edge back into a gentle glow. */}
+                            <filter id={`${spotlightMaskId}-blur`} x="-80%" y="-80%" width="260%" height="260%">
+                              <feGaussianBlur in="SourceGraphic" stdDeviation="34" result="soft" />
+                              <feColorMatrix
+                                in="soft"
+                                type="matrix"
+                                values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 20 -9"
+                                result="fused"
+                              />
+                              <feGaussianBlur in="fused" stdDeviation="10" />
+                            </filter>
+                          </defs>
+                          <g filter={`url("#${spotlightMaskId}-blur")`}>
+                            {spotlightMarkers.map((marker) => (
+                              <circle
+                                key={marker.id}
+                                cx={marker.x}
+                                cy={marker.y}
+                                r={spotlightRadiusPx}
+                                fill={`url("#${spotlightMaskId}-feather")`}
+                              />
+                            ))}
+                          </g>
+                        </svg>
+                      </mask>
+                    </defs>
+                  </svg>
+                )}
+                <div className={styles.markerLayer}>
+                {data.markers.map((marker) => {
+                  const isActive = activeMarkerIds.has(marker.id)
+                  const isSelected = selectedMarkerId === marker.id
+                  const waypoint = waypointByMarkerId.get(marker.id)
+                  const mainOrder = waypoint?.role === 'main' ? mainWaypointOrder.findIndex((item) => item.markerId === marker.id) : -1
+                  const secondaryOrder = waypoint?.role === 'secondary' ? (waypoint.mainOrder ?? 1) - 1 : -1
+                  const isMainWaypoint = mainOrder >= 0
+                  const isSecondaryWaypoint = secondaryOrder >= 0
+                  const isAirportWaypoint = waypoint?.role === 'airport'
+                  // Only meaningful once a trip is selected: markers that
+                  // aren't part of that trip shrink and desaturate so the
+                  // chosen route's pins read clearly against the rest.
+                  const isDimmed = Boolean(selectedItinerary) && !isActive
+                  return (
+                    <button
+                      key={marker.id}
+                      type="button"
+                      className={`${styles.marker} ${isAirportWaypoint ? styles.markerAnchorAirport : ''}`}
+                      style={{ left: `${(marker.x / data.width) * 100}%`, top: `${(marker.y / data.height) * 100}%` }}
+                      onClick={(event) => {
+                        setSelectedMarkerId(marker.id)
+                        const wrap = mapFrameWrapRef.current
+                        if (!wrap) { setMarkerCardAnchor(null); return }
+                        const wrapRect = wrap.getBoundingClientRect()
+                        const btnRect = event.currentTarget.getBoundingClientRect()
+                        const cardHalfWidth = 168 // half of the card's ~21rem width
+                        const cardHeightEstimate = 360
+                        const gap = 18
+                        const margin = 12
+                        const cx = btnRect.left + btnRect.width / 2 - wrapRect.left
+                        const cy = btnRect.top + btnRect.height / 2 - wrapRect.top
+                        const left = Math.min(Math.max(cx, cardHalfWidth + margin), wrapRect.width - cardHalfWidth - margin)
+                        const above = cy > cardHeightEstimate + gap + margin
+                        setMarkerCardAnchor({ left, top: cy, above })
+                      }}
+                      aria-label={`Show details for ${marker.name}`}
+                      aria-pressed={isSelected}
+                      title={marker.name}
+                    >
+                      <span className={`${styles.markerHead} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isDimmed ? styles.markerDimmed : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}>
+                        <span className={(isMainWaypoint || isSecondaryWaypoint) ? styles.markerOrder : styles.markerCore}>{isMainWaypoint ? mainOrder + 1 : isSecondaryWaypoint ? secondaryOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
+                        {isMainWaypoint && <span className={styles.markerStay}>{waypoint?.nights ?? 0}N</span>}
+                        <span className={styles.markerLabel}>{marker.name}</span>
+                      </span>
+                    </button>
+                  )
+                })}
+                </div>
+              </div>
+            </div>
+          {selectedMarker && (
+            <aside
+              className={styles.placeCard}
+              aria-live="polite"
+              data-anchored={markerCardAnchor ? (markerCardAnchor.above ? 'above' : 'below') : undefined}
+              style={markerCardAnchor ? ({ '--place-card-left': `${markerCardAnchor.left}px`, '--place-card-top': `${markerCardAnchor.top}px` } as React.CSSProperties) : undefined}
+            >
+              <button type="button" className={styles.closeButton} onClick={() => setSelectedMarkerId(null)} aria-label="Close place details"><X size={16} /></button>
+              <img
+                className={styles.placeImage}
+                src={getLocationDetails(selectedMarker).image}
+                alt={`${selectedMarker.name} travel photograph`}
+                loading="lazy"
+              />
+              <span className={styles.placeType}>{selectedMarker.type === 'primary' ? 'Primary destination' : kindLabel[selectedMarker.kind] ?? 'Route hub'}</span>
+              <h3>{selectedMarker.name}</h3>
+              <p>{getLocationDetails(selectedMarker).description}</p>
+              <div className={styles.placeMeta}><MapPin size={14} /> Image coordinate {selectedMarker.x}, {selectedMarker.y}</div>
+              <div className={styles.placeMeta}><Route size={14} /> {selectedMarker.type === 'primary' ? 'Destination node' : 'Shared route hub'}</div>
+              {activeMarkerIds.has(selectedMarker.id) && <div className={styles.activeNotice}>Included in {selectedItinerary?.label}</div>}
+            </aside>
+          )}
           </div>
           <p className={styles.caption}>This hand-illustrated map is your visual companion to the island — tap any marker for a closer look at what makes each place worth the trip.</p>
           <p className={styles.accuracyNote}>Marker positions are artistically composed for a beautiful, easy-to-read map and are approximate — not intended for precise geographic navigation.</p>
