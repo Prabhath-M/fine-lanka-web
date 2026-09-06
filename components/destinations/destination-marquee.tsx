@@ -2,6 +2,8 @@
 
 import { memo, useCallback, useEffect, useRef, useState, type CSSProperties } from 'react'
 import { DestinationCard } from '@/components/destinations/destination-card'
+import { usePreloadVideos } from '@/lib/use-preload-videos'
+import { slugify } from '@/lib/utils'
 import type { Destination } from '@/lib/destinations-data'
 
 /**
@@ -98,6 +100,21 @@ export function DestinationMarquee({ destinations }: { destinations: Destination
   const go = useCallback((direction: number) => {
     setActiveIndex((current) => wrappedIndex(current + direction, destinations.length))
   }, [destinations.length])
+
+  // Only the active card's video is mounted/decoded (see lib/destination-media.ts),
+  // so a freshly-activated card previously had zero head start on the network
+  // fetch — the video request only began once the switch had already happened,
+  // which is what showed as a ~2s dark gap (the inactive-card poster gradient)
+  // before the first frame arrived. Prefetching the immediate neighbors' video
+  // bytes into the browser cache while the current card is showing means that
+  // by the time the user actually switches, the file's already local.
+  const neighborSlugs = destinations.length > 1
+    ? [
+        slugify(destinations[wrappedIndex(activeIndex - 1, destinations.length)].name),
+        slugify(destinations[wrappedIndex(activeIndex + 1, destinations.length)].name),
+      ]
+    : []
+  usePreloadVideos(neighborSlugs.map((slug) => `/videos/destinations/${slug}.mp4`))
 
   if (!destinations.length) {
     return <p className="dest-empty">No destinations match that filter yet — try another region.</p>
