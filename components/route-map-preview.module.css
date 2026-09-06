@@ -404,6 +404,10 @@
   color: #fff5df;
 }
 
+.mapFrameWrap {
+  position: relative;
+}
+
 .mapFrame {
   position: relative;
   overflow: hidden;
@@ -791,6 +795,27 @@
   background: rgba(28, 42, 52, 0.95);
   color: #f8efd9;
   box-shadow: 0 1rem 2.5rem rgba(19, 26, 28, 0.4);
+}
+
+/* On wide/desktop viewports, pop the card up right next to the marker that
+   was clicked instead of pinning it to a fixed map corner. --place-card-left
+   /--place-card-top are set inline per click (see route-map-preview.tsx),
+   measured off the actual marker position so this stays correct through the
+   map's zoom levels. Mobile keeps the simpler fixed corner card above, since
+   there's rarely room to float a card next to a marker on a small screen. */
+@media (min-width: 981px) {
+  .placeCard[data-anchored] {
+    right: auto;
+    bottom: auto;
+    left: var(--place-card-left);
+    top: var(--place-card-top);
+  }
+  .placeCard[data-anchored='above'] {
+    transform: translate(-50%, calc(-100% - 18px));
+  }
+  .placeCard[data-anchored='below'] {
+    transform: translate(-50%, 18px);
+  }
 }
 
 .closeButton {
