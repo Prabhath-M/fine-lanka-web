@@ -71,7 +71,6 @@ export function ToursPricingPage() {
   }
 
   const list = activeSlug === 'All' ? TOUR_PACKAGES : TOUR_PACKAGES.filter((t) => t.category === activeSlug)
-  const priceFloor = Math.min(...TOUR_PACKAGES.map((tour) => tour.priceFrom))
   const featuredTour = list.find((t) => t.slug === featuredSlug) ?? list[0]
 
   const selectAdjacentTour = (direction: -1 | 1) => {
@@ -113,7 +112,7 @@ export function ToursPricingPage() {
               <a href="#tour-collection" className="btn btn-uikit-primary">
                 Browse the collection
               </a>
-              <span>Indicative prices, re-quoted around your dates and stays.</span>
+              <span>Pricing shared directly with you — tailored to your dates and stays.</span>
             </div>
           </div>
           <aside className="tours-hero-ledger" aria-label="Collection overview">
@@ -129,8 +128,8 @@ export function ToursPricingPage() {
                 <dd>ways into the island</dd>
               </div>
               <div>
-                <dt>From ${priceFloor.toLocaleString('en-US')}</dt>
-                <dd>per person, twin share</dd>
+                <dt><button type="button" className="tours-ledger-contact" data-open-enquiry="">Contact us</button></dt>
+                <dd>for current pricing</dd>
               </div>
             </dl>
             <p className="tours-ledger-note">Every route is private, flexible, and backed by local support throughout.</p>

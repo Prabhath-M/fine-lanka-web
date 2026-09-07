@@ -60,7 +60,7 @@ export function ItineraryModal({ tour, onClose }: { tour: TourPackage | null; on
             <>
               <p className="itinerary-route">{tour.route}</p>
               <p className="itinerary-meta">
-                {tour.nights} nights · From ${tour.priceFrom.toLocaleString('en-US')} per person
+                {tour.nights} nights · Contact us for current pricing
               </p>
               <ol className="itinerary-days">
                 {tour.itinerary.map((d) => (
