@@ -5638,6 +5638,20 @@ main > #destinations,
 .tours-hero-ledger dl > div { display: grid; grid-template-columns: minmax(4.8rem, 0.5fr) 1fr; gap: 0.9rem; align-items: baseline; }
 .tours-hero-ledger dl > div:nth-child(3) { grid-template-columns: 1fr; gap: 0.3rem; }
 .tours-hero-ledger dt { color: #fbf4df; font-family: var(--font-display); font-size: clamp(1.35rem, 2vw, 1.85rem); font-weight: 500; line-height: 1; white-space: nowrap; }
+.tours-ledger-contact {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: rgba(251, 244, 223, 0.4);
+  text-underline-offset: 0.2em;
+  transition: text-decoration-color 0.2s var(--ease, ease);
+}
+.tours-ledger-contact:hover,
+.tours-ledger-contact:focus-visible { text-decoration-color: currentColor; }
 .tours-hero-ledger dd { margin: 0; color: rgba(247, 241, 223, 0.66); font-size: 0.75rem; line-height: 1.45; }
 .tours-ledger-note { margin: 1.3rem 0 0; padding-top: 1rem; border-top: 1px solid rgba(229, 196, 124, 0.2); color: rgba(247, 241, 223, 0.66); font-size: 0.75rem; line-height: 1.6; }
 .tours-hero .mural-divider--frieze { position: relative; z-index: 1; }

@@ -100,11 +100,11 @@ export function TourCard({
             </div>
 
             <div className="lg:border-l lg:border-[var(--tc-line)] lg:pl-8">
-              <p className="tc-eyebrow">From / per person</p>
-              <p className="tc-display mt-1 text-4xl leading-none text-[var(--tc-monsoon)] sm:text-[2.5rem]">
-                ${tour.priceFrom.toLocaleString('en-US')}
+              <p className="tc-eyebrow">Pricing</p>
+              <p className="tc-display mt-1 text-3xl leading-none text-[var(--tc-monsoon)] sm:text-4xl">
+                On request
               </p>
-              <p className="mt-2 text-xs text-[var(--tc-ink-soft)]">Twin share · thoughtfully paced</p>
+              <p className="mt-2 text-xs text-[var(--tc-ink-soft)]">Contact us for current pricing — twin share, tailored to your dates.</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
                 <button
                   className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[rgba(14,81,69,0.3)] bg-transparent px-5 text-sm font-extrabold text-[var(--tc-monsoon)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:border-[var(--tc-monsoon)] hover:bg-[rgba(14,81,69,0.06)] active:scale-[0.97]"
