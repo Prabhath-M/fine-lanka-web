@@ -2,7 +2,7 @@ import { Analytics } from '@vercel/analytics/next'
 /* Ceylon Field Notes: retain elegant field typography and use the company
    logo consistently in browser chrome. */
 import type { Metadata, Viewport } from 'next'
-import { Fraunces, Inter, Space_Mono } from 'next/font/google'
+import { Fraunces, Inter, Nunito } from 'next/font/google'
 import { EnquiryModal } from '@/components/enquiry-modal'
 import { SiteFooter } from '@/components/site-footer'
 import { SiteHeader } from '@/components/site-header'
@@ -21,10 +21,10 @@ const inter = Inter({
   variable: '--font-inter',
 })
 
-const spaceMono = Space_Mono({
+const nunito = Nunito({
   subsets: ['latin'],
-  weight: ['400', '700'],
-  variable: '--font-space-mono',
+  weight: ['500', '600', '700', '800'],
+  variable: '--font-nunito',
 })
 
 // Falls back to localhost during local dev; set NEXT_PUBLIC_SITE_URL in
@@ -115,7 +115,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${inter.variable} ${spaceMono.variable} bg-background`}
+      className={`${fraunces.variable} ${inter.variable} ${nunito.variable} bg-background`}
     >
       <body className="antialiased">
         {/* TravelAgency structured data (JSON-LD) — helps Google associate

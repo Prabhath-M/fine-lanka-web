@@ -75,20 +75,20 @@ export function TourCard({
         <div className="relative">
           <div className="flex items-start gap-3 text-[var(--tc-ink-soft)]">
             <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--tc-brass)]" strokeWidth={1.5} />
-            <p className="tc-mono line-clamp-1 max-w-[720px] text-[11px] leading-[1.8] sm:text-xs">{tour.route}</p>
+            <p className="tc-mono line-clamp-1 max-w-[720px] text-[13.5px] leading-[1.8] sm:text-[0.906rem]">{tour.route}</p>
           </div>
 
           <div className="my-6 tc-carved-rule" />
 
           <div className="grid gap-7 lg:grid-cols-[minmax(0,1.2fr)_minmax(230px,0.8fr)] lg:gap-9">
             <div>
-              <p className="line-clamp-4 min-h-[102px] max-w-[620px] text-[15px] leading-[1.7] text-[var(--tc-monsoon)] sm:min-h-[109px] sm:text-base">{tour.blurb}</p>
+              <p className="line-clamp-4 min-h-[102px] max-w-[620px] text-[17.5px] leading-[1.7] text-[var(--tc-monsoon)] sm:min-h-[109px] sm:text-[18.5px]">{tour.blurb}</p>
               <div className="mt-6 h-[84px] overflow-hidden">
                 {stops.length > 0 && (
-                  <div className="flex flex-wrap gap-x-6 gap-y-3 text-[10px] font-extrabold uppercase tracking-[0.16em] text-[var(--tc-ink-soft)]">
+                  <div className="flex flex-wrap gap-x-6 gap-y-3 text-[12.5px] font-extrabold uppercase tracking-[0.16em] text-[var(--tc-ink-soft)]">
                     {stops.map((stop, index) => (
                       <span className="flex items-center gap-2" key={`${tour.slug}-stop-${index}`}>
-                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--tc-brass)]/60 text-[9px] text-[var(--tc-brass)]">
+                        <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full border border-[var(--tc-brass)]/60 text-[11.5px] text-[var(--tc-brass)]">
                           0{index + 1}
                         </span>
                         <span className="line-clamp-1">{stop}</span>
@@ -104,10 +104,10 @@ export function TourCard({
               <p className="tc-display mt-1 text-3xl leading-none text-[var(--tc-monsoon)] sm:text-4xl">
                 On request
               </p>
-              <p className="mt-2 text-xs text-[var(--tc-ink-soft)]">Contact us for current pricing — twin share, tailored to your dates.</p>
+              <p className="mt-2 text-[0.906rem] text-[var(--tc-ink-soft)]">Contact us for current pricing — twin share, tailored to your dates.</p>
               <div className="mt-6 flex flex-col gap-3 sm:flex-row lg:flex-col">
                 <button
-                  className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[rgba(14,81,69,0.3)] bg-transparent px-5 text-sm font-extrabold text-[var(--tc-monsoon)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:border-[var(--tc-monsoon)] hover:bg-[rgba(14,81,69,0.06)] active:scale-[0.97]"
+                  className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[rgba(14,81,69,0.3)] bg-transparent px-5 text-[1.03rem] font-extrabold text-[var(--tc-monsoon)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:border-[var(--tc-monsoon)] hover:bg-[rgba(14,81,69,0.06)] active:scale-[0.97]"
                   onClick={() => onOpenItinerary(tour)}
                   type="button"
                 >
@@ -115,7 +115,7 @@ export function TourCard({
                   <ArrowRight className="h-4 w-4 transition-transform duration-200 ease-[var(--tc-ease-out)] group-hover/button:translate-x-1" strokeWidth={1.8} />
                 </button>
                 <button
-                  className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[rgba(14,81,69,0.3)] bg-transparent px-5 text-sm font-extrabold text-[var(--tc-monsoon)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:border-[var(--tc-monsoon)] hover:bg-[rgba(14,81,69,0.06)] active:scale-[0.97]"
+                  className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl border border-[rgba(14,81,69,0.3)] bg-transparent px-5 text-[1.03rem] font-extrabold text-[var(--tc-monsoon)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:border-[var(--tc-monsoon)] hover:bg-[rgba(14,81,69,0.06)] active:scale-[0.97]"
                   onClick={() => onViewOnMap(tour)}
                   type="button"
                 >
@@ -123,7 +123,7 @@ export function TourCard({
                   <Map className="h-4 w-4 transition-transform duration-200 ease-[var(--tc-ease-out)] group-hover/button:-translate-y-0.5" strokeWidth={1.7} />
                 </button>
                 <button
-                  className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--tc-monsoon)] px-5 text-sm font-extrabold text-[var(--tc-ivory)] shadow-[0_10px_20px_rgba(14,81,69,0.16)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:bg-[var(--tc-monsoon-deep)] hover:shadow-[0_14px_24px_rgba(14,81,69,0.22)] active:scale-[0.97]"
+                  className="tc-focus group/button inline-flex min-h-12 items-center justify-center gap-2 rounded-xl bg-[var(--tc-monsoon)] px-5 text-[1.03rem] font-extrabold text-[var(--tc-ivory)] shadow-[0_10px_20px_rgba(14,81,69,0.16)] transition-all duration-200 ease-[var(--tc-ease-out)] hover:bg-[var(--tc-monsoon-deep)] hover:shadow-[0_14px_24px_rgba(14,81,69,0.22)] active:scale-[0.97]"
                   data-open-enquiry=""
                   type="button"
                 >
