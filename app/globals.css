@@ -951,9 +951,9 @@
   align-items: center;
   gap: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.956rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--sl-ink);
   background: var(--sl-brass-light);
   border: none;
@@ -1151,10 +1151,11 @@ body:has(.journal-portal-toggle:checked) {
 }
 .section { padding-block: var(--space-6); }
 .section-label {
-  font-family: var(--font-mono);
-  font-size: 0.856rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--brass);
   display: inline-block;
   margin-bottom: var(--space-2);
@@ -1182,9 +1183,9 @@ body:has(.journal-portal-toggle:checked) {
   align-items: center;
   gap: 0.6rem;
   font-family: var(--font-mono);
-  font-size: 0.876rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   padding: 0.9rem 1.6rem;
   border-radius: var(--radius);
   border: 1px solid transparent;
@@ -8563,12 +8564,12 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .intro-professional-assurance-label {
   margin: 0 0 1.1rem;
-  color: #e7be69;
-  font-family: var(--font-mono);
-  font-size: 0.716rem;
+  color: #f4d38c;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .intro-professional-assurance > p:not(.intro-professional-assurance-label) {
   margin: 0;
@@ -8672,12 +8673,12 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .intro-compact-method-label {
   margin: 0 0 0.78rem;
-  color: rgba(247, 231, 188, 0.68);
-  font-family: var(--font-mono);
-  font-size: 0.696rem;
+  color: rgba(247, 231, 188, 0.88);
+  font-family: var(--font-display);
+  font-size: 1rem;
   font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .intro-compact-method ol {
   display: grid;
@@ -10021,7 +10022,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .intro-blue-lily .intro-compact-method { grid-column: 2; grid-row: 2; }
 .intro-blue-lily .section-label { color: #d4b46e; }
 .intro-blue-lily .intro-compact-kicker,
-.intro-blue-lily .intro-compact-method-label { color: rgba(240, 231, 202, 0.72); }
+.intro-blue-lily .intro-compact-method-label { color: rgba(240, 231, 202, 0.9); }
 .intro-blue-lily h2 { max-width: 14ch; }
 .intro-blue-lily .intro-compact-copy { color: rgba(248, 241, 218, 0.8); }
 .intro-blue-lily .intro-compact-method ol {
