@@ -1,5 +1,5 @@
 import { Icon } from '@/components/icons'
-import { FEATURES } from '@/lib/site-data'
+import { FEATURES, SITE } from '@/lib/site-data'
 
 /**
  * Design reminder: the Why Fine Lanka section is a premium travel-standard
@@ -44,7 +44,7 @@ export function Features() {
             <span>Fine Lanka</span>
             <strong>Local knowledge,<br />held personally.</strong>
             <i aria-hidden="true" />
-            <small>Since 2011 · Sri Lanka</small>
+            <small>Since {SITE.foundedYear} · Sri Lanka</small>
           </aside>
         </header>
 

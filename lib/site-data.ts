@@ -33,7 +33,7 @@ export const SITE: SiteInfo = {
   email: 'info@finelankatours.com',
   emails: ['info@finelankatours.com', 'travel@finelankatours.com'],
   address: 'No. 38/18, Muthulanda, Dagonna Road, Boragodawaththa, Minuwangoda, Sri Lanka',
-  foundedYear: 2011,
+  foundedYear: 2015,
 }
 
 export interface NavChild {
