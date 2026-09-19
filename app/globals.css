@@ -2096,17 +2096,6 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   gap: var(--space-4);
   padding-block: 0.5rem var(--space-2);
 }
-.dest-marquee-level-label {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 0 0 0.6rem clamp(1.25rem, 4vw, 3.5rem);
-  font-family: var(--font-mono);
-  font-size: 0.876rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-on-light-muted);
-}
 .dest-marquee-level-arrow {
   display: inline-grid;
   place-items: center;
@@ -2181,11 +2170,11 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   justify-content: center;
   align-items: center;
   gap: 18px;
-  color: rgba(244, 237, 218, 0.55);
-  font-family: var(--font-mono);
-  font-size: 11.5px;
-  letter-spacing: 0.19em;
-  text-transform: uppercase;
+  color: rgba(244, 237, 218, 0.8);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .chart-ritual-footer { justify-content: space-between; }
 .chart-ritual-rule { width: 30px; height: 1px; background: var(--brass); opacity: 0.8; }
@@ -2228,10 +2217,10 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   z-index: 2;
   margin: 15px 0 0;
   color: var(--brass-light);
-  font-family: var(--font-mono);
-  font-size: 12.5px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   animation: chartRitualRise 0.6s 0.32s both;
 }
 .chart-ritual-title {
@@ -2300,9 +2289,9 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   border-radius: 999px;
   color: var(--text-on-dark);
   font-family: var(--font-mono);
-  font-size: 0.836rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   backdrop-filter: blur(3px);
 }
 .chart-replay:hover { border-color: var(--brass-light); color: var(--brass-light); }
@@ -2447,10 +2436,10 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 .dest-card-front-text .coord-label { color: var(--brass-light); margin-bottom: 0.1rem; }
 .dest-card-front-text h3 { font-size: 1.15rem; color: var(--text-on-dark); }
 .dest-region {
-  font-family: var(--font-mono);
-  font-size: 0.856rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.92rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--teal-light);
 }
 .dest-card-front-text .dest-region {
@@ -2537,9 +2526,9 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   color: var(--brass-light);
   padding: 0.55rem 1rem;
   font-family: var(--font-mono);
-  font-size: 0.876rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   border-radius: var(--radius);
 }
 .dest-back-cta:hover { background: var(--brass-light); color: var(--ink); }
@@ -3773,11 +3762,11 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 }
 
 .destinations-page .dest-hero-note {
-  color: rgba(243, 239, 225, 0.55);
-  font-family: var(--font-mono);
-  font-size: 0.806rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: rgba(243, 239, 225, 0.82);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 
 .destinations-page .dest-hero-aside {
@@ -3793,12 +3782,12 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 .destinations-page .dest-hero-aside-label,
 .destinations-page .dest-hero-aside-caption {
   margin: 0;
-  color: rgba(243, 239, 225, 0.56);
-  font-family: var(--font-mono);
-  font-size: 0.796rem;
-  letter-spacing: 0.09em;
+  color: rgba(243, 239, 225, 0.82);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   line-height: 1.55;
-  text-transform: uppercase;
 }
 .destinations-page .dest-hero-aside-value {
   margin: 0.35rem 0 0.55rem;
@@ -3818,24 +3807,14 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   margin-top: clamp(3.2rem, 7vw, 6.3rem);
   padding-top: 1rem;
   border-top: 1px solid rgba(243, 239, 225, 0.19);
-  color: rgba(243, 239, 225, 0.58);
-  font-family: var(--font-mono);
-  font-size: 0.806rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: rgba(243, 239, 225, 0.85);
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .destinations-page .dest-hero-meta-status { justify-self: end; color: var(--brass-light); }
 .destinations-page .dest-hero-meta-status i,
-.destinations-page .dest-marquee-status-dot {
-  display: inline-block;
-  width: 0.42rem;
-  height: 0.42rem;
-  margin-right: 0.45rem;
-  border-radius: 50%;
-  background: var(--dest-sea-glass);
-  box-shadow: 0 0 0 4px rgba(79, 155, 155, 0.14);
-}
-
 .destinations-page .destinations-intro-row {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(240px, 0.64fr);
@@ -3873,31 +3852,9 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   position: relative;
   padding-top: 0.2rem;
 }
-.destinations-page .dest-marquee-status {
-  display: flex;
-  align-items: center;
-  gap: 0.1rem;
-  min-height: 1.3rem;
-  margin: 0 0 0.4rem clamp(1.25rem, 4vw, 3.5rem);
-  color: var(--text-on-light-muted);
-  font-family: var(--font-mono);
-  font-size: 0.756rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.destinations-page .dest-marquee-status .dest-marquee-status-dot { margin-right: 0.5rem; background: var(--brass); box-shadow: 0 0 0 4px rgba(184, 146, 74, 0.12); }
-.destinations-page .dest-marquee-status.is-plotting .dest-marquee-status-dot { animation: destStatusPulse 1s ease-in-out infinite; background: var(--dest-sea-glass); }
-.destinations-page .dest-marquee-status strong { margin-left: auto; color: var(--ink); font-size: 0.876rem; font-weight: 400; }
-.destinations-page .dest-marquee-status > span:last-child { margin-left: 0.25rem; }
 .destinations-page .dest-marquee {
   gap: clamp(2.2rem, 4vw, 4rem);
   padding-block: 0.5rem 1rem;
-}
-.destinations-page .dest-marquee-level-label {
-  margin-bottom: 0.75rem;
-  color: rgba(26, 35, 49, 0.62);
-  font-size: 0.766rem;
-  letter-spacing: 0.14em;
 }
 .destinations-page .dest-marquee-level-arrow {
   width: 1.25rem;
@@ -4077,25 +4034,6 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 /* The destination field intentionally replaces the old duplicate conveyor
    rows: each filtered place appears once, in a composed atlas grid, while
    the card itself remains the unchanged framed artifact. */
-.destinations-page .dest-card-field-rule {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin: 0 clamp(1.1rem, 4vw, 3.5rem) 1.3rem;
-  color: rgba(26, 35, 49, 0.48);
-  font-family: var(--font-mono);
-  font-size: 0.736rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-}
-.destinations-page .dest-card-field-rule i {
-  display: block;
-  flex: 1;
-  height: 1px;
-  background: rgba(26, 35, 49, 0.16);
-}
-.destinations-page .dest-card-field-rule span:first-child,
-.destinations-page .dest-card-field-rule span:last-child { color: var(--brass); }
 .destinations-page .dest-card-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -4109,22 +4047,6 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   animation: destCardPlot 650ms var(--plot-delay, 0ms) both;
 }
 .destinations-page .dest-card-field-item .dest-card { width: 100%; }
-.destinations-page .dest-card-field-loading {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 0.5rem;
-  margin: 2rem 0 0;
-  color: var(--text-on-light-muted);
-  font-family: var(--font-mono);
-  font-size: 0.766rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-}
-.destinations-page .dest-card-field-loading span {
-  color: var(--brass);
-  font-size: 1rem;
-}
 
 @media (max-width: 1060px) {
   .destinations-page .dest-card-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -4172,19 +4094,6 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   padding: 0.2rem 0 0.8rem;
   padding-top: 0.6rem;
 }
-.destinations-page .dest-card-field-route {
-  display: grid;
-  grid-template-columns: auto auto minmax(36px, 1fr) auto auto auto;
-  gap: 0.6rem;
-  align-items: center;
-  margin: 0 clamp(1.1rem, 4vw, 3.5rem) 1.4rem;
-  color: rgba(26, 35, 49, 0.56);
-  font-family: var(--font-mono);
-  font-size: 0.716rem;
-  letter-spacing: 0.07em;
-  line-height: 1.4;
-  text-transform: uppercase;
-}
 .destinations-page .dest-card-field-route-label { color: var(--teal); }
 .destinations-page .dest-card-field-route-point { color: var(--brass); white-space: nowrap; }
 .destinations-page .dest-card-field-route > i {
@@ -4200,17 +4109,6 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   min-width: 2rem;
   background: linear-gradient(90deg, var(--brass), rgba(79, 155, 155, 0.46));
   transform: skewX(-24deg);
-}
-.destinations-page .dest-card-field-endpoint {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  margin: 1.7rem clamp(1.1rem, 4vw, 3.5rem) 0;
-  color: rgba(26, 35, 49, 0.48);
-  font-family: var(--font-mono);
-  font-size: 0.716rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 .destinations-page .dest-card-field-endpoint i {
   display: block;
@@ -4594,18 +4492,17 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   left: 50%;
   bottom: -1.35rem;
   transform: translateX(-50%);
-  color: rgba(14, 42, 47, 0.7);
-  font-family: var(--font-mono);
-  font-size: 0.726rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: rgba(14, 42, 47, 0.85);
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   white-space: nowrap;
 }
-.destinations-page .island-carousel-eyebrow { margin: 0 0 0.48rem; color: var(--teal); font-family: var(--font-mono); font-size: 0.736rem; letter-spacing: 0.13em; text-transform: uppercase; }
+.destinations-page .island-carousel-eyebrow { margin: 0 0 0.48rem; color: var(--teal); font-family: var(--font-display); font-size: 0.95rem; font-style: italic; letter-spacing: 0.01em; }
 .destinations-page .island-carousel-caption h3 { margin: 0; color: var(--ink); font-family: 'Fraunces', serif; font-size: clamp(1.75rem, 3vw, 2.8rem); font-weight: 400; line-height: 0.96; }
 .destinations-page .island-carousel-caption p:not(.island-carousel-eyebrow) { max-width: 52ch; margin: 0.65rem 0 0; color: var(--text-on-light-muted); font-size: 1.066rem; line-height: 1.65; }
-.destinations-page .island-carousel-coordinates { display: grid; justify-items: end; gap: 0.42rem; color: var(--brass); font-family: var(--font-mono); font-size: 0.746rem; letter-spacing: 0.08em; text-align: right; text-transform: uppercase; }
-.destinations-page .island-carousel-coordinates strong { color: var(--teal); font-size: 0.746rem; font-weight: 400; }
+
 .destinations-page .island-carousel-dots { display: flex; justify-content: center; gap: 0.38rem; margin-top: 1.2rem; }
 
 /* Backdrop blur requires repainting the video behind it while the loop runs.
@@ -4649,7 +4546,7 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 @media (max-width: 760px) {
   .destinations-page .island-carousel-stage { min-height: 720px; background-size: auto, 54px 54px, 54px 54px, cover; }
   .destinations-page .island-carousel-card { width: clamp(250px, 70vw, 290px); }
-  .destinations-page .island-carousel-markings { font-size: 0.606rem; }
+  .destinations-page .island-carousel-markings { font-size: 0.73rem; }
   .destinations-page .island-carousel-marking { padding: 0.35rem 0.4rem; }
   .destinations-page .island-carousel-marking--sw { display: none; }
   .destinations-page .island-carousel-marking--ne { max-width: 11ch; text-align: right; }
@@ -4818,11 +4715,11 @@ main > #destinations,
 .destinations-page .dest-section-kicker {
   margin: 0 0 1rem;
   color: var(--brass-light);
-  font-family: var(--font-mono);
-  font-size: 0.836rem;
-  letter-spacing: 0.18em;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   line-height: 1.3;
-  text-transform: uppercase;
 }
 
 /* Destinations boundary + information panel refinement. The frieze is part of
@@ -4925,10 +4822,10 @@ main > #destinations,
 .destinations-page .destinations-toolbar-note {
   flex: none;
   color: #21423d;
-  font-family: var(--font-mono);
-  font-size: 0.776rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   display: inline-flex;
   align-items: center;
   gap: 0.34rem;
@@ -5301,12 +5198,11 @@ main > #destinations,
   margin: 0 clamp(1.1rem, 4vw, 3.5rem) 1.1rem;
   padding-bottom: 0.6rem;
   border-bottom: 1px solid rgba(184, 146, 74, 0.2); color: var(--dest-solid-ink);
-  font-family: var(--font-mono);
-  font-size: 0.716rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase; }
-.destinations-page .island-carousel-markings { position: absolute; inset: 0; z-index: 2; pointer-events: none; color: var(--dest-solid-ink); font-family: var(--font-mono); font-size: 0.706rem; letter-spacing: 0.1em; text-transform: uppercase; }
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.01em; }
+.destinations-page .island-carousel-markings { position: absolute; inset: 0; z-index: 2; pointer-events: none; color: var(--dest-solid-ink); font-family: var(--font-display); font-size: 0.85rem; font-style: italic; letter-spacing: 0.01em; }
 .destinations-page .island-carousel-marking { position: absolute; padding: 0.42rem 0.56rem; border: 1px solid rgba(184, 146, 74, 0.31);
   background: #fff8e7;
   color: var(--dest-solid-ink);
@@ -5362,11 +5258,11 @@ main > #destinations,
   color: #e8d29c;
 }
 .destinations-page .island-carousel-waypoint {
-  color: rgba(247, 244, 236, 0.82);
-  font-family: var(--font-mono);
-  font-size: 0.716rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
+  color: rgba(247, 244, 236, 0.9);
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .destinations-page .island-carousel-info-pane-body {
   display: grid;
@@ -5408,10 +5304,10 @@ main > #destinations,
 }
 .destinations-page .island-carousel-facts dt {
   color: #5b6f65;
-  font-family: var(--font-mono);
-  font-size: 0.676rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .destinations-page .island-carousel-facts dd {
   color: #1b3734;
@@ -5932,12 +5828,12 @@ body:has(.features:target) .typed-opening { display: none; }
   }
   .destinations-page .destinations-atlas-heading-status {
     margin: 0 0 0.12rem;
-    color: rgba(247, 239, 215, 0.72);
-    font-family: var(--font-mono);
-    font-size: 0.676rem;
-    letter-spacing: 0.12em;
+    color: rgba(247, 239, 215, 0.9);
+    font-family: var(--font-display);
+    font-size: 0.85rem;
+    font-style: italic;
+    letter-spacing: 0.01em;
     text-align: right;
-    text-transform: uppercase;
     white-space: nowrap;
   }
   .destinations-page .destinations-atlas-heading-status strong { color: #f2c96e; font-size: 0.876rem; }
@@ -6284,17 +6180,6 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .destinations-atlas-heading-status,
   .destinations-page .destinations-atlas-heading-status strong { color: #8a5d31; }
   .destinations-page .destinations-atlas-rail-label,
-  .destinations-page .destinations-atlas-rail-foot {
-    margin: 0;
-    color: #38585a;
-    text-shadow: 0 1px 0 rgba(255, 252, 239, 0.64);
-    font-family: var(--font-mono);
-    font-size: 0.636rem;
-    letter-spacing: 0.12em;
-    line-height: 1.35;
-    text-align: center;
-    text-transform: uppercase;
-  }
   .destinations-page .island-carousel-compass {
     width: 78px;
     height: 78px;
@@ -9936,11 +9821,10 @@ body:has(.features:target) .typed-opening { display: none; }
   border: 1px solid rgba(181, 137, 69, 0.76);
   box-shadow: inset 0 0 0 1px rgba(255, 247, 221, 0.12);
   font-family: var(--font-mono);
-  font-size: 0.706rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.02em;
   text-decoration: none;
-  text-transform: uppercase;
   transition: background 160ms var(--ease), transform 160ms var(--ease);
 }
 .explore-heritage-rebuild .explore-map-destinations-link:hover,
