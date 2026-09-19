@@ -1,0 +1,20 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/about/page": "/about",
+  "/api/booking/route": "/api/booking",
+  "/api/enquiry/route": "/api/enquiry",
+  "/api/newsletter/route": "/api/newsletter",
+  "/booking-terms/page": "/booking-terms",
+  "/booking/page": "/booking",
+  "/contact/page": "/contact",
+  "/cookie-policy/page": "/cookie-policy",
+  "/destinations/page": "/destinations",
+  "/journal/page": "/journal",
+  "/map-preview/page": "/map-preview",
+  "/page": "/",
+  "/privacy/page": "/privacy",
+  "/robots.txt/route": "/robots.txt",
+  "/sitemap.xml/route": "/sitemap.xml",
+  "/tours-pricing/page": "/tours-pricing"
+}
