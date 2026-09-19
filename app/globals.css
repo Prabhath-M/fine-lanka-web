@@ -365,10 +365,10 @@
   box-shadow: 0 0 24px rgba(212, 175, 55, 0.35);
 }
 .portal-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.876rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--sl-brass-light);
 }
 .portal-intro h1 {
@@ -389,9 +389,9 @@
   position: relative;
   margin-top: 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.956rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   color: var(--sl-ink);
   background: var(--sl-brass-light);
   border: none;
@@ -495,11 +495,11 @@
 .journal-threshold-kicker {
   min-height: 1.2em;
   margin: 0 0 1.4rem;
-  color: rgba(241, 215, 149, 0.78);
-  font-family: var(--font-mono);
-  font-size: clamp(0.736rem, calc(0.75vw + 2.5px), 0.876rem);
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  color: rgba(241, 215, 149, 0.9);
+  font-family: var(--font-display);
+  font-size: clamp(0.95rem, calc(0.75vw + 2.5px), 1.1rem);
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .journal-threshold-title {
   min-height: 1.1em;
@@ -608,10 +608,10 @@
   pointer-events: auto;
 }
 .chronicle-eyebrow {
-  font-family: var(--font-mono);
-  font-size: 0.856rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--sl-brass-light);
 }
 .chronicle-head p {
@@ -652,10 +652,10 @@
   flex: 1;
 }
 .chronicle-card-meta {
-  font-family: var(--font-mono);
-  font-size: 0.816rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--sl-teal);
 }
 .chronicle-card-body h3 {
@@ -675,10 +675,10 @@
   margin-top: 0.2rem;
 }
 .chronicle-card-tags span {
-  font-family: var(--font-mono);
-  font-size: 0.776rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   border: 1px solid rgba(26, 35, 49, 0.2);
   border-radius: 999px;
   padding: 0.22rem 0.6rem;
@@ -770,10 +770,10 @@
   padding: 2.5rem;
 }
 .reader-meta {
-  font-family: var(--font-mono);
-  font-size: 0.856rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--sl-teal);
 }
 .reader-body h2 {
@@ -789,10 +789,10 @@
   gap: 0.5rem;
 }
 .reader-tags span {
-  font-family: var(--font-mono);
-  font-size: 0.796rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.87rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   border: 1px solid rgba(26, 35, 49, 0.2);
   border-radius: 999px;
   padding: 0.25rem 0.7rem;
@@ -10312,12 +10312,12 @@ body:has(.features:target) .typed-opening { display: none; }
   left: 50%;
   transform: translateX(-50%);
   z-index: 3;
-  font-family: var(--font-mono);
-  font-size: 0.836rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--sl-text-on-dark-muted);
-  opacity: 0.7;
+  opacity: 0.85;
   transition: opacity 0.6s var(--sl-ease);
 }
 
@@ -10851,22 +10851,6 @@ body:has(.features:target) .typed-opening { display: none; }
 .chronicle-section.is-revealed .chronicle-card-media::after {
   animation: chronicleCoverSweep 620ms var(--sl-ease) calc(1.48s + var(--delay, 0ms)) forwards;
 }
-.chronicle-card-folio {
-  position: absolute;
-  z-index: 3;
-  top: 0.85rem;
-  left: 0.85rem;
-  padding: 0.36rem 0.52rem;
-  border: 1px solid rgba(249, 224, 151, 0.72);
-  background: rgba(8, 30, 33, 0.76);
-  color: #f4da90;
-  font-family: var(--font-mono);
-  font-size: 0.676rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  line-height: 1;
-  text-transform: uppercase;
-}
 @keyframes chronicleLedgerLine {
   to { transform: scaleX(1); }
 }
@@ -10895,7 +10879,6 @@ body:has(.features:target) .typed-opening { display: none; }
 @media (max-width: 640px) {
   .chronicle-head::before { right: auto; left: 0; width: 7.5rem; transform-origin: left center; }
   .chronicle-head::after { display: none; }
-  .chronicle-card-folio { top: 0.72rem; left: 0.72rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .chronicle-section.is-revealed::before,
@@ -11216,12 +11199,11 @@ body:has(.features:target) .typed-opening { display: none; }
   gap: 0.42rem;
   margin: 0;
   color: #d8b461;
-  font-family: var(--font-mono);
-  font-size: 0.716rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   line-height: 1;
-  text-transform: uppercase;
   white-space: nowrap;
   text-shadow: 0 0 0.65rem rgba(216, 180, 97, 0.42);
 }
