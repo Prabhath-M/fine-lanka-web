@@ -1,0 +1,1511 @@
+{
+  "image": "/images/fine-lanka-route-atlas-all-hubs.webp",
+  "width": 1664,
+  "height": 2080,
+  "calibration": "original verified 47-marker map coordinates restored; itinerary pins anchor their bottom tip to fixed marker centers; no map coordinates changed; itinerary-driven pins with airport, secondary stops, numbered main stays, and nights; 2026-09-02; secondary pins inherit parent main-destination ordinals; 2026-09-02; airport anchor nudged below Negombo; 2026-09-02; airport anchor nudged below Negombo; 2026-09-02; airport anchor nudged below Negombo; 2026-09-02",
+  "source": {
+    "map": "Supplied Sri Lanka Tour Map image; red-ring waypoint circles detected in the source pixels.",
+    "grid": "8 columns x 10 rows over the exact 1664 x 2080 source image.",
+    "routes": "Removed by request; no path or itinerary records are retained."
+  },
+  "networkStats": {
+    "markerCount": 47,
+    "edgeCount": 0,
+    "primaryCount": 39,
+    "hubCount": 8,
+    "itineraryCount": 13,
+    "connected": false
+  },
+  "markers": [
+    {
+      "id": "point-pedro",
+      "name": "Point Pedro",
+      "x": 623.47,
+      "y": 46.84,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 3,
+        "row": 1
+      }
+    },
+    {
+      "id": "jaffna",
+      "name": "Jaffna",
+      "x": 512.34,
+      "y": 120.42,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 3,
+        "row": 1
+      }
+    },
+    {
+      "id": "elephant-pass",
+      "name": "Elephant Pass",
+      "x": 719.9,
+      "y": 234.78,
+      "type": "hub",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 4,
+        "row": 2
+      }
+    },
+    {
+      "id": "mullaittivu",
+      "name": "Mullaittivu",
+      "x": 956.63,
+      "y": 379.19,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 5,
+        "row": 2
+      }
+    },
+    {
+      "id": "mannar",
+      "name": "Mannar",
+      "x": 390.25,
+      "y": 424.49,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 2,
+        "row": 3
+      }
+    },
+    {
+      "id": "madhu-road-national-park",
+      "name": "Madhu Road National Park",
+      "x": 486.58,
+      "y": 535.54,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 3,
+        "row": 3
+      }
+    },
+    {
+      "id": "pulmoddai",
+      "name": "Pulmoddai",
+      "x": 1016.1,
+      "y": 576.38,
+      "type": "hub",
+      "kind": "coast",
+      "gridCell": {
+        "column": 5,
+        "row": 3
+      }
+    },
+    {
+      "id": "aukana",
+      "name": "Aukana",
+      "x": 967.76,
+      "y": 675.96,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 5,
+        "row": 4
+      }
+    },
+    {
+      "id": "trincomalee",
+      "name": "Trincomalee",
+      "x": 1171.73,
+      "y": 677.64,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 6,
+        "row": 4
+      }
+    },
+    {
+      "id": "pigeon-island",
+      "name": "Pigeon Island",
+      "x": 1211.5,
+      "y": 732.87,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 6,
+        "row": 4
+      }
+    },
+    {
+      "id": "mihintale",
+      "name": "Mihintale",
+      "x": 745.3,
+      "y": 690.48,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 4,
+        "row": 4
+      }
+    },
+    {
+      "id": "habanara",
+      "name": "Habarana",
+      "x": 747.06,
+      "y": 844.62,
+      "type": "hub",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 4,
+        "row": 5
+      }
+    },
+    {
+      "id": "sigiriya",
+      "name": "Sigiriya",
+      "x": 905.25,
+      "y": 894.99,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 5,
+        "row": 5
+      }
+    },
+    {
+      "id": "pasikudah",
+      "name": "Pasikudah Beach",
+      "x": 1322.84,
+      "y": 943.84,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 7,
+        "row": 5
+      }
+    },
+    {
+      "id": "dambulla",
+      "name": "Dambulla",
+      "x": 716.73,
+      "y": 948.21,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 4,
+        "row": 5
+      }
+    },
+    {
+      "id": "kurunegala",
+      "name": "Kurunegala",
+      "x": 539.12,
+      "y": 1013.22,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 3,
+        "row": 5
+      }
+    },
+    {
+      "id": "chilaw",
+      "name": "Chilaw",
+      "x": 331.08,
+      "y": 1025.49,
+      "type": "hub",
+      "kind": "coast",
+      "gridCell": {
+        "column": 2,
+        "row": 5
+      }
+    },
+    {
+      "id": "alu-vihara",
+      "name": "Alu Vihara",
+      "x": 825.96,
+      "y": 1121.3,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 4,
+        "row": 6
+      }
+    },
+    {
+      "id": "pinnawala",
+      "name": "Pinnawala Elephant Orphanage",
+      "x": 547.17,
+      "y": 1147.95,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 3,
+        "row": 6
+      }
+    },
+    {
+      "id": "batticaloa",
+      "name": "Batticaloa",
+      "x": 1444.64,
+      "y": 1176.44,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 7,
+        "row": 6
+      }
+    },
+    {
+      "id": "kandy",
+      "name": "Kandy",
+      "x": 773.9,
+      "y": 1236.18,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 4,
+        "row": 6
+      }
+    },
+    {
+      "id": "avissawella",
+      "name": "Avissawella",
+      "x": 602.89,
+      "y": 1308.28,
+      "type": "hub",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 3,
+        "row": 7
+      }
+    },
+    {
+      "id": "arugam-bay",
+      "name": "Arugam Bay",
+      "x": 1489.59,
+      "y": 1364.39,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 8,
+        "row": 7
+      }
+    },
+    {
+      "id": "bandaranaike-airport",
+      "name": "Katunayake / Bandaranaike International Airport",
+      "x": 342.0,
+      "y": 1308.0,
+      "type": "primary",
+      "kind": "arrival",
+      "gridCell": {
+        "column": 2,
+        "row": 6
+      },
+      "anchorNote": "Below Negombo with clearance for both pin heads; fixed source-image anchor."
+    },
+    {
+      "id": "badulla",
+      "name": "Badulla",
+      "x": 1097.84,
+      "y": 1494.16,
+      "type": "hub",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 6,
+        "row": 8
+      }
+    },
+    {
+      "id": "nuwara-eliya",
+      "name": "Nuwara Eliya",
+      "x": 874.0,
+      "y": 1414.0,
+      "type": "primary",
+      "kind": "tea",
+      "gridCell": {
+        "column": 5,
+        "row": 7
+      }
+    },
+    {
+      "id": "ratnapura",
+      "name": "Ratnapura",
+      "x": 566.91,
+      "y": 1541.68,
+      "type": "hub",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 3,
+        "row": 8
+      }
+    },
+    {
+      "id": "bentota",
+      "name": "Bentota",
+      "x": 456.19,
+      "y": 1664.91,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 3,
+        "row": 9
+      }
+    },
+    {
+      "id": "galle",
+      "name": "Galle",
+      "x": 533.73,
+      "y": 1841.88,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 3,
+        "row": 9
+      }
+    },
+    {
+      "id": "kataragama",
+      "name": "Kataragama",
+      "x": 1201.47,
+      "y": 1865.27,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 6,
+        "row": 9
+      }
+    },
+    {
+      "id": "unawatuna",
+      "name": "Unawatuna Beach",
+      "x": 608.55,
+      "y": 1904.3,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 3,
+        "row": 10
+      }
+    },
+    {
+      "id": "tangalle",
+      "name": "Tangalle",
+      "x": 997.78,
+      "y": 1959.48,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 5,
+        "row": 10
+      }
+    },
+    {
+      "id": "mirissa",
+      "name": "Mirissa Beach",
+      "x": 744.83,
+      "y": 1995.12,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 4,
+        "row": 10
+      }
+    },
+    {
+      "id": "negombo",
+      "name": "Negombo",
+      "x": 342.0,
+      "y": 1180.0,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 2,
+        "row": 6
+      }
+    },
+    {
+      "id": "colombo",
+      "name": "Colombo",
+      "x": 360.0,
+      "y": 1374.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 2,
+        "row": 7
+      }
+    },
+    {
+      "id": "kilinochchi",
+      "name": "Kilinochchi",
+      "x": 656.0,
+      "y": 314.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 4,
+        "row": 2
+      }
+    },
+    {
+      "id": "vavuniya",
+      "name": "Vavuniya",
+      "x": 710.0,
+      "y": 500.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 4,
+        "row": 3
+      }
+    },
+    {
+      "id": "anuradhapura",
+      "name": "Anuradhapura Ancient City",
+      "x": 598.0,
+      "y": 754.0,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 3,
+        "row": 4
+      }
+    },
+    {
+      "id": "polonnaruwa",
+      "name": "Polonnaruwa",
+      "x": 1052.0,
+      "y": 890.0,
+      "type": "primary",
+      "kind": "heritage",
+      "gridCell": {
+        "column": 6,
+        "row": 5
+      }
+    },
+    {
+      "id": "matale",
+      "name": "Matale",
+      "x": 842.0,
+      "y": 1072.0,
+      "type": "hub",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 5,
+        "row": 6
+      }
+    },
+    {
+      "id": "mahiyanganaya",
+      "name": "Mahiyanganaya",
+      "x": 1206.0,
+      "y": 1082.0,
+      "type": "primary",
+      "kind": "landmark",
+      "gridCell": {
+        "column": 6,
+        "row": 6
+      }
+    },
+    {
+      "id": "nallathanni",
+      "name": "Nallathanni",
+      "x": 1058.0,
+      "y": 1222.0,
+      "type": "primary",
+      "kind": "mountain",
+      "gridCell": {
+        "column": 6,
+        "row": 6
+      }
+    },
+    {
+      "id": "meemure",
+      "name": "Meemure Village",
+      "x": 936.0,
+      "y": 1300.0,
+      "type": "primary",
+      "kind": "nature",
+      "gridCell": {
+        "column": 5,
+        "row": 7
+      }
+    },
+    {
+      "id": "haputale",
+      "name": "Haputale",
+      "x": 940.0,
+      "y": 1532.0,
+      "type": "primary",
+      "kind": "tea",
+      "gridCell": {
+        "column": 5,
+        "row": 8
+      }
+    },
+    {
+      "id": "ella",
+      "name": "Ella",
+      "x": 1018.0,
+      "y": 1604.0,
+      "type": "primary",
+      "kind": "mountain",
+      "gridCell": {
+        "column": 5,
+        "row": 8
+      }
+    },
+    {
+      "id": "tissamaharama",
+      "name": "Tissamaharama",
+      "x": 1248.0,
+      "y": 1726.0,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 7,
+        "row": 9
+      }
+    },
+    {
+      "id": "kalpitiya",
+      "name": "Kalpitiya",
+      "x": 354.0,
+      "y": 840.0,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 2,
+        "row": 5
+      }
+    }
+  ],
+  "segments": [],
+  "itineraries": [
+    {
+      "id": "cultural-triangle-escape",
+      "label": "Cultural Triangle Escape",
+      "route": "Airport \u2192 Sigiriya (2N) \u2192 Kandy (2N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "pinnawala",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 2
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "pinnawala",
+        "sigiriya",
+        "kandy"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "heritage-and-serenity",
+      "label": "Heritage and Serenity Getaway",
+      "route": "Airport \u2192 Anuradhapura (2N) \u2192 Sigiriya (2N) \u2192 Kandy (2N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "pinnawala",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "anuradhapura",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "mihintale",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "aukana",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "polonnaruwa",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "dambulla",
+          "role": "secondary",
+          "mainOrder": 3
+        },
+        {
+          "markerId": "matale",
+          "role": "secondary",
+          "mainOrder": 3
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 2
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "pinnawala",
+        "anuradhapura",
+        "mihintale",
+        "aukana",
+        "polonnaruwa",
+        "sigiriya",
+        "dambulla",
+        "matale",
+        "kandy"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "through-ancient-kingdoms",
+      "label": "Through Ancient Kingdoms",
+      "route": "Airport \u2192 Anuradhapura \u2192 Sigiriya \u2192 Kandy \u2192 Nuwara Eliya \u2192 Ella \u2192 Mahiyanganaya \u2192 Tissamaharama \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "anuradhapura",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "mihintale",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "aukana",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "polonnaruwa",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "dambulla",
+          "role": "secondary",
+          "mainOrder": 3
+        },
+        {
+          "markerId": "matale",
+          "role": "secondary",
+          "mainOrder": 3
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "ella",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "mahiyanganaya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "tissamaharama",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "kataragama",
+          "role": "secondary",
+          "mainOrder": 7
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "anuradhapura",
+        "mihintale",
+        "aukana",
+        "polonnaruwa",
+        "sigiriya",
+        "dambulla",
+        "matale",
+        "kandy",
+        "nuwara-eliya",
+        "ella",
+        "mahiyanganaya",
+        "tissamaharama",
+        "kataragama"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "highlands-and-waterfalls",
+      "label": "Highlands and Waterfalls Getaway",
+      "route": "Airport \u2192 Kandy (1N) \u2192 Nuwara Eliya (1N) \u2192 Ella (2N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "ella",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "ratnapura",
+          "role": "secondary",
+          "mainOrder": 3
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "kandy",
+        "nuwara-eliya",
+        "ella",
+        "ratnapura"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "serene-bliss-exploration",
+      "label": "Serene Bliss Exploration",
+      "route": "Airport \u2192 Sigiriya \u2192 Knuckles / Meemure \u2192 Kandy \u2192 Nallathanni \u2192 Nuwara Eliya \u2192 Haputale \u2192 Ella \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "matale",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "meemure",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "nallathanni",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "haputale",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "ella",
+          "role": "main",
+          "nights": 1
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "sigiriya",
+        "matale",
+        "meemure",
+        "kandy",
+        "nallathanni",
+        "nuwara-eliya",
+        "haputale",
+        "ella"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "thrills-and-tranquility",
+      "label": "Thrills and Tranquility",
+      "route": "Airport \u2192 Kitulgala \u2192 Nuwara Eliya \u2192 Haputale \u2192 Ella \u2192 Knuckles \u2192 Sigiriya \u2192 Negombo \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "haputale",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "ella",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "negombo",
+          "role": "main",
+          "nights": 1
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "nuwara-eliya",
+        "haputale",
+        "ella",
+        "sigiriya",
+        "negombo"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "northern-horizons",
+      "label": "Northern Horizons and Coastal Charms",
+      "route": "Airport \u2192 Kalpitiya \u2192 Mannar \u2192 Jaffna \u2192 Trincomalee \u2192 Sigiriya \u2192 Negombo \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "kalpitiya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "mannar",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "jaffna",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "trincomalee",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "pigeon-island",
+          "role": "secondary",
+          "mainOrder": 4
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "pinnawala",
+          "role": "secondary",
+          "mainOrder": 6
+        },
+        {
+          "markerId": "negombo",
+          "role": "main",
+          "nights": 1
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "kalpitiya",
+        "mannar",
+        "jaffna",
+        "trincomalee",
+        "pigeon-island",
+        "sigiriya",
+        "pinnawala",
+        "negombo"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "southern-coastal-bliss",
+      "label": "Southern Coastal Bliss",
+      "route": "Airport \u2192 Kandy \u2192 Nuwara Eliya \u2192 Mirissa (2N) \u2192 Galle \u2192 Bentota (2N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "pinnawala",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "mirissa",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "galle",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "bentota",
+          "role": "main",
+          "nights": 2
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "pinnawala",
+        "kandy",
+        "nuwara-eliya",
+        "mirissa",
+        "galle",
+        "bentota"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "sun-and-fun",
+      "label": "Sun and Fun",
+      "route": "Airport \u2192 Sigiriya \u2192 Pasikudah (2N) \u2192 Arugam Bay (2N) \u2192 Tissamaharama \u2192 Tangalle \u2192 Mirissa (2N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "pinnawala",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "polonnaruwa",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "pasikudah",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "arugam-bay",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "tissamaharama",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "kataragama",
+          "role": "secondary",
+          "mainOrder": 4
+        },
+        {
+          "markerId": "tangalle",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "mirissa",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "galle",
+          "role": "secondary",
+          "mainOrder": 6
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "pinnawala",
+        "sigiriya",
+        "polonnaruwa",
+        "pasikudah",
+        "arugam-bay",
+        "tissamaharama",
+        "kataragama",
+        "tangalle",
+        "mirissa",
+        "galle"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "romantic-getaway",
+      "label": "Romantic Getaway",
+      "route": "Airport \u2192 Kandy (2N) \u2192 Nuwara Eliya (1N) \u2192 Bentota (1N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "pinnawala",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "bentota",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "galle",
+          "role": "secondary",
+          "mainOrder": 3
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "pinnawala",
+        "kandy",
+        "nuwara-eliya",
+        "bentota",
+        "galle"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "tales-of-love",
+      "label": "Tales of Love and Timeless Beauty",
+      "route": "Airport \u2192 Sigiriya \u2192 Kandy \u2192 Nuwara Eliya \u2192 Ella \u2192 Udawalawe \u2192 Mirissa (2N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "pinnawala",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "dambulla",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "ella",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "mirissa",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "galle",
+          "role": "secondary",
+          "mainOrder": 6
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "pinnawala",
+        "sigiriya",
+        "dambulla",
+        "kandy",
+        "nuwara-eliya",
+        "ella",
+        "mirissa",
+        "galle"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "sri-lanka-honeymoon",
+      "label": "Sri Lanka Honeymoon \u2014 Romance and Adventure Awaits",
+      "route": "Airport \u2192 Negombo \u2192 Trincomalee (2N) \u2192 Sigiriya \u2192 Kandy (2N) \u2192 Nuwara Eliya \u2192 Ella \u2192 Arugam Bay (2N) \u2192 Yala \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "negombo",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "trincomalee",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "pigeon-island",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "ella",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "arugam-bay",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "tissamaharama",
+          "role": "secondary",
+          "mainOrder": 7
+        },
+        {
+          "markerId": "kataragama",
+          "role": "secondary",
+          "mainOrder": 7
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "negombo",
+        "trincomalee",
+        "pigeon-island",
+        "sigiriya",
+        "kandy",
+        "nuwara-eliya",
+        "ella",
+        "arugam-bay",
+        "tissamaharama",
+        "kataragama"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    },
+    {
+      "id": "ramayana-legacy",
+      "label": "Ramayana Legacy in Sri Lanka",
+      "route": "Airport \u2192 Negombo \u2192 Mannar \u2192 Trincomalee \u2192 Sigiriya (2N) \u2192 Kandy \u2192 Nuwara Eliya \u2192 Ella \u2192 Unawatuna (2N) \u2192 Airport",
+      "waypoints": [
+        {
+          "markerId": "bandaranaike-airport",
+          "role": "airport"
+        },
+        {
+          "markerId": "negombo",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "chilaw",
+          "role": "secondary",
+          "mainOrder": 2
+        },
+        {
+          "markerId": "mannar",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "trincomalee",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "sigiriya",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "dambulla",
+          "role": "secondary",
+          "mainOrder": 4
+        },
+        {
+          "markerId": "kandy",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "nuwara-eliya",
+          "role": "main",
+          "nights": 1
+        },
+        {
+          "markerId": "ella",
+          "role": "main",
+          "nights": 2
+        },
+        {
+          "markerId": "galle",
+          "role": "secondary",
+          "mainOrder": 8
+        }
+      ],
+      "markers": [
+        "bandaranaike-airport",
+        "negombo",
+        "chilaw",
+        "mannar",
+        "trincomalee",
+        "sigiriya",
+        "dambulla",
+        "kandy",
+        "nuwara-eliya",
+        "ella",
+        "galle"
+      ],
+      "segments": [],
+      "tracedSegments": [],
+      "distanceKm": 0,
+      "durationMin": 0,
+      "airportToAirport": true
+    }
+  ],
+  "audit": {
+    "method": "Hough circle detection constrained to small red-ring/white-center markers, followed by OCR and manual visual review",
+    "excludedFalsePositiveCircles": [
+      {
+        "x": 900,
+        "y": 398,
+        "reason": "circle left of Mullaittivu label"
+      },
+      {
+        "x": 1118,
+        "y": 668,
+        "reason": "circle left of Trincomalee label"
+      },
+      {
+        "x": 1198,
+        "y": 756,
+        "reason": "circle below Nilaveli label"
+      },
+      {
+        "x": 736,
+        "y": 868,
+        "reason": "circle just below Habarana label"
+      },
+      {
+        "x": 494,
+        "y": 1756,
+        "reason": "circle between Bentota and Galle"
+      },
+      {
+        "x": 608,
+        "y": 1602,
+        "reason": "circle below Ratnapura"
+      },
+      {
+        "x": 366,
+        "y": 1382,
+        "reason": "circle below Colombo"
+      }
+    ],
+    "addedOrRefreshedMarkers": [
+      {
+        "id": "avissawella",
+        "x": 602.89,
+        "y": 1308.28,
+        "label": "Avissawella"
+      },
+      {
+        "id": "badulla",
+        "x": 1097.84,
+        "y": 1494.16,
+        "label": "Badulla"
+      }
+    ],
+    "latestUserCorrections": [
+      "Airport moved to the same vertical line immediately below Negombo.",
+      "G24 removed as the old airport placement; Colombo added at the nearby unmarked point.",
+      "G11 relabeled as Mihintale.",
+      "C39 position used for Aukana.",
+      "Kalpitiya added at the red circle above Chilaw.",
+      "Colombo moved slightly right to the indicated red circle."
+    ],
+    "review2Implemented": [
+      "Kilinochchi",
+      "Vavuniya",
+      "Anuradhapura Ancient City",
+      "Polonnaruwa",
+      "Matale",
+      "Mahiyanganaya",
+      "Nallathanni",
+      "Meemure Village",
+      "Nuwara Eliya",
+      "Haputale",
+      "Ella",
+      "Tissamaharama"
+    ],
+    "colomboAdjustment": {
+      "x": 330.0,
+      "y": 1374.0,
+      "note": "moved slightly right per user review"
+    }
+  }
+}
