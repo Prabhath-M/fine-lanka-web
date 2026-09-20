@@ -3266,10 +3266,10 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   padding: 0.7rem 0.8rem;
 }
 .itinerary-day-num {
-  font-family: var(--font-mono);
-  font-size: 0.876rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   color: var(--brass);
   padding-top: 0.2rem;
 }
@@ -3311,9 +3311,9 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 }
 .filter-bar button {
   font-family: var(--font-mono);
-  font-size: 0.876rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   padding: 0.6rem 1rem;
   border: 1px solid var(--line-on-light);
   background: transparent;
@@ -3390,20 +3390,6 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   bottom: 0;
   height: 2px;
   background: linear-gradient(90deg, transparent, #d4af37, #f6e7ad, #d4af37, transparent);
-}
-.tour-nights-badge {
-  position: absolute;
-  top: var(--space-2);
-  right: var(--space-2);
-  font-family: var(--font-mono);
-  font-size: 0.776rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #1a2a10;
-  background: linear-gradient(150deg, #f6e7ad, #d4af37);
-  padding: 0.28rem 0.6rem;
-  border-radius: 999px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 .tour-media-title { display: flex; align-items: center; gap: 0.7rem; }
 .tour-icon {
@@ -4801,8 +4787,9 @@ main > #destinations,
   border-color: #9caea3;
   border-radius: 2px;
   color: var(--dest-solid-ink);
-  font-size: 0.786rem;
-  letter-spacing: 0.09em;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
   background: #faf3df;
   text-shadow: none;
 }
@@ -5389,11 +5376,11 @@ main > #destinations,
 .tours-hero .section-label {
   margin: 0 0 1rem;
   color: #e5c47c;
-  font-family: var(--font-mono);
-  font-size: 0.816rem;
-  letter-spacing: 0.19em;
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
   line-height: 1.35;
-  text-transform: uppercase;
 }
 .tours-hero h1 {
   max-width: 10.5ch;
@@ -5438,10 +5425,10 @@ main > #destinations,
 .tours-ledger-label {
   margin: 0;
   color: #e5c47c;
-  font-family: var(--font-mono);
-  font-size: 0.736rem;
-  letter-spacing: 0.17em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 .tours-ledger-rule { height: 1px; margin: 1rem 0 1.2rem; background: linear-gradient(90deg, #d6b566, rgba(214, 181, 102, 0)); }
 .tours-hero-ledger dl { display: grid; gap: 1rem; margin: 0; }
@@ -5520,7 +5507,7 @@ main > #destinations,
   padding: 1.15rem clamp(1.1rem, 3vw, 2.1rem) 1.3rem;
 }
 .tour-filter-current { margin: 0; color: #173c39; font-family: var(--font-display); font-size: clamp(1.45rem, 2.4vw, 2rem); line-height: 1; }
-.tour-filter-count { margin: 0; color: #587067; font-family: var(--font-mono); font-size: 0.806rem; letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
+.tour-filter-count { margin: 0; color: #587067; font-family: var(--font-display); font-size: 0.95rem; font-style: italic; letter-spacing: 0.01em; white-space: nowrap; }
 .tour-filter-count strong { color: #173c39; font-size: 1.056rem; font-weight: 500; }
 .tours-page .tour-empty { grid-column: 1 / -1; }
 .tours-page .tour-curated-empty h3 { max-width: 15ch; color: #183b38; font-size: clamp(2rem, 4vw, 3.35rem); letter-spacing: -0.04em; line-height: 0.98; }
@@ -11943,56 +11930,9 @@ body:has(.features:target) .typed-opening { display: none; }
    picture-led cover, a formal route index, and an editorial pricing ledger.
    This replaces generic stacked cards while retaining the existing actions.
    ========================================================================== */
-.tours-page .tour-card-spine span {
-  writing-mode: vertical-rl;
-  transform: rotate(180deg);
-}
-.tours-page .tour-card-days {
-  display: flex;
-  min-width: 2.25rem;
-  flex-direction: column;
-  align-items: center;
-  margin: 0;
-  padding-left: 0.75rem;
-  border-left: 1px solid rgba(42, 96, 86, 0.28);
-  color: #2b675e;
-  font-family: var(--font-mono);
-  font-size: 0.656rem;
-  letter-spacing: 0.08em;
-  line-height: 1.1;
-  text-transform: uppercase;
-}
-.tours-page .tour-card-days strong {
-  color: #1d514a;
-  font-family: var(--font-display);
-  font-size: 1.45rem;
-  font-weight: 500;
-  letter-spacing: -0.045em;
-  line-height: 0.9;
-}
-
 @media (max-width: 640px) {
   .tours-page .tour-card {
     min-height: 0;
-  }
-  .tours-page .tour-card-spine {
-    width: 1.42rem;
-    padding-block: 0.72rem;
-    font-size: 0.586rem;
-  }
-  .tours-page .tour-card-media,
-  .tours-page .tour-card-body {
-    margin-left: 1.42rem;
-  }
-  .tours-page .tour-card-media {
-    height: clamp(13rem, 62vw, 16.8rem);
-    padding: 1rem;
-  }
-  .tours-page .tour-card-category {
-    max-width: 13rem;
-  }
-  .tours-page .tour-media-title h3 {
-    font-size: clamp(1.5rem, 8vw, 2rem);
   }
 }
 
@@ -12249,13 +12189,14 @@ body:has(.features:target) .typed-opening { display: none; }
   align-items: center;
   min-height: 0;
   padding-right: 4rem;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.01em;
   padding: 0.9rem clamp(1.1rem, 2.5vw, 1.6rem) 0.5rem;
   border-bottom: none;
-  font-family: var(--font-mono);
-  font-size: 0.836rem;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
   font-weight: 600;
-  text-transform: uppercase;
+  text-transform: none;
 }
 .tours-page .filter-bar {
   display: flex;
@@ -12367,27 +12308,6 @@ body:has(.features:target) .typed-opening { display: none; }
   transform: translateY(-5px);
   box-shadow: 0 20px 40px rgba(20, 40, 36, 0.16);
 }
-.tours-page .tour-card-spine {
-  position: absolute;
-  z-index: 4;
-  top: 0;
-  bottom: 0;
-  left: 0; display: none;
-  width: 1.7rem;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
-  padding-block: 1rem;
-  border-right: 1px solid rgba(233, 205, 128, 0.52);
-  background:
-    linear-gradient(180deg, rgba(229, 196, 124, 0.11), transparent 18% 82%, rgba(229, 196, 124, 0.1)),
-    #173f3b;
-  color: #e9cf8a;
-  font-family: var(--font-mono);
-  font-size: 0.646rem;
-  font-weight: 700;
-  letter-spacing: 0.13em;
-  text-transform: uppercase; }
 .tours-page .tour-card-media,
 .tours-page .tour-card-body {
   margin-left: 0;
@@ -12433,37 +12353,12 @@ body:has(.features:target) .typed-opening { display: none; }
   margin-bottom: auto;
 }
 .tours-page .tour-card-category,
-.tours-page .tour-nights-badge {
-  position: static;
-  display: inline-flex;
-  align-items: center;
-  min-height: 0;
-  padding: 0.32rem 0.65rem;
-  border: none;
-  border-radius: 999px;
-  background: rgba(15, 57, 52, 0.84);
-  color: #f8e6af;
-  box-shadow: none;
-  font-family: var(--font-mono);
-  font-size: 0.776rem;
-  letter-spacing: 0.06em;
-  line-height: 1.2;
-  text-transform: uppercase;
-  gap: 0.35rem;
-  font-weight: 600;
-}
 .tours-page .tour-card-category {
   max-width: none;
   background: rgba(8, 27, 24, 0.5);
   color: #f4ead0;
 }
 .tours-page .tour-card-category .icon { width: 12px; height: 12px; }
-.tours-page .tour-nights-badge { border-radius: 1px;
-  background: rgba(253, 250, 240, 0.94);
-  color: #17453f; font-size: 0.756rem;
-  flex: none;
-  border-color: rgba(255, 249, 230, 0.66);
-}
 .tours-page .tour-media-title {
   position: relative;
   z-index: 2;
