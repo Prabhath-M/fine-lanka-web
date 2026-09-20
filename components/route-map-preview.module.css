@@ -30,10 +30,10 @@
 .placeType,
 .routeOptionTop,
 .legendTitle {
-  font-family: var(--font-mono), ui-monospace, SFMono-Regular, monospace;
-  font-size: 0.816rem;
-  letter-spacing: 0.13em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 
 .eyebrow {
@@ -344,9 +344,10 @@
 
 .routeFacts small {
   color: #8f7863;
-  font-size: 0.716rem;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.8rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 
 .mapHeader h2 {
@@ -363,10 +364,10 @@
   border: 1px solid rgba(52, 44, 33, 0.23);
   border-radius: 999px;
   color: #775c46;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.776rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 0.85rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 
 .zoomControls {
@@ -907,10 +908,10 @@
   min-height: 60vh;
   place-items: center;
   color: #5b4f40;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.906rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-style: italic;
+  letter-spacing: 0.01em;
 }
 
 @media (max-width: 980px) {
