@@ -1,9 +1,11 @@
 'use client'
 
-import { useEffect, useId, useMemo, useRef, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Compass, MapPin, MousePointer2, Route, X } from 'lucide-react'
 import styles from './route-map-preview.module.css'
 import { DESTINATIONS } from '@/lib/destinations-data'
+
+type MarkerSprite = { file: string; x: number; y: number; width: number; height: number }
 
 type Marker = {
   id: string
@@ -252,6 +254,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   const mapFrameWrapRef = useRef<HTMLDivElement>(null)
   const [markerCardAnchor, setMarkerCardAnchor] = useState<{ left: number; top: number; above: boolean } | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [sprites, setSprites] = useState<Record<string, MarkerSprite>>({})
 
   useEffect(() => {
     fetch('/data/route-atlas.json')
@@ -261,6 +264,17 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
       })
       .then(setData)
       .catch((loadError: Error) => setError(loadError.message))
+    // Per-location illustration cutouts, keyed by marker id -- see
+    // docs/RELEASE-2-ROADMAP.md for how these were produced (hand-marked
+    // grouping on the source artwork, not a rectangular crop, since several
+    // locations sit too close together for a bounding box to separate them
+    // cleanly). Missing this file just means illustrations don't render;
+    // the map and markers still work without it, so a soft failure here
+    // (no .catch surfaced to the error state) is intentional.
+    fetch('/data/map-sprites-by-marker-id.json')
+      .then((response) => (response.ok ? response.json() : {}))
+      .then(setSprites)
+      .catch(() => setSprites({}))
   }, [])
 
   const selectedItinerary = selectedItineraryId ? data?.itineraries.find((item) => item.id === selectedItineraryId) : undefined
@@ -268,21 +282,6 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   const activeWaypoints = useMemo(() => selectedItinerary?.waypoints ?? [], [selectedItinerary])
   const activeMarkerIds = useMemo(() => new Set(activeWaypoints.map((waypoint) => waypoint.markerId)), [activeWaypoints])
   const activeSegmentIds = useMemo(() => new Set(selectedItinerary?.segments ?? []), [selectedItinerary])
-  // Per-pin "spotlight": rather than one shape covering the whole trip, each
-  // active marker gets its own soft-edged circle of full colour, and the
-  // rest of the map stays under the grayscale/dimmed copy. An SVG <mask>
-  // (referenced by id) is used rather than stacking CSS gradient masks,
-  // because a real union of several circular "reveal" holes needs either
-  // mask-composite keywords that differ between standard and -webkit- CSS
-  // (fragile across browsers) or, more simply and predictably, an SVG mask —
-  // where painting several white/feathered circles on a black backdrop
-  // unions their visible regions automatically, no compositing mode needed.
-  const spotlightMarkers = useMemo(() => {
-    if (!data || !selectedItinerary || activeMarkerIds.size === 0) return []
-    return data.markers.filter((marker) => activeMarkerIds.has(marker.id))
-  }, [data, selectedItinerary, activeMarkerIds])
-  const spotlightRadiusPx = 340
-  const spotlightMaskId = useId()
   const waypointByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint) => [waypoint.markerId, waypoint])), [activeWaypoints])
   const mainWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'main'), [activeWaypoints])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
@@ -390,91 +389,41 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
             <div className={styles.mapFrame}>
               <div className={styles.mapCanvas} style={zoomCanvasStyle}>
                 <img
-                  src={data.image}
-                  alt="Illustrated Sri Lankan tour map with detected waypoint circles"
+                  src="/images/sri-lanka-base-map-clean.webp"
+                  alt="Sri Lanka tour map"
                   className={styles.mapImage}
                   width={data.width}
                   height={data.height}
                   loading="lazy"
                 />
-                <img
-                  src={data.image}
-                  alt=""
-                  aria-hidden="true"
-                  className={styles.mapImageMuted}
-                  style={{ opacity: selectedItinerary ? 1 : 0 }}
-                  width={data.width}
-                  height={data.height}
-                  loading="lazy"
-                />
-                {spotlightMarkers.length > 0 && (
-                  <img
-                    src={data.image}
-                    alt=""
-                    aria-hidden="true"
-                    className={styles.mapImageSpotlight}
-                    style={{ mask: `url("#${spotlightMaskId}")`, WebkitMaskImage: `url("#${spotlightMaskId}")` }}
-                    width={data.width}
-                    height={data.height}
-                    loading="lazy"
-                  />
-                )}
-                {spotlightMarkers.length > 0 && (
-                  <svg width="0" height="0" style={{ position: 'absolute' }} aria-hidden="true" focusable="false">
-                    <defs>
-                      <mask id={spotlightMaskId} maskUnits="objectBoundingBox" maskContentUnits="objectBoundingBox">
-                        <rect x="0" y="0" width="1" height="1" fill="black" />
-                        {/* A nested, viewBox-scoped <svg> gives this content real
-                            pixel coordinates (matching marker.x/marker.y and the
-                            blur's stdDeviation directly, no fraction math) while
-                            the outer mask still scales proportionally with
-                            whatever size the masked <img> actually renders at. */}
-                        <svg x="0" y="0" width="1" height="1" viewBox={`0 0 ${data.width} ${data.height}`}>
-                          <defs>
-                            <radialGradient id={`${spotlightMaskId}-feather`}>
-                              <stop offset="0%" stopColor="#fff" stopOpacity="1" />
-                              <stop offset="35%" stopColor="#fff" stopOpacity="1" />
-                              <stop offset="100%" stopColor="#fff" stopOpacity="0" />
-                            </radialGradient>
-                            {/* Blurring the combined shapes alone still leaves a
-                                faint darker notch right where two circles meet —
-                                a plain blur softens each edge but doesn't fully
-                                fuse two separate soft-edged blobs into one evenly
-                                -lit shape. Fix (the classic "gooey filter" trick):
-                                blur, then push the alpha channel through a steep
-                                threshold so any partially-lit pixel snaps to
-                                fully on/off — this is what actually merges two
-                                overlapping blobs into one seamless union, since
-                                there's no partial-alpha pinch left to read as a
-                                notch. A final light blur softens that now-crisp
-                                edge back into a gentle glow. */}
-                            <filter id={`${spotlightMaskId}-blur`} x="-80%" y="-80%" width="260%" height="260%">
-                              <feGaussianBlur in="SourceGraphic" stdDeviation="34" result="soft" />
-                              <feColorMatrix
-                                in="soft"
-                                type="matrix"
-                                values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 20 -9"
-                                result="fused"
-                              />
-                              <feGaussianBlur in="fused" stdDeviation="10" />
-                            </filter>
-                          </defs>
-                          <g filter={`url("#${spotlightMaskId}-blur")`}>
-                            {spotlightMarkers.map((marker) => (
-                              <circle
-                                key={marker.id}
-                                cx={marker.x}
-                                cy={marker.y}
-                                r={spotlightRadiusPx}
-                                fill={`url("#${spotlightMaskId}-feather")`}
-                              />
-                            ))}
-                          </g>
-                        </svg>
-                      </mask>
-                    </defs>
-                  </svg>
-                )}
+                <div className={styles.illustrationLayer} aria-hidden="true">
+                  {data.markers.map((marker) => {
+                    const sprite = sprites[marker.id]
+                    if (!sprite) return null
+                    const isActive = activeMarkerIds.has(marker.id)
+                    // Same rule the marker pins already use: once a trip is
+                    // selected, only that trip's own stops stay at full
+                    // presence -- everything else fades back. No trip
+                    // selected means every illustration shows normally.
+                    const isDimmed = Boolean(selectedItinerary) && !isActive
+                    return (
+                      <img
+                        key={marker.id}
+                        src={sprite.file}
+                        alt=""
+                        className={styles.markerIllustration}
+                        style={{
+                          left: `${(sprite.x / data.width) * 100}%`,
+                          top: `${(sprite.y / data.height) * 100}%`,
+                          width: `${(sprite.width / data.width) * 100}%`,
+                          height: `${(sprite.height / data.height) * 100}%`,
+                          opacity: isDimmed ? 0.28 : 1,
+                        }}
+                        loading="lazy"
+                      />
+                    )
+                  })}
+                </div>
                 <div className={styles.markerLayer}>
                 {data.markers.map((marker) => {
                   const isActive = activeMarkerIds.has(marker.id)

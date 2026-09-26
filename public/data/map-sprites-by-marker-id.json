@@ -1,0 +1,331 @@
+{
+  "jaffna": {
+    "file": "/images/map-sprites/jaffna.webp",
+    "x": 432.8,
+    "y": 13.5,
+    "width": 203.7,
+    "height": 145.7
+  },
+  "point-pedro": {
+    "file": "/images/map-sprites/point-pedro.webp",
+    "x": 614.8,
+    "y": 30.3,
+    "width": 31.4,
+    "height": 32.0
+  },
+  "mannar": {
+    "file": "/images/map-sprites/mannar.webp",
+    "x": 179.8,
+    "y": 191.8,
+    "width": 318.5,
+    "height": 305.5
+  },
+  "elephant-pass": {
+    "file": "/images/map-sprites/elephant-pass.webp",
+    "x": 635.4,
+    "y": 239.4,
+    "width": 71.0,
+    "height": 54.2
+  },
+  "kilinochchi": {
+    "file": "/images/map-sprites/kilinochchi.webp",
+    "x": 570.4,
+    "y": 264.3,
+    "width": 171.2,
+    "height": 125.1
+  },
+  "mullaittivu": {
+    "file": "/images/map-sprites/mullaittivu.webp",
+    "x": 836.3,
+    "y": 279.5,
+    "width": 283.3,
+    "height": 182.0
+  },
+  "madhu-road-national-park": {
+    "file": "/images/map-sprites/madhu-road-national-park.webp",
+    "x": 448.5,
+    "y": 387.8,
+    "width": 212.9,
+    "height": 209.6
+  },
+  "vavuniya": {
+    "file": "/images/map-sprites/vavuniya.webp",
+    "x": 658.7,
+    "y": 449.6,
+    "width": 152.8,
+    "height": 102.9
+  },
+  "pulmoddai": {
+    "file": "/images/map-sprites/pulmoddai.webp",
+    "x": 973.4,
+    "y": 502.7,
+    "width": 171.2,
+    "height": 111.6
+  },
+  "mihintale": {
+    "file": "/images/map-sprites/mihintale.webp",
+    "x": 695.5,
+    "y": 598.5,
+    "width": 248.1,
+    "height": 120.8
+  },
+  "trincomalee": {
+    "file": "/images/map-sprites/trincomalee.webp",
+    "x": 1025.4,
+    "y": 602.3,
+    "width": 284.9,
+    "height": 124.0
+  },
+  "anuradhapura": {
+    "file": "/images/map-sprites/anuradhapura-ancient-city.webp",
+    "x": 576.3,
+    "y": 605.6,
+    "width": 179.8,
+    "height": 193.9
+  },
+  "aukana": {
+    "file": "/images/map-sprites/aukana.webp",
+    "x": 776.8,
+    "y": 641.3,
+    "width": 224.8,
+    "height": 158.2
+  },
+  "pigeon-island": {
+    "file": "/images/map-sprites/pigeon-island.webp",
+    "x": 1158.6,
+    "y": 692.8,
+    "width": 163.6,
+    "height": 82.9
+  },
+  "dambulla": {
+    "file": "/images/map-sprites/dambulla.webp",
+    "x": 511.3,
+    "y": 710.7,
+    "width": 481.0,
+    "height": 419.8
+  },
+  "kalpitiya": {
+    "file": "/images/map-sprites/kalpitiya.webp",
+    "x": 60.7,
+    "y": 725.8,
+    "width": 465.8,
+    "height": 231.8
+  },
+  "sigiriya": {
+    "file": "/images/map-sprites/sigiriya.webp",
+    "x": 855.8,
+    "y": 762.7,
+    "width": 188.5,
+    "height": 189.6
+  },
+  "habanara": {
+    "file": "/images/map-sprites/habarana.webp",
+    "x": 664.6,
+    "y": 857.5,
+    "width": 208.0,
+    "height": 145.2
+  },
+  "pasikudah": {
+    "file": "/images/map-sprites/pasikudah-beach.webp",
+    "x": 1266.4,
+    "y": 857.5,
+    "width": 279.0,
+    "height": 160.9
+  },
+  "polonnaruwa": {
+    "file": "/images/map-sprites/polonnaruwa.webp",
+    "x": 972.8,
+    "y": 905.7,
+    "width": 207.5,
+    "height": 98.6
+  },
+  "kurunegala": {
+    "file": "/images/map-sprites/kurunegala.webp",
+    "x": 503.8,
+    "y": 919.8,
+    "width": 176.6,
+    "height": 200.4
+  },
+  "chilaw": {
+    "file": "/images/map-sprites/chilaw.webp",
+    "x": 178.8,
+    "y": 952.8,
+    "width": 191.8,
+    "height": 147.9
+  },
+  "batticaloa": {
+    "file": "/images/map-sprites/batticaloa.webp",
+    "x": 1396.4,
+    "y": 1008.6,
+    "width": 224.8,
+    "height": 222.1
+  },
+  "matale": {
+    "file": "/images/map-sprites/matale.webp",
+    "x": 783.8,
+    "y": 1017.8,
+    "width": 174.4,
+    "height": 169.5
+  },
+  "mahiyanganaya": {
+    "file": "/images/map-sprites/mahiyanganaya.webp",
+    "x": 1165.7,
+    "y": 1024.8,
+    "width": 206.9,
+    "height": 116.5
+  },
+  "negombo": {
+    "file": "/images/map-sprites/negombo.webp",
+    "x": 55.8,
+    "y": 1032.4,
+    "width": 334.8,
+    "height": 206.9
+  },
+  "alu-vihara": {
+    "file": "/images/map-sprites/alu-vihara.webp",
+    "x": 632.7,
+    "y": 1053.5,
+    "width": 192.8,
+    "height": 138.1
+  },
+  "pinnawala": {
+    "file": "/images/map-sprites/pinnawala-elephant-orphanage.webp",
+    "x": 433.3,
+    "y": 1108.8,
+    "width": 215.0,
+    "height": 187.4
+  },
+  "meemure": {
+    "file": "/images/map-sprites/meemure-village.webp",
+    "x": 884.5,
+    "y": 1154.8,
+    "width": 164.7,
+    "height": 200.4
+  },
+  "kandy": {
+    "file": "/images/map-sprites/kandy.webp",
+    "x": 712.8,
+    "y": 1159.7,
+    "width": 183.6,
+    "height": 153.8
+  },
+  "nallathanni": {
+    "file": "/images/map-sprites/nallathanni.webp",
+    "x": 1032.4,
+    "y": 1175.4,
+    "width": 151.1,
+    "height": 101.8
+  },
+  "bandaranaike-airport": {
+    "file": "/images/map-sprites/katunayake-bandaranaike-international-airport.webp",
+    "x": 65.5,
+    "y": 1214.4,
+    "width": 313.1,
+    "height": 144.1
+  },
+  "nuwara-eliya": {
+    "file": "/images/map-sprites/nuwara-eliya.webp",
+    "x": 855.8,
+    "y": 1288.6,
+    "width": 46.6,
+    "height": 54.7
+  },
+  "avissawella": {
+    "file": "/images/map-sprites/avissawella.webp",
+    "x": 687.4,
+    "y": 1298.4,
+    "width": 188.0,
+    "height": 147.9
+  },
+  "arugam-bay": {
+    "file": "/images/map-sprites/arugam-bay.webp",
+    "x": 1438.7,
+    "y": 1298.4,
+    "width": 197.7,
+    "height": 199.9
+  },
+  "colombo": {
+    "file": "/images/map-sprites/colombo.webp",
+    "x": 211.8,
+    "y": 1327.6,
+    "width": 242.7,
+    "height": 150.0
+  },
+  "haputale": {
+    "file": "/images/map-sprites/haputale.webp",
+    "x": 854.8,
+    "y": 1344.4,
+    "width": 284.9,
+    "height": 164.1
+  },
+  "badulla": {
+    "file": "/images/map-sprites/badulla.webp",
+    "x": 1088.8,
+    "y": 1452.8,
+    "width": 115.9,
+    "height": 69.9
+  },
+  "ratnapura": {
+    "file": "/images/map-sprites/ratnapura.webp",
+    "x": 521.6,
+    "y": 1494.5,
+    "width": 167.9,
+    "height": 154.9
+  },
+  "ella": {
+    "file": "/images/map-sprites/ella.webp",
+    "x": 987.5,
+    "y": 1516.7,
+    "width": 165.2,
+    "height": 163.6
+  },
+  "bentota": {
+    "file": "/images/map-sprites/bentota.webp",
+    "x": 294.7,
+    "y": 1583.8,
+    "width": 267.6,
+    "height": 165.8
+  },
+  "tissamaharama": {
+    "file": "/images/map-sprites/tissamaharama.webp",
+    "x": 1092.5,
+    "y": 1686.8,
+    "width": 172.8,
+    "height": 158.7
+  },
+  "galle": {
+    "file": "/images/map-sprites/galle.webp",
+    "x": 352.6,
+    "y": 1714.4,
+    "width": 299.0,
+    "height": 275.2
+  },
+  "kataragama": {
+    "file": "/images/map-sprites/kataragama.webp",
+    "x": 1170.5,
+    "y": 1764.8,
+    "width": 167.9,
+    "height": 145.7
+  },
+  "unawatuna": {
+    "file": "/images/map-sprites/unawatuna-beach.webp",
+    "x": 578.5,
+    "y": 1835.7,
+    "width": 189.0,
+    "height": 166.8
+  },
+  "tangalle": {
+    "file": "/images/map-sprites/tangalle.webp",
+    "x": 958.8,
+    "y": 1848.7,
+    "width": 194.5,
+    "height": 183.6
+  },
+  "mirissa": {
+    "file": "/images/map-sprites/mirissa-beach.webp",
+    "x": 717.7,
+    "y": 1873.6,
+    "width": 214.5,
+    "height": 177.7
+  }
+}
