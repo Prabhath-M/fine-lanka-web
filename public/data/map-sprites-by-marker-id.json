@@ -6,13 +6,6 @@
     "width": 203.7,
     "height": 145.7
   },
-  "point-pedro": {
-    "file": "/images/map-sprites/point-pedro.webp",
-    "x": 614.8,
-    "y": 30.3,
-    "width": 31.4,
-    "height": 32.0
-  },
   "mannar": {
     "file": "/images/map-sprites/mannar.webp",
     "x": 179.8,
@@ -24,7 +17,7 @@
     "file": "/images/map-sprites/elephant-pass.webp",
     "x": 635.4,
     "y": 239.4,
-    "width": 71.0,
+    "width": 71,
     "height": 54.2
   },
   "kilinochchi": {
@@ -33,13 +26,6 @@
     "y": 264.3,
     "width": 171.2,
     "height": 125.1
-  },
-  "mullaittivu": {
-    "file": "/images/map-sprites/mullaittivu.webp",
-    "x": 836.3,
-    "y": 279.5,
-    "width": 283.3,
-    "height": 182.0
   },
   "madhu-road-national-park": {
     "file": "/images/map-sprites/madhu-road-national-park.webp",
@@ -74,7 +60,7 @@
     "x": 1025.4,
     "y": 602.3,
     "width": 284.9,
-    "height": 124.0
+    "height": 124
   },
   "anuradhapura": {
     "file": "/images/map-sprites/anuradhapura-ancient-city.webp",
@@ -99,10 +85,10 @@
   },
   "dambulla": {
     "file": "/images/map-sprites/dambulla.webp",
-    "x": 511.3,
-    "y": 710.7,
-    "width": 481.0,
-    "height": 419.8
+    "x": 664.6,
+    "y": 857.5,
+    "width": 208,
+    "height": 145.2
   },
   "kalpitiya": {
     "file": "/images/map-sprites/kalpitiya.webp",
@@ -118,18 +104,11 @@
     "width": 188.5,
     "height": 189.6
   },
-  "habanara": {
-    "file": "/images/map-sprites/habarana.webp",
-    "x": 664.6,
-    "y": 857.5,
-    "width": 208.0,
-    "height": 145.2
-  },
   "pasikudah": {
     "file": "/images/map-sprites/pasikudah-beach.webp",
     "x": 1266.4,
     "y": 857.5,
-    "width": 279.0,
+    "width": 279,
     "height": 160.9
   },
   "polonnaruwa": {
@@ -192,7 +171,7 @@
     "file": "/images/map-sprites/pinnawala-elephant-orphanage.webp",
     "x": 433.3,
     "y": 1108.8,
-    "width": 215.0,
+    "width": 215,
     "height": 187.4
   },
   "meemure": {
@@ -225,17 +204,10 @@
   },
   "nuwara-eliya": {
     "file": "/images/map-sprites/nuwara-eliya.webp",
-    "x": 855.8,
-    "y": 1288.6,
-    "width": 46.6,
-    "height": 54.7
-  },
-  "avissawella": {
-    "file": "/images/map-sprites/avissawella.webp",
-    "x": 687.4,
-    "y": 1298.4,
-    "width": 188.0,
-    "height": 147.9
+    "x": 854.8,
+    "y": 1344.4,
+    "width": 284.9,
+    "height": 164.1
   },
   "arugam-bay": {
     "file": "/images/map-sprites/arugam-bay.webp",
@@ -249,14 +221,7 @@
     "x": 211.8,
     "y": 1327.6,
     "width": 242.7,
-    "height": 150.0
-  },
-  "haputale": {
-    "file": "/images/map-sprites/haputale.webp",
-    "x": 854.8,
-    "y": 1344.4,
-    "width": 284.9,
-    "height": 164.1
+    "height": 150
   },
   "badulla": {
     "file": "/images/map-sprites/badulla.webp",
@@ -297,7 +262,7 @@
     "file": "/images/map-sprites/galle.webp",
     "x": 352.6,
     "y": 1714.4,
-    "width": 299.0,
+    "width": 299,
     "height": 275.2
   },
   "kataragama": {
@@ -311,7 +276,7 @@
     "file": "/images/map-sprites/unawatuna-beach.webp",
     "x": 578.5,
     "y": 1835.7,
-    "width": 189.0,
+    "width": 189,
     "height": 166.8
   },
   "tangalle": {
