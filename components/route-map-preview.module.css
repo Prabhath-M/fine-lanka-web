@@ -441,33 +441,24 @@
   object-fit: fill;
 }
 
-.mapImageMuted {
+.illustrationLayer {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
   z-index: 1;
-  display: block;
-  object-fit: fill;
   pointer-events: none;
-  opacity: 0;
-  filter: grayscale(0.85) brightness(0.8) saturate(0.5);
-  transition: opacity 450ms ease-out;
 }
 
-/* Full-colour copy, masked (see the SVG <mask> rendered alongside it) to
-   only show through within a soft circle around each of the selected
-   trip's markers — the "reveal window" that pokes through the muted layer
-   above. */
-.mapImageSpotlight {
+/* Each is a precisely shape-cut illustration for one location (see
+   docs/RELEASE-2-ROADMAP.md) -- positioned by its own bounding box, not
+   the marker's point coordinate, since the illustration extends
+   asymmetrically around where its pin sits. */
+.markerIllustration {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
   display: block;
-  object-fit: fill;
-  pointer-events: none;
+  object-fit: contain;
+  transition: opacity 450ms ease-out;
 }
 
 .routeOverlay {
