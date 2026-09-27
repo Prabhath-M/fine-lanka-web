@@ -403,8 +403,9 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                     const isActive = activeMarkerIds.has(marker.id)
                     // Same rule the marker pins already use: once a trip is
                     // selected, only that trip's own stops stay at full
-                    // presence -- everything else fades back. No trip
-                    // selected means every illustration shows normally.
+                    // presence -- everything else fades to barely-there
+                    // (visible up close, but not competing for attention).
+                    // No trip selected means every illustration shows normally.
                     const isDimmed = Boolean(selectedItinerary) && !isActive
                     return (
                       <img
@@ -417,7 +418,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                           top: `${(sprite.y / data.height) * 100}%`,
                           width: `${(sprite.width / data.width) * 100}%`,
                           height: `${(sprite.height / data.height) * 100}%`,
-                          opacity: isDimmed ? 0.28 : 1,
+                          opacity: isDimmed ? 0.07 : 1,
                         }}
                         loading="lazy"
                       />
