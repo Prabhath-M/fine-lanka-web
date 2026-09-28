@@ -3,9 +3,9 @@
 /* Ceylon Field Notes: the enquiry content stays in document flow over a
    section-scoped fixed background; the original top hero remains untouched. */
 import { useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { Icon } from '@/components/icons'
-import { DESTINATIONS } from '@/lib/destinations-data'
+import { suggestDestinations } from '@/lib/booking-suggestions'
 import { HONEYPOT_FIELD } from '@/lib/form-guard'
 import { PROCESS_STEPS, SITE } from '@/lib/site-data'
 import { TOUR_CATEGORIES, TOUR_PACKAGES } from '@/lib/tours-data'
@@ -44,6 +44,24 @@ export function BookingPage() {
 
   const [message, setMessage] = useState<{ text: string; isError: boolean } | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  // The suggestion box follows the chosen tour: sights near its route, or headline
+  // sights when no tour is picked (see lib/booking-suggestions.ts).
+  const [tour, setTour] = useState(
+    preselectTour && TOUR_PACKAGES.some((t) => t.slug === preselectTour) ? preselectTour : '',
+  )
+  const suggestions = useMemo(() => suggestDestinations(tour), [tour])
+  const [picked, setPicked] = useState<string[]>(() =>
+    suggestDestinations(tour)
+      .filter((site) => site.label === preselectDestination)
+      .map((site) => site.label),
+  )
+  const chooseTour = (slug: string) => {
+    setTour(slug)
+    // Keep only picks that are still suggested for the new tour.
+    const stillSuggested = new Set(suggestDestinations(slug).map((site) => site.label))
+    setPicked((current) => current.filter((label) => stillSuggested.has(label)))
+  }
 
   const categoriesWithPackages = TOUR_CATEGORIES.filter((c) =>
     TOUR_PACKAGES.some((t) => t.category === c.slug),
@@ -114,6 +132,8 @@ export function BookingPage() {
                   isError: false,
                 })
                 form.reset()
+                setTour('')
+                setPicked([])
               } catch (err) {
                 setMessage({
                   text:
@@ -192,11 +212,8 @@ export function BookingPage() {
               <select
                 id="booking-tour"
                 name="tour"
-                defaultValue={
-                  preselectTour && TOUR_PACKAGES.some((t) => t.slug === preselectTour)
-                    ? preselectTour
-                    : ''
-                }
+                value={tour}
+                onChange={(e) => chooseTour(e.target.value)}
               >
                 <option value="">Not sure yet — help me choose</option>
                 {categoriesWithPackages.map((c) => (
@@ -212,17 +229,28 @@ export function BookingPage() {
             </div>
 
             <div className="form-row">
-              <label>Destinations you&apos;d like to include (optional)</label>
+              <label>
+                {tour
+                  ? 'Popular stops close to your route — tap any you’d like us to work in (optional)'
+                  : 'Popular places — tap any you’d like us to work in (optional)'}
+              </label>
               <div className="checkbox-grid">
-                {DESTINATIONS.map((d) => (
-                  <label className="checkbox-pill" key={d.name}>
+                {suggestions.map((site) => (
+                  <label className="checkbox-pill" key={site.id}>
                     <input
                       type="checkbox"
                       name="destinations"
-                      value={d.name}
-                      defaultChecked={preselectDestination === d.name}
+                      value={site.label}
+                      checked={picked.includes(site.label)}
+                      onChange={(e) =>
+                        setPicked((current) =>
+                          e.target.checked
+                            ? [...current, site.label]
+                            : current.filter((label) => label !== site.label),
+                        )
+                      }
                     />
-                    {d.name}
+                    {site.label}
                   </label>
                 ))}
               </div>
