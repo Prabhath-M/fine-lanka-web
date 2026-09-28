@@ -35,7 +35,7 @@ pills) and make its contents smart, in a short, low-key way:
 
 ## 3. How suggestions are chosen (`lib/booking-suggestions.ts`)
 
-- A curated pool of 24 **major sights** (each an atlas marker id + short label), not all
+- A curated pool of 23 **major sights** (each an atlas marker id + short label), not all
   51 map markers.
 - A tour's own stops (overnights + side visits) come from `route-atlas.json`, which is
   already kept in sync with `tours-data.ts` by a test.

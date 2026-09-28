@@ -48,7 +48,6 @@ export const MAJOR_SITES: readonly SuggestedDestination[] = [
   { id: 'jaffna', label: 'Jaffna' },
   { id: 'colombo', label: 'Colombo' },
   { id: 'negombo', label: 'Negombo' },
-  { id: 'kalpitiya', label: 'Kalpitiya' },
 ]
 
 /** Shown when no tour is selected. */
