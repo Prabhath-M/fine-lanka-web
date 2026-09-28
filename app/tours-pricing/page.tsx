@@ -5,7 +5,7 @@ import { ToursPricingPage } from '@/components/tours-pricing-page'
 export const metadata: Metadata = {
   title: 'Tours & Pricing — Fine Lanka Tours',
   description:
-    'Sample tailor-made Sri Lanka tour packages and indicative pricing from Fine Lanka Tours — wildlife, hill country, beaches, culture, honeymoons and adventure.',
+    'Sample tailor-made Sri Lanka tour packages from Fine Lanka Tours — wildlife, hill country, beaches, culture, honeymoons and adventure.',
   alternates: { canonical: '/tours-pricing' },
 }
 

@@ -86,10 +86,6 @@ export interface TourPackage {
   name: string
   icon: string
   nights: number
-  /** Indicative per-person, twin-share estimate based on trip length.
-   *  Every itinerary is re-quoted individually once dates, stays and
-   *  pace are set. */
-  priceFrom: number
   route: string
   blurb: string
   itinerary: ItineraryDay[]
@@ -102,7 +98,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Cultural Triangle Escape',
     icon: 'temple',
     nights: 4,
-    priceFrom: 1150,
     route: 'Airport → Sigiriya (2N) → Kandy (2N) → Airport',
     blurb:
       "A compact first taste of the Cultural Triangle — Sigiriya's rock fortress and Kandy's Temple of the Sacred Tooth Relic in five days.",
@@ -120,7 +115,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Heritage and Serenity Getaway',
     icon: 'temple',
     nights: 6,
-    priceFrom: 1650,
     route: 'Airport → Anuradhapura (2N) → Sigiriya (2N) → Kandy (2N) → Airport',
     blurb: 'Three ancient kingdoms in one route — Anuradhapura, Polonnaruwa and Kandy — at an unhurried pace.',
     itinerary: [
@@ -139,7 +133,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Through Ancient Kingdoms',
     icon: 'temple',
     nights: 11,
-    priceFrom: 2950,
     route: 'Airport → Anuradhapura → Sigiriya → Kandy → Nuwara Eliya → Ella → Mahiyanganaya → Tissamaharama → Airport',
     blurb:
       'The full heritage-and-highlands circuit — ancient kingdoms, hill country and a Yala safari finish, over twelve days.',
@@ -164,7 +157,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Highlands and Waterfalls Getaway',
     icon: 'mountain',
     nights: 4,
-    priceFrom: 1100,
     route: 'Airport → Kandy (1N) → Nuwara Eliya (1N) → Ella (2N) → Airport',
     blurb: "A short, scenic run through the hill country — tea country, a cloud-forest train ride and Ella's waterfalls.",
     itinerary: [
@@ -181,7 +173,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Serene Bliss Exploration',
     icon: 'mountain',
     nights: 10,
-    priceFrom: 2650,
     route: "Airport → Sigiriya → Knuckles/Meemure → Kandy → Nallathanni → Nuwara Eliya → Haputale → Ella → Airport",
     blurb: 'A deep hill-country and Knuckles-range circuit for travellers who want to properly walk the highlands.',
     itinerary: [
@@ -204,7 +195,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Thrills and Tranquility',
     icon: 'mountain',
     nights: 8,
-    priceFrom: 2150,
     route: 'Airport → Kitulgala → Nuwara Eliya → Haputale → Ella → Knuckles → Sigiriya → Negombo → Airport',
     blurb:
       "The active version of the hill country — white-water rafting, an Adam's Peak sunrise and a Knuckles trek, ending on the beach.",
@@ -226,7 +216,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Northern Horizons and Coastal Charms',
     icon: 'wave',
     nights: 9,
-    priceFrom: 2350,
     route: 'Airport → Kalpitiya → Mannar → Jaffna → Trincomalee → Sigiriya → Negombo → Airport',
     blurb: "The island's lesser-visited north — kite-surfing, Mannar's flamingos and Jaffna, looping back via Trincomalee.",
     itinerary: [
@@ -248,7 +237,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Southern Coastal Bliss',
     icon: 'wave',
     nights: 7,
-    priceFrom: 1850,
     route: 'Airport → Kandy → Nuwara Eliya → Mirissa (2N) → Galle → Bentota (2N) → Airport',
     blurb: 'Hill country into the south coast — whale watching in Mirissa, Galle Fort and river life in Bentota.',
     itinerary: [
@@ -268,7 +256,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Sun and Fun',
     icon: 'wave',
     nights: 9,
-    priceFrom: 2350,
     route: 'Airport → Sigiriya → Pasikudah (2N) → Arugam Bay (2N) → Tissamaharama → Tangalle → Mirissa (2N) → Airport',
     blurb: 'An east-to-south beach circuit for surfers and sun-seekers, with a Yala safari built in along the way.',
     itinerary: [
@@ -290,7 +277,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Romantic Getaway',
     icon: 'sun',
     nights: 5,
-    priceFrom: 1350,
     route: "Airport → Kandy (2N) → Nuwara Eliya (1N) → Bentota (1N) → Airport",
     blurb: "A short, unhurried route for two — Kandy's temples, tea country and a river-and-beach finish in Bentota.",
     itinerary: [
@@ -308,7 +294,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Tales of Love and Timeless Beauty',
     icon: 'sun',
     nights: 9,
-    priceFrom: 2350,
     route: 'Airport → Sigiriya → Kandy → Nuwara Eliya → Ella → Udawalawe → Mirissa (2N) → Airport',
     blurb: 'A fuller romantic circuit — heritage, hill country, a private safari and whale watching to close.',
     itinerary: [
@@ -330,7 +315,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Sri Lanka Honeymoon — Romance and Adventure Awaits',
     icon: 'sun',
     nights: 10,
-    priceFrom: 3250,
     route: 'Airport → Negombo → Trincomalee (2N) → Sigiriya → Kandy (2N) → Nuwara Eliya → Ella → Arugam Bay (2N) → Yala → Airport',
     blurb:
       "The signature honeymoon route — the east coast's beaches and reefs, the Cultural Triangle and hill country, ending on safari.",
@@ -354,7 +338,6 @@ export const TOUR_PACKAGES: TourPackage[] = [
     name: 'Ramayana Legacy in Sri Lanka',
     icon: 'temple',
     nights: 11,
-    priceFrom: 2950,
     route: "Airport → Negombo → Mannar → Trincomalee → Sigiriya (2N) → Kandy → Nuwara Eliya → Ella → Unawatuna (2N) → Airport",
     blurb: 'Sites across the island linked to the Ramayana legend, woven through a full heritage-and-coast circuit.',
     itinerary: [
