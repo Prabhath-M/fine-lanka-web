@@ -19,7 +19,7 @@ box in the tracker when a phase merges.
 | 1 | `tours/remove-prices` | Remove price data + copy | [x] |
 | 2 | `tours/bigger-itinerary-box` | Enlarge itinerary modal (CSS only) | [x] |
 | 3 | `tours/culture-content` | Culture tours 1.1–1.3 | [x] |
-| 4 | `tours/nature-content` | Nature tours 2.1–2.3 | [ ] |
+| 4 | `tours/nature-content` | Nature tours 2.1–2.3 | [x] |
 | 5 | `tours/beach-content` | Beach tours 3.1–3.3 | [ ] |
 | 6 | `tours/romantic-ramayana-content` | Romantic 4.1–4.3 + Ramayana 5 | [ ] |
 | 7 | `tours/route-map-sync` | `route-atlas.json` + map tests | [ ] |
