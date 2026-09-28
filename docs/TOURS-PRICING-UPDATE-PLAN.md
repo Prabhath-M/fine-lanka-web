@@ -20,7 +20,7 @@ box in the tracker when a phase merges.
 | 2 | `tours/bigger-itinerary-box` | Enlarge itinerary modal (CSS only) | [x] |
 | 3 | `tours/culture-content` | Culture tours 1.1–1.3 | [x] |
 | 4 | `tours/nature-content` | Nature tours 2.1–2.3 | [x] |
-| 5 | `tours/beach-content` | Beach tours 3.1–3.3 | [ ] |
+| 5 | `tours/beach-content` | Beach tours 3.1–3.3 | [x] |
 | 6 | `tours/romantic-ramayana-content` | Romantic 4.1–4.3 + Ramayana 5 | [ ] |
 | 7 | `tours/route-map-sync` | `route-atlas.json` + map tests | [ ] |
 | 8 | `tours/final-qa` | Blurbs, cross-references, full QA | [ ] |
