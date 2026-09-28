@@ -306,5 +306,12 @@
     "y": 1653.2,
     "width": 217.8,
     "height": 128.9
+  },
+  "eco-national-park": {
+    "file": "/images/map-sprites/eco-national-park.webp",
+    "x": 786.0,
+    "y": 750.0,
+    "width": 90.0,
+    "height": 59.0
   }
 }

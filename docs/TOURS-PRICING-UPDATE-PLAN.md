@@ -16,7 +16,7 @@ box in the tracker when a phase merges.
 | Phase | Branch (suggested) | Scope | Status |
 |---|---|---|---|
 | 0 | — | Confirm open questions (below) | [ ] |
-| 1 | `tours/remove-prices` | Remove price data + copy | [ ] |
+| 1 | `tours/remove-prices` | Remove price data + copy | [x] |
 | 2 | `tours/bigger-itinerary-box` | Enlarge itinerary modal (CSS only) | [x] |
 | 3 | `tours/culture-content` | Culture tours 1.1–1.3 | [x] |
 | 4 | `tours/nature-content` | Nature tours 2.1–2.3 | [ ] |
@@ -67,12 +67,13 @@ do if nobody answers.
 5. **Tour names** — doc uses "&" in two names; repo uses "and". **Keep repo
    names.**
 6. **Typos in the doc to fix as we go:** "Orghanage", "Enroye", "Haputhale",
-   "Udawalawa/Udawalawe", "Rathnapura/Ratnapura", "Kandy" casing. Unclear:
-   **"Eco-National Park"** (1.1 Day 2) — confirm the park name.
+   "Udawalawa/Udawalawe", "Rathnapura/Ratnapura", "Kandy" casing. **"Eco-National Park"** (1.1 Day 2) is
+   the Eco National Park near Habarana — resolved: written into the day text and
+   added to the map as an `eco-national-park` marker (secondary stop on 1.1).
 7. **Abbreviations** in doc routes expand to: Anu = Anuradhapura, Mahi =
    Mahiyanganaya, Tissa = Tissamaharama, Col = Colombo.
 8. **Map stops that don't exist yet** (see Phase 7): Udawalawe, Yala,
-   Hiriketiya. **Decide: add real markers, or map to nearest existing marker.**
+   Hiriketiya. **Resolved: real markers were added** (Udawalawe, Yala, Hiriketiya).
 
 ## Phase 1 — Remove prices
 

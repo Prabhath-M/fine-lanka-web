@@ -9,9 +9,9 @@
     "routes": "Removed by request; no path or itinerary records are retained."
   },
   "networkStats": {
-    "markerCount": 50,
+    "markerCount": 51,
     "edgeCount": 0,
-    "primaryCount": 42,
+    "primaryCount": 43,
     "hubCount": 8,
     "itineraryCount": 13,
     "connected": false
@@ -617,6 +617,18 @@
         "column": 5,
         "row": 10
       }
+    },
+    {
+      "id": "eco-national-park",
+      "name": "Eco National Park",
+      "x": 772.0,
+      "y": 797.0,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 4,
+        "row": 4
+      }
     }
   ],
   "segments": [],
@@ -641,6 +653,11 @@
           "nights": 2
         },
         {
+          "markerId": "eco-national-park",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
           "markerId": "kandy",
           "role": "main",
           "nights": 2
@@ -650,6 +667,7 @@
         "bandaranaike-airport",
         "pinnawala",
         "sigiriya",
+        "eco-national-park",
         "kandy"
       ],
       "segments": [],

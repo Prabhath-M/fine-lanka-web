@@ -103,7 +103,7 @@ export const TOUR_PACKAGES: TourPackage[] = [
       "A compact first taste of the Cultural Triangle — Sigiriya's rock fortress and Kandy's Temple of the Sacred Tooth Relic in five days.",
     itinerary: [
       { day: 1, title: 'Airport to Sigiriya', text: 'Transfer via Pinnawala Elephant Orphanage; climb of Sigiriya Rock Fortress.' },
-      { day: 2, title: 'Sigiriya', text: 'Sunrise at Pidurangala Rock, then a safari at Minneriya or Kaudulla National Park.' },
+      { day: 2, title: 'Sigiriya', text: 'Sunrise at Pidurangala Rock, then a safari at Minneriya or Kaudulla National Park and the Eco National Park near Habarana.' },
       { day: 3, title: 'Sigiriya to Kandy', text: 'Dambulla Cave Temple and a spice garden en route; afternoon at the Temple of the Sacred Tooth Relic.' },
       { day: 4, title: 'Kandy', text: 'Peradeniya Royal Botanical Gardens, the Bahirawakanda Buddha viewpoint and a Kandy city tour with the Gem Museum.' },
       { day: 5, title: 'Kandy to Airport', text: 'Optional tea factory visit in Giragama before transferring to the airport.' },
