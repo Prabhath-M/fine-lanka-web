@@ -30,7 +30,12 @@ export function TourCard({
   onNext?: () => void
 }) {
   const category = TOUR_CATEGORIES.find((c) => c.slug === tour.category)
-  const stops = tour.itinerary.slice(0, 3).map((day) => day.title)
+  // Multi-night stays repeat a day title (e.g. "Sigiriya" twice); collapse consecutive
+  // duplicates so the three tags show three different stops.
+  const stops = tour.itinerary
+    .map((day) => day.title)
+    .filter((title, index, titles) => index === 0 || title !== titles[index - 1])
+    .slice(0, 3)
 
   return (
     <article className="tour-card-v2 group relative overflow-hidden rounded-[28px] bg-[var(--tc-ivory)] text-[var(--tc-monsoon-deep)] ring-1 ring-[rgba(14,81,69,0.13)] transition-transform duration-300 ease-[var(--tc-ease-out)] hover:-translate-y-1">

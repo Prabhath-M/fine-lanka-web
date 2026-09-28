@@ -23,7 +23,7 @@ box in the tracker when a phase merges.
 | 5 | `tours/beach-content` | Beach tours 3.1–3.3 | [x] |
 | 6 | `tours/romantic-ramayana-content` | Romantic 4.1–4.3 + Ramayana 5 | [x] |
 | 7 | `tours/route-map-sync` | `route-atlas.json` + map tests | [x] |
-| 8 | `tours/final-qa` | Blurbs, cross-references, full QA | [ ] |
+| 8 | `tours/final-qa` | Blurbs, cross-references, full QA | [x] |
 
 Every phase: `pnpm lint && pnpm test && pnpm build` must pass before the PR.
 
