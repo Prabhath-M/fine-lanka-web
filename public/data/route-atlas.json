@@ -9,9 +9,9 @@
     "routes": "Removed by request; no path or itinerary records are retained."
   },
   "networkStats": {
-    "markerCount": 47,
+    "markerCount": 50,
     "edgeCount": 0,
-    "primaryCount": 39,
+    "primaryCount": 42,
     "hubCount": 8,
     "itineraryCount": 13,
     "connected": false
@@ -580,6 +580,42 @@
       "gridCell": {
         "column": 2,
         "row": 5
+      }
+    },
+    {
+      "id": "udawalawe",
+      "name": "Udawalawe",
+      "x": 888.0,
+      "y": 1705.0,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 5,
+        "row": 9
+      }
+    },
+    {
+      "id": "yala",
+      "name": "Yala National Park",
+      "x": 1370.0,
+      "y": 1700.0,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 7,
+        "row": 9
+      }
+    },
+    {
+      "id": "hiriketiya",
+      "name": "Hiriketiya",
+      "x": 925.41,
+      "y": 1972.22,
+      "type": "primary",
+      "kind": "coast",
+      "gridCell": {
+        "column": 5,
+        "row": 10
       }
     }
   ],

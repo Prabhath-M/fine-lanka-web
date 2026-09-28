@@ -334,5 +334,21 @@
     "y": 1873.6,
     "width": 214.5,
     "height": 177.7
+  },
+  {
+    "name": "Udawalawe National Park",
+    "file": "/images/map-sprites/udawalawe.webp",
+    "x": 827.1,
+    "y": 1660.2,
+    "width": 121.9,
+    "height": 132.7
+  },
+  {
+    "name": "Yala National Park",
+    "file": "/images/map-sprites/yala.webp",
+    "x": 1267.5,
+    "y": 1653.2,
+    "width": 217.8,
+    "height": 128.9
   }
 ]
