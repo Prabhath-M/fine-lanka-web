@@ -93,7 +93,6 @@ export function BookingPage() {
                 nights: formData.get('nights'),
                 tour: formData.get('tour'),
                 destinations: formData.getAll('destinations'),
-                budget: formData.get('budget'),
                 details: formData.get('details'),
                 [HONEYPOT_FIELD]: formData.get(HONEYPOT_FIELD),
               }
@@ -227,17 +226,6 @@ export function BookingPage() {
                   </label>
                 ))}
               </div>
-            </div>
-
-            <div className="form-row">
-              <label htmlFor="booking-budget">Approximate budget per person</label>
-              <select id="booking-budget" name="budget" defaultValue="">
-                <option value="">Prefer not to say / not sure yet</option>
-                <option value="under-1500">Under $1,500</option>
-                <option value="1500-2500">$1,500 – $2,500</option>
-                <option value="2500-4000">$2,500 – $4,000</option>
-                <option value="4000-plus">$4,000+</option>
-              </select>
             </div>
 
             <div className="form-row">
