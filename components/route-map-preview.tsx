@@ -132,6 +132,10 @@ const locationDetails: Record<string, { image: string; description: string }> = 
     image: '/images/tour-nature.webp',
     description: 'A gentle first stop beside the Maha Oya, known for the Pinnawala Elephant Orphanage and a slower introduction to Sri Lanka’s wildlife.',
   },
+  'eco-national-park': {
+    image: '/images/tour-nature.webp',
+    description: 'A short drive from Habarana, the Eco National Park offers an easy jeep safari through open scrub and forest, with a good chance of seeing wild elephants.',
+  },
   dambulla: {
     image: '/images/tour-cultural-historical.webp',
     description: 'A north-central heritage stop anchored by the Dambulla Cave Temple, with painted caves and Buddha images carved into the rock.',
@@ -389,7 +393,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
             <div className={styles.mapFrame}>
               <div className={styles.mapCanvas} style={zoomCanvasStyle}>
                 <img
-                  src="/images/sri-lanka-base-map-clean.webp"
+                  src="/images/sri-lanka-base-map-v2.webp"
                   alt="Sri Lanka tour map"
                   className={styles.mapImage}
                   width={data.width}

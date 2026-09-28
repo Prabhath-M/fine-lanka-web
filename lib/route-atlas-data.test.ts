@@ -1,9 +1,10 @@
 import { describe, expect, it } from 'vitest'
 import atlas from '../public/data/route-atlas.json'
+import { TOUR_PACKAGES } from './tours-data'
 
 type Marker = { id: string; type: 'primary' | 'hub'; kind: string }
 type Waypoint = { markerId: string; role: 'airport' | 'main' | 'secondary'; nights?: number }
-type Itinerary = { waypoints: Waypoint[]; airportToAirport: boolean }
+type Itinerary = { id: string; route: string; waypoints: Waypoint[]; airportToAirport: boolean }
 
 const markers = atlas.markers as Marker[]
 const itineraries = atlas.itineraries as Itinerary[]
@@ -34,5 +35,22 @@ describe('route atlas data', () => {
     expect(atlas.networkStats.edgeCount).toBe(0)
     expect(atlas.networkStats.itineraryCount).toBe(13)
     expect(atlas.networkStats.connected).toBe(false)
+  })
+
+  it('keeps every itinerary in step with its tour package (route text, overnight stops and nights)', () => {
+    // The Knuckles overnight is drawn on the Meemure marker.
+    const markerForStop = (name: string) => {
+      const slug = name.trim().toLowerCase().replace(/\s+/g, '-')
+      return slug === 'knuckles' ? 'meemure' : slug
+    }
+    expect(itineraries.map((itinerary) => itinerary.id).sort()).toEqual(TOUR_PACKAGES.map((tour) => tour.slug).sort())
+    for (const tour of TOUR_PACKAGES) {
+      const itinerary = itineraries.find((item) => item.id === tour.slug)!
+      expect(itinerary.route, tour.slug).toBe(tour.route)
+      const stops = [...tour.route.matchAll(/([^→(]+?) \((\d+)N\)/g)].map((match) => ({ markerId: markerForStop(match[1]), nights: Number(match[2]) }))
+      const mains = itinerary.waypoints.filter((waypoint) => waypoint.role === 'main').map((waypoint) => ({ markerId: waypoint.markerId, nights: waypoint.nights }))
+      expect(mains, tour.slug).toEqual(stops)
+      expect(mains.reduce((sum, stop) => sum + (stop.nights ?? 0), 0), tour.slug).toBe(tour.nights)
+    }
   })
 })

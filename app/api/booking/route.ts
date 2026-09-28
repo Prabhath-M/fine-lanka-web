@@ -33,7 +33,6 @@ export async function POST(req: NextRequest) {
   const destinations = Array.isArray(body.destinations)
     ? body.destinations.filter((d): d is string => typeof d === 'string').slice(0, 50).join(', ')
     : undefined
-  const budget = cleanString(body.budget, 40)
   const details = cleanString(body.details, 4000)
 
   if (!name || !email || !isValidEmail(email)) {
@@ -56,7 +55,6 @@ export async function POST(req: NextRequest) {
         ['Trip length (nights)', nights],
         ['Tour package', tour],
         ['Destinations', destinations],
-        ['Budget per person', budget],
         ['Details', details],
       ],
     })
