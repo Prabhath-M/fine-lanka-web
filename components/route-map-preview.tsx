@@ -389,7 +389,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
             <div className={styles.mapFrame}>
               <div className={styles.mapCanvas} style={zoomCanvasStyle}>
                 <img
-                  src="/images/sri-lanka-base-map-clean.webp"
+                  src="/images/sri-lanka-base-map-v2.webp"
                   alt="Sri Lanka tour map"
                   className={styles.mapImage}
                   width={data.width}
