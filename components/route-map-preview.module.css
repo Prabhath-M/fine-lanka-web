@@ -709,26 +709,16 @@
   left: 50%;
   width: max-content;
   max-width: 10rem;
-  padding: 0.17rem 0.3rem;
-  border-radius: 0.2rem;
-  background: rgba(28, 42, 52, 0.9);
-  color: #fff6e4;
+  padding: 0.05rem 0.15rem;
+  color: #000;
   font-family: var(--font-mono), ui-monospace, monospace;
   font-size: clamp(0.576rem, calc(0.68vw + 2.5px), 0.806rem);
+  font-weight: 600;
   letter-spacing: 0.02em;
   line-height: 1.1;
-  opacity: 0;
+  text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 1px 2px rgba(255, 255, 255, 0.9);
   pointer-events: none;
-  transform: translateX(-50%) translateY(-0.15rem);
-  transition: opacity 160ms ease, transform 160ms ease;
-}
-
-.marker:hover .markerLabel,
-.marker:focus-visible .markerLabel,
-.markerSelected .markerLabel,
-.markerActive .markerLabel {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
+  transform: translateX(-50%);
 }
 
 .markerActive {
@@ -1070,7 +1060,6 @@
 
   .markerLabel {
     max-width: 7rem;
-    padding: 0.1rem 0.2rem;
     font-size: 0.516rem;
   }
 
