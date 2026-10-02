@@ -9,9 +9,9 @@
     "routes": "Removed by request; no path or itinerary records are retained."
   },
   "networkStats": {
-    "markerCount": 51,
+    "markerCount": 52,
     "edgeCount": 0,
-    "primaryCount": 43,
+    "primaryCount": 44,
     "hubCount": 8,
     "itineraryCount": 13,
     "connected": false
@@ -629,6 +629,18 @@
         "column": 4,
         "row": 4
       }
+    },
+    {
+      "id": "minneriya",
+      "name": "Minneriya National Park",
+      "x": 1030.0,
+      "y": 985.0,
+      "type": "primary",
+      "kind": "wildlife",
+      "gridCell": {
+        "column": 5,
+        "row": 5
+      }
     }
   ],
   "segments": [],
@@ -636,7 +648,7 @@
     {
       "id": "cultural-triangle-escape",
       "label": "Cultural Triangle Escape",
-      "route": "Airport \u2192 Sigiriya (2N) \u2192 Kandy (2N) \u2192 Airport",
+      "route": "Airport → Sigiriya (2N) → Kandy (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -648,9 +660,19 @@
           "mainOrder": 1
         },
         {
+          "markerId": "dambulla",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
           "markerId": "sigiriya",
           "role": "main",
           "nights": 2
+        },
+        {
+          "markerId": "minneriya",
+          "role": "secondary",
+          "mainOrder": 1
         },
         {
           "markerId": "eco-national-park",
@@ -666,7 +688,9 @@
       "markers": [
         "bandaranaike-airport",
         "pinnawala",
+        "dambulla",
         "sigiriya",
+        "minneriya",
         "eco-national-park",
         "kandy"
       ],
@@ -679,7 +703,7 @@
     {
       "id": "heritage-and-serenity",
       "label": "Heritage and Serenity Getaway",
-      "route": "Airport \u2192 Anuradhapura (2N) \u2192 Sigiriya (2N) \u2192 Kandy (2N) \u2192 Airport",
+      "route": "Airport → Anuradhapura (2N) → Sigiriya (2N) → Kandy (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -752,7 +776,7 @@
     {
       "id": "through-ancient-kingdoms",
       "label": "Through Ancient Kingdoms",
-      "route": "Airport \u2192 Anuradhapura (2N) \u2192 Sigiriya (2N) \u2192 Kandy (2N) \u2192 Nuwara Eliya (1N) \u2192 Ella (1N) \u2192 Mahiyanganaya (1N) \u2192 Tissamaharama (2N) \u2192 Airport",
+      "route": "Airport → Anuradhapura (2N) → Sigiriya (2N) → Kandy (2N) → Nuwara Eliya (1N) → Ella (1N) → Mahiyanganaya (1N) → Tissamaharama (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -849,7 +873,7 @@
     {
       "id": "highlands-and-waterfalls",
       "label": "Highlands and Waterfalls Getaway",
-      "route": "Airport \u2192 Kandy (1N) \u2192 Nuwara Eliya (1N) \u2192 Ella (2N) \u2192 Airport",
+      "route": "Airport → Kandy (1N) → Nuwara Eliya (1N) → Ella (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -892,7 +916,7 @@
     {
       "id": "serene-bliss-exploration",
       "label": "Serene Bliss Exploration",
-      "route": "Airport \u2192 Sigiriya (1N) \u2192 Knuckles (2N) \u2192 Kandy (1N) \u2192 Nallathanni (1N) \u2192 Nuwara Eliya (2N) \u2192 Haputale (1N) \u2192 Ella (2N) \u2192 Airport",
+      "route": "Airport → Sigiriya (1N) → Knuckles (2N) → Kandy (1N) → Nallathanni (1N) → Nuwara Eliya (2N) → Haputale (1N) → Ella (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -959,7 +983,7 @@
     {
       "id": "thrills-and-tranquility",
       "label": "Thrills and Tranquility",
-      "route": "Airport \u2192 Nallathanni (1N) \u2192 Nuwara Eliya (1N) \u2192 Haputale (1N) \u2192 Ella (2N) \u2192 Udawalawe (1N) \u2192 Ratnapura (1N) \u2192 Negombo (1N) \u2192 Airport",
+      "route": "Airport → Nallathanni (1N) → Nuwara Eliya (1N) → Haputale (1N) → Ella (2N) → Udawalawe (1N) → Ratnapura (1N) → Negombo (1N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -1020,7 +1044,7 @@
     {
       "id": "northern-horizons",
       "label": "Northern Horizons and Coastal Charms",
-      "route": "Airport \u2192 Kalpitiya (2N) \u2192 Mannar (1N) \u2192 Jaffna (2N) \u2192 Trincomalee (1N) \u2192 Sigiriya (1N) \u2192 Negombo (2N) \u2192 Airport",
+      "route": "Airport → Kalpitiya (2N) → Mannar (1N) → Jaffna (2N) → Trincomalee (1N) → Sigiriya (1N) → Negombo (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -1087,7 +1111,7 @@
     {
       "id": "southern-coastal-bliss",
       "label": "Southern Coastal Bliss",
-      "route": "Airport \u2192 Bentota (1N) \u2192 Galle (2N) \u2192 Mirissa (1N) \u2192 Hiriketiya (2N) \u2192 Yala (1N) \u2192 Colombo (1N) \u2192 Airport",
+      "route": "Airport → Bentota (1N) → Galle (2N) → Mirissa (1N) → Hiriketiya (2N) → Yala (1N) → Colombo (1N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -1148,7 +1172,7 @@
     {
       "id": "sun-and-fun",
       "label": "Sun and Fun",
-      "route": "Airport \u2192 Sigiriya (2N) \u2192 Pasikudah (2N) \u2192 Arugam Bay (2N) \u2192 Tissamaharama (1N) \u2192 Tangalle (1N) \u2192 Mirissa (1N) \u2192 Bentota (1N) \u2192 Airport",
+      "route": "Airport → Sigiriya (2N) → Pasikudah (2N) → Arugam Bay (2N) → Tissamaharama (1N) → Tangalle (1N) → Mirissa (1N) → Bentota (1N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -1239,7 +1263,7 @@
     {
       "id": "romantic-getaway",
       "label": "Romantic Getaway",
-      "route": "Airport \u2192 Kandy (2N) \u2192 Nuwara Eliya (1N) \u2192 Bentota (2N) \u2192 Airport",
+      "route": "Airport → Kandy (2N) → Nuwara Eliya (1N) → Bentota (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -1288,7 +1312,7 @@
     {
       "id": "tales-of-love",
       "label": "Tales of Love and Timeless Beauty",
-      "route": "Airport \u2192 Sigiriya (2N) \u2192 Kandy (1N) \u2192 Nuwara Eliya (1N) \u2192 Ella (2N) \u2192 Udawalawe (1N) \u2192 Mirissa (2N) \u2192 Airport",
+      "route": "Airport → Sigiriya (2N) → Kandy (1N) → Nuwara Eliya (1N) → Ella (2N) → Udawalawe (1N) → Mirissa (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -1366,8 +1390,8 @@
     },
     {
       "id": "sri-lanka-honeymoon",
-      "label": "Sri Lanka Honeymoon \u2014 Romance and Adventure Awaits",
-      "route": "Airport \u2192 Negombo (1N) \u2192 Trincomalee (2N) \u2192 Sigiriya (2N) \u2192 Kandy (1N) \u2192 Nuwara Eliya (1N) \u2192 Ella (1N) \u2192 Arugam Bay (2N) \u2192 Airport",
+      "label": "Sri Lanka Honeymoon — Romance and Adventure Awaits",
+      "route": "Airport → Negombo (1N) → Trincomalee (2N) → Sigiriya (2N) → Kandy (1N) → Nuwara Eliya (1N) → Ella (1N) → Arugam Bay (2N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
@@ -1446,7 +1470,7 @@
     {
       "id": "ramayana-legacy",
       "label": "Ramayana Legacy in Sri Lanka",
-      "route": "Airport \u2192 Negombo (1N) \u2192 Mannar (1N) \u2192 Trincomalee (2N) \u2192 Sigiriya (2N) \u2192 Kandy (1N) \u2192 Nuwara Eliya (1N) \u2192 Ella (2N) \u2192 Unawatuna (1N) \u2192 Airport",
+      "route": "Airport → Negombo (1N) → Mannar (1N) → Trincomalee (2N) → Sigiriya (2N) → Kandy (1N) → Nuwara Eliya (1N) → Ella (2N) → Unawatuna (1N) → Airport",
       "waypoints": [
         {
           "markerId": "bandaranaike-airport",
