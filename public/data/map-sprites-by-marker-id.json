@@ -288,15 +288,15 @@
   },
   "mirissa": {
     "file": "/images/map-sprites/mirissa-beach.webp",
-    "x": 717.7,
-    "y": 1873.6,
+    "x": 621.58,
+    "y": 1881.6,
     "width": 214.5,
     "height": 177.7
   },
   "udawalawe": {
     "file": "/images/map-sprites/udawalawe.webp",
     "x": 827.1,
-    "y": 1660.2,
+    "y": 1590.2,
     "width": 121.9,
     "height": 132.7
   },
@@ -323,15 +323,15 @@
   },
   "yapahuwa": {
     "file": "/images/map-sprites/yapahuwa.webp",
-    "x": 555.9,
-    "y": 936.07,
-    "width": 55.0,
-    "height": 56.33
+    "x": 421.0,
+    "y": 953.0,
+    "width": 82.5,
+    "height": 84.5
   },
   "wilpaththu-national-park": {
     "file": "/images/map-sprites/minneriya.webp",
     "x": 440,
-    "y": 712,
+    "y": 817.3,
     "width": 126,
     "height": 105
   }
