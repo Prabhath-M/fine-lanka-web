@@ -113,10 +113,10 @@
   },
   "polonnaruwa": {
     "file": "/images/map-sprites/polonnaruwa.webp",
-    "x": 994.4,
-    "y": 771.0,
-    "width": 115.2,
-    "height": 126.0
+    "x": 1003.04,
+    "y": 780.45,
+    "width": 97.92,
+    "height": 107.1
   },
   "kurunegala": {
     "file": "/images/map-sprites/kurunegala.webp",
@@ -323,9 +323,9 @@
   },
   "yapahuwa": {
     "file": "/images/map-sprites/yapahuwa.webp",
-    "x": 500.9,
-    "y": 823.4,
-    "width": 165,
-    "height": 169
+    "x": 555.9,
+    "y": 936.07,
+    "width": 55.0,
+    "height": 56.33
   }
 }
