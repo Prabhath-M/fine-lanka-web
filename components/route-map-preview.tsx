@@ -136,9 +136,17 @@ const locationDetails: Record<string, { image: string; description: string }> = 
     image: '/images/tour-nature.webp',
     description: 'One of the Cultural Triangle\'s classic safari parks, known for large elephant gatherings around its reservoir, especially in the dry season.',
   },
+  'wilpaththu-national-park': {
+    image: '/images/tour-nature.webp',
+    description: 'Sri Lanka’s largest national park on the north-west coast, known for its natural “villu” lakes, dense dry-zone forest and some of the island’s best leopard sightings.',
+  },
   'eco-national-park': {
     image: '/images/tour-nature.webp',
     description: 'A short drive from Habarana, the Eco National Park offers an easy jeep safari through open scrub and forest, with a good chance of seeing wild elephants.',
+  },
+  yapahuwa: {
+    image: '/images/tour-cultural-historical.webp',
+    description: 'A thirteenth-century rock fortress that briefly served as the island’s capital, famed for its steep ornamental stairway guarded by a carved stone lion.',
   },
   dambulla: {
     image: '/images/tour-cultural-historical.webp',

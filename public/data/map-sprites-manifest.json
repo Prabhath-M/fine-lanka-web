@@ -114,10 +114,10 @@
   {
     "name": "Sigiriya",
     "file": "/images/map-sprites/sigiriya.webp",
-    "x": 855.8,
-    "y": 762.7,
-    "width": 188.5,
-    "height": 189.6
+    "x": 865.22,
+    "y": 772.18,
+    "width": 169.65,
+    "height": 170.64
   },
   {
     "name": "Pasikudah Beach",
@@ -130,10 +130,10 @@
   {
     "name": "Polonnaruwa",
     "file": "/images/map-sprites/polonnaruwa.webp",
-    "x": 988,
-    "y": 764,
-    "width": 128,
-    "height": 140
+    "x": 1003.04,
+    "y": 780.45,
+    "width": 97.92,
+    "height": 107.1
   },
   {
     "name": "Kurunegala",
@@ -170,8 +170,8 @@
   {
     "name": "Mahiyanganaya",
     "file": "/images/map-sprites/mahiyanganaya.webp",
-    "x": 1165.7,
-    "y": 1024.8,
+    "x": 1009.5,
+    "y": 1189.61,
     "width": 206.9,
     "height": 116.5
   },
@@ -218,8 +218,8 @@
   {
     "name": "Nallathanni",
     "file": "/images/map-sprites/nallathanni.webp",
-    "x": 1032.4,
-    "y": 1175.4,
+    "x": 695.74,
+    "y": 1373.43,
     "width": 151.1,
     "height": 101.8
   },
@@ -353,17 +353,33 @@
   },
   {
     "name": "Eco National Park",
-    "file": "/images/map-sprites/eco-national-park.webp",
-    "x": 786.0,
-    "y": 750.0,
-    "width": 90.0,
-    "height": 59.0
+    "file": "/images/map-sprites/minneriya.webp",
+    "x": 758,
+    "y": 732,
+    "width": 100,
+    "height": 83.33
   },
   {
     "name": "Minneriya",
     "file": "/images/map-sprites/minneriya.webp",
     "x": 1011,
     "y": 959,
+    "width": 126,
+    "height": 105
+  },
+  {
+    "name": "Yapahuwa",
+    "file": "/images/map-sprites/yapahuwa.webp",
+    "x": 555.9,
+    "y": 936.07,
+    "width": 55.0,
+    "height": 56.33
+  },
+  {
+    "name": "Wilpaththu National Park",
+    "file": "/images/map-sprites/minneriya.webp",
+    "x": 440,
+    "y": 712,
     "width": 126,
     "height": 105
   }
