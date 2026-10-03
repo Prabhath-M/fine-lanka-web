@@ -114,10 +114,10 @@
   {
     "name": "Sigiriya",
     "file": "/images/map-sprites/sigiriya.webp",
-    "x": 855.8,
-    "y": 762.7,
-    "width": 188.5,
-    "height": 189.6
+    "x": 865.22,
+    "y": 772.18,
+    "width": 169.65,
+    "height": 170.64
   },
   {
     "name": "Pasikudah Beach",
@@ -130,10 +130,10 @@
   {
     "name": "Polonnaruwa",
     "file": "/images/map-sprites/polonnaruwa.webp",
-    "x": 988,
-    "y": 764,
-    "width": 128,
-    "height": 140
+    "x": 994.4,
+    "y": 771.0,
+    "width": 115.2,
+    "height": 126.0
   },
   {
     "name": "Kurunegala",
@@ -170,8 +170,8 @@
   {
     "name": "Mahiyanganaya",
     "file": "/images/map-sprites/mahiyanganaya.webp",
-    "x": 1165.7,
-    "y": 1024.8,
+    "x": 1009.5,
+    "y": 1189.61,
     "width": 206.9,
     "height": 116.5
   },
@@ -218,8 +218,8 @@
   {
     "name": "Nallathanni",
     "file": "/images/map-sprites/nallathanni.webp",
-    "x": 1032.4,
-    "y": 1175.4,
+    "x": 695.74,
+    "y": 1373.43,
     "width": 151.1,
     "height": 101.8
   },
