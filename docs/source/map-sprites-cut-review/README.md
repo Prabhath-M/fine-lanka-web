@@ -16,9 +16,20 @@ labeled grid for quick visual review.
 arugam-bay, bandaranaike-airport, batticaloa, bentota, chilaw, colombo,
 dambulla, elephant-pass, ella, galle, jaffna, kandy, kataragama, kilinochchi,
 madhu-road-national-park, mahiyanganaya, mannar, meemure, mihintale,
-mullaittivu, nallathanni, nuwara-eliya, pasikudah, pigeon-island, polonnaruwa,
+mullaittivu, nallathanni, nuwara-eliya, pasikudah, pigeon-island, minneriya,
 pulmoddai, ratnapura, sigiriya, tangalle, tissamaharama, unawatuna,
 avissawella.
+
+**Fixed — Polonnaruwa / Minneriya mix-up:** the auto-cut `polonnaruwa.png`
+had grouped the Polonnaruwa heritage building with two nearby elephant
+illustrations, because this reference sheet predates the `minneriya` marker
+in `route-atlas.json` and so has no ring of its own for it — the elephants
+were the closest art to the Polonnaruwa ring and got swept in. Split by
+hand: the two elephants are now their own `minneriya.png` (Minneriya is a
+safari park, so an elephant pair is the right art), and `polonnaruwa.png`
+is replaced entirely with the clean reference dagoba image supplied
+separately, resized to ~137×163 to match the scale of comparable heritage
+cutouts in this batch (Anuradhapura's stupa is 154×163).
 
 **1 known mismatch:** `pinnawala.png` is actually a parasailer-and-dolphins
 illustration, not elephants — wrong for the elephant orphanage. The real
