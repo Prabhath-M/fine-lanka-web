@@ -739,9 +739,19 @@
           "mainOrder": 1
         },
         {
+          "markerId": "yapahuwa",
+          "role": "secondary",
+          "mainOrder": 1
+        },
+        {
           "markerId": "anuradhapura",
           "role": "main",
           "nights": 2
+        },
+        {
+          "markerId": "wilpaththu-national-park",
+          "role": "secondary",
+          "mainOrder": 1
         },
         {
           "markerId": "mihintale",
@@ -782,7 +792,9 @@
       "markers": [
         "bandaranaike-airport",
         "pinnawala",
+        "yapahuwa",
         "anuradhapura",
+        "wilpaththu-national-park",
         "mihintale",
         "aukana",
         "polonnaruwa",
