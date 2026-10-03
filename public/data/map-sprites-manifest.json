@@ -353,11 +353,11 @@
   },
   {
     "name": "Eco National Park",
-    "file": "/images/map-sprites/eco-national-park.webp",
-    "x": 786.0,
-    "y": 750.0,
-    "width": 90.0,
-    "height": 59.0
+    "file": "/images/map-sprites/minneriya.webp",
+    "x": 758,
+    "y": 732,
+    "width": 100,
+    "height": 83.33
   },
   {
     "name": "Minneriya",
@@ -374,5 +374,13 @@
     "y": 936.07,
     "width": 55.0,
     "height": 56.33
+  },
+  {
+    "name": "Wilpaththu National Park",
+    "file": "/images/map-sprites/minneriya.webp",
+    "x": 440,
+    "y": 712,
+    "width": 126,
+    "height": 105
   }
 ]
