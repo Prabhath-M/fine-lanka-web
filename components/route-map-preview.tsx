@@ -140,6 +140,10 @@ const locationDetails: Record<string, { image: string; description: string }> = 
     image: '/images/tour-nature.webp',
     description: 'A short drive from Habarana, the Eco National Park offers an easy jeep safari through open scrub and forest, with a good chance of seeing wild elephants.',
   },
+  yapahuwa: {
+    image: '/images/tour-cultural-historical.webp',
+    description: 'A thirteenth-century rock fortress that briefly served as the island’s capital, famed for its steep ornamental stairway guarded by a carved stone lion.',
+  },
   dambulla: {
     image: '/images/tour-cultural-historical.webp',
     description: 'A north-central heritage stop anchored by the Dambulla Cave Temple, with painted caves and Buddha images carved into the rock.',

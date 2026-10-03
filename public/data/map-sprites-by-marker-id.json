@@ -320,5 +320,12 @@
     "y": 959,
     "width": 126,
     "height": 105
+  },
+  "yapahuwa": {
+    "file": "/images/map-sprites/yapahuwa.webp",
+    "x": 500.9,
+    "y": 823.4,
+    "width": 165,
+    "height": 169
   }
 }
