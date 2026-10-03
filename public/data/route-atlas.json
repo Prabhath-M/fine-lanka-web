@@ -295,7 +295,7 @@
     },
     {
       "id": "bandaranaike-airport",
-      "name": "Katunayake / Bandaranaike International Airport",
+      "name": "Katunayaka Airport",
       "x": 342.0,
       "y": 1308.0,
       "type": "primary",
@@ -658,12 +658,12 @@
       "id": "wilpaththu-national-park",
       "name": "Wilpaththu National Park",
       "x": 546.0,
-      "y": 758.7,
+      "y": 864.0,
       "type": "primary",
       "kind": "wildlife",
       "gridCell": {
         "column": 3,
-        "row": 4
+        "row": 5
       }
     }
   ],

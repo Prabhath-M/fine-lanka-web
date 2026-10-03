@@ -224,7 +224,7 @@
     "height": 101.8
   },
   {
-    "name": "Katunayake / Bandaranaike International Airport",
+    "name": "Katunayaka Airport",
     "file": "/images/map-sprites/katunayake-bandaranaike-international-airport.webp",
     "x": 65.5,
     "y": 1214.4,
@@ -330,8 +330,8 @@
   {
     "name": "Mirissa Beach",
     "file": "/images/map-sprites/mirissa-beach.webp",
-    "x": 717.7,
-    "y": 1873.6,
+    "x": 621.58,
+    "y": 1881.6,
     "width": 214.5,
     "height": 177.7
   },
@@ -379,7 +379,7 @@
     "name": "Wilpaththu National Park",
     "file": "/images/map-sprites/minneriya.webp",
     "x": 440,
-    "y": 712,
+    "y": 817.3,
     "width": 126,
     "height": 105
   }
