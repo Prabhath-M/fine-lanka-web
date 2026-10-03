@@ -130,10 +130,10 @@
   {
     "name": "Polonnaruwa",
     "file": "/images/map-sprites/polonnaruwa.webp",
-    "x": 972.8,
-    "y": 905.7,
-    "width": 207.5,
-    "height": 98.6
+    "x": 988,
+    "y": 764,
+    "width": 128,
+    "height": 140
   },
   {
     "name": "Kurunegala",
@@ -358,5 +358,13 @@
     "y": 750.0,
     "width": 90.0,
     "height": 59.0
+  },
+  {
+    "name": "Minneriya",
+    "file": "/images/map-sprites/minneriya.webp",
+    "x": 1011,
+    "y": 959,
+    "width": 126,
+    "height": 105
   }
 ]

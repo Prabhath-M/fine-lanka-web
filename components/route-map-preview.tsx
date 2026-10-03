@@ -132,6 +132,10 @@ const locationDetails: Record<string, { image: string; description: string }> = 
     image: '/images/tour-nature.webp',
     description: 'A gentle first stop beside the Maha Oya, known for the Pinnawala Elephant Orphanage and a slower introduction to Sri Lanka’s wildlife.',
   },
+  minneriya: {
+    image: '/images/tour-nature.webp',
+    description: 'One of the Cultural Triangle\'s classic safari parks, known for large elephant gatherings around its reservoir, especially in the dry season.',
+  },
   'eco-national-park': {
     image: '/images/tour-nature.webp',
     description: 'A short drive from Habarana, the Eco National Park offers an easy jeep safari through open scrub and forest, with a good chance of seeing wild elephants.',
