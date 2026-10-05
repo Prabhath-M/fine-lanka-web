@@ -648,21 +648,39 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                       className={styles.nextArrow}
                       style={{ left: `${(nextArrow.x / data.width) * 100}%`, top: `${(nextArrow.y / data.height) * 100}%`, '--arrow-angle': `${nextArrow.angle}deg` } as React.CSSProperties}
                     >
-                      <svg className={styles.nextArrowSvg} viewBox="0 0 120 70" overflow="visible">
+                      <svg className={styles.nextArrowSvg} viewBox="0 0 1021 1250" overflow="visible">
                         <defs>
                           <linearGradient id="nextArrowBody" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0" stopColor="#ffe6b3" />
                             <stop offset="0.5" stopColor="#e58a45" />
                             <stop offset="1" stopColor="#a8391f" />
                           </linearGradient>
+                          <linearGradient id="nextArrowGloss" x1="0" y1="0" x2="1" y2="1">
+                            <stop offset="0" stopColor="#fff" stopOpacity="0.45" />
+                            <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
+                          </linearGradient>
+                          <clipPath id="nextArrowClip"><path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" /></clipPath>
+                          <filter id="nextArrowSoft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="5" /></filter>
+                          {/* Bevel masks: lit rim = shape minus itself shifted down-right; shaded rim = shape minus itself shifted up-left. */}
+                          <mask id="nextArrowLit" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1300" height="1500">
+                            <rect x="-100" y="-100" width="1300" height="1500" fill="#fff" />
+                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" transform="translate(24 24)" fill="#000" />
+                          </mask>
+                          <mask id="nextArrowShade" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1300" height="1500">
+                            <rect x="-100" y="-100" width="1300" height="1500" fill="#fff" />
+                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" transform="translate(-24 -24)" fill="#000" />
+                          </mask>
                         </defs>
-                        <g opacity="0.78">
-                          {/* Bent-band arrow: wide band rising from below, a tight elbow, then a straight shaft into a head about twice the shaft's width. */}
-                          <path d="M0 70 L0 19 Q0 11 8 11 L82 11 L82 0 L118 22 L82 44 L82 33 L22 33 L22 70 Z" transform="translate(0 5)" fill="#2a1409" opacity="0.35" />
-                          <path d="M0 70 L0 19 Q0 11 8 11 L82 11 L82 0 L118 22 L82 44 L82 33 L22 33 L22 70 Z" fill="#8f2f1a" stroke="#8f2f1a" strokeWidth="2" strokeLinejoin="round" />
-                          <path d="M1.5 70 L1.5 19 Q1.5 12.5 8 12.5 L83.5 12.5 L83.5 2.8 L114 22 L83.5 41.2 L83.5 31.5 L20.5 31.5 L20.5 70 Z" fill="url(#nextArrowBody)" />
-                          <path d="M83.5 22 L114 22 L83.5 41.2 L83.5 31.5 L20.5 31.5 L20.5 22 Z" fill="#8f2f1a" opacity="0.18" />
-                          <path d="M4 66 L4 19 Q4 14.5 8.5 14.5 L80 14.5" fill="none" stroke="#fff6dc" strokeOpacity="0.75" strokeWidth="2.2" strokeLinecap="round" />
+                        <g opacity="0.88">
+                          {/* Swooping arrow (tapered tail, tall head) with a bevel/emboss: gradient body, gloss, light top-left rim, dark bottom-right rim. */}
+                          <g clipPath="url(#nextArrowClip)">
+                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="url(#nextArrowBody)" />
+                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="url(#nextArrowGloss)" />
+                            <g filter="url(#nextArrowSoft)">
+                              <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="#fff6dc" fillOpacity="0.9" mask="url(#nextArrowLit)" />
+                              <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="#5c1c0c" fillOpacity="0.55" mask="url(#nextArrowShade)" />
+                            </g>
+                          </g>
                         </g>
                       </svg>
                     </div>
