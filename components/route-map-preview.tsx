@@ -671,6 +671,8 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                             <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" transform="translate(-24 -24)" fill="#000" />
                           </mask>
                         </defs>
+                        {/* Rotated about the tail tip (218,1) so the tail-to-head chord lies along the direction to the next stop. */}
+                        <g transform="rotate(-49.8 218 1)">
                         <g opacity="0.88">
                           {/* Swooping arrow (tapered tail, tall head) with a bevel/emboss: gradient body, gloss, light top-left rim, dark bottom-right rim. */}
                           <g clipPath="url(#nextArrowClip)">
@@ -681,6 +683,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                               <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="#5c1c0c" fillOpacity="0.55" mask="url(#nextArrowShade)" />
                             </g>
                           </g>
+                        </g>
                         </g>
                       </svg>
                     </div>
