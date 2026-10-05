@@ -384,6 +384,20 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
     return () => observer.disconnect()
   }, [data])
 
+  // Bring the map to the middle of the screen once a trip is picked -- from
+  // the sidebar's own route list, or from outside via selectedItineraryId
+  // (e.g. a "View on map" button elsewhere on the page). Skipped on first
+  // mount so the default pre-selected trip doesn't yank the page on load.
+  const didMountRef = useRef(false)
+  useEffect(() => {
+    if (!didMountRef.current) { didMountRef.current = true; return }
+    if (!selectedItineraryId) return
+    const frame = requestAnimationFrame(() => {
+      mapFrameWrapRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [selectedItineraryId])
+
   // Start once the map is visible (and not already played / skipped for this selection).
   useEffect(() => {
     if (!animKey || !mapInView || reducedMotion || startedKey === animKey) return
@@ -614,6 +628,18 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                 })}
                 </div>
               </div>
+              {selectedItinerary && (
+                <div className={styles.pinLegend} aria-label="Pin colour guide">
+                  <span className={styles.pinLegendRow}>
+                    <i className={`${styles.pinLegendIcon} ${styles.pinLegendIconMain}`} aria-hidden="true" />
+                    Primary destination
+                  </span>
+                  <span className={styles.pinLegendRow}>
+                    <i className={`${styles.pinLegendIcon} ${styles.pinLegendIconSecondary}`} aria-hidden="true" />
+                    En route / secondary stop
+                  </span>
+                </div>
+              )}
             </div>
           {selectedMarker && (
             <aside

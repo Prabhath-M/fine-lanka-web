@@ -419,6 +419,69 @@
   box-shadow: 0 1.6rem 3rem rgba(29, 36, 37, 0.27);
 }
 
+/* On-map pin colour key -- shown only while a trip is selected, since the
+   red/yellow teardrop pins only exist on the map in that state (otherwise
+   every marker is the plain network dot the sidebar's own "Read the marks"
+   legend already covers). Sits in the frame's own corner, outside
+   .mapCanvas, so it stays put through zoom/pan instead of panning with it. */
+.pinLegend {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 5;
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.42rem 0.6rem;
+  border-radius: 0.5rem;
+  background: rgba(255, 252, 244, 0.86);
+  box-shadow: 0 0.2rem 0.6rem rgba(40, 24, 12, 0.22);
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  color: #3c2b1e;
+}
+
+.pinLegendRow {
+  display: flex;
+  align-items: center;
+  gap: 0.42rem;
+  white-space: nowrap;
+}
+
+/* Small teardrop swatches matching the actual pin shape/colours. */
+.pinLegendIcon {
+  display: inline-block;
+  width: 0.62rem;
+  height: 0.62rem;
+  flex: none;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+}
+
+.pinLegendIconMain {
+  border: 2px solid #fff4d7;
+  background: #b8472d;
+}
+
+.pinLegendIconSecondary {
+  border: 2px solid #fff8dc;
+  background: #d19a2f;
+}
+
+@media (max-width: 720px) {
+  .pinLegend {
+    top: 0.4rem;
+    right: 0.4rem;
+    padding: 0.3rem 0.46rem;
+    font-size: 0.56rem;
+    gap: 0.2rem;
+  }
+
+  .pinLegendIcon {
+    width: 0.5rem;
+    height: 0.5rem;
+  }
+}
+
 .mapCanvas {
   position: absolute;
   overflow: visible;

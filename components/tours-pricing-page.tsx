@@ -80,17 +80,10 @@ export function ToursPricingPage() {
     setFeaturedSlug(list[nextIndex].slug)
   }
 
+  // Selecting the tour is enough on its own -- RouteMapPreview centers the
+  // map frame in the viewport itself whenever selectedItineraryId changes.
   const showTourOnMap = (tour: TourPackage) => {
     setSelectedMapItineraryId(tour.slug)
-    window.requestAnimationFrame(() => {
-      const mapSection = document.getElementById('tour-map')
-      if (!mapSection) return
-      const headerOffset = 24
-      window.scrollTo({
-        top: mapSection.getBoundingClientRect().top + window.scrollY - headerOffset,
-        behavior: 'smooth',
-      })
-    })
   }
 
   return (
