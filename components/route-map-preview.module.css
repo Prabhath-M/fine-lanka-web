@@ -608,8 +608,8 @@
 }
 
 .markerItinerarySecondary {
-  width: 1.5rem;
-  height: 1.5rem;
+  width: 1.18rem;
+  height: 1.18rem;
   border-width: 2px;
   border-color: #fff8dc;
   background: #d19a2f;
@@ -641,16 +641,6 @@
   position: relative;
   z-index: 1;
   margin-top: -0.28rem;
-}
-
-.markerStay {
-  position: absolute;
-  bottom: 0.2rem;
-  z-index: 1;
-  font-family: var(--font-mono), ui-monospace, monospace;
-  font-size: 0.696rem;
-  font-weight: 800;
-  line-height: 1;
 }
 
 .markerOrdered {
@@ -1015,8 +1005,8 @@
   }
 
   .markerItinerarySecondary {
-    width: 0.94rem;
-    height: 0.94rem;
+    width: 0.76rem;
+    height: 0.76rem;
   }
 
   .markerItineraryAirport {
@@ -1063,11 +1053,6 @@
 
   .markerOrder {
     font-size: 0.696rem;
-  }
-
-  .markerStay {
-    bottom: 0.11rem;
-    font-size: 0.526rem;
   }
 
   /* Smaller names (phones only) so neighbouring places don't run into each
