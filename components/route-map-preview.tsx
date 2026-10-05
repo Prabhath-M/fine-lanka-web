@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
 import { Compass, FastForward, MapPin, MousePointer2, RotateCcw, Route, X } from 'lucide-react'
 import styles from './route-map-preview.module.css'
 import { DESTINATIONS } from '@/lib/destinations-data'
-import { POP_MS, planReveal, typeDuration } from '@/lib/map-reveal'
+import { NAME_START_MS, planReveal, typeDuration } from '@/lib/map-reveal'
 
 type MarkerSprite = { file: string; x: number; y: number; width: number; height: number }
 
@@ -247,10 +247,11 @@ function pathForSegment(segment: Segment, markers: Map<string, Marker>, width: n
 type LabelMode = 'full' | 'hidden' | 'typing'
 
 /**
- * A marker's name. In 'typing' mode it waits for the pin to land, then types
- * itself out letter by letter with a blinking caret. The not-yet-typed letters
- * stay in the layout (just invisible) so the label box never resizes or
- * re-wraps while it types.
+ * A marker's name. In 'typing' mode it waits for the pin to land (plus a short
+ * still pause), then types itself out letter by letter with a blinking caret.
+ * The not-yet-typed letters stay in the layout (just invisible) and the caret is
+ * drawn without taking any space or adding a line-break point, so the label box
+ * never resizes and always wraps exactly as it will when finished.
  */
 function MarkerLabel({ text, mode, typeMs }: { text: string; mode: LabelMode; typeMs: number }) {
   // -1 = waiting for the pin to land, otherwise the number of letters shown.
@@ -271,7 +272,7 @@ function MarkerLabel({ text, mode, typeMs }: { text: string; mode: LabelMode; ty
         setChars(count)
         if (count >= text.length && interval) clearInterval(interval)
       }, typeMs / Math.max(text.length, 1))
-    }, POP_MS)
+    }, NAME_START_MS)
     return () => {
       clearTimeout(start)
       if (interval) clearInterval(interval)
@@ -285,7 +286,7 @@ function MarkerLabel({ text, mode, typeMs }: { text: string; mode: LabelMode; ty
       {typing ? (
         <>
           <span>{text.slice(0, chars)}</span>
-          <i className={styles.typeCaret} aria-hidden="true" />
+          <span className={styles.typeCaret} aria-hidden="true" />
           <span className={styles.typeRest}>{text.slice(chars)}</span>
         </>
       ) : (
