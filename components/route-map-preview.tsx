@@ -648,7 +648,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                       className={styles.nextArrow}
                       style={{ left: `${(nextArrow.x / data.width) * 100}%`, top: `${(nextArrow.y / data.height) * 100}%`, '--arrow-angle': `${nextArrow.angle}deg` } as React.CSSProperties}
                     >
-                      <svg className={styles.nextArrowSvg} viewBox="0 0 1021 1250" overflow="visible">
+                      <svg className={styles.nextArrowSvg} viewBox="0 0 1021 1550" overflow="visible">
                         <defs>
                           <linearGradient id="nextArrowBody" x1="0" y1="0" x2="0" y2="1">
                             <stop offset="0" stopColor="#ffe6b3" />
@@ -659,28 +659,28 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                             <stop offset="0" stopColor="#fff" stopOpacity="0.45" />
                             <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
                           </linearGradient>
-                          <clipPath id="nextArrowClip"><path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" /></clipPath>
+                          <clipPath id="nextArrowClip"><path d="M218 0 L240 880 C240 1030 340 1104 506 1104 L506 950 L1020 1250 L506 1550 L506 1396 C180 1396 0 1240 0 880 Z" /></clipPath>
                           <filter id="nextArrowSoft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="5" /></filter>
                           {/* Bevel masks: lit rim = shape minus itself shifted down-right; shaded rim = shape minus itself shifted up-left. */}
-                          <mask id="nextArrowLit" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1300" height="1500">
-                            <rect x="-100" y="-100" width="1300" height="1500" fill="#fff" />
-                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" transform="translate(24 24)" fill="#000" />
+                          <mask id="nextArrowLit" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1300" height="1800">
+                            <rect x="-100" y="-100" width="1300" height="1800" fill="#fff" />
+                            <path d="M218 0 L240 880 C240 1030 340 1104 506 1104 L506 950 L1020 1250 L506 1550 L506 1396 C180 1396 0 1240 0 880 Z" transform="translate(24 24)" fill="#000" />
                           </mask>
-                          <mask id="nextArrowShade" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1300" height="1500">
-                            <rect x="-100" y="-100" width="1300" height="1500" fill="#fff" />
-                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" transform="translate(-24 -24)" fill="#000" />
+                          <mask id="nextArrowShade" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1300" height="1800">
+                            <rect x="-100" y="-100" width="1300" height="1800" fill="#fff" />
+                            <path d="M218 0 L240 880 C240 1030 340 1104 506 1104 L506 950 L1020 1250 L506 1550 L506 1396 C180 1396 0 1240 0 880 Z" transform="translate(-24 -24)" fill="#000" />
                           </mask>
                         </defs>
                         {/* Rotated about the tail tip (218,1) so the tail-to-head chord lies along the direction to the next stop. */}
-                        <g transform="rotate(-49.8 218 1)">
+                        <g transform="rotate(-57.3 218 1)">
                         <g opacity="0.88">
-                          {/* Swooping arrow (tapered tail, tall head) with a bevel/emboss: gradient body, gloss, light top-left rim, dark bottom-right rim. */}
+                          {/* Swooping arrow (straight tapered tail, late bend, tall head) with a bevel/emboss: gradient body, gloss, light top-left rim, dark bottom-right rim. */}
                           <g clipPath="url(#nextArrowClip)">
-                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="url(#nextArrowBody)" />
-                            <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="url(#nextArrowGloss)" />
+                            <path d="M218 0 L240 880 C240 1030 340 1104 506 1104 L506 950 L1020 1250 L506 1550 L506 1396 C180 1396 0 1240 0 880 Z" fill="url(#nextArrowBody)" />
+                            <path d="M218 0 L240 880 C240 1030 340 1104 506 1104 L506 950 L1020 1250 L506 1550 L506 1396 C180 1396 0 1240 0 880 Z" fill="url(#nextArrowGloss)" />
                             <g filter="url(#nextArrowSoft)">
-                              <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="#fff6dc" fillOpacity="0.9" mask="url(#nextArrowLit)" />
-                              <path d="M218 0 C146 96 114 200 114 306 C114 546 280 736 506 794 L506 654 L1020 952 L506 1250 L506 1086 C190 1026 0 786 0 476 C0 286 80 116 218 0 Z" fill="#5c1c0c" fillOpacity="0.55" mask="url(#nextArrowShade)" />
+                              <path d="M218 0 L240 880 C240 1030 340 1104 506 1104 L506 950 L1020 1250 L506 1550 L506 1396 C180 1396 0 1240 0 880 Z" fill="#fff6dc" fillOpacity="0.9" mask="url(#nextArrowLit)" />
+                              <path d="M218 0 L240 880 C240 1030 340 1104 506 1104 L506 950 L1020 1250 L506 1550 L506 1396 C180 1396 0 1240 0 880 Z" fill="#5c1c0c" fillOpacity="0.55" mask="url(#nextArrowShade)" />
                             </g>
                           </g>
                         </g>
