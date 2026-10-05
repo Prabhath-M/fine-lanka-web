@@ -3,7 +3,7 @@
  * ------------------------------------------------------------------
  * Timing for the "route reveal" on the tours map: when a trip is
  * selected its stops appear one after another in itinerary order.
- * For each stop: the pin pops up and settles, a short still pause, then
+ * For each stop: the pin drops in (grows from the ground, bounces, settles), a short still pause, then
  * its name types out, then a short beat before the next stop. Nothing
  * moves while a name is typing.
  *
@@ -14,7 +14,7 @@
 /** Pause before the first stop appears. */
 export const START_DELAY_MS = 350
 /** Pin pop-up. Everything that moves (pin, ripple, illustration) is finished within this. */
-export const POP_MS = 380
+export const POP_MS = 560
 /** Still pause after the pin has landed, before its name starts typing. */
 export const NAME_DELAY_MS = 400
 /** When the name starts typing, measured from the start of the pin pop. */

@@ -1124,45 +1124,61 @@
 }
 
 /* ---- Route reveal (see lib/map-reveal.ts for the timing) ------------------
-   A selected trip's stops appear one by one: the pin pops up from its spot
-   with a ripple, the illustration rises into place, then the name types out. */
+   A selected trip's stops appear one by one. Each pin drops in like a
+   "location pop-up": it grows out of its spot on the ground, rises past its
+   resting height, bounces back and settles while a soft shadow ripples out
+   underneath. Then the illustration rises and the name types out.
+   The head sits 0.69rem above its anchor (see .markerItinerary*), so the
+   pin scales around that anchor point -- its tip. */
 .markerUnrevealed {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(0);
+  transform: translate(-50%, calc(-100% - 0.69rem)) scale(0);
+  transform-origin: 50% calc(100% + 0.69rem);
   transition: none;
   pointer-events: none;
 }
 
 .markerPop {
-  animation: pinPop 380ms cubic-bezier(0.2, 0.9, 0.3, 1) backwards;
+  transform-origin: 50% calc(100% + 0.69rem);
+  animation: pinDrop 560ms cubic-bezier(0.33, 0, 0.3, 1) backwards;
 }
 
+/* Ground shadow + ripple at the anchor point, under the pin's tip. */
 .markerPop::before {
   content: '';
   position: absolute;
-  inset: -4px;
-  border: 3px solid rgba(255, 214, 120, 0.95);
+  left: 50%;
+  top: calc(100% + 0.69rem);
+  width: 130%;
+  height: 34%;
+  border: 1.5px solid rgba(184, 71, 45, 0.55);
   border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(184, 71, 45, 0.38), rgba(184, 71, 45, 0.12) 70%);
+  z-index: -2;
   pointer-events: none;
-  animation: pinRipple 380ms ease-out both;
+  animation: pinShadow 560ms ease-out both;
 }
 
-@keyframes pinPop {
+@keyframes pinDrop {
+  0% { opacity: 0; transform: translate(-50%, calc(-100% - 0.69rem)) scale(0.05); }
+  12% { opacity: 1; }
+  45% { transform: translate(-50%, calc(-100% - 0.69rem)) translateY(-0.5rem) scale(1.22); }
+  70% { transform: translate(-50%, calc(-100% - 0.69rem)) translateY(0.12rem) scale(0.94); }
+  86% { transform: translate(-50%, calc(-100% - 0.69rem)) scale(1.04); }
+  100% { opacity: 1; transform: translate(-50%, calc(-100% - 0.69rem)) scale(1); }
+}
+
+@keyframes pinShadow {
   0% { opacity: 0; transform: translate(-50%, -50%) scale(0.1); }
-  55% { opacity: 1; transform: translate(-50%, -50%) scale(1.35); }
-  78% { transform: translate(-50%, -50%) scale(0.92); }
-  100% { transform: translate(-50%, -50%) scale(1); }
-}
-
-@keyframes pinRipple {
-  0% { opacity: 0.95; transform: scale(0.6); }
-  100% { opacity: 0; transform: scale(2.6); }
+  30% { opacity: 1; transform: translate(-50%, -50%) scale(0.75); }
+  55% { opacity: 0.9; transform: translate(-50%, -50%) scale(1.45); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(1.9); }
 }
 
 .illustrationRise {
   transform-origin: 50% 85%;
-  /* Starts just after the pin and is done with it by the time the pop ends. */
-  animation: illustrationRise 300ms cubic-bezier(0.22, 1, 0.36, 1) 90ms backwards;
+  /* Starts as the pin reaches its peak and is done as the pin settles. */
+  animation: illustrationRise 380ms cubic-bezier(0.22, 1, 0.36, 1) 160ms backwards;
 }
 
 @keyframes illustrationRise {
