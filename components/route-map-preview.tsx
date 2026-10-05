@@ -628,19 +628,21 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                 })}
                 </div>
               </div>
-              {selectedItinerary && (
-                <div className={styles.pinLegend} aria-label="Pin colour guide">
-                  <span className={styles.pinLegendRow}>
-                    <i className={`${styles.pinLegendIcon} ${styles.pinLegendIconMain}`} aria-hidden="true" />
-                    Primary destination
-                  </span>
-                  <span className={styles.pinLegendRow}>
-                    <i className={`${styles.pinLegendIcon} ${styles.pinLegendIconSecondary}`} aria-hidden="true" />
-                    En route / secondary stop
-                  </span>
-                </div>
-              )}
             </div>
+          {selectedItinerary && (
+            <div className={styles.pinLegendTrack}>
+              <div className={styles.pinLegend} aria-label="Pin colour guide">
+                <span className={styles.pinLegendRow}>
+                  <i className={`${styles.pinLegendIcon} ${styles.pinLegendIconMain}`} aria-hidden="true" />
+                  Primary destination
+                </span>
+                <span className={styles.pinLegendRow}>
+                  <i className={`${styles.pinLegendIcon} ${styles.pinLegendIconSecondary}`} aria-hidden="true" />
+                  En route / secondary stop
+                </span>
+              </div>
+            </div>
+          )}
           {selectedMarker && (
             <aside
               className={styles.placeCard}
