@@ -1348,7 +1348,7 @@
   }
 }
 
-/* "Next destination" arrow: a semi-transparent, curved, 3D-looking arrow that
+/* "Next destination" arrow: a semi-transparent, 3D-looking bent-band arrow (wide band, tight elbow, broad head) that
    shows after a stop's name has typed, pointing the way toward the next stop
    (it does not span the gap). It sits at the stop's anchor, rotated toward the
    next stop, and is removed the moment the next pin starts to pop. */
@@ -1369,14 +1369,14 @@
 .nextArrowSvg {
   position: absolute;
   left: 1.5rem;
-  top: -1.3rem;
+  top: -0.68rem;
   width: 4.6rem;
   height: auto;
   /* globals.css gives every svg max-width: 100%, and this svg sits in a 0x0
      anchor -- without this it collapses to zero width and never shows. */
   max-width: none;
   filter: drop-shadow(0 0.25rem 0.3rem rgba(40, 20, 8, 0.35));
-  transform-origin: 0% 80%;
+  transform-origin: 0% 31%;
   animation: nextArrowIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both, nextArrowNudge 900ms ease-in-out 480ms infinite alternate;
 }
 
@@ -1393,7 +1393,7 @@
 @media (max-width: 720px) {
   .nextArrowSvg {
     left: 1rem;
-    top: -0.9rem;
+    top: -0.48rem;
     width: 3.2rem;
   }
 }
