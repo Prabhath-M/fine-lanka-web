@@ -1,9 +1,10 @@
 'use client'
 
-import { useEffect, useMemo, useRef, useState } from 'react'
-import { Compass, MapPin, MousePointer2, Route, X } from 'lucide-react'
+import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
+import { Compass, FastForward, MapPin, MousePointer2, RotateCcw, Route, X } from 'lucide-react'
 import styles from './route-map-preview.module.css'
 import { DESTINATIONS } from '@/lib/destinations-data'
+import { NAME_START_MS, planReveal, typeDuration } from '@/lib/map-reveal'
 
 type MarkerSprite = { file: string; x: number; y: number; width: number; height: number }
 
@@ -243,6 +244,58 @@ function pathForSegment(segment: Segment, markers: Map<string, Marker>, width: n
     .join(' ')
 }
 
+type LabelMode = 'full' | 'hidden' | 'typing'
+
+/**
+ * A marker's name. In 'typing' mode it waits for the pin to land (plus a short
+ * still pause), then types itself out letter by letter with a blinking caret.
+ * The not-yet-typed letters stay in the layout (just invisible) and the caret is
+ * drawn without taking any space or adding a line-break point, so the label box
+ * never resizes and always wraps exactly as it will when finished.
+ */
+function MarkerLabel({ text, mode, typeMs }: { text: string; mode: LabelMode; typeMs: number }) {
+  // -1 = waiting for the pin to land, otherwise the number of letters shown.
+  const [chars, setChars] = useState(text.length)
+
+  useLayoutEffect(() => {
+    if (mode !== 'typing') {
+      setChars(text.length)
+      return
+    }
+    setChars(-1)
+    let interval: ReturnType<typeof setInterval> | undefined
+    const start = setTimeout(() => {
+      setChars(0)
+      let count = 0
+      interval = setInterval(() => {
+        count += 1
+        setChars(count)
+        if (count >= text.length && interval) clearInterval(interval)
+      }, typeMs / Math.max(text.length, 1))
+    }, NAME_START_MS)
+    return () => {
+      clearTimeout(start)
+      if (interval) clearInterval(interval)
+    }
+  }, [mode, text, typeMs])
+
+  const typing = mode === 'typing' && chars >= 0
+  const hidden = mode === 'hidden' || (mode === 'typing' && chars < 0)
+  return (
+    <span className={`${styles.markerLabel} ${hidden ? styles.markerLabelHidden : ''}`}>
+      {typing ? (
+        <>
+          <span>{text.slice(0, chars)}</span>
+          <span className={styles.typeCaret} aria-hidden="true" />
+          <span className={styles.typeRest}>{text.slice(chars)}</span>
+        </>
+      ) : (
+        text
+      )}
+    </span>
+  )
+}
+
 type RouteMapPreviewProps = {
   embedded?: boolean
   selectedItineraryId?: string | null
@@ -299,9 +352,58 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   const activeMarkerIds = useMemo(() => new Set(activeWaypoints.map((waypoint) => waypoint.markerId)), [activeWaypoints])
   const activeSegmentIds = useMemo(() => new Set(selectedItinerary?.segments ?? []), [selectedItinerary])
   const waypointByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint) => [waypoint.markerId, waypoint])), [activeWaypoints])
+  const waypointIndexByMarkerId = useMemo(() => new Map(activeWaypoints.map((waypoint, index) => [waypoint.markerId, index])), [activeWaypoints])
   const mainWaypointOrder = useMemo(() => activeWaypoints.filter((waypoint) => waypoint.role === 'main'), [activeWaypoints])
   const selectedMarker = selectedMarkerId ? markerById.get(selectedMarkerId) : null
   const [zoomRegionId, setZoomRegionId] = useState('overview')
+
+  // ---- Route reveal -------------------------------------------------------
+  // Picking a trip plays its stops in itinerary order: pin pops up, its name
+  // types out, next stop (timing lives in lib/map-reveal.ts). It waits until
+  // the map is on screen, can be skipped or replayed, and is skipped entirely
+  // for people who prefer reduced motion.
+  const [reducedMotion] = useState(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [mapInView, setMapInView] = useState(false)
+  const [replayCount, setReplayCount] = useState(0)
+  const [reveal, setReveal] = useState<{ key: string; shown: number }>({ key: '', shown: 0 })
+  const [startedKey, setStartedKey] = useState('')
+  const animKey = selectedItinerary ? `${selectedItinerary.id}:${replayCount}` : ''
+  // How many of the trip's stops have appeared so far (Infinity = all, no animation).
+  const shown = !selectedItinerary || reducedMotion ? Infinity : reveal.key === animKey ? reveal.shown : 0
+  const isRevealing = Number.isFinite(shown)
+
+  useEffect(() => {
+    const el = mapFrameWrapRef.current
+    if (!el) return
+    if (typeof IntersectionObserver === 'undefined') {
+      setMapInView(true)
+      return
+    }
+    const observer = new IntersectionObserver(([entry]) => setMapInView(entry.isIntersecting), { threshold: 0.3 })
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [data])
+
+  // Start once the map is visible (and not already played / skipped for this selection).
+  useEffect(() => {
+    if (!animKey || !mapInView || reducedMotion || startedKey === animKey) return
+    if (reveal.key === animKey && reveal.shown === Infinity) return
+    setStartedKey(animKey)
+  }, [animKey, mapInView, reducedMotion, startedKey, reveal])
+
+  useEffect(() => {
+    if (!startedKey || startedKey !== animKey || !selectedItinerary) return
+    const names = selectedItinerary.waypoints.map((waypoint) => markerById.get(waypoint.markerId)?.name ?? '')
+    const { steps, totalMs } = planReveal(names)
+    const timers = steps.map((step, index) => setTimeout(() => setReveal({ key: startedKey, shown: index + 1 }), step.popAt))
+    timers.push(setTimeout(() => setReveal({ key: startedKey, shown: Infinity }), totalMs))
+    return () => timers.forEach(clearTimeout)
+  }, [startedKey, animKey, selectedItinerary, markerById])
+
+  const skipReveal = () => {
+    setReveal({ key: animKey, shown: Infinity })
+    setStartedKey('')
+  }
   const zoomRegion = zoomRegions.find((region) => region.id === zoomRegionId) ?? zoomRegions[0]
   const zoomScale = data ? data.width / zoomRegion.width : 1
   const zoomCanvasStyle = data ? {
@@ -398,6 +500,17 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                   </button>
                 ))}
               </div>
+              {selectedItinerary && !reducedMotion && (
+                isRevealing ? (
+                  <button type="button" className={styles.replayButton} onClick={skipReveal}>
+                    <FastForward size={13} /> Skip animation
+                  </button>
+                ) : (
+                  <button type="button" className={styles.replayButton} onClick={() => setReplayCount((count) => count + 1)}>
+                    <RotateCcw size={13} /> Replay route
+                  </button>
+                )
+              )}
               <span className={styles.mapHint}><MousePointer2 size={14} /> Tap a marker to explore · {zoomRegion.note}</span>
             </div>
           </div>
@@ -423,18 +536,23 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                     // (visible up close, but not competing for attention).
                     // No trip selected means every illustration shows normally.
                     const isDimmed = Boolean(selectedItinerary) && !isActive
+                    // While the route reveal plays, a trip stop's illustration
+                    // stays hidden until its turn, then rises into place.
+                    const stopIndex = waypointIndexByMarkerId.get(marker.id) ?? -1
+                    const waitingForTurn = isRevealing && stopIndex >= 0 && shown <= stopIndex
+                    const risingIn = isRevealing && stopIndex >= 0 && shown > stopIndex
                     return (
                       <img
                         key={marker.id}
                         src={sprite.file}
                         alt=""
-                        className={styles.markerIllustration}
+                        className={`${styles.markerIllustration} ${risingIn ? styles.illustrationRise : ''}`}
                         style={{
                           left: `${(sprite.x / data.width) * 100}%`,
                           top: `${(sprite.y / data.height) * 100}%`,
                           width: `${(sprite.width / data.width) * 100}%`,
                           height: `${(sprite.height / data.height) * 100}%`,
-                          opacity: isDimmed ? 0.07 : 1,
+                          opacity: isDimmed ? 0.07 : waitingForTurn ? 0 : 1,
                         }}
                         loading="lazy"
                       />
@@ -455,6 +573,12 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                   // aren't part of that trip shrink and desaturate so the
                   // chosen route's pins read clearly against the rest.
                   const isDimmed = Boolean(selectedItinerary) && !isActive
+                  // Route reveal: this stop's place in the itinerary decides when
+                  // its pin pops and when its name types.
+                  const stopIndex = waypointIndexByMarkerId.get(marker.id) ?? -1
+                  const inReveal = isRevealing && stopIndex >= 0
+                  const pinState = !inReveal ? '' : shown > stopIndex ? styles.markerPop : styles.markerUnrevealed
+                  const labelMode: LabelMode = !inReveal || shown > stopIndex + 1 ? 'full' : shown === stopIndex + 1 ? 'typing' : 'hidden'
                   return (
                     <button
                       key={marker.id}
@@ -481,10 +605,10 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                       aria-pressed={isSelected}
                       title={marker.name}
                     >
-                      <span className={`${styles.markerHead} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isDimmed ? styles.markerDimmed : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''}`}>
+                      <span className={`${styles.markerHead} ${marker.type === 'primary' ? styles.markerPrimary : styles.markerHub} ${marker.kind === 'arrival' ? styles.markerArrival : ''} ${isActive ? styles.markerActive : ''} ${isDimmed ? styles.markerDimmed : ''} ${isSelected ? styles.markerSelected : ''} ${isMainWaypoint ? styles.markerItineraryMain : ''} ${isSecondaryWaypoint ? styles.markerItinerarySecondary : ''} ${isAirportWaypoint ? styles.markerItineraryAirport : ''} ${pinState}`}>
                         <span className={(isMainWaypoint || isSecondaryWaypoint) ? styles.markerOrder : styles.markerCore}>{isMainWaypoint ? mainOrder + 1 : isSecondaryWaypoint ? secondaryOrder + 1 : marker.type === 'hub' && marker.kind !== 'arrival' ? '•' : symbolByKind[marker.kind] ?? '·'}</span>
                         {isMainWaypoint && <span className={styles.markerStay}>{waypoint?.nights ?? 0}N</span>}
-                        <span className={styles.markerLabel}>{marker.name}</span>
+                        <MarkerLabel text={marker.name} mode={labelMode} typeMs={typeDuration(marker.name)} />
                       </span>
                     </button>
                   )
