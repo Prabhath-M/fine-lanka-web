@@ -24,6 +24,8 @@ export const CHAR_MS = 28
 export const MAX_TYPE_MS = 520
 /** Beat after a name finishes, before the next pin. */
 export const GAP_MS = 70
+/** Extra pause between two stops while the "next destination" arrow is shown. */
+export const ARROW_MS = 600
 
 export interface RevealStep {
   /** When this stop's pin pops, in ms from the start of the reveal. */
@@ -32,6 +34,8 @@ export interface RevealStep {
   typeAt: number
   /** How long the name takes to type. */
   typeMs: number
+  /** When the direction arrow toward the next stop appears (name fully typed). null for the last stop. */
+  arrowAt: number | null
   /** When the whole step is done. */
   endAt: number
 }
@@ -43,9 +47,12 @@ export function typeDuration(name: string): number {
 /** Schedule for a list of stop names, in itinerary order. */
 export function planReveal(names: readonly string[]): { steps: RevealStep[]; totalMs: number } {
   let t = START_DELAY_MS
-  const steps = names.map((name) => {
+  const steps = names.map((name, index) => {
     const typeMs = typeDuration(name)
-    const step: RevealStep = { popAt: t, typeAt: t + NAME_START_MS, typeMs, endAt: t + NAME_START_MS + typeMs + GAP_MS }
+    const typedAt = t + NAME_START_MS + typeMs
+    const hasNext = index < names.length - 1
+    // The arrow shows from the moment the name is typed until the next pin pops (endAt).
+    const step: RevealStep = { popAt: t, typeAt: t + NAME_START_MS, typeMs, arrowAt: hasNext ? typedAt : null, endAt: typedAt + GAP_MS + (hasNext ? ARROW_MS : 0) }
     t = step.endAt
     return step
   })

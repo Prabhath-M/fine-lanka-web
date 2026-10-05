@@ -1347,3 +1347,56 @@
     animation: none;
   }
 }
+
+/* "Next destination" arrow: a semi-transparent, curved, 3D-looking arrow that
+   shows after a stop's name has typed, pointing the way toward the next stop
+   (it does not span the gap). It sits at the stop's anchor, rotated toward the
+   next stop, and is removed the moment the next pin starts to pop. */
+.arrowLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.nextArrow {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform: translate(0, -0.9rem) rotate(var(--arrow-angle, 0deg));
+}
+
+.nextArrowSvg {
+  position: absolute;
+  left: 1.5rem;
+  top: -1.3rem;
+  width: 4.6rem;
+  height: auto;
+  filter: drop-shadow(0 0.25rem 0.3rem rgba(40, 20, 8, 0.35));
+  transform-origin: 0% 80%;
+  animation: nextArrowIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both, nextArrowNudge 900ms ease-in-out 480ms infinite alternate;
+}
+
+@keyframes nextArrowIn {
+  from { opacity: 0; transform: translateX(-0.8rem) scale(0.6); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+
+@keyframes nextArrowNudge {
+  from { transform: translateX(0); }
+  to { transform: translateX(0.35rem); }
+}
+
+@media (max-width: 720px) {
+  .nextArrowSvg {
+    left: 1rem;
+    top: -0.9rem;
+    width: 3.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nextArrowSvg {
+    animation: none;
+  }
+}

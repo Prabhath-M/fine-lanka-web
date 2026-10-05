@@ -365,7 +365,7 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
   const [reducedMotion] = useState(() => typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches)
   const [mapInView, setMapInView] = useState(false)
   const [replayCount, setReplayCount] = useState(0)
-  const [reveal, setReveal] = useState<{ key: string; shown: number }>({ key: '', shown: 0 })
+  const [reveal, setReveal] = useState<{ key: string; shown: number; arrow: number }>({ key: '', shown: 0, arrow: -1 })
   const [startedKey, setStartedKey] = useState('')
   const animKey = selectedItinerary ? `${selectedItinerary.id}:${replayCount}` : ''
   // How many of the trip's stops have appeared so far (Infinity = all, no animation).
@@ -409,13 +409,27 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
     if (!startedKey || startedKey !== animKey || !selectedItinerary) return
     const names = selectedItinerary.waypoints.map((waypoint) => markerById.get(waypoint.markerId)?.name ?? '')
     const { steps, totalMs } = planReveal(names)
-    const timers = steps.map((step, index) => setTimeout(() => setReveal({ key: startedKey, shown: index + 1 }), step.popAt))
-    timers.push(setTimeout(() => setReveal({ key: startedKey, shown: Infinity }), totalMs))
+    const timers = steps.map((step, index) => setTimeout(() => setReveal({ key: startedKey, shown: index + 1, arrow: -1 }), step.popAt))
+    // Direction arrow toward the next stop: appears once this stop's name is
+    // typed, and is cleared the moment the next stop's pin starts to pop.
+    steps.forEach((step, index) => {
+      if (step.arrowAt !== null) timers.push(setTimeout(() => setReveal({ key: startedKey, shown: index + 1, arrow: index }), step.arrowAt))
+    })
+    timers.push(setTimeout(() => setReveal({ key: startedKey, shown: Infinity, arrow: -1 }), totalMs))
     return () => timers.forEach(clearTimeout)
   }, [startedKey, animKey, selectedItinerary, markerById])
 
+  // Arrow from the stop that just finished typing toward the next one.
+  const nextArrow = (() => {
+    if (!data || !isRevealing || reveal.key !== animKey || reveal.arrow < 0) return null
+    const from = markerById.get(activeWaypoints[reveal.arrow]?.markerId ?? '')
+    const to = markerById.get(activeWaypoints[reveal.arrow + 1]?.markerId ?? '')
+    if (!from || !to || Math.hypot(to.x - from.x, to.y - from.y) < 1) return null
+    return { key: `${animKey}:${reveal.arrow}`, x: from.x, y: from.y, angle: (Math.atan2(to.y - from.y, to.x - from.x) * 180) / Math.PI }
+  })()
+
   const skipReveal = () => {
-    setReveal({ key: animKey, shown: Infinity })
+    setReveal({ key: animKey, shown: Infinity, arrow: -1 })
     setStartedKey('')
   }
   const zoomRegion = zoomRegions.find((region) => region.id === zoomRegionId) ?? zoomRegions[0]
@@ -627,6 +641,36 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                   )
                 })}
                 </div>
+                {nextArrow && (
+                  <div className={styles.arrowLayer} aria-hidden="true">
+                    <div
+                      key={nextArrow.key}
+                      className={styles.nextArrow}
+                      style={{ left: `${(nextArrow.x / data.width) * 100}%`, top: `${(nextArrow.y / data.height) * 100}%`, '--arrow-angle': `${nextArrow.angle}deg` } as React.CSSProperties}
+                    >
+                      <svg className={styles.nextArrowSvg} viewBox="0 0 120 56" overflow="visible">
+                        <defs>
+                          <linearGradient id="nextArrowBody" x1="0" y1="0" x2="0" y2="1">
+                            <stop offset="0" stopColor="#ffe6b3" />
+                            <stop offset="0.5" stopColor="#e58a45" />
+                            <stop offset="1" stopColor="#a8391f" />
+                          </linearGradient>
+                        </defs>
+                        <g opacity="0.72">
+                          <g transform="translate(0 6)" opacity="0.4" fill="#2a1409" stroke="#2a1409">
+                            <path d="M6 44 Q52 -2 88 22" fill="none" strokeWidth="13" strokeLinecap="round" />
+                            <polygon points="82,31.2 94,12.8 116.5,40.7" strokeWidth="6" strokeLinejoin="round" />
+                          </g>
+                          <path d="M6 44 Q52 -2 88 22" fill="none" stroke="#8f2f1a" strokeWidth="13" strokeLinecap="round" />
+                          <path d="M6 42 Q52 -4 88 20" fill="none" stroke="url(#nextArrowBody)" strokeWidth="10" strokeLinecap="round" />
+                          <polygon points="82,31.2 94,12.8 116.5,40.7" fill="#8f2f1a" stroke="#8f2f1a" strokeWidth="4" strokeLinejoin="round" />
+                          <polygon points="83,31 94.5,14 112,38" fill="url(#nextArrowBody)" stroke="url(#nextArrowBody)" strokeWidth="3" strokeLinejoin="round" />
+                          <path d="M10 38 Q52 -8 86 14" fill="none" stroke="#fff6dc" strokeOpacity="0.75" strokeWidth="2.5" strokeLinecap="round" />
+                        </g>
+                      </svg>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           {selectedItinerary && (
