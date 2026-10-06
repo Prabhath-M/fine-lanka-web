@@ -13591,8 +13591,8 @@ body:has(.features:target) .typed-opening { display: none; }
   aspect-ratio: 800 / 330;
   object-fit: contain;
   object-position: center;
-  opacity: 0.82;
-  filter: drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.24));
+  opacity: 0.94;
+  filter: drop-shadow(0 0 0.28rem rgba(18, 34, 20, 0.34)) drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.24));
   transform: translate3d(-50%, 0, 0);
   animation: adv-bird-flight var(--dur) linear var(--delay) infinite;
   will-change: transform;
@@ -13642,8 +13642,8 @@ body:has(.features:target) .typed-opening { display: none; }
   aspect-ratio: var(--ar, 16 / 9);
   object-fit: contain;
   object-position: center;
-  opacity: 0.78;
-  filter: drop-shadow(0 0 1.2rem rgba(97, 201, 233, 0.2));
+  opacity: 0.92;
+  filter: drop-shadow(0 0 1.2rem rgba(97, 201, 233, 0.34));
   animation: adv-fish-drift var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
 }
