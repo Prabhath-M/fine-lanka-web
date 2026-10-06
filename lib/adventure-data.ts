@@ -13,6 +13,7 @@ export type AdventureIconKey =
   | 'kayak'
   | 'raft'
   | 'dive'
+  | 'surf'
   | 'atv'
   | 'cave'
 
@@ -27,8 +28,10 @@ export interface Adventure {
   tags: string[]
   zone: AdventureZone
   icon: AdventureIconKey
-  /** Base path (no extension/size suffix) of the photo, once supplied. */
+  /** Base path (no extension/size suffix) of the photo: `<image>-480w.webp`, `-960w`, `-1600w`. */
   image?: string
+  /** Alt text for the photo. */
+  imageAlt?: string
 }
 
 export const ADVENTURE_ZONES: { id: AdventureZone; label: string }[] = [
@@ -61,6 +64,8 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Scenic aerial tour', 'Private experience', 'Luxury adventure'],
     zone: 'air',
     icon: 'helicopter',
+    image: '/images/adventure-helicopter-tours',
+    imageAlt: 'A red helicopter flying over forest and a rock fortress at sunset',
   },
   {
     number: '02',
@@ -71,6 +76,8 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Adrenaline', 'Mountain views', 'Ella'],
     zone: 'air',
     icon: 'zipline',
+    image: '/images/adventure-ella-zip-line',
+    imageAlt: 'A rider in an orange helmet gliding along a zip line above the forest',
   },
   {
     number: '03',
@@ -81,6 +88,8 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Nature', 'Countryside', 'Beach riding'],
     zone: 'land',
     icon: 'horse',
+    image: '/images/adventure-horse-riding',
+    imageAlt: 'A smiling child riding a horse, led by a guide',
   },
   {
     number: '04',
@@ -91,6 +100,8 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Rivers', 'Lagoons', 'Mangroves', 'Nature'],
     zone: 'water',
     icon: 'kayak',
+    image: '/images/adventure-kayaking',
+    imageAlt: 'A kayaker carrying a yellow kayak along a beach',
   },
   {
     number: '05',
@@ -101,6 +112,8 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Adrenaline', 'Rapids', 'Kitulgala', 'Rainforest'],
     zone: 'water',
     icon: 'raft',
+    image: '/images/adventure-white-water-rafting',
+    imageAlt: 'A group in helmets paddling a blue raft through white-water rapids',
   },
   {
     number: '06',
@@ -111,9 +124,23 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Marine life', 'Coral reefs', 'Diving', 'Snorkelling'],
     zone: 'water',
     icon: 'dive',
+    image: '/images/adventure-scuba-diving-snorkelling',
+    imageAlt: 'A diver swimming beside a school of fish in deep blue water',
   },
   {
     number: '07',
+    slug: 'surfing-kite-surfing',
+    title: 'Surfing & Kite Surfing',
+    tagline: 'Ride the wind and the waves.',
+    body: 'Sri Lanka’s coastline is made for life on the water. Paddle out at famous surf breaks like Arugam Bay and Weligama, or let the wind pull you across the lagoons of Kalpitiya on a kite surfing session. Whether you’re standing up on your first wave or chasing the next big ride, the island has a beach for you.',
+    tags: ['Surf breaks', 'Kite surfing', 'Coastline', 'Adrenaline'],
+    zone: 'water',
+    icon: 'surf',
+    image: '/images/adventure-surfing-kite-surfing',
+    imageAlt: 'A kite surfer riding a wave, spray flying',
+  },
+  {
+    number: '08',
     slug: 'atv-quad-bike-adventures',
     title: 'ATV & Quad Bike Adventures',
     tagline: 'Take the road less travelled.',
@@ -121,9 +148,11 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Off-road', 'Adrenaline', 'Countryside', 'Adventure'],
     zone: 'land',
     icon: 'atv',
+    image: '/images/adventure-atv-quad-bike-adventures',
+    imageAlt: 'A rider in a helmet on a yellow quad bike on the beach',
   },
   {
-    number: '08',
+    number: '09',
     slug: 'cave-exploration',
     title: 'Cave Exploration',
     tagline: 'Step into the hidden side of Sri Lanka.',
@@ -131,6 +160,8 @@ export const ADVENTURES: Adventure[] = [
     tags: ['Exploration', 'Nature', 'History', 'Adventure'],
     zone: 'underground',
     icon: 'cave',
+    image: '/images/adventure-cave-exploration',
+    imageAlt: 'An explorer with a headlamp standing in a vast cave',
   },
 ]
 

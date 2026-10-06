@@ -10,8 +10,8 @@ import {
 } from './adventure-data'
 
 describe('adventure data', () => {
-  it('has the eight experiences numbered 01-08 in order', () => {
-    expect(ADVENTURES.map((a) => a.number)).toEqual(['01', '02', '03', '04', '05', '06', '07', '08'])
+  it('has the nine experiences numbered 01-09 in order', () => {
+    expect(ADVENTURES.map((a) => a.number)).toEqual(['01', '02', '03', '04', '05', '06', '07', '08', '09'])
   })
 
   it('has unique slugs and unique icon keys', () => {
@@ -39,12 +39,19 @@ describe('adventure data', () => {
     const titles = (zone: Parameters<typeof adventuresForZone>[0]) => adventuresForZone(zone).map((a) => a.title)
     expect(titles('air')).toEqual(['Helicopter Tours', 'Ella Zip Line'])
     expect(titles('land')).toEqual(['Horse Riding', 'ATV & Quad Bike Adventures'])
-    expect(titles('water')).toEqual(['Kayaking', 'White-Water Rafting', 'Scuba Diving & Snorkelling'])
+    expect(titles('water')).toEqual(['Kayaking', 'White-Water Rafting', 'Scuba Diving & Snorkelling', 'Surfing & Kite Surfing'])
     expect(titles('underground')).toEqual(['Cave Exploration'])
   })
 
+  it('gives every experience a photo and alt text', () => {
+    for (const a of ADVENTURES) {
+      expect(a.image).toMatch(/^\/images\/adventure-/)
+      expect((a.imageAlt ?? '').trim()).not.toBe('')
+    }
+  })
+
   it('returns everything for the "all" filter', () => {
-    expect(adventuresForZone('all')).toHaveLength(8)
+    expect(adventuresForZone('all')).toHaveLength(9)
   })
 
   it('keeps the section header and closing copy', () => {
@@ -55,9 +62,9 @@ describe('adventure data', () => {
 })
 
 describe('adventureStage', () => {
-  it('places the eight experiences from sky down to depth', () => {
+  it('places the nine experiences from sky down to depth', () => {
     expect(ADVENTURES.map(adventureStage)).toEqual([
-      'sky', 'canopy', 'land', 'water', 'water', 'water', 'land', 'depth',
+      'sky', 'canopy', 'land', 'water', 'water', 'water', 'water', 'land', 'depth',
     ])
   })
 

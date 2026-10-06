@@ -65,7 +65,8 @@ describe('AdventureSection', () => {
   it('keeps list semantics on the unstyled lists and hides decoration from assistive tech', () => {
     expect(html).toContain('class="adventure-list" role="list"')
     expect(html.match(/class="adventure-tags" role="list"/g)).toHaveLength(ADVENTURES.length)
-    expect(html.match(/class="adventure-media" aria-hidden="true"/g)).toHaveLength(ADVENTURES.length)
+    // Panels with a photo expose it (with alt text); only placeholders are hidden.
+    expect(html.match(/class="adventure-media"><img /g)).toHaveLength(ADVENTURES.length)
     expect(html).toContain('class="adventure-tint" aria-hidden="true"')
   })
 })

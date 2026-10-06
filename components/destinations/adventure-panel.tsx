@@ -14,10 +14,26 @@ export function AdventurePanel({ adventure }: { adventure: Adventure }) {
     <li className="adventure-panel" data-zone={adventure.zone} data-stage={adventureStage(adventure)} aria-labelledby={headingId}>
       <span className="adventure-node" aria-hidden="true" />
 
-      <figure className="adventure-media" aria-hidden="true">
-        {/* Illustrated placeholder until the photograph is supplied (plan, phase 6). */}
-        <span className="adventure-media-contours" />
-        <Icon name={adventure.icon} className="adventure-media-icon" />
+      <figure className="adventure-media" aria-hidden={adventure.image ? undefined : 'true'}>
+        {adventure.image ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={`${adventure.image}-960w.webp`}
+            srcSet={`${adventure.image}-480w.webp 480w, ${adventure.image}-960w.webp 960w, ${adventure.image}-1600w.webp 1600w`}
+            sizes="(min-width: 900px) 45vw, 92vw"
+            width={1600}
+            height={1000}
+            alt={adventure.imageAlt ?? adventure.title}
+            loading="lazy"
+            decoding="async"
+          />
+        ) : (
+          <>
+            {/* Illustrated placeholder for an experience without a photograph yet. */}
+            <span className="adventure-media-contours" />
+            <Icon name={adventure.icon} className="adventure-media-icon" />
+          </>
+        )}
       </figure>
 
       <div className="adventure-body">
