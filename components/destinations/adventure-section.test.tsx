@@ -36,11 +36,11 @@ describe('AdventureSection', () => {
     expect(new Set(ids).size).toBe(ids.length)
   })
 
-  it('renders the zone filter with All active and a live count', () => {
-    for (const label of ['All', 'Air', 'Land', 'Water', 'Underground']) expect(html).toContain(`>${label}</button>`)
-    expect(html).toMatch(/data-zone="all" class="is-active" aria-pressed="true"/)
-    expect(html).toContain('aria-live="polite"')
-    expect(html).toContain('Showing all 8 experiences')
+  it('has no zone filter or zone labels', () => {
+    expect(html).not.toContain('filter-bar')
+    expect(html).not.toContain('aria-pressed')
+    expect(html).not.toContain('adventure-media-zone')
+    expect(html).not.toContain('Showing')
   })
 
   it('renders the altitude gauge (decorative) with all five stages', () => {

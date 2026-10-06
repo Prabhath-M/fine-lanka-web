@@ -138,14 +138,6 @@ export function adventuresForZone(zone: AdventureZone | 'all'): Adventure[] {
   return zone === 'all' ? ADVENTURES : ADVENTURES.filter((a) => a.zone === zone)
 }
 
-/** Screen-reader / visible status line for the zone filter. */
-export function adventureCountLabel(count: number, zone: AdventureZone | 'all'): string {
-  const noun = count === 1 ? 'experience' : 'experiences'
-  if (zone === 'all') return `Showing all ${count} ${noun}`
-  const label = ADVENTURE_ZONES.find((z) => z.id === zone)?.label ?? ''
-  return `Showing ${count} ${label.toLowerCase()} ${noun}`
-}
-
 /** Altitude gauge stages, top (sky) to bottom (depth). */
 export type AdventureStage = 'sky' | 'canopy' | 'land' | 'water' | 'depth'
 

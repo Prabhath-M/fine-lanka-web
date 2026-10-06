@@ -1,6 +1,6 @@
 import { Icon } from '@/components/icons'
 import type { Adventure } from '@/lib/adventure-data'
-import { ADVENTURE_ZONES, adventureStage } from '@/lib/adventure-data'
+import { adventureStage } from '@/lib/adventure-data'
 
 /**
  * One "field dossier" in the Adventure & Experiences section. Server-renderable:
@@ -8,7 +8,6 @@ import { ADVENTURE_ZONES, adventureStage } from '@/lib/adventure-data'
  * live in the parent and only toggle data attributes / classes.
  */
 export function AdventurePanel({ adventure }: { adventure: Adventure }) {
-  const zoneLabel = ADVENTURE_ZONES.find((zone) => zone.id === adventure.zone)?.label ?? ''
   const headingId = `adventure-${adventure.slug}`
 
   return (
@@ -19,7 +18,6 @@ export function AdventurePanel({ adventure }: { adventure: Adventure }) {
         {/* Illustrated placeholder until the photograph is supplied (plan, phase 6). */}
         <span className="adventure-media-contours" />
         <Icon name={adventure.icon} className="adventure-media-icon" />
-        <figcaption className="adventure-media-zone">{zoneLabel}</figcaption>
       </figure>
 
       <div className="adventure-body">

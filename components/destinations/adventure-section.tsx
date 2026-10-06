@@ -3,15 +3,11 @@
 import { useEffect, useRef, useState } from 'react'
 import { Icon } from '@/components/icons'
 import {
+  ADVENTURES,
   ADVENTURE_CLOSING,
   ADVENTURE_INTRO,
   ADVENTURE_STAGES,
-  ADVENTURE_ZONES,
-  adventureStage,
-  adventureCountLabel,
-  adventuresForZone,
   type AdventureStage,
-  type AdventureZone,
 } from '@/lib/adventure-data'
 import { AdventurePanel } from '@/components/destinations/adventure-panel'
 
@@ -19,19 +15,15 @@ import { AdventurePanel } from '@/components/destinations/adventure-panel'
  * "Adventure & Experiences" -- the "Sky to Underground" section of the
  * Destinations page. See docs/DESTINATIONS-ADVENTURE-SECTION-PLAN.md.
  *
- * Phase 3 added the zone filter. Phase 4 added the altitude gauge, the
+ * Phase 4 added the altitude gauge, the
  * scroll-linked background shift (`data-stage` on the section drives the CSS)
  * and the staggered panel entrance. One IntersectionObserver handles both the
  * active stage and the entrance; it never touches layout, so nothing shifts.
  */
 export function AdventureSection() {
-  const [zone, setZone] = useState<AdventureZone | 'all'>('all')
-  const visible = adventuresForZone(zone)
   const sectionRef = useRef<HTMLElement>(null)
   const [stage, setStage] = useState<AdventureStage>('sky')
   const [motion, setMotion] = useState(false)
-  const stagesShown = new Set(visible.map(adventureStage))
-  const options: { id: AdventureZone | 'all'; label: string }[] = [{ id: 'all', label: 'All' }, ...ADVENTURE_ZONES]
 
   // Entrance effects are enabled only once JS is running, so the server HTML
   // (and no-JS visitors) always see every panel.
@@ -39,7 +31,6 @@ export function AdventureSection() {
     setMotion(true)
   }, [])
 
-  // Re-run on every filter change: the visible panels are different elements.
   useEffect(() => {
     const root = sectionRef.current
     if (!root || typeof IntersectionObserver === 'undefined') return
@@ -81,7 +72,7 @@ export function AdventureSection() {
       reveal.disconnect()
       track.disconnect()
     }
-  }, [zone])
+  }, [])
 
   return (
     <section
@@ -108,26 +99,6 @@ export function AdventureSection() {
           <p className="adventure-lede">{ADVENTURE_INTRO.lede}</p>
         </header>
 
-        <div className="adventure-filter">
-          <div className="filter-bar" role="group" aria-label="Filter experiences by zone">
-            {options.map((option) => (
-              <button
-                type="button"
-                key={option.id}
-                data-zone={option.id}
-                className={zone === option.id ? 'is-active' : undefined}
-                aria-pressed={zone === option.id}
-                onClick={() => setZone(option.id)}
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-          <p className="adventure-count" role="status" aria-live="polite">
-            {adventureCountLabel(visible.length, zone)}
-          </p>
-        </div>
-
         <div className="adventure-track">
           <span className="adventure-spine" aria-hidden="true" />
           <div className="adventure-gauge" aria-hidden="true">
@@ -136,12 +107,7 @@ export function AdventureSection() {
                 <li
                   key={entry.id}
                   data-stage={entry.id}
-                  className={[
-                    entry.id === stage ? 'is-active' : '',
-                    stagesShown.has(entry.id) ? '' : 'is-dim',
-                  ]
-                    .filter(Boolean)
-                    .join(' ') || undefined}
+                  className={entry.id === stage ? 'is-active' : undefined}
                 >
                   <span className="adventure-gauge-tick" />
                   {entry.label}
@@ -150,7 +116,7 @@ export function AdventureSection() {
             </ol>
           </div>
           <ol className="adventure-list" role="list">
-            {visible.map((adventure) => (
+            {ADVENTURES.map((adventure) => (
               <AdventurePanel key={adventure.slug} adventure={adventure} />
             ))}
           </ol>

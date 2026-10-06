@@ -5,7 +5,6 @@ import {
   ADVENTURE_INTRO,
   ADVENTURE_ZONES,
   ADVENTURE_STAGES,
-  adventureCountLabel,
   adventureStage,
   adventuresForZone,
 } from './adventure-data'
@@ -52,14 +51,6 @@ describe('adventure data', () => {
     expect(ADVENTURE_INTRO.title).toBe('Go beyond the ordinary.')
     expect(ADVENTURE_CLOSING.title).toBe('A Little More Adventure. A Lot More Sri Lanka.')
     expect(ADVENTURE_CLOSING.signoff).toBe('Explore Sri Lanka. Experience More.')
-  })
-})
-
-describe('adventureCountLabel', () => {
-  it('describes the current filter', () => {
-    expect(adventureCountLabel(8, 'all')).toBe('Showing all 8 experiences')
-    expect(adventureCountLabel(3, 'water')).toBe('Showing 3 water experiences')
-    expect(adventureCountLabel(1, 'underground')).toBe('Showing 1 underground experience')
   })
 })
 

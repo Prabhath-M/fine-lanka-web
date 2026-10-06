@@ -13255,16 +13255,6 @@ body:has(.features:target) .typed-opening { display: none; }
   stroke-width: 1.1;
   filter: drop-shadow(0 0.4rem 0.8rem rgba(0, 0, 0, 0.35));
 }
-.destinations-page .adventure-media-zone {
-  position: absolute;
-  left: 1rem;
-  bottom: 0.85rem;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--brass-light);
-}
 
 .destinations-page .adventure-num {
   margin: 0;
@@ -13329,37 +13319,8 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure-brandline { margin: 0.5rem 0 0; font-style: italic; color: var(--text-on-dark-muted); }
 
-/* Phase 3: zone filter (reuses .filter-bar, re-skinned for the dark section) and anchor offset. */
+/* Anchor offset for the hero link (#adventure) so the sticky header doesn't cover the title. */
 .destinations-page .adventure { scroll-margin-top: 5.75rem; }
-.destinations-page .adventure-filter {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.9rem;
-  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
-}
-.destinations-page .adventure-filter .filter-bar { justify-content: center; }
-.destinations-page .adventure-filter .filter-bar button {
-  border-color: rgba(216, 185, 120, 0.45);
-  color: var(--text-on-dark-muted);
-}
-.destinations-page .adventure-filter .filter-bar button:hover { border-color: var(--brass-light); color: var(--text-on-dark); }
-.destinations-page .adventure-filter .filter-bar button.is-active {
-  background: var(--brass-light);
-  border-color: var(--brass-light);
-  color: var(--ink);
-}
-.destinations-page .adventure-filter .filter-bar button:focus-visible {
-  outline: 2px solid var(--brass-light);
-  outline-offset: 3px;
-}
-.destinations-page .adventure-count {
-  margin: 0;
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
-  color: var(--text-on-dark-muted);
-}
 
 /* ---- Phase 4: altitude gauge, background shift, panel effects ---- */
 
@@ -13437,7 +13398,6 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure-gauge-scale li.is-active { color: var(--brass-light); transform: translateX(0.3rem); }
 .destinations-page .adventure-gauge-scale li.is-active .adventure-gauge-tick { width: 1rem; height: 2px; }
-.destinations-page .adventure-gauge-scale li.is-dim { opacity: 0.5; }
 
 /* Hover / focus: a dark veil fades off (opacity, not a filter) and brighter brass contours fade
    in. Only opacity and transform change, so the browser can animate them on the GPU. */
@@ -13451,8 +13411,7 @@ body:has(.features:target) .typed-opening { display: none; }
   background: linear-gradient(160deg, rgba(15, 27, 43, 0.5), rgba(15, 27, 43, 0.32));
   transition: opacity 0.6s var(--ease);
 }
-.destinations-page .adventure-media-icon,
-.destinations-page .adventure-media-zone { z-index: 1; }
+.destinations-page .adventure-media-icon { z-index: 1; }
 .destinations-page .adventure-media-contours::after {
   content: '';
   position: absolute;
@@ -13567,14 +13526,11 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure-title-row h3 { font-size: clamp(1.5rem, 6vw, 1.9rem); }
   .destinations-page .adventure-icon-badge { width: 2.4rem; height: 2.4rem; }
   .destinations-page .adventure-copy { max-width: none; }
-  .destinations-page .adventure-filter { margin-bottom: 1.5rem; }
   .destinations-page .adventure-closing { padding-inline: 0; }
 }
 
 @media (max-width: 520px) {
   .destinations-page .adventure-gauge { top: 6.25rem; }
-  .destinations-page .adventure-filter .filter-bar { gap: 0.4rem; }
-  .destinations-page .adventure-filter .filter-bar button { font-size: 0.85rem; padding: 0.55rem 0.8rem; min-height: 2.5rem; }
   .destinations-page .adventure-gauge-scale li { font-size: 0.62rem; letter-spacing: 0.06em; }
   .destinations-page .adventure-media-icon { width: 4rem; height: 4rem; }
 }
