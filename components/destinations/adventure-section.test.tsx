@@ -37,14 +37,14 @@ describe("AdventureSection", () => {
     expect(html).toContain("data-open-enquiry");
   });
 
-  it("wraps each point in a stage that can pin, gives it a load bar, and renders the server-safe scrub marker", () => {
+  it("wraps each point in a stage that can pin, gives it a load bar, and uses the stable non-scrub layout marker", () => {
     expect(html.match(/class="adventure-stick"/g)).toHaveLength(
       ADVENTURES.length,
     );
     expect(
       html.match(/class="adventure-load" aria-hidden="true"/g),
     ).toHaveLength(ADVENTURES.length);
-    expect(html).toContain('data-scrub="on"');
+    expect(html).toContain('data-scrub="off"');
   });
 
   it("uses unique element ids", () => {
