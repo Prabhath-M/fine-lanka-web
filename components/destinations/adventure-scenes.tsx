@@ -1,9 +1,9 @@
-import type { CSSProperties, ReactNode } from 'react'
+import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 import { ADVENTURE_STAGES, type AdventureStage } from '@/lib/adventure-data'
 
 /**
  * Atmospheric, photo-led backdrops for the Adventure & Experiences section. Real cloud layers
- * drift over the photography while transparent animated GIFs provide the wildlife motion.
+ * drift over the photography while supplied green-screen videos provide the wildlife motion.
  * These are decorative, deterministic and hidden from assistive technology by the parent.
  */
 const vars = (values: Record<string, string | number>) => values as unknown as CSSProperties
@@ -45,7 +45,6 @@ const RIPPLES = [
   { bottom: 16, width: 72, duration: 23, delay: -12 },
   { bottom: 25, width: 48, duration: 17, delay: -8 },
 ]
-
 
 const RAYS = [
   { x: 8, width: 14, duration: 9, delay: -2 },
@@ -96,7 +95,47 @@ const FIREFLIES = [
   { x: 95, y: 60, dx: 22, dy: -40, size: 3, duration: 17, delay: -10 },
 ]
 
-const scene = (stage: AdventureStage): ReactNode => {
+function TransparentVideo({
+  src,
+  className,
+  active,
+  style,
+}: {
+  src: string
+  className: string
+  active: boolean
+  style?: CSSProperties
+}) {
+  const ref = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const video = ref.current
+    if (!video) return
+    if (active) {
+      void video.play().catch(() => {})
+    } else {
+      video.pause()
+    }
+  }, [active])
+
+  return (
+    <video
+      ref={ref}
+      className={className}
+      style={style}
+      autoPlay={active}
+      loop
+      muted
+      playsInline
+      preload={active ? 'auto' : 'metadata'}
+      aria-hidden="true"
+    >
+      <source src={src} type="video/webm" />
+    </video>
+  )
+}
+
+const scene = (stage: AdventureStage, active: boolean): ReactNode => {
   switch (stage) {
     case 'sky':
       return (
@@ -116,7 +155,7 @@ const scene = (stage: AdventureStage): ReactNode => {
             <span key={`cloud-${i}`} className="adv-cloud adv-cloud-bank" style={vars({ '--x': `${cloud.x}%`, '--y': `${cloud.y}%`, '--w': `${cloud.size}vw`, '--dur': `${cloud.duration}s`, '--delay': `${cloud.delay}s`, '--o': 0.48 })} />
           ))}
           {BIRDS.map((bird, i) => (
-            <span key={i} className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <TransparentVideo key={i} src="/images/adventure-real-birds.webm" className="adv-bird" active={active} style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
         </>
       )
@@ -124,7 +163,7 @@ const scene = (stage: AdventureStage): ReactNode => {
       return (
         <>
           {BIRDS.map((bird, i) => (
-            <span key={`bird-${i}`} className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <TransparentVideo key={`bird-${i}`} src="/images/adventure-real-birds.webm" className="adv-bird" active={active} style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
           {MOTES.map((mote, i) => (
             <span key={i} className="adv-mote" style={vars({ '--x': `${mote.x}%`, '--y': `${mote.y}%`, '--dur': `${mote.duration}s`, '--delay': `${mote.delay}s` })} />
@@ -142,10 +181,10 @@ const scene = (stage: AdventureStage): ReactNode => {
             <span key={`ray-${i}`} className="adv-ray" style={vars({ '--x': `${ray.x}%`, '--w': `${ray.width}vw`, '--dur': `${ray.duration}s`, '--delay': `${ray.delay}s` })} />
           ))}
           {FISH.map((fish, i) => (
-            <span key={i} className="adv-fish" style={vars({ '--x': `${fish.x}%`, '--y': `${fish.y}%`, '--s': `${fish.size}vw`, '--dur': `${fish.duration}s`, '--delay': `${fish.delay}s` })} />
+            <TransparentVideo key={`fish-${i}`} src="/images/adventure-real-fish.webm" className="adv-fish" active={active} style={vars({ '--x': `${fish.x}%`, '--y': `${fish.y}%`, '--s': `${fish.size}vw`, '--dur': `${fish.duration}s`, '--delay': `${fish.delay}s` })} />
           ))}
           {JELLYFISH.map((jelly, i) => (
-            <span key={i} className={`adv-jelly adv-jelly-${jelly.kind}`} style={vars({ '--x': `${jelly.x}%`, '--s': `${jelly.size}vw`, '--dur': `${jelly.duration}s`, '--delay': `${jelly.delay}s`, '--dx': `${jelly.drift}px` })} />
+            <TransparentVideo key={`jelly-${i}`} src="/images/adventure-real-jellyfish.webm" className={`adv-jelly adv-jelly-${jelly.kind}`} active={active} style={vars({ '--x': `${jelly.x}%`, '--s': `${jelly.size}vw`, '--dur': `${jelly.duration}s`, '--delay': `${jelly.delay}s`, '--dx': `${jelly.drift}px` })} />
           ))}
           {BUBBLES.map((bubble, i) => (
             <span key={i} className="adv-bubble" style={vars({ '--x': `${bubble.x}%`, '--sz': `${bubble.size}px`, '--dur': `${bubble.duration}s`, '--delay': `${bubble.delay}s` })} />
@@ -161,12 +200,16 @@ const scene = (stage: AdventureStage): ReactNode => {
   }
 }
 
+export function AdventureScreenOverlay({ active }: { active: boolean }) {
+  return <TransparentVideo src="/images/adventure-real-camera-splash.webm" className={`adventure-screen-overlay${active ? ' is-on' : ''}`} active={active} />
+}
+
 export function AdventureScenes({ stage }: { stage: AdventureStage }) {
   return (
     <div className="adventure-tint-view">
       {ADVENTURE_STAGES.map((entry) => (
         <div key={entry.id} data-stage={entry.id} className={`adventure-scene${entry.id === stage ? ' is-on' : ''}`}>
-          {scene(entry.id)}
+          {scene(entry.id, entry.id === stage)}
         </div>
       ))}
     </div>

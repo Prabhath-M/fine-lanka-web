@@ -13391,12 +13391,15 @@ body:has(.features:target) .typed-opening { display: none; }
   z-index: 25;
   pointer-events: none;
   opacity: 0;
-  background: url('/images/adventure-camera-droplets.gif') center / cover no-repeat;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  object-position: center;
+  opacity: 0;
   mix-blend-mode: screen;
   transition: opacity 0.7s var(--ease);
 }
-.destinations-page .adventure[data-stage='water'] .adventure-screen-overlay,
-.destinations-page .adventure[data-stage='ocean'] .adventure-screen-overlay { opacity: 0.72; }
+.destinations-page .adventure-screen-overlay.is-on { opacity: 0.78; }
 
 .destinations-page .adventure-tint-view {
   position: sticky;
@@ -13493,8 +13496,8 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 /* ---- Atmospheric scene plates: distinct environments follow the current adventure stage. ----
-   Backdrops are separate from the activity-card photography; transparent animated GIF layers provide
-   real wingbeats, fish schooling and jellyfish motion. Camera droplets live in a fixed foreground layer. */
+   Backdrops are separate from the activity-card photography; supplied green-screen videos are chroma-keyed
+   into transparent WebM wildlife layers. Camera splash footage lives in a fixed foreground layer. */
 .destinations-page .adventure-scene {
   position: absolute;
   inset: 0;
@@ -13584,10 +13587,11 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-bird {
   top: var(--y);
   left: var(--x);
-  width: clamp(5.5rem, calc(9rem * var(--s)), 12rem);
-  aspect-ratio: 260 / 170;
-  background: url('/images/adventure-bird-flap.gif') center / contain no-repeat;
-  opacity: 0.76;
+  width: clamp(14rem, calc(27rem * var(--s)), 38rem);
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.82;
   filter: drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.24));
   transform: translate3d(-50%, 0, 0);
   animation: adv-bird-flight var(--dur) linear var(--delay) infinite;
@@ -13634,10 +13638,11 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-fish {
   top: var(--y);
   left: 0;
-  width: min(var(--s), 30rem);
+  width: min(var(--s), 32rem);
   aspect-ratio: 16 / 9;
-  background: url('/images/adventure-fish-school.gif') center / contain no-repeat;
-  opacity: 0.72;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.78;
   filter: drop-shadow(0 0 1.2rem rgba(97, 201, 233, 0.2));
   animation: adv-fish-drift var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
@@ -13645,19 +13650,15 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-jelly {
   top: 100%;
   left: var(--x);
-  width: min(var(--s), 12rem);
-  aspect-ratio: 1;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-image: url('/images/adventure-jellyfish-drift.gif');
+  width: min(calc(var(--s) * 1.5), 18rem);
+  aspect-ratio: 520 / 552;
+  object-fit: contain;
+  object-position: center;
   filter: drop-shadow(0 0 1.1rem rgba(150, 222, 255, 0.24));
   opacity: 0.78;
   animation: adv-rise var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
 }
-.destinations-page .adv-jelly-moon,
-.destinations-page .adv-jelly-tropical { background-image: url('/images/adventure-jellyfish-drift.gif'); }
 /* Photographic glass-like bubbles: rim, reflected highlight and soft caustic glow. */
 .destinations-page .adv-bubble {
   left: var(--x);
