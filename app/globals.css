@@ -13354,51 +13354,6 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure-tint-view span[data-stage='water'] { background: rgba(10, 52, 62, 0.34); }
 .destinations-page .adventure-tint-view span[data-stage='depth'] { background: rgba(2, 8, 10, 0.5); }
 
-/* Gauge: a sticky brass scale in the left gutter (desktop). */
-@media (min-width: 901px) {
-  .destinations-page .adventure-track { padding-left: 5.5rem; }
-  .destinations-page .adventure-spine { left: calc(50% + 2.75rem); }
-}
-.destinations-page .adventure-gauge {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 5.5rem;
-  pointer-events: none;
-}
-.destinations-page .adventure-gauge-scale {
-  position: sticky;
-  top: 8rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1.7rem;
-  margin: 0;
-  padding: 0 0 0 0.9rem;
-  list-style: none;
-  border-left: 1px solid rgba(216, 185, 120, 0.55);
-}
-.destinations-page .adventure-gauge-scale li {
-  position: relative;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: rgba(216, 185, 120, 0.7);
-  transition: color 0.5s var(--ease), transform 0.5s var(--ease);
-}
-.destinations-page .adventure-gauge-tick {
-  position: absolute;
-  top: 50%;
-  left: -0.9rem;
-  width: 0.5rem;
-  height: 1px;
-  background: currentColor;
-  transition: width 0.5s var(--ease);
-}
-.destinations-page .adventure-gauge-scale li.is-active { color: var(--brass-light); transform: translateX(0.3rem); }
-.destinations-page .adventure-gauge-scale li.is-active .adventure-gauge-tick { width: 1rem; height: 2px; }
-
 /* Hover / focus: a dark veil fades off (opacity, not a filter) and brighter brass contours fade
    in. Only opacity and transform change, so the browser can animate them on the GPU. */
 .destinations-page .adventure-media { transition: transform 0.6s var(--ease), border-color 0.6s var(--ease), opacity 0.7s var(--ease); }
@@ -13451,9 +13406,6 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure-tint-view span,
   .destinations-page .adventure-media::after,
   .destinations-page .adventure-media-contours::after,
-  .destinations-page .adventure-gauge-scale li,
-  .destinations-page .adventure-gauge-tick,
-  .destinations-page .adventure-gauge-scale::after,
   .destinations-page .adventure-media,
   .destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > *,
   .destinations-page .adventure[data-motion='on'] .adventure-node { transition: none; }
@@ -13466,7 +13418,6 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 /* ---- Phase 5: responsive pass ---- */
-.destinations-page .adventure-gauge-scale::after { content: none; }
 
 @media (max-width: 900px) {
   .destinations-page .adventure-spine,
@@ -13475,49 +13426,6 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure { padding-block: clamp(3.5rem, 12vw, 5rem) clamp(3rem, 10vw, 4.5rem); }
   .destinations-page .adventure-head { margin-bottom: 2.25rem; }
   .destinations-page .adventure-lede { font-size: 1rem; }
-
-  /* Gauge becomes a slim progress bar that sticks under the site header. */
-  .destinations-page .adventure-gauge {
-    position: sticky;
-    top: 6.5rem;
-    z-index: 5;
-    width: auto;
-    margin: 0 calc(var(--space-3, 1rem) * -1) 1.75rem;
-    padding: 0.6rem var(--space-3, 1rem) 0.7rem;
-    background: rgba(6, 18, 26, 0.95);
-    border-block: 1px solid rgba(216, 185, 120, 0.25);
-  }
-  .destinations-page .adventure-gauge-scale {
-    position: relative;
-    top: auto;
-    flex-direction: row;
-    justify-content: space-between;
-    gap: 0.25rem;
-    padding: 0 0 0.55rem;
-    border-left: 0;
-  }
-  .destinations-page .adventure-gauge-scale::before,
-  .destinations-page .adventure-gauge-scale::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    height: 2px;
-    border-radius: 2px;
-  }
-  .destinations-page .adventure-gauge-scale::before { width: 100%; background: rgba(216, 185, 120, 0.25); }
-  .destinations-page .adventure-gauge-scale::after {
-    width: 20%;
-    background: var(--brass-light);
-    transition: width 0.6s var(--ease);
-  }
-  .destinations-page .adventure[data-stage='canopy'] .adventure-gauge-scale::after { width: 40%; }
-  .destinations-page .adventure[data-stage='land'] .adventure-gauge-scale::after { width: 60%; }
-  .destinations-page .adventure[data-stage='water'] .adventure-gauge-scale::after { width: 80%; }
-  .destinations-page .adventure[data-stage='depth'] .adventure-gauge-scale::after { width: 100%; }
-  .destinations-page .adventure-gauge-scale li { font-size: 0.68rem; letter-spacing: 0.1em; }
-  .destinations-page .adventure-gauge-scale li.is-active { transform: none; }
-  .destinations-page .adventure-gauge-tick { display: none; }
 
   /* Panels stack: photo frame first, then the text. */
   .destinations-page .adventure-panel { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
@@ -13530,7 +13438,5 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 @media (max-width: 520px) {
-  .destinations-page .adventure-gauge { top: 6.25rem; }
-  .destinations-page .adventure-gauge-scale li { font-size: 0.62rem; letter-spacing: 0.06em; }
   .destinations-page .adventure-media-icon { width: 4rem; height: 4rem; }
 }

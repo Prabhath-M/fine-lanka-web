@@ -43,9 +43,9 @@ describe('AdventureSection', () => {
     expect(html).not.toContain('Showing')
   })
 
-  it('renders the altitude gauge (decorative) with all five stages', () => {
-    expect(html).toContain('class="adventure-gauge" aria-hidden="true"')
-    for (const label of ['Sky', 'Canopy', 'Land', 'Water', 'Depth']) expect(html).toContain(`</span>${label}</li>`)
+  it('has no altitude gauge, but keeps the stage that drives the background shift', () => {
+    expect(html).not.toContain('adventure-gauge')
+    expect(html).toContain('class="adventure-tint" aria-hidden="true"')
     expect(html).toContain('data-stage="sky"')
   })
 

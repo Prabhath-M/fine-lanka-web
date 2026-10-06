@@ -15,7 +15,7 @@ import { AdventurePanel } from '@/components/destinations/adventure-panel'
  * "Adventure & Experiences" -- the "Sky to Underground" section of the
  * Destinations page. See docs/DESTINATIONS-ADVENTURE-SECTION-PLAN.md.
  *
- * Phase 4 added the altitude gauge, the
+ * Phase 4 added the
  * scroll-linked background shift (`data-stage` on the section drives the CSS)
  * and the staggered panel entrance. One IntersectionObserver handles both the
  * active stage and the entrance; it never touches layout, so nothing shifts.
@@ -101,20 +101,6 @@ export function AdventureSection() {
 
         <div className="adventure-track">
           <span className="adventure-spine" aria-hidden="true" />
-          <div className="adventure-gauge" aria-hidden="true">
-            <ol className="adventure-gauge-scale">
-              {ADVENTURE_STAGES.map((entry) => (
-                <li
-                  key={entry.id}
-                  data-stage={entry.id}
-                  className={entry.id === stage ? 'is-active' : undefined}
-                >
-                  <span className="adventure-gauge-tick" />
-                  {entry.label}
-                </li>
-              ))}
-            </ol>
-          </div>
           <ol className="adventure-list" role="list">
             {ADVENTURES.map((adventure) => (
               <AdventurePanel key={adventure.slug} adventure={adventure} />
