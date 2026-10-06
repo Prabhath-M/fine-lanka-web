@@ -3754,6 +3754,20 @@ a.mobile-nav-heading.is-active { color: var(--brass-light); }
   justify-content: center;
 }
 
+.destinations-page .dest-hero-link {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #edcf85;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(237, 207, 133, 0.5);
+  padding-bottom: 0.15rem;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.destinations-page .dest-hero-link:hover,
+.destinations-page .dest-hero-link:focus-visible { color: #fff9e8; border-color: #fff9e8; }
+
 .destinations-page .dest-hero-note {
   color: rgba(243, 239, 225, 0.82);
   font-family: var(--font-display);
@@ -13314,6 +13328,38 @@ body:has(.features:target) .typed-opening { display: none; }
   color: var(--brass-light);
 }
 .destinations-page .adventure-brandline { margin: 0.5rem 0 0; font-style: italic; color: var(--text-on-dark-muted); }
+
+/* Phase 3: zone filter (reuses .filter-bar, re-skinned for the dark section) and anchor offset. */
+.destinations-page .adventure { scroll-margin-top: 5.75rem; }
+.destinations-page .adventure-filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.9rem;
+  margin: 0 auto clamp(2.5rem, 5vw, 4rem);
+}
+.destinations-page .adventure-filter .filter-bar { justify-content: center; }
+.destinations-page .adventure-filter .filter-bar button {
+  border-color: rgba(216, 185, 120, 0.45);
+  color: var(--text-on-dark-muted);
+}
+.destinations-page .adventure-filter .filter-bar button:hover { border-color: var(--brass-light); color: var(--text-on-dark); }
+.destinations-page .adventure-filter .filter-bar button.is-active {
+  background: var(--brass-light);
+  border-color: var(--brass-light);
+  color: var(--ink);
+}
+.destinations-page .adventure-filter .filter-bar button:focus-visible {
+  outline: 2px solid var(--brass-light);
+  outline-offset: 3px;
+}
+.destinations-page .adventure-count {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  color: var(--text-on-dark-muted);
+}
 
 /* Minimal stacking so nothing breaks below desktop; the full responsive pass is phase 5. */
 @media (max-width: 900px) {

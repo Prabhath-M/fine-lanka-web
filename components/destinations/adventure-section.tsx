@@ -1,16 +1,30 @@
+'use client'
+
+import { useState } from 'react'
 import { Icon } from '@/components/icons'
-import { ADVENTURES, ADVENTURE_CLOSING, ADVENTURE_INTRO } from '@/lib/adventure-data'
+import {
+  ADVENTURE_CLOSING,
+  ADVENTURE_INTRO,
+  ADVENTURE_ZONES,
+  adventureCountLabel,
+  adventuresForZone,
+  type AdventureZone,
+} from '@/lib/adventure-data'
 import { AdventurePanel } from '@/components/destinations/adventure-panel'
 
 /**
  * "Adventure & Experiences" -- the "Sky to Underground" section of the
  * Destinations page. See docs/DESTINATIONS-ADVENTURE-SECTION-PLAN.md.
  *
- * Phase 2: static structure only. The zone filter (phase 3) and the altitude
- * gauge / background shift (phase 4) build on the hooks left here:
+ * Phase 3 adds the zone filter. The altitude gauge / background shift
+ * (phase 4) builds on the hooks left here:
  * `.adventure-sky` (scroll-linked background) and `.adventure-spine` (gauge).
  */
 export function AdventureSection() {
+  const [zone, setZone] = useState<AdventureZone | 'all'>('all')
+  const visible = adventuresForZone(zone)
+  const options: { id: AdventureZone | 'all'; label: string }[] = [{ id: 'all', label: 'All' }, ...ADVENTURE_ZONES]
+
   return (
     <section id="adventure" className="adventure" aria-labelledby="adventure-title">
       <div className="adventure-sky" aria-hidden="true" />
@@ -22,10 +36,30 @@ export function AdventureSection() {
           <p className="adventure-lede">{ADVENTURE_INTRO.lede}</p>
         </header>
 
+        <div className="adventure-filter">
+          <div className="filter-bar" role="group" aria-label="Filter experiences by zone">
+            {options.map((option) => (
+              <button
+                type="button"
+                key={option.id}
+                data-zone={option.id}
+                className={zone === option.id ? 'is-active' : undefined}
+                aria-pressed={zone === option.id}
+                onClick={() => setZone(option.id)}
+              >
+                {option.label}
+              </button>
+            ))}
+          </div>
+          <p className="adventure-count" role="status" aria-live="polite">
+            {adventureCountLabel(visible.length, zone)}
+          </p>
+        </div>
+
         <div className="adventure-track">
           <span className="adventure-spine" aria-hidden="true" />
           <ol className="adventure-list">
-            {ADVENTURES.map((adventure) => (
+            {visible.map((adventure) => (
               <AdventurePanel key={adventure.slug} adventure={adventure} />
             ))}
           </ol>

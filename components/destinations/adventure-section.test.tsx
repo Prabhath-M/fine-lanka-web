@@ -35,4 +35,11 @@ describe('AdventureSection', () => {
     const ids = [...html.matchAll(/ id="([^"]+)"/g)].map((m) => m[1])
     expect(new Set(ids).size).toBe(ids.length)
   })
+
+  it('renders the zone filter with All active and a live count', () => {
+    for (const label of ['All', 'Air', 'Land', 'Water', 'Underground']) expect(html).toContain(`>${label}</button>`)
+    expect(html).toMatch(/data-zone="all" class="is-active" aria-pressed="true"/)
+    expect(html).toContain('aria-live="polite"')
+    expect(html).toContain('Showing all 8 experiences')
+  })
 })
