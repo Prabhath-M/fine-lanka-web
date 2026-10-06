@@ -13399,9 +13399,7 @@ body:has(.features:target) .typed-opening { display: none; }
   mix-blend-mode: screen;
   transition: opacity 0.7s var(--ease);
 }
-.destinations-page .adventure-screen-overlay.is-on { opacity: 0.92; filter: contrast(1.3) saturate(1.2); }
-.destinations-page .adventure-screen-overlay-secondary { transform: scale(1.12) rotate(1.5deg); opacity: 0; }
-.destinations-page .adventure-screen-overlay-secondary.is-on { opacity: 0.42; }
+.destinations-page .adventure-screen-overlay.is-on { opacity: 0.78; }
 
 .destinations-page .adventure-tint-view {
   position: sticky;
@@ -13589,12 +13587,12 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-bird {
   top: var(--y);
   left: var(--x);
-  width: clamp(18rem, calc(34rem * var(--s)), 46rem);
+  width: clamp(14rem, calc(27rem * var(--s)), 38rem);
   aspect-ratio: 16 / 9;
   object-fit: contain;
   object-position: center;
-  opacity: 0.96;
-  filter: drop-shadow(0 0 0.55rem rgba(230, 248, 230, 0.42)) drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.24));
+  opacity: 0.82;
+  filter: drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.24));
   transform: translate3d(-50%, 0, 0);
   animation: adv-bird-flight var(--dur) linear var(--delay) infinite;
   will-change: transform;
@@ -13640,24 +13638,24 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-fish {
   top: var(--y);
   left: 0;
-  width: min(calc(var(--s) * 1.18), 38rem);
+  width: min(var(--s), 32rem);
   aspect-ratio: 16 / 9;
   object-fit: contain;
   object-position: center;
-  opacity: 0.96;
-  filter: drop-shadow(0 0 1.4rem rgba(105, 231, 255, 0.48)) drop-shadow(0 0 0.45rem rgba(233, 255, 255, 0.3));
+  opacity: 0.78;
+  filter: drop-shadow(0 0 1.2rem rgba(97, 201, 233, 0.2));
   animation: adv-fish-drift var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
 }
 .destinations-page .adv-jelly {
   top: 100%;
   left: var(--x);
-  width: min(calc(var(--s) * 1.8), 23rem);
+  width: min(calc(var(--s) * 1.5), 18rem);
   aspect-ratio: 520 / 552;
   object-fit: contain;
   object-position: center;
   filter: drop-shadow(0 0 1.1rem rgba(150, 222, 255, 0.24));
-  opacity: 0.94;
+  opacity: 0.78;
   animation: adv-rise var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
 }
@@ -13681,8 +13679,8 @@ body:has(.features:target) .typed-opening { display: none; }
   width: var(--sz);
   height: var(--sz);
   border-radius: 50%;
-  background: #f5ffb6;
-  box-shadow: 0 0 0.8rem 0.25rem rgba(214, 255, 145, 0.82), 0 0 2.6rem 0.85rem rgba(190, 240, 115, 0.38);
+  background: #edffb2;
+  box-shadow: 0 0 0.55rem 0.18rem rgba(214, 255, 145, 0.48), 0 0 1.8rem 0.55rem rgba(190, 240, 115, 0.2);
   filter: blur(0.35px);
   opacity: 0;
   animation: adv-firefly var(--dur) ease-in-out var(--delay) infinite;
