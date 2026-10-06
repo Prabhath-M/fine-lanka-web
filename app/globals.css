@@ -1943,6 +1943,11 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
 #mobile-nav-links > li { border-bottom: 1px solid var(--line-on-dark); }
 #mobile-nav-links > li > a,
 .mobile-nav-heading { display: block; padding: 0.9rem 0; color: var(--text-on-dark); font-size: 1rem; }
+a.mobile-nav-heading { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; }
+.mobile-nav-heading-arrow { color: var(--brass-light); font-size: 1.05rem; }
+a.mobile-nav-heading:hover,
+a.mobile-nav-heading:focus-visible,
+a.mobile-nav-heading.is-active { color: var(--brass-light); }
 .mobile-nav-group ul { padding-left: var(--space-2); padding-bottom: 0.6rem; }
 .mobile-nav-group ul a { display: block; padding: 0.5rem 0; color: var(--text-on-dark-muted); font-size: 1.056rem; }
 

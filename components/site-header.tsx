@@ -224,7 +224,14 @@ export function SiteHeader() {
             if (item.children) {
               return (
                 <li key={item.label} className="mobile-nav-group">
-                  <span className="mobile-nav-heading">{item.label}</span>
+                  <NavLink
+                    href={item.href}
+                    className={`mobile-nav-heading${item.page === currentPage ? ' is-active' : ''}`}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    <span>{item.label}</span>
+                    <span className="mobile-nav-heading-arrow" aria-hidden="true">→</span>
+                  </NavLink>
                   <ul>
                     {item.children.map((child) => (
                       <li key={child.label}>
