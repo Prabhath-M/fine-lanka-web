@@ -31,7 +31,8 @@ describe('AdventureSection', () => {
     expect(html).toContain('data-open-enquiry')
   })
 
-  it('gives each point a load bar, and starts with scrub mode off', () => {
+  it('wraps each point in a stage that can pin, gives it a load bar, and starts with scrub mode off', () => {
+    expect(html.match(/class="adventure-stick"/g)).toHaveLength(ADVENTURES.length)
     expect(html.match(/class="adventure-load" aria-hidden="true"/g)).toHaveLength(ADVENTURES.length)
     expect(html).toContain('data-scrub="off"')
   })

@@ -19,14 +19,14 @@ import { AdventureScenes } from '@/components/destinations/adventure-scenes'
  * `data-stage` on the section also drives the text colours. One IntersectionObserver handles both the
  * active stage and the entrance; it never touches layout, so nothing shifts.
  */
-/** A point starts building when its top edge rises above this share of the viewport height. */
-const BUILD_START = 0.92
+/** The pinned stage never sits higher than this (the sticky site header's height). */
+const PIN_MIN_TOP_REM = 5.75
 
 export function AdventureSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [stage, setStage] = useState<AdventureStage>('sky')
   // 'off': server HTML / no JS (everything visible). 'reveal': reduced motion, a simple fade-in per panel.
-  // 'scrub': each point builds up as it scrolls into view.
+  // 'scrub': each point holds in place while it builds up with scroll.
   const [mode, setMode] = useState<'off' | 'reveal' | 'scrub'>('off')
 
   // Effects are enabled only once JS is running, so the server HTML (and no-JS visitors) always see
@@ -39,28 +39,37 @@ export function AdventureSection() {
     return () => query.removeEventListener('change', apply)
   }, [])
 
-  // Scroll-built points: as a panel rises through the viewport its content builds up (photo, then
-  // heading, copy, tags, with a load bar filling), finishing once the panel is centred. The progress
-  // is written to the panel as `--p`. It only ever goes up, so a point that has been built stays built
-  // (also when scrolling back up); only the background scene changes with the section. Reads are
-  // batched before writes.
+  // Scroll-held points: each panel keeps its normal size and spacing, plus a short stretch of extra
+  // height (padding) during which its stage (`.adventure-stick`) stays put, centred in the viewport.
+  // Scrolling through that stretch builds the point up (photo, heading, copy, tags, load bar); then the
+  // stage releases and the page carries on. The progress is written to the panel as `--p` (0 to 1).
+  // It only ever goes up, so a point that has been built stays built (also when scrolling back up);
+  // only the background scene changes with the section. Reads are batched before writes.
   useEffect(() => {
     if (mode !== 'scrub') return
     const root = sectionRef.current
     if (!root) return
     const panels = Array.from(root.querySelectorAll<HTMLElement>('.adventure-panel'))
+    const sticks = panels.map((panel) => panel.querySelector<HTMLElement>('.adventure-stick'))
     const done = new Map<HTMLElement, number>()
+    let pins: number[] = []
     let frame = 0
 
+    // Where each stage pins: centred in the viewport, but never under the sticky site header.
+    const measure = () => {
+      const vh = window.innerHeight
+      const header = PIN_MIN_TOP_REM * (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16)
+      pins = sticks.map((stick) => (stick ? Math.max(header, (vh - stick.offsetHeight) / 2) : 0))
+      panels.forEach((panel, i) => panel.style.setProperty('--pin', `${pins[i]}px`))
+    }
     const update = () => {
       frame = 0
-      const vh = window.innerHeight
-      const start = vh * BUILD_START
-      const next = panels.map((panel) => {
+      const next = panels.map((panel, i) => {
+        const stick = sticks[i]
+        if (!stick) return 1
         const rect = panel.getBoundingClientRect()
-        const end = vh * 0.5 - rect.height / 2 // panel centred in the viewport
-        const range = Math.max(start - end, 1)
-        const raw = Math.min(1, Math.max(0, (start - rect.top) / range))
+        const hold = rect.height - stick.offsetHeight // how far the stage stays pinned
+        const raw = hold > 0 ? Math.min(1, Math.max(0, (pins[i] - rect.top) / hold)) : 1
         return Math.max(done.get(panel) ?? 0, Math.round(raw * 1000) / 1000)
       })
       panels.forEach((panel, i) => {
@@ -73,13 +82,18 @@ export function AdventureSection() {
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)
     }
+    const onResize = () => {
+      measure()
+      schedule()
+    }
 
+    measure()
     update()
     window.addEventListener('scroll', schedule, { passive: true })
-    window.addEventListener('resize', schedule)
+    window.addEventListener('resize', onResize)
     return () => {
       window.removeEventListener('scroll', schedule)
-      window.removeEventListener('resize', schedule)
+      window.removeEventListener('resize', onResize)
       if (frame) cancelAnimationFrame(frame)
     }
   }, [mode])

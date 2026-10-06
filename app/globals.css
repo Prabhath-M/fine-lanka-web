@@ -13777,12 +13777,14 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure-node { transition: none; }
 }
 
-/* ---- Scroll-built points ----
-   With JS and no reduced-motion preference, the section sets data-scrub='on'. The JS writes each
-   panel's build-up progress to --p (0 to 1) as it rises through the viewport, and everything below
-   is a pure function of it: the photo rises in and sharpens to full colour, then the heading, the
-   copy and the tags appear, while the load bar fills. Progress never goes back down, so a built
-   point stays built. Layout and spacing are the normal ones: no pinning, nothing extra between points. */
+/* ---- Scroll-held points ----
+   With JS and no reduced-motion preference, the section sets data-scrub='on'. Each panel keeps its
+   normal size and spacing and gains a short stretch of padding; inside it the stage (.adventure-stick)
+   stays pinned, centred in the viewport, while the JS writes the scroll progress through that stretch
+   to --p (0 to 1). Everything below is a pure function of --p: the photo sharpens from veiled to full
+   colour, then the heading, the copy and the tags appear while the load bar fills. At 1 the stage
+   releases and the page scrolls on. Progress never goes back down, so a built point stays built.
+   Without scrub mode (no JS, reduced motion) .adventure-stick is invisible to layout. */
 .destinations-page .adventure-panel {
   --p: 1;
   --t-media: clamp(0, calc(var(--p) / 0.3), 1);
@@ -13790,19 +13792,33 @@ body:has(.features:target) .typed-opening { display: none; }
   --t-copy: clamp(0, calc((var(--p) - 0.35) / 0.25), 1);
   --t-tags: clamp(0, calc((var(--p) - 0.6) / 0.25), 1);
 }
+.destinations-page .adventure-stick { display: contents; }
 .destinations-page .adventure-load { display: none; }
 
-/* Photo: rises and scales in, then sharpens from veiled to full colour. */
+.destinations-page .adventure[data-scrub='on'] .adventure-panel {
+  display: block;
+  padding-bottom: 65vh;
+  padding-bottom: 65svh;
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-stick {
+  position: sticky;
+  top: var(--pin, 5.75rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 6rem);
+}
+
+/* Before it loads, a point shows as a dimmed frame and its number; the rest builds with --p. */
 .destinations-page .adventure[data-scrub='on'] .adventure-media {
-  opacity: var(--t-media);
-  transform: translate3d(0, calc((1 - var(--t-media)) * 3rem), 0) scale(calc(0.94 + 0.06 * var(--t-media)));
+  opacity: calc(0.45 + 0.55 * var(--t-media));
+  transform: scale(calc(0.96 + 0.04 * var(--t-media)));
   transition: none;
 }
-.destinations-page .adventure[data-scrub='on'] .adventure-media::after { opacity: calc(1 - var(--p)); transition: none; }
+.destinations-page .adventure[data-scrub='on'] .adventure-media::after { opacity: calc(1 - var(--p) * 0.9); transition: none; }
 .destinations-page .adventure[data-scrub='on'] .adventure-media img { transform: scale(calc(1.14 - 0.14 * var(--p))); }
 
-/* Text: number and title, then tagline and copy, then the tags one by one. */
-.destinations-page .adventure[data-scrub='on'] .adventure-num,
+.destinations-page .adventure[data-scrub='on'] .adventure-num { opacity: calc(0.45 + 0.55 * var(--t-head)); }
 .destinations-page .adventure[data-scrub='on'] .adventure-title-row {
   opacity: var(--t-head);
   transform: translate3d(0, calc((1 - var(--t-head)) * 1.6rem), 0);
@@ -13827,7 +13843,6 @@ body:has(.features:target) .typed-opening { display: none; }
   overflow: hidden;
   border-radius: 3px;
   background: var(--adv-line-soft);
-  opacity: var(--t-head);
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-load i {
   display: block;
@@ -13837,3 +13852,17 @@ body:has(.features:target) .typed-opening { display: none; }
   transform: scaleX(var(--p));
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
+
+@media (max-width: 900px) {
+  .destinations-page .adventure[data-scrub='on'] .adventure-panel { padding-bottom: 55vh; padding-bottom: 55svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-stick { grid-template-columns: 1fr; gap: 1.25rem; }
+  /* Keep a whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-num { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+}
+@media (max-width: 900px) and (max-height: 700px) {
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 22vh; max-height: 22svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-num { display: none; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.92rem; line-height: 1.6; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-experience { margin-top: 0.9rem; }
+}
