@@ -30,6 +30,8 @@ const GAP_REM = 2.5
 /** How far you scroll while a point is held and builds up, as a share of the screen height. */
 const HOLD_DESKTOP = 0.65
 const HOLD_MOBILE = 0.55
+/** The hold of a point that is already built (scrolling back up through it), as a share of the screen height. */
+const HOLD_BUILT = 0.1
 
 export function AdventureSection() {
   const sectionRef = useRef<HTMLElement>(null)
@@ -54,6 +56,8 @@ export function AdventureSection() {
   // bar; its progress is written to the panel as `--p`, 0 to 1), and a move, where the whole stack
   // slides up by one point. So while a point is held, its neighbours are held too. The progress only
   // ever goes up, so a built point stays built; only the background scene changes with the section.
+  // Once a point is built, its hold shrinks (when scrolling has stopped, with the scroll position
+  // corrected by the same amount, so nothing visibly moves): scrolling back up is then not a dead stretch.
   // The stack's movement is a scroll-linked Web Animation, so the browser runs it on the compositor,
   // in step with the pinned viewport (no one-frame lag); browsers without scroll timelines fall back
   // to writing the transform from the scroll handler. Reads are batched before writes.
@@ -72,9 +76,13 @@ export function AdventureSection() {
     let railTop = 0
     let railH = 0
     let step = 0 // distance between two neighbouring points
-    let hold = 0 // scroll distance of one hold
+    let fullHold = 0 // scroll distance of a hold that is still to be built
+    let builtHold = 0 // and of one that is already built
+    let holds: number[] = [] // current hold of each point
+    let starts: number[] = [] // scroll offset where each point's hold begins
     let total = 0 // scroll distance of the whole pinned stretch
     let frame = 0
+    let idle = 0
     let lastY = Number.NaN
     let lastIndex = -1
     let lastW = 0
@@ -89,19 +97,17 @@ export function AdventureSection() {
     const buildAnimation = () => {
       anim?.cancel()
       anim = null
+      docTop = track.getBoundingClientRect().top + window.scrollY
       if (!canTimeline || !ScrollTimelineApi) return
       let effect: ScrollLinkedAnimation | null = null
       try {
-        const cycle = hold + step
         const frames: Keyframe[] = []
         for (let i = 0; i < count; i++) {
-          const at = (i * cycle) / total
-          const heldUntil = (i * cycle + hold) / total
-          frames.push({ offset: at, transform: `translate3d(0, ${offsetAt(i)}px, 0)` })
-          frames.push({ offset: heldUntil, transform: `translate3d(0, ${offsetAt(i)}px, 0)` })
+          const transform = `translate3d(0, ${offsetAt(i)}px, 0)`
+          frames.push({ offset: starts[i] / total, transform })
+          frames.push({ offset: (starts[i] + holds[i]) / total, transform })
         }
         const timeline = new ScrollTimelineApi({ source: document.scrollingElement ?? document.documentElement })
-        docTop = track.getBoundingClientRect().top + window.scrollY
         const start = docTop - railTop
         effect = list.animate(frames, { timeline, fill: 'both', easing: 'linear' } as KeyframeAnimationOptions) as ScrollLinkedAnimation
         effect.rangeStart = `${start}px`
@@ -113,7 +119,19 @@ export function AdventureSection() {
         anim = null
       }
     }
-
+    // Lay the holds out one after another, size the track, and rebuild the animation.
+    const layout = () => {
+      let at = 0
+      starts = holds.map((hold, i) => {
+        const begin = at
+        at += hold + (i < count - 1 ? step : 0)
+        return begin
+      })
+      total = at
+      track.style.height = `${railH + total}px`
+      lastY = Number.NaN
+      buildAnimation()
+    }
     const measure = () => {
       const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
       const vh = window.innerHeight
@@ -121,34 +139,35 @@ export function AdventureSection() {
       railH = Math.max(0, vh - railTop)
       const tallest = sticks.reduce((max, stick) => Math.max(max, stick ? stick.offsetHeight : 0), 0)
       step = tallest + GAP_REM * rem
-      hold = vh * (window.innerWidth <= 900 ? HOLD_MOBILE : HOLD_DESKTOP)
-      total = (count - 1) * (hold + step) + hold
+      fullHold = vh * (window.innerWidth <= 900 ? HOLD_MOBILE : HOLD_DESKTOP)
+      builtHold = vh * HOLD_BUILT
+      holds = panels.map((panel) => ((done.get(panel) ?? 0) >= 1 ? builtHold : fullHold))
       root.style.setProperty('--rail-top', `${railTop}px`)
       root.style.setProperty('--rail-h', `${railH}px`)
       root.style.setProperty('--step', `${step}px`)
-      track.style.height = `${railH + total}px`
-      lastY = Number.NaN
       lastW = window.innerWidth
       lastH = vh
-      buildAnimation()
+      layout()
     }
+    const scrolled = () => Math.min(total, Math.max(0, railTop - track.getBoundingClientRect().top))
+
     const update = () => {
       frame = 0
       const rect = track.getBoundingClientRect()
       const s = Math.min(total, Math.max(0, railTop - rect.top))
-      const cycle = hold + step
-      const k = Math.min(count - 1, Math.floor(s / cycle))
-      const f = s - k * cycle
+      let k = count - 1
+      while (k > 0 && starts[k] > s) k--
+      const f = s - starts[k]
       let u = k // which point is centred (fractional while the stack moves)
       let held = 1 // build-up progress of point k
-      if (f <= hold) held = hold > 0 ? f / hold : 1
-      else u = k + (f - hold) / step
+      if (f <= holds[k]) held = holds[k] > 0 ? f / holds[k] : 1
+      else u = k + (f - holds[k]) / step
 
       if (anim) {
         // Content above the section can change height (images, fonts): keep the timeline lined up.
         if (Math.abs(rect.top + window.scrollY - docTop) > 1) buildAnimation()
       } else {
-        const y = Math.round(offsetAt(0) * 10 - u * step * 10) / 10
+        const y = Math.round((offsetAt(0) - u * step) * 10) / 10
         if (y !== lastY) {
           lastY = y
           list.style.transform = `translate3d(0, ${y}px, 0)`
@@ -169,8 +188,34 @@ export function AdventureSection() {
         if (next) setStage(next)
       }
     }
+    // Scrolling has stopped: shrink the holds of points that are built (except the one being held right
+    // now) and move the scroll position back by what was removed above it, so the view stays put.
+    const compress = () => {
+      idle = 0
+      const s = scrolled()
+      const y0 = window.scrollY
+      let above = 0
+      let changed = false
+      const next = holds.map((hold, i) => {
+        if (hold <= builtHold || (done.get(panels[i]) ?? 0) < 1) return hold
+        if (starts[i] <= s && s <= starts[i] + hold) return hold
+        changed = true
+        if (starts[i] + hold <= s) above += hold - builtHold
+        return builtHold
+      })
+      if (!changed) return
+      holds = next
+      layout()
+      if (above > 0) window.scrollTo({ top: y0 - above, behavior: 'instant' as ScrollBehavior })
+      schedule()
+    }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)
+    }
+    const onScroll = () => {
+      schedule()
+      window.clearTimeout(idle)
+      idle = window.setTimeout(compress, 250)
     }
     const onResize = () => {
       // Phone address bars grow and shrink the viewport while scrolling: that must not re-lay-out.
@@ -181,12 +226,13 @@ export function AdventureSection() {
 
     measure()
     update()
-    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('scroll', onScroll, { passive: true })
     window.addEventListener('resize', onResize)
     return () => {
-      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('scroll', onScroll)
       window.removeEventListener('resize', onResize)
       if (frame) cancelAnimationFrame(frame)
+      window.clearTimeout(idle)
       anim?.cancel()
       list.style.transform = ''
       track.style.height = ''
