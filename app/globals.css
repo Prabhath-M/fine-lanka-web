@@ -13795,10 +13795,16 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure-stick { display: contents; }
 .destinations-page .adventure-load { display: none; }
 
+/* --adv-hold is how far you scroll while a point is held in place and builds up. The pinned stage then
+   releases straight into the next point, so the gap between two built points stays short. */
+.destinations-page .adventure[data-scrub='on'] {
+  --adv-hold: 38vh;
+  --adv-hold: 38svh;
+}
 .destinations-page .adventure[data-scrub='on'] .adventure-panel {
   display: block;
-  padding-bottom: 65vh;
-  padding-bottom: 65svh;
+  padding-bottom: var(--adv-hold);
+  margin-bottom: clamp(0.5rem, 1.5vw, 1.25rem);
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-stick {
   position: sticky;
@@ -13854,7 +13860,8 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
 
 @media (max-width: 900px) {
-  .destinations-page .adventure[data-scrub='on'] .adventure-panel { padding-bottom: 55vh; padding-bottom: 55svh; }
+  .destinations-page .adventure[data-scrub='on'] { --adv-hold: 32vh; --adv-hold: 32svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-panel { margin-bottom: 0.5rem; }
   .destinations-page .adventure[data-scrub='on'] .adventure-stick { grid-template-columns: 1fr; gap: 1.25rem; }
   /* Keep a whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
   .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }
