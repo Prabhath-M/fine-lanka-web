@@ -137,9 +137,6 @@ function TransparentVideo({
       muted
       playsInline
       preload={active ? 'auto' : 'metadata'}
-      onCanPlay={() => {
-        if (active) void ref.current?.play().catch(() => {})
-      }}
       aria-hidden="true"
     >
       <source src={src} type="video/webm" />

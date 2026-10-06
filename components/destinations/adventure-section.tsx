@@ -181,20 +181,7 @@ export function AdventureSection() {
         panel.style.setProperty('--p', String(next))
         panel.classList.toggle('is-complete', next >= 1)
       })
-      // Use the panel actually nearest the viewer's middle band as the stage source. This keeps
-      // the visual scene and its videos in sync even when the browser runs the list movement on a
-      // compositor timeline and does not expose the animated transform to layout reads.
-      const targetY = window.innerHeight * 0.42
-      let index = 0
-      let nearestDistance = Number.POSITIVE_INFINITY
-      panels.forEach((panel, i) => {
-        const rect = panel.getBoundingClientRect()
-        const distance = Math.abs(rect.top + rect.height / 2 - targetY)
-        if (distance < nearestDistance) {
-          nearestDistance = distance
-          index = i
-        }
-      })
+      const index = Math.min(count - 1, Math.max(0, Math.round(u)))
       if (index !== lastIndex) {
         lastIndex = index
         const next = panels[index].dataset.stage as AdventureStage | undefined
@@ -290,39 +277,14 @@ export function AdventureSection() {
       { rootMargin: '-45% 0px -45% 0px', threshold: 0 },
     )
 
-    // Some browsers do not re-fire a narrow negative-margin observer while the list is moved by
-    // the scrub/reveal layout. Keep a geometry-based fallback so the active scene always follows
-    // the panel nearest the viewer's middle band and its transparent videos can play.
-    const updateStageFromViewport = () => {
-      const targetY = window.innerHeight * 0.42
-      let nearest: HTMLElement | undefined
-      let distance = Number.POSITIVE_INFINITY
-      for (const panel of panels) {
-        const rect = panel.getBoundingClientRect()
-        const center = rect.top + rect.height / 2
-        const nextDistance = Math.abs(center - targetY)
-        if (nextDistance < distance) {
-          distance = nextDistance
-          nearest = panel
-        }
-      }
-      const next = nearest?.dataset.stage as AdventureStage | undefined
-      if (next) setStage(next)
-    }
-
     for (const panel of panels) {
       reveal.observe(panel)
       // While scrubbing, the scroll handler above picks the stage from the stack's position instead.
       if (mode !== 'scrub') track.observe(panel)
     }
-    updateStageFromViewport()
-    window.addEventListener('scroll', updateStageFromViewport, { passive: true })
-    window.addEventListener('resize', updateStageFromViewport)
     return () => {
       reveal.disconnect()
       track.disconnect()
-      window.removeEventListener('scroll', updateStageFromViewport)
-      window.removeEventListener('resize', updateStageFromViewport)
     }
   }, [mode])
 
