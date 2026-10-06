@@ -1093,38 +1093,38 @@
    buttons retain their coordinate and hit area; only the visual heads shrink. */
 @media (max-width: 620px) {
   .markerHead {
-    width: 1.18rem;
-    height: 1.18rem;
+    width: 0.98rem;
+    height: 0.98rem;
     border-width: 1.5px;
   }
 
   .markerHub {
-    width: 0.86rem;
-    height: 0.86rem;
+    width: 0.72rem;
+    height: 0.72rem;
     border-width: 1.5px;
   }
 
   .markerArrival {
-    width: 0.98rem;
-    height: 0.98rem;
+    width: 0.82rem;
+    height: 0.82rem;
   }
 
   /* No translate override needed here: the -70.7% anchor (see desktop
      rules above) is percentage-based, so it already lands the teardrop's
      point on the anchor at any size -- only the sizes themselves shrink. */
   .markerItineraryMain {
-    width: 1.48rem;
-    height: 1.48rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   .markerItinerarySecondary {
-    width: 0.76rem;
-    height: 0.76rem;
+    width: 0.62rem;
+    height: 0.62rem;
   }
 
   .markerItineraryAirport {
-    width: 1.18rem;
-    height: 1.18rem;
+    width: 0.98rem;
+    height: 0.98rem;
   }
 
   .markerItineraryMain:hover,
@@ -1153,24 +1153,24 @@
   }
 
   .markerCore {
-    font-size: 0.736rem;
+    font-size: 0.62rem;
   }
 
   .markerArrival .markerCore {
-    font-size: 0.796rem;
+    font-size: 0.67rem;
   }
 
   .markerOrder {
-    font-size: 0.696rem;
+    font-size: 0.58rem;
   }
 
   /* Smaller names (phones only) so neighbouring places don't run into each
      other; narrower wrap width keeps each label's footprint compact too. */
   .markerLabel {
-    max-width: 5.6rem;
-    padding: 0.03rem 0.2rem;
-    font-size: 0.436rem;
-    letter-spacing: 0.01em;
+    max-width: 4.6rem;
+    padding: 0.02rem 0.16rem;
+    font-size: 0.376rem;
+    letter-spacing: 0;
     line-height: 1.05;
   }
 
@@ -1405,10 +1405,14 @@
 }
 
 @media (max-width: 720px) {
+  .nextArrow {
+    transform: translate(0, -0.6rem) rotate(var(--arrow-angle, 0deg));
+  }
+
   .nextArrowSvg {
-    left: 0.4rem;
-    top: -0.62rem;
-    width: 2.3rem;
+    left: 0.3rem;
+    top: -0.45rem;
+    width: 1.7rem;
   }
 }
 
