@@ -54,8 +54,9 @@ const RAYS = [
 ]
 
 const FISH = [
-  { x: 9, y: 28, size: 28, duration: 52, delay: -24 },
-  { x: 54, y: 61, size: 21, duration: 64, delay: -43 },
+  { src: '/images/adventure-fish-salmon.webm', ar: '574 / 182', x: 8, y: 24, size: 26, duration: 52, delay: -24 },
+  { src: '/images/adventure-fish-perch.webm', ar: '588 / 304', x: 42, y: 58, size: 20, duration: 64, delay: -43 },
+  { src: '/images/adventure-fish-red.webm', ar: '638 / 190', x: 18, y: 78, size: 22, duration: 58, delay: -9 },
 ]
 
 const JELLYFISH = [
@@ -155,7 +156,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
             <span key={`cloud-${i}`} className="adv-cloud adv-cloud-bank" style={vars({ '--x': `${cloud.x}%`, '--y': `${cloud.y}%`, '--w': `${cloud.size}vw`, '--dur': `${cloud.duration}s`, '--delay': `${cloud.delay}s`, '--o': 0.48 })} />
           ))}
           {BIRDS.map((bird, i) => (
-            <TransparentVideo key={i} src="/images/adventure-real-birds.webm" className="adv-bird" active={active} style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <TransparentVideo key={i} src="/images/adventure-birds-flock.webm" className="adv-bird" active={active} style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
         </>
       )
@@ -163,7 +164,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
       return (
         <>
           {BIRDS.map((bird, i) => (
-            <TransparentVideo key={`bird-${i}`} src="/images/adventure-real-birds.webm" className="adv-bird" active={active} style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <TransparentVideo key={`bird-${i}`} src="/images/adventure-birds-flock.webm" className="adv-bird" active={active} style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
           {MOTES.map((mote, i) => (
             <span key={i} className="adv-mote" style={vars({ '--x': `${mote.x}%`, '--y': `${mote.y}%`, '--dur': `${mote.duration}s`, '--delay': `${mote.delay}s` })} />
@@ -181,7 +182,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
             <span key={`ray-${i}`} className="adv-ray" style={vars({ '--x': `${ray.x}%`, '--w': `${ray.width}vw`, '--dur': `${ray.duration}s`, '--delay': `${ray.delay}s` })} />
           ))}
           {FISH.map((fish, i) => (
-            <TransparentVideo key={`fish-${i}`} src="/images/adventure-real-fish.webm" className="adv-fish" active={active} style={vars({ '--x': `${fish.x}%`, '--y': `${fish.y}%`, '--s': `${fish.size}vw`, '--dur': `${fish.duration}s`, '--delay': `${fish.delay}s` })} />
+            <TransparentVideo key={`fish-${i}`} src={fish.src} className="adv-fish" active={active} style={vars({ '--ar': fish.ar, '--x': `${fish.x}%`, '--y': `${fish.y}%`, '--s': `${fish.size}vw`, '--dur': `${fish.duration}s`, '--delay': `${fish.delay}s` })} />
           ))}
           {JELLYFISH.map((jelly, i) => (
             <TransparentVideo key={`jelly-${i}`} src="/images/adventure-real-jellyfish.webm" className={`adv-jelly adv-jelly-${jelly.kind}`} active={active} style={vars({ '--x': `${jelly.x}%`, '--s': `${jelly.size}vw`, '--dur': `${jelly.duration}s`, '--delay': `${jelly.delay}s`, '--dx': `${jelly.drift}px` })} />

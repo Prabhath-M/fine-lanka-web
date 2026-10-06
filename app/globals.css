@@ -13587,8 +13587,8 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-bird {
   top: var(--y);
   left: var(--x);
-  width: clamp(14rem, calc(27rem * var(--s)), 38rem);
-  aspect-ratio: 16 / 9;
+  width: clamp(16rem, calc(30rem * var(--s)), 44rem);
+  aspect-ratio: 800 / 330;
   object-fit: contain;
   object-position: center;
   opacity: 0.82;
@@ -13638,8 +13638,8 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-fish {
   top: var(--y);
   left: 0;
-  width: min(var(--s), 32rem);
-  aspect-ratio: 16 / 9;
+  width: min(var(--s), 26rem);
+  aspect-ratio: var(--ar, 16 / 9);
   object-fit: contain;
   object-position: center;
   opacity: 0.78;

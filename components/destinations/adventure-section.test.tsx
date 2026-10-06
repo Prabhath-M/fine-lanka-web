@@ -84,7 +84,7 @@ describe('AdventureSection', () => {
       return filename
     })
     expect(new Set(backgrounds).size).toBe(stages.length)
-    for (const asset of ['adventure-real-birds.webm', 'adventure-real-fish.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm']) {
+    for (const asset of ['adventure-birds-flock.webm', 'adventure-fish-salmon.webm', 'adventure-fish-perch.webm', 'adventure-fish-red.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm']) {
       expect(existsSync(join(process.cwd(), 'public/images', asset))).toBe(true)
     }
     expect(styles).toContain('background-color: #000;')
