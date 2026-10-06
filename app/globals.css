@@ -13777,44 +13777,25 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure-node { transition: none; }
 }
 
-/* ---- Scroll-scrubbed points ----
-   With JS and no reduced-motion preference, the section sets data-scrub='on'. Each panel then becomes
-   a tall block holding a pinned stage (.adventure-stick); the JS writes the scroll progress through
-   the block to --p (0 to 1) and everything below is a pure function of it: the photo rises in and
-   sharpens to full colour, then the heading, the copy and the tags appear, while the load bar fills.
-   When it reaches 1 the content holds for a moment, the stage unpins and the page scrolls on to the
-   next point. Without scrub mode (no JS, reduced motion) .adventure-stick is invisible to layout. */
+/* ---- Scroll-built points ----
+   With JS and no reduced-motion preference, the section sets data-scrub='on'. The JS writes each
+   panel's build-up progress to --p (0 to 1) as it rises through the viewport, and everything below
+   is a pure function of it: the photo rises in and sharpens to full colour, then the heading, the
+   copy and the tags appear, while the load bar fills. Progress never goes back down, so a built
+   point stays built. Layout and spacing are the normal ones: no pinning, nothing extra between points. */
 .destinations-page .adventure-panel {
   --p: 1;
-  --t-media: clamp(0, calc(var(--p) / 0.22), 1);
-  --t-head: clamp(0, calc((var(--p) - 0.12) / 0.2), 1);
-  --t-copy: clamp(0, calc((var(--p) - 0.3) / 0.22), 1);
-  --t-tags: clamp(0, calc((var(--p) - 0.52) / 0.2), 1);
+  --t-media: clamp(0, calc(var(--p) / 0.3), 1);
+  --t-head: clamp(0, calc((var(--p) - 0.15) / 0.25), 1);
+  --t-copy: clamp(0, calc((var(--p) - 0.35) / 0.25), 1);
+  --t-tags: clamp(0, calc((var(--p) - 0.6) / 0.25), 1);
 }
-.destinations-page .adventure-stick { display: contents; }
 .destinations-page .adventure-load { display: none; }
-
-.destinations-page .adventure[data-scrub='on'] .adventure-panel {
-  display: block;
-  height: 240vh;
-  height: 240svh;
-  margin-bottom: 0;
-}
-.destinations-page .adventure[data-scrub='on'] .adventure-stick {
-  position: sticky;
-  top: 5.75rem;
-  height: calc(100vh - 5.75rem);
-  height: calc(100svh - 5.75rem);
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: clamp(2.5rem, 7vw, 6rem);
-}
 
 /* Photo: rises and scales in, then sharpens from veiled to full colour. */
 .destinations-page .adventure[data-scrub='on'] .adventure-media {
   opacity: var(--t-media);
-  transform: translate3d(0, calc((1 - var(--t-media)) * 3.5rem), 0) scale(calc(0.93 + 0.07 * var(--t-media)));
+  transform: translate3d(0, calc((1 - var(--t-media)) * 3rem), 0) scale(calc(0.94 + 0.06 * var(--t-media)));
   transition: none;
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-media::after { opacity: calc(1 - var(--p)); transition: none; }
@@ -13856,21 +13837,3 @@ body:has(.features:target) .typed-opening { display: none; }
   transform: scaleX(var(--p));
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
-
-@media (max-width: 900px) {
-  .destinations-page .adventure[data-scrub='on'] .adventure-panel { height: 220vh; height: 220svh; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-stick {
-    grid-template-columns: 1fr;
-    align-content: center;
-    gap: 1.25rem;
-  }
-  /* Keep the whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
-  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-num { font-size: clamp(2.4rem, 11vw, 3.4rem); }
-}
-@media (max-width: 900px) and (max-height: 700px) {
-  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 22vh; max-height: 22svh; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-num { display: none; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.92rem; line-height: 1.6; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-experience { margin-top: 0.9rem; }
-}
