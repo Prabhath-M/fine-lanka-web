@@ -89,7 +89,7 @@ describe('AdventureSection', () => {
     for (const asset of ['adventure-birds-flock.webm', 'adventure-fish-salmon.webm', 'adventure-fish-perch.webm', 'adventure-fish-red.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm', 'adventure-water-drops.gif', 'adventure-little-bird.gif']) {
       expect(existsSync(join(process.cwd(), 'public/images', asset))).toBe(true)
     }
-    expect(styles).toContain('background-color: #000;')
+    expect(styles).toContain("--scene-image: url('/images/adventure-background-depth.webp')")
     expect(html).toContain('type="video/webm"')
     expect(styles).toContain('background-color: #0a4560;')
   })

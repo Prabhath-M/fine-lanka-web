@@ -13609,8 +13609,8 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure-scene[data-stage='depth'] {
   --scene-image: url('/images/adventure-background-depth.webp');
-  --scene-wash: linear-gradient(180deg, rgba(0, 0, 0, 0.72), rgba(0, 0, 0, 0.78) 45%, rgba(0, 0, 0, 0.9));
-  background-color: #000;
+  --scene-wash: linear-gradient(180deg, rgba(0, 8, 13, 0.22), rgba(0, 5, 10, 0.34) 45%, rgba(0, 2, 5, 0.52));
+  background-color: #061218;
 }
 /* Natural cloud photographs drift across the sky in layered, different-depth passes. */
 .destinations-page .adv-cloud {
