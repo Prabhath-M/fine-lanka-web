@@ -13145,3 +13145,180 @@ body:has(.features:target) .typed-opening { display: none; }
     width: min(100% - 1rem, 1440px);
   }
 }
+
+/* =====================================================================
+   Destinations: "Adventure & Experiences" -- the Sky to Underground section.
+   Plan: docs/DESTINATIONS-ADVENTURE-SECTION-PLAN.md
+   Phase 2 = static desktop layout. Filter (3), gauge + scroll effects (4)
+   and the full responsive pass (5) build on these classes.
+   ===================================================================== */
+.destinations-page .adventure {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(5rem, 9vw, 8rem) 0 clamp(4rem, 7vw, 6rem);
+  color: var(--text-on-dark);
+  border-top: 1px solid rgba(216, 185, 120, 0.5);
+  background: linear-gradient(180deg, #2a4f63 0%, #1d3a52 14%, var(--ink) 40%, #0b1c23 72%, #050e12 100%);
+}
+/* Faint topographic contours: the "map" thread that ties the section to the atlas above. */
+.destinations-page .adventure-sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+  background-image:
+    repeating-radial-gradient(circle at 12% 8%, transparent 0 46px, rgba(216, 185, 120, 0.07) 47px 48px),
+    repeating-radial-gradient(circle at 92% 62%, transparent 0 58px, rgba(216, 185, 120, 0.06) 59px 60px);
+}
+
+.destinations-page .adventure-head { max-width: 46rem; margin: 0 auto clamp(3.5rem, 7vw, 6rem); text-align: center; }
+.destinations-page .adventure-head .dest-section-kicker { color: var(--brass-light); }
+.destinations-page .adventure-head h2 { margin-top: 0.75rem; font-size: clamp(2.25rem, 5vw, 4rem); color: var(--text-on-dark); }
+.destinations-page .adventure-lede { margin: 1.25rem auto 0; max-width: 54ch; color: var(--text-on-dark-muted); font-size: 1.08rem; line-height: 1.7; }
+
+/* The depth spine: one brass line running down the middle, a node per panel. */
+.destinations-page .adventure-track { position: relative; }
+.destinations-page .adventure-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, rgba(216, 185, 120, 0.7) 6%, rgba(216, 185, 120, 0.7) 94%, transparent);
+}
+.destinations-page .adventure-list { list-style: none; margin: 0; padding: 0; }
+
+.destinations-page .adventure-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 6rem);
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+.destinations-page .adventure-panel:nth-child(even) .adventure-media { order: 2; }
+.destinations-page .adventure-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.95rem;
+  height: 0.95rem;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--brass-light);
+  border-radius: 50%;
+  background: var(--ink);
+  box-shadow: 0 0 0 5px rgba(216, 185, 120, 0.14);
+}
+
+/* Media frame: illustrated placeholder, tinted by zone so the depth story reads even without photos. */
+.destinations-page .adventure-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(216, 185, 120, 0.35);
+  border-radius: 0.9rem;
+  background: linear-gradient(160deg, #35617a, #173247);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.35);
+}
+.destinations-page .adventure-panel[data-zone='land'] .adventure-media { background: linear-gradient(160deg, #4d4c37, #1e2419); }
+.destinations-page .adventure-panel[data-zone='water'] .adventure-media { background: linear-gradient(160deg, #1f5c66, #0d2a33); }
+.destinations-page .adventure-panel[data-zone='underground'] .adventure-media { background: linear-gradient(160deg, #2d2c33, #0b0c10); }
+.destinations-page .adventure-media-contours {
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(circle at 28% 118%, transparent 0 16px, rgba(216, 185, 120, 0.17) 17px 18px);
+}
+.destinations-page .adventure-media-icon {
+  position: relative;
+  width: clamp(4.5rem, 9vw, 7rem);
+  height: clamp(4.5rem, 9vw, 7rem);
+  color: var(--brass-light);
+  stroke-width: 1.1;
+  filter: drop-shadow(0 0.4rem 0.8rem rgba(0, 0, 0, 0.35));
+}
+.destinations-page .adventure-media-zone {
+  position: absolute;
+  left: 1rem;
+  bottom: 0.85rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+}
+
+.destinations-page .adventure-num {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(216, 185, 120, 0.6);
+}
+.destinations-page .adventure-title-row { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.6rem; }
+.destinations-page .adventure-icon-badge {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid rgba(216, 185, 120, 0.55);
+  border-radius: 50%;
+  color: var(--brass-light);
+}
+.destinations-page .adventure-icon-badge .icon { width: 1.5rem; height: 1.5rem; }
+.destinations-page .adventure-title-row h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); color: var(--text-on-dark); }
+.destinations-page .adventure-tagline { margin: 0.7rem 0 0.9rem; font-style: italic; font-size: 1.12rem; color: var(--brass-light); }
+.destinations-page .adventure-copy { margin: 0; max-width: 52ch; line-height: 1.75; color: var(--text-on-dark-muted); }
+
+.destinations-page .adventure-experience { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.85rem; margin-top: 1.4rem; }
+.destinations-page .adventure-experience-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+}
+.destinations-page .adventure-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+.destinations-page .adventure-tags li {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid rgba(216, 185, 120, 0.4);
+  border-radius: 999px;
+  background: rgba(216, 185, 120, 0.08);
+  font-size: 0.82rem;
+  color: var(--text-on-dark);
+}
+
+.destinations-page .adventure-closing {
+  max-width: 52rem;
+  margin: clamp(2rem, 5vw, 4rem) auto 0;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid rgba(216, 185, 120, 0.3);
+  text-align: center;
+}
+.destinations-page .adventure-closing h3 { font-size: clamp(1.9rem, 4vw, 3rem); color: var(--text-on-dark); }
+.destinations-page .adventure-closing > p:not([class]) { margin: 1.1rem auto 1.8rem; max-width: 56ch; color: var(--text-on-dark-muted); line-height: 1.75; }
+.destinations-page .adventure-signoff {
+  margin: 2rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--brass-light);
+}
+.destinations-page .adventure-brandline { margin: 0.5rem 0 0; font-style: italic; color: var(--text-on-dark-muted); }
+
+/* Minimal stacking so nothing breaks below desktop; the full responsive pass is phase 5. */
+@media (max-width: 900px) {
+  .destinations-page .adventure-spine,
+  .destinations-page .adventure-node { display: none; }
+  .destinations-page .adventure-panel { grid-template-columns: 1fr; gap: 1.5rem; }
+  .destinations-page .adventure-panel:nth-child(even) .adventure-media { order: 0; }
+}

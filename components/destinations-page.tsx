@@ -3,6 +3,7 @@
 import { useCallback, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icon } from '@/components/icons'
+import { AdventureSection } from '@/components/destinations/adventure-section'
 import { DestinationMarquee } from '@/components/destinations/destination-marquee'
 import { ChartIntro } from '@/components/destinations/chart-intro'
 import { DESTINATIONS, type DestinationRegion } from '@/lib/destinations-data'
@@ -200,6 +201,8 @@ export function DestinationsPage() {
             </div>
           </section>
         </div>
+
+        <AdventureSection />
 
         <section className="cta-band destinations-cta">
           <div className="destinations-cta-mark" aria-hidden="true">

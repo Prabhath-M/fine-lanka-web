@@ -73,7 +73,7 @@ change the page; nothing merges to `main` until Phase 6 is approved.
 |---|-------|--------|
 | 0 | Plan | Done |
 | 1 | Data and copy | Done |
-| 2 | Icons and static section | Not started |
+| 2 | Icons and static section | Done |
 | 3 | Zone filter and hero link | Not started |
 | 4 | Sky-to-Underground gauge and effects | Not started |
 | 5 | Responsive, accessibility, reduced motion | Not started |

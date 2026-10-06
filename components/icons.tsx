@@ -184,6 +184,76 @@ export const ICON_PATHS = {
       <circle cx="44" cy="6" r="2.1" fill="currentColor" stroke="none" />
     </>
   ),
+  // ---- Adventure & Experiences (Destinations page) ----
+  helicopter: (
+    <>
+      <path d="M12 27 C12 21 17 18 24 18 H31 C35 18 38 21 38 25 V27 C38 30 35 32 31 32 H19 C15 32 12 30 12 27 Z" />
+      <path d="M26 21 H31 C33 21 34 23 34 25 H26 Z" />
+      <path d="M8 12 H40 M24 12 V18" />
+      <path d="M12 25 H4 M4 20 V30" />
+      <path d="M16 38 H34 M20 32 V38 M30 32 V38" />
+    </>
+  ),
+  zipline: (
+    <>
+      <path d="M4 8 V22 M44 22 V42" />
+      <path d="M4 12 L44 28" />
+      <path d="M25 21 V26" />
+      <circle cx="25" cy="29" r="2.6" />
+      <path d="M25 32 V38 M25 34 L21 30 M25 34 L29 30 M25 38 L21 43 M25 38 L29 43" />
+    </>
+  ),
+  horse: (
+    <>
+      <path d="M14 42 L16 24 C17 16 21 10 27 8 L29 4 L31 10 L38 22 L42 30 L40 35 L35 34 L30 30 L26 34 L26 42" />
+      <path d="M19 19 L14 21 M21 13 L16 14" />
+      <circle cx="31" cy="19" r="0.9" fill="currentColor" stroke="none" />
+    </>
+  ),
+  kayak: (
+    <>
+      <path d="M4 32 C12 37 36 37 44 32 C36 29 12 29 4 32 Z" />
+      <circle cx="24" cy="17" r="3" />
+      <path d="M24 20 V29" />
+      <path d="M12 13 L36 37 M9 15 L14 9 M34 40 L39 34" />
+      <path d="M4 43 C8 41 12 45 16 43 S24 41 28 43 S36 45 44 43" />
+    </>
+  ),
+  raft: (
+    <>
+      <path d="M6 30 C6 26 10 24 14 24 H34 C38 24 42 26 42 30 C42 34 38 36 34 36 H14 C10 36 6 34 6 30 Z" />
+      <path d="M12 8 L20 24 M36 8 L28 24 M9 6 L14 10 M34 10 L39 6" />
+      <path d="M4 43 C8 39 12 45 16 41 S24 45 28 41 S36 45 44 41" />
+    </>
+  ),
+  dive: (
+    <>
+      <path d="M8 22 C8 18 12 16 16 16 H32 C36 16 40 18 40 22 V26 C40 30 37 32 34 32 C30 32 29 29 26 29 H22 C19 29 18 32 14 32 C11 32 8 30 8 26 Z" />
+      <path d="M8 22 H4 M40 22 H44 M40 18 L44 10 V6" />
+      <circle cx="20" cy="40" r="2" />
+      <circle cx="28" cy="36" r="1.5" />
+      <circle cx="25" cy="43" r="1" />
+    </>
+  ),
+  atv: (
+    <>
+      <circle cx="13" cy="33" r="7.5" />
+      <circle cx="37" cy="33" r="7.5" />
+      <circle cx="13" cy="33" r="3" />
+      <circle cx="37" cy="33" r="3" />
+      <path d="M13 25 H19 L23 19 H31 L35 25 H37" />
+      <path d="M20 26 H31 V30 H20 Z" />
+      <path d="M33 25 L35 15 H41 M22 17 H30" />
+    </>
+  ),
+  cave: (
+    <>
+      <path d="M6 42 V28 C6 14 14 8 24 8 C34 8 42 14 42 28 V42" />
+      <path d="M4 42 H44" />
+      <path d="M16 11 L18 22 L20 10 M26 9 L28 19 L30 9 M34 12 L35 19 L36 13" />
+      <path d="M14 42 L17 33 L20 42 M28 42 L31 30 L34 42" />
+    </>
+  ),
 } as const
 
 export type IconName = keyof typeof ICON_PATHS
