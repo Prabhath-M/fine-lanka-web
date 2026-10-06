@@ -1,6 +1,7 @@
 # Destinations: "Adventure & Experiences" section – implementation plan
 
-Status: **plan only, nothing implemented yet.** Branch: `feat/destinations-adventure-section`.
+Branch: `feat/destinations-adventure-section`. Work is split into small phases (below); each phase is one
+session, ends in its own commit, and leaves the branch building and passing tests.
 
 ## Goal
 
@@ -63,13 +64,62 @@ A new `<section id="adventure">` in `components/destinations-page.tsx`, after th
 - **Tests:** a small data test, like `components/destinations/destination-card.test.ts`.
 - **Delivery:** work stays on `feat/destinations-adventure-section`; merge to `main` only after review.
 
-## Build order
+## Phases
 
-1. Data and copy.
-2. Static layout and icons.
-3. Scroll gauge, filters and hover states.
-4. Responsive, accessibility and polish pass.
-5. Review on the branch, then merge.
+Each phase is self-contained: it ends with `tsc` + `vitest` green, a commit, and a push. Phases 2 onward
+change the page; nothing merges to `main` until Phase 6 is approved.
+
+| # | Phase | Status |
+|---|-------|--------|
+| 0 | Plan | Done |
+| 1 | Data and copy | Not started |
+| 2 | Icons and static section | Not started |
+| 3 | Zone filter and hero link | Not started |
+| 4 | Sky-to-Underground gauge and effects | Not started |
+| 5 | Responsive, accessibility, reduced motion | Not started |
+| 6 | Photos, QA and merge | Not started |
+
+### Phase 1 – Data and copy
+- Add `lib/adventure-data.ts`: typed `ADVENTURES` (number, slug, title, tagline, body, tags, zone, icon key,
+  image) plus section header/closing copy, all verbatim from the source copy below.
+- Add `lib/adventure-data.test.ts`: 8 entries, numbers 01–08 in order, unique slugs, every zone valid,
+  no empty copy.
+- Exit: tests green; no UI change.
+
+### Phase 2 – Icons and static section
+- Add 8 inline SVG line icons (helicopter, zip line, horse, kayak, raft, dive, ATV, cave) in the style of
+  `components/icons.tsx`.
+- Add `components/destinations/adventure-section.tsx` and `adventure-panel.tsx` (server-renderable, no
+  effects yet): header block, 8 dossier panels (numeral, icon, title, tagline, body, tag chips, photo
+  frame with illustrated placeholder), closing band with the enquiry button.
+- Insert into `components/destinations-page.tsx` between the atlas and the CTA band; add `.adventure-*`
+  desktop styles under `.destinations-page` in `app/globals.css`.
+- Exit: section renders on `/destinations` at desktop width; tsc and tests green.
+
+### Phase 3 – Zone filter and hero link
+- Zone chips (All / Air / Land / Water / Underground) reusing the filter-bar styling, keyboard operable,
+  with an `aria-live` count.
+- "Adventure & Experiences" anchor link in the page hero (`#adventure`) with smooth scroll.
+- Exit: filtering and the anchor work; tests green.
+
+### Phase 4 – Sky-to-Underground gauge and effects
+- Sticky brass altitude gauge (Sky, Canopy, Land, Water, Depth) driven by an `IntersectionObserver`.
+- Scroll-linked background shift from dawn sky to ink navy to deep teal-black.
+- Panel hover/focus reveal (duotone to full colour, brass contour lines); staggered entrance.
+- Exit: effects smooth on desktop; no layout shift; tests green.
+
+### Phase 5 – Responsive, accessibility, reduced motion
+- Mobile layout: gauge becomes a slim horizontal progress bar, panels stack; check against the smaller
+  mobile map sizes and the new mobile nav.
+- Accessibility pass: heading order, list semantics, focus states, contrast on the dark background.
+- `prefers-reduced-motion`: all scroll and entrance effects off.
+- Exit: verified at 360, 390, 768, 1024 and 1440 px widths.
+
+### Phase 6 – Photos, QA and merge
+- Integrate the 8 photos (webp 480w / 960w / 1600w, lazy-loaded, alt text) when supplied; otherwise keep
+  the placeholders.
+- Final QA: `tsc`, `vitest`, `next build`, Lighthouse spot check on `/destinations`.
+- Review on the branch, then merge to `main`.
 
 ## Open points
 
