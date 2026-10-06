@@ -13401,37 +13401,6 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure-screen-overlay.is-on { opacity: 0.78; }
 
-/* Fixed passes deliberately use separate z-layers: one bird can pass behind the page content,
-   while another pass flies above it. They never cross through a card or text node mid-flight. */
-.destinations-page .adventure-bird-overlay {
-  position: fixed;
-  left: 0;
-  width: clamp(8rem, 15vw, 15rem);
-  height: auto;
-  aspect-ratio: 9 / 16;
-  object-fit: contain;
-  pointer-events: none;
-  opacity: 0;
-  visibility: hidden;
-  will-change: transform, opacity;
-  transition: opacity 0.45s var(--ease), visibility 0s linear 0.45s;
-}
-.destinations-page .adventure-bird-overlay.is-on {
-  opacity: 1;
-  visibility: visible;
-  transition-delay: 0s;
-}
-.destinations-page .adventure-bird-overlay-under {
-  z-index: 0;
-  top: 16%;
-  animation: adv-overlay-bird-under 18s linear infinite;
-}
-.destinations-page .adventure-bird-overlay-over {
-  z-index: 31;
-  top: 58%;
-  animation: adv-overlay-bird-over 24s linear -8s infinite;
-}
-
 .destinations-page .adventure-tint-view {
   position: sticky;
   top: 0;
@@ -13724,16 +13693,6 @@ body:has(.features:target) .typed-opening { display: none; }
 @keyframes adv-cloud-drift {
   from { transform: translate3d(-48vw, 0, 0); }
   to { transform: translate3d(125vw, 1.5vh, 0); }
-}
-@keyframes adv-overlay-bird-under {
-  0%, 8% { transform: translate3d(-18rem, -2vh, 0) rotate(-3deg); }
-  42% { transform: translate3d(42vw, 2vh, 0) rotate(2deg); }
-  92%, 100% { transform: translate3d(112vw, -1vh, 0) rotate(-2deg); }
-}
-@keyframes adv-overlay-bird-over {
-  0%, 12% { transform: translate3d(108vw, 1vh, 0) scaleX(-1) rotate(2deg); }
-  48% { transform: translate3d(48vw, -2vh, 0) scaleX(-1) rotate(-2deg); }
-  88%, 100% { transform: translate3d(-18rem, 1vh, 0) scaleX(-1) rotate(3deg); }
 }
 @keyframes adv-bird-flight {
   0% { transform: translate3d(-42vw, 0, 0); }

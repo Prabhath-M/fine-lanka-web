@@ -9,7 +9,7 @@ import {
   type AdventureStage,
 } from '@/lib/adventure-data'
 import { AdventurePanel } from '@/components/destinations/adventure-panel'
-import { AdventureBirdOverlay, AdventureScenes, AdventureScreenOverlay } from '@/components/destinations/adventure-scenes'
+import { AdventureScenes, AdventureScreenOverlay } from '@/components/destinations/adventure-scenes'
 
 /**
  * "Adventure & Experiences" -- the "Sky to Underground" section of the
@@ -302,8 +302,7 @@ export function AdventureSection() {
         <AdventureScenes stage={stage} />
       </div>
       <div className="adventure-sky" aria-hidden="true" />
-      <AdventureScreenOverlay active={stage === 'water'} />
-      <AdventureBirdOverlay active={stage === 'canopy'} />
+      <AdventureScreenOverlay active={stage === 'water' || stage === 'ocean'} />
 
       <div className="container">
         <header className="adventure-head">
