@@ -53,4 +53,19 @@ describe('AdventureSection', () => {
     expect(html.match(/class="adventure-panel"[^>]*data-stage="/g)).toHaveLength(ADVENTURES.length)
     expect(html).toContain('data-motion="off"')
   })
+
+  it('keeps a valid heading order: one h2, then h3s only', () => {
+    const levels = [...html.matchAll(/<h([1-6])[ >]/g)].map((m) => Number(m[1]))
+    expect(levels[0]).toBe(2)
+    expect(levels.filter((level) => level === 2)).toHaveLength(1)
+    expect(levels.slice(1).every((level) => level === 3)).toBe(true)
+    expect(levels).toHaveLength(1 + ADVENTURES.length + 1)
+  })
+
+  it('keeps list semantics on the unstyled lists and hides decoration from assistive tech', () => {
+    expect(html).toContain('class="adventure-list" role="list"')
+    expect(html.match(/class="adventure-tags" role="list"/g)).toHaveLength(ADVENTURES.length)
+    expect(html.match(/class="adventure-media" aria-hidden="true"/g)).toHaveLength(ADVENTURES.length)
+    expect(html).toContain('class="adventure-tint" aria-hidden="true"')
+  })
 })

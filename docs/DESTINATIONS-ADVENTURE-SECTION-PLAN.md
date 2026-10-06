@@ -76,7 +76,7 @@ change the page; nothing merges to `main` until Phase 6 is approved.
 | 2 | Icons and static section | Done |
 | 3 | Zone filter and hero link | Done |
 | 4 | Sky-to-Underground gauge and effects | Done |
-| 5 | Responsive, accessibility, reduced motion | Not started |
+| 5 | Responsive, accessibility, reduced motion | Done (width check in a browser still to do) |
 | 6 | Photos, QA and merge | Not started |
 
 ### Phase 1 – Data and copy

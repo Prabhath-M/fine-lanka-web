@@ -19,7 +19,7 @@ import { AdventurePanel } from '@/components/destinations/adventure-panel'
  * "Adventure & Experiences" -- the "Sky to Underground" section of the
  * Destinations page. See docs/DESTINATIONS-ADVENTURE-SECTION-PLAN.md.
  *
- * Phase 3 added the zone filter. Phase 4 adds the altitude gauge, the
+ * Phase 3 added the zone filter. Phase 4 added the altitude gauge, the
  * scroll-linked background shift (`data-stage` on the section drives the CSS)
  * and the staggered panel entrance. One IntersectionObserver handles both the
  * active stage and the entrance; it never touches layout, so nothing shifts.
@@ -143,7 +143,7 @@ export function AdventureSection() {
               ))}
             </ol>
           </div>
-          <ol className="adventure-list">
+          <ol className="adventure-list" role="list">
             {visible.map((adventure) => (
               <AdventurePanel key={adventure.slug} adventure={adventure} />
             ))}

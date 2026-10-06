@@ -36,7 +36,7 @@ export function AdventurePanel({ adventure }: { adventure: Adventure }) {
         <p className="adventure-copy">{adventure.body}</p>
         <div className="adventure-experience">
           <span className="adventure-experience-label">Experience</span>
-          <ul className="adventure-tags">
+          <ul className="adventure-tags" role="list">
             {adventure.tags.map((tag) => (
               <li key={tag}>{tag}</li>
             ))}
