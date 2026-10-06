@@ -42,4 +42,15 @@ describe('AdventureSection', () => {
     expect(html).toContain('aria-live="polite"')
     expect(html).toContain('Showing all 8 experiences')
   })
+
+  it('renders the altitude gauge (decorative) with all five stages', () => {
+    expect(html).toContain('class="adventure-gauge" aria-hidden="true"')
+    for (const label of ['Sky', 'Canopy', 'Land', 'Water', 'Depth']) expect(html).toContain(`</span>${label}</li>`)
+    expect(html).toContain('data-stage="sky"')
+  })
+
+  it('tags every panel with its gauge stage and keeps entrance effects off in server HTML', () => {
+    expect(html.match(/class="adventure-panel"[^>]*data-stage="/g)).toHaveLength(ADVENTURES.length)
+    expect(html).toContain('data-motion="off"')
+  })
 })

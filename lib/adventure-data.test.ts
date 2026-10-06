@@ -4,7 +4,9 @@ import {
   ADVENTURE_CLOSING,
   ADVENTURE_INTRO,
   ADVENTURE_ZONES,
+  ADVENTURE_STAGES,
   adventureCountLabel,
+  adventureStage,
   adventuresForZone,
 } from './adventure-data'
 
@@ -58,5 +60,18 @@ describe('adventureCountLabel', () => {
     expect(adventureCountLabel(8, 'all')).toBe('Showing all 8 experiences')
     expect(adventureCountLabel(3, 'water')).toBe('Showing 3 water experiences')
     expect(adventureCountLabel(1, 'underground')).toBe('Showing 1 underground experience')
+  })
+})
+
+describe('adventureStage', () => {
+  it('places the eight experiences from sky down to depth', () => {
+    expect(ADVENTURES.map(adventureStage)).toEqual([
+      'sky', 'canopy', 'land', 'water', 'water', 'water', 'land', 'depth',
+    ])
+  })
+
+  it('only uses stages the gauge defines', () => {
+    const ids = ADVENTURE_STAGES.map((stage) => stage.id)
+    for (const a of ADVENTURES) expect(ids).toContain(adventureStage(a))
   })
 })

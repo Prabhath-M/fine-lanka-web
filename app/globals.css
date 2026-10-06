@@ -13361,9 +13361,120 @@ body:has(.features:target) .typed-opening { display: none; }
   color: var(--text-on-dark-muted);
 }
 
+/* ---- Phase 4: altitude gauge, background shift, panel effects ---- */
+
+/* Scroll-linked tint: the section's data-stage (set by the IntersectionObserver) fades the
+   background from dawn sky, through ink navy, to deep teal-black. Opacity-only transitions. */
+.destinations-page .adventure-tint {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: rgba(70, 120, 150, 0.22);
+  transition: background-color 1.2s var(--ease);
+}
+.destinations-page .adventure[data-stage='canopy'] .adventure-tint { background: rgba(48, 92, 96, 0.2); }
+.destinations-page .adventure[data-stage='land'] .adventure-tint { background: rgba(20, 38, 58, 0.28); }
+.destinations-page .adventure[data-stage='water'] .adventure-tint { background: rgba(10, 52, 62, 0.34); }
+.destinations-page .adventure[data-stage='depth'] .adventure-tint { background: rgba(2, 8, 10, 0.5); }
+
+/* Gauge: a sticky brass scale in the left gutter (desktop). */
+@media (min-width: 901px) {
+  .destinations-page .adventure-track { padding-left: 5.5rem; }
+  .destinations-page .adventure-spine { left: calc(50% + 2.75rem); }
+}
+.destinations-page .adventure-gauge {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 5.5rem;
+  pointer-events: none;
+}
+.destinations-page .adventure-gauge-scale {
+  position: sticky;
+  top: 8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+  margin: 0;
+  padding: 0 0 0 0.9rem;
+  list-style: none;
+  border-left: 1px solid rgba(216, 185, 120, 0.55);
+}
+.destinations-page .adventure-gauge-scale li {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(216, 185, 120, 0.5);
+  transition: color 0.5s var(--ease), transform 0.5s var(--ease);
+}
+.destinations-page .adventure-gauge-tick {
+  position: absolute;
+  top: 50%;
+  left: -0.9rem;
+  width: 0.5rem;
+  height: 1px;
+  background: currentColor;
+  transition: width 0.5s var(--ease);
+}
+.destinations-page .adventure-gauge-scale li.is-active { color: var(--brass-light); transform: translateX(0.3rem); }
+.destinations-page .adventure-gauge-scale li.is-active .adventure-gauge-tick { width: 1rem; height: 2px; }
+.destinations-page .adventure-gauge-scale li.is-dim { opacity: 0.35; }
+
+/* Hover / focus: duotone to full colour, brass contour lines brighten. */
+.destinations-page .adventure-media { filter: saturate(0.6) brightness(0.92); transition: filter 0.6s var(--ease), transform 0.6s var(--ease), border-color 0.6s var(--ease), opacity 0.7s var(--ease); }
+.destinations-page .adventure-media-contours { transition: opacity 0.6s var(--ease); }
+.destinations-page .adventure-panel:hover .adventure-media,
+.destinations-page .adventure-panel:focus-within .adventure-media {
+  filter: none;
+  transform: translateY(-4px);
+  border-color: rgba(216, 185, 120, 0.8);
+}
+.destinations-page .adventure-panel:hover .adventure-media-contours,
+.destinations-page .adventure-panel:focus-within .adventure-media-contours {
+  background: repeating-radial-gradient(circle at 28% 118%, transparent 0 16px, rgba(216, 185, 120, 0.4) 17px 18px);
+}
+
+/* Staggered entrance: media first, then the text elements in turn. Only when JS has marked
+   the section data-motion="on", so server HTML and no-JS visitors see everything. */
+.destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-media,
+.destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-body > * {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > * {
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(2) { transition-delay: 0.1s; }
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(3) { transition-delay: 0.2s; }
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(4) { transition-delay: 0.3s; }
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(5) { transition-delay: 0.4s; }
+.destinations-page .adventure[data-motion='on'] .adventure-node { transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease); }
+.destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-node { transform: translate(-50%, -50%) scale(0.4); }
+
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page .adventure-tint,
+  .destinations-page .adventure-gauge-scale li,
+  .destinations-page .adventure-gauge-tick,
+  .destinations-page .adventure-media,
+  .destinations-page .adventure-media-contours,
+  .destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > *,
+  .destinations-page .adventure[data-motion='on'] .adventure-node { transition: none; }
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-media,
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-body > *,
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-node { opacity: 1; transform: none; }
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-node { transform: translate(-50%, -50%); }
+  .destinations-page .adventure-panel:hover .adventure-media,
+  .destinations-page .adventure-panel:focus-within .adventure-media { transform: none; }
+}
+
 /* Minimal stacking so nothing breaks below desktop; the full responsive pass is phase 5. */
 @media (max-width: 900px) {
   .destinations-page .adventure-spine,
+  .destinations-page .adventure-gauge,
   .destinations-page .adventure-node { display: none; }
   .destinations-page .adventure-panel { grid-template-columns: 1fr; gap: 1.5rem; }
   .destinations-page .adventure-panel:nth-child(even) .adventure-media { order: 0; }

@@ -145,3 +145,29 @@ export function adventureCountLabel(count: number, zone: AdventureZone | 'all'):
   const label = ADVENTURE_ZONES.find((z) => z.id === zone)?.label ?? ''
   return `Showing ${count} ${label.toLowerCase()} ${noun}`
 }
+
+/** Altitude gauge stages, top (sky) to bottom (depth). */
+export type AdventureStage = 'sky' | 'canopy' | 'land' | 'water' | 'depth'
+
+export const ADVENTURE_STAGES: { id: AdventureStage; label: string }[] = [
+  { id: 'sky', label: 'Sky' },
+  { id: 'canopy', label: 'Canopy' },
+  { id: 'land', label: 'Land' },
+  { id: 'water', label: 'Water' },
+  { id: 'depth', label: 'Depth' },
+]
+
+/** Where an experience sits on the gauge. The zip line is the only "canopy" entry. */
+export function adventureStage(adventure: Pick<Adventure, 'zone' | 'slug'>): AdventureStage {
+  if (adventure.slug === 'ella-zip-line') return 'canopy'
+  switch (adventure.zone) {
+    case 'air':
+      return 'sky'
+    case 'land':
+      return 'land'
+    case 'water':
+      return 'water'
+    case 'underground':
+      return 'depth'
+  }
+}

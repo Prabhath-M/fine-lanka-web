@@ -1,6 +1,6 @@
 import { Icon } from '@/components/icons'
 import type { Adventure } from '@/lib/adventure-data'
-import { ADVENTURE_ZONES } from '@/lib/adventure-data'
+import { ADVENTURE_ZONES, adventureStage } from '@/lib/adventure-data'
 
 /**
  * One "field dossier" in the Adventure & Experiences section. Server-renderable:
@@ -12,7 +12,7 @@ export function AdventurePanel({ adventure }: { adventure: Adventure }) {
   const headingId = `adventure-${adventure.slug}`
 
   return (
-    <li className="adventure-panel" data-zone={adventure.zone} aria-labelledby={headingId}>
+    <li className="adventure-panel" data-zone={adventure.zone} data-stage={adventureStage(adventure)} aria-labelledby={headingId}>
       <span className="adventure-node" aria-hidden="true" />
 
       <figure className="adventure-media" aria-hidden="true">
