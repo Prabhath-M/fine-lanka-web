@@ -25,9 +25,9 @@ const WISPS: Layer[] = [
 ]
 
 const BIRDS: Layer[] = [
-  { x: 18, y: 18, size: 0.92, duration: 42, delay: -8 },
-  { x: 58, y: 38, size: 0.72, duration: 50, delay: -25 },
-  { x: 82, y: 62, size: 0.58, duration: 57, delay: -39 },
+  { x: 8, y: 15, size: 0.72, duration: 42, delay: -8 },
+  { x: 12, y: 38, size: 0.56, duration: 51, delay: -25 },
+  { x: 6, y: 61, size: 0.48, duration: 58, delay: -39 },
 ]
 
 const MOTES = [
@@ -55,9 +55,13 @@ const RAYS = [
 ]
 
 const FISH = [
-  { src: '/images/adventure-fish-salmon.gif', ar: '574 / 182', x: 10, y: 24, size: 23, duration: 46, delay: -12 },
-  { src: '/images/adventure-fish-perch.gif', ar: '588 / 304', x: 56, y: 52, size: 18, duration: 58, delay: -31 },
-  { src: '/images/adventure-fish-red.gif', ar: '638 / 190', x: 24, y: 75, size: 20, duration: 51, delay: -22 },
+  { src: '/images/adventure-fish-salmon.png', ar: '574 / 182', x: 12, y: 18, size: 14, start: '-26vw', mid: '42vw', end: '112vw', lift: '-2vh', flip: 1, duration: 38, delay: -8 },
+  { src: '/images/adventure-fish-perch.png', ar: '588 / 304', x: 72, y: 32, size: 11, start: '112vw', mid: '50vw', end: '-24vw', lift: '2vh', flip: -1, duration: 46, delay: -21 },
+  { src: '/images/adventure-fish-red.png', ar: '638 / 190', x: 34, y: 43, size: 12, start: '-22vw', mid: '38vw', end: '108vw', lift: '-3vh', flip: 1, duration: 52, delay: -34 },
+  { src: '/images/adventure-fish-salmon.png', ar: '574 / 182', x: 80, y: 55, size: 9, start: '110vw', mid: '58vw', end: '-20vw', lift: '1vh', flip: -1, duration: 43, delay: -15 },
+  { src: '/images/adventure-fish-perch.png', ar: '588 / 304', x: 22, y: 66, size: 10, start: '-24vw', mid: '44vw', end: '114vw', lift: '-2vh', flip: 1, duration: 57, delay: -42 },
+  { src: '/images/adventure-fish-red.png', ar: '638 / 190', x: 66, y: 76, size: 8, start: '108vw', mid: '52vw', end: '-22vw', lift: '2vh', flip: -1, duration: 49, delay: -7 },
+  { src: '/images/adventure-fish-salmon.png', ar: '574 / 182', x: 44, y: 87, size: 7, start: '-20vw', mid: '36vw', end: '110vw', lift: '-1vh', flip: 1, duration: 61, delay: -29 },
 ]
 
 const JELLYFISH = [
@@ -83,18 +87,22 @@ const BUBBLES = [
 ]
 
 const FIREFLIES = [
-  { x: 9, y: 22, dx: 40, dy: -30, size: 4, duration: 15, delay: -2 },
-  { x: 17, y: 62, dx: -30, dy: -50, size: 5, duration: 18, delay: -11 },
-  { x: 26, y: 38, dx: 50, dy: 20, size: 3, duration: 13, delay: -6 },
-  { x: 34, y: 78, dx: -20, dy: -40, size: 4, duration: 17, delay: -14 },
-  { x: 42, y: 28, dx: 36, dy: 34, size: 5, duration: 19, delay: -4 },
-  { x: 50, y: 56, dx: -44, dy: -26, size: 3, duration: 14, delay: -9 },
-  { x: 58, y: 18, dx: 28, dy: 46, size: 4, duration: 16, delay: -16 },
-  { x: 66, y: 70, dx: -38, dy: -34, size: 5, duration: 20, delay: -1 },
-  { x: 74, y: 44, dx: 46, dy: -22, size: 3, duration: 12, delay: -8 },
-  { x: 82, y: 82, dx: -26, dy: -48, size: 4, duration: 18, delay: -13 },
-  { x: 90, y: 30, dx: -34, dy: 38, size: 5, duration: 15, delay: -5 },
-  { x: 95, y: 60, dx: 22, dy: -40, size: 3, duration: 17, delay: -10 },
+  { x: 7, y: 18, dx: 40, dy: -30, size: 5, duration: 15, delay: -2 },
+  { x: 14, y: 46, dx: -30, dy: -50, size: 8, duration: 18, delay: -11 },
+  { x: 22, y: 72, dx: 50, dy: 20, size: 4, duration: 13, delay: -6 },
+  { x: 30, y: 30, dx: -20, dy: -40, size: 6, duration: 17, delay: -14 },
+  { x: 38, y: 84, dx: 36, dy: 34, size: 9, duration: 19, delay: -4 },
+  { x: 46, y: 58, dx: -44, dy: -26, size: 4, duration: 14, delay: -9 },
+  { x: 54, y: 20, dx: 28, dy: 46, size: 7, duration: 16, delay: -16 },
+  { x: 61, y: 74, dx: -38, dy: -34, size: 5, duration: 20, delay: -1 },
+  { x: 68, y: 42, dx: 46, dy: -22, size: 10, duration: 12, delay: -8 },
+  { x: 75, y: 88, dx: -26, dy: -48, size: 6, duration: 18, delay: -13 },
+  { x: 82, y: 26, dx: -34, dy: 38, size: 5, duration: 15, delay: -5 },
+  { x: 89, y: 60, dx: 22, dy: -40, size: 8, duration: 17, delay: -10 },
+  { x: 95, y: 36, dx: -24, dy: 26, size: 4, duration: 14, delay: -3 },
+  { x: 18, y: 90, dx: 30, dy: -22, size: 7, duration: 21, delay: -17 },
+  { x: 57, y: 48, dx: -36, dy: 30, size: 5, duration: 16, delay: -7 },
+  { x: 93, y: 78, dx: 42, dy: -36, size: 9, duration: 19, delay: -12 },
 ]
 
 function TransparentVideo({
@@ -169,7 +177,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
             <span key={`cloud-${i}`} className="adv-cloud adv-cloud-bank" style={vars({ '--x': `${cloud.x}%`, '--y': `${cloud.y}%`, '--w': `${cloud.size}vw`, '--dur': `${cloud.duration}s`, '--delay': `${cloud.delay}s`, '--o': 0.48 })} />
           ))}
           {BIRDS.map((bird, i) => (
-            <AnimatedGif key={i} src="/images/adventure-birds-flock.gif" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <AnimatedGif key={i} src="/images/adventure-birds-flock.png" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
         </>
       )
@@ -177,7 +185,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
       return (
         <>
           {BIRDS.map((bird, i) => (
-            <AnimatedGif key={`bird-${i}`} src="/images/adventure-birds-flock.gif" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <AnimatedGif key={`bird-${i}`} src="/images/adventure-birds-flock.png" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
           {MOTES.map((mote, i) => (
             <span key={i} className="adv-mote" style={vars({ '--x': `${mote.x}%`, '--y': `${mote.y}%`, '--dur': `${mote.duration}s`, '--delay': `${mote.delay}s` })} />
@@ -195,7 +203,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
             <span key={`ray-${i}`} className="adv-ray" style={vars({ '--x': `${ray.x}%`, '--w': `${ray.width}vw`, '--dur': `${ray.duration}s`, '--delay': `${ray.delay}s` })} />
           ))}
           {FISH.map((fish, i) => (
-            <AnimatedGif key={`fish-${i}`} src={fish.src} className="adv-fish" style={vars({ '--ar': fish.ar, '--x': `${fish.x}%`, '--y': `${fish.y}%`, '--s': `${fish.size}vw`, '--dur': `${fish.duration}s`, '--delay': `${fish.delay}s` })} />
+            <AnimatedGif key={`fish-${i}`} src={fish.src} className="adv-fish" style={vars({ '--ar': fish.ar, '--x': `${fish.x}%`, '--y': `${fish.y}%`, '--s': `${fish.size}vw`, '--dur': `${fish.duration}s`, '--delay': `${fish.delay}s`, '--start': fish.start, '--mid': fish.mid, '--end': fish.end, '--lift': fish.lift, '--flip': fish.flip })} />
           ))}
           {JELLYFISH.map((jelly, i) => (
             <TransparentVideo key={`jelly-${i}`} src="/images/adventure-real-jellyfish.webm" className={`adv-jelly adv-jelly-${jelly.kind}`} active={active} style={vars({ '--x': `${jelly.x}%`, '--s': `${jelly.size}vw`, '--dur': `${jelly.duration}s`, '--delay': `${jelly.delay}s`, '--dx': `${jelly.drift}px` })} />

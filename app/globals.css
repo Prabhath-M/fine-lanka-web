@@ -13587,12 +13587,12 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-bird {
   top: var(--y);
   left: var(--x);
-  width: clamp(16rem, calc(30rem * var(--s)), 44rem);
+  width: clamp(12rem, calc(24rem * var(--s)), 34rem);
   aspect-ratio: 800 / 330;
   object-fit: contain;
   object-position: center;
   opacity: 0.94;
-  filter: drop-shadow(0 0 0.28rem rgba(18, 34, 20, 0.34)) drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.24));
+  filter: drop-shadow(0 0 0.22rem rgba(18, 34, 20, 0.26)) drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.2));
   transform: translate3d(-50%, 0, 0);
   animation: adv-bird-flight var(--dur) linear var(--delay) infinite;
   will-change: transform;
@@ -13638,13 +13638,14 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-fish {
   top: var(--y);
   left: 0;
-  width: min(var(--s), 26rem);
+  width: min(var(--s), 18rem);
   aspect-ratio: var(--ar, 16 / 9);
   object-fit: contain;
   object-position: center;
-  opacity: 0.92;
-  filter: drop-shadow(0 0 1.2rem rgba(97, 201, 233, 0.34));
+  opacity: 0.9;
+  filter: drop-shadow(0 0 0.8rem rgba(97, 201, 233, 0.22));
   animation: adv-fish-drift var(--dur) ease-in-out var(--delay) infinite;
+  animation-direction: var(--direction, normal);
   will-change: transform;
 }
 .destinations-page .adv-jelly {
@@ -13694,9 +13695,10 @@ body:has(.features:target) .typed-opening { display: none; }
   to { transform: translate3d(125vw, 1.5vh, 0); }
 }
 @keyframes adv-bird-flight {
-  0% { transform: translate3d(-50%, 0, 0); }
-  50% { transform: translate3d(50vw, -2vh, 0); }
-  100% { transform: translate3d(108vw, 1vh, 0); }
+  0% { transform: translate3d(-42vw, 0, 0); }
+  18% { transform: translate3d(-8vw, -1vh, 0); }
+  72% { transform: translate3d(62vw, -2vh, 0); }
+  100% { transform: translate3d(118vw, 1vh, 0); }
 }
 @keyframes adv-fly {
   0% { transform: translate3d(-12vw, 0, 0); }
@@ -13706,8 +13708,9 @@ body:has(.features:target) .typed-opening { display: none; }
   100% { transform: translate3d(112vw, 0, 0); }
 }
 @keyframes adv-fish-drift {
-  0%, 100% { transform: translate3d(-9vw, 1vh, 0) rotate(-1deg); }
-  50% { transform: translate3d(42vw, -2vh, 0) rotate(2deg); }
+  0% { transform: translate3d(var(--start), 1vh, 0) scaleX(var(--flip, 1)) rotate(-1deg); }
+  50% { transform: translate3d(var(--mid), var(--lift, -2vh), 0) scaleX(var(--flip, 1)) rotate(2deg); }
+  100% { transform: translate3d(var(--end), 0, 0) scaleX(var(--flip, 1)) rotate(-1deg); }
 }
 @keyframes adv-mote {
   0% { opacity: 0; transform: translate3d(0, 0, 0); }
@@ -13742,7 +13745,7 @@ body:has(.features:target) .typed-opening { display: none; }
 @media (max-width: 720px) {
   .destinations-page .adv-cloud:nth-child(n + 5),
   .destinations-page .adv-bubble:nth-child(n + 9),
-  .destinations-page .adv-firefly:nth-child(n + 9),
+  .destinations-page .adv-firefly:nth-child(n + 13),
   .destinations-page .adv-mote:nth-child(n + 6) { display: none; }
 }
 /* Honor reduced-motion preferences while keeping the realistic still frames visible. */
@@ -13796,7 +13799,7 @@ body:has(.features:target) .typed-opening { display: none; }
 @media (max-width: 720px) {
   .destinations-page .adv-cloud:nth-child(n + 6),
   .destinations-page .adv-bubble:nth-child(n + 8),
-  .destinations-page .adv-firefly:nth-child(n + 10),
+  .destinations-page .adv-firefly:nth-child(n + 14),
   .destinations-page .adv-mote:nth-child(n + 6) { display: none; }
 }
 
