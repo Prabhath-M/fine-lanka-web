@@ -63,9 +63,10 @@ describe('AdventureSection', () => {
     expect(html.match(/class="adventure-scene is-on"/g)).toHaveLength(1)
     expect(html).toContain('adv-cloud') // sky: clouds
     expect(html).toContain('adv-bird') // canopy and land: birds
-    expect(html).toContain('adv-drop') // water: splashes
+    expect(html).toContain('adv-ripple') // water: photographic light on moving rapids
     expect(html).toContain('adv-fish') // ocean: fish
     expect(html).toContain('adv-jelly') // ocean: jellyfish
+    expect(html).toContain('adv-bubble') // ocean: bubbles
     expect(html).toContain('adv-firefly') // cave: fireflies
   })
 
