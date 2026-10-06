@@ -234,11 +234,10 @@ export function AdventureScreenOverlay({ active }: { active: boolean }) {
 }
 
 function LittleBird({ className }: { className: string }) {
-  // The GIF is a tall, mostly empty frame with stray specks along its bottom edge, so the
-  // crop box shows only the area the bird actually flies in.
+  // Animated WebP with a real (soft) alpha channel, pre-cropped to the bird's flight area.
   return (
     <span className={`adventure-little-bird ${className}`}>
-      <AnimatedGif src="/images/adventure-little-bird.gif" className="adventure-little-bird-img" />
+      <AnimatedGif src="/images/adventure-little-bird.webp" className="adventure-little-bird-img" />
     </span>
   )
 }
