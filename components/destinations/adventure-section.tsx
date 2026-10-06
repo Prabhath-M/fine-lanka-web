@@ -19,6 +19,10 @@ import { AdventureScenes } from '@/components/destinations/adventure-scenes'
  * `data-stage` on the section also drives the text colours. One IntersectionObserver handles both the
  * active stage and the entrance; it never touches layout, so nothing shifts.
  */
+/** Scroll-linked animations: not in every TypeScript DOM lib yet. */
+type ScrollTimelineCtor = new (options: { source: Element | null }) => AnimationTimeline
+type ScrollLinkedAnimation = Animation & { rangeStart: string; rangeEnd: string }
+
 /** The pinned viewport never sits higher than this (the sticky site header's height). */
 const PIN_MIN_TOP_REM = 5.75
 /** Space between two neighbouring points while they are held, in rem. */
@@ -50,7 +54,9 @@ export function AdventureSection() {
   // bar; its progress is written to the panel as `--p`, 0 to 1), and a move, where the whole stack
   // slides up by one point. So while a point is held, its neighbours are held too. The progress only
   // ever goes up, so a built point stays built; only the background scene changes with the section.
-  // Reads are batched before writes.
+  // The stack's movement is a scroll-linked Web Animation, so the browser runs it on the compositor,
+  // in step with the pinned viewport (no one-frame lag); browsers without scroll timelines fall back
+  // to writing the transform from the scroll handler. Reads are batched before writes.
   useEffect(() => {
     if (mode !== 'scrub') return
     const root = sectionRef.current
@@ -71,6 +77,42 @@ export function AdventureSection() {
     let frame = 0
     let lastY = Number.NaN
     let lastIndex = -1
+    let lastW = 0
+    let lastH = 0
+    let docTop = Number.NaN // the track's top edge in the document
+    let anim: Animation | null = null
+    const ScrollTimelineApi = (window as unknown as { ScrollTimeline?: ScrollTimelineCtor }).ScrollTimeline
+    const canTimeline = !!ScrollTimelineApi && typeof Animation !== 'undefined' && 'rangeStart' in Animation.prototype
+
+    // The stack's offset at the middle of each point, and the scroll-linked animation that moves it.
+    const offsetAt = (index: number) => railH / 2 - (index * step + step / 2)
+    const buildAnimation = () => {
+      anim?.cancel()
+      anim = null
+      if (!canTimeline || !ScrollTimelineApi) return
+      let effect: ScrollLinkedAnimation | null = null
+      try {
+        const cycle = hold + step
+        const frames: Keyframe[] = []
+        for (let i = 0; i < count; i++) {
+          const at = (i * cycle) / total
+          const heldUntil = (i * cycle + hold) / total
+          frames.push({ offset: at, transform: `translate3d(0, ${offsetAt(i)}px, 0)` })
+          frames.push({ offset: heldUntil, transform: `translate3d(0, ${offsetAt(i)}px, 0)` })
+        }
+        const timeline = new ScrollTimelineApi({ source: document.scrollingElement ?? document.documentElement })
+        docTop = track.getBoundingClientRect().top + window.scrollY
+        const start = docTop - railTop
+        effect = list.animate(frames, { timeline, fill: 'both', easing: 'linear' } as KeyframeAnimationOptions) as ScrollLinkedAnimation
+        effect.rangeStart = `${start}px`
+        effect.rangeEnd = `${start + total}px`
+        anim = effect
+        list.style.transform = ''
+      } catch {
+        effect?.cancel()
+        anim = null
+      }
+    }
 
     const measure = () => {
       const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16
@@ -86,6 +128,9 @@ export function AdventureSection() {
       root.style.setProperty('--step', `${step}px`)
       track.style.height = `${railH + total}px`
       lastY = Number.NaN
+      lastW = window.innerWidth
+      lastH = vh
+      buildAnimation()
     }
     const update = () => {
       frame = 0
@@ -99,10 +144,15 @@ export function AdventureSection() {
       if (f <= hold) held = hold > 0 ? f / hold : 1
       else u = k + (f - hold) / step
 
-      const y = Math.round((railH / 2 - (u * step + step / 2)) * 10) / 10
-      if (y !== lastY) {
-        lastY = y
-        list.style.transform = `translate3d(0, ${y}px, 0)`
+      if (anim) {
+        // Content above the section can change height (images, fonts): keep the timeline lined up.
+        if (Math.abs(rect.top + window.scrollY - docTop) > 1) buildAnimation()
+      } else {
+        const y = Math.round(offsetAt(0) * 10 - u * step * 10) / 10
+        if (y !== lastY) {
+          lastY = y
+          list.style.transform = `translate3d(0, ${y}px, 0)`
+        }
       }
       panels.forEach((panel, i) => {
         const raw = i < k ? 1 : i === k ? held : 0
@@ -123,6 +173,8 @@ export function AdventureSection() {
       if (!frame) frame = requestAnimationFrame(update)
     }
     const onResize = () => {
+      // Phone address bars grow and shrink the viewport while scrolling: that must not re-lay-out.
+      if (window.innerWidth === lastW && Math.abs(window.innerHeight - lastH) < 160) return
       measure()
       schedule()
     }
@@ -135,6 +187,7 @@ export function AdventureSection() {
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', onResize)
       if (frame) cancelAnimationFrame(frame)
+      anim?.cancel()
       list.style.transform = ''
       track.style.height = ''
       for (const name of ['--rail-top', '--rail-h', '--step']) root.style.removeProperty(name)
