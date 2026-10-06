@@ -223,7 +223,39 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
 }
 
 export function AdventureScreenOverlay({ active }: { active: boolean }) {
-  return <TransparentVideo src="/images/adventure-real-camera-splash.webm" className={`adventure-screen-overlay${active ? ' is-on' : ''}`} active={active} />
+  return (
+    <div className={`adventure-screen-overlay-layer${active ? ' is-on' : ''}`} aria-hidden="true">
+      <AnimatedGif src="/images/adventure-water-drops.gif" className="adventure-screen-overlay" />
+    </div>
+  )
+}
+
+export function AdventureBirdOverlay({ active }: { active: boolean }) {
+  const state = active ? ' is-on' : ''
+  return (
+    <>
+      <div className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-under${state}`} aria-hidden="true">
+        <AnimatedGif src="/images/adventure-little-bird.gif" className="adventure-little-bird adventure-little-bird-under" />
+      </div>
+      <div className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-over${state}`} aria-hidden="true">
+        <AnimatedGif src="/images/adventure-little-bird.gif" className="adventure-little-bird adventure-little-bird-over" />
+      </div>
+    </>
+  )
+}
+
+export function AdventureFishOverlay({ active }: { active: boolean }) {
+  const state = active ? ' is-on' : ''
+  return (
+    <>
+      <div className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-under${state}`} aria-hidden="true">
+        <AnimatedGif src="/images/adventure-fish-perch.png" className="adventure-overlay-fish adventure-overlay-fish-under" />
+      </div>
+      <div className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-over${state}`} aria-hidden="true">
+        <AnimatedGif src="/images/adventure-fish-red.png" className="adventure-overlay-fish adventure-overlay-fish-over" />
+      </div>
+    </>
+  )
 }
 
 export function AdventureScenes({ stage }: { stage: AdventureStage }) {

@@ -13385,21 +13385,69 @@ body:has(.features:target) .typed-opening { display: none; }
   z-index: -1;
   pointer-events: none;
 }
-.destinations-page .adventure-screen-overlay {
+.destinations-page .adventure-screen-overlay-layer,
+.destinations-page .adventure-bird-overlay-layer,
+.destinations-page .adventure-fish-overlay-layer {
   position: fixed;
   inset: 0;
-  z-index: 25;
+  overflow: hidden;
   pointer-events: none;
   opacity: 0;
-  width: 100vw;
-  height: 100vh;
+  visibility: hidden;
+  transition: opacity 0.55s var(--ease), visibility 0s linear 0.55s;
+}
+.destinations-page .adventure-screen-overlay-layer.is-on,
+.destinations-page .adventure-bird-overlay-layer.is-on,
+.destinations-page .adventure-fish-overlay-layer.is-on {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.destinations-page .adventure-screen-overlay-layer { z-index: 28; mix-blend-mode: screen; }
+.destinations-page .adventure-screen-overlay {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center;
-  opacity: 0;
-  mix-blend-mode: screen;
-  transition: opacity 0.7s var(--ease);
+  opacity: 0.78;
 }
-.destinations-page .adventure-screen-overlay.is-on { opacity: 0.78; }
+.destinations-page .adventure-bird-overlay-layer-under,
+.destinations-page .adventure-fish-overlay-layer-under { z-index: 0; }
+.destinations-page .adventure-bird-overlay-layer-over,
+.destinations-page .adventure-fish-overlay-layer-over { z-index: 31; }
+.destinations-page .adventure-little-bird {
+  position: absolute;
+  width: clamp(8rem, 15vw, 15rem);
+  height: auto;
+  aspect-ratio: 9 / 16;
+  object-fit: contain;
+  will-change: transform;
+}
+.destinations-page .adventure-little-bird-under {
+  top: 14%;
+  animation: adv-overlay-bird-under 18s linear infinite;
+}
+.destinations-page .adventure-little-bird-over {
+  top: 58%;
+  animation: adv-overlay-bird-over 24s linear -8s infinite;
+}
+.destinations-page .adventure-overlay-fish {
+  position: absolute;
+  width: clamp(5rem, 12vw, 12rem);
+  height: auto;
+  object-fit: contain;
+  will-change: transform;
+}
+.destinations-page .adventure-overlay-fish-under {
+  top: 34%;
+  animation: adv-overlay-fish-under 20s linear infinite;
+}
+.destinations-page .adventure-overlay-fish-over {
+  top: 70%;
+  animation: adv-overlay-fish-over 26s linear -11s infinite;
+}
 
 .destinations-page .adventure-tint-view {
   position: sticky;
@@ -13693,6 +13741,26 @@ body:has(.features:target) .typed-opening { display: none; }
 @keyframes adv-cloud-drift {
   from { transform: translate3d(-48vw, 0, 0); }
   to { transform: translate3d(125vw, 1.5vh, 0); }
+}
+@keyframes adv-overlay-bird-under {
+  0%, 8% { transform: translate3d(-18rem, -2vh, 0) rotate(-3deg); }
+  42% { transform: translate3d(42vw, 2vh, 0) rotate(2deg); }
+  92%, 100% { transform: translate3d(112vw, -1vh, 0) rotate(-2deg); }
+}
+@keyframes adv-overlay-bird-over {
+  0%, 12% { transform: translate3d(108vw, 1vh, 0) scaleX(-1) rotate(2deg); }
+  48% { transform: translate3d(48vw, -2vh, 0) scaleX(-1) rotate(-2deg); }
+  88%, 100% { transform: translate3d(-18rem, 1vh, 0) scaleX(-1) rotate(3deg); }
+}
+@keyframes adv-overlay-fish-under {
+  0% { transform: translate3d(-16rem, 1vh, 0); }
+  48% { transform: translate3d(48vw, -3vh, 0); }
+  100% { transform: translate3d(112vw, 0, 0); }
+}
+@keyframes adv-overlay-fish-over {
+  0% { transform: translate3d(112vw, 0, 0) scaleX(-1); }
+  52% { transform: translate3d(46vw, 2vh, 0) scaleX(-1); }
+  100% { transform: translate3d(-16rem, -1vh, 0) scaleX(-1); }
 }
 @keyframes adv-bird-flight {
   0% { transform: translate3d(-42vw, 0, 0); }

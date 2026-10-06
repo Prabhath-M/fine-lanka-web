@@ -66,7 +66,9 @@ describe('AdventureSection', () => {
     expect(html).toContain('adv-cloud') // sky: clouds
     expect(html).toContain('adv-bird') // canopy and land: real bird video
     expect(html).toContain('adv-ripple') // water: photographic light on moving rapids
-    expect(html).toContain('adventure-screen-overlay') // water: fixed camera/window splash video
+    expect(html).toContain('adventure-screen-overlay') // water: fixed screen droplets
+    expect(html).toContain('adventure-bird-overlay-layer')
+    expect(html).toContain('adventure-fish-overlay-layer')
     expect(html).toContain('adv-fish') // ocean: fish
     expect(html).toContain('adv-jelly') // ocean: jellyfish
     expect(html).toContain('adv-bubble') // ocean: bubbles
@@ -84,7 +86,7 @@ describe('AdventureSection', () => {
       return filename
     })
     expect(new Set(backgrounds).size).toBe(stages.length)
-    for (const asset of ['adventure-birds-flock.webm', 'adventure-fish-salmon.webm', 'adventure-fish-perch.webm', 'adventure-fish-red.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm']) {
+    for (const asset of ['adventure-birds-flock.webm', 'adventure-fish-salmon.webm', 'adventure-fish-perch.webm', 'adventure-fish-red.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm', 'adventure-water-drops.gif', 'adventure-little-bird.gif']) {
       expect(existsSync(join(process.cwd(), 'public/images', asset))).toBe(true)
     }
     expect(styles).toContain('background-color: #000;')
