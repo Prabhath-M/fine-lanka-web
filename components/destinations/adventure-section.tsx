@@ -92,7 +92,13 @@ export function AdventureSection() {
       data-stage={stage}
       data-motion={motion ? 'on' : 'off'}
     >
-      <div className="adventure-tint" aria-hidden="true" />
+      <div className="adventure-tint" aria-hidden="true">
+        <div className="adventure-tint-view">
+          {ADVENTURE_STAGES.map((entry) => (
+            <span key={entry.id} data-stage={entry.id} className={entry.id === stage ? 'is-on' : undefined} />
+          ))}
+        </div>
+      </div>
       <div className="adventure-sky" aria-hidden="true" />
 
       <div className="container">

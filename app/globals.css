@@ -13363,20 +13363,35 @@ body:has(.features:target) .typed-opening { display: none; }
 
 /* ---- Phase 4: altitude gauge, background shift, panel effects ---- */
 
-/* Scroll-linked tint: the section's data-stage (set by the IntersectionObserver) fades the
-   background from dawn sky, through ink navy, to deep teal-black. Opacity-only transitions. */
+/* Scroll-linked tint: five stacked layers inside a viewport-sized sticky stage, crossfaded with
+   opacity (compositor-only, no per-frame repaint of the tall section). The active layer follows
+   the section's current stage, set by the IntersectionObserver. */
 .destinations-page .adventure-tint {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background: rgba(70, 120, 150, 0.12);
-  transition: background-color 1.2s var(--ease);
 }
-.destinations-page .adventure[data-stage='canopy'] .adventure-tint { background: rgba(48, 92, 96, 0.2); }
-.destinations-page .adventure[data-stage='land'] .adventure-tint { background: rgba(20, 38, 58, 0.28); }
-.destinations-page .adventure[data-stage='water'] .adventure-tint { background: rgba(10, 52, 62, 0.34); }
-.destinations-page .adventure[data-stage='depth'] .adventure-tint { background: rgba(2, 8, 10, 0.5); }
+.destinations-page .adventure-tint-view {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+.destinations-page .adventure-tint-view span {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+  will-change: opacity;
+}
+.destinations-page .adventure-tint-view span.is-on { opacity: 1; }
+.destinations-page .adventure-tint-view span[data-stage='sky'] { background: rgba(70, 120, 150, 0.12); }
+.destinations-page .adventure-tint-view span[data-stage='canopy'] { background: rgba(48, 92, 96, 0.2); }
+.destinations-page .adventure-tint-view span[data-stage='land'] { background: rgba(20, 38, 58, 0.28); }
+.destinations-page .adventure-tint-view span[data-stage='water'] { background: rgba(10, 52, 62, 0.34); }
+.destinations-page .adventure-tint-view span[data-stage='depth'] { background: rgba(2, 8, 10, 0.5); }
 
 /* Gauge: a sticky brass scale in the left gutter (desktop). */
 @media (min-width: 901px) {
@@ -13424,19 +13439,37 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure-gauge-scale li.is-active .adventure-gauge-tick { width: 1rem; height: 2px; }
 .destinations-page .adventure-gauge-scale li.is-dim { opacity: 0.5; }
 
-/* Hover / focus: duotone to full colour, brass contour lines brighten. */
-.destinations-page .adventure-media { filter: saturate(0.6) brightness(0.92); transition: filter 0.6s var(--ease), transform 0.6s var(--ease), border-color 0.6s var(--ease), opacity 0.7s var(--ease); }
-.destinations-page .adventure-media-contours { transition: opacity 0.6s var(--ease); }
+/* Hover / focus: a dark veil fades off (opacity, not a filter) and brighter brass contours fade
+   in. Only opacity and transform change, so the browser can animate them on the GPU. */
+.destinations-page .adventure-media { transition: transform 0.6s var(--ease), border-color 0.6s var(--ease), opacity 0.7s var(--ease); }
+.destinations-page .adventure-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(160deg, rgba(15, 27, 43, 0.5), rgba(15, 27, 43, 0.32));
+  transition: opacity 0.6s var(--ease);
+}
+.destinations-page .adventure-media-icon,
+.destinations-page .adventure-media-zone { z-index: 1; }
+.destinations-page .adventure-media-contours::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: repeating-radial-gradient(circle at 28% 118%, transparent 0 16px, rgba(216, 185, 120, 0.4) 17px 18px);
+  transition: opacity 0.6s var(--ease);
+}
 .destinations-page .adventure-panel:hover .adventure-media,
 .destinations-page .adventure-panel:focus-within .adventure-media {
-  filter: none;
   transform: translateY(-4px);
   border-color: rgba(216, 185, 120, 0.8);
 }
-.destinations-page .adventure-panel:hover .adventure-media-contours,
-.destinations-page .adventure-panel:focus-within .adventure-media-contours {
-  background: repeating-radial-gradient(circle at 28% 118%, transparent 0 16px, rgba(216, 185, 120, 0.4) 17px 18px);
-}
+.destinations-page .adventure-panel:hover .adventure-media::after,
+.destinations-page .adventure-panel:focus-within .adventure-media::after { opacity: 0; }
+.destinations-page .adventure-panel:hover .adventure-media-contours::after,
+.destinations-page .adventure-panel:focus-within .adventure-media-contours::after { opacity: 1; }
 
 /* Staggered entrance: media first, then the text elements in turn. Only when JS has marked
    the section data-motion="on", so server HTML and no-JS visitors see everything. */
@@ -13456,12 +13489,13 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-node { transform: translate(-50%, -50%) scale(0.4); }
 
 @media (prefers-reduced-motion: reduce) {
-  .destinations-page .adventure-tint,
+  .destinations-page .adventure-tint-view span,
+  .destinations-page .adventure-media::after,
+  .destinations-page .adventure-media-contours::after,
   .destinations-page .adventure-gauge-scale li,
   .destinations-page .adventure-gauge-tick,
   .destinations-page .adventure-gauge-scale::after,
   .destinations-page .adventure-media,
-  .destinations-page .adventure-media-contours,
   .destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > *,
   .destinations-page .adventure[data-motion='on'] .adventure-node { transition: none; }
   .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-media,
@@ -13491,9 +13525,7 @@ body:has(.features:target) .typed-opening { display: none; }
     width: auto;
     margin: 0 calc(var(--space-3, 1rem) * -1) 1.75rem;
     padding: 0.6rem var(--space-3, 1rem) 0.7rem;
-    background: rgba(6, 18, 26, 0.82);
-    -webkit-backdrop-filter: blur(8px);
-    backdrop-filter: blur(8px);
+    background: rgba(6, 18, 26, 0.95);
     border-block: 1px solid rgba(216, 185, 120, 0.25);
   }
   .destinations-page .adventure-gauge-scale {
