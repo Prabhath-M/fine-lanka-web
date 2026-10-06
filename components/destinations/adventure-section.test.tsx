@@ -1,4 +1,6 @@
 import { renderToStaticMarkup } from 'react-dom/server'
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
 import { describe, expect, it } from 'vitest'
 import { ADVENTURES } from '@/lib/adventure-data'
 import { AdventureSection } from './adventure-section'
@@ -68,6 +70,19 @@ describe('AdventureSection', () => {
     expect(html).toContain('adv-jelly') // ocean: jellyfish
     expect(html).toContain('adv-bubble') // ocean: bubbles
     expect(html).toContain('adv-firefly') // cave: fireflies
+  })
+
+  it('uses a separate existing background plate for every adventure stage', () => {
+    const styles = readFileSync(join(process.cwd(), 'app/globals.css'), 'utf8')
+    const stages = ['sky', 'canopy', 'land', 'water', 'ocean', 'depth']
+    const backgrounds = stages.map((stage) => {
+      const filename = `adventure-background-${stage}.webp`
+      const scene = styles.match(new RegExp(`\\.adventure-scene\\[data-stage='${stage}'\\] \\{([\\s\\S]*?)\\n\\}`))
+      expect(scene?.[1]).toContain(`--scene-image: url('/images/${filename}')`)
+      expect(existsSync(join(process.cwd(), 'public/images', filename))).toBe(true)
+      return filename
+    })
+    expect(new Set(backgrounds).size).toBe(stages.length)
   })
 
   it('tags every panel with its gauge stage and keeps entrance effects off in server HTML', () => {

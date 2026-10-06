@@ -13376,7 +13376,7 @@ body:has(.features:target) .typed-opening { display: none; }
 
 /* ---- Phase 4: altitude gauge, background shift, panel effects ---- */
 
-/* Scroll-linked tint: five stacked layers inside a viewport-sized sticky stage, crossfaded with
+/* Scroll-linked tint: six stacked layers inside a viewport-sized sticky stage, crossfaded with
    opacity (compositor-only, no per-frame repaint of the tall section). The active layer follows
    the section's current stage, set by the IntersectionObserver. */
 .destinations-page .adventure-tint {
@@ -13479,21 +13479,20 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure-media-icon { width: 4rem; height: 4rem; }
 }
 
-/* ---- Photo-led scenes: realistic layers that follow the current adventure stage. ----
-   Each view uses an existing adventure photograph as its backdrop; transparent real-image layers
-   provide slow cloud, bird, fish and jellyfish motion. The inactive scenes remain paused. */
+/* ---- Atmospheric scene plates: distinct environments follow the current adventure stage. ----
+   Backdrops are separate from the activity-card photography; transparent real-image layers provide
+   slow cloud, bird, fish and jellyfish motion. The inactive scenes remain paused. */
 .destinations-page .adventure-scene {
   position: absolute;
   inset: 0;
   z-index: 0;
   overflow: hidden;
   opacity: 0;
-  transition: opacity 0s linear 1.3s;
+  transition: opacity 1.2s var(--ease);
 }
 .destinations-page .adventure-scene.is-on {
   z-index: 1;
   opacity: 1;
-  transition: opacity 1.2s var(--ease);
 }
 .destinations-page .adventure-scene:not(.is-on) * { animation-play-state: paused; }
 .destinations-page .adventure-scene:not(.is-on)::before { animation-play-state: paused; }
@@ -13520,32 +13519,32 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure-scene > * { position: absolute; z-index: 2; }
 .destinations-page .adventure-scene[data-stage='sky'] {
-  --scene-image: url('/images/adventure-helicopter-tours-1600w.webp');
+  --scene-image: url('/images/adventure-background-sky.webp');
   --scene-wash: linear-gradient(180deg, rgba(239, 247, 249, 0.72), rgba(222, 236, 239, 0.44) 52%, rgba(204, 224, 229, 0.54));
   background-color: #dbe9ed;
 }
 .destinations-page .adventure-scene[data-stage='canopy'] {
-  --scene-image: url('/images/adventure-ella-zip-line-1600w.webp');
+  --scene-image: url('/images/adventure-background-canopy.webp');
   --scene-wash: linear-gradient(180deg, rgba(220, 239, 229, 0.66), rgba(185, 218, 198, 0.47) 54%, rgba(146, 189, 163, 0.57));
   background-color: #a9cdb8;
 }
 .destinations-page .adventure-scene[data-stage='land'] {
-  --scene-image: url('/images/adventure-horse-riding-1600w.webp');
+  --scene-image: url('/images/adventure-background-land.webp');
   --scene-wash: linear-gradient(180deg, rgba(237, 240, 216, 0.70), rgba(220, 226, 185, 0.48) 54%, rgba(177, 193, 134, 0.57));
   background-color: #d1d9aa;
 }
 .destinations-page .adventure-scene[data-stage='water'] {
-  --scene-image: url('/images/adventure-white-water-rafting-1600w.webp');
+  --scene-image: url('/images/adventure-background-water.webp');
   --scene-wash: linear-gradient(180deg, rgba(6, 38, 51, 0.44), rgba(6, 38, 51, 0.34) 52%, rgba(3, 24, 35, 0.58));
   background-color: #124658;
 }
 .destinations-page .adventure-scene[data-stage='ocean'] {
-  --scene-image: url('/images/adventure-scuba-diving-snorkelling-1600w.webp');
-  --scene-wash: linear-gradient(180deg, rgba(2, 34, 55, 0.47), rgba(2, 28, 51, 0.38) 48%, rgba(1, 15, 31, 0.68));
+  --scene-image: url('/images/adventure-background-ocean.webp');
+  --scene-wash: linear-gradient(180deg, rgba(2, 34, 55, 0.22), rgba(2, 28, 51, 0.16) 48%, rgba(1, 15, 31, 0.38));
   background-color: #07314b;
 }
 .destinations-page .adventure-scene[data-stage='depth'] {
-  --scene-image: url('/images/adventure-cave-exploration-1600w.webp');
+  --scene-image: url('/images/adventure-background-depth.webp');
   --scene-wash: linear-gradient(180deg, rgba(4, 6, 8, 0.44), rgba(3, 5, 7, 0.35) 45%, rgba(1, 2, 3, 0.68));
   background-color: #030507;
 }
