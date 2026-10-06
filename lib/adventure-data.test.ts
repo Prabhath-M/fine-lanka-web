@@ -38,7 +38,7 @@ describe('adventure data', () => {
   it('groups experiences into zones as planned', () => {
     const titles = (zone: Parameters<typeof adventuresForZone>[0]) => adventuresForZone(zone).map((a) => a.title)
     expect(titles('air')).toEqual(['Helicopter Tours', 'Ella Zip Line'])
-    expect(titles('land')).toEqual(['Horse Riding', 'ATV & Quad Bike Adventures'])
+    expect(titles('land')).toEqual(['ATV & Quad Bike Adventures', 'Horse Riding'])
     expect(titles('water')).toEqual(['Kayaking', 'Surfing & Kite Surfing', 'White-Water Rafting', 'Scuba Diving & Snorkelling'])
     expect(titles('underground')).toEqual(['Cave Exploration'])
   })
@@ -54,8 +54,8 @@ describe('adventure data', () => {
     expect(ADVENTURES.map((a) => a.slug)).toEqual([
       'helicopter-tours',
       'ella-zip-line',
-      'horse-riding',
       'atv-quad-bike-adventures',
+      'horse-riding',
       'kayaking',
       'surfing-kite-surfing',
       'white-water-rafting',

@@ -48,6 +48,12 @@ const RIPPLES = [
   { bottom: 25, width: 48, duration: 17, delay: -8 },
 ]
 
+const SPLASHES = [
+  { x: 18, y: 74, size: 18, duration: 8, delay: -2, rotate: -12 },
+  { x: 46, y: 68, size: 24, duration: 10, delay: -6, rotate: 8 },
+  { x: 76, y: 78, size: 16, duration: 7, delay: -4, rotate: 18 },
+]
+
 const RAYS = [
   { x: 8, width: 14, duration: 9, delay: -2 },
   { x: 34, width: 10, duration: 12, delay: -7 },
@@ -133,9 +139,16 @@ const scene = (stage: AdventureStage): ReactNode => {
         </>
       )
     case 'water':
-      return RIPPLES.map((ripple, i) => (
-        <span key={i} className="adv-ripple" style={vars({ '--bottom': `${ripple.bottom}%`, '--w': `${ripple.width}vw`, '--dur': `${ripple.duration}s`, '--delay': `${ripple.delay}s` })} />
-      ))
+      return (
+        <>
+          {RIPPLES.map((ripple, i) => (
+            <span key={`ripple-${i}`} className="adv-ripple" style={vars({ '--bottom': `${ripple.bottom}%`, '--w': `${ripple.width}vw`, '--dur': `${ripple.duration}s`, '--delay': `${ripple.delay}s` })} />
+          ))}
+          {SPLASHES.map((splash, i) => (
+            <span key={`splash-${i}`} className="adv-splash" style={vars({ '--x': `${splash.x}%`, '--y': `${splash.y}%`, '--sz': `${splash.size}vw`, '--dur': `${splash.duration}s`, '--delay': `${splash.delay}s`, '--rotate': `${splash.rotate}deg` })} />
+          ))}
+        </>
+      )
     case 'ocean':
       return (
         <>

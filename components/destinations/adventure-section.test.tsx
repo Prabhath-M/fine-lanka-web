@@ -66,6 +66,7 @@ describe('AdventureSection', () => {
     expect(html).toContain('adv-cloud') // sky: clouds
     expect(html).toContain('adv-bird') // canopy and land: birds
     expect(html).toContain('adv-ripple') // water: photographic light on moving rapids
+    expect(html).toContain('adv-splash') // water: camera-facing splash bursts
     expect(html).toContain('adv-fish') // ocean: fish
     expect(html).toContain('adv-jelly') // ocean: jellyfish
     expect(html).toContain('adv-bubble') // ocean: bubbles
@@ -83,6 +84,8 @@ describe('AdventureSection', () => {
       return filename
     })
     expect(new Set(backgrounds).size).toBe(stages.length)
+    expect(styles).toContain('background-color: #000;')
+    expect(styles).toContain('background-color: #0a4560;')
   })
 
   it('tags every panel with its gauge stage and keeps entrance effects off in server HTML', () => {
