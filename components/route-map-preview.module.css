@@ -1354,7 +1354,8 @@
 .arrowLayer {
   position: absolute;
   inset: 0;
-  z-index: 3;
+  /* Above everything else in the map (pins, labels, illustrations, route line, place card). */
+  z-index: 50;
   pointer-events: none;
 }
 
