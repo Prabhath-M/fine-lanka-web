@@ -5615,7 +5615,7 @@ main > #destinations,
   .process-background { background-size: auto 124%; background-position: 79% 88%; }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TYPED ARRIVAL INTRO — HOME-PAGE OPENING ONLY
    This independent overlay types a short Sri Lanka message over black, then
    dissolves without touching the existing hero video, content, or controls.
@@ -5803,7 +5803,7 @@ main > #destinations,
    This resolves before hydration, so /#why reaches Why Fine Lanka immediately. */
 body:has(.features:target) .typed-opening { display: none; }
 
-/* ========================================================================== 
+/* ==========================================================================
    DESTINATIONS — ATLAS WINDOW LAYOUT
    One panel holds the heading, the two region rails, the island carousel
    stage, the rudder, and the current-bearing pane.
@@ -5898,7 +5898,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — VISUAL ASSET REFRESH
    This is a visual layer only: the portal timing, door transforms, card rise,
    hover transitions, and reader behavior above remain untouched.
@@ -5951,7 +5951,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .reader-hero::after { display: none; }
 
-/* ========================================================================== 
+/* ==========================================================================
    DESTINATIONS — CONTINUOUS ATLAS COMPOSITION
    The hero now resolves at the mural within one first viewport. The explorer
    below reads as one chart table: card stage, wheel, and current-bearing pane
@@ -6400,7 +6400,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    DESTINATIONS + HOME — OPEN HERITAGE STAGE
    Keep the protected carousel cards, rudder controls, map pins, and media
    interactions intact. This layer removes only unnecessary containers and
@@ -7018,7 +7018,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .about-invitation { padding-block: 5rem; }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TOURS & PRICING — HERITAGE ROUTE FOLIO
    Design reminder: present the collection as a Sri Lankan route folio—jade,
    parchment, fresco-gold rules, and sparse liyawel relief. Filter, URL,
@@ -7112,7 +7112,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .tours-page .tour-collection-intro > div { padding-left: 1rem; }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TOURS COLLECTION — MOONSTONE GARDEN INDEX
    Design reminder: a light, composed parchment garden follows the dark hero.
    Category controls are carved jade-and-parchment index tiles; filtering logic
@@ -10729,7 +10729,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — PORTAL TO ARCHIVE REVEAL
    The ancient doorway resolves into an archive: a brass registration line
    draws first, the heading is typeset in two deliberate movements, and each
@@ -10851,7 +10851,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — ORIGINAL REVEAL RESTORATION
    Restore the prior post-portal header and card choreography. The portal,
    archive background, and established Journal card design remain unchanged.
@@ -10978,7 +10978,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — PORTAL-GATED CONTENT REVEAL
    The door removal and content entry are separate states. Until the portal
    completes and the intentional half-second pause ends, all Chronicle content
@@ -11229,7 +11229,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    BOOK NOW — PRIVATE ROUTE BRIEF REDESIGN
    A calm, editorial enquiry experience: parchment brief + deep-jade process
    ledger. Form structure and submission behavior remain unchanged.
@@ -11480,7 +11480,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 
-/* ========================================================================== 
+/* ==========================================================================
    SECTION BACKGROUNDS — TOURS COLLECTION + BOOKING DETAILS
    ========================================================================== */
 @media (max-width: 720px) {
@@ -11492,7 +11492,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 
-/* ========================================================================== 
+/* ==========================================================================
    DEPTH IMAGE LAYERS — original-size supplied imagery behind section content
    ========================================================================== */
 .tours-page .tour-section-depth-art::after,
@@ -11625,7 +11625,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    CEYLON FIELD NOTES — FIXED SCENIC CANVASES
    The previous rules fitted one 2048:877 image to arbitrary content height
    using `background-size: 100% 100%`, which visibly distorted the imagery.
@@ -11682,7 +11682,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    CEYLON FIELD NOTES — SECTION-SCOPED BACKGROUND CORRECTION
    Keep the original Book Now and Tours & Pricing top heroes in their existing
    document layers. The imagery is fixed only while its own content section is
@@ -11891,7 +11891,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TOURS & PRICING — ROUTE FOLIO CARDS
    Ceylon Field Notes treats every itinerary as a compact travel folio: a
    picture-led cover, a formal route index, and an editorial pricing ledger.
@@ -13385,6 +13385,19 @@ body:has(.features:target) .typed-opening { display: none; }
   z-index: -1;
   pointer-events: none;
 }
+.destinations-page .adventure-screen-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 25;
+  pointer-events: none;
+  opacity: 0;
+  background: url('/images/adventure-camera-droplets.gif') center / cover no-repeat;
+  mix-blend-mode: screen;
+  transition: opacity 0.7s var(--ease);
+}
+.destinations-page .adventure[data-stage='water'] .adventure-screen-overlay,
+.destinations-page .adventure[data-stage='ocean'] .adventure-screen-overlay { opacity: 0.72; }
+
 .destinations-page .adventure-tint-view {
   position: sticky;
   top: 0;
@@ -13480,8 +13493,8 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 /* ---- Atmospheric scene plates: distinct environments follow the current adventure stage. ----
-   Backdrops are separate from the activity-card photography; transparent real-image layers provide
-   slow cloud, bird, fish and jellyfish motion. The inactive scenes remain paused. */
+   Backdrops are separate from the activity-card photography; transparent animated GIF layers provide
+   real wingbeats, fish schooling and jellyfish motion. Camera droplets live in a fixed foreground layer. */
 .destinations-page .adventure-scene {
   position: absolute;
   inset: 0;
@@ -13570,29 +13583,17 @@ body:has(.features:target) .typed-opening { display: none; }
 /* Distant wildlife is rendered from photographic cutouts, not drawn bird shapes. */
 .destinations-page .adv-bird {
   top: var(--y);
-  left: 0;
-  width: calc(1.8rem * var(--s));
-  aspect-ratio: 3 / 2;
-  background: url('/images/adventure-bird-in-flight.webp') center / contain no-repeat;
-  opacity: 0.62;
-  filter: drop-shadow(0 0.15rem 0.2rem rgba(18, 34, 20, 0.2));
-  animation: adv-fly var(--dur) linear var(--delay) infinite;
+  left: var(--x);
+  width: clamp(5.5rem, calc(9rem * var(--s)), 12rem);
+  aspect-ratio: 260 / 170;
+  background: url('/images/adventure-bird-flap.gif') center / contain no-repeat;
+  opacity: 0.76;
+  filter: drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.24));
+  transform: translate3d(-50%, 0, 0);
+  animation: adv-bird-flight var(--dur) linear var(--delay) infinite;
   will-change: transform;
 }
-.destinations-page .adv-bird::before,
-.destinations-page .adv-bird::after {
-  content: '';
-  position: absolute;
-  top: 37%;
-  width: 54%;
-  height: 34%;
-  border-top: 2px solid rgba(25, 47, 48, 0.72);
-  border-radius: 50%;
-  transform-origin: 100% 50%;
-  animation: adv-wingbeat 0.42s ease-in-out var(--delay) infinite alternate;
-}
-.destinations-page .adv-bird::before { left: -18%; transform: rotate(-14deg); }
-.destinations-page .adv-bird::after { right: -18%; transform-origin: 0 50%; transform: scaleX(-1) rotate(-14deg); animation-delay: calc(var(--delay) - 0.12s); }
+
 /* Warm, out-of-focus pollen catches the light over the real landscape photograph. */
 .destinations-page .adv-mote {
   top: var(--y);
@@ -13606,20 +13607,6 @@ body:has(.features:target) .typed-opening { display: none; }
   animation: adv-mote var(--dur) ease-in-out var(--delay) infinite;
 }
 /* A moving, very soft water glint complements the real rapids photograph. */
-.destinations-page .adv-splash {
-  top: var(--y);
-  left: var(--x);
-  width: var(--sz);
-  aspect-ratio: 1.55;
-  border: max(1px, 0.12vw) solid rgba(224, 250, 255, 0.76);
-  border-bottom-color: transparent;
-  border-left-color: rgba(224, 250, 255, 0.3);
-  border-radius: 50%;
-  transform: translate(-50%, -50%) rotate(var(--rotate)) scale(0.25);
-  filter: blur(0.35px) drop-shadow(0 0 0.6rem rgba(183, 238, 255, 0.3));
-  opacity: 0;
-  animation: adv-splash-burst var(--dur) cubic-bezier(0.2, 0.72, 0.28, 1) var(--delay) infinite;
-}
 .destinations-page .adv-ripple {
   left: 50%;
   bottom: var(--bottom);
@@ -13649,23 +13636,11 @@ body:has(.features:target) .typed-opening { display: none; }
   left: 0;
   width: min(var(--s), 30rem);
   aspect-ratio: 16 / 9;
-  background: url('/images/adventure-reef-fish-school.webp') center / contain no-repeat;
-  opacity: 0.66;
+  background: url('/images/adventure-fish-school.gif') center / contain no-repeat;
+  opacity: 0.72;
   filter: drop-shadow(0 0 1.2rem rgba(97, 201, 233, 0.2));
-  animation: adv-swim var(--dur) ease-in-out var(--delay) infinite;
+  animation: adv-fish-drift var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
-}
-.destinations-page .adv-fish::after {
-  content: '';
-  position: absolute;
-  right: 4%;
-  top: 38%;
-  width: 18%;
-  height: 28%;
-  border-right: 2px solid rgba(179, 237, 255, 0.68);
-  border-top: 2px solid rgba(179, 237, 255, 0.68);
-  transform: rotate(45deg);
-  animation: adv-tailbeat 0.75s ease-in-out var(--delay) infinite alternate;
 }
 .destinations-page .adv-jelly {
   top: 100%;
@@ -13675,13 +13650,14 @@ body:has(.features:target) .typed-opening { display: none; }
   background-position: center;
   background-repeat: no-repeat;
   background-size: contain;
+  background-image: url('/images/adventure-jellyfish-drift.gif');
   filter: drop-shadow(0 0 1.1rem rgba(150, 222, 255, 0.24));
   opacity: 0.78;
   animation: adv-rise var(--dur) ease-in-out var(--delay) infinite;
   will-change: transform;
 }
-.destinations-page .adv-jelly-moon { background-image: url('/images/adventure-jellyfish-moon.webp'); }
-.destinations-page .adv-jelly-tropical { background-image: url('/images/adventure-jellyfish-tropical.webp'); }
+.destinations-page .adv-jelly-moon,
+.destinations-page .adv-jelly-tropical { background-image: url('/images/adventure-jellyfish-drift.gif'); }
 /* Photographic glass-like bubbles: rim, reflected highlight and soft caustic glow. */
 .destinations-page .adv-bubble {
   left: var(--x);
@@ -13716,6 +13692,11 @@ body:has(.features:target) .typed-opening { display: none; }
   from { transform: translate3d(-48vw, 0, 0); }
   to { transform: translate3d(125vw, 1.5vh, 0); }
 }
+@keyframes adv-bird-flight {
+  0% { transform: translate3d(-50%, 0, 0); }
+  50% { transform: translate3d(50vw, -2vh, 0); }
+  100% { transform: translate3d(108vw, 1vh, 0); }
+}
 @keyframes adv-fly {
   0% { transform: translate3d(-12vw, 0, 0); }
   25% { transform: translate3d(22vw, -2vh, 0); }
@@ -13723,9 +13704,9 @@ body:has(.features:target) .typed-opening { display: none; }
   75% { transform: translate3d(80vw, -1.5vh, 0); }
   100% { transform: translate3d(112vw, 0, 0); }
 }
-@keyframes adv-wingbeat {
-  from { scale: 1 0.42; opacity: 0.45; }
-  to { scale: 1 1.28; opacity: 0.9; }
+@keyframes adv-fish-drift {
+  0%, 100% { transform: translate3d(-9vw, 1vh, 0) rotate(-1deg); }
+  50% { transform: translate3d(42vw, -2vh, 0) rotate(2deg); }
 }
 @keyframes adv-mote {
   0% { opacity: 0; transform: translate3d(0, 0, 0); }
@@ -13738,23 +13719,6 @@ body:has(.features:target) .typed-opening { display: none; }
   to { transform: translate3d(-50%, -1.1vh, 0) scaleX(1.15); }
 }
 @keyframes adv-ray { from { opacity: 0.2; } to { opacity: 0.72; } }
-@keyframes adv-swim {
-  0% { transform: translate3d(-12vw, 1vh, 0) rotate(-1deg) scale(0.96); }
-  24% { transform: translate3d(18vw, -2vh, 0) rotate(2deg) scale(1); }
-  52% { transform: translate3d(52vw, 1.5vh, 0) rotate(-2deg) scale(0.98); }
-  78% { transform: translate3d(84vw, -1vh, 0) rotate(1deg) scale(1.03); }
-  100% { transform: translate3d(115vw, 0, 0) rotate(-1deg) scale(0.96); }
-}
-@keyframes adv-tailbeat {
-  from { rotate: 28deg; }
-  to { rotate: 62deg; }
-}
-@keyframes adv-splash-burst {
-  0%, 18% { opacity: 0; transform: translate(-50%, -50%) rotate(var(--rotate)) scale(0.25); }
-  34% { opacity: 0.9; }
-  72% { opacity: 0.55; transform: translate(-50%, -50%) rotate(var(--rotate)) scale(1); }
-  100% { opacity: 0; transform: translate(-50%, -58%) rotate(var(--rotate)) scale(1.3); }
-}
 @keyframes adv-rise {
   0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.88); }
   12% { opacity: 0.78; }
@@ -13792,8 +13756,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adv-firefly { opacity: 0.72; }
   .destinations-page .adv-mote { opacity: 0.56; }
   .destinations-page .adv-ray { opacity: 0.42; }
-  .destinations-page .adv-ripple { opacity: 0.42; }
-  .destinations-page .adv-splash { opacity: 0.45; transform: translate(-50%, -50%) rotate(var(--rotate)) scale(0.82); }
+
   .destinations-page .adventure-head .dest-section-kicker,
   .destinations-page .adventure-head h2,
   .destinations-page .adventure-lede,
@@ -13847,8 +13810,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adv-firefly { opacity: 0.72; }
   .destinations-page .adv-mote { opacity: 0.56; }
   .destinations-page .adv-ray { opacity: 0.42; }
-  .destinations-page .adv-ripple { opacity: 0.42; }
-  .destinations-page .adv-splash { opacity: 0.45; transform: translate(-50%, -50%) rotate(var(--rotate)) scale(0.82); }
+
   .destinations-page .adventure-head .dest-section-kicker,
   .destinations-page .adventure-head h2,
   .destinations-page .adventure-lede,

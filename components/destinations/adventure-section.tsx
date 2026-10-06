@@ -302,6 +302,7 @@ export function AdventureSection() {
         <AdventureScenes stage={stage} />
       </div>
       <div className="adventure-sky" aria-hidden="true" />
+      <div className="adventure-screen-overlay" aria-hidden="true" />
 
       <div className="container">
         <header className="adventure-head">

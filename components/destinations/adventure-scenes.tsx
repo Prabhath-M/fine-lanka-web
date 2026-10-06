@@ -2,8 +2,8 @@ import type { CSSProperties, ReactNode } from 'react'
 import { ADVENTURE_STAGES, type AdventureStage } from '@/lib/adventure-data'
 
 /**
- * Atmospheric, photo-led backdrops for the Adventure & Experiences section. Real cloud,
- * bird, jellyfish and fish image layers drift over the existing adventure photography.
+ * Atmospheric, photo-led backdrops for the Adventure & Experiences section. Real cloud layers
+ * drift over the photography while transparent animated GIFs provide the wildlife motion.
  * These are decorative, deterministic and hidden from assistive technology by the parent.
  */
 const vars = (values: Record<string, string | number>) => values as unknown as CSSProperties
@@ -25,10 +25,8 @@ const WISPS: Layer[] = [
 ]
 
 const BIRDS: Layer[] = [
-  { x: 20, y: 18, size: 1.15, duration: 43, delay: -9 },
-  { x: 64, y: 31, size: 0.8, duration: 50, delay: -27 },
-  { x: 39, y: 48, size: 1.35, duration: 39, delay: -18 },
-  { x: 78, y: 63, size: 0.95, duration: 47, delay: -36 },
+  { x: 18, y: 21, size: 1.15, duration: 43, delay: -9 },
+  { x: 62, y: 43, size: 0.86, duration: 51, delay: -27 },
 ]
 
 const MOTES = [
@@ -48,11 +46,6 @@ const RIPPLES = [
   { bottom: 25, width: 48, duration: 17, delay: -8 },
 ]
 
-const SPLASHES = [
-  { x: 18, y: 74, size: 18, duration: 8, delay: -2, rotate: -12 },
-  { x: 46, y: 68, size: 24, duration: 10, delay: -6, rotate: 8 },
-  { x: 76, y: 78, size: 16, duration: 7, delay: -4, rotate: 18 },
-]
 
 const RAYS = [
   { x: 8, width: 14, duration: 9, delay: -2 },
@@ -130,7 +123,7 @@ const scene = (stage: AdventureStage): ReactNode => {
     case 'land':
       return (
         <>
-          {BIRDS.slice(0, 3).map((bird, i) => (
+          {BIRDS.map((bird, i) => (
             <span key={`bird-${i}`} className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
           {MOTES.map((mote, i) => (
@@ -139,16 +132,9 @@ const scene = (stage: AdventureStage): ReactNode => {
         </>
       )
     case 'water':
-      return (
-        <>
-          {RIPPLES.map((ripple, i) => (
-            <span key={`ripple-${i}`} className="adv-ripple" style={vars({ '--bottom': `${ripple.bottom}%`, '--w': `${ripple.width}vw`, '--dur': `${ripple.duration}s`, '--delay': `${ripple.delay}s` })} />
-          ))}
-          {SPLASHES.map((splash, i) => (
-            <span key={`splash-${i}`} className="adv-splash" style={vars({ '--x': `${splash.x}%`, '--y': `${splash.y}%`, '--sz': `${splash.size}vw`, '--dur': `${splash.duration}s`, '--delay': `${splash.delay}s`, '--rotate': `${splash.rotate}deg` })} />
-          ))}
-        </>
-      )
+      return RIPPLES.map((ripple, i) => (
+        <span key={i} className="adv-ripple" style={vars({ '--bottom': `${ripple.bottom}%`, '--w': `${ripple.width}vw`, '--dur': `${ripple.duration}s`, '--delay': `${ripple.delay}s` })} />
+      ))
     case 'ocean':
       return (
         <>
