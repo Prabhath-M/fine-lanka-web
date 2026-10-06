@@ -25,8 +25,10 @@ const WISPS: Layer[] = [
 ]
 
 const BIRDS: Layer[] = [
-  { x: 18, y: 21, size: 1.15, duration: 43, delay: -9 },
-  { x: 62, y: 43, size: 0.86, duration: 51, delay: -27 },
+  { x: 16, y: 18, size: 1.35, duration: 28, delay: -4 },
+  { x: 48, y: 32, size: 1.1, duration: 34, delay: -18 },
+  { x: 79, y: 50, size: 0.98, duration: 31, delay: -25 },
+  { x: 34, y: 67, size: 0.82, duration: 38, delay: -11 },
 ]
 
 const MOTES = [
@@ -54,15 +56,18 @@ const RAYS = [
 ]
 
 const FISH = [
-  { x: 9, y: 28, size: 28, duration: 52, delay: -24 },
-  { x: 54, y: 61, size: 21, duration: 64, delay: -43 },
+  { x: 8, y: 22, size: 34, duration: 30, delay: -7 },
+  { x: 54, y: 48, size: 30, duration: 36, delay: -19 },
+  { x: 22, y: 70, size: 25, duration: 33, delay: -26 },
+  { x: 78, y: 34, size: 22, duration: 42, delay: -31 },
 ]
 
 const JELLYFISH = [
-  { x: 12, size: 15, duration: 73, delay: -21, drift: 44, kind: 'moon' },
-  { x: 42, size: 11, duration: 61, delay: -39, drift: -28, kind: 'tropical' },
-  { x: 72, size: 18, duration: 82, delay: -58, drift: 52, kind: 'moon' },
-  { x: 91, size: 10, duration: 69, delay: -9, drift: -36, kind: 'tropical' },
+  { x: 8, size: 19, duration: 46, delay: -12, drift: 44, kind: 'moon' },
+  { x: 30, size: 15, duration: 52, delay: -29, drift: -28, kind: 'tropical' },
+  { x: 53, size: 22, duration: 58, delay: -41, drift: 52, kind: 'moon' },
+  { x: 77, size: 17, duration: 49, delay: -4, drift: -36, kind: 'tropical' },
+  { x: 94, size: 14, duration: 62, delay: -35, drift: 30, kind: 'moon' },
 ]
 
 const BUBBLES = [
@@ -81,18 +86,22 @@ const BUBBLES = [
 ]
 
 const FIREFLIES = [
-  { x: 9, y: 22, dx: 40, dy: -30, size: 4, duration: 15, delay: -2 },
-  { x: 17, y: 62, dx: -30, dy: -50, size: 5, duration: 18, delay: -11 },
-  { x: 26, y: 38, dx: 50, dy: 20, size: 3, duration: 13, delay: -6 },
-  { x: 34, y: 78, dx: -20, dy: -40, size: 4, duration: 17, delay: -14 },
-  { x: 42, y: 28, dx: 36, dy: 34, size: 5, duration: 19, delay: -4 },
-  { x: 50, y: 56, dx: -44, dy: -26, size: 3, duration: 14, delay: -9 },
-  { x: 58, y: 18, dx: 28, dy: 46, size: 4, duration: 16, delay: -16 },
-  { x: 66, y: 70, dx: -38, dy: -34, size: 5, duration: 20, delay: -1 },
-  { x: 74, y: 44, dx: 46, dy: -22, size: 3, duration: 12, delay: -8 },
-  { x: 82, y: 82, dx: -26, dy: -48, size: 4, duration: 18, delay: -13 },
-  { x: 90, y: 30, dx: -34, dy: 38, size: 5, duration: 15, delay: -5 },
-  { x: 95, y: 60, dx: 22, dy: -40, size: 3, duration: 17, delay: -10 },
+  { x: 6, y: 18, dx: 48, dy: -34, size: 6, duration: 11, delay: -2 },
+  { x: 13, y: 46, dx: -36, dy: -52, size: 7, duration: 14, delay: -11 },
+  { x: 20, y: 73, dx: 44, dy: 22, size: 5, duration: 12, delay: -6 },
+  { x: 28, y: 29, dx: -22, dy: -42, size: 6, duration: 15, delay: -14 },
+  { x: 36, y: 61, dx: 42, dy: 35, size: 7, duration: 13, delay: -4 },
+  { x: 44, y: 17, dx: -48, dy: -28, size: 5, duration: 10, delay: -9 },
+  { x: 51, y: 78, dx: 30, dy: -44, size: 6, duration: 14, delay: -16 },
+  { x: 59, y: 40, dx: -42, dy: 28, size: 7, duration: 16, delay: -1 },
+  { x: 67, y: 22, dx: 50, dy: -24, size: 5, duration: 11, delay: -8 },
+  { x: 74, y: 68, dx: -34, dy: -48, size: 7, duration: 15, delay: -13 },
+  { x: 82, y: 34, dx: 38, dy: 42, size: 6, duration: 12, delay: -5 },
+  { x: 90, y: 82, dx: -28, dy: -36, size: 8, duration: 17, delay: -10 },
+  { x: 97, y: 52, dx: 24, dy: -46, size: 5, duration: 13, delay: -7 },
+  { x: 24, y: 88, dx: 36, dy: -30, size: 6, duration: 16, delay: -12 },
+  { x: 63, y: 88, dx: -40, dy: -32, size: 5, duration: 14, delay: -3 },
+  { x: 87, y: 14, dx: -34, dy: 38, size: 6, duration: 12, delay: -15 },
 ]
 
 function TransparentVideo({
@@ -201,7 +210,12 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
 }
 
 export function AdventureScreenOverlay({ active }: { active: boolean }) {
-  return <TransparentVideo src="/images/adventure-real-camera-splash.webm" className={`adventure-screen-overlay${active ? ' is-on' : ''}`} active={active} />
+  return (
+    <>
+      <TransparentVideo src="/images/adventure-real-camera-splash.webm" className={`adventure-screen-overlay${active ? ' is-on' : ''}`} active={active} />
+      <TransparentVideo src="/images/adventure-real-camera-splash.webm" className={`adventure-screen-overlay adventure-screen-overlay-secondary${active ? ' is-on' : ''}`} active={active} />
+    </>
+  )
 }
 
 export function AdventureScenes({ stage }: { stage: AdventureStage }) {
