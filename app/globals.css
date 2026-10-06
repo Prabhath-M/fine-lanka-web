@@ -13797,13 +13797,19 @@ body:has(.features:target) .typed-opening { display: none; }
 /* --adv-hold is how far you scroll while a point is held in place and builds up. The pinned stage then
    releases straight into the next point, so the gap between two built points stays short. */
 .destinations-page .adventure[data-scrub='on'] {
-  --adv-hold: 26vh;
-  --adv-hold: 26svh;
+  --adv-hold: 32vh;
+  --adv-hold: 32svh;
 }
+.destinations-page .adventure-hold { display: none; }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel {
   display: block;
-  padding-bottom: var(--adv-hold);
   margin-bottom: 0;
+}
+/* A sticky stage is only held inside its parent's content box (padding does not count), so the hold
+   is a real spacer after the stage rather than padding on the panel. */
+.destinations-page .adventure[data-scrub='on'] .adventure-hold {
+  display: block;
+  height: var(--adv-hold);
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-stick {
   position: sticky;
@@ -13846,7 +13852,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
 
 @media (max-width: 900px) {
-  .destinations-page .adventure[data-scrub='on'] { --adv-hold: 24vh; --adv-hold: 24svh; }
+  .destinations-page .adventure[data-scrub='on'] { --adv-hold: 28vh; --adv-hold: 28svh; }
   .destinations-page .adventure[data-scrub='on'] .adventure-stick { grid-template-columns: 1fr; gap: 1.25rem; }
   /* Keep a whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
   .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }

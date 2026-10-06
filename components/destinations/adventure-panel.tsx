@@ -67,6 +67,8 @@ export function AdventurePanel({ adventure }: { adventure: Adventure }) {
           </div>
         </div>
       </div>
+      {/* Scroll distance during which the stage above stays pinned (zero-sized unless scrub mode is on). */}
+      <span className="adventure-hold" aria-hidden="true" />
     </li>
   )
 }
