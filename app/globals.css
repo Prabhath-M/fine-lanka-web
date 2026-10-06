@@ -13776,3 +13776,101 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure-closing > p,
   .destinations-page .adventure-node { transition: none; }
 }
+
+/* ---- Scroll-scrubbed points ----
+   With JS and no reduced-motion preference, the section sets data-scrub='on'. Each panel then becomes
+   a tall block holding a pinned stage (.adventure-stick); the JS writes the scroll progress through
+   the block to --p (0 to 1) and everything below is a pure function of it: the photo rises in and
+   sharpens to full colour, then the heading, the copy and the tags appear, while the load bar fills.
+   When it reaches 1 the content holds for a moment, the stage unpins and the page scrolls on to the
+   next point. Without scrub mode (no JS, reduced motion) .adventure-stick is invisible to layout. */
+.destinations-page .adventure-panel {
+  --p: 1;
+  --t-media: clamp(0, calc(var(--p) / 0.22), 1);
+  --t-head: clamp(0, calc((var(--p) - 0.12) / 0.2), 1);
+  --t-copy: clamp(0, calc((var(--p) - 0.3) / 0.22), 1);
+  --t-tags: clamp(0, calc((var(--p) - 0.52) / 0.2), 1);
+}
+.destinations-page .adventure-stick { display: contents; }
+.destinations-page .adventure-load { display: none; }
+
+.destinations-page .adventure[data-scrub='on'] .adventure-panel {
+  display: block;
+  height: 240vh;
+  height: 240svh;
+  margin-bottom: 0;
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-stick {
+  position: sticky;
+  top: 5.75rem;
+  height: calc(100vh - 5.75rem);
+  height: calc(100svh - 5.75rem);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 6rem);
+}
+
+/* Photo: rises and scales in, then sharpens from veiled to full colour. */
+.destinations-page .adventure[data-scrub='on'] .adventure-media {
+  opacity: var(--t-media);
+  transform: translate3d(0, calc((1 - var(--t-media)) * 3.5rem), 0) scale(calc(0.93 + 0.07 * var(--t-media)));
+  transition: none;
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-media::after { opacity: calc(1 - var(--p)); transition: none; }
+.destinations-page .adventure[data-scrub='on'] .adventure-media img { transform: scale(calc(1.14 - 0.14 * var(--p))); }
+
+/* Text: number and title, then tagline and copy, then the tags one by one. */
+.destinations-page .adventure[data-scrub='on'] .adventure-num,
+.destinations-page .adventure[data-scrub='on'] .adventure-title-row {
+  opacity: var(--t-head);
+  transform: translate3d(0, calc((1 - var(--t-head)) * 1.6rem), 0);
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-tagline,
+.destinations-page .adventure[data-scrub='on'] .adventure-copy {
+  opacity: var(--t-copy);
+  transform: translate3d(0, calc((1 - var(--t-copy)) * 1.4rem), 0);
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-experience-label { opacity: var(--t-tags); }
+.destinations-page .adventure[data-scrub='on'] .adventure-tags li {
+  opacity: clamp(0, calc(var(--t-tags) * 5 - var(--i, 0)), 1);
+  transform: translate3d(0, calc((1 - clamp(0, calc(var(--t-tags) * 5 - var(--i, 0)), 1)) * 0.8rem), 0);
+}
+
+/* Load bar under the number: fills as the point "loads"; the node fills in when it is done. */
+.destinations-page .adventure[data-scrub='on'] .adventure-load {
+  display: block;
+  width: min(100%, 18rem);
+  height: 3px;
+  margin-top: 0.9rem;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--adv-line-soft);
+  opacity: var(--t-head);
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-load i {
+  display: block;
+  height: 100%;
+  background: var(--adv-accent);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--p));
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
+
+@media (max-width: 900px) {
+  .destinations-page .adventure[data-scrub='on'] .adventure-panel { height: 220vh; height: 220svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-stick {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 1.25rem;
+  }
+  /* Keep the whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-num { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+}
+@media (max-width: 900px) and (max-height: 700px) {
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 22vh; max-height: 22svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-num { display: none; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.92rem; line-height: 1.6; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-experience { margin-top: 0.9rem; }
+}

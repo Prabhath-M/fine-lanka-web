@@ -22,13 +22,19 @@ describe('AdventureSection', () => {
   })
 
   it('renders every experience tag', () => {
-    for (const a of ADVENTURES) for (const tag of a.tags) expect(html).toContain(`<li>${tag}</li>`)
+    for (const a of ADVENTURES) for (const tag of a.tags) expect(html).toMatch(new RegExp(`<li[^>]*>${tag}</li>`))
   })
 
   it('renders the closing copy and the enquiry button', () => {
     expect(html).toContain('A Little More Adventure. A Lot More Sri Lanka.')
     expect(html).toContain('Explore Sri Lanka. Experience More.')
     expect(html).toContain('data-open-enquiry')
+  })
+
+  it('wraps each point in a pinned stage with a load bar, and starts with scrub mode off', () => {
+    expect(html.match(/class="adventure-stick"/g)).toHaveLength(ADVENTURES.length)
+    expect(html.match(/class="adventure-load" aria-hidden="true"/g)).toHaveLength(ADVENTURES.length)
+    expect(html).toContain('data-scrub="off"')
   })
 
   it('uses unique element ids', () => {

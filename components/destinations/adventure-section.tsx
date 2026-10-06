@@ -19,16 +19,78 @@ import { AdventureScenes } from '@/components/destinations/adventure-scenes'
  * `data-stage` on the section also drives the text colours. One IntersectionObserver handles both the
  * active stage and the entrance; it never touches layout, so nothing shifts.
  */
+/** Share of a point's scroll length spent building up; the rest is a short hold on the finished content. */
+const SCRUB_HOLD = 0.85
+
 export function AdventureSection() {
   const sectionRef = useRef<HTMLElement>(null)
   const [stage, setStage] = useState<AdventureStage>('sky')
-  const [motion, setMotion] = useState(false)
+  // 'off': server HTML / no JS (everything visible). 'reveal': reduced motion, a simple fade-in per panel.
+  // 'scrub': each point is pinned and builds up with scroll progress.
+  const [mode, setMode] = useState<'off' | 'reveal' | 'scrub'>('off')
 
-  // Entrance effects are enabled only once JS is running, so the server HTML
-  // (and no-JS visitors) always see every panel.
+  // Effects are enabled only once JS is running, so the server HTML (and no-JS visitors) always see
+  // every panel. Reduced-motion visitors keep the plain fade-in.
   useEffect(() => {
-    setMotion(true)
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const apply = () => setMode(query.matches ? 'reveal' : 'scrub')
+    apply()
+    query.addEventListener('change', apply)
+    return () => query.removeEventListener('change', apply)
   }, [])
+
+  // Scroll-scrubbed points: each panel is a tall block with a pinned (sticky) stage inside. How far
+  // the visitor has scrolled through that block (0 to 1, with a short hold at the end) is written
+  // to the panel as `--p`; the CSS turns it into the build-up. Reads are batched before writes.
+  useEffect(() => {
+    if (mode !== 'scrub') return
+    const root = sectionRef.current
+    if (!root) return
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('.adventure-panel'))
+    const sticks = panels.map((panel) => panel.querySelector<HTMLElement>('.adventure-stick'))
+    const last = new Map<HTMLElement, number>()
+    let pinTop = 0
+    let frame = 0
+
+    const readPinTop = () => {
+      const first = sticks.find(Boolean)
+      pinTop = first ? parseFloat(getComputedStyle(first).top) || 0 : 0
+    }
+    const update = () => {
+      frame = 0
+      const next = panels.map((panel, i) => {
+        const stick = sticks[i]
+        if (!stick) return 1
+        const rect = panel.getBoundingClientRect()
+        const range = rect.height - stick.offsetHeight
+        const raw = range > 0 ? (pinTop - rect.top) / range : 1
+        return Math.round(Math.min(1, Math.max(0, raw / SCRUB_HOLD)) * 1000) / 1000
+      })
+      panels.forEach((panel, i) => {
+        if (last.get(panel) === next[i]) return
+        last.set(panel, next[i])
+        panel.style.setProperty('--p', String(next[i]))
+        panel.classList.toggle('is-complete', next[i] >= 1)
+      })
+    }
+    const schedule = () => {
+      if (!frame) frame = requestAnimationFrame(update)
+    }
+    const onResize = () => {
+      readPinTop()
+      schedule()
+    }
+
+    readPinTop()
+    update()
+    window.addEventListener('scroll', schedule, { passive: true })
+    window.addEventListener('resize', onResize)
+    return () => {
+      window.removeEventListener('scroll', schedule)
+      window.removeEventListener('resize', onResize)
+      if (frame) cancelAnimationFrame(frame)
+    }
+  }, [mode])
 
   useEffect(() => {
     const root = sectionRef.current
@@ -80,7 +142,8 @@ export function AdventureSection() {
       className="adventure"
       aria-labelledby="adventure-title"
       data-stage={stage}
-      data-motion={motion ? 'on' : 'off'}
+      data-motion={mode === 'reveal' ? 'on' : 'off'}
+      data-scrub={mode === 'scrub' ? 'on' : 'off'}
     >
       <div className="adventure-tint" aria-hidden="true">
         <AdventureScenes stage={stage} />
