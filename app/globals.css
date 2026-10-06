@@ -13244,6 +13244,7 @@ body:has(.features:target) .typed-opening { display: none; }
 
 /* The depth spine: one brass line running down the middle, a node per panel. */
 .destinations-page .adventure-track { position: relative; }
+.destinations-page .adventure-rail { position: relative; }
 .destinations-page .adventure-spine {
   position: absolute;
   top: 0;
@@ -13778,13 +13779,13 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 /* ---- Scroll-held points ----
-   With JS and no reduced-motion preference, the section sets data-scrub='on'. Each panel keeps its
-   normal size and spacing and gains a short stretch of padding; inside it the stage (.adventure-stick)
-   stays pinned, centred in the viewport, while the JS writes the scroll progress through that stretch
-   to --p (0 to 1). The photo, number and title are always fully shown; once the point reaches the
-   middle of the screen only the description (tagline and copy), then the tags, appear as --p rises while
-   the load bar fills. At 1 the stage releases and the page scrolls on. Progress never goes back down,
-   so a built point stays built.
+   With JS and no reduced-motion preference, the section sets data-scrub='on'. The track becomes tall
+   (the JS sets its height) and the rail inside it is pinned below the site header; the points sit one
+   under another in the rail at a fixed distance (--step) and move together. While a point is held,
+   nothing moves, neighbours included; the JS writes the point's build-up progress to --p (0 to 1).
+   The photo, number and title are always shown; the description (tagline and copy), then the tags,
+   appear as --p rises while the load bar fills. Then the whole stack slides up to the next point.
+   Progress never goes back down, so a built point stays built.
    Without scrub mode (no JS, reduced motion) .adventure-stick is invisible to layout. */
 .destinations-page .adventure-panel {
   --p: 1;
@@ -13794,26 +13795,23 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure-stick { display: contents; }
 .destinations-page .adventure-load { display: none; }
 
-/* --adv-hold is how far you scroll while a point is held in place and builds up. The pinned stage then
-   releases straight into the next point, so the gap between two built points stays short. */
-.destinations-page .adventure[data-scrub='on'] {
-  --adv-hold: 32vh;
-  --adv-hold: 32svh;
+.destinations-page .adventure[data-scrub='on'] .adventure-rail {
+  position: sticky;
+  top: var(--rail-top, 5.75rem);
+  height: var(--rail-h, calc(100svh - 5.75rem));
+  overflow-x: visible;
+  overflow-y: clip;
 }
-.destinations-page .adventure-hold { display: none; }
+.destinations-page .adventure[data-scrub='on'] .adventure-list { will-change: transform; }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel {
-  display: block;
+  display: flex;
+  align-items: center;
+  height: var(--step, auto);
   margin-bottom: 0;
 }
-/* A sticky stage is only held inside its parent's content box (padding does not count), so the hold
-   is a real spacer after the stage rather than padding on the panel. */
-.destinations-page .adventure[data-scrub='on'] .adventure-hold {
-  display: block;
-  height: var(--adv-hold);
-}
 .destinations-page .adventure[data-scrub='on'] .adventure-stick {
-  position: sticky;
-  top: var(--pin, 5.75rem);
+  position: relative;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr;
   align-items: center;
@@ -13852,7 +13850,6 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
 
 @media (max-width: 900px) {
-  .destinations-page .adventure[data-scrub='on'] { --adv-hold: 28vh; --adv-hold: 28svh; }
   .destinations-page .adventure[data-scrub='on'] .adventure-stick { grid-template-columns: 1fr; gap: 1.25rem; }
   /* Keep a whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
   .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }

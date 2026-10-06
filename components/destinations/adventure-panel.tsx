@@ -5,8 +5,8 @@ import { adventureStage } from '@/lib/adventure-data'
 
 /**
  * One "point" in the Adventure & Experiences section. Server-renderable: no state or
- * effects here. While scrolling, the parent pins `.adventure-stick` in the viewport and writes
- * the panel's scroll progress to the `--p` custom property (0 to 1); the CSS builds the content
+ * effects here. While scrolling, the parent holds all the points in one pinned viewport and writes
+ * this panel's build-up progress to the `--p` custom property (0 to 1); the CSS builds the content
  * up from that (photo, heading, copy, tags, load bar). Without JS or with reduced motion the
  * panel is just a normal two-column block.
  */
@@ -67,8 +67,6 @@ export function AdventurePanel({ adventure }: { adventure: Adventure }) {
           </div>
         </div>
       </div>
-      {/* Scroll distance during which the stage above stays pinned (zero-sized unless scrub mode is on). */}
-      <span className="adventure-hold" aria-hidden="true" />
     </li>
   )
 }
