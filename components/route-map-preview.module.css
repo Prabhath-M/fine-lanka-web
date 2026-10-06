@@ -1348,10 +1348,9 @@
   }
 }
 
-/* "Next destination" arrow: a semi-transparent, 3D-looking swoosh arrow (bevel/emboss, tapered tail, tall head) that
-   shows after a stop's name has typed, pointing the way toward the next stop
-   (it does not span the gap). It sits at the stop's anchor, rotated toward the
-   next stop, and is removed the moment the next pin starts to pop. */
+/* "Next destination" arrow: three glowing neon-green chevrons (>>>) that light up one after another, shown after a
+   stop's name has typed, pointing the way toward the next stop (it does not span the gap). It sits at the stop's
+   anchor, rotated toward the next stop, and is removed the moment the next pin starts to pop. */
 .arrowLayer {
   position: absolute;
   inset: 0;
@@ -1368,41 +1367,56 @@
 
 .nextArrowSvg {
   position: absolute;
-  /* The arrow's tail tip (21.3% across, 0% down the viewBox) sits exactly on the
-     stop's anchor; the svg rotates the shape so the tail-to-head line points at
-     the next stop. */
-  left: -0.724rem;
-  top: 0;
+  /* Chevrons start a little way out from the stop's anchor and are vertically centred on the line to the next stop. */
+  left: 0.5rem;
+  top: -0.9rem;
   width: 3.4rem;
   height: auto;
   /* globals.css gives every svg max-width: 100%, and this svg sits in a 0x0
      anchor -- without this it collapses to zero width and never shows. */
   max-width: none;
-  filter: drop-shadow(0 0.25rem 0.3rem rgba(40, 20, 8, 0.35));
-  transform-origin: 21.3% 0%;
-  animation: nextArrowIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both, nextArrowNudge 900ms ease-in-out 480ms infinite alternate;
+  filter: drop-shadow(0 0 0.18rem #39ff14) drop-shadow(0 0 0.5rem rgba(57, 255, 20, 0.65));
+  transform-origin: 0% 50%;
+  animation: nextArrowIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
+
+.neonChevron {
+  fill: #2bd10e;
+  fill-opacity: 0.2;
+  stroke: #eaffe0;
+  stroke-width: 30;
+  stroke-linejoin: round;
+  animation: neonChase 1200ms ease-in-out infinite;
+}
+
+.neonChevron:nth-child(2) { animation-delay: 220ms; }
+.neonChevron:nth-child(3) { animation-delay: 440ms; }
 
 @keyframes nextArrowIn {
   from { opacity: 0; transform: translateX(-0.8rem) scale(0.6); }
   to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
-@keyframes nextArrowNudge {
-  from { transform: translateX(0); }
-  to { transform: translateX(0.35rem); }
+/* One chevron at a time brightens and fills, like the reference neon sign. */
+@keyframes neonChase {
+  0%, 60%, 100% { fill-opacity: 0.2; stroke-opacity: 0.75; }
+  25% { fill-opacity: 0.85; stroke-opacity: 1; }
 }
 
 @media (max-width: 720px) {
   .nextArrowSvg {
-    left: -0.49rem;
-    top: 0;
+    left: 0.4rem;
+    top: -0.62rem;
     width: 2.3rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .nextArrowSvg {
+  .nextArrowSvg,
+  .neonChevron {
     animation: none;
+  }
+  .neonChevron {
+    fill-opacity: 0.6;
   }
 }

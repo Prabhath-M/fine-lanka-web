@@ -648,43 +648,16 @@ export function RouteMapPreview({ embedded = false, selectedItineraryId: control
                       className={styles.nextArrow}
                       style={{ left: `${(nextArrow.x / data.width) * 100}%`, top: `${(nextArrow.y / data.height) * 100}%`, '--arrow-angle': `${nextArrow.angle}deg` } as React.CSSProperties}
                     >
-                      <svg className={styles.nextArrowSvg} viewBox="0 0 1021 800" overflow="visible">
-                        <defs>
-                          <linearGradient id="nextArrowBody" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0" stopColor="#ffe6b3" />
-                            <stop offset="0.5" stopColor="#e58a45" />
-                            <stop offset="1" stopColor="#a8391f" />
-                          </linearGradient>
-                          <linearGradient id="nextArrowGloss" x1="0" y1="0" x2="1" y2="1">
-                            <stop offset="0" stopColor="#fff" stopOpacity="0.45" />
-                            <stop offset="0.5" stopColor="#fff" stopOpacity="0" />
-                          </linearGradient>
-                          <clipPath id="nextArrowClip"><path d="M0 0 C40 200 160 300 360 300 L1100 300 L1100 150 L1500 440 L1100 730 L1100 580 L420 580 C100 580 -30 380 0 0 Z" /></clipPath>
-                          <filter id="nextArrowSoft" x="-10%" y="-10%" width="120%" height="120%"><feGaussianBlur stdDeviation="5" /></filter>
-                          {/* Bevel masks: lit rim = shape minus itself shifted down-right; shaded rim = shape minus itself shifted up-left. */}
-                          <mask id="nextArrowLit" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1800" height="1100">
-                            <rect x="-100" y="-100" width="1800" height="1100" fill="#fff" />
-                            <path d="M0 0 C40 200 160 300 360 300 L1100 300 L1100 150 L1500 440 L1100 730 L1100 580 L420 580 C100 580 -30 380 0 0 Z" transform="translate(24 24)" fill="#000" />
-                          </mask>
-                          <mask id="nextArrowShade" maskUnits="userSpaceOnUse" x="-100" y="-100" width="1800" height="1100">
-                            <rect x="-100" y="-100" width="1800" height="1100" fill="#fff" />
-                            <path d="M0 0 C40 200 160 300 360 300 L1100 300 L1100 150 L1500 440 L1100 730 L1100 580 L420 580 C100 580 -30 380 0 0 Z" transform="translate(-24 -24)" fill="#000" />
-                          </mask>
-                        </defs>
-                        {/* Rotated about the tail tip (218,1) so the tail-to-head chord lies along the direction to the next stop. */}
-                        <g transform="translate(218 1) rotate(-16.4)">
-                        <g opacity="0.88">
-                          {/* Swooping arrow (bend right at the tail end, then a long straight shaft and tall head) with a bevel/emboss: gradient body, gloss, light top-left rim, dark bottom-right rim. */}
-                          <g clipPath="url(#nextArrowClip)">
-                            <path d="M0 0 C40 200 160 300 360 300 L1100 300 L1100 150 L1500 440 L1100 730 L1100 580 L420 580 C100 580 -30 380 0 0 Z" fill="url(#nextArrowBody)" />
-                            <path d="M0 0 C40 200 160 300 360 300 L1100 300 L1100 150 L1500 440 L1100 730 L1100 580 L420 580 C100 580 -30 380 0 0 Z" fill="url(#nextArrowGloss)" />
-                            <g filter="url(#nextArrowSoft)">
-                              <path d="M0 0 C40 200 160 300 360 300 L1100 300 L1100 150 L1500 440 L1100 730 L1100 580 L420 580 C100 580 -30 380 0 0 Z" fill="#fff6dc" fillOpacity="0.9" mask="url(#nextArrowLit)" />
-                              <path d="M0 0 C40 200 160 300 360 300 L1100 300 L1100 150 L1500 440 L1100 730 L1100 580 L420 580 C100 580 -30 380 0 0 Z" fill="#5c1c0c" fillOpacity="0.55" mask="url(#nextArrowShade)" />
-                            </g>
-                          </g>
-                        </g>
-                        </g>
+                      <svg className={styles.nextArrowSvg} viewBox="0 0 1343 700" overflow="visible">
+                        {/* Neon chevrons (>>>) pointing toward the next stop; they light up one after another, nearest the pin first. */}
+                        {[0, 1, 2].map((i) => (
+                          <path
+                            key={i}
+                            className={styles.neonChevron}
+                            d="M0 0 H226 L543 350 L242 700 H7 L334 350 Z"
+                            transform={`translate(${i * 400} 0)`}
+                          />
+                        ))}
                       </svg>
                     </div>
                   </div>
