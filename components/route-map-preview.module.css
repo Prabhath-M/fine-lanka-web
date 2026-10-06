@@ -1348,7 +1348,7 @@
   }
 }
 
-/* "Next destination" arrow: three softly glowing brass-gold chevrons (>>>) that light up one after another, shown after a
+/* "Next destination" arrow: three bright glowing orange chevrons (>>>) that light up one after another, shown after a
    stop's name has typed, pointing the way toward the next stop (it does not span the gap). It sits at the stop's
    anchor, rotated toward the next stop, and is removed the moment the next pin starts to pop. */
 .arrowLayer {
@@ -1376,16 +1376,16 @@
   /* globals.css gives every svg max-width: 100%, and this svg sits in a 0x0
      anchor -- without this it collapses to zero width and never shows. */
   max-width: none;
-  filter: drop-shadow(0 0 0.16rem rgba(216, 185, 120, 0.95)) drop-shadow(0 0.12rem 0.3rem rgba(15, 27, 43, 0.5));
+  filter: drop-shadow(0 0 0.14rem rgba(255, 122, 26, 0.95)) drop-shadow(0 0.1rem 0.28rem rgba(60, 20, 5, 0.6));
   transform-origin: 0% 50%;
   animation: nextArrowIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .neonChevron {
-  fill: #b8924a;
-  fill-opacity: 0.2;
-  stroke: #fff4d6;
-  stroke-width: 30;
+  fill: #ff6a13;
+  fill-opacity: 0.5;
+  stroke: #fff1dc;
+  stroke-width: 36;
   stroke-linejoin: round;
   animation: neonChase 1200ms ease-in-out infinite;
 }
@@ -1400,8 +1400,8 @@
 
 /* One chevron at a time brightens and fills, like the reference neon sign. */
 @keyframes neonChase {
-  0%, 60%, 100% { fill-opacity: 0.2; stroke-opacity: 0.75; }
-  25% { fill-opacity: 0.85; stroke-opacity: 1; }
+  0%, 60%, 100% { fill-opacity: 0.5; stroke-opacity: 0.9; }
+  25% { fill-opacity: 1; stroke-opacity: 1; }
 }
 
 @media (max-width: 720px) {
@@ -1418,6 +1418,6 @@
     animation: none;
   }
   .neonChevron {
-    fill-opacity: 0.6;
+    fill-opacity: 0.85;
   }
 }
