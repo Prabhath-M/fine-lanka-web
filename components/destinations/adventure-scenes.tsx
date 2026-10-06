@@ -223,10 +223,23 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
 }
 
 export function AdventureScreenOverlay({ active }: { active: boolean }) {
+  // Drops are tiled at a fixed, modest size (two offset, mirrored layers so the repeat is not obvious)
+  // instead of stretching one 16:9 frame over the whole screen.
   return (
     <div className={`adventure-screen-overlay-layer${active ? ' is-on' : ''}`} aria-hidden="true">
-      <AnimatedGif src="/images/adventure-water-drops.gif" className="adventure-screen-overlay" />
+      <span className="adventure-screen-overlay adventure-screen-overlay-a" />
+      <span className="adventure-screen-overlay adventure-screen-overlay-b" />
     </div>
+  )
+}
+
+function LittleBird({ className }: { className: string }) {
+  // The GIF is a tall, mostly empty frame with stray specks along its bottom edge, so the
+  // crop box shows only the area the bird actually flies in.
+  return (
+    <span className={`adventure-little-bird ${className}`}>
+      <AnimatedGif src="/images/adventure-little-bird.gif" className="adventure-little-bird-img" />
+    </span>
   )
 }
 
@@ -235,10 +248,12 @@ export function AdventureBirdOverlay({ active }: { active: boolean }) {
   return (
     <>
       <div className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-under${state}`} aria-hidden="true">
-        <AnimatedGif src="/images/adventure-little-bird.gif" className="adventure-little-bird adventure-little-bird-under" />
+        <LittleBird className="adventure-little-bird-under" />
+        <LittleBird className="adventure-little-bird-under-late" />
       </div>
       <div className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-over${state}`} aria-hidden="true">
-        <AnimatedGif src="/images/adventure-little-bird.gif" className="adventure-little-bird adventure-little-bird-over" />
+        <LittleBird className="adventure-little-bird-over" />
+        <LittleBird className="adventure-little-bird-over-late" />
       </div>
     </>
   )

@@ -13407,32 +13407,44 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure-screen-overlay {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-  opacity: 0.78;
+  background-image: url('/images/adventure-water-drops.gif');
+  background-repeat: repeat;
+  opacity: 0.6;
 }
+.destinations-page .adventure-screen-overlay-a { background-size: clamp(22rem, 38vw, 34rem) auto; }
+.destinations-page .adventure-screen-overlay-b {
+  background-size: clamp(30rem, 52vw, 46rem) auto;
+  background-position: 37% 21%;
+  transform: scaleX(-1);
+  opacity: 0.38;
+}
+.destinations-page .adventure .container { position: relative; z-index: 1; }
 .destinations-page .adventure-bird-overlay-layer-under,
 .destinations-page .adventure-fish-overlay-layer-under { z-index: 0; }
 .destinations-page .adventure-bird-overlay-layer-over,
 .destinations-page .adventure-fish-overlay-layer-over { z-index: 31; }
 .destinations-page .adventure-little-bird {
   position: absolute;
-  width: clamp(8rem, 15vw, 15rem);
-  height: auto;
-  aspect-ratio: 9 / 16;
-  object-fit: contain;
+  left: 0;
+  display: block;
+  width: clamp(4.5rem, 8vw, 8rem);
+  aspect-ratio: 1;
+  overflow: hidden;
   will-change: transform;
 }
-.destinations-page .adventure-little-bird-under {
-  top: 14%;
-  animation: adv-overlay-bird-under 18s linear infinite;
+/* Crop the 480x853 GIF to the 340x340 box the bird flies in (x 90, y 195). */
+.destinations-page .adventure-little-bird-img {
+  position: absolute;
+  left: -26.5%;
+  top: -57.4%;
+  width: 141.2%;
+  max-width: none;
+  height: auto;
 }
-.destinations-page .adventure-little-bird-over {
-  top: 58%;
-  animation: adv-overlay-bird-over 24s linear -8s infinite;
-}
+.destinations-page .adventure-little-bird-under { top: 12%; animation: adv-overlay-bird-ltr 13s linear infinite; }
+.destinations-page .adventure-little-bird-under-late { top: 46%; animation: adv-overlay-bird-rtl 17s linear -9s infinite; }
+.destinations-page .adventure-little-bird-over { top: 28%; animation: adv-overlay-bird-rtl 15s linear -4s infinite; }
+.destinations-page .adventure-little-bird-over-late { top: 64%; animation: adv-overlay-bird-ltr 19s linear -12s infinite; }
 .destinations-page .adventure-overlay-fish {
   position: absolute;
   width: clamp(5rem, 12vw, 12rem);
@@ -13742,15 +13754,17 @@ body:has(.features:target) .typed-opening { display: none; }
   from { transform: translate3d(-48vw, 0, 0); }
   to { transform: translate3d(125vw, 1.5vh, 0); }
 }
-@keyframes adv-overlay-bird-under {
-  0%, 8% { transform: translate3d(-18rem, -2vh, 0) rotate(-3deg); }
-  42% { transform: translate3d(42vw, 2vh, 0) rotate(2deg); }
-  92%, 100% { transform: translate3d(112vw, -1vh, 0) rotate(-2deg); }
+@keyframes adv-overlay-bird-ltr {
+  0% { transform: translate3d(-14vw, 3vh, 0) rotate(-6deg); }
+  30% { transform: translate3d(26vw, -4vh, 0) rotate(4deg); }
+  65% { transform: translate3d(66vw, 5vh, 0) rotate(-3deg); }
+  100% { transform: translate3d(108vw, -2vh, 0) rotate(5deg); }
 }
-@keyframes adv-overlay-bird-over {
-  0%, 12% { transform: translate3d(108vw, 1vh, 0) scaleX(-1) rotate(2deg); }
-  48% { transform: translate3d(48vw, -2vh, 0) scaleX(-1) rotate(-2deg); }
-  88%, 100% { transform: translate3d(-18rem, 1vh, 0) scaleX(-1) rotate(3deg); }
+@keyframes adv-overlay-bird-rtl {
+  0% { transform: translate3d(108vw, -3vh, 0) scaleX(-1) rotate(-5deg); }
+  35% { transform: translate3d(70vw, 5vh, 0) scaleX(-1) rotate(4deg); }
+  70% { transform: translate3d(30vw, -4vh, 0) scaleX(-1) rotate(-4deg); }
+  100% { transform: translate3d(-14vw, 3vh, 0) scaleX(-1) rotate(5deg); }
 }
 @keyframes adv-overlay-fish-under {
   0% { transform: translate3d(-16rem, 1vh, 0); }
