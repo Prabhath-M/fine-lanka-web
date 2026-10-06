@@ -28,8 +28,8 @@ const PIN_MIN_TOP_REM = 5.75
 /** Space between two neighbouring points while they are held, in rem. */
 const GAP_REM = 2.5
 /** How far you scroll while a point is held and builds up, as a share of the screen height. */
-const HOLD_DESKTOP = 0.32
-const HOLD_MOBILE = 0.28
+const HOLD_DESKTOP = 0.65
+const HOLD_MOBILE = 0.55
 
 export function AdventureSection() {
   const sectionRef = useRef<HTMLElement>(null)
