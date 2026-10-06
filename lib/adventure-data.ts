@@ -93,6 +93,18 @@ export const ADVENTURES: Adventure[] = [
   },
   {
     number: '04',
+    slug: 'atv-quad-bike-adventures',
+    title: 'ATV & Quad Bike Adventures',
+    tagline: 'Take the road less travelled.',
+    body: 'Leave the usual tourist trails behind and take on rugged tracks, countryside paths and off-road terrain on an exciting ATV adventure. Perfect for those who want to add a little more adrenaline to their Sri Lankan journey.',
+    tags: ['Off-road', 'Adrenaline', 'Countryside', 'Adventure'],
+    zone: 'land',
+    icon: 'atv',
+    image: '/images/adventure-atv-quad-bike-adventures',
+    imageAlt: 'A rider in a helmet on a yellow quad bike on the beach',
+  },
+  {
+    number: '05',
     slug: 'kayaking',
     title: 'Kayaking',
     tagline: 'Paddle into the wild.',
@@ -104,31 +116,7 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A kayaker carrying a yellow kayak along a beach',
   },
   {
-    number: '05',
-    slug: 'white-water-rafting',
-    title: 'White-Water Rafting',
-    tagline: 'Let the river lead the way.',
-    body: 'Head into the adventure capital of Kitulgala and take on Sri Lanka’s thrilling white-water rapids. Surrounded by tropical rainforest, this is an exhilarating experience for adventure seekers and groups alike.',
-    tags: ['Adrenaline', 'Rapids', 'Kitulgala', 'Rainforest'],
-    zone: 'water',
-    icon: 'raft',
-    image: '/images/adventure-white-water-rafting',
-    imageAlt: 'A group in helmets paddling a blue raft through white-water rapids',
-  },
-  {
     number: '06',
-    slug: 'scuba-diving-snorkelling',
-    title: 'Scuba Diving & Snorkelling',
-    tagline: 'Discover the world beneath the waves.',
-    body: 'Dive into Sri Lanka’s tropical waters and discover colourful marine life, coral reefs and fascinating underwater landscapes. From relaxed snorkelling to deeper diving adventures, the island offers unforgettable experiences beneath the surface.',
-    tags: ['Marine life', 'Coral reefs', 'Diving', 'Snorkelling'],
-    zone: 'water',
-    icon: 'dive',
-    image: '/images/adventure-scuba-diving-snorkelling',
-    imageAlt: 'A diver swimming beside a school of fish in deep blue water',
-  },
-  {
-    number: '07',
     slug: 'surfing-kite-surfing',
     title: 'Surfing & Kite Surfing',
     tagline: 'Ride the wind and the waves.',
@@ -140,16 +128,28 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A kite surfer riding a wave, spray flying',
   },
   {
+    number: '07',
+    slug: 'white-water-rafting',
+    title: 'White-Water Rafting',
+    tagline: 'Let the river lead the way.',
+    body: 'Head into the adventure capital of Kitulgala and take on Sri Lanka’s thrilling white-water rapids. Surrounded by tropical rainforest, this is an exhilarating experience for adventure seekers and groups alike.',
+    tags: ['Adrenaline', 'Rapids', 'Kitulgala', 'Rainforest'],
+    zone: 'water',
+    icon: 'raft',
+    image: '/images/adventure-white-water-rafting',
+    imageAlt: 'A group in helmets paddling a blue raft through white-water rapids',
+  },
+  {
     number: '08',
-    slug: 'atv-quad-bike-adventures',
-    title: 'ATV & Quad Bike Adventures',
-    tagline: 'Take the road less travelled.',
-    body: 'Leave the usual tourist trails behind and take on rugged tracks, countryside paths and off-road terrain on an exciting ATV adventure. Perfect for those who want to add a little more adrenaline to their Sri Lankan journey.',
-    tags: ['Off-road', 'Adrenaline', 'Countryside', 'Adventure'],
-    zone: 'land',
-    icon: 'atv',
-    image: '/images/adventure-atv-quad-bike-adventures',
-    imageAlt: 'A rider in a helmet on a yellow quad bike on the beach',
+    slug: 'scuba-diving-snorkelling',
+    title: 'Scuba Diving & Snorkelling',
+    tagline: 'Discover the world beneath the waves.',
+    body: 'Dive into Sri Lanka’s tropical waters and discover colourful marine life, coral reefs and fascinating underwater landscapes. From relaxed snorkelling to deeper diving adventures, the island offers unforgettable experiences beneath the surface.',
+    tags: ['Marine life', 'Coral reefs', 'Diving', 'Snorkelling'],
+    zone: 'water',
+    icon: 'dive',
+    image: '/images/adventure-scuba-diving-snorkelling',
+    imageAlt: 'A diver swimming beside a school of fish in deep blue water',
   },
   {
     number: '09',
@@ -169,20 +169,26 @@ export function adventuresForZone(zone: AdventureZone | 'all'): Adventure[] {
   return zone === 'all' ? ADVENTURES : ADVENTURES.filter((a) => a.zone === zone)
 }
 
-/** Altitude gauge stages, top (sky) to bottom (depth). */
-export type AdventureStage = 'sky' | 'canopy' | 'land' | 'water' | 'depth'
+/**
+ * Background scenes, top (sky) to bottom (cave). Each stage has its own animated backdrop:
+ * sky = clouds, canopy and land = birds, water = waves and splashes, ocean = fish and jellyfish,
+ * depth = darkness and fireflies.
+ */
+export type AdventureStage = 'sky' | 'canopy' | 'land' | 'water' | 'ocean' | 'depth'
 
 export const ADVENTURE_STAGES: { id: AdventureStage; label: string }[] = [
   { id: 'sky', label: 'Sky' },
   { id: 'canopy', label: 'Canopy' },
   { id: 'land', label: 'Land' },
   { id: 'water', label: 'Water' },
+  { id: 'ocean', label: 'Ocean' },
   { id: 'depth', label: 'Depth' },
 ]
 
-/** Where an experience sits on the gauge. The zip line is the only "canopy" entry. */
+/** Which backdrop an experience scrolls over. The zip line is the only "canopy" entry; scuba is the only "ocean" one. */
 export function adventureStage(adventure: Pick<Adventure, 'zone' | 'slug'>): AdventureStage {
   if (adventure.slug === 'ella-zip-line') return 'canopy'
+  if (adventure.slug === 'scuba-diving-snorkelling') return 'ocean'
   switch (adventure.zone) {
     case 'air':
       return 'sky'

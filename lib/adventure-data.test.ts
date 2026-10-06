@@ -39,7 +39,7 @@ describe('adventure data', () => {
     const titles = (zone: Parameters<typeof adventuresForZone>[0]) => adventuresForZone(zone).map((a) => a.title)
     expect(titles('air')).toEqual(['Helicopter Tours', 'Ella Zip Line'])
     expect(titles('land')).toEqual(['Horse Riding', 'ATV & Quad Bike Adventures'])
-    expect(titles('water')).toEqual(['Kayaking', 'White-Water Rafting', 'Scuba Diving & Snorkelling', 'Surfing & Kite Surfing'])
+    expect(titles('water')).toEqual(['Kayaking', 'Surfing & Kite Surfing', 'White-Water Rafting', 'Scuba Diving & Snorkelling'])
     expect(titles('underground')).toEqual(['Cave Exploration'])
   })
 
@@ -48,6 +48,20 @@ describe('adventure data', () => {
       expect(a.image).toMatch(/^\/images\/adventure-/)
       expect((a.imageAlt ?? '').trim()).not.toBe('')
     }
+  })
+
+  it('runs from the sky down to the cave', () => {
+    expect(ADVENTURES.map((a) => a.slug)).toEqual([
+      'helicopter-tours',
+      'ella-zip-line',
+      'horse-riding',
+      'atv-quad-bike-adventures',
+      'kayaking',
+      'surfing-kite-surfing',
+      'white-water-rafting',
+      'scuba-diving-snorkelling',
+      'cave-exploration',
+    ])
   })
 
   it('returns everything for the "all" filter', () => {
@@ -64,7 +78,7 @@ describe('adventure data', () => {
 describe('adventureStage', () => {
   it('places the nine experiences from sky down to depth', () => {
     expect(ADVENTURES.map(adventureStage)).toEqual([
-      'sky', 'canopy', 'land', 'water', 'water', 'water', 'water', 'land', 'depth',
+      'sky', 'canopy', 'land', 'land', 'water', 'water', 'water', 'ocean', 'depth',
     ])
   })
 

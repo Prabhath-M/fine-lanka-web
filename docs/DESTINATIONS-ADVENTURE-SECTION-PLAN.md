@@ -77,7 +77,7 @@ change the page; nothing merges to `main` until Phase 6 is approved.
 | 3 | Zone filter and hero link | Done (zone filter later removed by request; hero link kept) |
 | 4 | Sky-to-Underground gauge and effects | Done (gauge later removed by request; background shift and panel effects kept) |
 | 5 | Responsive, accessibility, reduced motion | Done (width check in a browser still to do) |
-| 6 | Photos, QA and merge | In progress: photos for all experiences added; a ninth "Surfing & Kite Surfing" panel added (copy written by us, needs approval); section background image and final QA still to do |
+| 6 | Photos, QA and merge | In progress: photos for all experiences added; a ninth "Surfing & Kite Surfing" panel added (copy written by us, needs approval); experiences reordered sky to cave; animated backdrop per stage (clouds, birds, waves and splashes, fish and jellyfish, cave fireflies) with stage-themed text colours; browser check, Lighthouse and merge still to do |
 
 ### Phase 1 – Data and copy
 - Add `lib/adventure-data.ts`: typed `ADVENTURES` (number, slug, title, tagline, body, tags, zone, icon key,

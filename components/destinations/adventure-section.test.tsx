@@ -49,6 +49,20 @@ describe('AdventureSection', () => {
     expect(html).toContain('data-stage="sky"')
   })
 
+  it('renders one backdrop scene per stage, with only the first one on', () => {
+    for (const stage of ['sky', 'canopy', 'land', 'water', 'ocean', 'depth']) {
+      expect(html).toContain(`class="adventure-scene${stage === 'sky' ? ' is-on' : ''}"`)
+      expect(html).toContain(`data-stage="${stage}"`)
+    }
+    expect(html.match(/class="adventure-scene is-on"/g)).toHaveLength(1)
+    expect(html).toContain('adv-cloud') // sky: clouds
+    expect(html).toContain('adv-bird') // canopy and land: birds
+    expect(html).toContain('adv-drop') // water: splashes
+    expect(html).toContain('adv-fish') // ocean: fish
+    expect(html).toContain('adv-jelly') // ocean: jellyfish
+    expect(html).toContain('adv-firefly') // cave: fireflies
+  })
+
   it('tags every panel with its gauge stage and keeps entrance effects off in server HTML', () => {
     expect(html.match(/class="adventure-panel"[^>]*data-stage="/g)).toHaveLength(ADVENTURES.length)
     expect(html).toContain('data-motion="off"')

@@ -6,18 +6,17 @@ import {
   ADVENTURES,
   ADVENTURE_CLOSING,
   ADVENTURE_INTRO,
-  ADVENTURE_STAGES,
   type AdventureStage,
 } from '@/lib/adventure-data'
 import { AdventurePanel } from '@/components/destinations/adventure-panel'
+import { AdventureScenes } from '@/components/destinations/adventure-scenes'
 
 /**
  * "Adventure & Experiences" -- the "Sky to Underground" section of the
  * Destinations page. See docs/DESTINATIONS-ADVENTURE-SECTION-PLAN.md.
  *
- * Phase 4 added the
- * scroll-linked background shift (`data-stage` on the section drives the CSS)
- * and the staggered panel entrance. One IntersectionObserver handles both the
+ * The background is a set of animated scenes (see adventure-scenes.tsx), one per stage, and
+ * `data-stage` on the section also drives the text colours. One IntersectionObserver handles both the
  * active stage and the entrance; it never touches layout, so nothing shifts.
  */
 export function AdventureSection() {
@@ -84,11 +83,7 @@ export function AdventureSection() {
       data-motion={motion ? 'on' : 'off'}
     >
       <div className="adventure-tint" aria-hidden="true">
-        <div className="adventure-tint-view">
-          {ADVENTURE_STAGES.map((entry) => (
-            <span key={entry.id} data-stage={entry.id} className={entry.id === stage ? 'is-on' : undefined} />
-          ))}
-        </div>
+        <AdventureScenes stage={stage} />
       </div>
       <div className="adventure-sky" aria-hidden="true" />
 
