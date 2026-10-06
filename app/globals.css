@@ -13781,16 +13781,15 @@ body:has(.features:target) .typed-opening { display: none; }
    With JS and no reduced-motion preference, the section sets data-scrub='on'. Each panel keeps its
    normal size and spacing and gains a short stretch of padding; inside it the stage (.adventure-stick)
    stays pinned, centred in the viewport, while the JS writes the scroll progress through that stretch
-   to --p (0 to 1). Everything below is a pure function of --p: the photo sharpens from veiled to full
-   colour, then the heading, the copy and the tags appear while the load bar fills. At 1 the stage
-   releases and the page scrolls on. Progress never goes back down, so a built point stays built.
+   to --p (0 to 1). The photo, number and title are always fully shown; once the point reaches the
+   middle of the screen only the description (tagline and copy), then the tags, appear as --p rises while
+   the load bar fills. At 1 the stage releases and the page scrolls on. Progress never goes back down,
+   so a built point stays built.
    Without scrub mode (no JS, reduced motion) .adventure-stick is invisible to layout. */
 .destinations-page .adventure-panel {
   --p: 1;
-  --t-media: clamp(0, calc(var(--p) / 0.3), 1);
-  --t-head: clamp(0, calc((var(--p) - 0.15) / 0.25), 1);
-  --t-copy: clamp(0, calc((var(--p) - 0.35) / 0.25), 1);
-  --t-tags: clamp(0, calc((var(--p) - 0.6) / 0.25), 1);
+  --t-copy: clamp(0, calc(var(--p) / 0.5), 1);
+  --t-tags: clamp(0, calc((var(--p) - 0.5) / 0.4), 1);
 }
 .destinations-page .adventure-stick { display: contents; }
 .destinations-page .adventure-load { display: none; }
@@ -13798,13 +13797,13 @@ body:has(.features:target) .typed-opening { display: none; }
 /* --adv-hold is how far you scroll while a point is held in place and builds up. The pinned stage then
    releases straight into the next point, so the gap between two built points stays short. */
 .destinations-page .adventure[data-scrub='on'] {
-  --adv-hold: 38vh;
-  --adv-hold: 38svh;
+  --adv-hold: 26vh;
+  --adv-hold: 26svh;
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel {
   display: block;
   padding-bottom: var(--adv-hold);
-  margin-bottom: clamp(0.5rem, 1.5vw, 1.25rem);
+  margin-bottom: 0;
 }
 .destinations-page .adventure[data-scrub='on'] .adventure-stick {
   position: sticky;
@@ -13815,20 +13814,7 @@ body:has(.features:target) .typed-opening { display: none; }
   gap: clamp(2.5rem, 7vw, 6rem);
 }
 
-/* Before it loads, a point shows as a dimmed frame and its number; the rest builds with --p. */
-.destinations-page .adventure[data-scrub='on'] .adventure-media {
-  opacity: calc(0.45 + 0.55 * var(--t-media));
-  transform: scale(calc(0.96 + 0.04 * var(--t-media)));
-  transition: none;
-}
-.destinations-page .adventure[data-scrub='on'] .adventure-media::after { opacity: calc(1 - var(--p) * 0.9); transition: none; }
-.destinations-page .adventure[data-scrub='on'] .adventure-media img { transform: scale(calc(1.14 - 0.14 * var(--p))); }
-
-.destinations-page .adventure[data-scrub='on'] .adventure-num { opacity: calc(0.45 + 0.55 * var(--t-head)); }
-.destinations-page .adventure[data-scrub='on'] .adventure-title-row {
-  opacity: var(--t-head);
-  transform: translate3d(0, calc((1 - var(--t-head)) * 1.6rem), 0);
-}
+/* Photo, number and title stay fully shown; only the description and tags build with --p. */
 .destinations-page .adventure[data-scrub='on'] .adventure-tagline,
 .destinations-page .adventure[data-scrub='on'] .adventure-copy {
   opacity: var(--t-copy);
@@ -13860,8 +13846,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
 
 @media (max-width: 900px) {
-  .destinations-page .adventure[data-scrub='on'] { --adv-hold: 32vh; --adv-hold: 32svh; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-panel { margin-bottom: 0.5rem; }
+  .destinations-page .adventure[data-scrub='on'] { --adv-hold: 24vh; --adv-hold: 24svh; }
   .destinations-page .adventure[data-scrub='on'] .adventure-stick { grid-template-columns: 1fr; gap: 1.25rem; }
   /* Keep a whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
   .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }
