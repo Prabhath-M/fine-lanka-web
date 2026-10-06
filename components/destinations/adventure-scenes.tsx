@@ -223,7 +223,17 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
 }
 
 export function AdventureScreenOverlay({ active }: { active: boolean }) {
-  return <TransparentVideo src="/images/adventure-real-camera-splash.webm" className={`adventure-screen-overlay${active ? ' is-on' : ''}`} active={active} />
+  return <AnimatedGif src="/images/adventure-water-drops.gif" className={`adventure-screen-overlay${active ? ' is-on' : ''}`} />
+}
+
+export function AdventureBirdOverlay({ active }: { active: boolean }) {
+  const state = active ? ' is-on' : ''
+  return (
+    <>
+      <AnimatedGif src="/images/adventure-little-bird.gif" className={`adventure-bird-overlay adventure-bird-overlay-under${state}`} />
+      <AnimatedGif src="/images/adventure-little-bird.gif" className={`adventure-bird-overlay adventure-bird-overlay-over${state}`} />
+    </>
+  )
 }
 
 export function AdventureScenes({ stage }: { stage: AdventureStage }) {
