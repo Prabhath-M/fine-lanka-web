@@ -1348,7 +1348,7 @@
   }
 }
 
-/* "Next destination" arrow: three glowing neon-green chevrons (>>>) that light up one after another, shown after a
+/* "Next destination" arrow: three softly glowing brass-gold chevrons (>>>) that light up one after another, shown after a
    stop's name has typed, pointing the way toward the next stop (it does not span the gap). It sits at the stop's
    anchor, rotated toward the next stop, and is removed the moment the next pin starts to pop. */
 .arrowLayer {
@@ -1376,15 +1376,15 @@
   /* globals.css gives every svg max-width: 100%, and this svg sits in a 0x0
      anchor -- without this it collapses to zero width and never shows. */
   max-width: none;
-  filter: drop-shadow(0 0 0.18rem #39ff14) drop-shadow(0 0 0.5rem rgba(57, 255, 20, 0.65));
+  filter: drop-shadow(0 0 0.16rem rgba(216, 185, 120, 0.95)) drop-shadow(0 0.12rem 0.3rem rgba(15, 27, 43, 0.5));
   transform-origin: 0% 50%;
   animation: nextArrowIn 480ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .neonChevron {
-  fill: #2bd10e;
+  fill: #b8924a;
   fill-opacity: 0.2;
-  stroke: #eaffe0;
+  stroke: #fff4d6;
   stroke-width: 30;
   stroke-linejoin: round;
   animation: neonChase 1200ms ease-in-out infinite;
