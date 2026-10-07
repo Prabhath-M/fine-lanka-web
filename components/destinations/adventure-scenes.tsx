@@ -1,5 +1,6 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 import { ADVENTURE_STAGES, type AdventureStage } from '@/lib/adventure-data'
+import { Roamer } from '@/components/destinations/adventure-roamer'
 
 /**
  * Atmospheric, photo-led backdrops for the Adventure & Experiences section. Real cloud layers
@@ -222,23 +223,43 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
   }
 }
 
-export function AdventureScreenOverlay({ active }: { active: boolean }) {
-  // Drops are tiled at a fixed, modest size (two offset, mirrored layers so the repeat is not obvious)
-  // instead of stretching one 16:9 frame over the whole screen.
+/**
+ * Screen overlays (rain drops, birds, fish) sit in a section-sized box with a viewport-sized sticky
+ * stage inside it. So they stay locked to the screen while the section is on screen, leave with the
+ * section when it scrolls away, and are placed relative to the current screen when it comes back.
+ */
+function ViewportLayer({ className, children }: { className: string; children: ReactNode }) {
   return (
-    <div className={`adventure-screen-overlay-layer${active ? ' is-on' : ''}`} aria-hidden="true">
-      <span className="adventure-screen-overlay adventure-screen-overlay-a" />
-      <span className="adventure-screen-overlay adventure-screen-overlay-b" />
+    <div className="adventure-viewport-layer" aria-hidden="true">
+      <div className={className}>{children}</div>
     </div>
   )
 }
 
-function LittleBird({ className }: { className: string }) {
+export function AdventureScreenOverlay({ active }: { active: boolean }) {
+  // Drops are tiled at a fixed, modest size (two offset, mirrored layers so the repeat is not obvious)
+  // instead of stretching one 16:9 frame over the whole screen.
+  return (
+    <ViewportLayer className={`adventure-screen-overlay-layer${active ? ' is-on' : ''}`}>
+      <span className="adventure-screen-overlay adventure-screen-overlay-a" />
+      <span className="adventure-screen-overlay adventure-screen-overlay-b" />
+    </ViewportLayer>
+  )
+}
+
+const BIRD_SPEED: [number, number] = [150, 210]
+const BIRD_POINTS: [number, number] = [2, 4]
+const BIRD_PAUSE: [number, number] = [1.5, 5]
+const FISH_SPEED: [number, number] = [90, 140]
+const FISH_POINTS: [number, number] = [2, 3]
+const FISH_PAUSE: [number, number] = [2, 6]
+
+function LittleBird({ active, className, startDelay }: { active: boolean; className: string; startDelay: number }) {
   // Animated WebP with a real (soft) alpha channel, pre-cropped to the bird's flight area.
   return (
-    <span className={`adventure-little-bird ${className}`}>
+    <Roamer active={active} className={`adventure-little-bird ${className}`} speed={BIRD_SPEED} waypoints={BIRD_POINTS} pause={BIRD_PAUSE} tilt={0.6} startDelay={startDelay}>
       <AnimatedGif src="/images/adventure-little-bird.webp" className="adventure-little-bird-img" />
-    </span>
+    </Roamer>
   )
 }
 
@@ -246,15 +267,23 @@ export function AdventureBirdOverlay({ active }: { active: boolean }) {
   const state = active ? ' is-on' : ''
   return (
     <>
-      <div className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-under${state}`} aria-hidden="true">
-        <LittleBird className="adventure-little-bird-under" />
-        <LittleBird className="adventure-little-bird-under-late" />
-      </div>
-      <div className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-over${state}`} aria-hidden="true">
-        <LittleBird className="adventure-little-bird-over" />
-        <LittleBird className="adventure-little-bird-over-late" />
-      </div>
+      <ViewportLayer className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-under${state}`}>
+        <LittleBird active={active} className="adventure-little-bird-under" startDelay={0} />
+        <LittleBird active={active} className="adventure-little-bird-under-late" startDelay={6} />
+      </ViewportLayer>
+      <ViewportLayer className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-over${state}`}>
+        <LittleBird active={active} className="adventure-little-bird-over" startDelay={3} />
+        <LittleBird active={active} className="adventure-little-bird-over-late" startDelay={9} />
+      </ViewportLayer>
     </>
+  )
+}
+
+function OverlayFish({ active, src, className, startDelay }: { active: boolean; src: string; className: string; startDelay: number }) {
+  return (
+    <Roamer active={active} className={`adventure-overlay-fish-wrap ${className}`} speed={FISH_SPEED} waypoints={FISH_POINTS} pause={FISH_PAUSE} tilt={0.35} startDelay={startDelay}>
+      <AnimatedGif src={src} className="adventure-overlay-fish" />
+    </Roamer>
   )
 }
 
@@ -262,12 +291,12 @@ export function AdventureFishOverlay({ active }: { active: boolean }) {
   const state = active ? ' is-on' : ''
   return (
     <>
-      <div className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-under${state}`} aria-hidden="true">
-        <AnimatedGif src="/images/adventure-fish-perch.png" className="adventure-overlay-fish adventure-overlay-fish-under" />
-      </div>
-      <div className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-over${state}`} aria-hidden="true">
-        <AnimatedGif src="/images/adventure-fish-red.png" className="adventure-overlay-fish adventure-overlay-fish-over" />
-      </div>
+      <ViewportLayer className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-under${state}`}>
+        <OverlayFish active={active} src="/images/adventure-fish-perch.png" className="adventure-overlay-fish-under" startDelay={0} />
+      </ViewportLayer>
+      <ViewportLayer className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-over${state}`}>
+        <OverlayFish active={active} src="/images/adventure-fish-red.png" className="adventure-overlay-fish-over" startDelay={5} />
+      </ViewportLayer>
     </>
   )
 }

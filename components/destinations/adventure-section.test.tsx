@@ -75,6 +75,15 @@ describe('AdventureSection', () => {
     expect(html).toContain('adv-firefly') // cave: fireflies
   })
 
+  it('keeps the screen overlays locked to the screen but inside the section', () => {
+    const styles = readFileSync(join(process.cwd(), 'app/globals.css'), 'utf8')
+    expect(html).toContain('adventure-viewport-layer')
+    const rule = styles.match(/\.destinations-page \.adventure-screen-overlay-layer,[\s\S]*?\{([\s\S]*?)\n\}/)?.[1] ?? ''
+    expect(rule).toContain('position: sticky') // pinned to the screen while the section is on screen, leaves with it
+    expect(rule).not.toContain('position: fixed') // fixed would stay on screen after the section scrolls away
+    expect(rule).toContain('overflow: clip') // overflow: hidden would stop it sticking
+  })
+
   it('uses a separate existing background plate for every adventure stage', () => {
     const styles = readFileSync(join(process.cwd(), 'app/globals.css'), 'utf8')
     const stages = ['sky', 'canopy', 'land', 'water', 'ocean', 'depth']

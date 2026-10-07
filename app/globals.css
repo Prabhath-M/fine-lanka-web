@@ -13385,12 +13385,22 @@ body:has(.features:target) .typed-opening { display: none; }
   z-index: -1;
   pointer-events: none;
 }
+/* Section-sized box that holds a viewport-sized sticky stage (the layers below): the overlays stay
+   locked to the screen while the section is on screen, and leave with the section. */
+.destinations-page .adventure-viewport-layer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+}
 .destinations-page .adventure-screen-overlay-layer,
 .destinations-page .adventure-bird-overlay-layer,
 .destinations-page .adventure-fish-overlay-layer {
-  position: fixed;
-  inset: 0;
-  overflow: hidden;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: clip; /* clip, not hidden: hidden would make this a scroll container and stop it sticking */
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
@@ -13424,13 +13434,10 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure-bird-overlay-layer-over,
 .destinations-page .adventure-fish-overlay-layer-over { z-index: 31; }
 .destinations-page .adventure-little-bird {
-  position: absolute;
-  left: 0;
   display: block;
   width: clamp(4.5rem, 8vw, 8rem);
   aspect-ratio: 1;
   overflow: hidden;
-  will-change: transform;
 }
 .destinations-page .adventure-little-bird-img {
   display: block;
@@ -13438,24 +13445,24 @@ body:has(.features:target) .typed-opening { display: none; }
   height: 100%;
   object-fit: contain;
 }
-.destinations-page .adventure-little-bird-under { top: 12%; animation: adv-overlay-bird-ltr 13s linear infinite; }
-.destinations-page .adventure-little-bird-under-late { top: 46%; animation: adv-overlay-bird-rtl 17s linear -9s infinite; }
-.destinations-page .adventure-little-bird-over { top: 28%; animation: adv-overlay-bird-rtl 15s linear -4s infinite; }
-.destinations-page .adventure-little-bird-over-late { top: 64%; animation: adv-overlay-bird-ltr 19s linear -12s infinite; }
+.destinations-page .adventure-overlay-fish-wrap { width: clamp(5rem, 12vw, 12rem); }
 .destinations-page .adventure-overlay-fish {
-  position: absolute;
-  width: clamp(5rem, 12vw, 12rem);
+  display: block;
+  width: 100%;
   height: auto;
   object-fit: contain;
+}
+/* Birds and fish fly random routes set from script (components/destinations/adventure-roamer.tsx):
+   hidden until a flight starts, and not shown at all with reduced motion. */
+.destinations-page .adventure-roamer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
   will-change: transform;
 }
-.destinations-page .adventure-overlay-fish-under {
-  top: 34%;
-  animation: adv-overlay-fish-under 20s linear infinite;
-}
-.destinations-page .adventure-overlay-fish-over {
-  top: 70%;
-  animation: adv-overlay-fish-over 26s linear -11s infinite;
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page .adventure-roamer { display: none; }
 }
 
 .destinations-page .adventure-tint-view {
@@ -13750,28 +13757,6 @@ body:has(.features:target) .typed-opening { display: none; }
 @keyframes adv-cloud-drift {
   from { transform: translate3d(-48vw, 0, 0); }
   to { transform: translate3d(125vw, 1.5vh, 0); }
-}
-@keyframes adv-overlay-bird-ltr {
-  0% { transform: translate3d(-14vw, 3vh, 0) rotate(-6deg); }
-  30% { transform: translate3d(26vw, -4vh, 0) rotate(4deg); }
-  65% { transform: translate3d(66vw, 5vh, 0) rotate(-3deg); }
-  100% { transform: translate3d(108vw, -2vh, 0) rotate(5deg); }
-}
-@keyframes adv-overlay-bird-rtl {
-  0% { transform: translate3d(108vw, -3vh, 0) scaleX(-1) rotate(-5deg); }
-  35% { transform: translate3d(70vw, 5vh, 0) scaleX(-1) rotate(4deg); }
-  70% { transform: translate3d(30vw, -4vh, 0) scaleX(-1) rotate(-4deg); }
-  100% { transform: translate3d(-14vw, 3vh, 0) scaleX(-1) rotate(5deg); }
-}
-@keyframes adv-overlay-fish-under {
-  0% { transform: translate3d(-16rem, 1vh, 0); }
-  48% { transform: translate3d(48vw, -3vh, 0); }
-  100% { transform: translate3d(112vw, 0, 0); }
-}
-@keyframes adv-overlay-fish-over {
-  0% { transform: translate3d(112vw, 0, 0) scaleX(-1); }
-  52% { transform: translate3d(46vw, 2vh, 0) scaleX(-1); }
-  100% { transform: translate3d(-16rem, -1vh, 0) scaleX(-1); }
 }
 @keyframes adv-bird-flight {
   0% { transform: translate3d(-42vw, 0, 0); }
