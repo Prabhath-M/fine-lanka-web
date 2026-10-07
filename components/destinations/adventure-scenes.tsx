@@ -293,7 +293,7 @@ export function AdventureBirdOverlay({ active }: { active: boolean }) {
 
 function OverlayFish({ active, src, className, startDelay }: { active: boolean; src: string; className: string; startDelay: number }) {
   return (
-    <Roamer active={active} className={`adventure-overlay-fish-wrap ${className}`} speed={FISH_SPEED} waypoints={FISH_POINTS} pause={FISH_PAUSE} tilt={0.35} startDelay={startDelay}>
+    <Roamer active={active} className={`adventure-overlay-fish-wrap ${className}`} speed={FISH_SPEED} waypoints={FISH_POINTS} pause={FISH_PAUSE} tilt={0.35} forward startDelay={startDelay}>
       <AnimatedGif src={src} className="adventure-overlay-fish" />
     </Roamer>
   )

@@ -15,6 +15,8 @@ interface RoamerProps {
   /** Range of seconds between leaving the screen and coming back on a new route. */
   pause: [number, number]
   tilt?: number
+  /** Fish: only ever move forward (right), with a slow float back or ahead now and then. */
+  forward?: boolean
   /** Seconds before the first flight, so several sprites do not start together. */
   startDelay?: number
 }
@@ -25,7 +27,7 @@ interface RoamerProps {
  * Each route is planned from the layer's current size, so it always starts relative to the screen
  * as it is at that moment. Reduced-motion visitors do not see it at all.
  */
-export function Roamer({ active, className = '', children, speed, waypoints, pause, tilt, startDelay = 0 }: RoamerProps) {
+export function Roamer({ active, className = '', children, speed, waypoints, pause, tilt, forward, startDelay = 0 }: RoamerProps) {
   const ref = useRef<HTMLSpanElement>(null)
   const animation = useRef<Animation | null>(null)
 
@@ -60,6 +62,7 @@ export function Roamer({ active, className = '', children, speed, waypoints, pau
         speed: rand(speed),
         waypoints,
         tilt,
+        forward,
       })
       animation.current?.cancel()
       el.style.visibility = 'visible'
@@ -76,7 +79,7 @@ export function Roamer({ active, className = '', children, speed, waypoints, pau
       window.clearTimeout(timer)
       if (animation.current) animation.current.onfinish = null
     }
-  }, [active, speed, waypoints, pause, tilt, startDelay])
+  }, [active, speed, waypoints, pause, tilt, forward, startDelay])
 
   useEffect(() => () => animation.current?.cancel(), [])
 

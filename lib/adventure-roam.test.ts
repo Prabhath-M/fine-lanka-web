@@ -73,4 +73,66 @@ describe('planRoam', () => {
       }
     }
   })
+
+  describe('forward-only routes (fish)', () => {
+    const fish = { ...base, spriteW: 170, spriteH: 90, speed: 110, waypoints: [2, 3] as [number, number], forward: true }
+    const xOf = (transform: string) => Number(/translate3d\((-?[\d.]+)px/.exec(transform)?.[1])
+
+    it('enters on the left, leaves on the right, and swims on to the right overall', () => {
+      for (let seed = 1; seed <= 60; seed++) {
+        const { points, keyframes } = planRoam({ ...fish, random: seeded(seed) })
+        expect(points[0].x).toBeLessThanOrEqual(-fish.spriteW)
+        expect(points[points.length - 1].x).toBeGreaterThanOrEqual(fish.width)
+        expect(xOf(keyframes[keyframes.length - 1].transform)).toBeGreaterThan(xOf(keyframes[0].transform) + fish.width)
+      }
+    })
+
+    it('never swims backwards by more than a short float', () => {
+      for (let seed = 1; seed <= 60; seed++) {
+        const { keyframes } = planRoam({ ...fish, random: seeded(seed) })
+        let peak = -Infinity
+        let worstBack = 0
+        for (const frame of keyframes) {
+          const x = xOf(frame.transform)
+          peak = Math.max(peak, x)
+          worstBack = Math.max(worstBack, peak - x)
+        }
+        expect(worstBack).toBeLessThanOrEqual(fish.width * 0.14)
+      }
+    })
+
+    it('moves back only in a deliberate float, never as a small flicker', () => {
+      let floated = 0
+      let forwardOnly = 0
+      for (let seed = 1; seed <= 80; seed++) {
+        const { keyframes } = planRoam({ ...fish, random: seeded(seed) })
+        let peak = -Infinity
+        let worstBack = 0
+        for (const frame of keyframes) {
+          const x = xOf(frame.transform)
+          peak = Math.max(peak, x)
+          worstBack = Math.max(worstBack, peak - x)
+        }
+        if (worstBack < 1) forwardOnly++
+        else {
+          floated++
+          expect(worstBack).toBeGreaterThanOrEqual(40) // a real float (about 4% of the width or more), not a twitch
+        }
+      }
+      expect(floated).toBeGreaterThan(15)
+      expect(forwardOnly).toBeGreaterThan(15)
+    })
+
+    it('slows down while floating', () => {
+      // A float segment costs three times as much per pixel, so routes with one take longer than their length / speed.
+      const plan = planRoam({ ...fish, random: seeded(11) })
+      let length = 0
+      for (let i = 1; i < plan.keyframes.length; i++) {
+        const [x0, y0] = /translate3d\((-?[\d.]+)px, (-?[\d.]+)px/.exec(plan.keyframes[i - 1].transform)!.slice(1).map(Number)
+        const [x1, y1] = /translate3d\((-?[\d.]+)px, (-?[\d.]+)px/.exec(plan.keyframes[i].transform)!.slice(1).map(Number)
+        length += Math.hypot(x1 - x0, y1 - y0)
+      }
+      expect(plan.duration).toBeGreaterThan((length / fish.speed) * 1000 * 0.98)
+    })
+  })
 })

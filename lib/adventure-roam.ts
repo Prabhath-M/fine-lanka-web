@@ -26,6 +26,12 @@ export interface RoamOptions {
   waypoints: [number, number]
   /** Largest tilt, in radians (default 0.5). */
   tilt?: number
+  /**
+   * For creatures that must not swim backwards (fish): enter on the left, leave on the right, keep
+   * moving forward (to the right) through the waypoints, and once in a while float a little back or
+   * ahead, slowly, before carrying on forward.
+   */
+  forward?: boolean
   /** Random source in [0, 1); injectable for tests. */
   random?: () => number
 }
@@ -54,7 +60,7 @@ export function planRoam(options: RoamOptions): RoamPlan {
   const between = (low: number, high: number) => low + (high - low) * rnd()
   const maxTilt = options.tilt ?? 0.5
 
-  // Entry and exit: just outside the area, on two different sides (0 left, 1 right, 2 top, 3 bottom).
+  // Entry and exit points sit just outside the area (sides: 0 left, 1 right, 2 top, 3 bottom).
   const edge = (side: number): Point => {
     switch (side) {
       case 0:
@@ -67,58 +73,110 @@ export function planRoam(options: RoamOptions): RoamPlan {
         return { x: between(0.08, 0.9) * width, y: height + spriteH * 0.2 }
     }
   }
-  const startSide = Math.floor(rnd() * 4) % 4
-  const endSide = (startSide + 1 + (Math.floor(rnd() * 3) % 3)) % 4
-
-  // Random points inside the area, kept apart so the route wanders instead of dithering.
   const [minPoints, maxPoints] = options.waypoints
   const count = clamp(Math.floor(between(minPoints, maxPoints + 1)), minPoints, maxPoints)
   const boxW = Math.max(width * 0.9 - spriteW, 1)
   const boxH = Math.max(height * 0.82 - spriteH, 1)
-  const spacing = Math.min(width, height) * 0.22
-  const points: Point[] = [edge(startSide)]
-  for (let i = 0; i < count; i++) {
-    let candidate: Point = { x: width * 0.05 + rnd() * boxW, y: height * 0.08 + rnd() * boxH }
-    for (let attempt = 0; attempt < 8; attempt++) {
-      const previous = points[points.length - 1]
-      if (Math.hypot(candidate.x - previous.x, candidate.y - previous.y) >= spacing) break
-      candidate = { x: width * 0.05 + rnd() * boxW, y: height * 0.08 + rnd() * boxH }
-    }
-    points.push(candidate)
-  }
-  points.push(edge(endSide))
+  const points: Point[] = []
+  const floatSegments = new Set<number>() // segments flown slowly (the float back or ahead)
+  const backSegments = new Set<number>() // the only segments where a forward-only creature may drift back
 
-  // Dense samples along the curve, with cumulative length for equal-arc-length resampling.
+  if (options.forward) {
+    const startY = edge(0)
+    const endY = edge(1)
+    const lo = width * 0.1
+    const hi = Math.max(width * 0.9 - spriteW, lo + 1)
+    const yLo = height * 0.08
+    const yHi = height * 0.08 + boxH
+    const waypoints: Point[] = []
+    for (let i = 0; i < count; i++) {
+      const x = lo + (hi - lo) * ((i + 1) / (count + 1)) + between(-0.03, 0.03) * width
+      waypoints.push({ x: clamp(x, lo, hi), y: between(yLo, yHi) })
+    }
+    points.push(startY)
+    // One waypoint is followed by a slow float a little back (more often) or ahead, then forward again.
+    const floatAt = count > 0 ? Math.floor(rnd() * count) % count : -1
+    waypoints.forEach((waypoint, i) => {
+      points.push(waypoint)
+      if (i !== floatAt) return
+      const back = rnd() < 0.6
+      const shift = back ? -between(0.04, 0.09) : between(0.03, 0.05)
+      floatSegments.add(points.length - 1) // the segment from this waypoint to the float point
+      if (back) backSegments.add(points.length - 1)
+      points.push({ x: clamp(waypoint.x + shift * width, lo, hi), y: clamp(waypoint.y + between(-0.08, 0.08) * height, yLo, yHi) })
+      floatSegments.add(points.length - 1) // and the one that leaves it, which is also slow
+    })
+    points.push(endY)
+  } else {
+    // Entry and exit: two different sides; random points inside the area, kept apart so the route
+    // wanders instead of dithering.
+    const startSide = Math.floor(rnd() * 4) % 4
+    const endSide = (startSide + 1 + (Math.floor(rnd() * 3) % 3)) % 4
+    const spacing = Math.min(width, height) * 0.22
+    points.push(edge(startSide))
+    for (let i = 0; i < count; i++) {
+      let candidate: Point = { x: width * 0.05 + rnd() * boxW, y: height * 0.08 + rnd() * boxH }
+      for (let attempt = 0; attempt < 8; attempt++) {
+        const previous = points[points.length - 1]
+        if (Math.hypot(candidate.x - previous.x, candidate.y - previous.y) >= spacing) break
+        candidate = { x: width * 0.05 + rnd() * boxW, y: height * 0.08 + rnd() * boxH }
+      }
+      points.push(candidate)
+    }
+    points.push(edge(endSide))
+  }
+
+  // Dense samples along the curve, with cumulative "time cost" (length, three times as much on the
+  // slow float segments) for resampling at equal time steps, so a float really is slow.
   const dense: Point[] = []
+  const denseSegment: number[] = []
   const cumulative: number[] = []
   let length = 0
+  let cost = 0
   for (let i = 0; i < points.length - 1; i++) {
     const p0 = points[i - 1] ?? points[i]
     const p3 = points[i + 2] ?? points[i + 1]
+    const weight = floatSegments.has(i) ? 3 : 1
     for (let step = 0; step < 16; step++) {
       const point = catmullRom(p0, points[i], points[i + 1], p3, step / 16)
-      if (dense.length) length += Math.hypot(point.x - dense[dense.length - 1].x, point.y - dense[dense.length - 1].y)
+      if (dense.length) {
+        const d = Math.hypot(point.x - dense[dense.length - 1].x, point.y - dense[dense.length - 1].y)
+        length += d
+        cost += d * weight
+      }
       dense.push(point)
-      cumulative.push(length)
+      denseSegment.push(i)
+      cumulative.push(cost)
     }
   }
   const last = points[points.length - 1]
-  length += Math.hypot(last.x - dense[dense.length - 1].x, last.y - dense[dense.length - 1].y)
+  const tail = Math.hypot(last.x - dense[dense.length - 1].x, last.y - dense[dense.length - 1].y)
+  length += tail
+  cost += tail
   dense.push(last)
-  cumulative.push(length)
+  denseSegment.push(points.length - 2)
+  cumulative.push(cost)
 
   const frames = clamp(Math.round(length / 28), 24, 140)
   const samples: Point[] = []
   let cursor = 0
+  let furthest = -Infinity
   for (let i = 0; i < frames; i++) {
-    const target = (length * i) / (frames - 1)
+    const target = (cost * i) / (frames - 1)
     while (cursor < cumulative.length - 2 && cumulative[cursor + 1] < target) cursor++
     const span = cumulative[cursor + 1] - cumulative[cursor] || 1
     const k = clamp((target - cumulative[cursor]) / span, 0, 1)
-    samples.push({
-      x: dense[cursor].x + (dense[cursor + 1].x - dense[cursor].x) * k,
-      y: dense[cursor].y + (dense[cursor + 1].y - dense[cursor].y) * k,
-    })
+    let x = dense[cursor].x + (dense[cursor + 1].x - dense[cursor].x) * k
+    // A forward-only creature never drifts back by accident (a curve can overshoot slightly); only
+    // the deliberate float back may move it back.
+    if (options.forward) {
+      if (backSegments.has(denseSegment[cursor])) furthest = x // the float back: start again from here
+      else {
+        x = Math.max(x, furthest)
+        furthest = x
+      }
+    }
+    samples.push({ x, y: dense[cursor].y + (dense[cursor + 1].y - dense[cursor].y) * k })
   }
 
   // Tilt a little with the climb or dive. The image is never flipped; when the route runs against the
@@ -136,5 +194,5 @@ export function planRoam(options: RoamOptions): RoamPlan {
     })
   }
 
-  return { duration: clamp((length / Math.max(options.speed, 1)) * 1000, 4000, 60000), keyframes, points }
+  return { duration: clamp((cost / Math.max(options.speed, 1)) * 1000, 4000, 60000), keyframes, points }
 }
