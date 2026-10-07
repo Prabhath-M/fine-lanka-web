@@ -14042,14 +14042,32 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
 
 @media (max-width: 900px) {
-  .destinations-page .adventure[data-scrub='on'] .adventure-stick { grid-template-columns: 1fr; gap: 1.25rem; }
+  /* Compact points on phones: a smaller photo and smaller, tighter text in a narrower column, so a good
+     part of the backdrop (and the wildlife in it) stays visible around each point. */
+  .destinations-page .adventure[data-scrub='on'] .adventure-stick {
+    grid-template-columns: 1fr;
+    gap: 0.85rem;
+    width: min(100%, max(19.5rem, 60vw));
+    margin-inline: auto;
+  }
   /* Keep a whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
-  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-num { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 21vh; max-height: 21svh; border-radius: 0.75rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-num { font-size: clamp(2rem, 9vw, 2.6rem); }
+  .destinations-page .adventure[data-scrub='on'] .adventure-title-row { gap: 0.6rem; margin-top: 0.3rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-title-row h3 { font-size: clamp(1.2rem, 5vw, 1.45rem); }
+  .destinations-page .adventure[data-scrub='on'] .adventure-icon-badge { width: 2rem; height: 2rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-icon-badge .icon { width: 1.2rem; height: 1.2rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-tagline { margin: 0.4rem 0 0.5rem; font-size: 0.95rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.86rem; line-height: 1.55; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-experience { gap: 0.4rem 0.6rem; margin-top: 0.7rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-experience-label { font-size: 0.64rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-tags { gap: 0.35rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-tags li { padding: 0.15rem 0.55rem; font-size: 0.74rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-body::before { inset: -0.6rem -0.7rem; border-radius: 0.85rem; }
 }
 @media (max-width: 900px) and (max-height: 700px) {
-  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 22vh; max-height: 22svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 15vh; max-height: 15svh; }
   .destinations-page .adventure[data-scrub='on'] .adventure-num { display: none; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.92rem; line-height: 1.6; }
-  .destinations-page .adventure[data-scrub='on'] .adventure-experience { margin-top: 0.9rem; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.82rem; line-height: 1.5; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-experience { margin-top: 0.5rem; }
 }
