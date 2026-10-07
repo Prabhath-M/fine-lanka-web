@@ -13191,7 +13191,7 @@ body:has(.features:target) .typed-opening { display: none; }
   --adv-num: rgba(112, 80, 15, 0.6);
   --adv-chip: rgba(255, 255, 255, 0.6);
   --adv-node-bg: #f4fafd;
-  --adv-box: rgba(250, 253, 255, 0.67);
+  --adv-box: rgba(250, 253, 255, 0.57);
   --adv-box-line: rgba(112, 80, 15, 0.3);
   --adv-box-shadow: rgba(15, 36, 56, 0.2);
 }
@@ -13205,7 +13205,7 @@ body:has(.features:target) .typed-opening { display: none; }
   --adv-num: rgba(100, 68, 16, 0.6);
   --adv-chip: rgba(255, 255, 255, 0.5);
   --adv-node-bg: #eaf6ee;
-  --adv-box: rgba(244, 252, 246, 0.67);
+  --adv-box: rgba(244, 252, 246, 0.57);
   --adv-box-line: rgba(79, 53, 8, 0.3);
   --adv-box-shadow: rgba(12, 42, 32, 0.2);
 }
@@ -13219,7 +13219,7 @@ body:has(.features:target) .typed-opening { display: none; }
   --adv-num: rgba(99, 66, 16, 0.6);
   --adv-chip: rgba(255, 255, 255, 0.5);
   --adv-node-bg: #f1f3dc;
-  --adv-box: rgba(248, 249, 234, 0.69);
+  --adv-box: rgba(248, 249, 234, 0.57);
   --adv-box-line: rgba(99, 66, 16, 0.3);
   --adv-box-shadow: rgba(28, 42, 16, 0.2);
 }
