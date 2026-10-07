@@ -1,7 +1,13 @@
 'use client'
 
-import { useEffect, useRef, type ReactNode } from 'react'
-import { planRoam } from '@/lib/adventure-roam'
+import { useEffect, useId, useRef, type ReactNode } from 'react'
+import { planDistinctRoam, planRoam, type Point } from '@/lib/adventure-roam'
+
+/**
+ * Routes of the sprites in a group (e.g. all the birds), by sprite: each sprite's latest route, so a
+ * new flight can be planned to differ from the others' and from the sprite's own previous one.
+ */
+const boards = new Map<string, Map<string, Point[]>>()
 
 interface RoamerProps {
   /** Flies only while true; when it turns false the sprite stops and is hidden once its layer has faded. */
@@ -19,6 +25,8 @@ interface RoamerProps {
   forward?: boolean
   /** Seconds before the first flight, so several sprites do not start together. */
   startDelay?: number
+  /** Sprites with the same group never fly the same route: each flight is planned to differ from the rest. */
+  group?: string
 }
 
 /**
@@ -27,7 +35,8 @@ interface RoamerProps {
  * Each route is planned from the layer's current size, so it always starts relative to the screen
  * as it is at that moment. Reduced-motion visitors do not see it at all.
  */
-export function Roamer({ active, className = '', children, speed, waypoints, pause, tilt, forward, startDelay = 0 }: RoamerProps) {
+export function Roamer({ active, className = '', children, speed, waypoints, pause, tilt, forward, startDelay = 0, group }: RoamerProps) {
+  const id = useId()
   const ref = useRef<HTMLSpanElement>(null)
   const animation = useRef<Animation | null>(null)
 
@@ -36,7 +45,9 @@ export function Roamer({ active, className = '', children, speed, waypoints, pau
     const layer = el?.parentElement
     if (!el || !layer) return
 
+    const board = group ? (boards.get(group) ?? boards.set(group, new Map()).get(group)) : undefined
     if (!active) {
+      board?.delete(id)
       // Freeze where it is while the layer fades out, then clear it.
       animation.current?.pause()
       const clear = window.setTimeout(() => {
@@ -54,7 +65,7 @@ export function Roamer({ active, className = '', children, speed, waypoints, pau
     let stopped = false
     const launch = () => {
       if (stopped) return
-      const plan = planRoam({
+      const options = {
         width: layer.clientWidth,
         height: layer.clientHeight,
         spriteW: el.offsetWidth,
@@ -63,7 +74,10 @@ export function Roamer({ active, className = '', children, speed, waypoints, pau
         waypoints,
         tilt,
         forward,
-      })
+      }
+      // With a group, avoid every route on the board: the others' latest ones and this sprite's last.
+      const plan = board ? planDistinctRoam(options, [...board.values()]) : planRoam(options)
+      board?.set(id, plan.path)
       animation.current?.cancel()
       el.style.visibility = 'visible'
       const flight = el.animate(plan.keyframes, { duration: plan.duration, easing: 'linear', fill: 'forwards' })
@@ -77,9 +91,10 @@ export function Roamer({ active, className = '', children, speed, waypoints, pau
     return () => {
       stopped = true
       window.clearTimeout(timer)
+      board?.delete(id)
       if (animation.current) animation.current.onfinish = null
     }
-  }, [active, speed, waypoints, pause, tilt, forward, startDelay])
+  }, [active, speed, waypoints, pause, tilt, forward, startDelay, group, id])
 
   useEffect(() => () => animation.current?.cancel(), [])
 

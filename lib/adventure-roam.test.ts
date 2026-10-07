@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { planRoam } from '@/lib/adventure-roam'
+import { planDistinctRoam, planRoam, routeDistance, type Point } from '@/lib/adventure-roam'
 
 // Small deterministic random source (mulberry32) so the routes are reproducible.
 function seeded(seed: number) {
@@ -136,3 +136,42 @@ describe('planRoam', () => {
     })
   })
 })
+
+describe('planDistinctRoam', () => {
+  it('measures identical routes as 0 apart and different routes as far apart', () => {
+    const a = planRoam({ ...base, random: seeded(11) }).path
+    expect(routeDistance(a, a)).toBe(0)
+    expect(routeDistance(a, planRoam({ ...base, random: seeded(12) }).path)).toBeGreaterThan(50)
+  })
+
+  it('gives each of three birds, and each bird its next flight, a route unlike the others', () => {
+    const floor = Math.min(base.width, base.height) * 0.18
+    for (let seed = 1; seed <= 25; seed++) {
+      const random = seeded(seed * 97)
+      const board: Point[][] = []
+      const routes: Point[][] = []
+      // three birds, two flights each, always planned against everything flown so far
+      for (let flight = 0; flight < 6; flight++) {
+        const plan = planDistinctRoam({ ...base, random }, board.slice(-3))
+        for (const earlier of board.slice(-3)) expect(routeDistance(plan.path, earlier)).toBeGreaterThan(floor)
+        board.push(plan.path)
+        routes.push(plan.path)
+      }
+      expect(routes).toHaveLength(6)
+    }
+  })
+
+  it('beats a plain random route at staying away from the others', () => {
+    let distinctTotal = 0
+    let plainTotal = 0
+    for (let seed = 1; seed <= 30; seed++) {
+      const random = seeded(seed)
+      const others = [planRoam({ ...base, random }).path, planRoam({ ...base, random }).path]
+      const score = (path: Point[]) => Math.min(...others.map((o) => routeDistance(path, o)))
+      distinctTotal += score(planDistinctRoam({ ...base, random }, others).path)
+      plainTotal += score(planRoam({ ...base, random }).path)
+    }
+    expect(distinctTotal).toBeGreaterThan(plainTotal)
+  })
+})
+

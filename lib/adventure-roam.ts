@@ -42,6 +42,8 @@ export interface RoamPlan {
   keyframes: { transform: string; offset: number }[]
   /** The control points: entry, waypoints, exit (top-left corner of the sprite). */
   points: Point[]
+  /** The flown route, sampled at equal time steps (top-left corner of the sprite). */
+  path: Point[]
 }
 
 const clamp = (value: number, low: number, high: number) => Math.min(high, Math.max(low, value))
@@ -194,5 +196,50 @@ export function planRoam(options: RoamOptions): RoamPlan {
     })
   }
 
-  return { duration: clamp((cost / Math.max(options.speed, 1)) * 1000, 4000, 60000), keyframes, points }
+  return { duration: clamp((cost / Math.max(options.speed, 1)) * 1000, 4000, 60000), keyframes, points, path: samples }
+}
+
+/**
+ * How different two routes are: the mean distance, in px, from a point on one route to the nearest
+ * point on the other (both ways round, so a short route inside a long one still counts as different).
+ */
+export function routeDistance(a: Point[], b: Point[]): number {
+  const thin = (path: Point[]) => {
+    const stride = Math.max(1, Math.floor(path.length / 36))
+    return path.filter((_, i) => i % stride === 0)
+  }
+  const one = (from: Point[], to: Point[]) => {
+    let sum = 0
+    for (const p of from) {
+      let nearest = Infinity
+      for (const q of to) nearest = Math.min(nearest, Math.hypot(p.x - q.x, p.y - q.y))
+      sum += nearest
+    }
+    return sum / from.length
+  }
+  const ta = thin(a)
+  const tb = thin(b)
+  if (!ta.length || !tb.length) return Infinity
+  return (one(ta, tb) + one(tb, ta)) / 2
+}
+
+/**
+ * Plans a route that differs from every route in `avoid` (the other creatures' current or latest
+ * routes and this one's own previous route). Tries several random routes and keeps the one furthest
+ * from all of them, stopping early once one is clearly different.
+ */
+export function planDistinctRoam(options: RoamOptions, avoid: Point[][], attempts = 14): RoamPlan {
+  const enough = Math.min(options.width, options.height) * 0.38
+  let best: RoamPlan | null = null
+  let bestScore = -1
+  for (let i = 0; i < attempts; i++) {
+    const plan = planRoam(options)
+    const score = avoid.length ? Math.min(...avoid.map((route) => routeDistance(plan.path, route))) : Infinity
+    if (score > bestScore) {
+      best = plan
+      bestScore = score
+    }
+    if (score >= enough) break
+  }
+  return best as RoamPlan
 }

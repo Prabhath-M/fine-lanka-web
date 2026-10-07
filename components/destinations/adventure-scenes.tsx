@@ -270,7 +270,7 @@ const FISH_PAUSE: [number, number] = [2, 6]
 function LittleBird({ active, className, startDelay }: { active: boolean; className: string; startDelay: number }) {
   // Animated WebP with a real (soft) alpha channel, pre-cropped to the bird's flight area.
   return (
-    <Roamer active={active} className={`adventure-little-bird ${className}`} speed={BIRD_SPEED} waypoints={BIRD_POINTS} pause={BIRD_PAUSE} tilt={0.6} startDelay={startDelay}>
+    <Roamer active={active} className={`adventure-little-bird ${className}`} speed={BIRD_SPEED} waypoints={BIRD_POINTS} pause={BIRD_PAUSE} tilt={0.6} startDelay={startDelay} group="little-birds">
       <AnimatedGif src="/images/adventure-little-bird.webp" className="adventure-little-bird-img" />
     </Roamer>
   )

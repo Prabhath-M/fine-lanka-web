@@ -13454,7 +13454,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adventure-firefly-overlay-layer-over { z-index: 31; }
 .destinations-page .adventure-little-bird {
   display: block;
-  width: clamp(4.5rem, 8vw, 8rem);
+  width: clamp(3rem, 5.4vw, 5.4rem);
   aspect-ratio: 1;
   overflow: hidden;
 }
@@ -13464,7 +13464,7 @@ body:has(.features:target) .typed-opening { display: none; }
   height: 100%;
   object-fit: contain;
 }
-.destinations-page .adventure-overlay-fish-wrap { width: clamp(5rem, 12vw, 12rem); }
+.destinations-page .adventure-overlay-fish-wrap { width: clamp(4rem, 9.6vw, 9.6rem); }
 .destinations-page .adventure-overlay-fish {
   display: block;
   width: 100%;
@@ -13688,7 +13688,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-bird {
   top: var(--y);
   left: var(--x);
-  width: clamp(12rem, calc(24rem * var(--s)), 34rem);
+  width: clamp(9rem, calc(18rem * var(--s)), 25.5rem);
   aspect-ratio: 800 / 330;
   object-fit: contain;
   object-position: center;
@@ -13739,7 +13739,7 @@ body:has(.features:target) .typed-opening { display: none; }
 .destinations-page .adv-fish {
   top: var(--y);
   left: 0;
-  width: min(var(--s), 18rem);
+  width: min(calc(var(--s) * 0.8), 14.4rem);
   aspect-ratio: var(--ar, 16 / 9);
   object-fit: contain;
   object-position: center;

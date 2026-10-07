@@ -303,7 +303,7 @@ export function AdventureSection() {
       </div>
       <div className="adventure-sky" aria-hidden="true" />
       <AdventureScreenOverlay active={stage === 'water'} />
-      <AdventureBirdOverlay active={stage === 'canopy'} />
+      <AdventureBirdOverlay active={stage === 'canopy' || stage === 'land'} />
       <AdventureFishOverlay active={stage === 'ocean'} />
       <AdventureFireflyOverlay active={stage === 'depth'} />
 
