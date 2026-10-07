@@ -32,6 +32,8 @@ export interface Adventure {
   image?: string
   /** Alt text for the photo. */
   imageAlt?: string
+  /** CSS `object-position` for the photo when the frame crops it (default: centred). */
+  imagePosition?: string
 }
 
 export const ADVENTURE_ZONES: { id: AdventureZone; label: string }[] = [
@@ -78,6 +80,7 @@ export const ADVENTURES: Adventure[] = [
     icon: 'zipline',
     image: '/images/adventure-ella-zip-line',
     imageAlt: 'A rider in an orange helmet gliding along a zip line above the forest',
+    imagePosition: '50% 12%', // keep the cable and carabiner in frame when the box is wide and short
   },
   {
     number: '03',

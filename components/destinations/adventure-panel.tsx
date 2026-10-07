@@ -28,6 +28,7 @@ export function AdventurePanel({ adventure }: { adventure: Adventure }) {
               width={1600}
               height={1000}
               alt={adventure.imageAlt ?? adventure.title}
+              style={adventure.imagePosition ? { objectPosition: adventure.imagePosition } : undefined}
               loading="lazy"
               decoding="async"
             />
