@@ -14208,3 +14208,104 @@ body:has(.features:target) .typed-opening { display: none; }
   .mobile-nav-group ul a:hover,
   .mobile-nav-group ul a:focus-visible { color: var(--brass-light); border-left-color: var(--brass-light); }
 }
+
+/* ==========================================================================
+   MOBILE DRAWER — BUTTON STYLING
+   Every link in the slide-out menu reads as a tappable button: soft glass
+   fill, thin brass frame, press feedback, and a clear active state. Section
+   headings (Explore, Tours & Pricing) get the jade/gold treatment used by the
+   site's primary button; their children are quieter chips beneath them.
+   ========================================================================== */
+@media (max-width: 980px) {
+  .mobile-nav #mobile-nav-links { display: grid; gap: 0.55rem; }
+  .mobile-nav #mobile-nav-links > li { border-bottom: 0; }
+
+  /* shared button base */
+  .mobile-nav #mobile-nav-links a {
+    position: relative;
+    border: 1px solid rgba(235, 207, 135, 0.22);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+    box-shadow: inset 0 1px 0 rgba(255, 249, 226, 0.08);
+    transition: background 180ms var(--ease), border-color 180ms var(--ease),
+      color 180ms var(--ease), transform 140ms var(--ease), box-shadow 180ms var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-nav #mobile-nav-links a:hover,
+  .mobile-nav #mobile-nav-links a:focus-visible {
+    background: linear-gradient(180deg, rgba(235, 207, 135, 0.18), rgba(235, 207, 135, 0.06));
+    border-color: rgba(235, 207, 135, 0.6);
+    color: var(--brass-light);
+  }
+  .mobile-nav #mobile-nav-links a:active { transform: scale(0.98); }
+  .mobile-nav #mobile-nav-links a:focus-visible { outline: 2px solid #ebcf87; outline-offset: 2px; }
+
+  /* top-level plain links (Home, About, Booking…) */
+  .mobile-nav #mobile-nav-links > li > a { padding-inline: 1rem; }
+
+  /* group headings: jade glass with a gold frame + round arrow */
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading {
+    padding-inline: 1rem 0.7rem;
+    color: #fff9e7;
+    border-color: rgba(231, 198, 112, 0.7);
+    background: linear-gradient(135deg, rgba(36, 91, 83, 0.95), rgba(23, 63, 61, 0.95));
+    box-shadow: 0 2px 0 rgba(98, 67, 26, 0.55), inset 0 1px 0 rgba(255, 249, 227, 0.18);
+  }
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading:hover,
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading:focus-visible {
+    background: linear-gradient(135deg, rgba(44, 109, 99, 0.98), rgba(27, 77, 73, 0.98));
+    border-color: #ebcf87;
+    color: #fff9e7;
+  }
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading.is-active { border-color: #ebcf87; color: var(--brass-light); }
+  .mobile-nav .mobile-nav-heading-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: rgba(235, 207, 135, 0.16);
+    border: 1px solid rgba(235, 207, 135, 0.4);
+    color: var(--brass-light);
+    font-size: 0.95rem;
+  }
+
+  /* children: quieter chips under each heading */
+  .mobile-nav .mobile-nav-group ul { display: grid; gap: 0.4rem; padding: 0.55rem 0 0.2rem 0.6rem; }
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul a {
+    min-height: 42px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.97rem;
+    color: var(--text-on-dark);
+    border-left: 1px solid rgba(235, 207, 135, 0.22);
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: none;
+  }
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul li.is-sub a {
+    min-height: 38px;
+    margin-left: 0.9rem;
+    padding-left: 0.85rem;
+    font-size: 0.9rem;
+    color: var(--text-on-dark-muted);
+    border-left: 1px solid rgba(235, 207, 135, 0.22);
+  }
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul a:hover,
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul a:focus-visible { color: var(--brass-light); border-left-color: rgba(235, 207, 135, 0.6); }
+
+  /* current page */
+  .mobile-nav #mobile-nav-links > li > a.is-active {
+    color: var(--brass-light);
+    border-color: rgba(235, 207, 135, 0.75);
+    background: linear-gradient(180deg, rgba(235, 207, 135, 0.2), rgba(235, 207, 135, 0.07));
+  }
+}
+@media (max-width: 980px) {
+  /* current section heading keeps the jade fill, with a brighter gold frame */
+  .mobile-nav #mobile-nav-links > li > a.mobile-nav-heading.is-active {
+    background: linear-gradient(135deg, rgba(44, 109, 99, 0.98), rgba(27, 77, 73, 0.98));
+    border-color: #ebcf87;
+    color: var(--brass-light);
+    box-shadow: 0 2px 0 rgba(98, 67, 26, 0.55), 0 0 0 1px rgba(235, 207, 135, 0.35), inset 0 1px 0 rgba(255, 249, 227, 0.2);
+  }
+}
