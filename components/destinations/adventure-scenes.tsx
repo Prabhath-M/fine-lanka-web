@@ -111,11 +111,14 @@ function TransparentVideo({
   className,
   active,
   style,
+  startAt = 0,
 }: {
   src: string
   className: string
   active: boolean
   style?: CSSProperties
+  /** Seconds into the clip to begin at, so two copies of one clip are not in step. */
+  startAt?: number
 }) {
   const ref = useRef<HTMLVideoElement>(null)
 
@@ -139,6 +142,9 @@ function TransparentVideo({
       muted
       playsInline
       preload={active ? 'auto' : 'metadata'}
+      onLoadedMetadata={(event) => {
+        if (startAt > 0 && event.currentTarget.duration > startAt) event.currentTarget.currentTime = startAt
+      }}
       aria-hidden="true"
     >
       <source src={src} type="video/webm" />
@@ -217,7 +223,9 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
     case 'depth':
       return (
         <>
-          <AnimatedGif src="/images/adventure-fireflies.webp" className="adv-firefly-footage" />
+          {/* Keyed from the supplied blue-screen footage: two copies (one mirrored, out of step) fill the cave. */}
+          <TransparentVideo src="/images/adventure-fireflies.webm" className="adv-firefly-swarm adv-firefly-swarm-a" active={active} />
+          <TransparentVideo src="/images/adventure-fireflies.webm" className="adv-firefly-swarm adv-firefly-swarm-b" active={active} startAt={4.6} />
           {FIREFLIES.map((firefly, i) => (
             <span key={i} className="adv-firefly" style={vars({ '--x': `${firefly.x}%`, '--y': `${firefly.y}%`, '--dx': `${firefly.dx}px`, '--dy': `${firefly.dy}px`, '--sz': `${firefly.size}px`, '--dur': `${firefly.duration}s`, '--delay': `${firefly.delay}s` })} />
           ))}
