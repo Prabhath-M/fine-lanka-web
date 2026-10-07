@@ -3,9 +3,8 @@
  *
  * A flight enters from one edge of the viewport, passes through a few random points inside it, and
  * leaves through a different edge. The route is a smooth Catmull-Rom curve, resampled at equal
- * arc length so the sprite moves at a constant speed. The sprite turns to face the way it is going
- * (an artwork that faces right is mirrored when it heads left) and tilts a little with the climb.
- * Pure and framework-free so it can be tested; the component only feeds the keyframes to the
+ * arc length so the sprite moves at a constant speed. The sprite image is never mirrored (a flip
+ * would break the 3D look of the footage); it only tilts a little with the climb. Pure and framework-free so it can be tested; the component only feeds the keyframes to the
  * Web Animations API.
  */
 
@@ -122,22 +121,17 @@ export function planRoam(options: RoamOptions): RoamPlan {
     })
   }
 
-  // Heading: face the direction of travel (smoothly, so a turn reads as a quick flip) and tilt with the climb.
+  // Tilt a little with the climb or dive. The image is never flipped; when the route runs against the
+  // way the artwork faces, the tilt is mirrored so the nose still leads the climb.
   const keyframes: RoamPlan['keyframes'] = []
-  let facing = samples[1].x >= samples[0].x ? 1 : -1
-  let target = facing
   for (let i = 0; i < frames; i++) {
     const before = samples[Math.max(i - 1, 0)]
     const after = samples[Math.min(i + 1, frames - 1)]
     const dx = after.x - before.x
     const dy = after.y - before.y
-    const speed = Math.hypot(dx, dy) || 1
-    if (dx / speed > 0.15) target = 1
-    else if (dx / speed < -0.15) target = -1
-    facing += (target - facing) * 0.45
-    const tilt = clamp(Math.atan2(dy, Math.abs(dx) + 1e-6) * 0.6, -maxTilt, maxTilt)
+    const tilt = clamp(Math.atan2(dy * (dx < 0 ? -1 : 1), Math.abs(dx) + 1e-6) * 0.6, -maxTilt, maxTilt)
     keyframes.push({
-      transform: `translate3d(${samples[i].x.toFixed(1)}px, ${samples[i].y.toFixed(1)}px, 0) scaleX(${facing.toFixed(3)}) rotate(${tilt.toFixed(3)}rad)`,
+      transform: `translate3d(${samples[i].x.toFixed(1)}px, ${samples[i].y.toFixed(1)}px, 0) rotate(${tilt.toFixed(3)}rad)`,
       offset: i / (frames - 1),
     })
   }

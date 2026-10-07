@@ -56,21 +56,21 @@ describe('planRoam', () => {
     expect(plan.keyframes[plan.keyframes.length - 1].offset).toBe(1)
     plan.keyframes.forEach((frame, i) => {
       if (i) expect(frame.offset).toBeGreaterThan(plan.keyframes[i - 1].offset)
-      expect(frame.transform).toMatch(/^translate3d\(-?[\d.]+px, -?[\d.]+px, 0\) scaleX\(-?[\d.]+\) rotate\(-?[\d.]+rad\)$/)
+      expect(frame.transform).toMatch(/^translate3d\(-?[\d.]+px, -?[\d.]+px, 0\) rotate\(-?[\d.]+rad\)$/)
       expect(frame.transform).not.toMatch(/NaN|Infinity/)
     })
     expect(plan.duration).toBeGreaterThanOrEqual(4000)
     expect(plan.duration).toBeLessThanOrEqual(60000)
   })
 
-  it('faces the way it is travelling', () => {
-    // Entering from the left and ending on the right must start facing right (positive scaleX).
-    for (let seed = 1; seed <= 60; seed++) {
-      const plan = planRoam({ ...base, random: seeded(seed) })
-      const first = plan.points[0]
-      if (first.x > -base.spriteW) continue
-      const scale = Number(/scaleX\((-?[\d.]+)\)/.exec(plan.keyframes[0].transform)?.[1])
-      expect(scale).toBeGreaterThan(0)
+  it('never flips the image, and keeps the tilt small', () => {
+    for (let seed = 1; seed <= 40; seed++) {
+      const plan = planRoam({ ...base, tilt: 0.5, random: seeded(seed) })
+      for (const frame of plan.keyframes) {
+        expect(frame.transform).not.toContain('scale')
+        const angle = Number(/rotate\((-?[\d.]+)rad\)/.exec(frame.transform)?.[1])
+        expect(Math.abs(angle)).toBeLessThanOrEqual(0.5)
+      }
     }
   })
 })

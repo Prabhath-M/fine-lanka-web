@@ -13395,7 +13395,8 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure-screen-overlay-layer,
 .destinations-page .adventure-bird-overlay-layer,
-.destinations-page .adventure-fish-overlay-layer {
+.destinations-page .adventure-fish-overlay-layer,
+.destinations-page .adventure-firefly-overlay-layer {
   position: sticky;
   top: 0;
   height: 100vh;
@@ -13408,7 +13409,8 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure-screen-overlay-layer.is-on,
 .destinations-page .adventure-bird-overlay-layer.is-on,
-.destinations-page .adventure-fish-overlay-layer.is-on {
+.destinations-page .adventure-fish-overlay-layer.is-on,
+.destinations-page .adventure-firefly-overlay-layer.is-on {
   opacity: 1;
   visibility: visible;
   transition-delay: 0s;
@@ -13430,9 +13432,11 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .destinations-page .adventure .container { position: relative; z-index: 1; }
 .destinations-page .adventure-bird-overlay-layer-under,
-.destinations-page .adventure-fish-overlay-layer-under { z-index: 0; }
+.destinations-page .adventure-fish-overlay-layer-under,
+.destinations-page .adventure-firefly-overlay-layer-under { z-index: 0; }
 .destinations-page .adventure-bird-overlay-layer-over,
-.destinations-page .adventure-fish-overlay-layer-over { z-index: 31; }
+.destinations-page .adventure-fish-overlay-layer-over,
+.destinations-page .adventure-firefly-overlay-layer-over { z-index: 31; }
 .destinations-page .adventure-little-bird {
   display: block;
   width: clamp(4.5rem, 8vw, 8rem);
@@ -13463,6 +13467,24 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
   .destinations-page .adventure-roamer { display: none; }
+}
+/* Roaming fireflies: a soft yellow-green glow that blinks (set per firefly with --sz, --blink, --blink-delay). */
+.destinations-page .adventure-firefly-sprite { line-height: 0; }
+.destinations-page .adventure-firefly-dot {
+  display: block;
+  width: var(--sz);
+  height: var(--sz);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fcffd2 0 16%, rgba(224, 255, 132, 0.9) 28%, rgba(190, 240, 90, 0.4) 52%, rgba(170, 230, 70, 0) 74%);
+  opacity: 0.2;
+  animation: adv-firefly-blink var(--blink) ease-in-out var(--blink-delay) infinite;
+}
+@keyframes adv-firefly-blink {
+  0%, 100% { opacity: 0.18; }
+  12% { opacity: 1; }
+  24% { opacity: 0.3; }
+  36% { opacity: 0.95; }
+  55% { opacity: 0.15; }
 }
 
 .destinations-page .adventure-tint-view {

@@ -217,7 +217,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
     case 'depth':
       return (
         <>
-          <AnimatedGif src="/images/adventure-fireflies.apng" className="adv-firefly-footage" />
+          <AnimatedGif src="/images/adventure-fireflies.webp" className="adv-firefly-footage" />
           {FIREFLIES.map((firefly, i) => (
             <span key={i} className="adv-firefly" style={vars({ '--x': `${firefly.x}%`, '--y': `${firefly.y}%`, '--dx': `${firefly.dx}px`, '--dy': `${firefly.dy}px`, '--sz': `${firefly.size}px`, '--dur': `${firefly.duration}s`, '--delay': `${firefly.delay}s` })} />
           ))}
@@ -274,11 +274,10 @@ export function AdventureBirdOverlay({ active }: { active: boolean }) {
     <>
       <ViewportLayer className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-under${state}`}>
         <LittleBird active={active} className="adventure-little-bird-under" startDelay={0} />
-        <LittleBird active={active} className="adventure-little-bird-under-late" startDelay={6} />
+        <LittleBird active={active} className="adventure-little-bird-under-late" startDelay={5} />
       </ViewportLayer>
       <ViewportLayer className={`adventure-bird-overlay-layer adventure-bird-overlay-layer-over${state}`}>
-        <LittleBird active={active} className="adventure-little-bird-over" startDelay={3} />
-        <LittleBird active={active} className="adventure-little-bird-over-late" startDelay={9} />
+        <LittleBird active={active} className="adventure-little-bird-over" startDelay={2.5} />
       </ViewportLayer>
     </>
   )
@@ -301,6 +300,45 @@ export function AdventureFishOverlay({ active }: { active: boolean }) {
       </ViewportLayer>
       <ViewportLayer className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-over${state}`}>
         <OverlayFish active={active} src="/images/adventure-fish-red.png" className="adventure-overlay-fish-over" startDelay={5} />
+      </ViewportLayer>
+    </>
+  )
+}
+
+const FIREFLY_SPEED: [number, number] = [45, 80]
+const FIREFLY_POINTS: [number, number] = [3, 5]
+const FIREFLY_PAUSE: [number, number] = [0.5, 3]
+// size (px of glow), blink period (s), blink offset (s), start delay (s)
+const FIREFLIES_UNDER: [number, number, number, number][] = [
+  [20, 3.6, 0, 0], [14, 4.4, -1.2, 1.5], [26, 5.2, -2.5, 3], [16, 3.2, -0.7, 4.5], [22, 4.8, -3.1, 6], [12, 3.9, -2, 7.5],
+]
+const FIREFLIES_OVER: [number, number, number, number][] = [
+  [16, 4.1, -0.5, 1], [22, 5.0, -2.2, 3.5], [12, 3.4, -1.4, 5.5], [18, 4.6, -3.3, 8], [14, 3.8, -2.8, 10],
+]
+
+function OverlayFirefly({ active, spec }: { active: boolean; spec: [number, number, number, number] }) {
+  const [size, blink, blinkDelay, startDelay] = spec
+  return (
+    <Roamer active={active} className="adventure-firefly-sprite" speed={FIREFLY_SPEED} waypoints={FIREFLY_POINTS} pause={FIREFLY_PAUSE} tilt={0} startDelay={startDelay}>
+      <i className="adventure-firefly-dot" style={vars({ '--sz': `${size}px`, '--blink': `${blink}s`, '--blink-delay': `${blinkDelay}s` })} />
+    </Roamer>
+  )
+}
+
+/** Cave fireflies that wander the screen on random routes: some behind the text, some drifting over it. */
+export function AdventureFireflyOverlay({ active }: { active: boolean }) {
+  const state = active ? ' is-on' : ''
+  return (
+    <>
+      <ViewportLayer className={`adventure-firefly-overlay-layer adventure-firefly-overlay-layer-under${state}`}>
+        {FIREFLIES_UNDER.map((spec, i) => (
+          <OverlayFirefly key={i} active={active} spec={spec} />
+        ))}
+      </ViewportLayer>
+      <ViewportLayer className={`adventure-firefly-overlay-layer adventure-firefly-overlay-layer-over${state}`}>
+        {FIREFLIES_OVER.map((spec, i) => (
+          <OverlayFirefly key={i} active={active} spec={spec} />
+        ))}
       </ViewportLayer>
     </>
   )
