@@ -188,3 +188,20 @@ waterways or venture beneath the earth, Fine Lanka Tours brings you closer to th
 the island.
 Explore Sri Lanka. Experience More.
 Fine Lanka Tours – A Journey Beyond Expectations.
+
+---
+
+## Production notes (as built)
+
+- **Scrolling:** `components/destinations/adventure-section.tsx` pins one viewport and moves all points
+  together. Tunables at the top of the file: `GAP_REM` (space between points), `HOLD_DESKTOP` and
+  `HOLD_MOBILE` (scroll per reveal, as a share of the screen height) and `HOLD_BUILT` (the shorter hold of a
+  point that is already built). Browsers with scroll timelines run the movement on the compositor; others
+  fall back to a scroll handler.
+- **Photos:** `public/images/adventure-<slug>-480w|960w|1600w.webp` only; the plain `adventure-<slug>.webp`
+  copies are not used.
+- **Overlays:** fish, birds, little bird and water drops are animated WebP (100 ms frames, infinite loop);
+  jellyfish and fireflies are transparent WebM. `adventure-section.test.tsx` checks that every file the
+  scenes and styles refer to exists in `public/images`.
+- **Still to check by hand:** a real-browser pass on phones and tablets (short screens especially), and
+  `pnpm build` where Google Fonts is reachable.

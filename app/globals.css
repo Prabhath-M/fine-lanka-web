@@ -13816,13 +13816,6 @@ body:has(.features:target) .typed-opening { display: none; }
   72% { transform: translate3d(62vw, -2vh, 0); }
   100% { transform: translate3d(118vw, 1vh, 0); }
 }
-@keyframes adv-fly {
-  0% { transform: translate3d(-12vw, 0, 0); }
-  25% { transform: translate3d(22vw, -2vh, 0); }
-  50% { transform: translate3d(50vw, 1vh, 0); }
-  75% { transform: translate3d(80vw, -1.5vh, 0); }
-  100% { transform: translate3d(112vw, 0, 0); }
-}
 @keyframes adv-fish-drift {
   0% { transform: translate3d(var(--start), 1vh, 0) scaleX(var(--flip, 1)) rotate(-1deg); }
   50% { transform: translate3d(var(--mid), var(--lift, -2vh), 0) scaleX(var(--flip, 1)) rotate(2deg); }
