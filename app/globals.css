@@ -1826,6 +1826,22 @@ body[data-page='journal'] .site-header {
 .dropdown li a:hover::after { color: rgba(212, 175, 55, 0.8); }
 .dropdown-label { line-height: 1.25; }
 
+/* Regions listed beneath "Destinations" in the Explore dropdown: indented, smaller and not numbered. */
+.dropdown li.dropdown-sub:not(.dropdown-heading):not(.dropdown-frieze) { border-bottom: 0; }
+.dropdown li.dropdown-sub.dropdown-sub-end:not(.dropdown-heading):not(.dropdown-frieze):not(:last-child) {
+  border-bottom: 1px dashed rgba(212, 175, 55, 0.14);
+}
+.dropdown li.dropdown-sub:not(.dropdown-heading):not(.dropdown-frieze) a {
+  counter-increment: none;
+  padding: 0.4rem 0.8rem 0.4rem 2.1rem;
+  font-size: 0.95rem;
+  color: rgba(241, 228, 198, 0.86);
+}
+.dropdown li.dropdown-sub:not(.dropdown-heading) a::after { content: none; }
+.dropdown li.dropdown-sub a:hover { padding-left: 2.4rem; }
+.dropdown li.dropdown-sub .dropdown-icon { width: 22px; height: 22px; border-radius: 6px; }
+.dropdown li.dropdown-sub .dropdown-icon .icon { width: 12px; height: 12px; }
+
 .dropdown-icon {
   display: inline-flex;
   flex: none;
@@ -1952,6 +1968,8 @@ a.mobile-nav-heading:focus-visible,
 a.mobile-nav-heading.is-active { color: var(--brass-light); }
 .mobile-nav-group ul { padding-left: var(--space-2); padding-bottom: 0.6rem; }
 .mobile-nav-group ul a { display: block; padding: 0.5rem 0; color: var(--text-on-dark-muted); font-size: 1.056rem; }
+/* Regions beneath "Destinations" in the Explore group. */
+.mobile-nav-group ul li.is-sub a { padding: 0.35rem 0 0.35rem var(--space-2); font-size: 0.95rem; border-left: 1px solid var(--line-on-dark); }
 
 /* ---------- 5. Hero ---------- */
 .hero-video {

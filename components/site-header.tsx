@@ -153,8 +153,13 @@ export function SiteHeader() {
                         <li className="dropdown-heading" aria-hidden="true">
                           <span>{item.label}</span>
                         </li>
-                        {item.children.map((child) => (
-                          <li key={child.label}>
+                        {item.children.map((child, index) => {
+                          const next = item.children?.[index + 1]
+                          const subClass = child.sub
+                            ? `dropdown-sub${next?.sub ? '' : ' dropdown-sub-end'}`
+                            : undefined
+                          return (
+                          <li key={child.label} className={subClass}>
                             <NavLink href={child.href}>
                               <span className="dropdown-icon">
                                 <Icon name={child.icon} />
@@ -162,7 +167,8 @@ export function SiteHeader() {
                               <span className="dropdown-label">{child.label}</span>
                             </NavLink>
                           </li>
-                        ))}
+                          )
+                        })}
                         <li className="dropdown-frieze dropdown-frieze--bottom" aria-hidden="true">
                           <Icon name="fisherman" />
                           <Icon name="dancer" />
@@ -234,7 +240,7 @@ export function SiteHeader() {
                   </NavLink>
                   <ul>
                     {item.children.map((child) => (
-                      <li key={child.label}>
+                      <li key={child.label} className={child.sub ? 'is-sub' : undefined}>
                         <NavLink href={child.href} onClick={() => setMobileOpen(false)}>
                           {child.label}
                         </NavLink>

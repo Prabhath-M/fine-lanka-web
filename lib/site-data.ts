@@ -40,6 +40,8 @@ export interface NavChild {
   label: string
   href: string
   icon: string
+  /** Rendered indented beneath the entry above it (a sub-section of it) and not numbered. */
+  sub?: boolean
 }
 
 export interface NavLink {
@@ -58,9 +60,16 @@ export const NAV_LINKS: NavLink[] = [
     label: 'Explore',
     href: '/destinations',
     page: 'destinations',
-    // Both children are sections of the Destinations page (anchors).
+    // Destinations and Adventures are sections of the Destinations page (anchors); the regions
+    // beneath Destinations filter the destination list.
     children: [
       { label: 'Destinations', href: '/destinations#destination-carousel', icon: 'compass' },
+      { label: 'Cultural Triangle', href: '/destinations?region=Cultural+Triangle', icon: 'temple', sub: true },
+      { label: 'Hill Country', href: '/destinations?region=Hill+Country', icon: 'mountain', sub: true },
+      { label: 'South Coast', href: '/destinations?region=South+Coast', icon: 'wave', sub: true },
+      { label: 'East Coast', href: '/destinations?region=East+Coast', icon: 'compass', sub: true },
+      { label: 'Wildlife & National Parks', href: '/destinations?region=Wildlife+%26+National+Parks', icon: 'elephant', sub: true },
+      { label: 'Colombo & West Coast', href: '/destinations?region=Colombo+%26+West+Coast', icon: 'island', sub: true },
       { label: 'Adventures', href: '/destinations#adventure', icon: 'zipline' },
     ],
   },
