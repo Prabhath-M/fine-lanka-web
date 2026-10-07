@@ -13738,6 +13738,18 @@ body:has(.features:target) .typed-opening { display: none; }
   animation: adv-bubble var(--dur) ease-in var(--delay) infinite;
 }
 /* Small, defocused points of light replace the illustrated stalactites and cave shapes. */
+.destinations-page .adv-firefly-footage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  pointer-events: none;
+  opacity: 0.74;
+  mix-blend-mode: screen;
+}
 .destinations-page .adv-firefly {
   top: var(--y);
   left: var(--x);

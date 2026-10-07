@@ -72,7 +72,8 @@ describe('AdventureSection', () => {
     expect(html).toContain('adv-fish') // ocean: fish
     expect(html).toContain('adv-jelly') // ocean: jellyfish
     expect(html).toContain('adv-bubble') // ocean: bubbles
-    expect(html).toContain('adv-firefly') // cave: fireflies
+    expect(html).toContain('adv-firefly') // cave: existing firefly particles
+    expect(html).toContain('adventure-fireflies.apng') // cave: supplied blue-screen firefly footage
   })
 
   it('keeps the screen overlays locked to the screen but inside the section', () => {
@@ -95,7 +96,7 @@ describe('AdventureSection', () => {
       return filename
     })
     expect(new Set(backgrounds).size).toBe(stages.length)
-    for (const asset of ['adventure-birds-flock.webm', 'adventure-fish-salmon.webm', 'adventure-fish-perch.webm', 'adventure-fish-red.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm', 'adventure-water-drops.webp', 'adventure-little-bird.webp']) {
+    for (const asset of ['adventure-birds-flock.webm', 'adventure-fish-salmon.webm', 'adventure-fish-perch.webm', 'adventure-fish-red.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm', 'adventure-water-drops.webp', 'adventure-little-bird.webp', 'adventure-fireflies.apng']) {
       expect(existsSync(join(process.cwd(), 'public/images', asset))).toBe(true)
     }
     expect(styles).toContain("--scene-image: url('/images/adventure-background-depth.webp')")

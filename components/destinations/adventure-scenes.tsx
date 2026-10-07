@@ -215,9 +215,14 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
         </>
       )
     case 'depth':
-      return FIREFLIES.map((firefly, i) => (
-        <span key={i} className="adv-firefly" style={vars({ '--x': `${firefly.x}%`, '--y': `${firefly.y}%`, '--dx': `${firefly.dx}px`, '--dy': `${firefly.dy}px`, '--sz': `${firefly.size}px`, '--dur': `${firefly.duration}s`, '--delay': `${firefly.delay}s` })} />
-      ))
+      return (
+        <>
+          <AnimatedGif src="/images/adventure-fireflies.apng" className="adv-firefly-footage" />
+          {FIREFLIES.map((firefly, i) => (
+            <span key={i} className="adv-firefly" style={vars({ '--x': `${firefly.x}%`, '--y': `${firefly.y}%`, '--dx': `${firefly.dx}px`, '--dy': `${firefly.dy}px`, '--sz': `${firefly.size}px`, '--dur': `${firefly.duration}s`, '--delay': `${firefly.delay}s` })} />
+          ))}
+        </>
+      )
     default:
       return null
   }
