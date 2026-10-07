@@ -8,6 +8,7 @@ export type AdventureZone = 'air' | 'land' | 'water' | 'underground'
 
 export type AdventureIconKey =
   | 'helicopter'
+  | 'balloon'
   | 'zipline'
   | 'horse'
   | 'kayak'
@@ -71,6 +72,18 @@ export const ADVENTURES: Adventure[] = [
   },
   {
     number: '02',
+    slug: 'hot-air-balloon',
+    title: 'Hot Air Balloon Rides',
+    tagline: 'Drift above the hills at sunrise.',
+    body: 'Rise silently into the morning light and float above misty hills, tea country and shimmering lakes. A hot air balloon ride is a calm, unhurried way to take in Sri Lanka’s landscapes from above, with the sun breaking over the horizon.',
+    tags: ['Sunrise flight', 'Scenic views', 'Peaceful', 'Photography'],
+    zone: 'air',
+    icon: 'balloon',
+    image: '/images/adventure-hot-air-balloon',
+    imageAlt: 'A colourful hot air balloon marked Sri Lanka floating above misty tea hills and a lake at sunrise',
+  },
+  {
+    number: '03',
     slug: 'ella-zip-line',
     title: 'Ella Zip Line',
     tagline: 'Fly above the heart of Ella.',
@@ -83,7 +96,7 @@ export const ADVENTURES: Adventure[] = [
     imagePosition: '50% 0%', // keep the top (cable and carabiner) in frame when the box crops the photo
   },
   {
-    number: '03',
+    number: '04',
     slug: 'atv-quad-bike-adventures',
     title: 'ATV & Quad Bike Adventures',
     tagline: 'Take the road less travelled.',
@@ -95,7 +108,7 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A rider in a helmet on a yellow quad bike on the beach',
   },
   {
-    number: '04',
+    number: '05',
     slug: 'horse-riding',
     title: 'Horse Riding',
     tagline: 'Discover Sri Lanka at a different pace.',
@@ -107,7 +120,7 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A smiling child riding a horse, led by a guide',
   },
   {
-    number: '05',
+    number: '06',
     slug: 'kayaking',
     title: 'Kayaking',
     tagline: 'Paddle into the wild.',
@@ -119,7 +132,7 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A kayaker carrying a yellow kayak along a beach',
   },
   {
-    number: '06',
+    number: '07',
     slug: 'surfing-kite-surfing',
     title: 'Surfing & Kite Surfing',
     tagline: 'Ride the wind and the waves.',
@@ -131,7 +144,7 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A kite surfer riding a wave, spray flying',
   },
   {
-    number: '07',
+    number: '08',
     slug: 'white-water-rafting',
     title: 'White-Water Rafting',
     tagline: 'Let the river lead the way.',
@@ -143,7 +156,7 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A group in helmets paddling a blue raft through white-water rapids',
   },
   {
-    number: '08',
+    number: '09',
     slug: 'scuba-diving-snorkelling',
     title: 'Scuba Diving & Snorkelling',
     tagline: 'Discover the world beneath the waves.',
@@ -155,7 +168,7 @@ export const ADVENTURES: Adventure[] = [
     imageAlt: 'A diver swimming beside a school of fish in deep blue water',
   },
   {
-    number: '09',
+    number: '10',
     slug: 'cave-exploration',
     title: 'Cave Exploration',
     tagline: 'Step into the hidden side of Sri Lanka.',

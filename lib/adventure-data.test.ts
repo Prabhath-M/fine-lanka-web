@@ -10,8 +10,8 @@ import {
 } from './adventure-data'
 
 describe('adventure data', () => {
-  it('has the nine experiences numbered 01-09 in order', () => {
-    expect(ADVENTURES.map((a) => a.number)).toEqual(['01', '02', '03', '04', '05', '06', '07', '08', '09'])
+  it('has the ten experiences numbered 01-10 in order', () => {
+    expect(ADVENTURES.map((a) => a.number)).toEqual(['01', '02', '03', '04', '05', '06', '07', '08', '09', '10'])
   })
 
   it('has unique slugs and unique icon keys', () => {
@@ -37,7 +37,7 @@ describe('adventure data', () => {
 
   it('groups experiences into zones as planned', () => {
     const titles = (zone: Parameters<typeof adventuresForZone>[0]) => adventuresForZone(zone).map((a) => a.title)
-    expect(titles('air')).toEqual(['Helicopter Tours', 'Ella Zip Line'])
+    expect(titles('air')).toEqual(['Helicopter Tours', 'Hot Air Balloon Rides', 'Ella Zip Line'])
     expect(titles('land')).toEqual(['ATV & Quad Bike Adventures', 'Horse Riding'])
     expect(titles('water')).toEqual(['Kayaking', 'Surfing & Kite Surfing', 'White-Water Rafting', 'Scuba Diving & Snorkelling'])
     expect(titles('underground')).toEqual(['Cave Exploration'])
@@ -53,6 +53,7 @@ describe('adventure data', () => {
   it('runs from the sky down to the cave', () => {
     expect(ADVENTURES.map((a) => a.slug)).toEqual([
       'helicopter-tours',
+      'hot-air-balloon',
       'ella-zip-line',
       'atv-quad-bike-adventures',
       'horse-riding',
@@ -65,7 +66,7 @@ describe('adventure data', () => {
   })
 
   it('returns everything for the "all" filter', () => {
-    expect(adventuresForZone('all')).toHaveLength(9)
+    expect(adventuresForZone('all')).toHaveLength(10)
   })
 
   it('keeps the section header and closing copy', () => {
@@ -76,9 +77,9 @@ describe('adventure data', () => {
 })
 
 describe('adventureStage', () => {
-  it('places the nine experiences from sky down to depth', () => {
+  it('places the ten experiences from sky down to depth', () => {
     expect(ADVENTURES.map(adventureStage)).toEqual([
-      'sky', 'canopy', 'land', 'land', 'water', 'water', 'water', 'ocean', 'depth',
+      'sky', 'sky', 'canopy', 'land', 'land', 'water', 'water', 'water', 'ocean', 'depth',
     ])
   })
 

@@ -194,6 +194,14 @@ export const ICON_PATHS = {
       <path d="M16 38 H34 M20 32 V38 M30 32 V38" />
     </>
   ),
+  balloon: (
+    <>
+      <path d="M24 4 C14 4 9 12 9 19 C9 27 17 32 20 35 H28 C31 32 39 27 39 19 C39 12 34 4 24 4 Z" />
+      <path d="M24 4 C18 11 18 27 21 35 M24 4 C30 11 30 27 27 35" />
+      <path d="M20 35 L21.5 40 M28 35 L26.5 40" />
+      <path d="M21 40 H27 V45 H21 Z" />
+    </>
+  ),
   zipline: (
     <>
       <path d="M4 8 V22 M44 22 V42" />
