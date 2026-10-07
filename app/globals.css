@@ -13776,10 +13776,10 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 /* Small, defocused points of light replace the illustrated stalactites and cave shapes. */
 /* Firefly footage (keyed from the supplied blue-screen clip, 1130 x 450): shown at about its own pixel size
-   (dots of 4 to 6 px) rather than stretched over the screen. The second copy is mirrored and starts later. */
+   (dots of 4 to 6 px) rather than stretched over the screen. Script moves it (and may mirror it) on each visit. */
 .destinations-page .adv-firefly-swarm-wrap {
   position: absolute;
-  top: 8%;
+  top: 0;
   left: 0;
   z-index: 0;
   width: clamp(40rem, 84vw, 82rem);

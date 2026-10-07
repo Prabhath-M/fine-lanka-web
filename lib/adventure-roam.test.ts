@@ -177,22 +177,76 @@ describe('planDistinctRoam', () => {
 
 
 describe('planSwarmPass', () => {
-  const swarm = { width: 1440, height: 800, spriteW: 1210 }
-  it('starts with every firefly beyond the left edge and ends with every firefly beyond the right edge', () => {
-    for (const bounds of [[0.02, 0.82], [0.18, 0.98]] as [number, number][]) {
+  const swarm = { width: 1440, height: 800, spriteW: 1210, spriteH: 482 }
+  const boundsList: [number, number][] = [[0.015, 0.845], [0.155, 0.985]]
+
+  it('starts with every firefly beyond the edge it comes in from and ends beyond the edge it leaves by', () => {
+    for (const bounds of boundsList) {
       for (const width of [390, 768, 1440, 2560]) {
-        const pass = planSwarmPass({ ...swarm, width, bounds, random: seeded(width) })
-        expect(pass.from + bounds[1] * swarm.spriteW).toBeLessThan(0)
-        expect(pass.to + bounds[0] * swarm.spriteW).toBeGreaterThan(width)
-        expect(pass.keyframes[0].offset).toBe(0)
-        expect(pass.keyframes[pass.keyframes.length - 1].offset).toBe(1)
+        for (let seed = 1; seed <= 12; seed++) {
+          const pass = planSwarmPass({ ...swarm, width, bounds, random: seeded(seed * width) })
+          const first = pass.centers[0]
+          const last = pass.centers[pass.centers.length - 1]
+          if (pass.enter === 'left') expect(first.x + pass.halfWidth).toBeLessThan(0)
+          else expect(first.x - pass.halfWidth).toBeGreaterThan(width)
+          if (pass.exit === 'left') expect(last.x + pass.halfWidth).toBeLessThan(0)
+          else expect(last.x - pass.halfWidth).toBeGreaterThan(width)
+          expect(pass.keyframes[0].offset).toBe(0)
+          expect(pass.keyframes[pass.keyframes.length - 1].offset).toBe(1)
+        }
       }
     }
   })
 
-  it('moves steadily left to right', () => {
-    const pass = planSwarmPass({ ...swarm, bounds: [0.02, 0.82], random: seeded(5) })
-    const xs = pass.keyframes.map((f) => Number(/translate3d\((-?[\d.]+)px/.exec(f.transform)?.[1]))
-    for (let i = 1; i < xs.length; i++) expect(xs[i]).toBeGreaterThan(xs[i - 1])
+  it('comes in and leaves by either side, chosen at random', () => {
+    const enters = new Set<string>()
+    const exits = new Set<string>()
+    const combos = new Set<string>()
+    for (let seed = 1; seed <= 60; seed++) {
+      const pass = planSwarmPass({ ...swarm, bounds: boundsList[0], random: seeded(seed) })
+      enters.add(pass.enter)
+      exits.add(pass.exit)
+      combos.add(`${pass.enter}-${pass.exit}`)
+    }
+    expect(enters.size).toBe(2)
+    expect(exits.size).toBe(2)
+    expect(combos.size).toBe(4)
+  })
+
+  it('swarms about the screen in between: circling, not a straight crossing', () => {
+    for (let seed = 1; seed <= 30; seed++) {
+      const { centers } = planSwarmPass({ ...swarm, bounds: boundsList[0], random: seeded(seed + 500) })
+      const middle = centers.slice(Math.floor(centers.length * 0.3), Math.floor(centers.length * 0.7))
+      // stays on screen while circling, and sweeps both sides of its centre in x and in y
+      for (const c of middle) {
+        expect(c.x).toBeGreaterThan(0)
+        expect(c.x).toBeLessThan(swarm.width)
+      }
+      const xs = middle.map((c) => c.x)
+      const ys = middle.map((c) => c.y)
+      expect(Math.max(...xs) - Math.min(...xs)).toBeGreaterThan(swarm.width * 0.1)
+      expect(Math.max(...ys) - Math.min(...ys)).toBeGreaterThan(swarm.height * 0.1)
+      // it really circles: turning at least one full loop around the middle of its circling
+      const orbit = centers.slice(Math.floor(centers.length * 0.3), Math.floor(centers.length * 0.7))
+      const mx = orbit.reduce((sum, c) => sum + c.x, 0) / orbit.length
+      const my = orbit.reduce((sum, c) => sum + c.y, 0) / orbit.length
+      let turned = 0
+      for (let i = 1; i < orbit.length; i++) {
+        let d = Math.atan2(orbit[i].y - my, orbit[i].x - mx) - Math.atan2(orbit[i - 1].y - my, orbit[i - 1].x - mx)
+        if (d > Math.PI) d -= Math.PI * 2
+        if (d < -Math.PI) d += Math.PI * 2
+        turned += d
+      }
+      expect(Math.abs(turned)).toBeGreaterThan(Math.PI * 1.4)
+    }
+  })
+
+  it('moves smoothly: no jump between neighbouring keyframes', () => {
+    for (let seed = 1; seed <= 30; seed++) {
+      const { centers } = planSwarmPass({ ...swarm, bounds: boundsList[1], random: seeded(seed + 900) })
+      for (let i = 1; i < centers.length; i++) {
+        expect(Math.hypot(centers[i].x - centers[i - 1].x, centers[i].y - centers[i - 1].y)).toBeLessThan(swarm.width * 0.06)
+      }
+    }
   })
 })

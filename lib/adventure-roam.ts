@@ -245,47 +245,121 @@ export function planDistinctRoam(options: RoamOptions, avoid: Point[][], attempt
 }
 
 export interface SwarmPassOptions {
-  /** Width and height of the area the swarm crosses (the viewport-sized scene), in px. */
+  /** Width and height of the area the swarm moves over (the viewport-sized scene), in px. */
   width: number
   height: number
-  /** Width of the swarm footage's frame, in px. */
+  /** Size of the swarm footage's frame, in px. */
   spriteW: number
+  spriteH: number
   /** Where the fireflies sit inside the frame, as a share of its width (left edge, right edge). */
   bounds: [number, number]
-  /** Vertical sway, in px, as the swarm drifts across. */
-  sway?: number
+  /** Where the middle of the swarm sits vertically inside the frame, as a share of its height. */
+  midY?: number
+  /** Where the swarm circles, as a share of the area's height (lowest, highest). */
+  lane?: [number, number]
   random?: () => number
 }
 
 export interface SwarmPass {
-  /** Left offset of the footage's frame at the start and at the end of the pass, in px. */
-  from: number
-  to: number
+  /** Keyframes for the footage's frame (its top-left corner), evenly spaced in time. */
   keyframes: { transform: string; offset: number }[]
+  /** The route of the middle of the swarm, one point per keyframe. */
+  centers: Point[]
+  /** The edge it comes in from and the edge it leaves through. */
+  enter: 'left' | 'right'
+  exit: 'left' | 'right'
+  /** Half the width of the swarm's cloud, in px (what has to clear the edge to be off screen). */
+  halfWidth: number
 }
 
+const easeOutSine = (k: number) => Math.sin((k * Math.PI) / 2)
+const easeInOutSine = (k: number) => 0.5 - Math.cos(k * Math.PI) / 2
+
 /**
- * One pass of a firefly swarm across the screen: it starts with every firefly beyond the left edge,
- * drifts right (swaying a little up and down) while the footage plays, and ends with every firefly
- * beyond the right edge. The footage restarts only while the swarm is off screen, so its loop point
- * is never seen.
+ * One visit of a firefly swarm: it comes in from the left or the right edge (at random), swarms about
+ * the middle of the screen in a slow, springy loop (an ellipse whose radius breathes in and out, like a
+ * coil) and then drifts away, slowly, through the left or the right edge (also at random). It begins
+ * and ends with every firefly beyond an edge, so the footage can restart there without it showing.
  */
 export function planSwarmPass(options: SwarmPassOptions): SwarmPass {
-  const { width, height, spriteW, bounds } = options
+  const { width, height, spriteW, spriteH, bounds } = options
   const rnd = options.random ?? Math.random
-  const margin = 12
-  const from = -bounds[1] * spriteW - margin
-  const to = width - bounds[0] * spriteW + margin
-  const sway = options.sway ?? height * 0.05
+  const midY = options.midY ?? 0.5
+  const midX = (bounds[0] + bounds[1]) / 2
+  const halfWidth = ((bounds[1] - bounds[0]) / 2) * spriteW
+  const [laneLow, laneHigh] = options.lane ?? [0.3, 0.6]
+
+  const enter: 'left' | 'right' = rnd() < 0.5 ? 'left' : 'right'
+  const exit: 'left' | 'right' = rnd() < 0.5 ? 'left' : 'right'
+  const cx = width * (0.38 + 0.24 * rnd())
+  const cy = height * (laneLow + (laneHigh - laneLow) * rnd())
+  const rx = clamp(width * (0.14 + 0.07 * rnd()), 70, 520)
+  const ry = clamp(height * (0.12 + 0.06 * rnd()), 50, 260)
+  const dir = rnd() < 0.5 ? 1 : -1
   const phase = rnd() * Math.PI * 2
-  const steps = 8
-  const keyframes: SwarmPass['keyframes'] = []
-  for (let i = 0; i <= steps; i++) {
-    const k = i / steps
-    keyframes.push({
-      transform: `translate3d(${(from + (to - from) * k).toFixed(1)}px, ${(Math.sin(phase + k * Math.PI * 2) * sway).toFixed(1)}px, 0)`,
-      offset: k,
-    })
+
+  // The loop starts on the side it came in from and ends on the side it leaves by, so the way in and the
+  // way out run on from the circling instead of cutting across it.
+  const startAngle = enter === 'left' ? Math.PI : 0
+  const endAngle = exit === 'left' ? Math.PI : 0
+  const twoPi = Math.PI * 2
+  const base = (((endAngle - startAngle) * dir) % twoPi + twoPi) % twoPi
+  // One loop, or now and then two; the radius breathes in and out and the centre drifts a little, so the
+  // path coils like a spring instead of retracing one ellipse.
+  const sweep = base + twoPi * (rnd() < 0.5 ? 1 : 2)
+  const driftPhase = rnd() * Math.PI * 2
+  const coil = (u: number) => 0.78 + 0.22 * Math.sin(u * Math.PI * 4 + phase)
+  const orbit = (u: number): Point => {
+    const angle = startAngle + dir * sweep * u
+    const drift = Math.sin(u * Math.PI * 2 + driftPhase)
+    return {
+      x: cx + width * 0.04 * drift + rx * coil(u) * Math.cos(angle),
+      y: cy + height * 0.03 * Math.cos(u * Math.PI * 2 + driftPhase) + ry * coil(u) * Math.sin(angle),
+    }
   }
-  return { from, to, keyframes }
+
+  const margin = 16
+  const orbitStart = orbit(0)
+  const orbitEnd = orbit(1)
+  const start: Point = { x: enter === 'left' ? -halfWidth - margin : width + halfWidth + margin, y: orbitStart.y + (rnd() - 0.5) * 0.2 * height }
+  const end: Point = { x: exit === 'left' ? -halfWidth - margin : width + halfWidth + margin, y: orbitEnd.y + (rnd() - 0.5) * 0.2 * height }
+
+  const comeIn = 0.25
+  const leave = 0.25
+  // The way in and the way out bow a little, instead of running dead straight.
+  const bow = (rnd() < 0.5 ? 1 : -1) * 0.07 * height
+  const bowOut = (rnd() < 0.5 ? 1 : -1) * 0.07 * height
+  const frames = 160
+  const raw: Point[] = []
+  for (let i = 0; i < frames; i++) {
+    const t = i / (frames - 1)
+    if (t < comeIn) {
+      const k = easeOutSine(t / comeIn)
+      raw.push({ x: start.x + (orbitStart.x - start.x) * k, y: start.y + (orbitStart.y - start.y) * k + Math.sin(k * Math.PI) * bow })
+    } else if (t > 1 - leave) {
+      const k = easeInOutSine((t - (1 - leave)) / leave)
+      raw.push({ x: orbitEnd.x + (end.x - orbitEnd.x) * k, y: orbitEnd.y + (end.y - orbitEnd.y) * k + Math.sin(k * Math.PI) * bowOut })
+    } else {
+      raw.push(orbit((t - comeIn) / (1 - comeIn - leave)))
+    }
+  }
+  // Soften the joins between the three parts; the first and last points stay where they are, off screen.
+  const centers = raw.map((point, i) => {
+    if (i === 0 || i === frames - 1) return point
+    const radius = Math.min(8, i, frames - 1 - i)
+    let sx = 0
+    let sy = 0
+    for (let j = i - radius; j <= i + radius; j++) {
+      sx += raw[j].x
+      sy += raw[j].y
+    }
+    const n = radius * 2 + 1
+    return { x: sx / n, y: sy / n }
+  })
+
+  const keyframes = centers.map((c, i) => ({
+    transform: `translate3d(${(c.x - midX * spriteW).toFixed(1)}px, ${(c.y - midY * spriteH).toFixed(1)}px, 0)`,
+    offset: i / (frames - 1),
+  }))
+  return { keyframes, centers, enter, exit, halfWidth }
 }
