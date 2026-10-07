@@ -56,21 +56,42 @@ export function DestinationsPage() {
     [activeRegion],
   )
 
+  // Runs once the chart intro has opened. It used to scroll to the carousel for every visit, which
+  // pulled people away from wherever they had asked to land (the Explore button, the Adventures
+  // link). Now it only moves the page when the link asked for somewhere in particular. It reads the
+  // URL when it runs, rather than from render state, so it keeps a stable identity and does not
+  // re-fire when a region filter is clicked.
   const scrollToCarousel = useCallback(() => {
     // Keep the mobile page at the top after the chart ritual. The compact
     // atlas stacks the carousel and rudder in normal flow; auto-scrolling to
     // the stage makes the rudder appear to jump away on initial load.
     if (window.matchMedia('(max-width: 760px)').matches) return
 
+    const hashId = decodeURIComponent(window.location.hash.slice(1))
+    const hashTarget = hashId ? document.getElementById(hashId) : null
+    const cameForRegion = new URLSearchParams(window.location.search).has('region')
+
     window.requestAnimationFrame(() => {
-      const stage = document.getElementById('destination-carousel-stage')
-      if (!stage) return
+      // 1. A link to a section (#adventure, #destination-carousel): go to that section, which also
+      //    stops the carousel scroll below from overriding it.
+      if (hashTarget) {
+        hashTarget.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        return
+      }
 
-      const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height ?? 0
-      const breathingRoom = 18
-      const destinationTop = window.scrollY + stage.getBoundingClientRect().top - headerHeight - breathingRoom
+      // 2. A region link (?region=...): show the filtered carousel.
+      if (cameForRegion) {
+        const stage = document.getElementById('destination-carousel-stage')
+        if (!stage) return
 
-      window.scrollTo({ top: Math.max(0, destinationTop), behavior: 'smooth' })
+        const headerHeight = document.querySelector('.site-header')?.getBoundingClientRect().height ?? 0
+        const breathingRoom = 18
+        const destinationTop = window.scrollY + stage.getBoundingClientRect().top - headerHeight - breathingRoom
+
+        window.scrollTo({ top: Math.max(0, destinationTop), behavior: 'smooth' })
+      }
+
+      // 3. Otherwise (a plain /destinations, e.g. the Explore button) stay at the top of the page.
     })
   }, [])
 
