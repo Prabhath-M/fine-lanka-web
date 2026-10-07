@@ -80,7 +80,7 @@ export const ADVENTURES: Adventure[] = [
     icon: 'zipline',
     image: '/images/adventure-ella-zip-line',
     imageAlt: 'A rider in an orange helmet gliding along a zip line above the forest',
-    imagePosition: '50% 12%', // keep the cable and carabiner in frame when the box is wide and short
+    imagePosition: '50% 0%', // keep the top (cable and carabiner) in frame when the box crops the photo
   },
   {
     number: '03',
