@@ -14079,3 +14079,233 @@ body:has(.features:target) .typed-opening { display: none; }
   .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.82rem; line-height: 1.5; }
   .destinations-page .adventure[data-scrub='on'] .adventure-experience { margin-top: 0.5rem; }
 }
+
+/* ==========================================================================
+   MOBILE HEADER & DRAWER REFINEMENT (phones / small tablets only)
+   Loaded last so it settles the several earlier header overrides. Desktop
+   (> 980px) is deliberately untouched.
+   - Brand shrinks (and ellipsizes as a last resort) so the action buttons
+     never get pushed off-screen on 320-380px phones.
+   - "Plan a Journey" icon button and the hamburger share one 44px footprint.
+   - The hamburger -> X morph is computed from the bar geometry so the cross
+     is centred instead of skewed.
+   - The drawer gets comfortable tap targets, clear hierarchy and safe-area
+     padding.
+   ========================================================================== */
+@media (max-width: 980px) {
+  .site-header .header-inner { gap: 0.6rem; }
+  .site-header .header-inner > .brand,
+  .site-header .header-inner > a.brand { min-width: 0; flex: 0 1 auto; }
+  .site-header .brand [data-brand] {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .site-header .header-actions { flex: none; align-items: center; gap: 0.5rem; }
+
+  /* hamburger: 44px target, three evenly spaced bars, exact X morph */
+  body .site-header .nav-toggle {
+    flex: none;
+    display: block;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: 1px solid rgba(235, 207, 135, 0.5);
+    border-radius: 10px;
+    background: rgba(2, 29, 31, 0.38);
+    -webkit-tap-highlight-color: transparent;
+  }
+  body .site-header .nav-toggle span,
+  body .site-header .nav-toggle::before,
+  body .site-header .nav-toggle::after {
+    left: 11px;
+    right: auto;
+    width: 20px;
+    height: 2px;
+    border-radius: 2px;
+    background: #fff8e5;
+  }
+  body .site-header .nav-toggle::before { top: 13px; bottom: auto; }
+  body .site-header .nav-toggle::after { bottom: 13px; top: auto; }
+  body .site-header .nav-toggle span { top: 50%; transform: translateY(-50%); }
+  body .site-header .nav-toggle[aria-expanded="true"] { background: rgba(235, 207, 135, 0.14); border-color: #ebcf87; }
+  body .site-header .nav-toggle[aria-expanded="true"]::before { transform: translateY(7px) rotate(45deg); }
+  body .site-header .nav-toggle[aria-expanded="true"]::after { transform: translateY(-7px) rotate(-45deg); }
+  body .site-header .nav-toggle[aria-expanded="true"] span { opacity: 0; transform: translateY(-50%) scaleX(0.2); }
+  body .site-header .nav-toggle:hover,
+  body .site-header .nav-toggle:focus-visible { transform: none; }
+}
+
+@media (max-width: 520px) {
+  .site-header .header-inner { min-height: 5.5rem; padding-inline: 0.9rem; }
+  .site-header.is-scrolled .header-inner { min-height: 5.5rem; }
+  .site-header .brand { gap: 0.4rem; padding-block: 0.4rem; font-size: 1.05rem; }
+  .site-header .brand-logo,
+  .site-header.is-scrolled .brand-logo { width: 3.7rem; height: 3.7rem; margin-right: 0.35rem; }
+
+  /* icon-only CTA matches the hamburger's 44px footprint */
+  .site-header .header-actions .btn-uikit-primary {
+    width: 44px;
+    min-width: 44px;
+    height: 44px;
+    min-height: 44px;
+    padding: 0;
+    border-width: 2px;
+    border-radius: 10px;
+    justify-content: center;
+    font-size: 0;
+    gap: 0;
+    box-shadow: 0 2px 0 rgba(98, 67, 26, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  }
+  .site-header .header-actions .btn-uikit-primary .btn-icon { width: 1.2rem; height: 1.2rem; margin: 0; }
+  .site-header .header-actions .btn-uikit-primary:hover,
+  .site-header .header-actions .btn-uikit-primary:focus-visible { transform: none; }
+
+  /* drawer starts just below the (shorter) header */
+  .mobile-nav {
+    width: min(86vw, 340px);
+    padding: calc(5.5rem + 0.75rem) 1.25rem calc(var(--space-5) + env(safe-area-inset-bottom, 0px));
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 380px) {
+  .site-header .header-inner { padding-inline: 0.75rem; gap: 0.4rem; }
+  .site-header .brand { font-size: 0.95rem; }
+  .site-header .brand-logo,
+  .site-header.is-scrolled .brand-logo { width: 3.2rem; height: 3.2rem; margin-right: 0.25rem; }
+  .site-header .header-actions { gap: 0.4rem; }
+}
+
+/* ---- Drawer hierarchy & tap targets (phones and tablets) ---- */
+@media (max-width: 980px) {
+  .mobile-nav { box-shadow: -18px 0 40px -18px rgba(0, 0, 0, 0.55); }
+  #mobile-nav-links > li > a,
+  .mobile-nav-heading {
+    min-height: 48px;
+    display: flex;
+    align-items: center;
+    padding-block: 0.7rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  a.mobile-nav-heading { justify-content: space-between; }
+  #mobile-nav-links > li > a.is-active { color: var(--brass-light); }
+  .mobile-nav-group ul { padding: 0 0 0.7rem 0.15rem; }
+  .mobile-nav-group ul a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    padding: 0.35rem 0 0.35rem 0.85rem;
+    font-size: 1rem;
+    font-weight: 400;
+    border-left: 1px solid var(--line-on-dark);
+  }
+  .mobile-nav-group ul li.is-sub a { min-height: 40px; padding-left: 1.75rem; font-size: 0.94rem; }
+  .mobile-nav-group ul a:hover,
+  .mobile-nav-group ul a:focus-visible { color: var(--brass-light); border-left-color: var(--brass-light); }
+}
+
+/* ==========================================================================
+   MOBILE DRAWER — BUTTON STYLING
+   Every link in the slide-out menu reads as a tappable button: soft glass
+   fill, thin brass frame, press feedback, and a clear active state. Section
+   headings (Explore, Tours & Pricing) get the jade/gold treatment used by the
+   site's primary button; their children are quieter chips beneath them.
+   ========================================================================== */
+@media (max-width: 980px) {
+  .mobile-nav #mobile-nav-links { display: grid; gap: 0.55rem; }
+  .mobile-nav #mobile-nav-links > li { border-bottom: 0; }
+
+  /* shared button base */
+  .mobile-nav #mobile-nav-links a {
+    position: relative;
+    border: 1px solid rgba(235, 207, 135, 0.22);
+    border-radius: 10px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.025));
+    box-shadow: inset 0 1px 0 rgba(255, 249, 226, 0.08);
+    transition: background 180ms var(--ease), border-color 180ms var(--ease),
+      color 180ms var(--ease), transform 140ms var(--ease), box-shadow 180ms var(--ease);
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-nav #mobile-nav-links a:hover,
+  .mobile-nav #mobile-nav-links a:focus-visible {
+    background: linear-gradient(180deg, rgba(235, 207, 135, 0.18), rgba(235, 207, 135, 0.06));
+    border-color: rgba(235, 207, 135, 0.6);
+    color: var(--brass-light);
+  }
+  .mobile-nav #mobile-nav-links a:active { transform: scale(0.98); }
+  .mobile-nav #mobile-nav-links a:focus-visible { outline: 2px solid #ebcf87; outline-offset: 2px; }
+
+  /* top-level plain links (Home, About, Booking…) */
+  .mobile-nav #mobile-nav-links > li > a { padding-inline: 1rem; }
+
+  /* group headings: jade glass with a gold frame + round arrow */
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading {
+    padding-inline: 1rem 0.7rem;
+    color: #fff9e7;
+    border-color: rgba(231, 198, 112, 0.7);
+    background: linear-gradient(135deg, rgba(36, 91, 83, 0.95), rgba(23, 63, 61, 0.95));
+    box-shadow: 0 2px 0 rgba(98, 67, 26, 0.55), inset 0 1px 0 rgba(255, 249, 227, 0.18);
+  }
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading:hover,
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading:focus-visible {
+    background: linear-gradient(135deg, rgba(44, 109, 99, 0.98), rgba(27, 77, 73, 0.98));
+    border-color: #ebcf87;
+    color: #fff9e7;
+  }
+  .mobile-nav #mobile-nav-links a.mobile-nav-heading.is-active { border-color: #ebcf87; color: var(--brass-light); }
+  .mobile-nav .mobile-nav-heading-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.9rem;
+    height: 1.9rem;
+    border-radius: 50%;
+    background: rgba(235, 207, 135, 0.16);
+    border: 1px solid rgba(235, 207, 135, 0.4);
+    color: var(--brass-light);
+    font-size: 0.95rem;
+  }
+
+  /* children: quieter chips under each heading */
+  .mobile-nav .mobile-nav-group ul { display: grid; gap: 0.4rem; padding: 0.55rem 0 0.2rem 0.6rem; }
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul a {
+    min-height: 42px;
+    padding: 0.35rem 0.9rem;
+    font-size: 0.97rem;
+    color: var(--text-on-dark);
+    border-left: 1px solid rgba(235, 207, 135, 0.22);
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: none;
+  }
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul li.is-sub a {
+    min-height: 38px;
+    margin-left: 0.9rem;
+    padding-left: 0.85rem;
+    font-size: 0.9rem;
+    color: var(--text-on-dark-muted);
+    border-left: 1px solid rgba(235, 207, 135, 0.22);
+  }
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul a:hover,
+  .mobile-nav #mobile-nav-links .mobile-nav-group ul a:focus-visible { color: var(--brass-light); border-left-color: rgba(235, 207, 135, 0.6); }
+
+  /* current page */
+  .mobile-nav #mobile-nav-links > li > a.is-active {
+    color: var(--brass-light);
+    border-color: rgba(235, 207, 135, 0.75);
+    background: linear-gradient(180deg, rgba(235, 207, 135, 0.2), rgba(235, 207, 135, 0.07));
+  }
+}
+@media (max-width: 980px) {
+  /* current section heading keeps the jade fill, with a brighter gold frame */
+  .mobile-nav #mobile-nav-links > li > a.mobile-nav-heading.is-active {
+    background: linear-gradient(135deg, rgba(44, 109, 99, 0.98), rgba(27, 77, 73, 0.98));
+    border-color: #ebcf87;
+    color: var(--brass-light);
+    box-shadow: 0 2px 0 rgba(98, 67, 26, 0.55), 0 0 0 1px rgba(235, 207, 135, 0.35), inset 0 1px 0 rgba(255, 249, 227, 0.2);
+  }
+}
