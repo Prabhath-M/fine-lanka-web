@@ -57,13 +57,13 @@ const RAYS = [
 ]
 
 const FISH = [
-  { src: '/images/adventure-fish-salmon.png', ar: '574 / 182', x: 12, y: 18, size: 14, start: '-26vw', mid: '42vw', end: '112vw', lift: '-2vh', flip: 1, duration: 38, delay: -8 },
+  { src: '/images/adventure-fish-salmon.webp', ar: '574 / 182', x: 12, y: 18, size: 14, start: '-26vw', mid: '42vw', end: '112vw', lift: '-2vh', flip: 1, duration: 38, delay: -8 },
   { src: '/images/adventure-fish-perch.webp', ar: '560 / 290', x: 72, y: 32, size: 11, start: '112vw', mid: '50vw', end: '-24vw', lift: '2vh', flip: -1, duration: 46, delay: -21 },
-  { src: '/images/adventure-fish-red.png', ar: '638 / 190', x: 34, y: 43, size: 12, start: '-22vw', mid: '38vw', end: '108vw', lift: '-3vh', flip: 1, duration: 52, delay: -34 },
-  { src: '/images/adventure-fish-salmon.png', ar: '574 / 182', x: 80, y: 55, size: 9, start: '110vw', mid: '58vw', end: '-20vw', lift: '1vh', flip: -1, duration: 43, delay: -15 },
+  { src: '/images/adventure-fish-red.webp', ar: '638 / 190', x: 34, y: 43, size: 12, start: '-22vw', mid: '38vw', end: '108vw', lift: '-3vh', flip: 1, duration: 52, delay: -34 },
+  { src: '/images/adventure-fish-salmon.webp', ar: '574 / 182', x: 80, y: 55, size: 9, start: '110vw', mid: '58vw', end: '-20vw', lift: '1vh', flip: -1, duration: 43, delay: -15 },
   { src: '/images/adventure-fish-perch.webp', ar: '560 / 290', x: 22, y: 66, size: 10, start: '-24vw', mid: '44vw', end: '114vw', lift: '-2vh', flip: 1, duration: 57, delay: -42 },
-  { src: '/images/adventure-fish-red.png', ar: '638 / 190', x: 66, y: 76, size: 8, start: '108vw', mid: '52vw', end: '-22vw', lift: '2vh', flip: -1, duration: 49, delay: -7 },
-  { src: '/images/adventure-fish-salmon.png', ar: '574 / 182', x: 44, y: 87, size: 7, start: '-20vw', mid: '36vw', end: '110vw', lift: '-1vh', flip: 1, duration: 61, delay: -29 },
+  { src: '/images/adventure-fish-red.webp', ar: '638 / 190', x: 66, y: 76, size: 8, start: '108vw', mid: '52vw', end: '-22vw', lift: '2vh', flip: -1, duration: 49, delay: -7 },
+  { src: '/images/adventure-fish-salmon.webp', ar: '574 / 182', x: 44, y: 87, size: 7, start: '-20vw', mid: '36vw', end: '110vw', lift: '-1vh', flip: 1, duration: 61, delay: -29 },
 ]
 
 const JELLYFISH = [
@@ -277,7 +277,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
             <span key={`cloud-${i}`} className="adv-cloud adv-cloud-bank" style={vars({ '--x': `${cloud.x}%`, '--y': `${cloud.y}%`, '--w': `${cloud.size}vw`, '--dur': `${cloud.duration}s`, '--delay': `${cloud.delay}s`, '--o': 0.48 })} />
           ))}
           {BIRDS.map((bird, i) => (
-            <AnimatedGif key={i} src="/images/adventure-birds-flock.png" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <AnimatedGif key={i} src="/images/adventure-birds-flock.webp" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
         </>
       )
@@ -285,7 +285,7 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
       return (
         <>
           {BIRDS.map((bird, i) => (
-            <AnimatedGif key={`bird-${i}`} src="/images/adventure-birds-flock.png" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
+            <AnimatedGif key={`bird-${i}`} src="/images/adventure-birds-flock.webp" className="adv-bird" style={vars({ '--x': `${bird.x}%`, '--y': `${bird.y}%`, '--s': bird.size, '--dur': `${bird.duration}s`, '--delay': `${bird.delay}s` })} />
           ))}
           {MOTES.map((mote, i) => (
             <span key={i} className="adv-mote" style={vars({ '--x': `${mote.x}%`, '--y': `${mote.y}%`, '--dur': `${mote.duration}s`, '--delay': `${mote.delay}s` })} />
@@ -400,7 +400,7 @@ export function AdventureFishOverlay({ active }: { active: boolean }) {
         <OverlayFish active={active} src="/images/adventure-fish-perch.webp" className="adventure-overlay-fish-under" startDelay={0} />
       </ViewportLayer>
       <ViewportLayer className={`adventure-fish-overlay-layer adventure-fish-overlay-layer-over${state}`}>
-        <OverlayFish active={active} src="/images/adventure-fish-red.png" className="adventure-overlay-fish-over" startDelay={5} />
+        <OverlayFish active={active} src="/images/adventure-fish-red.webp" className="adventure-overlay-fish-over" startDelay={5} />
       </ViewportLayer>
     </>
   )
