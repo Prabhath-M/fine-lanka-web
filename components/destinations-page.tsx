@@ -3,6 +3,7 @@
 import { useCallback, useMemo } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { Icon } from '@/components/icons'
+import { AdventureSection } from '@/components/destinations/adventure-section'
 import { DestinationMarquee } from '@/components/destinations/destination-marquee'
 import { ChartIntro } from '@/components/destinations/chart-intro'
 import { DESTINATIONS, type DestinationRegion } from '@/lib/destinations-data'
@@ -124,6 +125,10 @@ export function DestinationsPage() {
                       <Icon name="pin" className="btn-icon" />
                       Plot a route
                     </button>
+                    <a href="#adventure" className="dest-hero-link">
+                      Adventure &amp; Experiences
+                      <span aria-hidden="true"> ↓</span>
+                    </a>
                     <span className="dest-hero-note">A considered way through the island</span>
                   </div>
                 </div>
@@ -200,6 +205,8 @@ export function DestinationsPage() {
             </div>
           </section>
         </div>
+
+        <AdventureSection />
 
         <section className="cta-band destinations-cta">
           <div className="destinations-cta-mark" aria-hidden="true">

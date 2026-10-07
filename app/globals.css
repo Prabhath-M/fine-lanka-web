@@ -3754,6 +3754,20 @@ a.mobile-nav-heading.is-active { color: var(--brass-light); }
   justify-content: center;
 }
 
+.destinations-page .dest-hero-link {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  color: #edcf85;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(237, 207, 133, 0.5);
+  padding-bottom: 0.15rem;
+  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
+}
+.destinations-page .dest-hero-link:hover,
+.destinations-page .dest-hero-link:focus-visible { color: #fff9e8; border-color: #fff9e8; }
+
 .destinations-page .dest-hero-note {
   color: rgba(243, 239, 225, 0.82);
   font-family: var(--font-display);
@@ -5601,7 +5615,7 @@ main > #destinations,
   .process-background { background-size: auto 124%; background-position: 79% 88%; }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TYPED ARRIVAL INTRO — HOME-PAGE OPENING ONLY
    This independent overlay types a short Sri Lanka message over black, then
    dissolves without touching the existing hero video, content, or controls.
@@ -5789,7 +5803,7 @@ main > #destinations,
    This resolves before hydration, so /#why reaches Why Fine Lanka immediately. */
 body:has(.features:target) .typed-opening { display: none; }
 
-/* ========================================================================== 
+/* ==========================================================================
    DESTINATIONS — ATLAS WINDOW LAYOUT
    One panel holds the heading, the two region rails, the island carousel
    stage, the rudder, and the current-bearing pane.
@@ -5884,7 +5898,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — VISUAL ASSET REFRESH
    This is a visual layer only: the portal timing, door transforms, card rise,
    hover transitions, and reader behavior above remain untouched.
@@ -5937,7 +5951,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 .reader-hero::after { display: none; }
 
-/* ========================================================================== 
+/* ==========================================================================
    DESTINATIONS — CONTINUOUS ATLAS COMPOSITION
    The hero now resolves at the mural within one first viewport. The explorer
    below reads as one chart table: card stage, wheel, and current-bearing pane
@@ -6386,7 +6400,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    DESTINATIONS + HOME — OPEN HERITAGE STAGE
    Keep the protected carousel cards, rudder controls, map pins, and media
    interactions intact. This layer removes only unnecessary containers and
@@ -7004,7 +7018,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .about-invitation { padding-block: 5rem; }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TOURS & PRICING — HERITAGE ROUTE FOLIO
    Design reminder: present the collection as a Sri Lankan route folio—jade,
    parchment, fresco-gold rules, and sparse liyawel relief. Filter, URL,
@@ -7098,7 +7112,7 @@ body:has(.features:target) .typed-opening { display: none; }
   .tours-page .tour-collection-intro > div { padding-left: 1rem; }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TOURS COLLECTION — MOONSTONE GARDEN INDEX
    Design reminder: a light, composed parchment garden follows the dark hero.
    Category controls are carved jade-and-parchment index tiles; filtering logic
@@ -10715,7 +10729,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — PORTAL TO ARCHIVE REVEAL
    The ancient doorway resolves into an archive: a brass registration line
    draws first, the heading is typeset in two deliberate movements, and each
@@ -10837,7 +10851,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — ORIGINAL REVEAL RESTORATION
    Restore the prior post-portal header and card choreography. The portal,
    archive background, and established Journal card design remain unchanged.
@@ -10964,7 +10978,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    JOURNAL — PORTAL-GATED CONTENT REVEAL
    The door removal and content entry are separate states. Until the portal
    completes and the intentional half-second pause ends, all Chronicle content
@@ -11215,7 +11229,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    BOOK NOW — PRIVATE ROUTE BRIEF REDESIGN
    A calm, editorial enquiry experience: parchment brief + deep-jade process
    ledger. Form structure and submission behavior remain unchanged.
@@ -11466,7 +11480,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 
-/* ========================================================================== 
+/* ==========================================================================
    SECTION BACKGROUNDS — TOURS COLLECTION + BOOKING DETAILS
    ========================================================================== */
 @media (max-width: 720px) {
@@ -11478,7 +11492,7 @@ body:has(.features:target) .typed-opening { display: none; }
 }
 
 
-/* ========================================================================== 
+/* ==========================================================================
    DEPTH IMAGE LAYERS — original-size supplied imagery behind section content
    ========================================================================== */
 .tours-page .tour-section-depth-art::after,
@@ -11611,7 +11625,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    CEYLON FIELD NOTES — FIXED SCENIC CANVASES
    The previous rules fitted one 2048:877 image to arbitrary content height
    using `background-size: 100% 100%`, which visibly distorted the imagery.
@@ -11668,7 +11682,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    CEYLON FIELD NOTES — SECTION-SCOPED BACKGROUND CORRECTION
    Keep the original Book Now and Tours & Pricing top heroes in their existing
    document layers. The imagery is fixed only while its own content section is
@@ -11877,7 +11891,7 @@ body:has(.features:target) .typed-opening { display: none; }
   }
 }
 
-/* ========================================================================== 
+/* ==========================================================================
    TOURS & PRICING — ROUTE FOLIO CARDS
    Ceylon Field Notes treats every itinerary as a compact travel folio: a
    picture-led cover, a formal route index, and an editorial pricing ledger.
@@ -13144,4 +13158,898 @@ body:has(.features:target) .typed-opening { display: none; }
   .tours-route-map-section > div {
     width: min(100% - 1rem, 1440px);
   }
+}
+
+/* =====================================================================
+   Destinations: "Adventure & Experiences" -- the Sky to Underground section.
+   Plan: docs/DESTINATIONS-ADVENTURE-SECTION-PLAN.md
+   Phase 2 = static desktop layout. Filter (3), gauge + scroll effects (4)
+   and the full responsive pass (5) build on these classes.
+   ===================================================================== */
+/* Per-stage theme: the backdrop changes from a light sky to a black cave, so the text colours follow it. */
+.destinations-page .adventure {
+  --adv-fg: var(--text-on-dark);
+  --adv-muted: var(--text-on-dark-muted);
+  --adv-accent: var(--brass-light);
+  --adv-line: rgba(216, 185, 120, 0.5);
+  --adv-line-soft: rgba(216, 185, 120, 0.16);
+  --adv-spine: rgba(216, 185, 120, 0.7);
+  --adv-num: rgba(216, 185, 120, 0.6);
+  --adv-chip: rgba(216, 185, 120, 0.1);
+  --adv-node-bg: var(--ink);
+  --adv-box: rgba(7, 17, 24, 0.57);
+  --adv-box-line: rgba(216, 185, 120, 0.3);
+  --adv-box-shadow: rgba(0, 0, 0, 0.35);
+}
+.destinations-page .adventure[data-stage='sky'] {
+  --adv-fg: #0f2438;
+  --adv-muted: #2b4560;
+  --adv-accent: #70500f;
+  --adv-line: rgba(112, 80, 15, 0.5);
+  --adv-line-soft: rgba(112, 80, 15, 0.14);
+  --adv-spine: rgba(112, 80, 15, 0.55);
+  --adv-num: rgba(112, 80, 15, 0.6);
+  --adv-chip: rgba(255, 255, 255, 0.6);
+  --adv-node-bg: #f4fafd;
+  --adv-box: rgba(250, 253, 255, 0.57);
+  --adv-box-line: rgba(112, 80, 15, 0.3);
+  --adv-box-shadow: rgba(15, 36, 56, 0.2);
+}
+.destinations-page .adventure[data-stage='canopy'] {
+  --adv-fg: #0c2a20;
+  --adv-muted: #163a2b;
+  --adv-accent: #4f3508;
+  --adv-line: rgba(79, 53, 8, 0.5);
+  --adv-line-soft: rgba(100, 68, 16, 0.14);
+  --adv-spine: rgba(100, 68, 16, 0.55);
+  --adv-num: rgba(100, 68, 16, 0.6);
+  --adv-chip: rgba(255, 255, 255, 0.5);
+  --adv-node-bg: #eaf6ee;
+  --adv-box: rgba(244, 252, 246, 0.57);
+  --adv-box-line: rgba(79, 53, 8, 0.3);
+  --adv-box-shadow: rgba(12, 42, 32, 0.2);
+}
+.destinations-page .adventure[data-stage='land'] {
+  --adv-fg: #1c2a10;
+  --adv-muted: #34471f;
+  --adv-accent: #634210;
+  --adv-line: rgba(99, 66, 16, 0.5);
+  --adv-line-soft: rgba(99, 66, 16, 0.14);
+  --adv-spine: rgba(99, 66, 16, 0.55);
+  --adv-num: rgba(99, 66, 16, 0.6);
+  --adv-chip: rgba(255, 255, 255, 0.5);
+  --adv-node-bg: #f1f3dc;
+  --adv-box: rgba(248, 249, 234, 0.57);
+  --adv-box-line: rgba(99, 66, 16, 0.3);
+  --adv-box-shadow: rgba(28, 42, 16, 0.2);
+}
+.destinations-page .adventure[data-stage='water'] {
+  --adv-fg: #f3fbfd;
+  --adv-muted: #d3ecf2;
+  --adv-accent: #f6e6bd;
+  --adv-box: rgba(5, 30, 38, 0.55);
+  --adv-box-line: rgba(246, 230, 189, 0.3);
+  --adv-box-shadow: rgba(0, 0, 0, 0.32);
+}
+
+.destinations-page .adventure {
+  position: relative;
+  isolation: isolate;
+  padding: clamp(5rem, 9vw, 8rem) 0 clamp(4rem, 7vw, 6rem);
+  color: var(--adv-fg);
+  border-top: 1px solid rgba(216, 185, 120, 0.5);
+  background: #0b1c23;
+}
+/* Faint topographic contours: the "map" thread that ties the section to the atlas above. */
+.destinations-page .adventure-sky {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.5;
+  pointer-events: none;
+  background-image:
+    repeating-radial-gradient(circle at 12% 8%, transparent 0 46px, rgba(216, 185, 120, 0.07) 47px 48px),
+    repeating-radial-gradient(circle at 92% 62%, transparent 0 58px, rgba(216, 185, 120, 0.06) 59px 60px);
+}
+
+.destinations-page .adventure-head { max-width: 46rem; margin: 0 auto clamp(3.5rem, 7vw, 6rem); text-align: center; }
+.destinations-page .adventure-head .dest-section-kicker { color: var(--adv-accent); }
+.destinations-page .adventure-head h2 { margin-top: 0.75rem; font-size: clamp(2.25rem, 5vw, 4rem); color: var(--adv-fg); }
+.destinations-page .adventure-lede { margin: 1.25rem auto 0; max-width: 54ch; color: var(--adv-muted); font-size: 1.08rem; line-height: 1.7; }
+
+/* The depth spine: one brass line running down the middle, a node per panel. */
+.destinations-page .adventure-track { position: relative; }
+.destinations-page .adventure-rail { position: relative; }
+.destinations-page .adventure-spine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(180deg, transparent, var(--adv-spine) 6%, var(--adv-spine) 94%, transparent);
+}
+.destinations-page .adventure-list { list-style: none; margin: 0; padding: 0; }
+
+.destinations-page .adventure-panel {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 6rem);
+  margin-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+.destinations-page .adventure-panel:nth-child(even) .adventure-media { order: 2; }
+.destinations-page .adventure-node {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.95rem;
+  height: 0.95rem;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--adv-accent);
+  border-radius: 50%;
+  background: var(--adv-node-bg);
+  box-shadow: 0 0 0 5px var(--adv-line-soft);
+}
+
+/* Media frame: illustrated placeholder, tinted by zone so the depth story reads even without photos. */
+.destinations-page .adventure-media {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid rgba(216, 185, 120, 0.35);
+  border-radius: 0.9rem;
+  background: linear-gradient(160deg, #35617a, #173247);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.35);
+}
+.destinations-page .adventure-panel[data-zone='land'] .adventure-media { background: linear-gradient(160deg, #4d4c37, #1e2419); }
+.destinations-page .adventure-panel[data-zone='water'] .adventure-media { background: linear-gradient(160deg, #1f5c66, #0d2a33); }
+.destinations-page .adventure-panel[data-zone='underground'] .adventure-media { background: linear-gradient(160deg, #2d2c33, #0b0c10); }
+.destinations-page .adventure-media-contours {
+  position: absolute;
+  inset: 0;
+  background: repeating-radial-gradient(circle at 28% 118%, transparent 0 16px, rgba(216, 185, 120, 0.17) 17px 18px);
+}
+.destinations-page .adventure-media-icon {
+  position: relative;
+  width: clamp(4.5rem, 9vw, 7rem);
+  height: clamp(4.5rem, 9vw, 7rem);
+  color: var(--adv-accent);
+  stroke-width: 1.1;
+  filter: drop-shadow(0 0.4rem 0.8rem rgba(0, 0, 0, 0.35));
+}
+
+.destinations-page .adventure-num {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 700;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--adv-num);
+}
+.destinations-page .adventure-title-row { display: flex; align-items: center; gap: 0.9rem; margin-top: 0.6rem; }
+.destinations-page .adventure-icon-badge {
+  display: grid;
+  place-items: center;
+  flex: none;
+  width: 2.7rem;
+  height: 2.7rem;
+  border: 1px solid var(--adv-line);
+  border-radius: 50%;
+  color: var(--adv-accent);
+}
+.destinations-page .adventure-icon-badge .icon { width: 1.5rem; height: 1.5rem; }
+.destinations-page .adventure-title-row h3 { font-size: clamp(1.6rem, 3vw, 2.3rem); color: var(--adv-fg); }
+.destinations-page .adventure-tagline { margin: 0.7rem 0 0.9rem; font-style: italic; font-size: 1.12rem; color: var(--adv-accent); }
+.destinations-page .adventure-copy { margin: 0; max-width: 52ch; line-height: 1.75; color: var(--adv-muted); }
+
+.destinations-page .adventure-experience { display: flex; flex-wrap: wrap; align-items: center; gap: 0.6rem 0.85rem; margin-top: 1.4rem; }
+.destinations-page .adventure-experience-label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--adv-accent);
+}
+.destinations-page .adventure-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; list-style: none; margin: 0; padding: 0; }
+.destinations-page .adventure-tags li {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--adv-line);
+  border-radius: 999px;
+  background: var(--adv-chip);
+  font-size: 0.82rem;
+  color: var(--adv-fg);
+}
+
+.destinations-page .adventure-closing {
+  max-width: 52rem;
+  margin: clamp(2rem, 5vw, 4rem) auto 0;
+  padding-top: clamp(3rem, 6vw, 5rem);
+  border-top: 1px solid var(--adv-line);
+  text-align: center;
+}
+.destinations-page .adventure-closing h3 { font-size: clamp(1.9rem, 4vw, 3rem); color: var(--adv-fg); }
+.destinations-page .adventure-closing > p:not([class]) { margin: 1.1rem auto 1.8rem; max-width: 56ch; color: var(--adv-muted); line-height: 1.75; }
+.destinations-page .adventure-signoff {
+  margin: 2rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--adv-accent);
+}
+.destinations-page .adventure-brandline { margin: 0.5rem 0 0; font-style: italic; color: var(--adv-muted); }
+
+/* Anchor offset for the hero link (#adventure) so the sticky header doesn't cover the title. */
+.destinations-page .adventure { scroll-margin-top: 5.75rem; }
+
+/* ---- Phase 4: altitude gauge, background shift, panel effects ---- */
+
+/* Scroll-linked tint: six stacked layers inside a viewport-sized sticky stage, crossfaded with
+   opacity (compositor-only, no per-frame repaint of the tall section). The active layer follows
+   the section's current stage, set by the IntersectionObserver. */
+.destinations-page .adventure-tint {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+/* Section-sized box that holds a viewport-sized sticky stage (the layers below): the overlays stay
+   locked to the screen while the section is on screen, and leave with the section. */
+.destinations-page .adventure-viewport-layer {
+  position: absolute;
+  inset: 0;
+  overflow: clip;
+  pointer-events: none;
+}
+.destinations-page .adventure-screen-overlay-layer,
+.destinations-page .adventure-bird-overlay-layer,
+.destinations-page .adventure-fish-overlay-layer,
+.destinations-page .adventure-firefly-overlay-layer {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: clip; /* clip, not hidden: hidden would make this a scroll container and stop it sticking */
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.55s var(--ease), visibility 0s linear 0.55s;
+}
+.destinations-page .adventure-screen-overlay-layer.is-on,
+.destinations-page .adventure-bird-overlay-layer.is-on,
+.destinations-page .adventure-fish-overlay-layer.is-on,
+.destinations-page .adventure-firefly-overlay-layer.is-on {
+  opacity: 1;
+  visibility: visible;
+  transition-delay: 0s;
+}
+.destinations-page .adventure-screen-overlay-layer { z-index: 28; mix-blend-mode: screen; }
+.destinations-page .adventure-screen-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('/images/adventure-water-drops.webp');
+  background-repeat: repeat;
+  opacity: 0.6;
+}
+.destinations-page .adventure-screen-overlay-a { background-size: clamp(22rem, 38vw, 34rem) auto; }
+.destinations-page .adventure-screen-overlay-b {
+  background-size: clamp(30rem, 52vw, 46rem) auto;
+  background-position: 37% 21%;
+  transform: scaleX(-1);
+  opacity: 0.38;
+}
+.destinations-page .adventure .container { position: relative; z-index: 1; }
+.destinations-page .adventure-bird-overlay-layer-under,
+.destinations-page .adventure-fish-overlay-layer-under,
+.destinations-page .adventure-firefly-overlay-layer-under { z-index: 0; }
+.destinations-page .adventure-bird-overlay-layer-over,
+.destinations-page .adventure-fish-overlay-layer-over,
+.destinations-page .adventure-firefly-overlay-layer-over { z-index: 31; }
+.destinations-page .adventure-little-bird {
+  display: block;
+  width: clamp(3rem, 5.4vw, 5.4rem);
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+.destinations-page .adventure-little-bird-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+.destinations-page .adventure-overlay-fish-wrap { width: clamp(4rem, 9.6vw, 9.6rem); }
+.destinations-page .adventure-overlay-fish {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+/* Birds and fish fly random routes set from script (components/destinations/adventure-roamer.tsx):
+   hidden until a flight starts, and not shown at all with reduced motion. */
+.destinations-page .adventure-roamer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page .adventure-roamer { display: none; }
+}
+/* Roaming fireflies: a soft yellow-green glow that blinks (set per firefly with --sz, --blink, --blink-delay). */
+.destinations-page .adventure-firefly-sprite { line-height: 0; }
+.destinations-page .adventure-firefly-dot {
+  display: block;
+  width: var(--sz);
+  height: var(--sz);
+  border-radius: 50%;
+  background: radial-gradient(circle, #f6ffc0 0 16%, rgba(224, 244, 60, 0.9) 28%, rgba(214, 236, 18, 0.4) 52%, rgba(214, 236, 18, 0) 74%);
+  opacity: 0.2;
+  animation: adv-firefly-blink var(--blink) ease-in-out var(--blink-delay) infinite;
+}
+@keyframes adv-firefly-blink {
+  0%, 100% { opacity: 0.18; }
+  12% { opacity: 1; }
+  24% { opacity: 0.3; }
+  36% { opacity: 0.95; }
+  55% { opacity: 0.15; }
+}
+
+.destinations-page .adventure-tint-view {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+/* Hover / focus: a dark veil fades off (opacity, not a filter) and brighter brass contours fade
+   in. Only opacity and transform change, so the browser can animate them on the GPU. */
+.destinations-page .adventure-media { transition: transform 0.6s var(--ease), border-color 0.6s var(--ease), opacity 0.7s var(--ease); }
+.destinations-page .adventure-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background: linear-gradient(160deg, rgba(15, 27, 43, 0.28), rgba(15, 27, 43, 0.12));
+  transition: opacity 0.6s var(--ease);
+}
+.destinations-page .adventure-media-icon { z-index: 1; }
+.destinations-page .adventure-media-contours::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  background: repeating-radial-gradient(circle at 28% 118%, transparent 0 16px, rgba(216, 185, 120, 0.4) 17px 18px);
+  transition: opacity 0.6s var(--ease);
+}
+.destinations-page .adventure-panel:hover .adventure-media,
+.destinations-page .adventure-panel:focus-within .adventure-media {
+  transform: translateY(-4px);
+  border-color: rgba(216, 185, 120, 0.8);
+}
+.destinations-page .adventure-panel:hover .adventure-media::after,
+.destinations-page .adventure-panel:focus-within .adventure-media::after { opacity: 0; }
+.destinations-page .adventure-panel:hover .adventure-media-contours::after,
+.destinations-page .adventure-panel:focus-within .adventure-media-contours::after { opacity: 1; }
+
+/* Staggered entrance: media first, then the text elements in turn. Only when JS has marked
+   the section data-motion="on", so server HTML and no-JS visitors see everything. */
+.destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-media,
+.destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-body > * {
+  opacity: 0;
+  transform: translateY(1.5rem);
+}
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > * {
+  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
+}
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(2) { transition-delay: 0.1s; }
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(3) { transition-delay: 0.2s; }
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(4) { transition-delay: 0.3s; }
+.destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > :nth-child(5) { transition-delay: 0.4s; }
+.destinations-page .adventure[data-motion='on'] .adventure-node { transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease); }
+.destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-node { transform: translate(-50%, -50%) scale(0.4); }
+
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page .adventure-scene,
+  .destinations-page .adventure-media::after,
+  .destinations-page .adventure-media-contours::after,
+  .destinations-page .adventure-media,
+  .destinations-page .adventure[data-motion='on'] .adventure-panel .adventure-body > *,
+  .destinations-page .adventure[data-motion='on'] .adventure-node { transition: none; }
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-media,
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-body > *,
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-node { opacity: 1; transform: none; }
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-node { transform: translate(-50%, -50%); }
+  .destinations-page .adventure-panel:hover .adventure-media,
+  .destinations-page .adventure-panel:focus-within .adventure-media { transform: none; }
+}
+
+/* ---- Phase 5: responsive pass ---- */
+
+@media (max-width: 900px) {
+  .destinations-page .adventure-spine,
+  .destinations-page .adventure-node { display: none; }
+
+  .destinations-page .adventure { padding-block: clamp(3.5rem, 12vw, 5rem) clamp(3rem, 10vw, 4.5rem); }
+  .destinations-page .adventure-head { margin-bottom: 2.25rem; }
+  .destinations-page .adventure-lede { font-size: 1rem; }
+
+  /* Panels stack: photo frame first, then the text. */
+  .destinations-page .adventure-panel { grid-template-columns: 1fr; gap: 1.5rem; margin-bottom: 3rem; }
+  .destinations-page .adventure-panel:nth-child(even) .adventure-media { order: 0; }
+  .destinations-page .adventure-num { font-size: clamp(3rem, 14vw, 4.5rem); }
+  .destinations-page .adventure-title-row h3 { font-size: clamp(1.5rem, 6vw, 1.9rem); }
+  .destinations-page .adventure-icon-badge { width: 2.4rem; height: 2.4rem; }
+  .destinations-page .adventure-copy { max-width: none; }
+  .destinations-page .adventure-closing { padding-inline: 0; }
+}
+
+@media (max-width: 520px) {
+  .destinations-page .adventure-media-icon { width: 4rem; height: 4rem; }
+}
+
+/* ---- Atmospheric scene plates: distinct environments follow the current adventure stage. ----
+   Backdrops are separate from the activity-card photography; supplied green-screen videos are chroma-keyed
+   into transparent WebM wildlife layers. Camera splash footage lives in a fixed foreground layer. */
+.destinations-page .adventure-scene {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity 1.2s var(--ease);
+}
+.destinations-page .adventure-scene.is-on {
+  z-index: 1;
+  opacity: 1;
+}
+.destinations-page .adventure-scene:not(.is-on) * { animation-play-state: paused; }
+.destinations-page .adventure-scene:not(.is-on)::before { animation-play-state: paused; }
+.destinations-page .adventure-scene::before {
+  content: '';
+  position: absolute;
+  inset: -4%;
+  z-index: 0;
+  background-image: var(--scene-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  transform: scale(1.04);
+  animation: adv-backdrop-drift 42s ease-in-out infinite alternate;
+  will-change: transform;
+}
+.destinations-page .adventure-scene::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: var(--scene-wash);
+}
+.destinations-page .adventure-scene > * { position: absolute; z-index: 2; }
+.destinations-page .adventure-scene[data-stage='sky'] {
+  --scene-image: url('/images/adventure-background-sky.webp');
+  --scene-wash: linear-gradient(180deg, rgba(239, 247, 249, 0.72), rgba(222, 236, 239, 0.44) 52%, rgba(204, 224, 229, 0.54));
+  background-color: #dbe9ed;
+}
+.destinations-page .adventure-scene[data-stage='canopy'] {
+  --scene-image: url('/images/adventure-background-canopy.webp');
+  --scene-wash: linear-gradient(180deg, rgba(220, 239, 229, 0.66), rgba(185, 218, 198, 0.47) 54%, rgba(146, 189, 163, 0.57));
+  background-color: #a9cdb8;
+}
+.destinations-page .adventure-scene[data-stage='land'] {
+  --scene-image: url('/images/adventure-background-land.webp');
+  --scene-wash: linear-gradient(180deg, rgba(237, 240, 216, 0.70), rgba(220, 226, 185, 0.48) 54%, rgba(177, 193, 134, 0.57));
+  background-color: #d1d9aa;
+}
+.destinations-page .adventure-scene[data-stage='water'] {
+  --scene-image: url('/images/adventure-background-water.webp');
+  --scene-wash: linear-gradient(180deg, rgba(6, 38, 51, 0.44), rgba(6, 38, 51, 0.34) 52%, rgba(3, 24, 35, 0.58));
+  background-color: #124658;
+}
+.destinations-page .adventure-scene[data-stage='ocean'] {
+  --scene-image: url('/images/adventure-background-ocean.webp');
+  --scene-wash: linear-gradient(180deg, rgba(8, 62, 86, 0.16), rgba(4, 42, 68, 0.18) 48%, rgba(2, 24, 46, 0.3));
+  background-color: #0a4560;
+}
+.destinations-page .adventure-scene[data-stage='depth'] {
+  --scene-image: url('/images/adventure-background-depth.webp');
+  --scene-wash: linear-gradient(180deg, rgba(0, 8, 13, 0.22), rgba(0, 5, 10, 0.34) 45%, rgba(0, 2, 5, 0.52));
+  background-color: #061218;
+}
+/* Natural cloud photographs drift across the sky in layered, different-depth passes. */
+.destinations-page .adv-cloud {
+  top: var(--y);
+  left: 0;
+  width: min(var(--w), 74rem);
+  aspect-ratio: 21 / 9;
+  opacity: var(--o, 0.74);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  filter: drop-shadow(0 0.25rem 1.1rem rgba(255, 255, 255, 0.16));
+  animation: adv-cloud-drift var(--dur) linear var(--delay) infinite;
+  will-change: transform;
+}
+.destinations-page .adv-cloud-bank { background-image: url('/images/adventure-cloud-bank.webp'); }
+.destinations-page .adv-cloud-wisp {
+  background-image: url('/images/adventure-cloud-wisps.webp');
+  opacity: 0.48;
+}
+/* Distant wildlife is rendered from photographic cutouts, not drawn bird shapes. */
+.destinations-page .adv-bird {
+  top: var(--y);
+  left: var(--x);
+  width: clamp(9rem, calc(18rem * var(--s)), 25.5rem);
+  aspect-ratio: 800 / 330;
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.94;
+  filter: drop-shadow(0 0 0.22rem rgba(18, 34, 20, 0.26)) drop-shadow(0 0.18rem 0.28rem rgba(18, 34, 20, 0.2));
+  transform: translate3d(-50%, 0, 0);
+  animation: adv-bird-flight var(--dur) linear var(--delay) infinite;
+  will-change: transform;
+}
+
+/* Warm, out-of-focus pollen catches the light over the real landscape photograph. */
+.destinations-page .adv-mote {
+  top: var(--y);
+  left: var(--x);
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 255, 223, 0.72), rgba(246, 224, 157, 0.18) 68%, transparent);
+  filter: blur(1.4px);
+  opacity: 0;
+  animation: adv-mote var(--dur) ease-in-out var(--delay) infinite;
+}
+/* A moving, very soft water glint complements the real rapids photograph. */
+.destinations-page .adv-ripple {
+  left: 50%;
+  bottom: var(--bottom);
+  width: var(--w);
+  height: clamp(2.5rem, 8vh, 6rem);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(224, 248, 255, 0.24), rgba(175, 226, 239, 0.08) 34%, transparent 72%);
+  filter: blur(0.55rem);
+  opacity: 0.76;
+  animation: adv-ripple-drift var(--dur) ease-in-out var(--delay) infinite alternate;
+  will-change: transform;
+}
+/* Subsurface caustics and moving rays soften the photographic underwater plate. */
+.destinations-page .adv-ray {
+  top: -10%;
+  left: var(--x);
+  width: var(--w);
+  height: 130%;
+  rotate: 14deg;
+  transform-origin: 50% 0;
+  background: linear-gradient(180deg, rgba(184, 233, 255, 0.25), rgba(160, 225, 255, 0.11) 28%, rgba(160, 225, 255, 0) 78%);
+  filter: blur(0.7rem);
+  animation: adv-ray var(--dur) ease-in-out var(--delay) infinite alternate;
+}
+.destinations-page .adv-fish {
+  top: var(--y);
+  left: 0;
+  width: min(calc(var(--s) * 0.8), 14.4rem);
+  aspect-ratio: var(--ar, 16 / 9);
+  object-fit: contain;
+  object-position: center;
+  opacity: 0.9;
+  filter: drop-shadow(0 0 0.8rem rgba(97, 201, 233, 0.22));
+  animation: adv-fish-drift var(--dur) ease-in-out var(--delay) infinite;
+  animation-direction: var(--direction, normal);
+  will-change: transform;
+}
+.destinations-page .adv-jelly {
+  top: 100%;
+  left: var(--x);
+  width: min(calc(var(--s) * 1.5), 18rem);
+  aspect-ratio: 520 / 552;
+  object-fit: contain;
+  object-position: center;
+  filter: drop-shadow(0 0 1.1rem rgba(150, 222, 255, 0.24));
+  opacity: 0.78;
+  animation: adv-rise var(--dur) ease-in-out var(--delay) infinite;
+  will-change: transform;
+}
+/* Photographic glass-like bubbles: rim, reflected highlight and soft caustic glow. */
+.destinations-page .adv-bubble {
+  left: var(--x);
+  bottom: -4%;
+  width: var(--sz);
+  height: var(--sz);
+  border: 1px solid rgba(225, 248, 255, 0.48);
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 27%, rgba(255, 255, 255, 0.78) 0 5%, rgba(195, 236, 255, 0.16) 14%, rgba(201, 239, 255, 0.04) 52%, rgba(255, 255, 255, 0.24) 86%, rgba(255, 255, 255, 0.04) 100%);
+  box-shadow: inset -1px -1px 2px rgba(255, 255, 255, 0.22), 0 0 0.45rem rgba(180, 231, 255, 0.12);
+  opacity: 0;
+  animation: adv-bubble var(--dur) ease-in var(--delay) infinite;
+}
+/* Small, defocused points of light replace the illustrated stalactites and cave shapes. */
+/* Firefly footage (keyed from the supplied blue-screen clip, 1130 x 450): shown at about its own pixel size
+   (dots of 4 to 6 px) rather than stretched over the screen. Script moves it (and may mirror it) on each visit. */
+.destinations-page .adv-firefly-swarm-wrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: clamp(40rem, 84vw, 82rem);
+  aspect-ratio: 1130 / 450;
+  pointer-events: none;
+  visibility: hidden; /* shown by script while a pass is under way (or as a still with reduced motion) */
+  will-change: transform;
+}
+.destinations-page .adv-firefly-swarm { display: block; width: 100%; height: 100%; pointer-events: none; }
+.destinations-page .adv-firefly-swarm-mirrored { transform: scaleX(-1); }
+.destinations-page .adv-firefly {
+  top: var(--y);
+  left: var(--x);
+  width: var(--sz);
+  height: var(--sz);
+  border-radius: 50%;
+  background: #edffb2;
+  box-shadow: 0 0 0.55rem 0.18rem rgba(214, 255, 145, 0.48), 0 0 1.8rem 0.55rem rgba(190, 240, 115, 0.2);
+  filter: blur(0.35px);
+  opacity: 0;
+  animation: adv-firefly var(--dur) ease-in-out var(--delay) infinite;
+}
+@keyframes adv-backdrop-drift {
+  from { transform: scale(1.04) translate3d(-0.7%, 0, 0); }
+  to { transform: scale(1.09) translate3d(0.7%, -0.5%, 0); }
+}
+@keyframes adv-cloud-drift {
+  from { transform: translate3d(-48vw, 0, 0); }
+  to { transform: translate3d(125vw, 1.5vh, 0); }
+}
+@keyframes adv-bird-flight {
+  0% { transform: translate3d(-42vw, 0, 0); }
+  18% { transform: translate3d(-8vw, -1vh, 0); }
+  72% { transform: translate3d(62vw, -2vh, 0); }
+  100% { transform: translate3d(118vw, 1vh, 0); }
+}
+@keyframes adv-fish-drift {
+  0% { transform: translate3d(var(--start), 1vh, 0) scaleX(var(--flip, 1)) rotate(-1deg); }
+  50% { transform: translate3d(var(--mid), var(--lift, -2vh), 0) scaleX(var(--flip, 1)) rotate(2deg); }
+  100% { transform: translate3d(var(--end), 0, 0) scaleX(var(--flip, 1)) rotate(-1deg); }
+}
+@keyframes adv-mote {
+  0% { opacity: 0; transform: translate3d(0, 0, 0); }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.68; transform: translate3d(30px, -12vh, 0); }
+  100% { opacity: 0; transform: translate3d(44px, -18vh, 0); }
+}
+@keyframes adv-ripple-drift {
+  from { transform: translate3d(-50%, 0, 0) scaleX(0.78); }
+  to { transform: translate3d(-50%, -1.1vh, 0) scaleX(1.15); }
+}
+@keyframes adv-ray { from { opacity: 0.2; } to { opacity: 0.72; } }
+@keyframes adv-rise {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.88); }
+  12% { opacity: 0.78; }
+  80% { opacity: 0.74; }
+  100% { opacity: 0; transform: translate3d(var(--dx), -130svh, 0) scale(1.06); }
+}
+@keyframes adv-bubble {
+  0% { opacity: 0; transform: translate3d(0, 0, 0) scale(0.78); }
+  10% { opacity: 0.58; }
+  50% { transform: translate3d(12px, -52vh, 0) scale(1); }
+  100% { opacity: 0; transform: translate3d(-8px, -112vh, 0) scale(0.9); }
+}
+@keyframes adv-firefly {
+  0%, 52% { opacity: 0; transform: translate3d(0, 0, 0); }
+  60% { opacity: 0.92; }
+  68% { opacity: 0.2; }
+  76% { opacity: 0.85; transform: translate3d(var(--dx), var(--dy), 0); }
+  88%, 100% { opacity: 0; transform: translate3d(calc(var(--dx) * 1.6), calc(var(--dy) * 0.4), 0); }
+}
+@media (max-width: 720px) {
+  .destinations-page .adv-cloud:nth-child(n + 5),
+  .destinations-page .adv-bubble:nth-child(n + 9),
+  .destinations-page .adv-firefly:nth-child(n + 13),
+  .destinations-page .adv-mote:nth-child(n + 6) { display: none; }
+}
+/* Honor reduced-motion preferences while keeping the realistic still frames visible. */
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page .adventure-scene::before,
+  .destinations-page .adventure-scene * { animation: none; }
+  .destinations-page .adv-cloud { left: var(--x); }
+  .destinations-page .adv-bird,
+  .destinations-page .adv-fish { left: var(--x); }
+  .destinations-page .adv-jelly { top: 34%; opacity: 0.65; }
+  .destinations-page .adv-bubble { bottom: 18%; opacity: 0.42; }
+  .destinations-page .adv-firefly { opacity: 0.72; }
+  .destinations-page .adv-mote { opacity: 0.56; }
+  .destinations-page .adv-ray { opacity: 0.42; }
+
+  .destinations-page .adventure-head .dest-section-kicker,
+  .destinations-page .adventure-head h2,
+  .destinations-page .adventure-lede,
+  .destinations-page .adventure-num,
+  .destinations-page .adventure-icon-badge,
+  .destinations-page .adventure-title-row h3,
+  .destinations-page .adventure-tagline,
+  .destinations-page .adventure-copy,
+  .destinations-page .adventure-experience-label,
+  .destinations-page .adventure-tags li,
+  .destinations-page .adventure-closing,
+  .destinations-page .adventure-closing h3,
+  .destinations-page .adventure-closing > p,
+  .destinations-page .adventure-node { transition: none; }
+}
+/* Text/chrome colours follow the stage smoothly. */
+.destinations-page .adventure-head .dest-section-kicker,
+.destinations-page .adventure-head h2,
+.destinations-page .adventure-lede,
+.destinations-page .adventure-num,
+.destinations-page .adventure-icon-badge,
+.destinations-page .adventure-title-row h3,
+.destinations-page .adventure-tagline,
+.destinations-page .adventure-copy,
+.destinations-page .adventure-experience-label,
+.destinations-page .adventure-tags li,
+.destinations-page .adventure-closing,
+.destinations-page .adventure-closing h3,
+.destinations-page .adventure-closing > p,
+.destinations-page .adventure-node {
+  transition-property: color, border-color, background-color, -webkit-text-stroke-color;
+  transition-duration: 1.1s;
+  transition-timing-function: var(--ease);
+}
+
+/* Highlight box behind each point's text, so the lettering stays readable over the backdrop and the
+   wildlife. It is a pseudo-element that extends past the text (no layout change), tinted per stage, and
+   it only fades in once the point has finished loading (scroll mode: .is-complete; reduced-motion
+   mode: after the entrance stagger). Server HTML / no JS shows it straight away. */
+.destinations-page .adventure-body { position: relative; isolation: isolate; }
+.destinations-page .adventure-body::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: -1.4rem -1.25rem;
+  border: 1px solid var(--adv-box-line);
+  border-radius: 1.25rem;
+  background: var(--adv-box);
+  box-shadow: 0 0.9rem 2.4rem var(--adv-box-shadow);
+  -webkit-backdrop-filter: blur(8px) saturate(1.1);
+  backdrop-filter: blur(8px) saturate(1.1);
+  pointer-events: none;
+  transition: opacity 0.7s var(--ease), background-color 1.1s var(--ease), border-color 1.1s var(--ease);
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-panel:not(.is-complete) .adventure-body::before,
+.destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-body::before { opacity: 0; }
+.destinations-page .adventure[data-motion='on'] .adventure-panel.is-revealed .adventure-body::before { transition-delay: 0.9s, 0s, 0s; }
+@media (max-width: 900px) {
+  .destinations-page .adventure-body::before { inset: -0.9rem -1rem; border-radius: 1rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page .adventure-body::before { transition: none; }
+  .destinations-page .adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-body::before { opacity: 1; }
+}
+
+@media (max-width: 720px) {
+  .destinations-page .adv-cloud:nth-child(n + 6),
+  .destinations-page .adv-bubble:nth-child(n + 8),
+  .destinations-page .adv-firefly:nth-child(n + 14),
+  .destinations-page .adv-mote:nth-child(n + 6) { display: none; }
+}
+
+/* Reduced motion: still scenes (nothing moves, nothing flashes), decoration parked in view. */
+@media (prefers-reduced-motion: reduce) {
+  .destinations-page .adventure-scene * { animation: none; }
+  .destinations-page .adv-cloud,
+  .destinations-page .adv-bird,
+  .destinations-page .adv-fish { left: var(--x); }
+  .destinations-page .adv-jelly { top: 34%; opacity: 0.65; }
+  .destinations-page .adv-bubble { bottom: 18%; opacity: 0.42; }
+  .destinations-page .adv-firefly { opacity: 0.72; }
+  .destinations-page .adv-mote { opacity: 0.56; }
+  .destinations-page .adv-ray { opacity: 0.42; }
+
+  .destinations-page .adventure-head .dest-section-kicker,
+  .destinations-page .adventure-head h2,
+  .destinations-page .adventure-lede,
+  .destinations-page .adventure-num,
+  .destinations-page .adventure-icon-badge,
+  .destinations-page .adventure-title-row h3,
+  .destinations-page .adventure-tagline,
+  .destinations-page .adventure-copy,
+  .destinations-page .adventure-experience-label,
+  .destinations-page .adventure-tags li,
+  .destinations-page .adventure-closing,
+  .destinations-page .adventure-closing h3,
+  .destinations-page .adventure-closing > p,
+  .destinations-page .adventure-node { transition: none; }
+}
+
+/* ---- Scroll-held points ----
+   With JS and no reduced-motion preference, the section sets data-scrub='on'. The track becomes tall
+   (the JS sets its height) and the rail inside it is pinned below the site header; the points sit one
+   under another in the rail at a fixed distance (--step) and move together. While a point is held,
+   nothing moves, neighbours included; the JS writes the point's build-up progress to --p (0 to 1).
+   The photo, number and title are always shown; the description (tagline and copy), then the tags,
+   appear as --p rises while the load bar fills. Then the whole stack slides up to the next point.
+   Progress never goes back down, so a built point stays built.
+   Without scrub mode (no JS, reduced motion) .adventure-stick is invisible to layout. */
+.destinations-page .adventure-panel {
+  --p: 1;
+  --t-copy: clamp(0, calc(var(--p) / 0.5), 1);
+  --t-tags: clamp(0, calc((var(--p) - 0.5) / 0.4), 1);
+}
+.destinations-page .adventure-stick { display: contents; }
+.destinations-page .adventure-load { display: none; }
+
+.destinations-page .adventure[data-scrub='on'] .adventure-rail {
+  position: sticky;
+  top: var(--rail-top, 5.75rem);
+  height: var(--rail-h, calc(100svh - 5.75rem));
+  overflow-x: visible;
+  overflow-y: clip;
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-list { will-change: transform; }
+.destinations-page .adventure[data-scrub='on'] .adventure-panel {
+  display: flex;
+  align-items: center;
+  height: var(--step, auto);
+  margin-bottom: 0;
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-stick {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2.5rem, 7vw, 6rem);
+}
+
+/* Photo, number and title stay fully shown; only the description and tags build with --p. */
+.destinations-page .adventure[data-scrub='on'] .adventure-tagline,
+.destinations-page .adventure[data-scrub='on'] .adventure-copy {
+  opacity: var(--t-copy);
+  transform: translate3d(0, calc((1 - var(--t-copy)) * 1.4rem), 0);
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-experience-label { opacity: var(--t-tags); }
+.destinations-page .adventure[data-scrub='on'] .adventure-tags li {
+  opacity: clamp(0, calc(var(--t-tags) * 5 - var(--i, 0)), 1);
+  transform: translate3d(0, calc((1 - clamp(0, calc(var(--t-tags) * 5 - var(--i, 0)), 1)) * 0.8rem), 0);
+}
+
+/* Load bar under the number: fills as the point "loads"; the node fills in when it is done. */
+.destinations-page .adventure[data-scrub='on'] .adventure-load {
+  display: block;
+  width: min(100%, 18rem);
+  height: 3px;
+  margin-top: 0.9rem;
+  overflow: hidden;
+  border-radius: 3px;
+  background: var(--adv-line-soft);
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-load i {
+  display: block;
+  height: 100%;
+  background: var(--adv-accent);
+  transform-origin: 0 50%;
+  transform: scaleX(var(--p));
+}
+.destinations-page .adventure[data-scrub='on'] .adventure-panel.is-complete .adventure-node { background: var(--adv-accent); }
+
+@media (max-width: 900px) {
+  .destinations-page .adventure[data-scrub='on'] .adventure-stick { grid-template-columns: 1fr; gap: 1.25rem; }
+  /* Keep a whole point on one screen: the photo is cropped (object-fit: cover) rather than the text. */
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 30vh; max-height: 30svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-num { font-size: clamp(2.4rem, 11vw, 3.4rem); }
+}
+@media (max-width: 900px) and (max-height: 700px) {
+  .destinations-page .adventure[data-scrub='on'] .adventure-media { max-height: 22vh; max-height: 22svh; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-num { display: none; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-copy { font-size: 0.92rem; line-height: 1.6; }
+  .destinations-page .adventure[data-scrub='on'] .adventure-experience { margin-top: 0.9rem; }
 }
