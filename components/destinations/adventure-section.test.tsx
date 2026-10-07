@@ -98,8 +98,14 @@ describe('AdventureSection', () => {
       return filename
     })
     expect(new Set(backgrounds).size).toBe(stages.length)
-    for (const asset of ['adventure-birds-flock.webm', 'adventure-fish-salmon.webm', 'adventure-fish-perch.webm', 'adventure-fish-red.webm', 'adventure-real-jellyfish.webm', 'adventure-real-camera-splash.webm', 'adventure-water-drops.webp', 'adventure-little-bird.webp', 'adventure-fireflies.webm']) {
-      expect(existsSync(join(process.cwd(), 'public/images', asset))).toBe(true)
+    // Every image or video the scenes and styles point to must exist in public/images.
+    const scenesSource = readFileSync(join(process.cwd(), 'components/destinations/adventure-scenes.tsx'), 'utf8')
+    const referenced = new Set(
+      [...(scenesSource + styles).matchAll(/\/images\/(adventure-[a-z0-9-]+\.(?:webp|webm|png))/g)].map((match) => match[1]),
+    )
+    expect(referenced.size).toBeGreaterThan(10)
+    for (const asset of referenced) {
+      expect(existsSync(join(process.cwd(), 'public/images', asset)), asset).toBe(true)
     }
     expect(styles).toContain("--scene-image: url('/images/adventure-background-depth.webp')")
     expect(html).toContain('type="video/webm"')
