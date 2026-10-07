@@ -9415,7 +9415,7 @@ body:has(.features:target) .typed-opening { display: none; }
   position: relative;
   z-index: 2;
   padding-bottom: 0;
-  width: min(100%, max(19.5rem, 60vw));
+  width: min(100%, 21rem);
   justify-self: center;
   background: rgba(250, 246, 228, 0.12);
 }
