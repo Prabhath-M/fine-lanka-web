@@ -105,6 +105,17 @@ describe('AdventureSection', () => {
     expect(styles).toContain('background-color: #0a4560;')
   })
 
+  it('puts a stage-tinted highlight box behind each point that appears only once the point has loaded', () => {
+    const styles = readFileSync(join(process.cwd(), 'app/globals.css'), 'utf8')
+    for (const stage of ['sky', 'canopy', 'land', 'water']) {
+      const block = styles.match(new RegExp(`\\.adventure\\[data-stage='${stage}'\\] \\{([\\s\\S]*?)\\n\\}`))
+      expect(block?.[1]).toContain('--adv-box:')
+    }
+    expect(styles).toContain(".adventure-body::before")
+    expect(styles).toContain(".adventure[data-scrub='on'] .adventure-panel:not(.is-complete) .adventure-body::before")
+    expect(styles).toContain(".adventure[data-motion='on'] .adventure-panel:not(.is-revealed) .adventure-body::before")
+  })
+
   it('tags every panel with its gauge stage and keeps entrance effects off in server HTML', () => {
     expect(html.match(/class="adventure-panel"[^>]*data-stage="/g)).toHaveLength(ADVENTURES.length)
     expect(html).toContain('data-motion="off"')
