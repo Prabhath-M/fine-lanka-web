@@ -75,6 +75,7 @@ describe('AdventureSection', () => {
     expect(html).toContain('adv-firefly') // cave: existing firefly particles
     expect(html.match(/adventure-fireflies\.webm/g)).toHaveLength(2) // two copies of the swarm
     expect(html).toContain('adventure-fireflies.webm') // cave: firefly footage keyed from the blue-screen clip
+    expect(html.match(/adv-firefly-swarm-wrap/g)).toHaveLength(2) // two swarms, each crossing the screen once per play
   })
 
   it('keeps the screen overlays locked to the screen but inside the section', () => {

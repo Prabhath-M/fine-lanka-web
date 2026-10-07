@@ -13777,16 +13777,19 @@ body:has(.features:target) .typed-opening { display: none; }
 /* Small, defocused points of light replace the illustrated stalactites and cave shapes. */
 /* Firefly footage (keyed from the supplied blue-screen clip, 1130 x 450): shown at about its own pixel size
    (dots of 4 to 6 px) rather than stretched over the screen. The second copy is mirrored and starts later. */
-.destinations-page .adv-firefly-swarm {
+.destinations-page .adv-firefly-swarm-wrap {
   position: absolute;
+  top: 8%;
+  left: 0;
   z-index: 0;
   width: clamp(40rem, 84vw, 82rem);
   aspect-ratio: 1130 / 450;
-  height: auto;
   pointer-events: none;
+  visibility: hidden; /* shown by script while a pass is under way (or as a still with reduced motion) */
+  will-change: transform;
 }
-.destinations-page .adv-firefly-swarm-a { top: 8%; left: 0; }
-.destinations-page .adv-firefly-swarm-b { top: 48%; right: 0; transform: scaleX(-1); }
+.destinations-page .adv-firefly-swarm { display: block; width: 100%; height: 100%; pointer-events: none; }
+.destinations-page .adv-firefly-swarm-mirrored { transform: scaleX(-1); }
 .destinations-page .adv-firefly {
   top: var(--y);
   left: var(--x);

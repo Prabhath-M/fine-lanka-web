@@ -1,5 +1,6 @@
 import { useEffect, useRef, type CSSProperties, type ReactNode } from 'react'
 import { ADVENTURE_STAGES, type AdventureStage } from '@/lib/adventure-data'
+import { planSwarmPass } from '@/lib/adventure-roam'
 import { Roamer } from '@/components/destinations/adventure-roamer'
 
 /**
@@ -152,6 +153,92 @@ function TransparentVideo({
   )
 }
 
+// The firefly footage is 9.0 s (225 frames at 25 fps) of a swarm milling about, and its fireflies fill
+// the left 1.5% to 84.5% of the frame (the second copy is mirrored, so it is the right-hand part).
+const SWARM_CLIP_SECONDS = 9
+// Played a little slower than recorded so the swarm drifts across the screen unhurriedly.
+const SWARM_RATE = 0.6
+const SWARM_BOUNDS: [number, number] = [0.015, 0.845]
+
+/**
+ * A swarm of fireflies that crosses the cave once per play of the footage: it comes in from beyond the
+ * left edge, drifts across with its own swarming motion, and has left beyond the right edge by the time
+ * the clip ends. The clip restarts (on a new height) only while it is off screen, so its loop point is
+ * never seen. Reduced-motion visitors get the still swarm.
+ */
+function FireflySwarm({ active, mirrored = false, lane, startDelay = 0, pause }: { active: boolean; mirrored?: boolean; lane: [number, number]; startDelay?: number; pause: [number, number] }) {
+  const wrapRef = useRef<HTMLSpanElement>(null)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  useEffect(() => {
+    const wrap = wrapRef.current
+    const video = videoRef.current
+    const layer = wrap?.parentElement
+    if (!wrap || !video || !layer) return
+
+    if (!active) {
+      // Freeze while the scene fades out, then clear it, so the next visit starts a fresh pass.
+      video.pause()
+      wrap.getAnimations().forEach((animation) => animation.pause())
+      const clear = window.setTimeout(() => {
+        wrap.getAnimations().forEach((animation) => animation.cancel())
+        wrap.style.visibility = 'hidden'
+      }, 1300)
+      return () => window.clearTimeout(clear)
+    }
+
+    if (typeof wrap.animate !== 'function' || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      wrap.style.visibility = 'visible'
+      wrap.style.top = `${lane[0]}%`
+      video.currentTime = 2
+      return
+    }
+
+    const rand = (range: [number, number]) => range[0] + Math.random() * (range[1] - range[0])
+    const bounds: [number, number] = mirrored ? [1 - SWARM_BOUNDS[1], 1 - SWARM_BOUNDS[0]] : SWARM_BOUNDS
+    let timer = 0
+    let stopped = false
+    const launch = () => {
+      if (stopped) return
+      const pass = planSwarmPass({ width: layer.clientWidth, height: layer.clientHeight, spriteW: wrap.offsetWidth, bounds })
+      wrap.getAnimations().forEach((animation) => animation.cancel())
+      wrap.style.top = `${rand(lane)}%`
+      // Rewind and start while the swarm is still beyond the left edge.
+      video.currentTime = 0
+      video.playbackRate = SWARM_RATE
+      void video.play().catch(() => {})
+      wrap.style.visibility = 'visible'
+      const flight = wrap.animate(pass.keyframes, { duration: (SWARM_CLIP_SECONDS / SWARM_RATE) * 1000, easing: 'linear', fill: 'forwards' })
+      flight.onfinish = () => {
+        wrap.style.visibility = 'hidden'
+        video.pause()
+        timer = window.setTimeout(launch, rand(pause) * 1000)
+      }
+    }
+    timer = window.setTimeout(launch, startDelay * 1000)
+    return () => {
+      stopped = true
+      window.clearTimeout(timer)
+      wrap.getAnimations().forEach((animation) => {
+        animation.onfinish = null
+      })
+    }
+  }, [active, mirrored, lane, startDelay, pause])
+
+  return (
+    <span ref={wrapRef} className="adv-firefly-swarm-wrap">
+      <video ref={videoRef} className={`adv-firefly-swarm${mirrored ? ' adv-firefly-swarm-mirrored' : ''}`} muted playsInline preload={active ? 'auto' : 'metadata'} aria-hidden="true">
+        <source src="/images/adventure-fireflies.webm" type="video/webm" />
+      </video>
+    </span>
+  )
+}
+
+const SWARM_LANE_A: [number, number] = [2, 24]
+const SWARM_LANE_B: [number, number] = [42, 62]
+const SWARM_PAUSE_A: [number, number] = [2.5, 5]
+const SWARM_PAUSE_B: [number, number] = [3, 6]
+
 function AnimatedGif({
   src,
   className,
@@ -223,9 +310,9 @@ const scene = (stage: AdventureStage, active: boolean): ReactNode => {
     case 'depth':
       return (
         <>
-          {/* Keyed from the supplied blue-screen footage: two copies (one mirrored, out of step) fill the cave. */}
-          <TransparentVideo src="/images/adventure-fireflies.webm" className="adv-firefly-swarm adv-firefly-swarm-a" active={active} />
-          <TransparentVideo src="/images/adventure-fireflies.webm" className="adv-firefly-swarm adv-firefly-swarm-b" active={active} startAt={4.6} />
+          {/* Keyed from the supplied blue-screen footage: two swarms (one mirrored, out of step) cross the cave, each pass entering from the left and leaving on the right. */}
+          <FireflySwarm active={active} lane={SWARM_LANE_A} pause={SWARM_PAUSE_A} startDelay={0.3} />
+          <FireflySwarm active={active} mirrored lane={SWARM_LANE_B} pause={SWARM_PAUSE_B} startDelay={7} />
           {FIREFLIES.map((firefly, i) => (
             <span key={i} className="adv-firefly" style={vars({ '--x': `${firefly.x}%`, '--y': `${firefly.y}%`, '--dx': `${firefly.dx}px`, '--dy': `${firefly.dy}px`, '--sz': `${firefly.size}px`, '--dur': `${firefly.duration}s`, '--delay': `${firefly.delay}s` })} />
           ))}

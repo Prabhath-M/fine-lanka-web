@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { planDistinctRoam, planRoam, routeDistance, type Point } from '@/lib/adventure-roam'
+import { planDistinctRoam, planRoam, planSwarmPass, routeDistance, type Point } from '@/lib/adventure-roam'
 
 // Small deterministic random source (mulberry32) so the routes are reproducible.
 function seeded(seed: number) {
@@ -175,3 +175,24 @@ describe('planDistinctRoam', () => {
   })
 })
 
+
+describe('planSwarmPass', () => {
+  const swarm = { width: 1440, height: 800, spriteW: 1210 }
+  it('starts with every firefly beyond the left edge and ends with every firefly beyond the right edge', () => {
+    for (const bounds of [[0.02, 0.82], [0.18, 0.98]] as [number, number][]) {
+      for (const width of [390, 768, 1440, 2560]) {
+        const pass = planSwarmPass({ ...swarm, width, bounds, random: seeded(width) })
+        expect(pass.from + bounds[1] * swarm.spriteW).toBeLessThan(0)
+        expect(pass.to + bounds[0] * swarm.spriteW).toBeGreaterThan(width)
+        expect(pass.keyframes[0].offset).toBe(0)
+        expect(pass.keyframes[pass.keyframes.length - 1].offset).toBe(1)
+      }
+    }
+  })
+
+  it('moves steadily left to right', () => {
+    const pass = planSwarmPass({ ...swarm, bounds: [0.02, 0.82], random: seeded(5) })
+    const xs = pass.keyframes.map((f) => Number(/translate3d\((-?[\d.]+)px/.exec(f.transform)?.[1]))
+    for (let i = 1; i < xs.length; i++) expect(xs[i]).toBeGreaterThan(xs[i - 1])
+  })
+})

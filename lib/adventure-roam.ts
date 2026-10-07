@@ -243,3 +243,49 @@ export function planDistinctRoam(options: RoamOptions, avoid: Point[][], attempt
   }
   return best as RoamPlan
 }
+
+export interface SwarmPassOptions {
+  /** Width and height of the area the swarm crosses (the viewport-sized scene), in px. */
+  width: number
+  height: number
+  /** Width of the swarm footage's frame, in px. */
+  spriteW: number
+  /** Where the fireflies sit inside the frame, as a share of its width (left edge, right edge). */
+  bounds: [number, number]
+  /** Vertical sway, in px, as the swarm drifts across. */
+  sway?: number
+  random?: () => number
+}
+
+export interface SwarmPass {
+  /** Left offset of the footage's frame at the start and at the end of the pass, in px. */
+  from: number
+  to: number
+  keyframes: { transform: string; offset: number }[]
+}
+
+/**
+ * One pass of a firefly swarm across the screen: it starts with every firefly beyond the left edge,
+ * drifts right (swaying a little up and down) while the footage plays, and ends with every firefly
+ * beyond the right edge. The footage restarts only while the swarm is off screen, so its loop point
+ * is never seen.
+ */
+export function planSwarmPass(options: SwarmPassOptions): SwarmPass {
+  const { width, height, spriteW, bounds } = options
+  const rnd = options.random ?? Math.random
+  const margin = 12
+  const from = -bounds[1] * spriteW - margin
+  const to = width - bounds[0] * spriteW + margin
+  const sway = options.sway ?? height * 0.05
+  const phase = rnd() * Math.PI * 2
+  const steps = 8
+  const keyframes: SwarmPass['keyframes'] = []
+  for (let i = 0; i <= steps; i++) {
+    const k = i / steps
+    keyframes.push({
+      transform: `translate3d(${(from + (to - from) * k).toFixed(1)}px, ${(Math.sin(phase + k * Math.PI * 2) * sway).toFixed(1)}px, 0)`,
+      offset: k,
+    })
+  }
+  return { from, to, keyframes }
+}
