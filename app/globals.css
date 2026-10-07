@@ -3756,20 +3756,6 @@ a.mobile-nav-heading.is-active { color: var(--brass-light); }
   justify-content: center;
 }
 
-.destinations-page .dest-hero-link {
-  font-family: var(--font-mono);
-  font-size: 0.95rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  color: #edcf85;
-  text-decoration: none;
-  border-bottom: 1px solid rgba(237, 207, 133, 0.5);
-  padding-bottom: 0.15rem;
-  transition: color 0.25s var(--ease), border-color 0.25s var(--ease);
-}
-.destinations-page .dest-hero-link:hover,
-.destinations-page .dest-hero-link:focus-visible { color: #fff9e8; border-color: #fff9e8; }
-
 .destinations-page .dest-hero-note {
   color: rgba(243, 239, 225, 0.82);
   font-family: var(--font-display);

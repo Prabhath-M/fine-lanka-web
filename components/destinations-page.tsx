@@ -125,9 +125,8 @@ export function DestinationsPage() {
                       <Icon name="pin" className="btn-icon" />
                       Plot a route
                     </button>
-                    <a href="#adventure" className="dest-hero-link">
-                      Adventure &amp; Experiences
-                      <span aria-hidden="true"> ↓</span>
+                    <a href="#adventure" className="btn btn-uikit-secondary">
+                      Adventures
                     </a>
                     <span className="dest-hero-note">A considered way through the island</span>
                   </div>
