@@ -55,16 +55,13 @@ export interface NavLink {
 // bookkeeping.
 export const NAV_LINKS: NavLink[] = [
   {
-    label: 'Destinations',
+    label: 'Explore',
     href: '/destinations',
     page: 'destinations',
+    // Both children are sections of the Destinations page (anchors).
     children: [
-      { label: 'Cultural Triangle', href: '/destinations?region=Cultural+Triangle', icon: 'temple' },
-      { label: 'Hill Country', href: '/destinations?region=Hill+Country', icon: 'mountain' },
-      { label: 'South Coast', href: '/destinations?region=South+Coast', icon: 'wave' },
-      { label: 'East Coast', href: '/destinations?region=East+Coast', icon: 'compass' },
-      { label: 'Wildlife & National Parks', href: '/destinations?region=Wildlife+%26+National+Parks', icon: 'elephant' },
-      { label: 'Colombo & West Coast', href: '/destinations?region=Colombo+%26+West+Coast', icon: 'island' },
+      { label: 'Destinations', href: '/destinations#destination-carousel', icon: 'compass' },
+      { label: 'Adventures', href: '/destinations#adventure', icon: 'zipline' },
     ],
   },
   {

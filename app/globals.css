@@ -1934,7 +1934,9 @@ body[data-page="index"] .nav-toggle::after { bottom: 13px; }
   width: min(84vw, 360px);
   background: var(--ink);
   z-index: 95;
-  padding: var(--space-5) var(--space-3);
+  /* The fixed site header (about 100-108px tall) sits above the drawer; start the list below it
+     so the first entry is not hidden underneath. */
+  padding: 7.5rem var(--space-3) var(--space-5);
   transform: translateX(100%);
   transition: transform 0.35s var(--ease);
   overflow-y: auto;
@@ -13388,6 +13390,8 @@ body:has(.features:target) .typed-opening { display: none; }
 
 /* Anchor offset for the hero link (#adventure) so the sticky header doesn't cover the title. */
 .destinations-page .adventure { scroll-margin-top: 5.75rem; }
+/* Target of the Explore > Destinations nav link; keep its top clear of the fixed header. */
+.destinations-page #destination-carousel { scroll-margin-top: 6.5rem; }
 
 /* ---- Phase 4: altitude gauge, background shift, panel effects ---- */
 
